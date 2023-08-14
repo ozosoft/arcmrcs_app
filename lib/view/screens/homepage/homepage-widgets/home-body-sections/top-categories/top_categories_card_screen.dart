@@ -35,7 +35,7 @@ class _TopCategoriesCardScreenState extends State<TopCategoriesCardScreen> {
                 itemCount: MyStrings().allCategoryies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CategoriesCard(
-                    title: MyStrings().allCategoryies[index]["title"].toString(),
+                    title: MyStrings().subCategoryies[index]["title"].toString(),
                     questions: MyStrings().allCategoryies[index]["questions"].toString(),
                     image: MyImages().categoryImages[index],
                     expansionVisible: true,

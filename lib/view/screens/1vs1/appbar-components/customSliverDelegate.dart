@@ -32,53 +32,56 @@ class CustomSliverDelegates extends SliverPersistentHeaderDelegate {
       child: Stack(
         children: [
           CustomOneVSOneAppBar(appbarSize: appBarSize),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(Dimensions.space5),
-                margin: const EdgeInsets.only(top:Dimensions.space55),
-                height: Dimensions.space60,
-                width: Dimensions.space60,
-                decoration: BoxDecoration(
-                    color: MyColor.prifileBG,
-                    borderRadius:
-                        BorderRadius.circular(Dimensions.space30)),
-                child: FittedBox(
-                  fit: BoxFit.cover,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        borderRadius:
-                            BorderRadius.circular(Dimensions.space40),
-                        image: const DecorationImage(
-                            image:
-                                AssetImage(MyImages.profileimageWomenPng),
-                            fit: BoxFit.cover)),
-                    height: Dimensions.space70,
-                    width: Dimensions.space70,
+          Padding(
+            padding: const EdgeInsets.only(right:Dimensions.space30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(Dimensions.space5),
+                  margin: const EdgeInsets.only(top:Dimensions.space55),
+                  height: Dimensions.space60,
+                  width: Dimensions.space60,
+                  decoration: BoxDecoration(
+                      color: MyColor.prifileBG,
+                      borderRadius:
+                          BorderRadius.circular(Dimensions.space30)),
+                  child: FittedBox(
+                    fit: BoxFit.cover,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.space40),
+                          image: const DecorationImage(
+                              image:
+                                  AssetImage(MyImages.profileimageWomenPng),
+                              fit: BoxFit.cover)),
+                      height: Dimensions.space70,
+                      width: Dimensions.space70,
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                 margin: const EdgeInsets.only(top:Dimensions.space55),
-                padding: const EdgeInsets.all(Dimensions.space5),
-                child: Text(
-                  MyStrings.versus,
-                  style: semiBoldExtraLarge.copyWith(
-                      color: MyColor.colorWhite),
+                Container(
+                   margin: const EdgeInsets.only(top:Dimensions.space55),
+                  padding: const EdgeInsets.all(Dimensions.space10),
+                  child: Text(
+                    MyStrings.versus,
+                    style: semiBoldExtraLarge.copyWith(
+                        color: MyColor.colorWhite),
+                  ),
                 ),
-              ),
-              Container(
-                 margin: const EdgeInsets.only(top:Dimensions.space55),
-                padding: const EdgeInsets.all(Dimensions.space5),
-                height: Dimensions.space60,
-                width: Dimensions.space60,
-                decoration: BoxDecoration(
-                    color: MyColor.prifileBG,
-                    borderRadius: BorderRadius.circular(30)),
-                child: SvgPicture.asset(MyImages.player2),
-              ),
-            ],
+                Container(
+                   margin: const EdgeInsets.only(top:Dimensions.space55),
+                  padding: const EdgeInsets.all(Dimensions.space5),
+                  height: Dimensions.space60,
+                  width: Dimensions.space60,
+                  decoration: BoxDecoration(
+                      color: MyColor.prifileBG,
+                      borderRadius: BorderRadius.circular(30)),
+                  child: SvgPicture.asset(MyImages.player2),
+                ),
+              ],
+            ),
           ),
           Positioned(
             left: 0.0,

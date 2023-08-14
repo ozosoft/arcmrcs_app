@@ -92,7 +92,7 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
           ),
         ),
         Padding(
-          padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * .38),
+          padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * .36),
           child: CircularCountDownTimer(
             duration: Dimensions.space60.toInt(),
             initialDuration: 0,

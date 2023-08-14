@@ -69,7 +69,7 @@ class _RankingTabBarState extends State<RankingTabBar>
             Row(
               children: [
                     Padding(
-                   padding:  EdgeInsets.only(left: size.width*.12,top:size.width*.1),
+                   padding:  EdgeInsets.only(left:orientation!=Orientation.portrait? size.width*.24:size.width*.12,top:orientation!=Orientation.portrait?size.width*.05:size.width*.1),
                    child: Column(
                    children: [
                      Container(
@@ -77,7 +77,7 @@ class _RankingTabBarState extends State<RankingTabBar>
                        child: FittedBox(
                               fit: BoxFit.cover,
                               child: Container(
-                                margin:const EdgeInsets.all(  Dimensions.space8),
+                                margin: EdgeInsets.all( orientation!=Orientation.portrait? Dimensions.space5:Dimensions.space8),
                                 decoration: BoxDecoration(
                                   color: MyColor.leaderBoardTabBar,
                                     borderRadius:
@@ -85,8 +85,8 @@ class _RankingTabBarState extends State<RankingTabBar>
                                     image: const DecorationImage(
                                         image:AssetImage(MyImages.profileimageWomenPng),
                                         fit: BoxFit.cover)),
-                                height: Dimensions.space60,
-                                width: Dimensions.space60,
+                                height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
+                                width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                               ),
                             ),
                      ),
@@ -117,23 +117,23 @@ class _RankingTabBarState extends State<RankingTabBar>
                                     image: const DecorationImage(
                                         image:AssetImage(MyImages.profileimageWomenPng),
                                         fit: BoxFit.cover)),
-                                height: Dimensions.space60,
-                                width: Dimensions.space60,
+                               height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
+                                width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                               ),
                             ),
                      ),
-                     Text("@marton",style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
+                     Text(MyStrings.marton,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
                     const SizedBox(height: Dimensions.space5,),
                      Container(
                       decoration:const BoxDecoration(color: MyColor.leaderBoardContainer,borderRadius:BorderRadius.all(Radius.circular(Dimensions.space30))),
                       padding:const EdgeInsets.all(Dimensions.space7),
-                      child: Text("2,558 QP",style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
+                      child: Text(MyStrings.qP,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
                    ],
                                 ),
                  ),
                
                    Padding(
-                   padding:  EdgeInsets.only(left: size.width*.07,top: size.width*.15),
+                   padding:  EdgeInsets.only(left: size.width*.07,top:orientation!=Orientation.portrait? size.width*.07:size.width*.15),
                    child: Column(
                    children: [
                      Container(
@@ -149,27 +149,27 @@ class _RankingTabBarState extends State<RankingTabBar>
                                     image: const DecorationImage(
                                         image:AssetImage(MyImages.profileimageWomenPng),
                                         fit: BoxFit.cover)),
-                                height: Dimensions.space60,
-                                width: Dimensions.space60,
+                              height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
+                                width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                               ),
                             ),
                      ),
-                     Text("@marton",style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
+                     Text(MyStrings.marton,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
                     const SizedBox(height: Dimensions.space5,),
                      Container(
                       decoration:const BoxDecoration(color: MyColor.leaderBoardContainer,borderRadius:BorderRadius.all(Radius.circular(Dimensions.space30))),
                       padding:const EdgeInsets.all(Dimensions.space7),
-                      child: Text("2,558 QP",style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
+                      child: Text(MyStrings.qP,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
                    ],
                                 ),
                  ),
              
                ],
             ),
-            Row(
+             Row(
               children: [
                     Padding(
-                   padding:  EdgeInsets.only(left: size.width*.12,top:size.width*.1),
+                   padding:  EdgeInsets.only(left:orientation!=Orientation.portrait? size.width*.24:size.width*.12,top:orientation!=Orientation.portrait?size.width*.05:size.width*.1),
                    child: Column(
                    children: [
                      Container(
@@ -177,7 +177,7 @@ class _RankingTabBarState extends State<RankingTabBar>
                        child: FittedBox(
                               fit: BoxFit.cover,
                               child: Container(
-                                margin:const EdgeInsets.all(  Dimensions.space8),
+                                margin: EdgeInsets.all( orientation!=Orientation.portrait? Dimensions.space5:Dimensions.space8),
                                 decoration: BoxDecoration(
                                   color: MyColor.leaderBoardTabBar,
                                     borderRadius:
@@ -185,8 +185,8 @@ class _RankingTabBarState extends State<RankingTabBar>
                                     image: const DecorationImage(
                                         image:AssetImage(MyImages.profileimageWomenPng),
                                         fit: BoxFit.cover)),
-                                height: Dimensions.space60,
-                                width: Dimensions.space60,
+                                height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
+                                width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                               ),
                             ),
                      ),
@@ -217,23 +217,23 @@ class _RankingTabBarState extends State<RankingTabBar>
                                     image: const DecorationImage(
                                         image:AssetImage(MyImages.profileimageWomenPng),
                                         fit: BoxFit.cover)),
-                                height: Dimensions.space60,
-                                width: Dimensions.space60,
+                               height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
+                                width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                               ),
                             ),
                      ),
-                     Text("@marton",style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
+                     Text(MyStrings.marton,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
                     const SizedBox(height: Dimensions.space5,),
                      Container(
                       decoration:const BoxDecoration(color: MyColor.leaderBoardContainer,borderRadius:BorderRadius.all(Radius.circular(Dimensions.space30))),
                       padding:const EdgeInsets.all(Dimensions.space7),
-                      child: Text("2,558 QP",style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
+                      child: Text(MyStrings.qP,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
                    ],
                                 ),
                  ),
                
                    Padding(
-                   padding:  EdgeInsets.only(left: size.width*.07,top: size.width*.15),
+                   padding:  EdgeInsets.only(left: size.width*.07,top:orientation!=Orientation.portrait? size.width*.07:size.width*.15),
                    child: Column(
                    children: [
                      Container(
@@ -249,8 +249,8 @@ class _RankingTabBarState extends State<RankingTabBar>
                                     image: const DecorationImage(
                                         image:AssetImage(MyImages.profileimageWomenPng),
                                         fit: BoxFit.cover)),
-                                height: Dimensions.space60,
-                                width: Dimensions.space60,
+                              height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
+                                width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                               ),
                             ),
                      ),

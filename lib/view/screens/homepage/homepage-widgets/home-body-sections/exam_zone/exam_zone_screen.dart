@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
+import 'package:flutter_prime/core/utils/my_strings.dart';
+import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
+import 'package:flutter_prime/view/components/divider/custom_vertical_divider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../../core/utils/dimensions.dart';
-import '../../../../../core/utils/my_strings.dart';
-import '../../../../../core/utils/style.dart';
 
-class QuizContestSection extends StatefulWidget {
-  const QuizContestSection({super.key});
+class ExamZoneScreen extends StatefulWidget {
+  const ExamZoneScreen({super.key});
 
   @override
-  State<QuizContestSection> createState() => _QuizContestSectionState();
+  State<ExamZoneScreen> createState() => _ExamZoneScreenState();
 }
 
-class _QuizContestSectionState extends State<QuizContestSection> {
+class _ExamZoneScreenState extends State<ExamZoneScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -29,7 +31,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                MyStrings.quizContest,
+                "Exam Zone",
                 style: semiBoldMediumLarge,
               ),
               Text(
@@ -132,10 +134,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                   ),
                                 ],
                               ),
-                              Container(
-                                height: 0.1,
-                                color: MyColor.colorlighterGrey,
-                              ),
+                             CustomVerticalDivider(height: .4),
                               Container(
                                 padding: const EdgeInsets.only(
                                     top: Dimensions.space10,
@@ -180,9 +179,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                       ),
                                     ),
                                     const Spacer(),
-                                    Center(
-                                        child: SvgPicture.asset(
-                                            MyImages.playNowSVG))
+                                   
                                   ],
                                 ),
                               ),

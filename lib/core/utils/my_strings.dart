@@ -219,7 +219,9 @@ class MyStrings {
   static const String quizContest = "Quiz Contest";
   static const String battleOfTheDay = "Battles of the Day";
   static const String oneVSone = "1 vs 1 Battle Quiz";
+  static const String groupBattle = "Group Battle";
   static const String battleQuiz = "Battle quiz one on one";
+  static const String groupbattleQuiz = "Battle quiz with group of players";
   static const String currentCoin = "Current Coin";
   static const String selectCountry = "Select Country";
   static const String letsPlay = "Let's Play";
@@ -248,6 +250,7 @@ class MyStrings {
   static const String accountNumber = "Account Number";
   static const String routingNumber = "Routing Number";
   static const String profileDetails = "Profile Details";
+  static const String playDiffrentQuizs = "Play Diffrent Quizs";
   static const String payNow = "PAY NOW";
   static const String noDepositFound = "No Deposit Found";
   static const String noWithdrawFound = "No Withdraw Found";
@@ -337,6 +340,11 @@ class MyStrings {
   static const String player = 'Player';
   static const String creator = 'Creator';
   static const String or = 'Or';
+  static const String movies = 'Movies';
+  static const String novel = 'Novel';
+  static const String geographical = 'Geographical';
+  static const String nation = 'National';
+  static const String international = 'International';
   static const String joinRoom = 'Join Room';
   static const String zero = '00';
   static const String zeroEight = '08';
@@ -543,6 +551,13 @@ class MyStrings {
     {'title': historyAndCulture, 'questions': questions3, 'level': tenlevel},
     {'title': music, 'questions': questions4, 'level': twelvelevel},
     {'title': scienceAndTech, 'questions': questions5, 'level': eightlevel},
+  ];
+    final List<Map<String, String>> subCategoryies = [
+    {'title': movies, 'questions': questions, 'level': sixlevel},
+    {'title': novel, 'questions': questions2, 'level': sevenlevel},
+    {'title': geographical, 'questions': questions3, 'level': tenlevel},
+    {'title': nation, 'questions': questions4, 'level': twelvelevel},
+    {'title': international, 'questions': questions5, 'level': eightlevel},
   ];
   final List<Map<String, String>> notifications = [
     {'title': rewardNotification, 'short_Notification': shortDesc1, 'detail_Notification': detailnotifucation1,'date':detailnotifucationdate1},

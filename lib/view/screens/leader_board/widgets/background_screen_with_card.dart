@@ -45,14 +45,15 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard>
         ),
         Padding(
           padding:
-              EdgeInsets.only(top: size.height * .33, left: size.width * .13),
+              EdgeInsets.only(top:orientation!=Orientation.portrait? size.height * .43:size.height * .33, left:orientation!=Orientation.portrait? size.width * .25:size.width * .13),
           child: SvgPicture.asset(
             MyImages.leaderBoardRankSVG,
+            width: orientation!=Orientation.portrait? size.width*.5:size.width*.7,
           ),
         ),
         Container(
           margin: EdgeInsets.only(
-              top: size.height * .45,
+              top: orientation!=Orientation.portrait?size.height * .6:size.height * .45,
               left: Dimensions.space20,
               right: Dimensions.space20),
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),

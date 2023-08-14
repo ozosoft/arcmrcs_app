@@ -34,8 +34,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                     onTap: () {
                           Get.toNamed(RouteHelper.topCategories,arguments: MyStrings().allCategoryies[index]["title"].toString());},
                     child: CategoriesCard(
-                      title:
-                          MyStrings().allCategoryies[index]["title"].toString(),
+                      title:MyStrings().allCategoryies[index]["title"].toString(),
                       questions: MyStrings()
                           .allCategoryies[index]["questions"]
                           .toString(),
