@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/utils/my_color.dart';
+import 'package:flutter_prime/core/utils/my_strings.dart';
+import 'package:flutter_prime/core/utils/style.dart';
+
+import '../../../core/utils/dimensions.dart';
+
+class OrDivider extends StatelessWidget {
+  const OrDivider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        const Expanded(
+            child: Divider(
+               thickness: .65,
+          color: MyColor.colorLightGrey,
+        )),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15),
+          child: Text(
+            MyStrings.or,
+            style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
+          ),
+        ),
+        const Expanded(
+            child: Divider(
+              thickness: .65,
+          color: MyColor.colorLightGrey,
+        )),
+      ],
+    );
+  }
+}

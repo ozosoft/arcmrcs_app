@@ -1,0 +1,26 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/utils/dimensions.dart';
+import 'package:flutter_prime/core/utils/my_color.dart';
+
+import '../../../core/utils/my_strings.dart';
+import '../../../core/utils/style.dart';
+
+class CustomSignUPText extends StatelessWidget {
+  const CustomSignUPText({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Container(
+              decoration: const  BoxDecoration(
+                border: Border(
+                bottom: BorderSide(color: MyColor.primaryColor, ))
+              ),
+              child:  Text(
+              MyStrings.signUp,
+              style: regularMediumLarge.copyWith(color:MyColor.primaryColor,
+              fontSize: Dimensions.space14  
+              ),
+            ),
+          );
+  }
+}
