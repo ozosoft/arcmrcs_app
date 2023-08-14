@@ -3,8 +3,6 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../core/utils/my_images.dart';
 
 class RankingTabBar extends StatefulWidget {
@@ -20,7 +18,7 @@ class _RankingTabBarState extends State<RankingTabBar>
   int selectedIndex = 1;
 
   TextEditingController _textEditingController = TextEditingController();
-  String _inputText = "";
+  String _inputText = ""; 
   void initState() {
     tabController = TabController(vsync: this, length: 2);
     setState(() {
@@ -31,6 +29,7 @@ class _RankingTabBarState extends State<RankingTabBar>
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    Orientation orientation = MediaQuery.of(context).orientation;
     return 
     DefaultTabController(
         length: 2,

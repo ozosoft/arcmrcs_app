@@ -156,7 +156,7 @@ Orientation orientation = MediaQuery.of(context).orientation;
                     gridDelegate:
                          SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3,
-                            childAspectRatio: orientation==Orientation.portrait? 1.5:.08,
+                            childAspectRatio: orientation==Orientation.portrait? .98:2,
                             crossAxisSpacing: Dimensions.space12),
                     itemCount: MyStrings().achivements.length,
                     itemBuilder: (BuildContext context, index) {
@@ -166,7 +166,7 @@ Orientation orientation = MediaQuery.of(context).orientation;
                             margin: const EdgeInsets.only(
                               top: Dimensions.space20,
                             ),
-                            padding: EdgeInsets.only(top: size.height * .025),
+                            padding: EdgeInsets.only(top:orientation==Orientation.portrait? size.height * .025:size.height * .08),
                             width: double.infinity,
                             decoration: BoxDecoration(
                                 color: MyColor.lobbycardColor,
@@ -189,11 +189,13 @@ Orientation orientation = MediaQuery.of(context).orientation;
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.only(left: size.width * .09),
+                            padding: EdgeInsets.only(left:orientation==Orientation.portrait?  size.width * .09:size.width * .125),
                             child: SvgPicture.asset(
                               alignment: Alignment.center,
                               MyImages().badges[index],
-                              height: Dimensions.space33,
+                              height:
+                              orientation==Orientation.portrait?Dimensions.space33:
+                               Dimensions.space43,
                             ),
                           ),
                         ],

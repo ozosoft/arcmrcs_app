@@ -31,6 +31,7 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard>
 
   @override
   Widget build(BuildContext context) {
+    Orientation orientation = MediaQuery.of(context).orientation;
     Size size = MediaQuery.of(context).size;
     return Stack(
       children: [

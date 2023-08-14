@@ -16,12 +16,17 @@ class MyColor {
   static const Color borderColor = Color(0xffD9D9D9);
   static const Color bodyTextColor = Color(0xFF747475);
   static const Color textColor = Color(0xFF8A8281);
+  static const Color notActivatedFadeColor = Color(0x5AFFFFFF);
 
   static const Color titleColor = Color(0xff373e4a);
   static const Color labelTextColor = Color(0xff444444);
   static const Color smallTextColor1 = Color(0xff555555);
   static const Color leaderBoardTabBar = Color(0xffE75E43);
   static const Color leaderBoardContainer = Color(0xffB7351B);
+  static const Color pendingBorderColor = Color(0xffFF9F43);
+  static const Color completedBorderColor = Color(0xff0DD693);
+  static const Color pendingContainerColor = Color(0xffFFF1E3);
+  static const Color completedContainerColor = Color(0xffD8F6EC);
 
   static const Color appBarColor = colorWhite;
   static const Color appBarContentColor = colorBlack;

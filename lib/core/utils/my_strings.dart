@@ -73,12 +73,14 @@ class MyStrings {
 
   static const String amount = "Amount";
   static const String date = "Date";
+  static const String dates = "2023 - 09 - 12";
   static const String character = " 8 character,";
   static const String upperCase = " Uppercase,";
   static const String lowerCase = " Lowercase,";
   static const String symbol = " Symbol";
   static const String charge = "Charge";
   static const String payableAmount = "Payable Amount";
+  static const String paymentSystem = "Payment : Paytm";
   static const String payable = "Payable";
 
   static const String withdrawMoney = "Withdraw Money";
@@ -359,12 +361,16 @@ class MyStrings {
   static const String historyAndCulture = 'History & Culture';
   static const String roomID = "874541";
   static const String marton = "@marton";
+  static const String twoHundredFortyDollar = "\$240.00";
   static const String jkobos = "@jkobos";
   static const String qP = "2,558 QP";
   static const String points = "1,570 Points";
   static const String quantity = '15';
   static const String leaderBoard = 'Leaderboard';
+  static const String totalCoins = "Total Coins";
+  static const String fivehundredCoin = '500.00';
   static const String weekly = 'Weekly';
+  static const String reedemRequest = "Reedem Request";
   static const String allTimes = 'All Times';
   static const String questions = '15 Questions';
   static const String versus = "VS";
