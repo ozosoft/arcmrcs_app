@@ -21,32 +21,24 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
         children: [
           const SizedBox(height: Dimensions.space10),
           const Text(
-            MyStrings.playDiffrentQuizs ,
+            MyStrings.playDiffrentQuizs,
             style: boldMediumLarge,
           ),
           const SizedBox(height: Dimensions.space10),
-          Container(
-            decoration: BoxDecoration(
-                color: MyColor.colorWhite,
-                borderRadius: BorderRadius.circular(Dimensions.space10)),
-            height: 200,
-            child: GridView.builder(
-                // physics: NeverScrollableScrollPhysics(),
-                // shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200,
-                    childAspectRatio: 3 / 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20),
-                itemCount: 6,
-                itemBuilder: (BuildContext context, int index) {
+          GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemCount: 10,
+                itemBuilder: (context, index) {
                   return Container(
-                    color: Colors.red,
-                    margin: EdgeInsets.all(10),
-                    child: Text("Tfduicndck"),
+                    color: Colors.blue,
+                    margin: EdgeInsets.all(8.0),
                   );
-                }),
-          ),
+                },
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+              ),
         ],
       ),
     );

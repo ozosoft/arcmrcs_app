@@ -48,8 +48,10 @@ class _QuizContestSectionState extends State<QuizContestSection> {
           width: double.infinity,
           child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
               child: Row(
-                children: List.generate(5,
+                children: List.generate(
+                    5,
                     (index) => Container(
                           margin: const EdgeInsets.symmetric(
                               horizontal: Dimensions.space5),
@@ -74,7 +76,8 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
-                                mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
                                     padding: const EdgeInsets.only(
@@ -92,7 +95,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                     // height: Dimensions.space70,
                                     // width: Dimensions.space220,
                                     padding: const EdgeInsets.only(
-                                      bottom: Dimensions.space20),
+                                        bottom: Dimensions.space20),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -113,12 +116,10 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                       ],
                                     ),
                                   ),
-                              
-                                  
                                   Container(
                                     padding: const EdgeInsets.only(
                                         top: Dimensions.space7),
-                                        margin:  const EdgeInsets.only(
+                                    margin: const EdgeInsets.only(
                                         left: Dimensions.space50),
                                     height: Dimensions.space70,
                                     width: Dimensions.space50,

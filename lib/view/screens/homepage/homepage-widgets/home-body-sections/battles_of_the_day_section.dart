@@ -10,8 +10,9 @@ import '../../../../../core/utils/my_strings.dart';
 import '../../../../../core/utils/style.dart';
 
 class BattleOfTheDaySection extends StatefulWidget {
- 
-  const BattleOfTheDaySection({super.key,});
+  const BattleOfTheDaySection({
+    super.key,
+  });
 
   @override
   State<BattleOfTheDaySection> createState() => _BattleOfTheDaySectionState();
@@ -72,7 +73,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                       ),
                       InkWell(
                         onTap: () {
-                           Get.toNamed(RouteHelper.oneVSoneBattleScreen);
+                          Get.toNamed(RouteHelper.oneVSoneBattleScreen);
                         },
                         child: Container(
                           height: Dimensions.space50,
@@ -99,7 +100,9 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                       const Spacer(),
                       InkWell(
                         onTap: () {
-                          Get.to(()=>OneVSOneBattleScreen(fromgroup: true,));
+                          Get.to(() => OneVSOneBattleScreen(
+                                fromgroup: true,
+                              ));
                         },
                         child: Container(
                           padding:

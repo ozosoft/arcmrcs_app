@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      
       body: SafeArea(
         child: CustomScrollView(
           slivers: <Widget>[
@@ -35,26 +34,23 @@ class _HomeScreenState extends State<HomeScreen> {
               floating: true,
               delegate: CustomSliverDelegate(
                 expandedHeight: Dimensions.space130,
-                scaffoldKey: _scaffoldKey
+                scaffoldKey: _scaffoldKey,
               ),
             ),
-            const SliverFillRemaining(
-              hasScrollBody: false,
+            const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.all(Dimensions.space10),
                 child: Column(
-           
                   children: [
-
                     TopCategorySection(),
                     BattleOfTheDaySection(),
                     QuizContestSection(),
                     ExamZoneScreen(),
-                    PlayDiffrentQuizes()
                   ],
                 ),
               ),
             ),
+            SliverToBoxAdapter(child: PlayDiffrentQuizes()),
           ],
         ),
       ),
