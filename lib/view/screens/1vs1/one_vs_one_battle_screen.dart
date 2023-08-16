@@ -13,8 +13,8 @@ import 'appbar-components/customSliverDelegate.dart';
 import 'play-with-friends-bottom-sheet/play_with_friends_bottom_sheet.dart';
 
 class OneVSOneBattleScreen extends StatelessWidget {
-   final bool fromgroup;
-  const OneVSOneBattleScreen({super.key,  this.fromgroup=false});
+  final bool fromgroup;
+  const OneVSOneBattleScreen({super.key, this.fromgroup = false});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,9 @@ class OneVSOneBattleScreen extends StatelessWidget {
                       height: Dimensions.space40,
                     ),
                     RoundedButton(
-                        text:fromgroup?MyStrings.groupBattle: MyStrings.letsPlay,
+                        text: fromgroup
+                            ? MyStrings.groupBattle
+                            : MyStrings.letsPlay,
                         press: () {
                           Get.toNamed(RouteHelper.findOpponentScreen);
                         },

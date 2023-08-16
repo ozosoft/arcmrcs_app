@@ -5,6 +5,7 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/data/controller/auth/signin/signin_controller.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/divider/custom_divider.dart';
 import 'package:flutter_prime/view/components/social_login/social_login_section.dart';
@@ -24,10 +25,10 @@ class _LoginBodySectionState extends State<LoginBodySection> {
   final formKey = GlobalKey<FormState>();
 
   bool remember = false;
- 
 
   @override
   Widget build(BuildContext context) {
+    final authController = Get.find<SignInController>();
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: Dimensions.space35, vertical: Dimensions.space7),
@@ -41,12 +42,15 @@ class _LoginBodySectionState extends State<LoginBodySection> {
               children: [
                 Text(
                   MyStrings.welcomeBack,
-                  style:semiBoldMediumLarge.copyWith(fontSize: Dimensions.space25),
+                  style: semiBoldMediumLarge.copyWith(
+                      fontSize: Dimensions.space25),
                 ),
                 const SizedBox(height: Dimensions.space6),
                 Text(
                   MyStrings.pleaseEnterDetails,
-                 style: regularLarge.copyWith(color: MyColor.authScreenTextColor, fontSize: Dimensions.space15),
+                  style: regularLarge.copyWith(
+                      color: MyColor.authScreenTextColor,
+                      fontSize: Dimensions.space15),
                 ),
               ],
             ),
@@ -59,16 +63,13 @@ class _LoginBodySectionState extends State<LoginBodySection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomTextField(
-               
                   hasIcon: true,
                   hastextcolor: true,
                   prefixicon: MyImages.personSVG,
                   animatedLabel: true,
                   needOutlineBorder: true,
                   labelText: MyStrings.username,
-                  onChanged: (value) {
-                   
-                  },
+                  onChanged: (value) {},
                   textInputType: TextInputType.emailAddress,
                   inputAction: TextInputAction.next,
                   validator: (value) {
@@ -81,7 +82,6 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                 ),
                 const SizedBox(height: Dimensions.space20),
                 CustomTextField(
-                 
                   hasIcon: true,
                   prefixicon: MyImages.lockSVG,
                   hastextcolor: true,
@@ -111,7 +111,9 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                           width: Dimensions.space25,
                           height: Dimensions.space25,
                           child: Checkbox(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      Dimensions.defaultRadius)),
                               activeColor: MyColor.primaryColor,
                               checkColor: MyColor.colorWhite,
                               value: remember,
@@ -170,6 +172,29 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                     )
                   ],
                 ),
+
+                //ARMANS's DEMO CODE
+                RoundedButton(
+                  text: "Player 1 Login",
+                  press: () {
+                    // Perform authentication using authController methods
+                    authController.signInWithEmailAndPassword(
+                        "arman.khan.dev@gmail.com", "123456");
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                RoundedButton(
+                  text: "Player 2 Login",
+                  press: () {
+                    // Perform authentication using authController methods
+                    authController.signInWithEmailAndPassword(
+                        "mr.akt.bd@gmail.com", "123456");
+                  },
+                ),
+
+                //ARMANS's DEMO CODE END
               ],
             ),
           )

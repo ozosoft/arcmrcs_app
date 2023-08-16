@@ -1,3 +1,4 @@
+import 'package:flutter_prime/data/controller/auth/signin/signin_controller.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -6,6 +7,8 @@ import 'package:flutter_prime/data/controller/splash/splash_controller.dart';
 import 'package:flutter_prime/data/repo/auth/general_setting_repo.dart';
 import 'package:flutter_prime/data/repo/splash/splash_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
+
+import '../../data/controller/battle/battle_room_controller.dart';
 
 Future<Map<String, Map<String, String>>> init() async {
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -20,6 +23,10 @@ Future<Map<String, Map<String, String>>> init() async {
   // Get.lazyPut(() => ThemeController(sharedPreferences: Get.find()));
   Get.lazyPut(() => GeneralSettingRepo(apiClient: Get.find()));
   Get.lazyPut(() => LocalizationController(sharedPreferences: Get.find()));
+
+  // Arman
+  Get.lazyPut(() => SignInController());
+  Get.lazyPut(() => BattleRoomController());
 
   Map<String, Map<String, String>> language = {};
   language['en_US'] = {'': ''};

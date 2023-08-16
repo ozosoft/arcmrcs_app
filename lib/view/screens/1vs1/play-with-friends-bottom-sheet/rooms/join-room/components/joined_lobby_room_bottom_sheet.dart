@@ -11,21 +11,21 @@ import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class LobbyBottomSheet extends StatefulWidget {
-  const LobbyBottomSheet({super.key});
+class JoinedLobbyBottomSheet extends StatefulWidget {
+  const JoinedLobbyBottomSheet({super.key});
 
   @override
-  State<LobbyBottomSheet> createState() => _LobbyBottomSheetState();
+  State<JoinedLobbyBottomSheet> createState() => _JoinedLobbyBottomSheetState();
 }
 
-class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
+class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
   bool start = false;
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return false; // Disable back button if `start` is true
+        return true; // Disable back button if `start` is true
       },
       child: GetBuilder<BattleRoomController>(builder: (controller) {
         return Padding(
