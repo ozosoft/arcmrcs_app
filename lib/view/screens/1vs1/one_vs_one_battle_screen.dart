@@ -12,12 +12,18 @@ import '../../components/text-form-field/custom_drop_down_field.dart';
 import 'appbar-components/customSliverDelegate.dart';
 import 'play-with-friends-bottom-sheet/play_with_friends_bottom_sheet.dart';
 
-class OneVSOneBattleScreen extends StatelessWidget {
-   final bool fromgroup;
-  const OneVSOneBattleScreen({super.key,  this.fromgroup=false});
+class OneVSOneBattleScreen extends StatefulWidget {
+  final bool isGroupBattle;
+  const OneVSOneBattleScreen({super.key, this.isGroupBattle = false});
 
   @override
+  State<OneVSOneBattleScreen> createState() => _OneVSOneBattleScreenState();
+}
+
+class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
+  @override
   Widget build(BuildContext context) {
+    print(widget.isGroupBattle);
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -26,6 +32,7 @@ class OneVSOneBattleScreen extends StatelessWidget {
               pinned: true,
               floating: true,
               delegate: CustomSliverDelegates(
+                isGroupBattle: widget.isGroupBattle,
                 expandedHeight: Dimensions.space180,
               ),
             ),
@@ -50,8 +57,8 @@ class OneVSOneBattleScreen extends StatelessWidget {
                       height: Dimensions.space40,
                     ),
                     RoundedButton(
-                        text:fromgroup?MyStrings.groupBattle: MyStrings.letsPlay,
-                        press: () {
+                        text:widget.isGroupBattle?MyStrings.createRoom:  MyStrings.letsPlay,
+                        press: () { widget.isGroupBattle?  Get.toNamed(RouteHelper.createRoomScreen):
                           Get.toNamed(RouteHelper.findOpponentScreen);
                         },
                         textSize: Dimensions.space20,
@@ -64,8 +71,9 @@ class OneVSOneBattleScreen extends StatelessWidget {
                       height: Dimensions.space25,
                     ),
                     RoundedButton(
-                        text: MyStrings.playWithFriend,
+                      text:widget.isGroupBattle?MyStrings.joinRoom: MyStrings.playWithFriend,
                         press: () {
+                          widget.isGroupBattle?  Get.toNamed(RouteHelper.joinRoomScreen):
                           CustomBottomSheet(
                                   child:
                                       const PlayWithFriendsBottomSheetWidget())

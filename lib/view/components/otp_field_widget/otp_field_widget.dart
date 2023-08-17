@@ -5,8 +5,15 @@ import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
 
 class OTPFieldWidget extends StatelessWidget {
-  final Color textcolor ,activeColor,inActiveColor;
-  const OTPFieldWidget({Key? key, required this.onChanged, this.textcolor=MyColor.textColor, this.activeColor =MyColor.screenBgColor, this.inActiveColor=MyColor.cardBorderColors}) : super(key: key);
+  final Color textcolor, activeColor, inActiveColor;
+  final bool fromExam;
+  const OTPFieldWidget(
+      {Key? key,
+      required this.onChanged,
+      this.textcolor = MyColor.textColor,
+      this.activeColor = MyColor.screenBgColor,
+      this.inActiveColor = MyColor.cardBorderColors,  this.fromExam=false})
+      : super(key: key);
 
   final ValueChanged<String>? onChanged;
 
@@ -17,7 +24,7 @@ class OTPFieldWidget extends StatelessWidget {
       child: PinCodeTextField(
         appContext: context,
         pastedTextStyle: regularDefault.copyWith(color: MyColor.getTextColor()),
-        length: 6,
+        length:fromExam?4: 6,
         textStyle: regularExtraLarge.copyWith(color: MyColor.textColor),
         obscureText: false,
         obscuringCharacter: '*',
@@ -25,7 +32,7 @@ class OTPFieldWidget extends StatelessWidget {
         animationType: AnimationType.fade,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         pinTheme: PinTheme(
-          fieldOuterPadding:const EdgeInsets.all(Dimensions.space4),
+            fieldOuterPadding: const EdgeInsets.all(Dimensions.space4),
             shape: PinCodeFieldShape.box,
             borderWidth: Dimensions.space1,
             borderRadius: BorderRadius.circular(Dimensions.space8),

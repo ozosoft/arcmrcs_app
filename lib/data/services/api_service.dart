@@ -11,59 +11,87 @@ import 'package:flutter_prime/data/model/authorization/authorization_response_mo
 import 'package:flutter_prime/data/model/general_setting/general_setting_response_model.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 
-class ApiClient extends GetxService {
+
+class ApiClient extends GetxService{
+
   SharedPreferences sharedPreferences;
   ApiClient({required this.sharedPreferences});
 
   Future<ResponseModel> request(
-    String uri,
-    String method,
-    Map<String, dynamic>? params, {
-    bool passHeader = false,
-    bool isOnlyAcceptType = false,
-  }) async {
-    Uri url = Uri.parse(uri);
+      String uri,
+      String method,
+      Map<String, dynamic>? params,
+      {bool passHeader=false,
+        bool isOnlyAcceptType=false,}) async {
+
+    Uri url=Uri.parse(uri);
     http.Response response;
+
 
     try {
       if (method == Method.postMethod) {
-        if (passHeader) {
+
+        if(passHeader){
+
           initToken();
-          if (isOnlyAcceptType) {
-            response = await http.post(url, body: params, headers: {
+          if(isOnlyAcceptType){
+            response = await http.post(url, body: params,headers: {
               "Accept": "application/json",
             });
-          } else {
-            response = await http.post(url, body: params, headers: {
+          }
+          else{
+            response = await http.post(url, body: params,headers: {
               "Accept": "application/json",
               "Authorization": "$tokenType $token"
             });
           }
-        } else {
+        }
+
+        else{
           response = await http.post(url, body: params);
         }
-      } else if (method == Method.postMethod) {
-        if (passHeader) {
+      }
+       else if (method == Method.postMethod) {
+
+        if(passHeader){
+
           initToken();
-          response = await http.post(url, body: params, headers: {
+
+          response = await http.post(
+              url,
+              body: params,
+              headers: {
             "Accept": "application/json",
             "Authorization": "$tokenType $token"
           });
-        } else {
-          response = await http.post(url, body: params);
+
         }
-      } else if (method == Method.deleteMethod) {
+        else{
+          response = await http.post(
+              url,
+              body: params
+          );
+        }
+      }
+      else if (method == Method.deleteMethod) {
+
         response = await http.delete(url);
+
       } else if (method == Method.updateMethod) {
+
         response = await http.patch(url);
+
       } else {
-        if (passHeader) {
+
+        if(passHeader){
           initToken();
-          response = await http.get(url, headers: {
+          response = await http.get(
+              url,headers: {
             "Accept": "application/json",
             "Authorization": "$tokenType $token"
           });
-        } else {
+
+        }else{
           response = await http.get(
             url,
           );
@@ -77,17 +105,18 @@ class ApiClient extends GetxService {
       print('token------------${token}');
 
       if (response.statusCode == 200) {
-        try {
-          AuthorizationResponseModel model =
-              AuthorizationResponseModel.fromJson(jsonDecode(response.body));
-          
-           if (model.remark == 'unauthenticated') {
-            sharedPreferences.setBool(
-                SharedPreferenceHelper.rememberMeKey, false);
+        try{
+          AuthorizationResponseModel model=AuthorizationResponseModel.fromJson(jsonDecode(response.body));
+          if( model.remark == 'profile_incomplete' ){
+            // Get.toNamed(RouteHelper.profileCompleteScreen);
+          }else if( model.remark == 'kyc_verification' ){
+            // Get.offAndToNamed(RouteHelper.kycScreen);
+          }else if( model.remark == 'unauthenticated' ){
+            sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, false);
             sharedPreferences.remove(SharedPreferenceHelper.token);
             Get.offAllNamed(RouteHelper.loginScreen);
           }
-        } catch (e) {
+        }catch(e){
           e.toString();
         }
 
@@ -95,14 +124,11 @@ class ApiClient extends GetxService {
       } else if (response.statusCode == 401) {
         sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, false);
         Get.offAllNamed(RouteHelper.loginScreen);
-        return ResponseModel(
-            false, MyStrings.unAuthorized.tr, 401, response.body);
+        return ResponseModel(false, MyStrings.unAuthorized.tr, 401, response.body);
       } else if (response.statusCode == 500) {
-        return ResponseModel(
-            false, MyStrings.serverError.tr, 500, response.body);
+        return ResponseModel(false, MyStrings.serverError.tr, 500, response.body);
       } else {
-        return ResponseModel(
-            false, MyStrings.somethingWentWrong.tr, 499, response.body);
+        return ResponseModel(false, MyStrings.somethingWentWrong.tr, 499, response.body);
       }
     } on SocketException {
       return ResponseModel(false, MyStrings.noInternet.tr, 503, '');
@@ -113,15 +139,15 @@ class ApiClient extends GetxService {
     }
   }
 
-  String token = '';
-  String tokenType = '';
+  String token='';
+  String tokenType='';
 
   initToken() {
     if (sharedPreferences.containsKey(SharedPreferenceHelper.accessTokenKey)) {
       String? t =
-          sharedPreferences.getString(SharedPreferenceHelper.accessTokenKey);
+      sharedPreferences.getString(SharedPreferenceHelper.accessTokenKey);
       String? tType =
-          sharedPreferences.getString(SharedPreferenceHelper.accessTokenType);
+      sharedPreferences.getString(SharedPreferenceHelper.accessTokenType);
       token = t ?? '';
       tokenType = tType ?? 'Bearer';
     } else {
@@ -130,66 +156,50 @@ class ApiClient extends GetxService {
     }
   }
 
-  storeGeneralSetting(GeneralSettingResponseModel model) {
-    String json = jsonEncode(model.toJson());
+  storeGeneralSetting(GeneralSettingResponseModel model){
+    String json=jsonEncode(model.toJson());
     sharedPreferences.setString(SharedPreferenceHelper.generalSettingKey, json);
     getGSData();
   }
 
-  GeneralSettingResponseModel getGSData() {
-    String pre =
-        sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ??
-            '';
-    GeneralSettingResponseModel model =
-        GeneralSettingResponseModel.fromJson(jsonDecode(pre));
+  GeneralSettingResponseModel getGSData(){
+    String pre= sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey)??'';
+    GeneralSettingResponseModel model=GeneralSettingResponseModel.fromJson(jsonDecode(pre));
     return model;
   }
 
-  String getCurrencyOrUsername(
-      {bool isCurrency = true, bool isSymbol = false}) {
-    if (isCurrency) {
-      String pre = sharedPreferences
-              .getString(SharedPreferenceHelper.generalSettingKey) ??
-          '';
-      GeneralSettingResponseModel model =
-          GeneralSettingResponseModel.fromJson(jsonDecode(pre));
-      String currency = isSymbol
-          ? model.data?.generalSetting?.curSym ?? ''
-          : model.data?.generalSetting?.curText ?? '';
+  String getCurrencyOrUsername({bool isCurrency = true,bool isSymbol = false}){
+
+    if(isCurrency){
+      String pre= sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey)??'';
+      GeneralSettingResponseModel model=GeneralSettingResponseModel.fromJson(jsonDecode(pre));
+      String currency = isSymbol?model.data?.generalSetting?.curSym??'':model.data?.generalSetting?.curText??'';
       return currency;
-    } else {
-      String username =
-          sharedPreferences.getString(SharedPreferenceHelper.userNameKey) ?? '';
+    } else{
+      String username = sharedPreferences.getString(SharedPreferenceHelper.userNameKey)??'';
       return username;
     }
+
   }
 
-  String getUserEmail() {
-    String email =
-        sharedPreferences.getString(SharedPreferenceHelper.userEmailKey) ?? '';
-    return email;
+
+  String getUserEmail(){
+      String email = sharedPreferences.getString(SharedPreferenceHelper.userEmailKey)??'';
+      return email;
   }
 
-  bool getPasswordStrengthStatus() {
-    String pre =
-        sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ??
-            '';
-    GeneralSettingResponseModel model =
-        GeneralSettingResponseModel.fromJson(jsonDecode(pre));
-    bool checkPasswordStrength =
-        model.data?.generalSetting?.securePassword.toString() == '0'
-            ? false
-            : true;
-    return checkPasswordStrength;
+  bool getPasswordStrengthStatus(){
+      String pre= sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey)??'';
+      GeneralSettingResponseModel model=GeneralSettingResponseModel.fromJson(jsonDecode(pre));
+      bool checkPasswordStrength = model.data?.generalSetting?.securePassword.toString() == '0' ? false : true;
+      return checkPasswordStrength;
   }
 
-  String getTemplateName() {
-    String pre =
-        sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey) ??
-            '';
-    GeneralSettingResponseModel model =
-        GeneralSettingResponseModel.fromJson(jsonDecode(pre));
-    String templateName = model.data?.generalSetting?.activeTemplate ?? '';
-    return templateName;
+  String getTemplateName (){
+      String pre= sharedPreferences.getString(SharedPreferenceHelper.generalSettingKey)??'';
+      GeneralSettingResponseModel model=GeneralSettingResponseModel.fromJson(jsonDecode(pre));
+      String templateName = model.data?.generalSetting?.activeTemplate??'';
+      return templateName;
   }
+
 }

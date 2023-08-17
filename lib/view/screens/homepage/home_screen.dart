@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/view/screens/drawer/drawer_screen.dart';
-import 'package:flutter_prime/view/screens/homepage/homepage-widgets/home-body-sections/exam_zone/exam_zone_screen.dart';
-import 'package:flutter_prime/view/screens/homepage/homepage-widgets/home-body-sections/top-categories/top_category_section.dart';
+import 'package:flutter_prime/view/screens/homepage/homepage-widgets/home-body-sections/exam_zone/exam_zone_category_screen.dart';
+import 'package:flutter_prime/view/screens/homepage/homepage-widgets/home-body-sections/sub-categories/top_category_section.dart';
 import 'homepage-widgets/custom_sliver_appbar.dart';
 import 'homepage-widgets/home-body-sections/battles_of_the_day_section.dart';
 import 'homepage-widgets/home-body-sections/play_diffrent_quizes/play_diffrent_quizes.dart';
@@ -26,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      
       body: SafeArea(
         child: CustomScrollView(
           slivers: <Widget>[
@@ -35,26 +34,23 @@ class _HomeScreenState extends State<HomeScreen> {
               floating: true,
               delegate: CustomSliverDelegate(
                 expandedHeight: Dimensions.space130,
-                scaffoldKey: _scaffoldKey
+                scaffoldKey: _scaffoldKey,
               ),
             ),
-            const SliverFillRemaining(
-              hasScrollBody: false,
+            const SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.all(Dimensions.space10),
                 child: Column(
-           
                   children: [
-
                     TopCategorySection(),
                     BattleOfTheDaySection(),
                     QuizContestSection(),
-                    ExamZoneScreen(),
-                    PlayDiffrentQuizes()
+                    ExamZoneCategoryScreen(),
                   ],
                 ),
               ),
             ),
+            SliverToBoxAdapter(child: PlayDiffrentQuizes()),
           ],
         ),
       ),

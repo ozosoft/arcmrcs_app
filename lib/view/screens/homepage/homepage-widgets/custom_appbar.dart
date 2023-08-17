@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
@@ -33,7 +34,6 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-     
       height: widget.appbarSize < kToolbarHeight
           ? kToolbarHeight
           : widget.appbarSize,
@@ -43,7 +43,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
         leadingWidth: Dimensions.space30,
         leading: IconButton(
             onPressed: () {
-                 widget.scaffoldKey.currentState!.openDrawer();
+              widget.scaffoldKey.currentState!.openDrawer();
             },
             icon: const Icon(Icons.menu)),
         flexibleSpace: Container(
@@ -87,9 +87,14 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
           ),
         ),
         actions: [
-          Padding(
-            padding: const EdgeInsets.all(Dimensions.space8),
-            child: SvgPicture.asset(MyImages.reward),
+          InkWell(
+            onTap: () {
+              Get.toNamed(RouteHelper.leaderBoardScreen);
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(Dimensions.space8),
+              child: SvgPicture.asset(MyImages.reward),
+            ),
           ),
           InkWell(
             onTap: () {

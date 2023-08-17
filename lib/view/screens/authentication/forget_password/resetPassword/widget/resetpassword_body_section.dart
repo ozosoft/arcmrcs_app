@@ -4,7 +4,11 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/data/controller/auth/forget_password/reset_password_controller.dart';
+import 'package:flutter_prime/data/repo/auth/login_repo.dart';
+import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
 import 'package:flutter_prime/view/components/text-form-field/custom_text_field.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/utils/my_color.dart';
@@ -19,82 +23,116 @@ class ResetPasswordBodySection extends StatefulWidget {
 
 class _ResetPasswordBodySectionState extends State<ResetPasswordBodySection> {
   final formKey = GlobalKey<FormState>();
+
+     @override
+  void initState() {
+    Get.put(ApiClient(sharedPreferences: Get.find()));
+    Get.put(LoginRepo(apiClient: Get.find()));
+    final controller = Get.put(ResetPasswordController(loginRepo: Get.find()));
+
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.email = Get.arguments[0];
+      controller.code = Get.arguments[1];
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Dimensions.space40,
-        vertical: Dimensions.space20,
-      ),
-      child: Column(
-        children: [
-          Text(
-            MyStrings.resetpassword,
-            style:regularDefault.copyWith(fontSize: Dimensions.space20,fontWeight: FontWeight.w500),
-          ),
-          const SizedBox(height: Dimensions.space8),
-          Text(
-            MyStrings.passwordMustBeDiffrentFromBefore,
-            style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
-          ),
-          Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(height: Dimensions.space20),
-                CustomTextField(
-                  hastextcolor: true,
-                  hasIcon: true,
-                  prefixicon: MyImages.lockSVG,
-                  animatedLabel: true,
-                  needOutlineBorder: true,
-                  isShowSuffixIcon: true,
-                  isPassword: true,
-                  labelText: MyStrings.newPassword,
-                  onChanged: (value) {},
-                  textInputType: TextInputType.emailAddress,
-                  inputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return MyStrings.fieldErrorMsg;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                const SizedBox(height: Dimensions.space25),
-                CustomTextField(
-                  hastextcolor: true,
-                  hasIcon: true,
-                  prefixicon: MyImages.lockSVG,
-                  animatedLabel: true,
-                  needOutlineBorder: true,
-                  isShowSuffixIcon: true,
-                  isPassword: true,
-                  labelText: MyStrings.confirmPassword,
-                  onChanged: (value) {},
-                  textInputType: TextInputType.emailAddress,
-                  inputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return MyStrings.fieldErrorMsg;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                const SizedBox(height: Dimensions.space40),
-                RoundedButton(
-                    text: MyStrings.continues,
-                    press: () {
-                      Get.toNamed(RouteHelper.loginScreen);
-                    },textSize: Dimensions.space17),
-               
-              ],
+    return GetBuilder<ResetPasswordController>(
+      builder: (controller) => Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Dimensions.space40,
+          vertical: Dimensions.space20,
+        ),
+        child: Column(
+          children: [
+            Text(
+              MyStrings.resetpassword,
+              style:regularDefault.copyWith(fontSize: Dimensions.space20,fontWeight: FontWeight.w500),
             ),
-          )
-        ],
+            const SizedBox(height: Dimensions.space8),
+            Text(
+              MyStrings.passwordMustBeDiffrentFromBefore,
+              style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
+            ),
+            Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: Dimensions.space20),
+                  CustomTextField(
+                    controller: controller.passController,
+                    focusNode: controller.passwordFocusNode,
+                    nextFocus: controller.confirmPasswordFocusNode,
+                    hastextcolor: true,
+                    hasIcon: true,
+                    prefixicon: MyImages.lockSVG,
+                    animatedLabel: true,
+                    needOutlineBorder: true,
+                    isShowSuffixIcon: true,
+                    isPassword: true,
+                    labelText: MyStrings.newPassword,
+                     onChanged: (value) {
+                            if (controller.checkPasswordStrength) {
+                              controller.updateValidationList(value);
+                            }
+                            return;
+                          },
+                    textInputType: TextInputType.emailAddress,
+                    inputAction: TextInputAction.next,
+                    
+                    validator: (value) {
+                            return controller.validatePassword(value);
+                          },
+                  ),
+                  const SizedBox(height: Dimensions.space25),
+                  CustomTextField(
+                    hastextcolor: true,
+                    hasIcon: true,
+                     controller: controller.confirmPassController,
+                    prefixicon: MyImages.lockSVG,
+                    animatedLabel: true,
+                    needOutlineBorder: true,
+                    isShowSuffixIcon: true,
+                    isPassword: true,
+                    labelText: MyStrings.confirmPassword,
+                    onChanged: (value) {},
+                    textInputType: TextInputType.emailAddress,
+                    inputAction: TextInputAction.next,
+                     validator: (value) {
+                        if (controller.passController.text.toLowerCase() !=
+                            controller.confirmPassController.text
+                                .toLowerCase()) {
+                          return MyStrings.kMatchPassError.tr;
+                        } else {
+                          return null;
+                        }
+                      },
+                  ),
+                  const SizedBox(height: Dimensions.space40),
+                controller.submitLoading? RoundedLoadingBtn():  RoundedButton(
+                      text: MyStrings.continues,
+                      press: () {
+                        if (formKey.currentState!.validate()) {
+                                controller.resetPassword();
+                              }
+                        // Get.toNamed(RouteHelper.loginScreen);
+                      },textSize: Dimensions.space17),
+                 
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

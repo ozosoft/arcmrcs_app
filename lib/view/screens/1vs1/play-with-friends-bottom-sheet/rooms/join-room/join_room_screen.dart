@@ -10,9 +10,7 @@ class JoinRoomScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: CustomCategoryAppBar(title: MyStrings.joinRoom),
-      body: Column(children: [
-        JoinRoomBodySection()
-      ],),
+      body: JoinRoomBodySection(),
     );
   }
 }

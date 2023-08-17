@@ -49,7 +49,7 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                     padding: const EdgeInsets.symmetric(
                     vertical: Dimensions.space11),
                     child: OTPFieldWidget(onChanged: (value) {
-                     },),
+                     },inActiveColor: MyColor.colorWhite,),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(

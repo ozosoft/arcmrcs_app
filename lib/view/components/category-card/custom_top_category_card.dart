@@ -3,7 +3,6 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomTopCategoryCard extends StatelessWidget {
   final String title, questionsQuantaty, image;
@@ -20,7 +19,7 @@ class CustomTopCategoryCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(Dimensions.space5),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: Dimensions.space17),
+        padding: const EdgeInsets.symmetric(vertical: Dimensions.space1),
         width: Dimensions.space103,
         decoration: BoxDecoration(
             color: MyColor.cardColor,
@@ -29,7 +28,7 @@ class CustomTopCategoryCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(image),
+            Image.network(image),
             Padding(
               padding: const EdgeInsets.symmetric( vertical: Dimensions.space10, horizontal: Dimensions.space5),
               child: Text(
@@ -38,7 +37,7 @@ class CustomTopCategoryCard extends StatelessWidget {
                 style: semiBoldDefault,
               ),
             ),
-            Text(MyStrings.questions,
+            Text(questionsQuantaty+MyStrings.questionse,
                 textAlign: TextAlign.center,
                 style: regularDefault.copyWith(
                     color: MyColor.colorlighterGrey,

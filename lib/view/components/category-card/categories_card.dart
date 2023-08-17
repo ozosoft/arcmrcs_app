@@ -12,40 +12,40 @@ import '../divider/custom_horizontal_divider.dart';
 import '../text/custom_text_with_underline.dart';
 
 class CategoriesCard extends StatefulWidget {
-  final String title, questions, image, levels;
-  final bool expansionVisible, fromViewAll, fromBookmark;
+
+  final String title,questions,image,levels, minute,marks,date,subCategoryId;
+  final bool expansionVisible, fromViewAll, fromBookmark, fromExam;
+  final bool isExpand;
 
   const CategoriesCard(
       {super.key,
       required this.title,
-      required this.questions,
-      required this.image,
+      this.questions = "",
+      this.image = "",
+      this.subCategoryId = "",
       this.expansionVisible = false,
       this.fromBookmark = false,
       required this.fromViewAll,
-      this.levels = "1"});
+      this.levels = "1",
+      this.fromExam = false,
+      this.minute = "",
+      this.marks = "",
+      this.isExpand = false,
+      this.date = ""});
 
   @override
   State<CategoriesCard> createState() => _CategoriesCardState();
 }
 
 class _CategoriesCardState extends State<CategoriesCard> {
-  bool isExpanded = false;
+
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: Dimensions.space12, vertical: Dimensions.space10),
-      child: InkWell(
-        onTap: () {
-          setState(() {
-            isExpanded = !isExpanded;
-            Get.toNamed(RouteHelper.topCategories,
-                arguments: widget.title);
-          });
-        },
-        child: Container(
+      child:  Container(
             decoration: BoxDecoration(
               color: MyColor.colorWhite,
               borderRadius: BorderRadius.circular(Dimensions.space10),
@@ -72,8 +72,8 @@ class _CategoriesCardState extends State<CategoriesCard> {
                     Padding(
                       padding: const EdgeInsets.only(
                           top: Dimensions.space20, bottom: Dimensions.space20),
-                      child: SvgPicture.asset(
-                        widget.image,
+                      child: Image.network(
+                        widget.image ?? "",
                         height: Dimensions.space40,
                       ),
                     ),
@@ -106,7 +106,10 @@ class _CategoriesCardState extends State<CategoriesCard> {
                                           vertical: Dimensions.space2,
                                           horizontal: Dimensions.space5),
                                       child: Center(
-                                          child: Text(widget.levels,
+                                          child: Text(
+                                              widget.fromExam
+                                                  ? widget.marks
+                                                  : widget.levels,
                                               style: regularDefault.copyWith(
                                                   color: MyColor.colorGrey))),
                                     )
@@ -124,20 +127,47 @@ class _CategoriesCardState extends State<CategoriesCard> {
                                     vertical: Dimensions.space2,
                                     horizontal: Dimensions.space5),
                                 child: Center(
-                                    child: Text(widget.questions,
+                                    child: Text(
+                                        widget.fromExam
+                                            ? widget.date
+                                            : widget.questions +
+                                                MyStrings.questionse,
                                         style: regularDefault.copyWith(
                                             color: MyColor.colorGrey))),
                               ),
                               const SizedBox(width: Dimensions.space10),
+                              widget.fromExam
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                              Dimensions.space3),
+                                          color: MyColor.cardColor,
+                                          border: Border.all(
+                                              color: MyColor.colorDarkGrey,
+                                              width: 0.3)),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: Dimensions.space2,
+                                          horizontal: Dimensions.space5),
+                                      child: Center(
+                                          child: Text(
+                                              widget.fromExam
+                                                  ? widget.minute
+                                                  : widget.questions,
+                                              style: regularDefault.copyWith(
+                                                  color: MyColor.colorGrey))),
+                                    )
+                                  : SizedBox(),
                               widget.fromViewAll == false
                                   ? Align(
                                       alignment: Alignment.topCenter,
-                                      child: SvgPicture.asset(
-                                        widget.fromBookmark
-                                            ? MyImages.deleteSVG
-                                            : MyImages.bookmarkSVG,
-                                        height: Dimensions.space20,
-                                      ),
+                                      child: widget.fromExam
+                                          ? SizedBox()
+                                          : SvgPicture.asset(
+                                              widget.fromBookmark
+                                                  ? MyImages.deleteSVG
+                                                  : MyImages.bookmarkSVG,
+                                              height: Dimensions.space20,
+                                            ),
                                     )
                                   : const SizedBox(),
                             ],
@@ -146,13 +176,18 @@ class _CategoriesCardState extends State<CategoriesCard> {
                       ),
                     ),
                     const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.only(top: Dimensions.space20),
-                      child: SvgPicture.asset(
-                        isExpanded ? MyImages.arrowDownSVG : MyImages.playSVG,
-                        height: Dimensions.space35,
-                      ),
-                    ),
+                    widget.fromExam
+                        ? SizedBox()
+                        : Padding(
+                            padding:
+                                const EdgeInsets.only(top: Dimensions.space20),
+                            child: SvgPicture.asset(
+                              widget.isExpand
+                                  ? MyImages.arrowDownSVG
+                                  : MyImages.playSVG,
+                              height: Dimensions.space35,
+                            ),
+                          ),
                     const SizedBox(width: Dimensions.space20),
                   ],
                 ),
@@ -160,7 +195,7 @@ class _CategoriesCardState extends State<CategoriesCard> {
                 widget.expansionVisible
                     ? ExpandedSection(
                         duration: 300,
-                        expand: isExpanded,
+                        expand: widget.isExpand,
                         child: Column(
                           children: [
                             const CustomHorizontalDivider(),
@@ -243,7 +278,7 @@ class _CategoriesCardState extends State<CategoriesCard> {
                     : SizedBox(),
               ],
             )),
-      ),
+      
     );
   }
 }

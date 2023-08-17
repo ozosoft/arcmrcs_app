@@ -153,6 +153,10 @@ class MyImages {
   static const String americanFlagSVG = "assets/images/americanFlag.svg";
   static const String arrowUpSVG = "assets/images/arrow-up_SVg.svg";
   static const String aarrowdownSVG = "assets/images/arrow-up-fill (2).svg";
+  static const String dailyquizSVG = "assets/images/daily_quiz.svg";
+  static const String funAndLearnSVG = "assets/images/fun&learrn.svg";
+  static const String guessTheWordSVG = "assets/images/guessTheWord.svg";
+  static const String examzoneSVG = "assets/images/examZone.svg";
 
   List<String> rightORWrong = [
     MyImages.whiteTikSVG,
@@ -201,6 +205,7 @@ class MyImages {
     MyImages.scienceKitSVG,
   ];
   final List notificatioImages = [eventSVG, joinRoomSVG, eventSVG];
+  final List playDiffrentGamesImages = [dailyquizSVG, funAndLearnSVG, guessTheWordSVG];
   final List flagImages = [germanflagSVG,americanFlagSVG,americanFlagSVG,germanflagSVG,americanFlagSVG];
   final List arrows = [arrowUpSVG,aarrowdownSVG,arrowUpSVG,aarrowdownSVG,arrowUpSVG];
 }
