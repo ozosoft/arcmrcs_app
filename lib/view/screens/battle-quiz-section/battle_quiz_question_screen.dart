@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/view/screens/battle-quiz-section/quiz-screen-widgets/quiz_questions_body_section.dart';
+import 'package:flutter_prime/view/screens/battle-quiz-section/quiz-screen-widgets/battle_quiz_questions_body_section.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/dimensions.dart';
+import '../../../data/controller/battle/battle_room_controller.dart';
 import '../../../data/model/quiz/quiz_list_model.dart';
 import '../../components/app-bar/custom_category_appBar.dart';
 
@@ -23,12 +24,14 @@ class _BattleQuizQuestionsScreenState extends State<BattleQuizQuestionsScreen> {
     print(qustionsList.first.question);
     return Scaffold(
         appBar: CustomCategoryAppBar(title: title.toString()),
-        body: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(
-              horizontal: Dimensions.space15, vertical: Dimensions.space50),
-          child: BattleQuizBodySection(
-            qustionsList: qustionsList,
-          ),
-        ));
+        body: GetBuilder<BattleRoomController>(builder: (controller) {
+          return SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(
+                horizontal: Dimensions.space15, vertical: Dimensions.space50),
+            child: BattleQuizBodySection(
+              qustionsList: qustionsList,
+            ),
+          );
+        }));
   }
 }

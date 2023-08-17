@@ -3,7 +3,7 @@ import 'package:flutter_prime/view/screens/authentication/forget_password/verifi
 import 'package:flutter_prime/view/screens/authentication/login/login_screen.dart';
 import 'package:flutter_prime/view/screens/authentication/signUp/signUp_screen.dart';
 import 'package:flutter_prime/view/screens/badges/badges_screen.dart';
-import 'package:flutter_prime/view/screens/battle-quiz-section/quiz_question_screen.dart';
+import 'package:flutter_prime/view/screens/battle-quiz-section/battle_quiz_question_screen.dart';
 import 'package:flutter_prime/view/screens/bookmark/bookmark_screen.dart';
 import 'package:flutter_prime/view/screens/coin_history/coin_history_screen.dart';
 import 'package:flutter_prime/view/screens/notification/notification_screen.dart';
