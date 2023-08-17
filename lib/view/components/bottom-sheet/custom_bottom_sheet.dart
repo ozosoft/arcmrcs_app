@@ -16,8 +16,9 @@ class CustomBottomSheet {
 
   void customBottomSheet(BuildContext context) {
     showModalBottomSheet(
-      
+        enableDrag: false,
         isScrollControlled: true,
+        isDismissible: false,
         backgroundColor: MyColor.transparentColor,
         context: context,
         builder: (BuildContext context) => SingleChildScrollView(

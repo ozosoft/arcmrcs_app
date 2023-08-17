@@ -37,6 +37,7 @@ class PlayWithFriendsBottomSheetWidget extends StatelessWidget {
           RoundedButton(
             text: MyStrings.joinRoom,
             press: () {
+              Get.back();
               Get.toNamed(RouteHelper.joinRoomScreen);
             },
             color: MyColor.colorBlack,

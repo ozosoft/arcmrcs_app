@@ -11,6 +11,7 @@ import '../../../../../../../core/utils/my_images.dart';
 import '../../../../../../../core/utils/my_strings.dart';
 import '../../../../../../../core/utils/style.dart';
 import '../../../../../../../data/controller/battle/battle_room_controller.dart';
+import '../../../../../../components/buttons/rounded_loading_button.dart';
 import '../../../../../../components/category-card/custom_room_card.dart';
 import '../../../../../../components/text-form-field/custom_drop_down_field.dart';
 import 'lobby_room_bottom_sheet.dart';
@@ -168,46 +169,49 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
               ),
             ),
             Obx(() {
-              if (battleRoomController.isBattleRoomCreated.value == true) {
+              if (battleRoomController.roomCreateState.value ==
+                  RoomCreateState.roomCreated) {
                 // Navigator.pop(context);
                 WidgetsBinding.instance.addPostFrameCallback((_) {
+
+                  // Navigator.pop(context);
+                  
                   CustomBottomSheet(
                     child: const LobbyBottomSheet(),
                   ).customBottomSheet(context);
 
-                  battleRoomController.toogleBattleCreatedData(false);
+                  battleRoomController
+                      .toogleBattleCreatedState(RoomCreateState.none);
                 });
               }
 
               return Padding(
                 padding: const EdgeInsets.only(top: Dimensions.space40),
-                child: RoundedButton(
-                    text: MyStrings.createRoom,
-                    press: () {
-                      var userData = signInController.user;
-                      print(userData.value!.email);
+                child: battleRoomController.roomCreateState.value ==
+                        RoomCreateState.creatingRoom
+                    ? RoundedLoadingBtn()
+                    : RoundedButton(
+                        text: MyStrings.createRoom,
+                        press: () {
+                          var userData = signInController.user;
+                          print(userData.value!.email);
 
-                      battleRoomController.createRoom(
-                        categoryId: "1",
-                        entryFee: 10,
-                        name:
-                            userData.value!.email == "arman.khan.dev@gmail.com"
+                          battleRoomController.createNewRoom(
+                            categoryId: "1",
+                            entryFee: 10,
+                            name: userData.value!.email ==
+                                    "arman.khan.dev@gmail.com"
                                 ? "Arman Khan"
                                 : "Imran Khan",
-                        profileUrl: "",
-                        uid: userData.value!.uid,
-                        questionLanguageId: "en",
-                        shouldGenerateRoomCode: true,
-                        
-                      );
-                      print(
-                          "${battleRoomController.isBattleRoomCreated.value} dnfhdhfd");
-                      // if (c.isBattleRoomCreated.value == true) {
-                      //   CustomBottomSheet(child: const LobbyBottomSheet())
-                      //       .customBottomSheet(context);
-                      // }
-                    },
-                    textSize: Dimensions.space20),
+                            profileUrl: "",
+                            uid: userData.value!.uid,
+                            questionLanguageId: "en",
+                            shouldGenerateRoomCode: true,
+                          );
+                          print(
+                              "${battleRoomController.roomCreateState.value}");
+                        },
+                        textSize: Dimensions.space20),
               );
             })
           ],

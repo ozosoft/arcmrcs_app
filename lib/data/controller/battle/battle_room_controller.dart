@@ -6,42 +6,77 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_prime/data/model/quiz/quiz_list_model.dart';
+import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/battle_room_helper.dart';
+import '../../../core/route/route.dart';
+import '../../../view/components/alert-dialog/custom_alert_dialog.dart';
 import '../../model/battle/battleRoom.dart';
 import '../../model/battle/battle_room_exeption.dart';
+
+enum RoomCreateState {
+  none,
+  creatingRoom,
+  roomCreated,
+  failed,
+  roomFound,
+  roomNotFound,
+}
+
+enum JoinRoomState {
+  none,
+  joining,
+  joined,
+  failed,
+  full,
+}
+
+enum UserFoundState {
+  none,
+  found,
+  notFound,
+  left,
+}
 
 class BattleRoomController extends GetxController {
   StreamSubscription<DocumentSnapshot>? _battleRoomStreamSubscription;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
 
+  Rx<RoomCreateState> roomCreateState = RoomCreateState.none.obs;
+  Rx<JoinRoomState> joinRoomState = JoinRoomState.none.obs;
+  Rx<UserFoundState> userFoundState = UserFoundState.none.obs;
+
   final Random _rnd = Random.secure();
-  final isBattleRoomCreated = false.obs;
-  final isBattleRoomJoined = false.obs;
 
   Rx<BattleRoom?> battleRoomData = Rx<BattleRoom?>(null);
+
   var questionsData =
       quizListModelFromJson(jsonEncode(BattleRoomHelper.demoQuestionList));
 
-  // Other methods from your BattleRoomCubit class...
-
+// Random Room COde
   String generateRoomCode(int length) => String.fromCharCodes(Iterable.generate(
       length,
       (_) => BattleRoomHelper.roomCodeGenerateCharacters.codeUnitAt(
           _rnd.nextInt(BattleRoomHelper.roomCodeGenerateCharacters.length))));
 
-  toogleBattleCreatedData(bool value) {
-    isBattleRoomCreated.value = value;
+  toogleBattleCreatedState(RoomCreateState value) {
+    roomCreateState.value = value;
     update();
   }
 
-  toogleBattleJoinedeData(bool value) {
-    isBattleRoomJoined.value = value;
+  toogleBattleJoinedeState(JoinRoomState value) {
+    joinRoomState.value = value;
     update();
   }
 
-  void createRoom(
+  toogleUserFoundState(UserFoundState value) {
+    userFoundState.value = value;
+    update();
+  }
+
+// Craete A Room
+  void createNewRoom(
       {required String categoryId,
       String? name,
       String? profileUrl,
@@ -50,13 +85,17 @@ class BattleRoomController extends GetxController {
       String? questionLanguageId,
       required bool shouldGenerateRoomCode}) async {
     try {
-      print("Frrom Craete Rooom");
+      toogleBattleCreatedState(RoomCreateState.creatingRoom);
+      print("From Create Room");
+
       String roomCode = "";
       if (shouldGenerateRoomCode) {
         roomCode = generateRoomCode(6);
       }
       print("Room Code $roomCode");
-      final DocumentSnapshot documentSnapshot = await createBattleRoomFirebase(
+
+      final DocumentSnapshot craeteNewRoomSnapshot =
+          await createBattleRoomFirebase(
         categoryId: categoryId,
         name: name!,
         profileUrl: profileUrl!,
@@ -67,14 +106,14 @@ class BattleRoomController extends GetxController {
         questionLanguageId: questionLanguageId!,
       );
 
-      // print("documentSnapshot $documentSnapshot");
-      BattleRoom.fromDocumentSnapshot(documentSnapshot);
+      BattleRoom.fromDocumentSnapshot(craeteNewRoomSnapshot);
 
       subscribeToBattleRoom(
-          documentSnapshot.id, questionsData.data.questions, false);
-      // isBattleRoomCreated.value = true;
-      update();
-    } catch (e) {}
+          craeteNewRoomSnapshot.id, questionsData.data.questions, false);
+    } catch (e) {
+      toogleBattleCreatedState(RoomCreateState.failed);
+      throw BattleRoomException(errorMessageCode: e.toString());
+    }
   }
 
   //subscribe battle room
@@ -84,50 +123,57 @@ class BattleRoomController extends GetxController {
     _battleRoomStreamSubscription =
         subscribeToBattleRoomFirebase(battleRoomDocumentId, forMultiUser)
             .listen((event) {
-      print(event);
-
       if (event.exists) {
         //emit new state
         BattleRoom battleRoom = BattleRoom.fromDocumentSnapshot(event);
 
         bool? userNotFound = battleRoom.user2?.uid.isEmpty;
-        print(userNotFound);
+
+        print(battleRoom);
 
         //if opponent userId is empty menas we have not found any user
         if (userNotFound == true) {
-          print("USer Not Found");
-          //if currentRoute is not battleRoomOpponent and battle room created then we
-          //have to delete the room so other user can not join the room
+          print("User Not Found ${userFoundState.value}");
 
-          //If roomCode is empty means room is created for playing random battle
-          //else room is created for play with friend battle
-          // if (Routes.currentRoute != Routes.battleRoomFindOpponent &&
-          //     battleRoom.roomCode!.isEmWpty) {
-          //   deleteBattleRoom(false);
-          // }
-          isBattleRoomCreated.value = true;
+          if (userFoundState.value == UserFoundState.found) {
+            print("One of the user left the room");
+          }
+          //Room Created
           battleRoomData.value = battleRoom;
-
-          update();
-          //if user not found yet
-          // emit(BattleRoomCreated(battleRoom));
+          if (roomCreateState.value != RoomCreateState.roomCreated) {
+            toogleBattleCreatedState(RoomCreateState.roomCreated);
+          }
         } else {
-          
-          isBattleRoomJoined.value = true;
+          print("User Found ${joinRoomState.value}");
           battleRoomData.value = battleRoom;
-          update();
-          print("User Found");
-          // emit(BattleRoomUserFound(
-          //   battleRoom: battleRoom,
-          //   isRoomExist: true,
-          //   questions: questions,
-          //   hasLeft: false,
-          // ));
+
+          if (joinRoomState.value != JoinRoomState.joined) {
+            toogleBattleJoinedeState(JoinRoomState.joined);
+            toogleUserFoundState(UserFoundState.found);
+          } else {}
+          print(battleRoom.readyToPlay);
+          if (battleRoom.readyToPlay == true) {
+            Get.back();
+            Get.toNamed(
+              RouteHelper.battleQuizQuestionsScreen,
+              arguments: ["Quiz DEmo", questions],
+            );
+            toogleBattleJoinedeState(JoinRoomState.none);
+          }
         }
       } else {
-        // if (state is BattleRoomUserFound) {
-        //   print("One of the user left the room");
+        if (userFoundState.value != UserFoundState.found) {
+          print("Creator of the user left the room");
+          Get.back();
+          print("Delete Room Close PopUp");
+        }
 
+        if (userFoundState.value == UserFoundState.found) {
+          print("Delete Room Close PopUp");
+          print("One of the user left the room");
+          toogleUserFoundState(UserFoundState.left);
+          Get.back();
+        }
         //   //if one of the user has left the game while playing
         //   emit(
         //     BattleRoomUserFound(
@@ -139,7 +185,9 @@ class BattleRoomController extends GetxController {
         // }
       }
     }, onError: (e) {
-      // emit(BattleRoomFailure(defaultErrorMessageCode));
+      toogleBattleCreatedState(RoomCreateState.failed);
+      toogleBattleJoinedeState(JoinRoomState.failed);
+      toogleUserFoundState(UserFoundState.none);
     }, cancelOnError: true);
   }
 
@@ -151,6 +199,8 @@ class BattleRoomController extends GetxController {
       String? roomCode,
       required String currentCoin}) async {
     try {
+      print(roomCode);
+      toogleBattleJoinedeState(JoinRoomState.joining);
       final result = await joinBattleRoomFrd(
         name: name,
         profileUrl: profileUrl,
@@ -158,15 +208,22 @@ class BattleRoomController extends GetxController {
         uid: uid,
         currentCoin: int.parse(currentCoin),
       );
-
+      print(result['questions']);
       subscribeToBattleRoom(
         result['roomId'],
         result['questions'],
         false,
       );
     } catch (e) {
-      print("BattleFailureError${e.toString()}");
+      print("Join BattleFailureError ${e.toString()}");
       // emit(BattleRoomFailure(e.toString()));
+      toogleBattleJoinedeState(JoinRoomState.failed);
+      if (e.toString() == "roomIsFullCode") {
+        toogleBattleJoinedeState(JoinRoomState.full);
+        CustomSnackBar.error(errorList: ["Sorry! Room Is Full"]);
+      } else {
+        CustomSnackBar.error(errorList: ["${e.toString()}"]);
+      }
     }
   }
 
@@ -190,7 +247,8 @@ class BattleRoomController extends GetxController {
 
       //game started code
       if ((querySnapshot.docs.first.data()
-          as Map<String, dynamic>)['readyToPlay']) {
+              as Map<String, dynamic>)['readyToPlay'] ==
+          true) {
         throw BattleRoomException(errorMessageCode: "gameStartedCode");
       }
 
@@ -201,7 +259,7 @@ class BattleRoomController extends GetxController {
         throw BattleRoomException(errorMessageCode: "notEnoughCoinsCode");
       }
 
-      print("GetSomeData ${questionsData}");
+      // print("GetSomeData ${questionsData.data.toJson()}");
 
       //get roomRef
       DocumentReference documentReference = querySnapshot.docs.first.reference;
@@ -223,11 +281,22 @@ class BattleRoomController extends GetxController {
           //room is full
           throw BattleRoomException(errorMessageCode: "roomIsFullCode");
         }
-        return {"roomId": documentSnapshot.id, "questions": questionsData};
+        return {
+          "roomId": documentSnapshot.id,
+          "questions": questionsData.data.questions
+        };
       });
     } catch (e) {
       throw BattleRoomException(errorMessageCode: e.toString());
     }
+  }
+
+  Future<void> startBattleQuiz(String? battleRoomDocumentId, String battle,
+      {bool readyToPlay = true}) async {
+    try {
+      updateMultiUserRoom(
+          battleRoomDocumentId, {"readyToPlay": readyToPlay}, battle);
+    } catch (e) {}
   }
 
 //Firebase Part
@@ -288,11 +357,36 @@ class BattleRoomController extends GetxController {
           .collection(BattleRoomHelper.battleroomCollectionMulti)
           .doc(battleRoomDocumentId)
           .snapshots();
+    } else {
+      return _firebaseFirestore
+          .collection(BattleRoomHelper.battleroomCollection)
+          .doc(battleRoomDocumentId)
+          .snapshots();
     }
-    return _firebaseFirestore
-        .collection(BattleRoomHelper.battleroomCollection)
-        .doc(battleRoomDocumentId)
-        .snapshots();
+  }
+
+  //delete battle room
+  Future<void> deleteBattleRoom(String? documentId, bool forMultiUser,
+      {String? roomCode}) async {
+    try {
+      if (forMultiUser) {
+        await _firebaseFirestore
+            .collection(BattleRoomHelper.battleroomCollectionMulti)
+            .doc(documentId)
+            .delete();
+      } else {
+        await _firebaseFirestore
+            .collection(BattleRoomHelper.battleroomCollection)
+            .doc(documentId)
+            .delete();
+      }
+    } on SocketException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } on PlatformException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    }
   }
 
   Future<void> removeOpponentFromBattleRoomFirebase(String roomId) async {
@@ -329,6 +423,25 @@ class BattleRoomController extends GetxController {
           .where("roomCode", isEqualTo: roomCode)
           .get();
       return querySnapshot;
+    } on SocketException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } on PlatformException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    }
+  }
+
+  //delete user from multiple user room
+  Future<void> updateMultiUserRoom(String? documentId,
+      Map<String, dynamic> updatedData, String battle) async {
+    try {
+      _firebaseFirestore
+          .collection(battle == "battle"
+              ? BattleRoomHelper.battleroomCollection
+              : BattleRoomHelper.battleroomCollectionMulti)
+          .doc(documentId)
+          .update(updatedData);
     } on SocketException catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());
     } on PlatformException catch (_) {

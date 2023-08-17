@@ -11,6 +11,7 @@ import '../../../../../../../core/utils/style.dart';
 import '../../../../../../../data/controller/auth/signin/signin_controller.dart';
 import '../../../../../../../data/controller/battle/battle_room_controller.dart';
 import '../../../../../../components/bottom-sheet/custom_bottom_sheet.dart';
+import '../../../../../../components/buttons/rounded_loading_button.dart';
 
 class JoinRoomBodySection extends StatefulWidget {
   const JoinRoomBodySection({super.key});
@@ -63,15 +64,17 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                       ),
                     ),
                     Obx(() {
-                      if (battleRoomController.isBattleRoomJoined.value ==
-                          true) {
-                        // Navigator.pop(context);
+                      print(battleRoomController.joinRoomState.value);
+                      if (battleRoomController.joinRoomState.value ==
+                          JoinRoomState.joined) {
                         WidgetsBinding.instance.addPostFrameCallback((_) {
+                          // Navigator.pop(context);
                           CustomBottomSheet(
                             child: const JoinedLobbyBottomSheet(),
                           ).customBottomSheet(context);
 
-                          battleRoomController.toogleBattleJoinedeData(false);
+                          battleRoomController
+                              .toogleBattleJoinedeState(JoinRoomState.none);
                         });
                       }
                       return Padding(
@@ -80,34 +83,35 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                             top: Dimensions.space10,
                             bottom: Dimensions.space25,
                             right: Dimensions.space15),
-                        child: RoundedButton(
-                          text: MyStrings.start,
-                          press: () {
-                            // Get.back();
-                            print(joinRoomCodeController.text);
+                        child: battleRoomController.joinRoomState.value ==
+                                JoinRoomState.joining
+                            ? RoundedLoadingBtn()
+                            : RoundedButton(
+                                text: MyStrings.start,
+                                press: () {
+                                  // Get.back();
+                                  print(joinRoomCodeController.text);
 
-                            var userData = signInController.user;
-                            print(userData.value!.email);
+                                  var userData = signInController.user;
+                                  print(userData.value!.email);
 
-                            battleRoomController.joinRoom(
-                                name: userData.value!.email ==
-                                        "arman.khan.dev@gmail.com"
-                                    ? "Arman Khan"
-                                    : "Imran Khan",
-                                profileUrl: "",
-                                uid: userData.value!.uid,
-                                currentCoin: "5000");
-                            print(
-                                "${battleRoomController.isBattleRoomJoined.value} dnfhdhfd");
-                            //   CustomBottomSheet(
-                            //   child: const JoinedLobbyBottomSheet(),
-                            // ).customBottomSheet(context);
-                          },
-                          color: MyColor.cardColor,
-                          textColor: MyColor.textColor,
-                          textSize: Dimensions.space18,
-                          cornerRadius: Dimensions.space10,
-                        ),
+                                  battleRoomController.joinRoom(
+                                      name: userData.value!.email ==
+                                              "arman.khan.dev@gmail.com"
+                                          ? "Arman Khan"
+                                          : "Imran Khan",
+                                      roomCode: joinRoomCodeController.text,
+                                      profileUrl: "",
+                                      uid: userData.value!.uid,
+                                      currentCoin: "5000");
+                                  print(
+                                      "${battleRoomController.joinRoomState.value}");
+                                },
+                                color: MyColor.primaryColor,
+                                textColor: MyColor.colorWhite,
+                                textSize: Dimensions.space18,
+                                cornerRadius: Dimensions.space10,
+                              ),
                       );
                     })
                   ],

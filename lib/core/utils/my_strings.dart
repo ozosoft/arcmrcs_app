@@ -396,6 +396,8 @@ class MyStrings {
   static const String reedemNow = "Redeem Now";
   static const String sharecodeText =
       "Share this room code to friend and ask them to join";
+  static const String pleaseWaitRoomText =
+      "Please wait game will start soon";
 
   static const String approved = "Approved";
   static const String supper = "Supper";

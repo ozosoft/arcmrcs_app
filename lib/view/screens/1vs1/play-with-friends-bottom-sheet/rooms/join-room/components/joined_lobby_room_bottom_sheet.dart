@@ -11,6 +11,8 @@ import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../components/alert-dialog/custom_alert_dialog.dart';
+
 class JoinedLobbyBottomSheet extends StatefulWidget {
   const JoinedLobbyBottomSheet({super.key});
 
@@ -23,12 +25,58 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return true; // Disable back button if `start` is true
-      },
-      child: GetBuilder<BattleRoomController>(builder: (controller) {
-        return Padding(
+    return GetBuilder<BattleRoomController>(builder: (controller) {
+      return WillPopScope(
+        onWillPop: () async {
+          CustomAlertDialog(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text("Are You sure You Want to leave this room!"),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () async {
+                        await controller
+                            .deleteBattleRoom(
+                                controller.battleRoomData.value!.roomId, false)
+                            .whenComplete(() {
+                          Navigator.of(context)
+                              .pop(true); // Return true when "Yes" is pressed
+                          Get.back();
+                        });
+                      },
+                      child: const Text(
+                        "Yes",
+                        style: regularLarge,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(
+                            false); // Return false when "Cancel" is pressed
+                      },
+                      child: const Text(
+                        "Cancel",
+                        style: regularLarge,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )).customAlertDialog(context);
+          return false; // Disable back button if `start` is true
+        },
+        child: Padding(
           padding: const EdgeInsets.all(Dimensions.space8),
           child: Column(
             children: [
@@ -76,7 +124,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                       width: Dimensions.space260,
                       child: Center(
                         child: Text(
-                          MyStrings.sharecodeText,
+                          MyStrings.pleaseWaitRoomText,
                           textAlign: TextAlign.center,
                           style:
                               regularLarge.copyWith(color: MyColor.textColor),
@@ -85,6 +133,10 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                     )
                   ],
                 ),
+              ),
+              Text(
+                "${controller.battleRoomData.value!.readyToPlay}",
+                style: semiBoldExtraLarge.copyWith(color: MyColor.primaryColor),
               ),
               const SizedBox(
                 height: Dimensions.space21,
@@ -218,32 +270,10 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                 ],
               ),
               const SizedBox(height: Dimensions.space100),
-              start
-                  ? RoundedButton(
-                      text: MyStrings.start,
-                      press: () {
-                        setState(() {
-                          start = true;
-                        });
-                      },
-                      cornerRadius: Dimensions.space10,
-                      textSize: Dimensions.space20,
-                    )
-                  : RoundedButton(
-                      text: MyStrings.start,
-                      press: () {
-                        setState(() {
-                          start = true;
-                        });
-                      },
-                      color: MyColor.lobbycardColor,
-                      textColor: MyColor.textColor,
-                      textSize: Dimensions.space20,
-                    )
             ],
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }

@@ -5,11 +5,14 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/battle/battle_room_controller.dart';
+import 'package:flutter_prime/view/components/alert-dialog/custom_alert_dialog.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_header_row.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../../../../../../../core/route/route.dart';
 
 class LobbyBottomSheet extends StatefulWidget {
   const LobbyBottomSheet({super.key});
@@ -23,12 +26,58 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        return false; // Disable back button if `start` is true
-      },
-      child: GetBuilder<BattleRoomController>(builder: (controller) {
-        return Padding(
+    return GetBuilder<BattleRoomController>(builder: (controller) {
+      return WillPopScope(
+        onWillPop: () async {
+          CustomAlertDialog(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                Text("Are You sure You Want to leave this room!"),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () async {
+                        await controller
+                            .deleteBattleRoom(
+                                controller.battleRoomData.value!.roomId, false)
+                            .whenComplete(() {
+                          Navigator.of(context)
+                              .pop(true); // Return true when "Yes" is pressed
+                          Get.back();
+                        });
+                      },
+                      child: Text(
+                        "Yes",
+                        style: regularLarge,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(
+                            false); // Return false when "Cancel" is pressed
+                      },
+                      child: Text(
+                        "Cancel",
+                        style: regularLarge,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          )).customAlertDialog(context);
+          return false; // Disable back button if `start` is true
+        },
+        child: Padding(
           padding: const EdgeInsets.all(Dimensions.space8),
           child: Column(
             children: [
@@ -85,6 +134,10 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                     )
                   ],
                 ),
+              ),
+              Text(
+                "${controller.battleRoomData.value!.readyToPlay}",
+                style: semiBoldExtraLarge.copyWith(color: MyColor.primaryColor),
               ),
               const SizedBox(
                 height: Dimensions.space21,
@@ -218,13 +271,22 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                 ],
               ),
               const SizedBox(height: Dimensions.space100),
-              start
+              controller.userFoundState.value == UserFoundState.found
                   ? RoundedButton(
                       text: MyStrings.start,
                       press: () {
                         setState(() {
                           start = true;
                         });
+                        print("go");
+
+                        controller.startBattleQuiz(
+                            controller.battleRoomData.value!.roomId, "battle",
+                            readyToPlay: true);
+                        // Get.toNamed(
+                        //   RouteHelper.quizQuestionsScreen,
+                        //   arguments: "QUIZ DEMo",
+                        // );
                       },
                       cornerRadius: Dimensions.space10,
                       textSize: Dimensions.space20,
@@ -242,8 +304,8 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                     )
             ],
           ),
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 }
