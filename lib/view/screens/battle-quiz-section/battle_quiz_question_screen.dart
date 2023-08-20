@@ -20,18 +20,15 @@ class _BattleQuizQuestionsScreenState extends State<BattleQuizQuestionsScreen> {
   final List<Question> qustionsList = Get.arguments[1] as List<Question>;
   @override
   Widget build(BuildContext context) {
-    print(qustionsList.length);
-    print(qustionsList.first.question);
+  
     return Scaffold(
         appBar: CustomCategoryAppBar(title: title.toString()),
-        body: GetBuilder<BattleRoomController>(builder: (controller) {
-          return SingleChildScrollView(
-            padding: const EdgeInsets.symmetric(
-                horizontal: Dimensions.space15, vertical: Dimensions.space50),
-            child: BattleQuizBodySection(
-              qustionsList: qustionsList,
-            ),
-          );
-        }));
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(
+              horizontal: Dimensions.space15, vertical: Dimensions.space50),
+          child: BattleQuizBodySection(
+            qustionsList: qustionsList,
+          ),
+        ));
   }
 }

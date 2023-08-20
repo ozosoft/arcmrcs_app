@@ -173,9 +173,8 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                   RoomCreateState.roomCreated) {
                 // Navigator.pop(context);
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-
                   // Navigator.pop(context);
-                  
+
                   CustomBottomSheet(
                     child: const LobbyBottomSheet(),
                   ).customBottomSheet(context);

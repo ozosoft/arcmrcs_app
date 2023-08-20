@@ -27,6 +27,7 @@ enum JoinRoomState {
   none,
   joining,
   joined,
+  aleadyJoined,
   failed,
   full,
 }
@@ -38,10 +39,18 @@ enum UserFoundState {
   left,
 }
 
+enum BattleGameState {
+  notStartede,
+  started,
+  end,
+  error,
+}
+
 class BattleRoomController extends GetxController {
   StreamSubscription<DocumentSnapshot>? _battleRoomStreamSubscription;
+     StreamSubscription<DocumentSnapshot>? get  battleRoomStreamSubscription => _battleRoomStreamSubscription;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-
+  get firebaseFirestore => _firebaseFirestore;
   Rx<RoomCreateState> roomCreateState = RoomCreateState.none.obs;
   Rx<JoinRoomState> joinRoomState = JoinRoomState.none.obs;
   Rx<UserFoundState> userFoundState = UserFoundState.none.obs;
@@ -143,21 +152,24 @@ class BattleRoomController extends GetxController {
             toogleBattleCreatedState(RoomCreateState.roomCreated);
           }
         } else {
-          print("User Found ${joinRoomState.value}");
           battleRoomData.value = battleRoom;
+          print("User Found ${joinRoomState.value}");
 
-          if (joinRoomState.value != JoinRoomState.joined) {
-            toogleBattleJoinedeState(JoinRoomState.joined);
-            toogleUserFoundState(UserFoundState.found);
-          } else {}
-          print(battleRoom.readyToPlay);
-          if (battleRoom.readyToPlay == true) {
+          if (joinRoomState.value != JoinRoomState.aleadyJoined) {
+            if (joinRoomState.value != JoinRoomState.joined) {
+              toogleBattleJoinedeState(JoinRoomState.joined);
+              toogleUserFoundState(UserFoundState.found);
+            }
+          }
+          if (joinRoomState.value != JoinRoomState.aleadyJoined &&
+              battleRoom.readyToPlay == true) {
+            print("called from here to quiz page");
             Get.back();
             Get.toNamed(
               RouteHelper.battleQuizQuestionsScreen,
-              arguments: ["Quiz DEmo", questions],
+              arguments: ["Quiz DEmo ${joinRoomState.value}", questions],
             );
-            toogleBattleJoinedeState(JoinRoomState.none);
+            toogleBattleJoinedeState(JoinRoomState.aleadyJoined);
           }
         }
       } else {
@@ -455,21 +467,36 @@ class BattleRoomController extends GetxController {
   Future saveAnswer(String? currentUserId, Map submittedAnswer,
       bool isCorrectAnswer, int points,
       {List<Question>? questionsList}) async {
+    BattleRoom battleRoom = battleRoomData.value!;
     List<Question>? questions = questionsList;
 
     //need to check submitting answer for user1 or user2
-    if (currentUserId == battleRoomData.value!.user1!.uid) {
-      print(questions!.length);
-      // if (battleRoomData.value!.user1!.answers.length != questions!.length) {
-      saveAnswerHandle(
-        battleRoomDocumentId: battleRoomData.value!.roomId,
-        points: 0,
-        forUser1: true,
-        submittedAnswer: List.from(battleRoomData.value!.user1!.answers)
-          ..add(submittedAnswer),
-      );
-      // }
-    } else {}
+    if (currentUserId == battleRoom.user1!.uid) {
+      if (battleRoom.user1!.answers.length != questions!.length) {
+        submitAnswerHandle(
+          battleRoomDocumentId: battleRoom.roomId,
+          points: isCorrectAnswer
+              ? (battleRoom.user1!.points + points)
+              : battleRoom.user1!.points,
+          forUser1: true,
+          submittedAnswer: List.from(battleRoom.user1!.answers)
+            ..add(submittedAnswer),
+        );
+      }
+    } else {
+      //submit answer for user2
+      if (battleRoom.user2!.answers.length != questions!.length) {
+        submitAnswerHandle(
+          submittedAnswer: List.from(battleRoom.user2!.answers)
+            ..add(submittedAnswer),
+          battleRoomDocumentId: battleRoom.roomId,
+          points: isCorrectAnswer
+              ? (battleRoom.user2!.points + points)
+              : battleRoom.user2!.points,
+          forUser1: false,
+        );
+      }
+    }
   }
 
   Future submitAnswer(String? currentUserId, String? submittedAnswer,
@@ -536,7 +563,7 @@ class BattleRoomController extends GetxController {
       int? points}) async {
     try {
       Map<String, dynamic> submitAnswer = {};
-      if (forUser1) {
+    if (forUser1) {
         submitAnswer
             .addAll({"user1.answers": submittedAnswer, "user1.points": points});
       } else {

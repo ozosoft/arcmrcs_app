@@ -280,13 +280,21 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                         });
                         print("go");
 
-                        controller.startBattleQuiz(
-                            controller.battleRoomData.value!.roomId, "battle",
-                            readyToPlay: true);
-                        // Get.toNamed(
-                        //   RouteHelper.quizQuestionsScreen,
-                        //   arguments: "QUIZ DEMo",
-                        // );
+                        controller
+                            .startBattleQuiz(
+                                controller.battleRoomData.value!.roomId,
+                                "battle",
+                                readyToPlay: true)
+                            .whenComplete(() {
+                          // Get.back();
+                          // Get.toNamed(
+                          //   RouteHelper.battleQuizQuestionsScreen,
+                          //   arguments: [
+                          //     "Quiz DEmo",
+                          //     controller.questionsData.data.questions
+                          //   ],
+                          // );
+                        });
                       },
                       cornerRadius: Dimensions.space10,
                       textSize: Dimensions.space20,
