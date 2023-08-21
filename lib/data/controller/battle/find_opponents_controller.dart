@@ -1,18 +1,22 @@
+import 'dart:async';
+
 import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
-import '../../../../../data/controller/auth/signin/signin_controller.dart';
-import '../../../../../data/controller/battle/battle_room_controller.dart';
+import '../auth/signin/signin_controller.dart';
+import 'battle_room_controller.dart';
 
-class FindOpponentsController extends GetxController
-    with GetSingleTickerProviderStateMixin {
+class FindOpponentsController extends GetxController with GetTickerProviderStateMixin {
   SignInController signInController;
   BattleRoomController battleRoomController;
 
   FindOpponentsController(this.signInController, this.battleRoomController);
   late final AnimationController _imageScrollController;
   AnimationController get imageScrollController => _imageScrollController;
-
+  late Timer _startTimer;
+  final _countdownSeconds = 5.obs;
+  get countdownSeconds => _countdownSeconds.value;
+  Timer get startTimer => _startTimer;
   @override
   void onInit() {
     super.onInit();
@@ -23,6 +27,34 @@ class FindOpponentsController extends GetxController
       randomSearch();
       runImageScrolling(startOrStop: false);
     });
+
+    // Listen for changes in user found state
+    ever<UserFoundState>(
+      battleRoomController.userFoundState,
+      (state) {
+        if (state == UserFoundState.found) {
+          _startTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+            // Start the 5-second timer here
+            if (_countdownSeconds.value > 0) {
+              _countdownSeconds.value--;
+            } else {
+              _startTimer.cancel();
+              //Start Game
+              battleRoomController.startBattleQuiz(battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true);
+            }
+          });
+        } else {
+          _countdownSeconds.value = 3;
+          _startTimer.cancel(); // Cancel the timer if user found state changes
+        }
+      },
+    );
+  }
+
+  @override
+  void onReady() {
+    // TODO: implement onReady
+    super.onReady();
   }
 
   @override
@@ -55,7 +87,9 @@ class FindOpponentsController extends GetxController
       categoryId: "5",
       name: userData.value!.email == "arman.khan.dev@gmail.com"
           ? "Arman Khan"
-          : "Imran Khan",
+          : userData.value!.email == "arman.khan.dev2@gmail.com"
+              ? "Imran Khan"
+              : "Salman Khan",
       profileUrl: "",
       uid: userData.value!.uid,
     );

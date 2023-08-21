@@ -12,9 +12,10 @@ import 'package:flutter_prime/data/model/quiz/quiz_list_model.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../../../data/controller/auth/signin/signin_controller.dart';
 import '../../../components/alert-dialog/custom_alert_dialog.dart';
+import '../../../components/custom_path/custom_notch_clipper.dart';
 import 'battle_quiz_option_button.dart';
 
 class BattleQuizBodySection extends StatefulWidget {
@@ -33,23 +34,14 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
   int rightAnswerIndex = 0;
   int selectedAnswerIndex = -1;
   SignInController signInController = Get.find();
+  GlobalKey<AnimatedListState> animatedListKey = GlobalKey<AnimatedListState>();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-//  late BattleRoomQuizController battleRoomQuizController;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     battleRoomQuizController = Get.put(
-//         BattleRoomQuizController(Get.find())); // Initialize your controller
-//     WidgetsBinding.instance.addPostFrameCallback((_) {
-//       battleRoomQuizController.questionsList.value = widget.qustionsList;
-//     });
-//   }
 
     return GetBuilder<BattleRoomQuizController>(
-        init: BattleRoomQuizController(Get.find()),
+        init: BattleRoomQuizController(Get.put(BattleRoomController())),
         initState: (quizState) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (quizState.controller!.questionsList.isEmpty) {
@@ -78,13 +70,9 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                         TextButton(
                           onPressed: () async {
                             await quizController.battleRoomController
-                                .deleteBattleRoom(
-                                    quizController.battleRoomController
-                                        .battleRoomData.value!.roomId,
-                                    false)
+                                .deleteBattleRoom(quizController.battleRoomController.battleRoomData.value!.roomId, false)
                                 .whenComplete(() {
-                              Navigator.of(context).pop(
-                                  true); // Return true when "Yes" is pressed
+                              Navigator.of(context).pop(true); // Return true when "Yes" is pressed
                               Get.back();
                             });
                           },
@@ -95,8 +83,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop(
-                                false); // Return false when "Cancel" is pressed
+                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                           },
                           child: const Text(
                             "Cancel",
@@ -114,10 +101,13 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
             // Main Body Code Started
             child: Obx(() {
               Question currentQuestion = quizController.getCurrentQuestion();
+              if (animatedListKey.currentState != null) {
+                animatedListKey.currentState!.reassemble(); // Reset the animations
+              }
               return Stack(
                 children: [
                   CustomPaint(
-                    // painter: RPSCustomPainter(),
+                    painter: RPSCustomPainter3(),
                     child: Container(
                       padding: const EdgeInsets.all(Dimensions.space20),
                       decoration: BoxDecoration(
@@ -136,197 +126,131 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                                 hasImage: false,
                               ),
                               LevelCardButton(
-                                  text:
-                                      "${quizController.currentQuestionIndex + 1}/${widget.qustionsList.length}",
-                                  hasIcon: false,
-                                  hasImage: false),
+                                  text: "${quizController.currentQuestionIndex + 1}/${widget.qustionsList.length}", hasIcon: false, hasImage: false),
                             ],
                           ),
                           const SizedBox(
                             height: 10,
                           ),
                           Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                if (currentQuestion.image != null) ...[
-                                  Container(
-                                    width: double.infinity,
-                                    padding: const EdgeInsets.only(
-                                        top: Dimensions.space40,
-                                        left: Dimensions.space8,
-                                        right: Dimensions.space8),
-                                    child: Image.network(
-                                      currentQuestion.image,
-                                      fit: BoxFit.cover,
+                            child: AnimationLimiter(
+                              key: animatedListKey,
+                              child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: AnimationConfiguration.toStaggeredList(
+                                    duration: const Duration(milliseconds: 375),
+                                    childAnimationBuilder: (widget) => SlideAnimation(
+                                      horizontalOffset: 50.0,
+                                      child: FadeInAnimation(
+                                        child: widget,
+                                      ),
                                     ),
-                                  ),
-                                ],
-                                Container(
-                                    padding: const EdgeInsets.only(
-                                        top: Dimensions.space20),
-                                    child: Text(
-                                      currentQuestion.question,
-                                      style: semiBoldExtraLarge.copyWith(
-                                          fontWeight: FontWeight.w500),
-                                      textAlign: TextAlign.center,
-                                    )),
-                                const SizedBox(height: 20),
+                                    children: [
+                                      if (currentQuestion.image != null) ...[
+                                        Container(
+                                          width: double.infinity,
+                                          padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                                          child: Image.network(
+                                            currentQuestion.image,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ],
+                                      Container(
+                                          padding: const EdgeInsets.only(top: Dimensions.space20),
+                                          child: Text(
+                                            currentQuestion.question,
+                                            style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500),
+                                            textAlign: TextAlign.center,
+                                          )),
+                                      const SizedBox(height: 20),
 
-                                Column(
-                                  children: currentQuestion.options
-                                      .asMap()
-                                      .entries
-                                      .map<Widget>((entry) {
-                                    int index = entry.key;
-                                    Option option = entry.value;
-                                    String optionLetter = String.fromCharCode(
-                                        'A'.codeUnitAt(0) + index);
+                                      Column(
+                                        children: currentQuestion.options.asMap().entries.map<Widget>((entry) {
+                                          int index = entry.key;
+                                          Option option = entry.value;
+                                          String optionLetter = String.fromCharCode('A'.codeUnitAt(0) + index);
 
-                                    return OptionButton(
-                                      letter: optionLetter,
-                                      option: option,
-                                      onTap: () async {
-                                        if (!quizController
-                                                .isOptionSelectedForQuestion(
-                                                    currentQuestion.id,
-                                                    option) &&
-                                            !quizController
-                                                .hasSubmittedAnswerForQuestion(
-                                                    currentQuestion.id)) {
-                                          print("From Ans Save ");
-                                          await quizController
-                                              .battleRoomController
-                                              .saveAnswer(
-                                            signInController.user.value!.uid,
-                                            {
-                                              "qid": option.questionId,
-                                              "ans": option.isAnswer,
+                                          return OptionButton(
+                                            letter: optionLetter,
+                                            option: option,
+                                            onTap: () async {
+                                              if (!quizController.isOptionSelectedForQuestion(currentQuestion.id, option) &&
+                                                  !quizController.hasSubmittedAnswerForQuestion(currentQuestion.id)) {
+                                                print("From Ans Save ");
+                                                await quizController.battleRoomController.saveAnswer(
+                                                  signInController.user.value!.uid,
+                                                  {
+                                                    "qid": option.questionId,
+                                                    "ans": option.isAnswer,
+                                                  },
+                                                  option.isAnswer == "1",
+                                                  10,
+                                                  questionsList: quizController.questionsList,
+                                                );
+                                                quizController.selectOptionForQuestion(currentQuestion.id, option);
+                                              }
                                             },
-                                            option.isAnswer == "1",
-                                            10,
-                                            questionsList:
-                                                quizController.questionsList,
+                                            isSelected: quizController.isOptionSelectedForQuestion(currentQuestion.id, option),
                                           );
-                                          quizController
-                                              .selectOptionForQuestion(
-                                                  currentQuestion.id, option);
-                                        }
-                                      },
-                                      isSelected: quizController
-                                          .isOptionSelectedForQuestion(
-                                              currentQuestion.id, option),
-                                    );
-                                  }).toList(),
-                                ),
+                                        }).toList(),
+                                      ),
 
-                                const SizedBox(height: 50),
+                                      const SizedBox(height: 50),
 
-                                // Display "Previous" button if not on the first question
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    if (quizController.currentQuestionIndex >
-                                        0) ...[
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          quizController.goToPreviousQuestion();
-                                        },
-                                        child: const Text('Previous'),
+                                      // Display "Previous" button if not on the first question
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          if (quizController.currentQuestionIndex > 0) ...[
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                quizController.goToPreviousQuestion();
+                                              },
+                                              child: const Text('Previous'),
+                                            ),
+                                          ],
+                                          if (quizController.hasMoreQuestions())
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                quizController.goToNextQuestion();
+                                              },
+                                              child: const Text('Next Question'),
+                                            ),
+                                        ],
+                                      ),
+
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              print(quizController.selectedOptions);
+                                            },
+                                            child: const Text('Submit'),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              quizController.selectedOptions.clear();
+                                              quizController.countDownController.restart();
+                                              quizController.update();
+                                            },
+                                            child: const Text('Clear Ans'),
+                                          ),
+                                          ElevatedButton(
+                                            onPressed: () {
+                                              setState(() {});
+                                            },
+                                            child: const Text('Clear Ans'),
+                                          ),
+                                        ],
                                       ),
                                     ],
-                                    if (quizController.hasMoreQuestions())
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          quizController.goToNextQuestion();
-                                        },
-                                        child: const Text('Next Question'),
-                                      ),
-                                  ],
-                                ),
-
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        print(quizController.selectedOptions);
-                                      },
-                                      child: const Text('Submit'),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        quizController.selectedOptions.clear();
-                                        quizController.countDownController
-                                            .restart();
-                                        quizController.update();
-                                      },
-                                      child: const Text('Clear Ans'),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                  )),
                             ),
                           ),
                           const SizedBox(
                             height: Dimensions.space25,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    showQuestions = !showQuestions;
-                                  });
-                                },
-                                child: const LevelCardButton(
-                                  hasIcon: false,
-                                  height: Dimensions.space75,
-                                  width: Dimensions.space78,
-                                  hasImage: true,
-                                  image: MyImages.fiftyFiftySVG,
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    audienceVote = !audienceVote;
-                                  });
-                                },
-                                child: const LevelCardButton(
-                                    hasIcon: false,
-                                    height: Dimensions.space75,
-                                    width: Dimensions.space78,
-                                    hasImage: true,
-                                    image: MyImages.groupSVG),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  quizController.countDownController.restart();
-                                },
-                                child: const LevelCardButton(
-                                    hasIcon: false,
-                                    height: Dimensions.space75,
-                                    width: Dimensions.space78,
-                                    hasImage: true,
-                                    image: MyImages.timeSVG),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.toNamed(RouteHelper.quizResultScreen,
-                                      arguments: MyStrings.quizResult);
-                                },
-                                child: const LevelCardButton(
-                                    hasIcon: false,
-                                    height: Dimensions.space75,
-                                    width: Dimensions.space78,
-                                    hasImage: true,
-                                    image: MyImages.nextSVG),
-                              )
-                            ],
                           ),
                           const SizedBox(
                             height: Dimensions.space25,
@@ -360,8 +284,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                         backgroundColor: MyColor.timerbgColor,
                         strokeWidth: Dimensions.space5,
                         strokeCap: StrokeCap.round,
-                        textStyle: semiBoldExtraLarge.copyWith(
-                            color: MyColor.primaryColor),
+                        textStyle: semiBoldExtraLarge.copyWith(color: MyColor.primaryColor),
                         textFormat: CountdownTextFormat.S,
                         isReverse: true,
                         isReverseAnimation: false,

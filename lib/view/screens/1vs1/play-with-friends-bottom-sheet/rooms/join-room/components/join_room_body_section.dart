@@ -74,7 +74,7 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                           ).customBottomSheet(context);
 
                           battleRoomController
-                              .toogleBattleJoinedeState(JoinRoomState.none);
+                              .toogleBattleJoinedState(JoinRoomState.none);
                         });
                       }
                       return Padding(
@@ -99,7 +99,10 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                                       name: userData.value!.email ==
                                               "arman.khan.dev@gmail.com"
                                           ? "Arman Khan"
-                                          : "Imran Khan",
+                                          : userData.value!.email ==
+                                                  "arman.khan.dev2@gmail.com"
+                                              ? "Imran Khan"
+                                              : "Salman Khan",
                                       roomCode: joinRoomCodeController.text,
                                       profileUrl: "",
                                       uid: userData.value!.uid,

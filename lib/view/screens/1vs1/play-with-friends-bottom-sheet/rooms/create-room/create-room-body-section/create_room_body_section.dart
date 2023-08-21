@@ -201,7 +201,10 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                             name: userData.value!.email ==
                                     "arman.khan.dev@gmail.com"
                                 ? "Arman Khan"
-                                : "Imran Khan",
+                                : userData.value!.email ==
+                                        "arman.khan.dev2@gmail.com"
+                                    ? "Imran Khan"
+                                    : "Salman Khan",
                             profileUrl: "",
                             uid: userData.value!.uid,
                             shouldGenerateRoomCode: true,

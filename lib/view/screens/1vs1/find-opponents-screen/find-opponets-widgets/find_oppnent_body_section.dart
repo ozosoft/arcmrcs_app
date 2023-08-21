@@ -11,22 +11,21 @@ import '../../../../../core/utils/style.dart';
 import '../../../../../data/controller/auth/signin/signin_controller.dart';
 import '../../../../../data/controller/battle/battle_room_controller.dart';
 import '../../../../components/alert-dialog/custom_alert_dialog.dart';
-import 'find_opponents_controller.dart';
+import '../../../../components/text/default_text.dart';
+import '../../../../../data/controller/battle/find_opponents_controller.dart';
 
 class FindOpponentsBodySection extends StatefulWidget {
   const FindOpponentsBodySection({super.key});
 
   @override
-  State<FindOpponentsBodySection> createState() =>
-      _FindOpponentsBodySectionState();
+  State<FindOpponentsBodySection> createState() => _FindOpponentsBodySectionState();
 }
 
 class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<FindOpponentsController>(
-        init: FindOpponentsController(
-            Get.find(), Get.put(BattleRoomController())),
+        init: FindOpponentsController(Get.find(), Get.put(BattleRoomController())),
         initState: (_) {},
         builder: (controller) {
           return WillPopScope(
@@ -49,10 +48,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                         TextButton(
                           onPressed: () async {
                             await controller.battleRoomController
-                                .deleteBattleRoom(
-                                    controller.battleRoomController
-                                        .battleRoomData.value!.roomId,
-                                    false)
+                                .deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false)
                                 .whenComplete(() {
                               // Navigator.of(context).pop(
                               //     true); // Return true when "Yes" is pressed
@@ -66,8 +62,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.of(context).pop(
-                                false); // Return false when "Cancel" is pressed
+                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                           },
                           child: const Text(
                             "Cancel",
@@ -93,20 +88,13 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                           padding: const EdgeInsets.all(Dimensions.space7),
                           height: Dimensions.space80,
                           width: Dimensions.space80,
-                          decoration: BoxDecoration(
-                              color: MyColor.prifileBG,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.space40)),
+                          decoration: BoxDecoration(color: MyColor.prifileBG, borderRadius: BorderRadius.circular(Dimensions.space40)),
                           child: FittedBox(
                             fit: BoxFit.cover,
                             child: Container(
                               decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(Dimensions.space40),
-                                  image: const DecorationImage(
-                                      image: AssetImage(
-                                          MyImages.profileimageWomenPng),
-                                      fit: BoxFit.cover)),
+                                  borderRadius: BorderRadius.circular(Dimensions.space40),
+                                  image: const DecorationImage(image: AssetImage(MyImages.profileimageWomenPng), fit: BoxFit.cover)),
                               height: Dimensions.space70,
                               width: Dimensions.space70,
                             ),
@@ -116,7 +104,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                           height: Dimensions.space10,
                         ),
                         Text(
-                          "${controller.signInController.user.value!.email == "arman.khan.dev@gmail.com" ? "Arman Khan" : "Imran Khan"} ",
+                          "${controller.signInController.user.value!.email == "arman.khan.dev@gmail.com" ? "Arman Khan" : controller.signInController.user.value!.email == "arman.khan.dev2@gmail.com" ? "Imran Khan" : "Salman Khan"} ",
                           style: semiBoldLarge,
                         )
                       ],
@@ -125,41 +113,29 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                       padding: const EdgeInsets.all(Dimensions.space20),
                       child: Text(
                         MyStrings.vs,
-                        style: semiBoldOverLarge.copyWith(
-                            color: MyColor.colorBlack),
+                        style: semiBoldOverLarge.copyWith(color: MyColor.colorBlack),
                       ),
                     ),
                     Obx(() {
-                      var opUserData = controller.battleRoomController
-                          .getOpponentUserDetails(
-                              controller.signInController.user.value!.uid);
+                      var opUserData = controller.battleRoomController.getOpponentUserDetails(controller.signInController.user.value!.uid);
 
-                      if (controller
-                              .battleRoomController.userFoundState.value ==
-                          UserFoundState.found) {
+                      if (controller.battleRoomController.userFoundState.value == UserFoundState.found) {
                         controller.imageScrollController.stop();
                       }
-                      return controller
-                                  .battleRoomController.userFoundState.value ==
-                              UserFoundState.found
+                      return controller.battleRoomController.userFoundState.value == UserFoundState.found
                           ? SingleChildScrollView(
                               child: Column(
                                 children: [
                                   Container(
-                                    padding:
-                                        const EdgeInsets.all(Dimensions.space7),
+                                    padding: const EdgeInsets.all(Dimensions.space7),
                                     height: Dimensions.space80,
                                     width: Dimensions.space80,
-                                    decoration: BoxDecoration(
-                                        color: MyColor.prifileBG,
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.space40)),
+                                    decoration: BoxDecoration(color: MyColor.prifileBG, borderRadius: BorderRadius.circular(Dimensions.space40)),
                                     child: FittedBox(
                                       fit: BoxFit.cover,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                              Dimensions.space40),
+                                          borderRadius: BorderRadius.circular(Dimensions.space40),
                                         ),
                                         height: Dimensions.space70,
                                         width: Dimensions.space70,
@@ -180,20 +156,15 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               child: Column(
                                 children: [
                                   Container(
-                                    padding:
-                                        const EdgeInsets.all(Dimensions.space7),
+                                    padding: const EdgeInsets.all(Dimensions.space7),
                                     height: Dimensions.space80,
                                     width: Dimensions.space80,
-                                    decoration: BoxDecoration(
-                                        color: MyColor.prifileBG,
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.space40)),
+                                    decoration: BoxDecoration(color: MyColor.prifileBG, borderRadius: BorderRadius.circular(Dimensions.space40)),
                                     child: FittedBox(
                                       fit: BoxFit.cover,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                              Dimensions.space40),
+                                          borderRadius: BorderRadius.circular(Dimensions.space40),
                                         ),
                                         height: Dimensions.space70,
                                         width: Dimensions.space70,
@@ -213,54 +184,100 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                     }),
                   ],
                 ),
-                Container(
-                  padding: const EdgeInsets.only(
-                      top: Dimensions.space40,
-                      left: Dimensions.space15,
-                      right: Dimensions.space15,
-                      bottom: Dimensions.space20),
-                  width: double.infinity,
-                  child: Lottie.asset(
-                    MyImages.userSearchLottie,
-                    height: Get.width / 1.5,
-                    controller: controller.imageScrollController,
-                    onLoaded: (composition) {
-                      // Configure the AnimationController with the duration of the
-                      // Lottie file and start the animation.
-                      controller.imageScrollController
-                        ..duration = composition.duration
-                        ..repeat();
-                    },
-                  ),
+                SizedBox(
+                  height: Dimensions.space10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Dimensions.space25),
-                  child: RoundedButton(
-                    text: MyStrings.start,
-                    press: () {
-                      // Get.back();
-                      controller.battleRoomController
-                          .startBattleQuiz(
-                              controller.battleRoomController.battleRoomData
-                                  .value!.roomId,
-                              "battle",
-                              readyToPlay: true)
-                          .whenComplete(() {
-                        // Get.back();
-                        // Get.toNamed(
-                        //   RouteHelper.battleQuizQuestionsScreen,
-                        //   arguments: [
-                        //     "Quiz DEmo",
-                        //     controller.questionsData.data.questions
-                        //   ],
-                        // );
-                      });
-                    },
-                    textSize: Dimensions.space20,
-                    cornerRadius: Dimensions.space10,
-                  ),
-                )
+                Stack(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(
+                          top: Dimensions.space40, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space20),
+                      width: double.infinity,
+                      child: Lottie.asset(
+                        MyImages.userSearchLottie,
+                        height: Get.width / 1.5,
+                        controller: controller.imageScrollController,
+                        onLoaded: (composition) {
+                          // Configure the AnimationController with the duration of the
+                          // Lottie file and start the animation.
+                          controller.imageScrollController
+                            ..duration = composition.duration
+                            ..repeat();
+                        },
+                      ),
+                    ),
+                    Obx(() => controller.battleRoomController.userFoundState.value == UserFoundState.found
+                        ? Positioned(
+                            top: 0,
+                            bottom: 0,
+                            right: 0,
+                            left: 0,
+                            child: Container(
+                              color: MyColor.scaffoldBackgroundColor.withOpacity(0.9),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.all(Dimensions.space14),
+                                    child: DefaultText(
+                                      text: "The Game Will Begin In",
+                                      fontSize: Dimensions.fontExtraLarge,
+                                      textStyle: boldLarge.copyWith(fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.all(Dimensions.space14),
+                                    child: DefaultText(
+                                      text: "${controller.countdownSeconds == 0 ? "Started!" : controller.countdownSeconds}",
+                                      fontSize: Dimensions.fontExtraLarge * 3,
+                                      textStyle: boldLarge.copyWith(color: MyColor.primaryColor, fontStyle: FontStyle.italic),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          )
+                        : const SizedBox.shrink())
+                  ],
+                ),
+                Obx(() => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space25),
+                      child: controller.battleRoomController.userFoundState.value == UserFoundState.found
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RoundedButton(
+                                  text: MyStrings.start,
+                                  press: () {
+                                    print("go");
+
+                                    controller.battleRoomController
+                                        .startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true)
+                                        .whenComplete(() {
+                                      // Get.back();
+                                      // Get.toNamed(
+                                      //   RouteHelper.battleQuizQuestionsScreen,
+                                      //   arguments: [
+                                      //     "Quiz DEmo",
+                                      //     controller.questionsData.data.questions
+                                      //   ],
+                                      // );
+                                    });
+                                  },
+                                  cornerRadius: Dimensions.space10,
+                                  textSize: Dimensions.space20,
+                                ),
+                              ],
+                            )
+                          : RoundedButton(
+                              text: MyStrings.start,
+                              press: () {},
+                              color: MyColor.colorWhite,
+                              textColor: MyColor.textColor,
+                              textSize: Dimensions.space20,
+                            ),
+                    ))
               ],
             ),
           );

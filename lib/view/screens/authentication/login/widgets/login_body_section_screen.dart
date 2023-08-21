@@ -193,6 +193,17 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                         "mr.akt.bd@gmail.com", "123456");
                   },
                 ),
+                SizedBox(
+                  height: 20,
+                ),
+                RoundedButton(
+                  text: "Player 3 Login",
+                  press: () {
+                    // Perform authentication using authController methods
+                    authController.signInWithEmailAndPassword(
+                        "arman.khan.dev2@gmail.com", "123456");
+                  },
+                ),
 
                 //ARMANS's DEMO CODE END
               ],
