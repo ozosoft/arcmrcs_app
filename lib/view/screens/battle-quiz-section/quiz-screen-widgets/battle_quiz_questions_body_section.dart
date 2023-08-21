@@ -51,11 +51,9 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
     return GetBuilder<BattleRoomQuizController>(
         init: BattleRoomQuizController(Get.find()),
         initState: (quizState) {
-          
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (quizState.controller!.questionsList.isEmpty) {
               quizState.controller!.questionsList.value = widget.qustionsList;
-           
             }
           });
         },
@@ -350,9 +348,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                           print("From Counter Next Querstion");
                           if (quizController.hasMoreQuestions()) {
                             quizController.goToNextQuestion();
-                            
                           }
-                          
                         },
                         initialDuration: 0,
                         width: Dimensions.space60,

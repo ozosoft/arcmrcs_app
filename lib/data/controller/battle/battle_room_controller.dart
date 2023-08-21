@@ -11,8 +11,10 @@ import 'package:get/get.dart';
 
 import '../../../core/helper/battle_room_helper.dart';
 import '../../../core/route/route.dart';
+import '../../../core/utils/internet_connectivity.dart';
 import '../../model/battle/battleRoom.dart';
 import '../../model/battle/battle_room_exeption.dart';
+import '../../model/battle/userBattleRoomDetails.dart';
 
 enum RoomCreateState {
   none,
@@ -48,7 +50,8 @@ enum BattleGameState {
 
 class BattleRoomController extends GetxController {
   StreamSubscription<DocumentSnapshot>? _battleRoomStreamSubscription;
-     StreamSubscription<DocumentSnapshot>? get  battleRoomStreamSubscription => _battleRoomStreamSubscription;
+  StreamSubscription<DocumentSnapshot>? get battleRoomStreamSubscription =>
+      _battleRoomStreamSubscription;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   get firebaseFirestore => _firebaseFirestore;
   Rx<RoomCreateState> roomCreateState = RoomCreateState.none.obs;
@@ -90,7 +93,6 @@ class BattleRoomController extends GetxController {
       String? profileUrl,
       String? uid,
       int? entryFee,
-      String? questionLanguageId,
       required bool shouldGenerateRoomCode}) async {
     try {
       toogleBattleCreatedState(RoomCreateState.creatingRoom);
@@ -111,7 +113,6 @@ class BattleRoomController extends GetxController {
         roomCode: roomCode,
         roomType: "public",
         entryFee: entryFee,
-        questionLanguageId: questionLanguageId!,
       );
 
       BattleRoom.fromDocumentSnapshot(craeteNewRoomSnapshot);
@@ -120,6 +121,7 @@ class BattleRoomController extends GetxController {
           craeteNewRoomSnapshot.id, questionsData.data.questions, false);
     } catch (e) {
       toogleBattleCreatedState(RoomCreateState.failed);
+      print(e.toString());
       throw BattleRoomException(errorMessageCode: e.toString());
     }
   }
@@ -310,6 +312,128 @@ class BattleRoomController extends GetxController {
     } catch (e) {}
   }
 
+// Start Main Search Random Battle room
+
+  void randomSearchRoom({
+    required String categoryId,
+    required String name,
+    required String profileUrl,
+    required String uid,
+  }) async {
+    try {
+      List<DocumentSnapshot> documents = await randomSearchBattleRoom(
+        categoryId: categoryId,
+        name: name,
+        profileUrl: profileUrl,
+        uid: uid,
+      );
+
+      if (documents.isNotEmpty) {
+        //find any random room
+        DocumentSnapshot room =
+            documents[Random.secure().nextInt(documents.length)];
+        // emit(BattleRoomJoining());
+
+        // List<Question> questions = await _battleRoomRepository.getQuestions(
+        //   categoryId: categoryId,
+        //   matchId: room.id,
+        //   forMultiUser: false,
+        //   roomDocumentId: room.id,
+        //   languageId: questionLanguageId,
+        //   roomCreater: false,
+        //   destroyBattleRoom: "0",
+        // );
+
+        final searchAgain = await randomJoinBattleRoom(
+            battleRoomDocumentId: room.id,
+            name: name,
+            profileUrl: profileUrl,
+            uid: uid);
+        if (searchAgain) {
+          //if user falis to join room then searchAgain
+          randomSearchRoom(
+            categoryId: categoryId,
+            name: name,
+            profileUrl: profileUrl,
+            uid: uid,
+          );
+        } else {
+          subscribeToBattleRoom(room.id, questionsData.data.questions, false);
+        }
+      } else {
+        createNewRoom(
+            categoryId: categoryId,
+            entryFee: 5,
+            name: name,
+            profileUrl: profileUrl,
+            shouldGenerateRoomCode: false,
+            uid: uid);
+      }
+    } catch (e) {
+      // emit(BattleRoomFailure(e.toString()));
+    }
+  }
+
+  //to join battle room (one to one)
+  Future<bool> randomJoinBattleRoom(
+      {String? battleRoomDocumentId,
+      String? name,
+      String? profileUrl,
+      String? uid}) async {
+    try {
+      return await joinBattleRoomFirebase(
+        battleRoomDocumentId: battleRoomDocumentId,
+        name: name,
+        profileUrl: profileUrl,
+        uid: uid,
+      );
+    } catch (e) {
+      throw BattleRoomException(errorMessageCode: e.toString());
+    }
+  }
+
+  //search battle room
+  Future<List<DocumentSnapshot>> randomSearchBattleRoom({
+    required String categoryId,
+    required String name,
+    required String profileUrl,
+    required String uid,
+  }) async {
+    try {
+      final documents = await searchBattleRoom(categoryId);
+
+      //if room is created by user who is searching the room then delete room
+      //so user will not join room that was created by him/her self
+      int index = documents.indexWhere((element) =>
+          (element.data() as Map<String, dynamic>)['createdBy'] == uid);
+      if (index != -1) {
+        deleteBattleRoom(documents[index].id, false);
+        documents.removeAt(index);
+      }
+      return documents;
+    } catch (e) {
+      throw BattleRoomException(errorMessageCode: e.toString());
+    }
+  }
+
+  UserBattleRoomDetails getOpponentUserDetails(String currentUserId) {
+    if (userFoundState.value == UserFoundState.found) {
+      if (currentUserId == battleRoomData.value!.user1?.uid) {
+        print(battleRoomData.value!.user2!);
+        return (battleRoomData.value!.user2!);
+      } else {
+        return (battleRoomData.value!.user1!);
+      }
+    }
+    return UserBattleRoomDetails(
+        points: 0,
+        answers: [],
+        correctAnswers: 0,
+        name: "name",
+        profileUrl: "profileUrl",
+        uid: "uid");
+  }
+
 //Firebase Part
 
   //to create room to play quiz
@@ -321,7 +445,6 @@ class BattleRoomController extends GetxController {
     String? roomCode,
     String? roomType,
     int? entryFee,
-    required String questionLanguageId,
   }) async {
     try {
       //hasLeft,categoryId
@@ -330,7 +453,6 @@ class BattleRoomController extends GetxController {
           .add({
         "createdBy": uid,
         "categoryId": categoryId,
-        "languageId": questionLanguageId,
         "roomCode": roomCode ?? "",
         "entryFee": entryFee ?? 0,
         "readyToPlay": false,
@@ -351,6 +473,46 @@ class BattleRoomController extends GetxController {
         "createdAt": Timestamp.now(),
       });
       return await documentReference.get();
+    } on SocketException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } on PlatformException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    }
+  }
+
+//to create room to play quiz
+  Future<bool> joinBattleRoomFirebase(
+      {String? name,
+      String? profileUrl,
+      String? uid,
+      String? battleRoomDocumentId}) async {
+    try {
+      DocumentReference documentReference = (await _firebaseFirestore
+              .collection(BattleRoomHelper.battleroomCollection)
+              .doc(battleRoomDocumentId)
+              .get())
+          .reference;
+      print("Join user here ");
+      return FirebaseFirestore.instance.runTransaction((transaction) async {
+        //get latest document
+        DocumentSnapshot documentSnapshot = await documentReference.get();
+        Map user2Details =
+            Map.from(documentSnapshot.data() as Map<String, dynamic>)['user2'];
+        print("User 2 : $user2Details");
+        if (user2Details['uid'].toString().isEmpty) {
+          //print("Join user");
+          //join as user2
+          transaction.update(documentReference, {
+            "user2.name": name,
+            "user2.uid": uid,
+            "user2.profileUrl": profileUrl,
+          });
+          return false;
+        }
+        return true; //search for other room
+      });
     } on SocketException catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());
     } on PlatformException catch (_) {
@@ -391,6 +553,34 @@ class BattleRoomController extends GetxController {
             .doc(documentId)
             .delete();
       }
+    } on SocketException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } on PlatformException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    }
+  }
+
+  //Search Room
+  Future<List<DocumentSnapshot>> searchBattleRoom(String categoryId) async {
+    try {
+      QuerySnapshot querySnapshot;
+      if (await InternetConnectivity.isUserOffline()) {
+        throw SocketException("");
+      }
+
+      querySnapshot = await _firebaseFirestore
+          .collection(BattleRoomHelper.battleroomCollection)
+          .where("categoryId", isEqualTo: categoryId)
+          .where("roomCode", isEqualTo: "")
+          .where(
+            "user2.uid",
+            isEqualTo: "",
+          )
+          .get();
+
+      return querySnapshot.docs;
     } on SocketException catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());
     } on PlatformException catch (_) {
@@ -563,7 +753,7 @@ class BattleRoomController extends GetxController {
       int? points}) async {
     try {
       Map<String, dynamic> submitAnswer = {};
-    if (forUser1) {
+      if (forUser1) {
         submitAnswer
             .addAll({"user1.answers": submittedAnswer, "user1.points": points});
       } else {

@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 
 import '../../../core/helper/battle_room_helper.dart';
 import '../../model/battle/battleRoom.dart';
-import '../../model/battle/userBattleRoomDetails.dart';
 import '../../model/quiz/quiz_list_model.dart';
 import 'battle_room_controller.dart';
 

@@ -79,6 +79,8 @@ class MyImages {
   static const String wrongSvg = "assets/images/wrongFilled.svg";
   static const String totalReward = "assets/images/totalReward.svg";
   static const String mapSVG = "assets/images/Map.svg";
+  static const String world = "assets/images/world.png";
+  static const String userSearchLottie = "assets/animation/user_search.json";
   static const String copySVG = "assets/images/copy_svg.svg";
   static const String roomCreatorSVG = "assets/images/roomCreator.svg";
   static const String onBoard2SVG = "assets/images/intro2.svg";

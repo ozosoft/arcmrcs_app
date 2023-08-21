@@ -204,7 +204,6 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                                 : "Imran Khan",
                             profileUrl: "",
                             uid: userData.value!.uid,
-                            questionLanguageId: "en",
                             shouldGenerateRoomCode: true,
                           );
                           print(
