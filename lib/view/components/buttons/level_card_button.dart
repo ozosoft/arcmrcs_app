@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 
 class LevelCardButton extends StatelessWidget {
   final bool hasIcon;
-  final bool hasImage;
+  final bool hasImage,lifelineUsed;
   final double ? height,width;
   final String? text, image;
   final Color bgColor;
@@ -17,7 +17,7 @@ class LevelCardButton extends StatelessWidget {
       this.bgColor = MyColor.primaryColor,
       this.contentColor = MyColor.colorWhite,
       required this.hasIcon,
-      this.image, this.height, this.width, required this.hasImage})
+      this.image, this.height, this.width, required this.hasImage, this.lifelineUsed=false})
       : super(key: key);
 
   @override
@@ -33,7 +33,7 @@ class LevelCardButton extends StatelessWidget {
         child: Center(
             child: Row(mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            hasIcon ? SvgPicture.asset(image!) :const SizedBox(),
+            hasIcon ? Opacity(opacity:20,child:  SvgPicture.asset(image!, color: MyColor.prifileBG,)) :const SizedBox(),
             hasImage==false? const SizedBox(
               width: 3,
             ):const SizedBox(),

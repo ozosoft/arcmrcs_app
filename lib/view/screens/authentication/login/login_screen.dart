@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/custom-head-section-for-auth/auth_heading.dart';
 import 'package:flutter_prime/view/screens/authentication/login/widgets/login_body_section_screen.dart';
-import 'package:get/get.dart';
 
-import '../../../../data/controller/auth/login_controller.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

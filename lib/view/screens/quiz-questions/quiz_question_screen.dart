@@ -19,10 +19,6 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomCategoryAppBar(title: title.toString()),
-        body:  SingleChildScrollView(
-          padding:const EdgeInsets.symmetric(
-              horizontal: Dimensions.space15, vertical: Dimensions.space50),
-          child: QuizBodySection(id: id),
-        ));
+        body:  QuizBodySection(id: id));
   }
 }

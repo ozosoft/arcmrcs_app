@@ -13,6 +13,7 @@ class UrlContainer {
   static const String registrationEndPoint = 'register';
   static const String loginEndPoint = 'login';
   static const String logoutUrl = 'logout';
+  static const String submitAnswerUrl = 'general-quiz/answer-submit';
   static const String forgetPasswordEndPoint = 'password/email';
   static const String passwordVerifyEndPoint = 'password/verify-code';
   static const String resetPasswordEndPoint = 'password/reset';

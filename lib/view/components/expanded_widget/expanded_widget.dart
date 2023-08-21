@@ -9,6 +9,7 @@ import 'package:flutter_prime/data/controller/all_categories/all_categories_cont
 import 'package:flutter_prime/data/repo/allcategories/all_categories_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/animated_widget/expanded_widget.dart';
+import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
 import 'package:flutter_prime/view/components/text/custom_text_with_underline.dart';
 import 'package:flutter_svg/svg.dart';
@@ -47,7 +48,9 @@ class _ExpandedSectionsState extends State<ExpandedSections> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AllCategoriesController>(
-      builder: (controller) => ExpandedSection(
+      builder: (controller) =>
+      controller.loader?CustomLoader():
+       ExpandedSection(
         duration: 300,
         expand: widget.isExpand,
         child: Column(
@@ -66,8 +69,7 @@ class _ExpandedSectionsState extends State<ExpandedSections> {
                             vertical: Dimensions.space5,
                             horizontal: Dimensions.space5),
                         child: InkWell(
-                          onTap: () { Get.toNamed(RouteHelper.quizQuestionsScreen,arguments: [widget.title, controller.allCategoriesList[widget.categoryindex]
-                                      .quizInfos![index].id]);},
+                          onTap: () { Get.toNamed(RouteHelper.quizQuestionsScreen,arguments: [widget.title, controller.allCategoriesList[widget.categoryindex].quizInfos![index].id]);},
                           child: Container(
                             padding: const EdgeInsets.symmetric( horizontal: Dimensions.space8,vertical: Dimensions.space8),
                             decoration: BoxDecoration(
