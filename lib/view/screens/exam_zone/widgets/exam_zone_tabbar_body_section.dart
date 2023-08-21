@@ -87,6 +87,7 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection>
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       child: CategoriesCard(
+                        index: index,
                         marks: MyStrings.marks,
                         date: MyStrings.dates,
                         minute: MyStrings.minutes,

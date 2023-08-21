@@ -48,7 +48,20 @@ class AllCategoriesController extends GetxController {
 
     loader = false;
     update();
+    int expandIndex = -1;
+  void changeExpandIndex(int index) {
+    if (expandIndex == index) {
+      expandIndex = -1;
+      update();
+      return;
+    }
+    expandIndex = index;
+    update();
   }
+  }
+
+
+  
 
   changeactivestatus() {
     isActive = !isActive;

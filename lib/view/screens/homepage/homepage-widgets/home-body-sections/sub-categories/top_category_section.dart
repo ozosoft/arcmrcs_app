@@ -7,7 +7,9 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
+import 'package:flutter_prime/data/controller/sub_categories/sub_categories_controller.dart';
 import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
+import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:get/get.dart';
 import '../../../../../components/category-card/custom_top_category_card.dart';
@@ -25,6 +27,10 @@ class _TopCategorySectionState extends State<TopCategorySection> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DashBoardRepo(apiClient: Get.find()));
     Get.put(DashBoardController(dashRepo: Get.find()));
+    Get.put(SubCategoriesRepo(apiClient: Get.find()));
+    Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
+    SubCategoriesController controllers =
+        Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
     DashBoardController controller =
         Get.put(DashBoardController(dashRepo: Get.find()));
 
@@ -86,34 +92,43 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                       ),
                     ),
                   ),
-                  GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3, childAspectRatio: .8),
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: controller.categorylist.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                          onTap: () {
-                           Get.toNamed(
-                              RouteHelper.subCategories,
-                              arguments: controller.categorylist[index].name
+                  GetBuilder<SubCategoriesController>(
+                    builder: (controllers) => GridView.builder(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 3, childAspectRatio: .8),
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: controller.categorylist.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return InkWell(
+                            onTap: () {
+                              Get.toNamed(
+                                RouteHelper.subCategories,
+                                arguments: [
+                                  controller.categorylist[index].name
+                                      .toString(),
+                                  controller.categorylist[index].id.toString()
+                                ],
+                              );
+                              controllers.changeExpandIndex(index);
+                              print("this is sub categ+++++++++++++++++++++++++++"+
+                                  controller.categorylist[index].id.toString());
+                            },
+                            child: CustomTopCategoryCard(
+                              index: index,
+                              title: controller.categorylist[index].name
                                   .toString(),
-                            );
-                          },
-                          child: CustomTopCategoryCard(
-                            title:
-                                controller.categorylist[index].name.toString(),
-                            questionsQuantaty: 
-                                controller.categorylist[index].questionsCount
-                                    .toString(),
-                            image:UrlContainer
-                                    .dashBoardCategoryImage +
-                                controller.categorylist[index].image.toString(),
-                          ),
-                        );
-                      })
+                              questionsQuantaty: controller
+                                  .categorylist[index].questionsCount
+                                  .toString(),
+                              image: UrlContainer.dashBoardCategoryImage +
+                                  controller.categorylist[index].image
+                                      .toString(),
+                            ),
+                          );
+                        }),
+                  )
                 ],
               ),
             ),

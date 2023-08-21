@@ -12,15 +12,17 @@ class QuizQuestionsScreen extends StatefulWidget {
 }
 
 class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
-  final title = Get.arguments as String;
+  final title = Get.arguments [0]as String;
+  final id = Get.arguments [1] ;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomCategoryAppBar(title: title.toString()),
-        body: const SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
+        body:  SingleChildScrollView(
+          padding:const EdgeInsets.symmetric(
               horizontal: Dimensions.space15, vertical: Dimensions.space50),
-          child: QuizBodySection(),
+          child: QuizBodySection(id: id),
         ));
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/all_categories/all_categories_controller.dart';
@@ -34,6 +33,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata();
+
     });
   }
 
@@ -60,17 +60,22 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                             levelList[0].subCategoryId.toString() != 'null'
                         ? levelList[0].subCategoryId.toString()
                         : '-1';
-                    String title =controller.allCategoriesList[index].name.toString();
+                    String title =
+                        controller.allCategoriesList[index].name.toString();
                     return InkWell(
                       onTap: () {
                         subCategoryId == ""
                             ? const SizedBox()
                             : Get.toNamed(RouteHelper.subCategories,
-                                arguments: [title, subCategoryId]);
-                        
+                                arguments: [title,  controller
+                            .allCategoriesList[index].id
+                            .toString()]);
+                        print("this is sub id++++++++++++++++++++"+subCategoryId
+                            .toString());
                       },
                       child: CategoriesCard(
-                        title:title,
+                       
+                        title: title,
                         questions: controller
                             .allCategoriesList[index].questionsCount
                             .toString(),
@@ -80,6 +85,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                         expansionVisible: false,
                         fromViewAll: true,
                         subCategoryId: subCategoryId,
+                        index: index,
                       ),
                     );
                   }),

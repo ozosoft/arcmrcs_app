@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/sub_categories/sub_categories_controller.dart';
 import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart';
@@ -33,7 +31,7 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
 
     title = Get.arguments[0] as String;
     subCategoryId = Get.arguments[1];
-    print("hello this is sub category" + subCategoryId);
+   
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -67,15 +65,10 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
                         controller.changeExpandIndex(index);
                       },
                       child: CategoriesCard(
-                        image: UrlContainer.subCategoriesImage +
-                            controller.subCategoriesList[index].image
-                                .toString(),
-                        title:
-                            controller.subCategoriesList[index].name.toString(),
-                        questions: controller
-                            .subCategoriesList[index].questionsCount
-                            .toString(),
-                        // image: MyImages().categoryImages[index],
+                        index: index,
+                        image: UrlContainer.subCategoriesImage + controller.subCategoriesList[index].image.toString(),
+                        title:controller.subCategoriesList[index].name.toString(),
+                        questions: controller.subCategoriesList[index].questionsCount.toString(),
                         expansionVisible: true,
                         fromViewAll: false,
                         isExpand: index == controller.expandIndex,

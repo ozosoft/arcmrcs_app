@@ -35,6 +35,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                 itemCount: MyStrings().allCategoryies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CategoriesCard(
+                    index: index,
                     title: MyStrings().allCategoryies[index]["title"].toString(),
                     questions: MyStrings().allCategoryies[index]["questions"].toString(),
                     image: MyImages().categoryImages[index],

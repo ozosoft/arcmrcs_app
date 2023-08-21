@@ -6,12 +6,13 @@ import 'package:flutter_prime/core/utils/style.dart';
 
 class CustomTopCategoryCard extends StatelessWidget {
   final String title, questionsQuantaty, image;
+  final int? index;
 
   const CustomTopCategoryCard({
     super.key,
     required this.title,
     required this.questionsQuantaty,
-    required this.image,
+    required this.image, this.index,
   });
 
   @override
@@ -30,14 +31,15 @@ class CustomTopCategoryCard extends StatelessWidget {
           children: [
             Image.network(image),
             Padding(
-              padding: const EdgeInsets.symmetric( vertical: Dimensions.space10, horizontal: Dimensions.space5),
+              padding: const EdgeInsets.symmetric(
+                  vertical: Dimensions.space10, horizontal: Dimensions.space5),
               child: Text(
                 title.toString(),
                 textAlign: TextAlign.center,
                 style: semiBoldDefault,
               ),
             ),
-            Text(questionsQuantaty+MyStrings.questionse,
+            Text(questionsQuantaty + MyStrings.questionse,
                 textAlign: TextAlign.center,
                 style: regularDefault.copyWith(
                     color: MyColor.colorlighterGrey,
