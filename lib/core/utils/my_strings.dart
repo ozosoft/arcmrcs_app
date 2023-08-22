@@ -85,8 +85,7 @@ class MyStrings {
 
   static const String withdrawMoney = "Withdraw Money";
   static const String resetPassword = "Reset Password";
-  static const String subText =
-      "Your new password must different form \nprevious used passwords";
+  static const String subText = "Your new password must different form \nprevious used passwords";
   static const String newPassword = "New Password";
   static const String newPasswordHint = "Enter new password";
 
@@ -112,8 +111,7 @@ class MyStrings {
 
   static const String selectALanguage = 'Select Language';
   static const String twoFactorAuth = 'Two Factor Authentication';
-  static const String twoFactorMsg =
-      'Enter 6-digit code from your two factor authenticator APP.';
+  static const String twoFactorMsg = 'Enter 6-digit code from your two factor authenticator APP.';
   static const String exitTitle = "Are you sure you want to exit the app?";
   static const String hasUpperLetter = "Has uppercase letter";
   static const String hasLowerLetter = "Has lowercase letter";
@@ -129,17 +127,13 @@ class MyStrings {
   static const String usernameOrEmailHint = "Enter your username or email";
   static const String createAccount = "Create an account";
   static const String fieldErrorMsg = "Please fill out this field";
-  static const String resetPassContent =
-      "To secure your account please provide a secure password";
-  static const String forgetPasswordSubText =
-      "Enter your email or username below to receive a password reset verification code";
-  static const String verifyPasswordSubText =
-      "A 6 digits verification code sent to your email address";
+  static const String resetPassContent = "To secure your account please provide a secure password";
+  static const String forgetPasswordSubText = "Enter your email or username below to receive a password reset verification code";
+  static const String verifyPasswordSubText = "A 6 digits verification code sent to your email address";
   static const String phoneNo = "Phone No.";
   static const String passwordResetEmailSentTo = 'Password reset email sent to';
   static const String emailVerification = "Email Verification";
-  static const String viaEmailVerify =
-      "We've sent you an access code via email for email verification";
+  static const String viaEmailVerify = "We've sent you an access code via email for email verification";
   static const String didNotReceiveCode = "Didn't receive code?";
   static const String resend = "Resend Code";
   static const String resendCode = "Resend Code";
@@ -156,14 +150,13 @@ class MyStrings {
   static const String type = "Type";
   static const String profile = "Profile";
   static const String profileEdit = "Edit Profile";
-  static const String  themes= "Theme Light/Dark";
+  static const String themes = "Theme Light/Dark";
   static const String language = "Language";
   static const String transactionNo = "Transaction No.";
   static const String privacyPolicy = "Privacy & Policy";
   static const String forgetPassword = "Forget Password";
   static const String enterVerificationcode = "Enter Verification Code";
-  static const String wehaveSentaCode =
-      "We have sent a code to refatul.tsk@gmail.com";
+  static const String wehaveSentaCode = "We have sent a code to refatul.tsk@gmail.com";
   static const String doNotHaveAccount = "Don't have an account?";
   static const String enterEmailOrUserName = 'Enter username or email';
   static const String policies = 'Policies';
@@ -180,8 +173,7 @@ class MyStrings {
   static const String iAgreeWith = "I agree with the";
 
   static const String createNewPassword = "Create new password";
-  static const String createPasswordSubText =
-      "Please provide a strong password to protect your account";
+  static const String createPasswordSubText = "Please provide a strong password to protect your account";
   static const String enterCurrentPassword = 'Enter current password';
   static const String enterNewPassword = 'Enter new password';
   static const String enterConfirmPassword = 'Enter confirm password';
@@ -203,8 +195,7 @@ class MyStrings {
   static const String accountName = "Account Name";
   static const String quizResult = "Quiz Result";
   static const String fifteenPercent = "15%";
-  static const String quizQuestions =
-      "The Great Wall is a world-famous historical landmark located in which country?";
+  static const String quizQuestions = "The Great Wall is a world-famous historical landmark located in which country?";
   static const String levels = "6 Level";
   static const String level1 = "Level 01";
   static const String allCategory = "All categories";
@@ -213,8 +204,7 @@ class MyStrings {
   static const String fee50Coins = "Fee 50 Coins";
   static const String endDate = "End 12 jun 2023";
   static const String healthAndQuiz = "Health Quiz Contest";
-  static const String healthAndQuizdescription =
-      "The health Quiz feature aims to bring the excitement";
+  static const String healthAndQuizdescription = "The health Quiz feature aims to bring the excitement";
   static const String topCategory = "Top Categories";
   static const String quizContest = "Quiz Contest";
   static const String battleOfTheDay = "Battles of the Day";
@@ -265,8 +255,7 @@ class MyStrings {
   static const String invalidEmailMsg = "Enter valid email";
   static const String enterCurrentPass = "Enter your current password";
   static const String enterNewPass = "Enter your new password";
-  static const String invalidPassMsg =
-      "Password must be contain 1 special character and number";
+  static const String invalidPassMsg = "Password must be contain 1 special character and number";
   static const String kMatchPassError = "Password doesn't match";
   static const String kFirstNameNullError = "Enter first name";
   static const String kLastNameNullError = "Enter last name";
@@ -277,12 +266,9 @@ class MyStrings {
   static const String somethingWentWrong = 'Something went wrong';
   static const String invalidAmount = 'Invalid amount';
   static const String welcomeBack = 'Welcome back';
-  static const String pleaseEnterDetails =
-      'Please enter your details to sign in.';
-  static const String pleaseEnterDetailstoSignUp =
-      'Please enter your details to Create Account.';
-  static const String enterEmailAndPassword =
-      'Enter your email account to reset password';
+  static const String pleaseEnterDetails = 'Please enter your details to sign in.';
+  static const String pleaseEnterDetailstoSignUp = 'Please enter your details to Create Account.';
+  static const String enterEmailAndPassword = 'Enter your email account to reset password';
 
   static const String verificationSuccess = 'Verification Success';
   static const String enterYourUsername = 'Enter your username';
@@ -290,16 +276,13 @@ class MyStrings {
   static const String enterYourPhoneNumber = "Enter your phone number";
   static const String confirmYourPassword = 'Confirm your password';
   static const String noCodeReceive = "Didn't receive the code?";
-  static const String smsVerificationMsg =
-      "We've sent you an access code to your phone number for SMS verification";
+  static const String smsVerificationMsg = "We've sent you an access code to your phone number for SMS verification";
   static const String selectACountry = "Select a country";
   static const String requestFail = "Request Failed";
   static const String requestSuccess = "Request Success";
   static const String resetpassword = "Reset Your Password";
-  static const String passwordMustBeDiffrentFromBefore =
-      "The password must be different than before";
-  static const String loginFailedTryAgain =
-      'The password must be different than before';
+  static const String passwordMustBeDiffrentFromBefore = "The password must be different than before";
+  static const String loginFailedTryAgain = 'The password must be different than before';
 
   static const String selectOne = "Select One";
   static const String sms = 'SMS';
@@ -308,8 +291,7 @@ class MyStrings {
   static const String retry = "Retry";
 
   static const String otpFieldEmptyMsg = "Otp field can't be empty";
-  static const String goBackLogMsg =
-      'Sorry something went wrong here, go back and retry after sometimes';
+  static const String goBackLogMsg = 'Sorry something went wrong here, go back and retry after sometimes';
 
   static const String secondAgo = 'second ago';
   static const String minutesAgo = 'minutes ago';
@@ -394,10 +376,8 @@ class MyStrings {
   static const String buyCoins = "Buy Coins";
   static const String reedemableAmount = "Redeemable Amount";
   static const String reedemNow = "Redeem Now";
-  static const String sharecodeText =
-      "Share this room code to friend and ask them to join";
-  static const String pleaseWaitRoomText =
-      "Please wait game will start soon";
+  static const String sharecodeText = "Share this room code to friend and ask them to join";
+  static const String pleaseWaitRoomText = "Please wait game will start soon";
 
   static const String approved = "Approved";
   static const String supper = "Supper";
@@ -456,30 +436,22 @@ class MyStrings {
   static const String onboardTitle = "Test Your Knowladge";
   static const String realMoney = "Win Real Money";
   static const String completeWIthFriends = "Compete With Friends";
-  static const String whoIsSmartest =
-      "Who is the smartest in your group of friends and family";
-  static const String pickTheCorrectAnswer =
-      "Pick the correct answer at the final question to win the prize money";
+  static const String whoIsSmartest = "Who is the smartest in your group of friends and family";
+  static const String pickTheCorrectAnswer = "Pick the correct answer at the final question to win the prize money";
   static const String dontHaveAnaccount = "Don’t have an account?";
-  static const String onboardDescription =
-      "There are hundreds of different catagories to choose from";
+  static const String onboardDescription = "There are hundreds of different catagories to choose from";
 
   static const String transactionType = "Transaction Type";
-  static const String minimumReedemAmount =
-      "Minimum Redeemable amount is \$2 (10 coins).";
+  static const String minimumReedemAmount = "Minimum Redeemable amount is \$2 (10 coins).";
   static const String payoutTime = "Payout will usd 7 - 10working days.";
   static const String remarkType = "Remark Type";
   static const String dot = "⚈";
-  static const String agreePolicyMessage =
-      "You must agree with our privacy & policies";
+  static const String agreePolicyMessage = "You must agree with our privacy & policies";
 
-  static RegExp emailValidatorRegExp =
-      RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  static RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   static List<MyLanguageModel> myLanguages = [
-    MyLanguageModel(
-        languageName: 'English', countryCode: 'US', languageCode: 'en'),
-    MyLanguageModel(
-        languageName: 'Arabic', countryCode: 'SA', languageCode: 'ar'),
+    MyLanguageModel(languageName: 'English', countryCode: 'US', languageCode: 'en'),
+    MyLanguageModel(languageName: 'Arabic', countryCode: 'SA', languageCode: 'ar'),
   ];
 
   List<MyQuestionsModel> quizquestions = [
@@ -528,21 +500,9 @@ class MyStrings {
     {'title': payoutTime},
   ];
   final List<Map<String, String>> coinsReedemdetails = [
-    {
-      'pack_name': goldenPack,
-      'price': twofifty,
-      'total_coins': fivehundredCoins
-    },
-    {
-      'pack_name': noAdsPack,
-      'price': oneTwenty,
-      'total_coins': fourhundredCoins
-    },
-    {
-      'pack_name': silverPack,
-      'price': eighty,
-      'total_coins': onehundredTwentyCoins
-    },
+    {'pack_name': goldenPack, 'price': twofifty, 'total_coins': fivehundredCoins},
+    {'pack_name': noAdsPack, 'price': oneTwenty, 'total_coins': fourhundredCoins},
+    {'pack_name': silverPack, 'price': eighty, 'total_coins': onehundredTwentyCoins},
     {'pack_name': proPack, 'price': threeforty, 'total_coins': sixhundredCoins},
     {'pack_name': smallPack, 'price': hundred, 'total_coins': tenCoins},
   ];
@@ -554,7 +514,7 @@ class MyStrings {
     {'title': music, 'questions': questions4, 'level': twelvelevel},
     {'title': scienceAndTech, 'questions': questions5, 'level': eightlevel},
   ];
-    final List<Map<String, String>> subCategoryies = [
+  final List<Map<String, String>> subCategoryies = [
     {'title': movies, 'questions': questions, 'level': sixlevel},
     {'title': novel, 'questions': questions2, 'level': sevenlevel},
     {'title': geographical, 'questions': questions3, 'level': tenlevel},
@@ -562,38 +522,20 @@ class MyStrings {
     {'title': international, 'questions': questions5, 'level': eightlevel},
   ];
   final List<Map<String, String>> notifications = [
-    {'title': rewardNotification, 'short_Notification': shortDesc1, 'detail_Notification': detailnotifucation1,'date':detailnotifucationdate1},
-    {'title':  joinwithnewroom, 'short_Notification': shortDesc2, 'detail_Notification': detailnotifucation1,'date':detailnotifucationdate2},
-    {'title':  eventNotification, 'short_Notification': shortDesc3, 'detail_Notification': detailnotifucation1,'date':detailnotifucationdate3},
+    {'title': rewardNotification, 'short_Notification': shortDesc1, 'detail_Notification': detailnotifucation1, 'date': detailnotifucationdate1},
+    {'title': joinwithnewroom, 'short_Notification': shortDesc2, 'detail_Notification': detailnotifucation1, 'date': detailnotifucationdate2},
+    {'title': eventNotification, 'short_Notification': shortDesc3, 'detail_Notification': detailnotifucation1, 'date': detailnotifucationdate3},
   ];
 
   final List<Map<String, String>> coinHistoryies = [
-    {
-      'title': wonWorldQuizContest,
-      'date': twelveMay2023,
-      'reward': twoFiftyUSD
-    },
-    {
-      'title': worldQuiz2023,
-      'date': twenrtyEightMay2023,
-      'reward': hundredAndTwentyUSD
-    },
-    {
-      'title': quizChallenge,
-      'date': twoJune2023,
-      'reward': hundredAndTwentyUSD
-    },
+    {'title': wonWorldQuizContest, 'date': twelveMay2023, 'reward': twoFiftyUSD},
+    {'title': worldQuiz2023, 'date': twenrtyEightMay2023, 'reward': hundredAndTwentyUSD},
+    {'title': quizChallenge, 'date': twoJune2023, 'reward': hundredAndTwentyUSD},
     {'title': battelQuizEvent, 'date': twelveMay2023, 'reward': twoFiftyUSD},
     {'title': quizGameChallenge, 'date': twoJune2023, 'reward': twoFiftyUSD},
   ];
 
-  List<String> rewardsList = [
-    twoFiftyUSD,
-    twoFiftyUSD,
-    hundredAndTwentyUSD,
-    twoFiftyUSD,
-    hundredAndTwentyUSD
-  ];
-   final List<String> languages = [english,bangla,hindi,spanish];
-   final List<String> settingsList = [sound,vibration,themes];
+  List<String> rewardsList = [twoFiftyUSD, twoFiftyUSD, hundredAndTwentyUSD, twoFiftyUSD, hundredAndTwentyUSD];
+  final List<String> languages = [english, bangla, hindi, spanish];
+  final List<String> settingsList = [sound, vibration, themes];
 }

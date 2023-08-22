@@ -5,6 +5,7 @@ class UserBattleRoomDetails {
   final int correctAnswers;
   final List answers;
   final int points;
+  final bool status;
 
   UserBattleRoomDetails(
       {required this.points,
@@ -12,7 +13,8 @@ class UserBattleRoomDetails {
       required this.correctAnswers,
       required this.name,
       required this.profileUrl,
-      required this.uid});
+      required this.uid,
+      required this.status});
 
   static UserBattleRoomDetails fromJson(Map json) {
     return UserBattleRoomDetails(
@@ -22,6 +24,7 @@ class UserBattleRoomDetails {
       name: json['name'] ?? "",
       profileUrl: json['profileUrl'] ?? "",
       uid: json['uid'] ?? "",
+      status: json['status'] ?? false,
     );
   }
 }

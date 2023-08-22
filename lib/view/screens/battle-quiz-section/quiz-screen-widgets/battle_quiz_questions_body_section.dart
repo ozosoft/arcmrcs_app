@@ -33,15 +33,13 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
 
   int rightAnswerIndex = 0;
   int selectedAnswerIndex = -1;
-  SignInController signInController = Get.find();
-  GlobalKey<AnimatedListState> animatedListKey = GlobalKey<AnimatedListState>();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return GetBuilder<BattleRoomQuizController>(
-        init: BattleRoomQuizController(Get.put(BattleRoomController())),
+        init: BattleRoomQuizController(Get.put(BattleRoomController()), Get.find()),
         initState: (quizState) {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             if (quizState.controller!.questionsList.isEmpty) {
@@ -50,6 +48,73 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
           });
         },
         builder: (quizController) {
+          if (quizController.opponentLeftTheGame.value == true) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (quizController.showLeftPopupValue.isFalse) {
+                print("Show PopUp");
+                CustomAlertDialog(
+                        willPop: false,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Text("Oponent Left The game!"),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              const Text(
+                                "You Won.",
+                                style: boldLarge,
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  TextButton(
+                                    onPressed: () async {
+                                      if (quizController.opponentLeftTheGame.isTrue) {
+                                        // left User
+                                        await quizController.battleRoomController
+                                            .deleteBattleRoom(
+                                          quizController.battleRoomController.battleRoomData.value!.roomId,
+                                          false,
+                                        )
+                                            .whenComplete(() {
+                                          Navigator.of(context).pop(true); // Return true when "Yes" is pressed
+                                          Get.back();
+                                        });
+                                      } else {
+                                        // left User
+                                        await quizController.battleRoomController
+                                            .leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false,
+                                                currentUserId: quizController.signInController.user.value!.uid)
+                                            .whenComplete(() {
+                                          Navigator.of(context).pop(true); // Return true when "Yes" is pressed
+                                          Get.back();
+                                        });
+                                      }
+                                    },
+                                    child: const Text(
+                                      "Ok",
+                                      style: regularLarge,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        barrierDismissible: false)
+                    .customAlertDialog(context);
+              }
+              quizController.showLeftPopupUpdate(true);
+            });
+          }
           return WillPopScope(
             onWillPop: () async {
               CustomAlertDialog(
@@ -64,17 +129,33 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                     const SizedBox(
                       height: 20,
                     ),
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
                           onPressed: () async {
-                            await quizController.battleRoomController
-                                .deleteBattleRoom(quizController.battleRoomController.battleRoomData.value!.roomId, false)
-                                .whenComplete(() {
-                              Navigator.of(context).pop(true); // Return true when "Yes" is pressed
-                              Get.back();
-                            });
+                            if (quizController.opponentLeftTheGame.isTrue) {
+                              // left User
+                              await quizController.battleRoomController
+                                  .deleteBattleRoom(
+                                quizController.battleRoomController.battleRoomData.value!.roomId,
+                                false,
+                              )
+                                  .whenComplete(() {
+                                Navigator.of(context).pop(true); // Return true when "Yes" is pressed
+                                Get.back();
+                              });
+                            } else {
+                              // left User
+                              await quizController.battleRoomController
+                                  .leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false,
+                                      currentUserId: quizController.signInController.user.value!.uid)
+                                  .whenComplete(() {
+                                Navigator.of(context).pop(true); // Return true when "Yes" is pressed
+                                Get.back();
+                              });
+                            }
                           },
                           child: const Text(
                             "Yes",
@@ -101,9 +182,12 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
             // Main Body Code Started
             child: Obx(() {
               Question currentQuestion = quizController.getCurrentQuestion();
-              if (animatedListKey.currentState != null) {
-                animatedListKey.currentState!.reassemble(); // Reset the animations
-              }
+              int currentQuestionId = currentQuestion.id;
+
+              // quizController.showLeftPopup(isUpdate: false);
+
+              quizController.updateAnimatedListKeyIfNeeded(currentQuestionId);
+
               return Stack(
                 children: [
                   CustomPaint(
@@ -134,7 +218,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                           ),
                           Center(
                             child: AnimationLimiter(
-                              key: animatedListKey,
+                              key: quizController.animatedListKey,
                               child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: AnimationConfiguration.toStaggeredList(
@@ -179,7 +263,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                                                   !quizController.hasSubmittedAnswerForQuestion(currentQuestion.id)) {
                                                 print("From Ans Save ");
                                                 await quizController.battleRoomController.saveAnswer(
-                                                  signInController.user.value!.uid,
+                                                  quizController.signInController.user.value!.uid,
                                                   {
                                                     "qid": option.questionId,
                                                     "ans": option.isAnswer,
@@ -272,7 +356,15 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                           print("From Counter Next Querstion");
                           if (quizController.hasMoreQuestions()) {
                             quizController.goToNextQuestion();
+                          } else {
+                            quizController.showLeftPopup(isUpdate: true);
+                            print("Show Result page");
                           }
+                        },
+                        onChange: (v) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+                            quizController.showLeftPopup(isUpdate: true);
+                          });
                         },
                         initialDuration: 0,
                         width: Dimensions.space60,

@@ -23,6 +23,7 @@ enum RoomCreateState {
   failed,
   roomFound,
   roomNotFound,
+  deleted,
 }
 
 enum JoinRoomState {
@@ -101,7 +102,6 @@ class BattleRoomController extends GetxController {
         profileUrl: profileUrl!,
         uid: uid!,
         roomCode: roomCode,
-        roomType: "public",
         entryFee: entryFee,
       );
 
@@ -164,6 +164,7 @@ class BattleRoomController extends GetxController {
           print("Delete Room Close PopUp");
           print("One of the user left the room");
           toogleUserFoundState(UserFoundState.left);
+          toogleBattleCreatedState(RoomCreateState.deleted);
           Get.back();
         }
       }
@@ -357,7 +358,7 @@ class BattleRoomController extends GetxController {
         return (battleRoomData.value!.user1!);
       }
     }
-    return UserBattleRoomDetails(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid");
+    return UserBattleRoomDetails(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
   }
 
 //Firebase Part
@@ -369,7 +370,6 @@ class BattleRoomController extends GetxController {
     required String profileUrl,
     required String uid,
     String? roomCode,
-    String? roomType,
     int? entryFee,
   }) async {
     try {
@@ -380,8 +380,8 @@ class BattleRoomController extends GetxController {
         "roomCode": roomCode ?? "",
         "entryFee": entryFee ?? 0,
         "readyToPlay": false,
-        "user1": {"name": name, "points": 0, "answers": [], "uid": uid, "profileUrl": profileUrl},
-        "user2": {"name": "", "points": 0, "answers": [], "uid": "", "profileUrl": ""},
+        "user1": {"name": name, "points": 0, "answers": [], "uid": uid, "profileUrl": profileUrl, "status": true},
+        "user2": {"name": "", "points": 0, "answers": [], "uid": "", "profileUrl": "", "status": false},
         "createdAt": Timestamp.now(),
       });
       return await documentReference.get();
@@ -412,6 +412,7 @@ class BattleRoomController extends GetxController {
             "user2.name": name,
             "user2.uid": uid,
             "user2.profileUrl": profileUrl,
+            "user2.status": true,
           });
           return false;
         }
@@ -442,6 +443,37 @@ class BattleRoomController extends GetxController {
         await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollectionMulti).doc(documentId).delete();
       } else {
         await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(documentId).delete();
+      }
+    } on SocketException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } on PlatformException catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    } catch (_) {
+      throw BattleRoomException(errorMessageCode: _.toString());
+    }
+  }
+
+  //Left battle room
+  Future<void> leftBattleRoomFirebase(String? documentId, bool forMultiUser, {String? roomCode, String? currentUserId}) async {
+    try {
+      if (forMultiUser) {
+        await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollectionMulti).doc(documentId).delete();
+      } else {
+        if (currentUserId == battleRoomData.value!.user1?.uid) {
+          await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(documentId).set(
+            {
+              "user1": {"status": false},
+            },
+            SetOptions(merge: true),
+          );
+        } else {
+          await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(documentId).set(
+            {
+              "user2": {"status": false},
+            },
+            SetOptions(merge: true),
+          );
+        }
       }
     } on SocketException catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());

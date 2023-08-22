@@ -12,14 +12,14 @@ import 'player_profile_picture.dart';
 import 'rewards_section.dart';
 import 'right_and_wrong_ans_section.dart';
 
-class QuizResultBodySection extends StatefulWidget {
-  const QuizResultBodySection({super.key});
+class BattleQuizResultBodySection extends StatefulWidget {
+  const BattleQuizResultBodySection({super.key});
 
   @override
-  State<QuizResultBodySection> createState() => _QuizResultBodySectionState();
+  State<BattleQuizResultBodySection> createState() => _BattleQuizResultBodySectionState();
 }
 
-class _QuizResultBodySectionState extends State<QuizResultBodySection> {
+class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySection> {
   bool showQuestions = false;
   bool audienceVote = false;
   bool tapAnswer = false;
@@ -33,9 +33,7 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
         Container(
           margin: const EdgeInsets.only(top: Dimensions.space20),
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.space20),
-              color: MyColor.colorWhite),
+          decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space20), color: MyColor.colorWhite),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -43,10 +41,7 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.only(
-                        top: Dimensions.space40,
-                        left: Dimensions.space8,
-                        right: Dimensions.space8),
+                    padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
                     child: SvgPicture.asset(
                       MyImages.victory,
                       fit: BoxFit.cover,
@@ -54,31 +49,23 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
                   ),
                   Container(
                       width: double.infinity,
-                      padding: EdgeInsets.only(
-                          left: size.width * .3, top: Dimensions.space140),
+                      padding: EdgeInsets.only(left: size.width * .3, top: Dimensions.space140),
                       child: Text(
                         MyStrings.victory,
-                        style: semiBoldOverLarge.copyWith(
-                            fontSize: Dimensions.space30),
+                        style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                       )),
                   Container(
                       width: double.infinity,
-                      padding: EdgeInsets.only(
-                          left: size.width * .256, top: Dimensions.space180),
+                      padding: EdgeInsets.only(left: size.width * .256, top: Dimensions.space180),
                       child: Text(
                         MyStrings.congratulation,
-                        style: regularOverLarge.copyWith(
-                            color: MyColor.colorQuizBodyText),
+                        style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
                       )),
                 ],
               ),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RightOrWrongAnsSection(),
-                  PlayerProfilePicture(),
-                  RewardsSection()
-                ],
+                children: [RightOrWrongAnsSection(), PlayerProfilePicture(), RewardsSection()],
               ),
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: Dimensions.space50),
@@ -92,7 +79,7 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
           ),
         ),
         Padding(
-          padding:  EdgeInsets.only(left: MediaQuery.of(context).size.width * .36),
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .36),
           child: CircularCountDownTimer(
             duration: Dimensions.space60.toInt(),
             initialDuration: 0,

@@ -47,13 +47,19 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                       children: [
                         TextButton(
                           onPressed: () async {
-                            await controller.battleRoomController
-                                .deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false)
-                                .whenComplete(() {
-                              // Navigator.of(context).pop(
-                              //     true); // Return true when "Yes" is pressed
+                            if (controller.battleRoomController.battleRoomData.value != null) {
+                              await controller.battleRoomController
+                                  .deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false)
+                                  .whenComplete(() {
+                                Navigator.of(context).pop(true);
+                                // Return true when "Yes" is pressed
+                                Get.back();
+                              });
+                            } else {
+                              Navigator.of(context).pop(true);
+                              // Return true when "Yes" is pressed
                               Get.back();
-                            });
+                            }
                           },
                           child: const Text(
                             "Yes",

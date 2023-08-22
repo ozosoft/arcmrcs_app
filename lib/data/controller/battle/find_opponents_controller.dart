@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../auth/signin/signin_controller.dart';
@@ -11,7 +12,7 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   BattleRoomController battleRoomController;
 
   FindOpponentsController(this.signInController, this.battleRoomController);
-  late final AnimationController _imageScrollController;
+  late AnimationController _imageScrollController;
   AnimationController get imageScrollController => _imageScrollController;
   late Timer _startTimer;
   final _countdownSeconds = 5.obs;
@@ -20,14 +21,12 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   @override
   void onInit() {
     super.onInit();
-    _imageScrollController = AnimationController(vsync: this);
 
-    Future.delayed(const Duration(milliseconds: 1000), () {
-      //search for battle room after initial animation completed
+    runImageScrolling(startOrStop: false);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       randomSearch();
-      runImageScrolling(startOrStop: false);
     });
-
     // Listen for changes in user found state
     ever<UserFoundState>(
       battleRoomController.userFoundState,
@@ -49,12 +48,6 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
         }
       },
     );
-  }
-
-  @override
-  void onReady() {
-    // TODO: implement onReady
-    super.onReady();
   }
 
   @override

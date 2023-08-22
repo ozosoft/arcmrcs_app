@@ -6,18 +6,22 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/data/controller/auth/signin/signin_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/battle_room_helper.dart';
+import '../../../core/utils/style.dart';
+import '../../../view/components/alert-dialog/custom_alert_dialog.dart';
 import '../../model/battle/battleRoom.dart';
 import '../../model/quiz/quiz_list_model.dart';
 import 'battle_room_controller.dart';
 
 class BattleRoomQuizController extends GetxController with GetTickerProviderStateMixin {
   final BattleRoomController battleRoomController;
-  BattleRoomQuizController(this.battleRoomController);
+  final SignInController signInController;
+  BattleRoomQuizController(this.battleRoomController, this.signInController);
   StreamSubscription<DocumentSnapshot>? battleRoomStreamSubscription;
-  final int duration = 60;
+  final int duration = 10;
   final CountDownController countDownController = CountDownController();
   final RxList<Question> questionsList = <Question>[].obs;
   late AnimationController _listAnimationController;
@@ -27,6 +31,13 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
   final Map<int, Option?> selectedOptions = <int, Option?>{};
 
   int currentQuestionIndex = 0;
+  final opponentLeftTheGame = false.obs;
+  final showLeftPopupValue = false.obs;
+  final meLeftTheGame = false.obs;
+
+  GlobalKey<AnimatedListState> animatedListKey = GlobalKey<AnimatedListState>();
+  int previousQuestionId = -1; // Initialize with a value that won't match any valid question id
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -35,6 +46,13 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       vsync: this,
       // Adjust duration as needed
     );
+
+    setupBattleRoomSubmitListener();
+  }
+
+  showLeftPopupUpdate(bool value) {
+    showLeftPopupValue(value);
+    update();
   }
 
   void selectOptionForQuestion(int questionId, Option option) {
@@ -46,6 +64,14 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
 
   bool isOptionSelectedForQuestion(int questionId, Option option) {
     return selectedOptions.containsKey(questionId) && selectedOptions[questionId] == option;
+  }
+
+//Update LIst Animation
+  void updateAnimatedListKeyIfNeeded(int newQuestionId) {
+    if (newQuestionId != previousQuestionId) {
+      animatedListKey = GlobalKey<AnimatedListState>();
+      previousQuestionId = newQuestionId;
+    }
   }
 
   void goToPreviousQuestion() {
@@ -61,12 +87,11 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       currentQuestionIndex++;
       countDownController.restart(duration: duration);
     }
-  
+
     update();
   }
 
   Question getCurrentQuestion() {
-    setupBattleRoomSubmitListener();
     if (currentQuestionIndex >= 0 && currentQuestionIndex < questionsList.length) {
       return questionsList[currentQuestionIndex];
     }
@@ -104,8 +129,38 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     battleRoomStreamSubscription = listenToBattleRoomDocument(battleRoomController.battleRoomData.value!.roomId!).listen((event) {
       if (event.exists) {
         checkUserAnswer(battleRoomController.battleRoomData.value!);
+      } else {
+        print("Room Deleted");
       }
     });
+  }
+
+  showLeftPopup({bool isUpdate = false}) {
+    if (showLeftPopupValue.isFalse) {
+      print("Checking If User Left The match");
+      var battleData = battleRoomController.battleRoomData.value!;
+
+      // im am user 1
+      if (signInController.user.value!.uid == battleData.user1!.uid) {
+        if (battleData.user2!.status == false) {
+          print("${battleData.user2!.name} Left The game");
+          opponentLeftTheGame.value = true;
+          if (isUpdate) {
+            update();
+          }
+        }
+      }
+      // im am user 2
+      if (signInController.user.value!.uid == battleData.user2!.uid) {
+        if (battleData.user1!.status == false) {
+          print("${battleData.user1!.name} Left The game");
+          opponentLeftTheGame.value = true;
+          if (isUpdate) {
+            update();
+          }
+        }
+      }
+    }
   }
 
   void checkUserAnswer(BattleRoom battleRoom) {
@@ -128,17 +183,23 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       } else {
         // Both users have answered all questions correctly
         String winnerUserId;
+        String winnerUserName = "";
 
         int user1CorrectAnswers = user1Answers.where((answer) => answer["ans"] == "1").length;
         int user2CorrectAnswers = user2Answers.where((answer) => answer["ans"] == "1").length;
 
         if (user1CorrectAnswers > user2CorrectAnswers) {
           winnerUserId = battleRoom.user1!.uid;
+          winnerUserName = battleRoom.user1!.name;
+          Get.snackbar("Winner Is", " $winnerUserName ", backgroundColor: Colors.green);
         } else if (user2CorrectAnswers > user1CorrectAnswers) {
           winnerUserId = battleRoom.user2!.uid;
+          winnerUserName = battleRoom.user2!.name;
+          Get.snackbar("Winner Is", " $winnerUserName ");
         } else {
           // It's a tie
           winnerUserId = "TIE";
+          Get.snackbar("Game Is", "Drawn!");
         }
 
         print("Winner User ID: $winnerUserId");

@@ -22,6 +22,7 @@ import '../../view/screens/1vs1/play-with-friends-bottom-sheet/rooms/create-room
 import '../../view/screens/1vs1/play-with-friends-bottom-sheet/rooms/join-room/join_room_screen.dart';
 import '../../view/screens/all-categories/all_categories_screen.dart';
 import '../../view/screens/authentication/forget_password/forgetpassword/forget_password_screen.dart';
+import '../../view/screens/battle_quiz_result/battle_quiz_result_screen.dart';
 import '../../view/screens/bottom_nav_bar/bottom_navigation_bar_screen.dart';
 import '../../view/screens/homepage/homepage-widgets/home-body-sections/top-categories/top_categories_card_screen.dart';
 import '../../view/screens/intro_section/onboard_intro_screen.dart';
@@ -40,9 +41,9 @@ class RouteHelper {
   static const String allCategories = '/all_categories_screen';
   static const String topCategories = '/top_categories_screen';
   static const String quizQuestionsScreen = '/quiz_questions_screen';
-  static const String battleQuizQuestionsScreen =
-      '/battleq_uiz_questions_screen';
+  static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
   static const String quizResultScreen = '/quiz_result_screen';
+  static const String battleQuizResultScreen = '/battle_quiz_result_screen';
   static const String reviewAnswerScreen = '/review_answer_screen';
   static const String oneVSoneBattleScreen = '/battle_screen';
   static const String findOpponentScreen = '/find_opponent_screen';
@@ -62,13 +63,10 @@ class RouteHelper {
     GetPage(name: onboardScreen, page: () => const OnBoardIntroScreen()),
     GetPage(name: loginScreen, page: () => const LoginScreen()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
-    GetPage(
-        name: forgetpasswordScreen, page: () => const ForgetPasswordScreen()),
+    GetPage(name: forgetpasswordScreen, page: () => const ForgetPasswordScreen()),
     GetPage(name: verificationScreen, page: () => const VerificationScreen()),
     GetPage(name: resetPassword, page: () => const ResetPasswordScreen()),
-    GetPage(
-        name: bottomNavBarScreen,
-        page: () => const BottomNavigationBarScreen()),
+    GetPage(name: bottomNavBarScreen, page: () => const BottomNavigationBarScreen()),
     GetPage(
         name: topCategories,
         page: () => const TopCategoriesCardScreen(
@@ -76,13 +74,11 @@ class RouteHelper {
             )),
     GetPage(name: allCategories, page: () => const AllCategoriesScreen()),
     GetPage(name: quizQuestionsScreen, page: () => const QuizQuestionsScreen()),
-    GetPage(
-        name: battleQuizQuestionsScreen,
-        page: () => const BattleQuizQuestionsScreen()),
+    GetPage(name: battleQuizQuestionsScreen, page: () => const BattleQuizQuestionsScreen()),
     GetPage(name: quizResultScreen, page: () => const QuizResultScreen()),
+    GetPage(name: battleQuizResultScreen, page: () => const BattleQuizResultScreen()),
     GetPage(name: reviewAnswerScreen, page: () => const ReviewAnswerScreen()),
-    GetPage(
-        name: oneVSoneBattleScreen, page: () => const OneVSOneBattleScreen()),
+    GetPage(name: oneVSoneBattleScreen, page: () => const OneVSOneBattleScreen()),
     GetPage(name: findOpponentScreen, page: () => const FindOpponenetScreen()),
     GetPage(name: createRoomScreen, page: () => const CreateRoomScreen()),
     GetPage(name: joinRoomScreen, page: () => const JoinRoomScreen()),
