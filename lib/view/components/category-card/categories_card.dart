@@ -8,20 +8,17 @@ import '../../../core/utils/my_images.dart';
 import '../../../core/utils/style.dart';
 
 class CategoriesCard extends StatefulWidget {
-  final String title,questions,image,levels,minute,marks,date,subCategoryId;
+  final String title, questions, image, levels, minute, marks, date, subCategoryId;
   final bool expansionVisible, fromViewAll, fromBookmark, fromExam;
   final bool isExpand;
   final int index;
 
-  const CategoriesCard(
-      {super.key,required this.title,this.questions = "",this.image = "",this.subCategoryId = "",this.expansionVisible = false,this.fromBookmark = false,required this.fromViewAll,this.levels = "1",this.fromExam = false,this.minute = "",this.marks = "",this.isExpand = false,required this.index,this.date = ""});
+  const CategoriesCard({super.key, required this.title, this.questions = "", this.image = "", this.subCategoryId = "", this.expansionVisible = false, this.fromBookmark = false, required this.fromViewAll, this.levels = "1", this.fromExam = false, this.minute = "", this.marks = "", this.isExpand = false, required this.index, this.date = ""});
   @override
   State<CategoriesCard> createState() => _CategoriesCardState();
 }
 
 class _CategoriesCardState extends State<CategoriesCard> {
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,63 +47,49 @@ class _CategoriesCardState extends State<CategoriesCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(width: Dimensions.space20),
-                  Padding(
+                 widget.image.isNotEmpty? Padding(
                     padding: const EdgeInsets.only(top: Dimensions.space20, bottom: Dimensions.space20),
                     child: Image.network(
                       widget.image ?? "",
                       height: Dimensions.space40,
                     ),
-                  ),
+                  ):SizedBox(),
                   const SizedBox(width: Dimensions.space30),
                   Padding(
                     padding: const EdgeInsets.only(top: Dimensions.space15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.title,style: semiBoldMediumLarge),
+                        Text(widget.title, style: semiBoldMediumLarge),
                         const SizedBox(height: Dimensions.space12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             widget.fromViewAll == false
                                 ? Container(
-                                    decoration: BoxDecoration(
-                                        color: MyColor.cardColor,
-                                        borderRadius: BorderRadius.circular(
-                                            Dimensions.space3),
-                                        border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
-                                    padding: const EdgeInsets.symmetric( vertical: Dimensions.space2, horizontal: Dimensions.space5),
-                                    child: Center(
-                                        child: Text(widget.fromExam? widget.marks: widget.levels,
-                                            style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    decoration: BoxDecoration(color: MyColor.cardColor, borderRadius: BorderRadius.circular(Dimensions.space3), border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
+                                    padding: const EdgeInsets.symmetric(vertical: Dimensions.space2, horizontal: Dimensions.space5),
+                                    child: Center(child: Text(widget.fromExam ? widget.marks : widget.levels, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                   )
                                 : const SizedBox(),
                             const SizedBox(width: Dimensions.space10),
                             Container(
-                              decoration: BoxDecoration(
-                                  borderRadius:BorderRadius.circular(Dimensions.space3),
-                                  color: MyColor.cardColor,
-                                  border: Border.all( color: MyColor.colorDarkGrey,width: 0.3)),
-                              padding: const EdgeInsets.symmetric(vertical: Dimensions.space2,horizontal: Dimensions.space5),
-                              child: Center(
-                                  child: Text(widget.fromExam ? widget.date: widget.questions +MyStrings.questionse,
-                                      style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space3), color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
+                              padding: const EdgeInsets.symmetric(vertical: Dimensions.space2, horizontal: Dimensions.space5),
+                              child: Center(child: Text(widget.fromExam ? widget.date : widget.questions + MyStrings.questionse, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                             ),
                             const SizedBox(width: Dimensions.space10),
                             widget.fromExam
                                 ? Container(
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular( Dimensions.space3),
-                                        color: MyColor.cardColor,
-                                        border: Border.all(color: MyColor.colorDarkGrey,width: 0.3)),
-                                    padding: const EdgeInsets.symmetric(vertical: Dimensions.space2,horizontal: Dimensions.space5),
-                                    child: Center(
-                                        child: Text( widget.fromExam? widget.minute: widget.questions,style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space3), color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
+                                    padding: const EdgeInsets.symmetric(vertical: Dimensions.space2, horizontal: Dimensions.space5),
+                                    child: Center(child: Text(widget.fromExam ? widget.minute : widget.questions, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                   )
-                                :const SizedBox(),
+                                : const SizedBox(),
                             widget.fromViewAll == false
-                                ? Align(alignment: Alignment.topCenter,child: widget.fromExam?const SizedBox()
-                                        : SvgPicture.asset(widget.fromBookmark ? MyImages.deleteSVG: MyImages.bookmarkSVG,height: Dimensions.space20),
+                                ? Align(
+                                    alignment: Alignment.topCenter,
+                                    child: widget.fromExam ? const SizedBox() : SvgPicture.asset(widget.fromBookmark ? MyImages.deleteSVG : MyImages.bookmarkSVG, height: Dimensions.space20),
                                   )
                                 : const SizedBox(),
                           ],
@@ -116,15 +99,23 @@ class _CategoriesCardState extends State<CategoriesCard> {
                   ),
                   const Spacer(),
                   widget.fromExam
-                      ?const SizedBox()
-                      : Padding( padding:const EdgeInsets.only(top: Dimensions.space20),
-                          child: SvgPicture.asset(widget.isExpand? MyImages.arrowDownSVG: MyImages.playSVG,height: Dimensions.space35),
+                      ? const SizedBox()
+                      : Padding(
+                          padding: const EdgeInsets.only(top: Dimensions.space20),
+                          child: SvgPicture.asset(widget.isExpand ? MyImages.arrowDownSVG : MyImages.playSVG, height: Dimensions.space35),
                         ),
                   const SizedBox(width: Dimensions.space20),
                 ],
               ),
-              const SizedBox(height: Dimensions.space3),
-              widget.expansionVisible ? ExpandedSections(categoryindex: widget.index,isExpand: widget.isExpand,title: widget.title,) :const SizedBox(),
+               SizedBox(height: widget.expansionVisible
+                  ?Dimensions.space3:Dimensions.space10),
+              widget.expansionVisible
+                  ? ExpandedSections(
+                      categoryindex: widget.index,
+                      isExpand: widget.isExpand,
+                      title: widget.title,
+                    )
+                  : const SizedBox(),
             ],
           )),
     );

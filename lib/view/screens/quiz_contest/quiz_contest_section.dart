@@ -7,9 +7,9 @@ import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../../../core/utils/dimensions.dart';
-import '../../../../../core/utils/my_strings.dart';
-import '../../../../../core/utils/style.dart';
+import '../../../core/utils/dimensions.dart';
+import '../../../core/utils/my_strings.dart';
+import '../../../core/utils/style.dart';
 
 class QuizContestSection extends StatefulWidget {
   const QuizContestSection({super.key});

@@ -23,6 +23,7 @@ class UrlContainer {
   static const String playdiffrentImage = '$domainUrl/assets/admin/images/quiz/';
   static const String allCategoriesImage = '$domainUrl/assets/admin/images/category/';
   static const String subCategoriesImage = '$domainUrl/assets/admin/images/subcategory/';
+  static const String examZoneImage = '$domainUrl/assets/admin/images/exam/exam-list/';
   
   static const String otpVerify = 'otp-verify';
   static const String otpResend = 'otp-resend';
@@ -33,6 +34,7 @@ class UrlContainer {
   static const String authorizationCodeEndPoint = 'authorization';
 
   static const String dashBoardUrl = 'dashboard';
+  static const String examZone = 'exam/exam-list';
   static const String transactionEndpoint = 'transactions';
 
   static const String addWithdrawRequestUrl = 'withdraw-request';

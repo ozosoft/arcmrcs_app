@@ -11,7 +11,7 @@ class ExamZoneScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: CustomCategoryAppBar(title: "Exam"),
-      body: SingleChildScrollView(child: ExamZoneTabBarBodySection(),),
+      body: ExamZoneTabBarBodySection(),
     );
   }
 }

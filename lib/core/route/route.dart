@@ -24,7 +24,7 @@ import '../../view/screens/all-categories/all_categories_screen.dart';
 import '../../view/screens/authentication/forget_password/forgetpassword/forget_password_screen.dart';
 import '../../view/screens/bottom_nav_bar/bottom_navigation_bar_screen.dart';
 import '../../view/screens/exam_zone/exam_zone_screen.dart';
-import '../../view/screens/homepage/homepage-widgets/home-body-sections/exam_zone/exam_zone_category_screen.dart';
+import '../../view/screens/exam_zone/exam_zone_homepage_category_screen.dart';
 import '../../view/screens/homepage/homepage-widgets/home-body-sections/sub-categories/sub_categories_card_screen.dart';
 import '../../view/screens/intro_section/onboard_intro_screen.dart';
 import '../../view/screens/leader_board/leader_board_screen.dart';

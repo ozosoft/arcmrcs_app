@@ -19,12 +19,7 @@ class _ReviewAnswerScreenState extends State<ReviewAnswerScreen> {
   Widget build(BuildContext context) {
     return const Scaffold(
         appBar: CustomCategoryAppBar(title: MyStrings.reviewAnswer),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal:Dimensions.space15,vertical: Dimensions.space50),
-            child: ReviewAnswerSection(),
-          )
-        )
+        body: ReviewAnswerSection()
       );
   }
 }

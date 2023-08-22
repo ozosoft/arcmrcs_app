@@ -7,25 +7,23 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
-import 'package:flutter_prime/data/repo/submit_answer/submit_answer_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:flutter_prime/view/screens/quiz-questions/quiz-screen-widgets/life_line_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../data/controller/quiz_questions/quiz_questions_controller.dart';
-import 'life_line_widget.dart';
-
-class QuizBodySection extends StatefulWidget {
+class QuizQuestiuonScreen extends StatefulWidget {
   final int id;
 
-  const QuizBodySection({super.key, required this.id});
+  const QuizQuestiuonScreen({super.key, required this.id});
 
   @override
-  State<QuizBodySection> createState() => _QuizBodySectionState();
+  State<QuizQuestiuonScreen> createState() => _QuizQuestiuonScreenState();
 }
 
-class _QuizBodySectionState extends State<QuizBodySection> {
+class _QuizQuestiuonScreenState extends State<QuizQuestiuonScreen> {
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));

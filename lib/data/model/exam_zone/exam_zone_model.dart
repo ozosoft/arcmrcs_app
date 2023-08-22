@@ -1,27 +1,27 @@
 // To parse this JSON data, do
 //
-//     final submitAnswerModel = submitAnswerModelFromJson(jsonString);
+//     final examZoneModel = examZoneModelFromJson(jsonString);
 
 import 'dart:convert';
 
-SubmitAnswerModel submitAnswerModelFromJson(String str) => SubmitAnswerModel.fromJson(json.decode(str));
+ExamZoneModel examZoneModelFromJson(String str) => ExamZoneModel.fromJson(json.decode(str));
 
-String submitAnswerModelToJson(SubmitAnswerModel data) => json.encode(data.toJson());
+String examZoneModelToJson(ExamZoneModel data) => json.encode(data.toJson());
 
-class SubmitAnswerModel {
+class ExamZoneModel {
     String? remark;
     String? status;
     Message? message;
     Data? data;
 
-    SubmitAnswerModel({
+    ExamZoneModel({
         this.remark,
         this.status,
         this.message,
         this.data,
     });
 
-    factory SubmitAnswerModel.fromJson(Map<String, dynamic> json) => SubmitAnswerModel(
+    factory ExamZoneModel.fromJson(Map<String, dynamic> json) => ExamZoneModel(
         remark: json["remark"],
         status: json["status"],
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
@@ -37,65 +37,44 @@ class SubmitAnswerModel {
 }
 
 class Data {
-    String? totalQuestion;
-    String? correctAnswer;
-    String? wrongAnswer;
-    String? winingScore;
-    String? totalScore;
-    NextLevelQuizInfo? nextLevelQuizInfo;
+    List<Exam>? exams;
 
     Data({
-        this.totalQuestion,
-        this.correctAnswer,
-        this.wrongAnswer,
-        this.winingScore,
-        this.totalScore,
-        this.nextLevelQuizInfo,
+        this.exams,
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
-        totalQuestion: json["totalQuestion"].toString(),
-        correctAnswer: json["correctAnswer"].toString(),
-        wrongAnswer: json["wrongAnswer"].toString(),
-        winingScore: json["winingScore"].toString(),
-        totalScore: json["totalScore"].toString(),
-        nextLevelQuizInfo: json["nextLevelQuizInfo"] == null ? null : NextLevelQuizInfo.fromJson(json["nextLevelQuizInfo"]),
+        exams: json["exams"] == null ? [] : List<Exam>.from(json["exams"]!.map((x) => Exam.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
-        "totalQuestion": totalQuestion,
-        "correctAnswer": correctAnswer,
-        "wrongAnswer": wrongAnswer,
-        "winingScore": winingScore,
-        "totalScore": totalScore,
-        "nextLevelQuizInfo": nextLevelQuizInfo?.toJson(),
+        "exams": exams == null ? [] : List<dynamic>.from(exams!.map((x) => x.toJson())),
     };
 }
 
-class NextLevelQuizInfo {
+class Exam {
     int? id;
     String? typeId;
-    String? categoryId;
+    dynamic categoryId;
     dynamic subCategoryId;
-    dynamic title;
-    dynamic image;
-    dynamic startDate;
-    dynamic endDate;
-    dynamic prize;
-    dynamic point;
+    String? title;
+    String? image;
+    DateTime? startDate;
+    DateTime? endDate;
+    String? prize;
+    String? point;
     dynamic description;
-    String? levelId;
+    dynamic levelId;
     String? examStartTime;
     String? examEndTime;
-    dynamic examDuration;
-    dynamic examKey;
+    String? examDuration;
+    String? examKey;
     String? winningMark;
     String? status;
     DateTime? createdAt;
     DateTime? updatedAt;
-    Level? level;
 
-    NextLevelQuizInfo({
+    Exam({
         this.id,
         this.typeId,
         this.categoryId,
@@ -116,18 +95,17 @@ class NextLevelQuizInfo {
         this.status,
         this.createdAt,
         this.updatedAt,
-        this.level,
     });
 
-    factory NextLevelQuizInfo.fromJson(Map<String, dynamic> json) => NextLevelQuizInfo(
+    factory Exam.fromJson(Map<String, dynamic> json) => Exam(
         id: json["id"],
         typeId: json["type_id"],
         categoryId: json["category_id"],
         subCategoryId: json["sub_category_id"],
         title: json["title"],
         image: json["image"],
-        startDate: json["start_date"],
-        endDate: json["end_date"],
+        startDate: json["start_date"] == null ? null : DateTime.parse(json["start_date"]),
+        endDate: json["end_date"] == null ? null : DateTime.parse(json["end_date"]),
         prize: json["prize"],
         point: json["point"],
         description: json["description"],
@@ -136,11 +114,10 @@ class NextLevelQuizInfo {
         examEndTime: json["exam_end_time"],
         examDuration: json["exam_duration"],
         examKey: json["exam_key"],
-        winningMark: json["winning_mark"],
+        winningMark: json["winning_mark"].toString(),
         status: json["status"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-        level: json["level"] == null ? null : Level.fromJson(json["level"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -150,8 +127,8 @@ class NextLevelQuizInfo {
         "sub_category_id": subCategoryId,
         "title": title,
         "image": image,
-        "start_date": startDate,
-        "end_date": endDate,
+        "start_date": "${startDate!.year.toString().padLeft(4, '0')}-${startDate!.month.toString().padLeft(2, '0')}-${startDate!.day.toString().padLeft(2, '0')}",
+        "end_date": "${endDate!.year.toString().padLeft(4, '0')}-${endDate!.month.toString().padLeft(2, '0')}-${endDate!.day.toString().padLeft(2, '0')}",
         "prize": prize,
         "point": point,
         "description": description,
@@ -161,43 +138,6 @@ class NextLevelQuizInfo {
         "exam_duration": examDuration,
         "exam_key": examKey,
         "winning_mark": winningMark,
-        "status": status,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-        "level": level?.toJson(),
-    };
-}
-
-class Level {
-    int? id;
-    String? title;
-    String? level;
-    String? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-
-    Level({
-        this.id,
-        this.title,
-        this.level,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-    });
-
-    factory Level.fromJson(Map<String, dynamic> json) => Level(
-        id: json["id"],
-        title: json["title"],
-        level: json["level"],
-        status: json["status"],
-        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "level": level,
         "status": status,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),

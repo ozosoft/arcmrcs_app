@@ -365,6 +365,7 @@ class MyStrings {
   static const String twoByTen = "2/10";
   static const String eightByTen = "8/10";
   static const String nextLevel = "Next Level";
+  static const String next = "Next";
   static const String sixlevel = "6 Level";
   static const String eightlevel = "8 Level";
   static const String sevenlevel = "7 Level";

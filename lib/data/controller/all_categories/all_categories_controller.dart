@@ -16,6 +16,7 @@ class AllCategoriesController extends GetxController {
   bool loader = true;
 
   bool isActive = false;
+  bool viewMore = false;
 
   void getdata() async {
     loader = true;

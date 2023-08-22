@@ -8,7 +8,6 @@ import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/otp_field_widget/otp_field_widget.dart';
 import 'package:flutter_prime/view/components/text/default_text.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 class EnterRoomBottomSheetWidget extends StatefulWidget {
