@@ -53,7 +53,7 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                       height: Dimensions.space40,
                     ),
                     RoundedButton(
-                        text: isGroupBattle ? MyStrings.groupBattle : MyStrings.letsPlay,
+                        text: widget.isGroupBattle ? MyStrings.groupBattle : MyStrings.letsPlay,
                         press: () {
 
                           Get.toNamed(RouteHelper.findOpponentScreen);
