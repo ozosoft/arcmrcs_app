@@ -14,4 +14,12 @@ class BattleRepo {
 
     return model;
   }
+
+  Future<ResponseModel> getBatttleQuestion(int id) async {
+    String url = "${UrlContainer.baseUrl}${UrlContainer.quizQuestionsUrl + id.toString()}";
+    print('come here: ${url}');
+    ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+
+    return model;
+  }
 }

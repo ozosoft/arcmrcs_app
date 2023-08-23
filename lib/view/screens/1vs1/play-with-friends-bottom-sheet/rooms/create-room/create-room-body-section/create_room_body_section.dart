@@ -171,6 +171,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                               profileUrl: "",
                               uid: battleRoomController.battleRepo.apiClient.getUserID(),
                               shouldGenerateRoomCode: true,
+                              questionList: []
                             );
                             print("${battleRoomController.roomCreateState.value}");
                           },

@@ -3,8 +3,7 @@ import 'package:flutter_prime/view/screens/battle-quiz-section/quiz-screen-widge
 import 'package:get/get.dart';
 
 import '../../../core/utils/dimensions.dart';
-import '../../../data/controller/battle/battle_room_controller.dart';
-import '../../../data/model/quiz/quiz_list_model.dart';
+import '../../../data/model/quiz_questions_model/quiz_questions_model.dart';
 import '../../components/app-bar/custom_category_appBar.dart';
 
 class BattleQuizQuestionsScreen extends StatefulWidget {

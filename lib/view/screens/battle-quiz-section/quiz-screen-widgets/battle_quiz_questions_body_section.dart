@@ -6,12 +6,12 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/battle/battle_room_controller.dart';
 import 'package:flutter_prime/data/controller/battle/battle_room_quiz_controller.dart';
-import 'package:flutter_prime/data/model/quiz/quiz_list_model.dart';
 import 'package:flutter_prime/data/repo/battle/battle_repo.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../../../core/route/route.dart';
+import '../../../../data/model/quiz_questions_model/quiz_questions_model.dart';
 import '../../../../data/services/api_service.dart';
 import '../../../components/alert-dialog/custom_alert_dialog.dart';
 
@@ -96,10 +96,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                                     });
                                   } else {
                                     // left User
-                                    await quizController.battleRoomController
-                                        .leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false,
-                                            currentUserId: quizController.battleRepo.apiClient.getUserID())
-                                        .whenComplete(() {
+                                    await quizController.battleRoomController.leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false, currentUserId: quizController.battleRepo.apiClient.getUserID()).whenComplete(() {
                                       Navigator.of(context).pop(true); // Return true when "Yes" is pressed
                                       Get.back();
                                     });
@@ -123,7 +120,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
       }
       return Obx(() {
         Question currentQuestion = quizController.getCurrentQuestion();
-        int currentQuestionId = currentQuestion.id;
+        int currentQuestionId = currentQuestion.id!;
 
         // quizController.showLeftPopup(isUpdate: false);
 
@@ -160,10 +157,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                             });
                           } else {
                             // left User
-                            await quizController.battleRoomController
-                                .leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false,
-                                    currentUserId: quizController.battleRepo.apiClient.getUserID())
-                                .whenComplete(() {
+                            await quizController.battleRoomController.leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false, currentUserId: quizController.battleRepo.apiClient.getUserID()).whenComplete(() {
                               Navigator.of(context).pop(true); // Return true when "Yes" is pressed
                               Get.back();
                             });
@@ -212,8 +206,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                             hasIcon: false,
                             hasImage: false,
                           ),
-                          LevelCardButton(
-                              text: "${quizController.currentQuestionIndex + 1}/${widget.qustionsList.length}", hasIcon: false, hasImage: false),
+                          LevelCardButton(text: "${quizController.currentQuestionIndex + 1}/${widget.qustionsList.length}", hasIcon: false, hasImage: false),
                         ],
                       ),
                       const SizedBox(
@@ -246,14 +239,14 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                                   Container(
                                       padding: const EdgeInsets.only(top: Dimensions.space20),
                                       child: Text(
-                                        currentQuestion.question,
+                                        currentQuestion.question!,
                                         style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500),
                                         textAlign: TextAlign.center,
                                       )),
                                   const SizedBox(height: 20),
 
                                   Column(
-                                    children: currentQuestion.options.asMap().entries.map<Widget>((entry) {
+                                    children: currentQuestion.options!.asMap().entries.map<Widget>((entry) {
                                       int index = entry.key;
                                       Option option = entry.value;
                                       String optionLetter = String.fromCharCode('A'.codeUnitAt(0) + index);
@@ -262,8 +255,7 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                                         letter: optionLetter,
                                         option: option,
                                         onTap: () async {
-                                          if (!quizController.isOptionSelectedForQuestion(currentQuestion.id, option) &&
-                                              !quizController.hasSubmittedAnswerForQuestion(currentQuestion.id)) {
+                                          if (!quizController.isOptionSelectedForQuestion(currentQuestion.id!, option) && !quizController.hasSubmittedAnswerForQuestion(currentQuestion.id!)) {
                                             print("From Ans Save ");
                                             await quizController.battleRoomController.saveAnswer(
                                               quizController.battleRepo.apiClient.getUserID(),
@@ -275,10 +267,10 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                                               10,
                                               questionsList: quizController.questionsList,
                                             );
-                                            quizController.selectOptionForQuestion(currentQuestion.id, option);
+                                            quizController.selectOptionForQuestion(currentQuestion.id!, option);
                                           }
                                         },
-                                        isSelected: quizController.isOptionSelectedForQuestion(currentQuestion.id, option),
+                                        isSelected: quizController.isOptionSelectedForQuestion(currentQuestion.id!, option),
                                       );
                                     }).toList(),
                                   ),

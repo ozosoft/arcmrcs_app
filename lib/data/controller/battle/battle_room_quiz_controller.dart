@@ -13,7 +13,7 @@ import '../../model/battle/battleRoom.dart';
 import '../../model/quiz/quiz_list_model.dart';
 import '../../repo/battle/battle_repo.dart';
 import 'battle_room_controller.dart';
-
+import '../../model/quiz_questions_model/quiz_questions_model.dart';
 class BattleRoomQuizController extends GetxController with GetTickerProviderStateMixin {
   BattleRepo battleRepo;
   final BattleRoomController battleRoomController;
@@ -241,42 +241,8 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     }
   }
 
-  void selectOptionForQuestion2(int questionId, Option option) {
-    // Check if user1 has already submitted an answer for this question
-    bool user1HasSubmittedAnswer = battleRoomController.battleRoomData.value!.user1!.answers.any((answer) => answer.qid == questionId);
 
-    // Check if user2 has already submitted an answer for this question
-    bool user2HasSubmittedAnswer = battleRoomController.battleRoomData.value!.user2!.answers.any((answer) => answer.qid == questionId);
 
-    if (!selectedOptions.containsKey(questionId) && !user1HasSubmittedAnswer && !user2HasSubmittedAnswer) {
-      // Only allow selecting an option and submitting if neither user has submitted for this question
-      selectedOptions[questionId] = option;
-
-      // Check if all necessary conditions are met to proceed to the next question
-      if (user1HasSubmittedAllAnswers() && user2HasSubmittedAllAnswers() && !hasSubmittedAnswerForQuestion(questionId)) {
-        goToNextQuestion();
-      }
-    }
-    update();
-  }
-
-  bool user1HasSubmittedAllAnswers() {
-    BattleRoom battleRoom = battleRoomController.battleRoomData.value!;
-    List<Question> questionsList = battleRoomController.questionsData.data.questions;
-
-    List<String> user1AnsweredQuestionIds = battleRoom.user1!.answers.map((answer) => answer.qid.toString()).toList();
-
-    return user1AnsweredQuestionIds.length == questionsList.length;
-  }
-
-  bool user2HasSubmittedAllAnswers() {
-    BattleRoom battleRoom = battleRoomController.battleRoomData.value!;
-    List<Question> questionsList = battleRoomController.questionsData.data.questions;
-
-    List<String> user2AnsweredQuestionIds = battleRoom.user2!.answers.map((answer) => answer.qid.toString()).toList();
-
-    return user2AnsweredQuestionIds.length == questionsList.length;
-  }
 
   @override
   void onClose() {
