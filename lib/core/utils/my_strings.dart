@@ -564,12 +564,6 @@ class MyStrings {
     {'title': guessTheWord, 'sub_title': funvocabulary},
   ];
 
- final List<Map<String, String>> playDifrentGames = [
-    {'title': dailyQuiz, 'sub_title': dailynewquiz},
-    {'title': funAndLearn, 'sub_title': gamequizwithfun},
-    {'title': guessTheWord, 'sub_title': funvocabulary},
-    ];
-
   final List<Map<String, String>> coinHistoryies = [
     {'title': wonWorldQuizContest, 'date': twelveMay2023, 'reward': twoFiftyUSD},
     {'title': worldQuiz2023, 'date': twenrtyEightMay2023, 'reward': hundredAndTwentyUSD},
