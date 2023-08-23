@@ -33,7 +33,7 @@ class MyImages {
   static const String navBarhome = "assets/images/home.svg";
   static const String navBarSettings = "assets/images/nav_bar_settings.svg";
   static const String navBarprofile = "assets/images/nav_bar_profile.svg";
-
+  static const String userSearchLottie = "assets/animation/user_search.json";
   static const String user = "assets/images/user.svg";
   static const String changePassword = "assets/images/change_password.svg";
   static const String googleSvg = "assets/images/googleSVG.svg";

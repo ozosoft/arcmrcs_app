@@ -1,4 +1,3 @@
-
 import 'package:flutter_prime/view/screens/authentication/forget_password/resetPassword/reset_Password_Screen.dart';
 import 'package:flutter_prime/view/screens/authentication/forget_password/verification/verification_screen.dart';
 import 'package:flutter_prime/view/screens/authentication/login/login_screen.dart';
@@ -25,6 +24,8 @@ import '../../view/screens/1vs1/play-with-friends-bottom-sheet/rooms/create-room
 import '../../view/screens/1vs1/play-with-friends-bottom-sheet/rooms/join-room/join_room_screen.dart';
 import '../../view/screens/all-categories/all_categories_screen.dart';
 import '../../view/screens/authentication/forget_password/forgetpassword/forget_password_screen.dart';
+import '../../view/screens/battle-quiz-section/battle_quiz_question_screen.dart';
+import '../../view/screens/battle_quiz_result/battle_quiz_result_screen.dart';
 import '../../view/screens/bottom_nav_bar/bottom_navigation_bar_screen.dart';
 import '../../view/screens/exam_zone/exam_zone_screen.dart';
 import '../../view/screens/exam_zone/exam_zone_homepage_category_screen.dart';
@@ -33,8 +34,6 @@ import '../../view/screens/intro_section/onboard_intro_screen.dart';
 import '../../view/screens/leader_board/leader_board_screen.dart';
 import '../../view/screens/quiz-result/quiz_result_screen.dart';
 import '../../view/screens/review-answer/review_answer-screen.dart';
-
-
 
 class RouteHelper {
 
@@ -50,7 +49,11 @@ class RouteHelper {
   static const String subCategories          = '/top_categories_screen';
   static const String quizQuestionsScreen    = '/quiz_questions_screen';
   static const String quizResultScreen       = '/quiz_result_screen';
-  static const String reviewAnswerScreen     = '/review_answer_screen';
+  //battle
+  static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
+  static const String battleQuizResultScreen = '/battle_quiz_result_screen';
+ 
+ static const String reviewAnswerScreen     = '/review_answer_screen';
   static const String oneVSoneBattleScreen   = '/battle_screen';
   static const String findOpponentScreen     = '/find_opponent_screen';
   static const String createRoomScreen       = '/create_room_screen';
@@ -69,7 +72,8 @@ class RouteHelper {
   static const String examZoneQuestionScreen = '/exam_zone_questions_screen';
   static const String examZoneResultScreen = '/exam_zone_result_screen';
   static const String examZoneReviewAnswerScreen = '/exam_zone_review_answer_screen';
-
+  
+  
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
     GetPage(name: onboardScreen, page: () => const OnBoardIntroScreen()),
@@ -79,10 +83,15 @@ class RouteHelper {
     GetPage(name: verificationScreen, page: () => const VerificationScreen()),
     GetPage(name: resetPassword, page: () => const ResetPasswordScreen()),
     GetPage(name: bottomNavBarScreen, page: () => const BottomNavigationBarScreen()),
-    GetPage( name: subCategories, page: () => const SubCategoriesCardScreen(title: "",)),
+
+    GetPage(name: subCategories, page: () => const SubCategoriesCardScreen(title: "")),
     GetPage(name: allCategories, page: () => const AllCategoriesScreen()),
     GetPage(name: quizQuestionsScreen, page: () => const QuizQuestionsScreen()),
     GetPage(name: quizResultScreen, page: () => const QuizResultScreen()),
+    //battle
+    GetPage(name: battleQuizQuestionsScreen, page: () => const BattleQuizQuestionsScreen()),
+    GetPage(name: battleQuizResultScreen, page: () => const BattleQuizResultScreen()),
+
     GetPage(name: reviewAnswerScreen, page: () => const ReviewAnswerScreen()),
     GetPage(name: oneVSoneBattleScreen, page: () => const OneVSOneBattleScreen()),
     GetPage(name: findOpponentScreen, page: () => const FindOpponenetScreen()),
@@ -99,8 +108,10 @@ class RouteHelper {
     GetPage(name: examZoneScreen, page: () => const ExamZoneScreen()),
     GetPage(name: examZoneCategoryScreen, page: () => const ExamZoneCategoryScreen()),
     GetPage(name: leaderBoardScreen, page: () => const LeaderBoardScreen()),
+
     GetPage(name: examZoneQuestionScreen, page: () => const Exam_zone_quiz_screen()),
     GetPage(name: examZoneResultScreen, page: () => const ExamResultScreen()),
     GetPage(name: examZoneReviewAnswerScreen, page: () => const ExamReviewAnswerScreen()),
+
   ];
 }

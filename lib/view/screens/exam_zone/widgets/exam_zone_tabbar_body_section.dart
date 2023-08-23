@@ -92,7 +92,9 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> w
                     itemBuilder: (BuildContext context, int index) {
                       return InkWell(
                         onTap: () {
+
                             CustomBottomSheet(child: EnterRoomBottomSheetWidget(quizInfo_id:controller.examcategoryList[index].id.toString())).customBottomSheet(context);
+
                         },
                         child: CategoriesCard(
                           index: index,

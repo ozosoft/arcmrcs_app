@@ -13,6 +13,7 @@ import 'appbar-components/customSliverDelegate.dart';
 import 'play-with-friends-bottom-sheet/play_with_friends_bottom_sheet.dart';
 
 class OneVSOneBattleScreen extends StatefulWidget {
+
   final bool isGroupBattle;
   const OneVSOneBattleScreen({super.key, this.isGroupBattle = false});
 
@@ -39,8 +40,7 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
             SliverFillRemaining(
               hasScrollBody: false,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: Dimensions.space30),
+                padding: const EdgeInsets.symmetric(horizontal: Dimensions.space30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -48,17 +48,14 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                       MyStrings.selectCategory,
                       style: semiBoldExtraLarge,
                     ),
-                    const CustomDropDownTextField3(
-                        selectedValue: null,
-                        onChanged: null,
-                        items: null,
-                        hintText: MyStrings.scienceAndTech),
+                    const CustomDropDownTextField3(selectedValue: null, onChanged: null, items: null, hintText: MyStrings.scienceAndTech),
                     const SizedBox(
                       height: Dimensions.space40,
                     ),
                     RoundedButton(
-                        text:widget.isGroupBattle?MyStrings.createRoom:  MyStrings.letsPlay,
-                        press: () { widget.isGroupBattle?  Get.toNamed(RouteHelper.createRoomScreen):
+                        text: isGroupBattle ? MyStrings.groupBattle : MyStrings.letsPlay,
+                        press: () {
+
                           Get.toNamed(RouteHelper.findOpponentScreen);
                         },
                         textSize: Dimensions.space20,
@@ -70,14 +67,10 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                     const SizedBox(
                       height: Dimensions.space25,
                     ),
-                    RoundedButton(
-                      text:widget.isGroupBattle?MyStrings.joinRoom: MyStrings.playWithFriend,
+                     RoundedButton(
+                        text: MyStrings.playWithFriend,
                         press: () {
-                          widget.isGroupBattle?  Get.toNamed(RouteHelper.joinRoomScreen):
-                          CustomBottomSheet(
-                                  child:
-                                      const PlayWithFriendsBottomSheetWidget())
-                              .customBottomSheet(context);
+                          CustomBottomSheet(child: const PlayWithFriendsBottomSheetWidget()).customBottomSheet(context);
                         },
                         textSize: Dimensions.space20,
                         color: MyColor.colorBlack,

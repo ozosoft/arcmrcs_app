@@ -14,6 +14,7 @@ import 'package:flutter_prime/view/components/text/default_text.dart';
 import 'package:get/get.dart';
 
 class EnterRoomBottomSheetWidget extends StatefulWidget {
+
   final String quizInfo_id;
   EnterRoomBottomSheetWidget({super.key, required this.quizInfo_id});
 

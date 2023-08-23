@@ -78,7 +78,9 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                             (index) => InkWell(
                                   onTap: () {
                                     // Get.toNamed(RouteHelper.examZoneScreen);
+
                                     CustomBottomSheet(child: EnterRoomBottomSheetWidget(quizInfo_id: controller.examZonelist[index].id.toString(),)).customBottomSheet(context);
+
                                   },
                                   child: Container(
                                     margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),

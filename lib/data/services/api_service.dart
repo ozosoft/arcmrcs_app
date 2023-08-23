@@ -72,6 +72,7 @@ class ApiClient extends GetxService{
               body: params
           );
         }
+
       }
       else if (method == Method.deleteMethod) {
 
@@ -186,6 +187,15 @@ class ApiClient extends GetxService{
   String getUserEmail(){
       String email = sharedPreferences.getString(SharedPreferenceHelper.userEmailKey)??'';
       return email;
+  }
+  String getUserName(){
+      String username = sharedPreferences.getString(SharedPreferenceHelper.userNameKey)??'';
+      return username;
+  }
+  String getUserID(){
+      String userID = sharedPreferences.getString(SharedPreferenceHelper.userIdKey)??'';
+      return userID;
+
   }
 
   bool getPasswordStrengthStatus(){
