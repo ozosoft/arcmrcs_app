@@ -15,6 +15,7 @@ class MyStrings {
   static const String selectPaymentMethod = "Select PaymentMethod";
 
   static const String appName = "Flutter Prime";
+
   static const String reviewAnswer = "Review Answer";
   static const String selectCategory = "Select Category";
   static const String entryCoinsForBattele = "Entry Coins For Battle";
@@ -44,6 +45,7 @@ class MyStrings {
   static const String username = "User Name";
   static const String password = "Password";
   static const String rememberMe = "Remember Me";
+  static const String iAgreewithrules = "I agree with all exam rules";
   static const String forgotPassword = "Forgot Password?";
   static const String signIn = "Sign In";
 
@@ -57,6 +59,10 @@ class MyStrings {
 
   static const String kyc = 'KYC';
   static const String isRequired = 'is required';
+  static const String viewAllRules = "View all rules";
+  static const String examRules = "Exam Rules";
+  static const String examKey = "Enter the exam key";
+  static const String enterExam = "Enter In Exam";
   static const String chooseFile = 'Choose File';
   static const String chooseAvatar = 'Choose Avatar';
   static const String kycUnderReviewMsg = 'Your KYC is under review';
@@ -196,13 +202,20 @@ class MyStrings {
   static const String quizResult = "Quiz Result";
   static const String fifteenPercent = "15%";
   static const String quizQuestions = "The Great Wall is a world-famous historical landmark located in which country?";
+  static const String quizQuestions2 = "The Great Wall is a world-famous ?";
   static const String levels = "6 Level";
   static const String level1 = "Level 01";
   static const String allCategory = "All categories";
   static const String music = "Music";
   static const String scienceAndTech = "Science & Technology";
   static const String fee50Coins = "Fee 50 Coins";
+  static const String feeCoins = "Fee Coins ";
   static const String endDate = "End 12 jun 2023";
+  static const String end = "End ";
+  static const String marks = "10 Marks";
+  static const String markss = " Marks";
+  static const String minutes = "25 min";
+  static const String minutess = " min";
   static const String healthAndQuiz = "Health Quiz Contest";
   static const String healthAndQuizdescription = "The health Quiz feature aims to bring the excitement";
   static const String topCategory = "Top Categories";
@@ -333,6 +346,7 @@ class MyStrings {
   static const String twoByTen = "2/10";
   static const String eightByTen = "8/10";
   static const String nextLevel = "Next Level";
+  static const String next = "Next";
   static const String sixlevel = "6 Level";
   static const String eightlevel = "8 Level";
   static const String sevenlevel = "7 Level";
@@ -351,6 +365,7 @@ class MyStrings {
   static const String historyAndCulture = 'History & Culture';
   static const String roomID = "874541";
   static const String marton = "@marton";
+  static const String examZone = "Exam Zone";
   static const String twoHundredFortyDollar = "\$240.00";
   static const String jkobos = "@jkobos";
   static const String qP = "2,558 QP";
@@ -362,7 +377,10 @@ class MyStrings {
   static const String weekly = 'Weekly';
   static const String reedemRequest = "Reedem Request";
   static const String allTimes = 'All Times';
+  static const String today = 'Today\'s';
+  static const String completed = 'Completed';
   static const String questions = '15 Questions';
+  static const String questionse = ' Questions';
   static const String versus = "VS";
   static const String questions2 = '10 Questions';
   static const String questions3 = '8 Questions';
@@ -378,7 +396,6 @@ class MyStrings {
   static const String reedemNow = "Redeem Now";
   static const String sharecodeText = "Share this room code to friend and ask them to join";
   static const String pleaseWaitRoomText = "Please wait game will start soon";
-
   static const String approved = "Approved";
   static const String supper = "Supper";
   static const String supperbattleMan = "Supper Battle Man";
@@ -436,6 +453,15 @@ class MyStrings {
   static const String onboardTitle = "Test Your Knowladge";
   static const String realMoney = "Win Real Money";
   static const String completeWIthFriends = "Compete With Friends";
+  static const String dailyQuiz = "Daily Quiz";
+  static const String funAndLearn = "Fun & Learn";
+  static const String guessTheWord = "Guess The Word";
+  static const String dailynewquiz = "Daily new quiz";
+  static const String gamequizwithfun = "Game quiz with fun";
+  static const String rules1 = "I Will not copy and give this exam with honesty";
+  static const String rules2 = "If you lock your phone then exam will complete automatically";
+  static const String rules3 = "You cant use browser";
+  static const String funvocabulary = "Fun vocabulary";
   static const String whoIsSmartest = "Who is the smartest in your group of friends and family";
   static const String pickTheCorrectAnswer = "Pick the correct answer at the final question to win the prize money";
   static const String dontHaveAnaccount = "Don’t have an account?";
@@ -527,6 +553,12 @@ class MyStrings {
     {'title': eventNotification, 'short_Notification': shortDesc3, 'detail_Notification': detailnotifucation1, 'date': detailnotifucationdate3},
   ];
 
+  final List<Map<String, String>> playDifrentGames = [
+    {'title': dailyQuiz, 'sub_title': dailynewquiz},
+    {'title': funAndLearn, 'sub_title': gamequizwithfun},
+    {'title': guessTheWord, 'sub_title': funvocabulary},
+  ];
+
   final List<Map<String, String>> coinHistoryies = [
     {'title': wonWorldQuizContest, 'date': twelveMay2023, 'reward': twoFiftyUSD},
     {'title': worldQuiz2023, 'date': twenrtyEightMay2023, 'reward': hundredAndTwentyUSD},
@@ -537,5 +569,7 @@ class MyStrings {
 
   List<String> rewardsList = [twoFiftyUSD, twoFiftyUSD, hundredAndTwentyUSD, twoFiftyUSD, hundredAndTwentyUSD];
   final List<String> languages = [english, bangla, hindi, spanish];
+  final List<String> questionsList = [quizQuestions, quizQuestions2, questions2, questions, rules1, rules2, rules3];
+  final List<String> rules = [rules1, rules2, rules3];
   final List<String> settingsList = [sound, vibration, themes];
 }

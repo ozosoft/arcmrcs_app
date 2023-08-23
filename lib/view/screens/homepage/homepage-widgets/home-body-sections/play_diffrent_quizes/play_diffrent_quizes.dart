@@ -3,6 +3,11 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/core/utils/url_container.dart';
+import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
+import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
+import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:get/get.dart';
 
 class PlayDiffrentQuizes extends StatefulWidget {
   const PlayDiffrentQuizes({super.key});
@@ -12,36 +17,82 @@ class PlayDiffrentQuizes extends StatefulWidget {
 }
 
 class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
+
+   @override
+  void initState() {
+    Get.put(ApiClient(sharedPreferences: Get.find()));
+    Get.put(DashBoardRepo(apiClient: Get.find()));
+    Get.put(DashBoardController(dashRepo: Get.find()));
+    DashBoardController controller =Get.put(DashBoardController(dashRepo: Get.find()));
+
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.getdata();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(Dimensions.space18),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: Dimensions.space10),
-          const Text(
-            MyStrings.playDiffrentQuizs,
-            style: boldMediumLarge,
-          ),
-          const SizedBox(height: Dimensions.space10),
-          GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                ),
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Container(
-                    color: Colors.blue,
-                    margin: EdgeInsets.all(8.0),
+    return  GetBuilder<DashBoardController>(
+      builder: (controller) =>  Padding(
+        padding: const EdgeInsets.all(Dimensions.space18),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: Dimensions.space10),
+            const Text(
+              MyStrings.playDiffrentQuizs,
+              style: boldMediumLarge,
+            ),
+            const SizedBox(height: Dimensions.space10),
+            GridView.builder(
+              
+                  gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1.2
+                  ),
+                  itemCount: controller.quizlist.length,
+                  itemBuilder: (context, index) {
+                    return    Container(
+                      padding:const EdgeInsets.symmetric(horizontal: Dimensions.space10),
+                   decoration: BoxDecoration(
+                              color: MyColor.colorWhite,
+                              borderRadius:
+                                  BorderRadius.circular(Dimensions.defaultRadius),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Color.fromARGB(61, 158, 158, 158),
+                                  blurRadius: 7,
+                                  spreadRadius: .5,
+                                  offset: Offset(
+                                    .4,
+                                    .4,
+                                  ),
+                                )
+                              ],
+                            ),
+                    margin:const EdgeInsets.all(Dimensions.space5), 
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
+                      Image.network(UrlContainer.playdiffrentImage+controller.quizlist[index].image.toString()),
+                      const SizedBox(height: Dimensions.space10,),
+                       Text(controller.quizlist[index].name.toString(),style: semiBoldExtraLarge,),
+                        const SizedBox(height: Dimensions.space3),
+                       Text(controller.quizlist[index].shortDescription.toString(),style: regularDefault.copyWith(color: MyColor.textColor,),textAlign: TextAlign.center),
+                    ],),
                   );
-                },
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-              ),
-        ],
+               
+                  },
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                ),
+          ],
+        ),
       ),
     );
-    ;
+    
   }
 }

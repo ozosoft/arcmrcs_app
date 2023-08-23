@@ -15,7 +15,7 @@ class BattleQuizResultScreen extends StatefulWidget {
 }
 
 class _BattleQuizResultScreenState extends State<BattleQuizResultScreen> {
-  final title = Get.arguments as String;
+  // final title = Get.arguments as String;
   @override
   Widget build(BuildContext context) {
     return const RepaintBoundary(

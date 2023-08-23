@@ -20,10 +20,6 @@ class BattleQuizResultBodySection extends StatefulWidget {
 }
 
 class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySection> {
-  bool showQuestions = false;
-  bool audienceVote = false;
-  bool tapAnswer = false;
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -76,29 +72,6 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
               ),
               const BottomSectionButtons()
             ],
-          ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .36),
-          child: CircularCountDownTimer(
-            duration: Dimensions.space60.toInt(),
-            initialDuration: 0,
-            controller: CountDownController(),
-            width: Dimensions.space80,
-            height: Dimensions.space90,
-            ringColor: MyColor.primaryColor,
-            ringGradient: null,
-            fillColor: MyColor.timerbgColor,
-            backgroundColor: MyColor.timerbgColor,
-            strokeWidth: Dimensions.space5,
-            strokeCap: StrokeCap.round,
-            textStyle: semiBoldExtraLarge.copyWith(color: MyColor.primaryColor),
-            textFormat: CountdownTextFormat.S,
-            isReverse: true,
-            isReverseAnimation: false,
-            isTimerTextShown: true,
-            autoStart: true,
-            onComplete: () {},
           ),
         ),
       ],

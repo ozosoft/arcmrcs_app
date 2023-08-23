@@ -6,30 +6,32 @@ import '../../../core/utils/my_color.dart';
 
 class OTPFieldWidget extends StatelessWidget {
   final Color textcolor, activeColor, inActiveColor;
+  final bool fromExam;
   final TextEditingController? tController; // Changed to optional
-
-  final ValueChanged<String>? onChanged;
 
   const OTPFieldWidget({
     Key? key,
+    this.tController, // Made it optional
     required this.onChanged,
     this.textcolor = MyColor.textColor,
     this.activeColor = MyColor.screenBgColor,
     this.inActiveColor = MyColor.cardBorderColors,
-    this.tController, // Made it optional
+    this.fromExam = false,
   }) : super(key: key);
+
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10),
       child: PinCodeTextField(
-        controller: tController,
         appContext: context,
         pastedTextStyle: regularDefault.copyWith(color: MyColor.getTextColor()),
-        length: 6,
+        length: fromExam ? 4 : 6,
         textStyle: regularExtraLarge.copyWith(color: MyColor.textColor),
         obscureText: false,
+        controller: tController,
         obscuringCharacter: '*',
         blinkWhenObscuring: false,
         animationType: AnimationType.fade,

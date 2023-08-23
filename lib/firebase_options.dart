@@ -70,6 +70,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '756507339207',
     projectId: 'quiz-lab-f9e22',
     storageBucket: 'quiz-lab-f9e22.appspot.com',
+    androidClientId: '756507339207-al6uohh0khqteh1c1jlj4c12fem0voc7.apps.googleusercontent.com',
     iosClientId: '756507339207-fqqhbp7aeadm2hckh6l40ca3bm5ogmhi.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterPrime',
   );

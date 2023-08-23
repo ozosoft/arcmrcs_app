@@ -41,7 +41,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(extendBody: true,
+    return Scaffold(
       body: Center(
         child: _widgetOptions.elementAt(_page),
       ),

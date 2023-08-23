@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_prime/data/model/quiz/quiz_list_model.dart';
+import 'package:flutter_prime/data/repo/battle/battle_repo.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
@@ -50,6 +51,8 @@ enum BattleGameState {
 }
 
 class BattleRoomController extends GetxController {
+  BattleRepo battleRepo;
+  BattleRoomController(this.battleRepo);
   StreamSubscription<DocumentSnapshot>? _battleRoomStreamSubscription;
   StreamSubscription<DocumentSnapshot>? get battleRoomStreamSubscription => _battleRoomStreamSubscription;
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;

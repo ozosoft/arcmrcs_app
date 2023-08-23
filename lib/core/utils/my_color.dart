@@ -34,7 +34,6 @@ class MyColor {
   static const Color textFieldDisableBorderColor = Color(0xffCFCEDB);
   static const Color quizresultBodyColor = Color(0xFFECECEC);
   static const Color quizresultBodyTextColor = Color(0xFFECECEC);
-  static const Color selectedAnswerbgColor = Color(0xFF7367F0);
   static const Color rightAnswerbgColor = Color(0xFF00BA00);
   static const Color wrongAnsColor = Color(0xFFFF2147);
   static const Color textFieldEnableBorderColor = primaryColor;
@@ -77,9 +76,12 @@ class MyColor {
   static const Color lobbycontColor = Color(0xFFFCECE8);
   static const Color lobbycontBorderColor = Color(0xFFE54322);
   static const Color cardBorderColors = Color(0xFFE9E9E9);
-  static const Color categoryCardBodyColor = Color(0xFFE5F8E5);
-  static const Color categoryCardBodyWrongColor = Color(0xFFFFD2DA);
-  static const Color prifileBG = Color(0xDFFF795E);
+  static const Color categoryCardBodyColor =  Color(0xFFE5F8E5);
+  static const Color categoryCardBodyWrongColor =  Color(0xFFFFD2DA);
+  static const Color prifileBG =  Color(0xDFFF795E);
+  static const Color unlockedLevel =  Color(0xFFF8F8F8);
+  static const Color lockedLevel =  Color(0xFFDFDFDF);
+  static const Color completedlevel =  Color(0xFFE5F8E5);
 
   static Color getPrimaryColor() {
     return primaryColor;
@@ -161,7 +163,7 @@ class MyColor {
     return MyColor.colorGrey;
   }
 
-  static Color getAuthTextColor() {
+   static Color getAuthTextColor() {
     return colorlighterGrey;
   }
 
@@ -197,24 +199,23 @@ class MyColor {
     MyColor.colorQuizBodyText
   ];
 
-  final List<Color> containerBorderColors = [
+      final List<Color> containerBorderColors = [
     Color(0xFFCCF1CC),
     Color(0xFFEEEEEE),
     Color(0xFFF8F8F8),
     MyColor.appBarColor
-  ];
+    ];
 
-  final List<Color> containerBodyColors = [
+      final List<Color> containerBodyColors = [
     MyColor.categoryCardBodyColor,
     MyColor.cardColor,
     Color(0xFFDFDFDF),
-  ];
-
-  final List<Color> containertextColors = [
-    Color(0xFF00BA00),
-    MyColor.colorBlack,
-    Color(0xFF8A8281)
-  ];
+    ];
+  
+      final List<Color> containertextColors = [
+      Color(0xFF00BA00),
+      MyColor.colorBlack,
+      Color(0xFF8A8281)];
 
   static getSymbolColor(int index) {
     int colorIndex = index > 10 ? index % 10 : index;

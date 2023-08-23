@@ -13,8 +13,8 @@ import 'appbar-components/customSliverDelegate.dart';
 import 'play-with-friends-bottom-sheet/play_with_friends_bottom_sheet.dart';
 
 class OneVSOneBattleScreen extends StatelessWidget {
-  final bool fromgroup;
-  const OneVSOneBattleScreen({super.key, this.fromgroup = false});
+  final bool isGroupBattle;
+  const OneVSOneBattleScreen({super.key, this.isGroupBattle = false});
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,7 @@ class OneVSOneBattleScreen extends StatelessWidget {
             SliverFillRemaining(
               hasScrollBody: false,
               child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: Dimensions.space30),
+                padding: const EdgeInsets.symmetric(horizontal: Dimensions.space30),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -41,18 +40,12 @@ class OneVSOneBattleScreen extends StatelessWidget {
                       MyStrings.selectCategory,
                       style: semiBoldExtraLarge,
                     ),
-                    const CustomDropDownTextField3(
-                        selectedValue: null,
-                        onChanged: null,
-                        items: null,
-                        hintText: MyStrings.scienceAndTech),
+                    const CustomDropDownTextField3(selectedValue: null, onChanged: null, items: null, hintText: MyStrings.scienceAndTech),
                     const SizedBox(
                       height: Dimensions.space40,
                     ),
                     RoundedButton(
-                        text: fromgroup
-                            ? MyStrings.groupBattle
-                            : MyStrings.letsPlay,
+                        text: isGroupBattle ? MyStrings.groupBattle : MyStrings.letsPlay,
                         press: () {
                           Get.toNamed(RouteHelper.findOpponentScreen);
                         },
@@ -68,10 +61,7 @@ class OneVSOneBattleScreen extends StatelessWidget {
                     RoundedButton(
                         text: MyStrings.playWithFriend,
                         press: () {
-                          CustomBottomSheet(
-                                  child:
-                                      const PlayWithFriendsBottomSheetWidget())
-                              .customBottomSheet(context);
+                          CustomBottomSheet(child: const PlayWithFriendsBottomSheetWidget()).customBottomSheet(context);
                         },
                         textSize: Dimensions.space20,
                         color: MyColor.colorBlack,

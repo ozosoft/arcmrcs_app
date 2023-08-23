@@ -100,9 +100,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                       const Spacer(),
                       InkWell(
                         onTap: () {
-                          Get.to(() => OneVSOneBattleScreen(
-                                fromgroup: true,
-                              ));
+                          Get.to(() => const OneVSOneBattleScreen());
                         },
                         child: Container(
                           padding:
@@ -168,6 +166,9 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
           height: Dimensions.space15,
         ),
         InkWell(
+          onTap: () {
+             Get.to(()=> const OneVSOneBattleScreen(isGroupBattle: true));
+          },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: Dimensions.space2),
             decoration: BoxDecoration(
@@ -198,7 +199,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                       ),
                       InkWell(
                         onTap: () {
-                          Get.toNamed(RouteHelper.oneVSoneBattleScreen);
+                            Get.to(()=> const OneVSOneBattleScreen(isGroupBattle: true,));
                         },
                         child: Container(
                           height: Dimensions.space50,

@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GeneralSettingRepo(apiClient: Get.find()));
     Get.put(LocalizationController(sharedPreferences: Get.find()));
-    final controller = Get.put(SplashController(repo: Get.find(), localizationController: Get.find()));
+    final controller = Get.put(SplashController(repo: Get.find()));
 
     super.initState();
 

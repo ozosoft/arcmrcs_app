@@ -9,44 +9,30 @@ import 'package:flutter_prime/data/model/global/response_model/response_model.da
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
-class ChangePasswordRepo {
-  ApiClient apiClient;
+class ChangePasswordRepo{
 
-  ChangePasswordRepo({required this.apiClient});
-  String token = '', tokenType = '';
+ ApiClient apiClient;
 
-  Future<bool> changePassword(String currentPass, String password) async {
-    final params = modelToMap(currentPass, password);
-    String url =
-        '${UrlContainer.baseUrl}${UrlContainer.changePasswordEndPoint}';
+ ChangePasswordRepo({required this.apiClient});
+ String token = '', tokenType = '';
 
-    ResponseModel responseModel = await apiClient
-        .request(url, Method.postMethod, params, passHeader: true);
-    if (responseModel.statusCode == 200) {
-      AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(
-          jsonDecode(responseModel.responseJson));
-      if (model.message?.success != null &&
-          model.message!.success!.isNotEmpty) {
-        CustomSnackBar.success(
-            successList:
-                model.message?.success ?? [MyStrings.passwordChanged.tr]);
-        return true;
-      } else {
-        CustomSnackBar.error(
-            errorList: model.message?.error ?? [MyStrings.requestFail.tr]);
-        return false;
-      }
-    } else {
-      return false;
-    }
-  }
+ Future<ResponseModel> changePassword(String currentPass, String password) async{
 
-  modelToMap(String currentPassword, String newPass) {
-    Map<String, dynamic> map2 = {
-      'current_password': currentPassword,
-      'password': newPass,
-      'password_confirmation': newPass
-    };
-    return map2;
-  }
+  final params = modelToMap(currentPass,password);
+  String url = '${UrlContainer.baseUrl}${UrlContainer.changePasswordEndPoint}';
+
+  ResponseModel responseModel= await apiClient.request(url, Method.postMethod, params,passHeader: true);
+  return responseModel;
+ }
+
+ modelToMap(String currentPassword,String newPass) {
+
+  Map<String,dynamic>map2={
+   'current_password':currentPassword,
+   'password':newPass,
+   'password_confirmation':newPass
+  };
+  return map2;
+ }
+
 }

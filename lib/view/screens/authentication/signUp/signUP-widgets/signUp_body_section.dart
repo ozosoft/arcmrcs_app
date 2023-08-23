@@ -5,6 +5,10 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/data/controller/auth/auth/registration_controller.dart';
+import 'package:flutter_prime/data/repo/auth/general_setting_repo.dart';
+import 'package:flutter_prime/data/repo/auth/signup_repo.dart';
+import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/divider/custom_divider.dart';
 import 'package:flutter_prime/view/components/social_login/social_login_section.dart';
@@ -22,146 +26,176 @@ class SignUpBodySection extends StatefulWidget {
 
 class _SignUpBodySectionState extends State<SignUpBodySection> {
   final formKey = GlobalKey<FormState>();
+
+    @override
+  void initState() {
+    Get.put(ApiClient(sharedPreferences: Get.find()));
+    Get.put(GeneralSettingRepo(apiClient: Get.find()));
+    Get.put(RegistrationRepo(apiClient: Get.find()));
+    Get.put(RegistrationController(
+        registrationRepo: Get.find(), generalSettingRepo: Get.find()));
+
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<RegistrationController>().initData();
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: Dimensions.space30,
-        vertical: Dimensions.space15,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            MyStrings.signUp,
-            style: semiBoldMediumLarge.copyWith(fontSize: Dimensions.space25),
-          ),
-          const SizedBox(height: Dimensions.space8),
-          Text(
-            MyStrings.pleaseEnterDetailstoSignUp,
-            style: regularLarge.copyWith(
-                color: MyColor.authScreenTextColor,
-                fontSize: Dimensions.space15),
-          ),
-          const SocialLoginSection(),
-          const CustomDivider(
-            space: Dimensions.space10,
-          ),
-          Form(
-            key: formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CustomTextField(
-                  hastextcolor: true,
-                  hasIcon: true,
-                  prefixicon: MyImages.personSVG,
-                  animatedLabel: true,
-                  needOutlineBorder: true,
-                  labelText: MyStrings.username,
-                  onChanged: (value) {},
-                  textInputType: TextInputType.emailAddress,
-                  inputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return MyStrings.fieldErrorMsg;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                const SizedBox(height: Dimensions.space20),
-                CustomTextField(
-                  hastextcolor: true,
-                  hasIcon: true,
-                  prefixicon: MyImages.mailSVG,
-                  animatedLabel: true,
-                  needOutlineBorder: true,
-                  labelText: MyStrings.email,
-                  onChanged: (value) {},
-                  textInputType: TextInputType.emailAddress,
-                  inputAction: TextInputAction.next,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return MyStrings.fieldErrorMsg;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                const SizedBox(height: Dimensions.space20),
-                CustomTextField(
-                  hastextcolor: true,
-                  hasIcon: true,
-                  prefixicon: MyImages.lockSVG,
-                  animatedLabel: true,
-                  needOutlineBorder: true,
-                  labelText: MyStrings.password,
-                  onChanged: (value) {
-                    print(value);
-                  },
-                  isShowSuffixIcon: true,
-                  isPassword: true,
-                  textInputType: TextInputType.text,
-                  inputAction: TextInputAction.done,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return MyStrings.fieldErrorMsg;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                const SizedBox(height: Dimensions.space2),
-                const StrongPassWordCheakSection(),
-                const SizedBox(height: Dimensions.space15),
-                CustomTextField(
-                  hastextcolor: true,
-                  hasIcon: true,
-                  prefixicon: MyImages.lockSVG,
-                  animatedLabel: true,
-                  needOutlineBorder: true,
-                  labelText: MyStrings.confirmPassword,
-                  onChanged: (value) {},
-                  isShowSuffixIcon: true,
-                  isPassword: true,
-                  textInputType: TextInputType.text,
-                  inputAction: TextInputAction.done,
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return MyStrings.fieldErrorMsg;
-                    } else {
-                      return null;
-                    }
-                  },
-                ),
-                const SizedBox(height: Dimensions.space25),
-                RoundedButton(
-                  text: MyStrings.signUp,
-                  press: () {},
-                ),
-                const SizedBox(height: Dimensions.space10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(MyStrings.alreadyAccount,
-                        overflow: TextOverflow.ellipsis,
-                        style: regularLarge.copyWith(
-                            color: MyColor.getAuthTextColor(),
-                            fontWeight: FontWeight.w500)),
-                     TextButton(
-                      onPressed: () {
-                        Get.toNamed(RouteHelper.loginScreen);
-                      },
-                      child: const CustomUndelineText(text: MyStrings.signIn),
-                    ),
-                    
-                  ],
-                ),
-              ],
+    return GetBuilder<RegistrationController>(
+      builder: (controller) =>  Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: Dimensions.space30,
+          vertical: Dimensions.space15,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              MyStrings.signUp,
+              style: semiBoldMediumLarge.copyWith(fontSize: Dimensions.space25),
             ),
-          )
-        ],
+            const SizedBox(height: Dimensions.space8),
+            Text(
+              MyStrings.pleaseEnterDetailstoSignUp,
+              style: regularLarge.copyWith(
+                  color: MyColor.authScreenTextColor,
+                  fontSize: Dimensions.space15),
+            ),
+            const SocialLoginSection(),
+            const CustomDivider(
+              space: Dimensions.space10,
+            ),
+            Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CustomTextField(
+                    controller: controller.userNameController,
+                    hastextcolor: true,
+                    hasIcon: true,
+                    prefixicon: MyImages.personSVG,
+                    animatedLabel: true,
+                    needOutlineBorder: true,
+                    labelText: MyStrings.username,
+                    onChanged: (value) {},
+                    textInputType: TextInputType.emailAddress,
+                    inputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return MyStrings.fieldErrorMsg;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  const SizedBox(height: Dimensions.space20),
+                  CustomTextField(
+                    controller: controller.emailController,
+                    hastextcolor: true,
+                    hasIcon: true,
+                    prefixicon: MyImages.mailSVG,
+                    animatedLabel: true,
+                    needOutlineBorder: true,
+                    labelText: MyStrings.email,
+                    onChanged: (value) {},
+                    textInputType: TextInputType.emailAddress,
+                    inputAction: TextInputAction.next,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return MyStrings.fieldErrorMsg;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  const SizedBox(height: Dimensions.space20),
+                  CustomTextField(
+                    controller: controller.passwordController,
+                    hastextcolor: true,
+                    hasIcon: true,
+                    prefixicon: MyImages.lockSVG,
+                    animatedLabel: true,
+                    needOutlineBorder: true,
+                    labelText: MyStrings.password,
+                    onChanged: (value) {
+                      print(value);
+                    },
+                    isShowSuffixIcon: true,
+                    isPassword: true,
+                    textInputType: TextInputType.text,
+                    inputAction: TextInputAction.done,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return MyStrings.fieldErrorMsg;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  const SizedBox(height: Dimensions.space2),
+                  const StrongPassWordCheakSection(),
+                  const SizedBox(height: Dimensions.space15),
+                  CustomTextField(
+                     controller: controller.cPasswordController,
+                    hastextcolor: true,
+                    hasIcon: true,
+                    prefixicon: MyImages.lockSVG,
+                    animatedLabel: true,
+                    needOutlineBorder: true,
+                    labelText: MyStrings.confirmPassword,
+                    onChanged: (value) {},
+                    isShowSuffixIcon: true,
+                    isPassword: true,
+                    textInputType: TextInputType.text,
+                    inputAction: TextInputAction.done,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return MyStrings.fieldErrorMsg;
+                      } else {
+                        return null;
+                      }
+                    },
+                  ),
+                  const SizedBox(height: Dimensions.space25),
+                  RoundedButton(
+                    text: MyStrings.signUp,
+                    press: () {
+                       if (formKey.currentState!.validate()) {
+                          controller.signUpUser();
+                        }
+                    },
+                  ),
+                  const SizedBox(height: Dimensions.space10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(MyStrings.alreadyAccount,
+                          overflow: TextOverflow.ellipsis,
+                          style: regularLarge.copyWith(
+                              color: MyColor.getAuthTextColor(),
+                              fontWeight: FontWeight.w500)),
+                       TextButton(
+                        onPressed: () {
+                          Get.toNamed(RouteHelper.loginScreen);
+                        },
+                        child: const CustomUndelineText(text: MyStrings.signIn),
+                      ),
+                      
+                    ],
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

@@ -8,8 +8,8 @@ import 'package:flutter_prime/view/screens/1vs1/play-with-friends-bottom-sheet/r
 import 'package:get/get.dart';
 
 import '../../../../../../../core/utils/style.dart';
-import '../../../../../../../data/controller/auth/signin/signin_controller.dart';
 import '../../../../../../../data/controller/battle/battle_room_controller.dart';
+import '../../../../../../../data/services/api_service.dart';
 import '../../../../../../components/bottom-sheet/custom_bottom_sheet.dart';
 import '../../../../../../components/buttons/rounded_loading_button.dart';
 
@@ -23,18 +23,20 @@ class JoinRoomBodySection extends StatefulWidget {
 class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
   late TextEditingController joinRoomCodeController = TextEditingController();
 
-  SignInController signInController = Get.find();
-  BattleRoomController battleRoomController = Get.put(BattleRoomController());
+  @override
+  void initState() {
+    super.initState();
+    Get.put(ApiClient(sharedPreferences: Get.find()));
+    Get.put(BattleRoomController(Get.find()));
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<BattleRoomController>(builder: (controller) {
+    return GetBuilder<BattleRoomController>(builder: (battleRoomController) {
       return Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-                top: Dimensions.space20,
-                left: Dimensions.space10,
-                right: Dimensions.space10),
+            padding: const EdgeInsets.only(top: Dimensions.space20, left: Dimensions.space10, right: Dimensions.space10),
             child: Container(
                 padding: const EdgeInsets.only(top: Dimensions.space8),
                 decoration: BoxDecoration(
@@ -46,18 +48,14 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(
-                          top: Dimensions.space12, left: Dimensions.space15),
+                      padding: const EdgeInsets.only(top: Dimensions.space12, left: Dimensions.space15),
                       child: Text(
                         MyStrings.entryRoomCode,
-                        style: regularMediumLarge.copyWith(
-                            color: MyColor.textColor,
-                            fontSize: Dimensions.space18),
+                        style: regularMediumLarge.copyWith(color: MyColor.textColor, fontSize: Dimensions.space18),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: Dimensions.space11),
+                      padding: const EdgeInsets.symmetric(vertical: Dimensions.space11),
                       child: OTPFieldWidget(
                         tController: joinRoomCodeController,
                         onChanged: (value) {},
@@ -65,26 +63,20 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                     ),
                     Obx(() {
                       print(battleRoomController.joinRoomState.value);
-                      if (battleRoomController.joinRoomState.value ==
-                          JoinRoomState.joined) {
+                      if (battleRoomController.joinRoomState.value == JoinRoomState.joined) {
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           // Navigator.pop(context);
                           CustomBottomSheet(
                             child: const JoinedLobbyBottomSheet(),
                           ).customBottomSheet(context);
 
-                          battleRoomController
-                              .toogleBattleJoinedState(JoinRoomState.none);
+                          battleRoomController.toogleBattleJoinedState(JoinRoomState.none);
                         });
                       }
                       return Padding(
                         padding: const EdgeInsets.only(
-                            left: Dimensions.space15,
-                            top: Dimensions.space10,
-                            bottom: Dimensions.space25,
-                            right: Dimensions.space15),
-                        child: battleRoomController.joinRoomState.value ==
-                                JoinRoomState.joining
+                            left: Dimensions.space15, top: Dimensions.space10, bottom: Dimensions.space25, right: Dimensions.space15),
+                        child: battleRoomController.joinRoomState.value == JoinRoomState.joining
                             ? RoundedLoadingBtn()
                             : RoundedButton(
                                 text: MyStrings.start,
@@ -92,23 +84,13 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                                   // Get.back();
                                   print(joinRoomCodeController.text);
 
-                                  var userData = signInController.user;
-                                  print(userData.value!.email);
-
                                   battleRoomController.joinRoom(
-                                      name: userData.value!.email ==
-                                              "arman.khan.dev@gmail.com"
-                                          ? "Arman Khan"
-                                          : userData.value!.email ==
-                                                  "arman.khan.dev2@gmail.com"
-                                              ? "Imran Khan"
-                                              : "Salman Khan",
+                                      name: battleRoomController.battleRepo.apiClient.getUserName(),
                                       roomCode: joinRoomCodeController.text,
                                       profileUrl: "",
-                                      uid: userData.value!.uid,
+                                      uid: battleRoomController.battleRepo.apiClient.getUserID(),
                                       currentCoin: "5000");
-                                  print(
-                                      "${battleRoomController.joinRoomState.value}");
+                                  print("${battleRoomController.joinRoomState.value}");
                                 },
                                 color: MyColor.primaryColor,
                                 textColor: MyColor.colorWhite,

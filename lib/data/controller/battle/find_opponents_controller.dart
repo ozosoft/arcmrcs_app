@@ -4,14 +4,15 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../auth/signin/signin_controller.dart';
+import '../../repo/battle/battle_repo.dart';
 import 'battle_room_controller.dart';
 
 class FindOpponentsController extends GetxController with GetTickerProviderStateMixin {
-  SignInController signInController;
+  BattleRepo battleRepo;
+
   BattleRoomController battleRoomController;
 
-  FindOpponentsController(this.signInController, this.battleRoomController);
+  FindOpponentsController(this.battleRoomController, this.battleRepo);
   late AnimationController _imageScrollController;
   AnimationController get imageScrollController => _imageScrollController;
   late Timer _startTimer;
@@ -74,17 +75,11 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
 
   //Search Random Users
   randomSearch() {
-    var userData = signInController.user;
-
     battleRoomController.randomSearchRoom(
       categoryId: "5",
-      name: userData.value!.email == "arman.khan.dev@gmail.com"
-          ? "Arman Khan"
-          : userData.value!.email == "arman.khan.dev2@gmail.com"
-              ? "Imran Khan"
-              : "Salman Khan",
+      name: battleRepo.apiClient.getUserName(),
       profileUrl: "",
-      uid: userData.value!.uid,
+      uid: battleRepo.apiClient.getUserID(),
     );
   }
 }

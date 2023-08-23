@@ -22,7 +22,7 @@ class _BattleQuizQuestionsScreenState extends State<BattleQuizQuestionsScreen> {
     return Scaffold(
         appBar: CustomCategoryAppBar(title: title.toString()),
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space50),
           child: BattleQuizBodySection(
             qustionsList: qustionsList,

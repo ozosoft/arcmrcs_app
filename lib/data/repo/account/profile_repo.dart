@@ -17,68 +17,54 @@ class ProfileRepo {
 
   ProfileRepo({required this.apiClient});
 
-  Future<bool> updateProfile(UserPostModel m, bool isProfile) async {
-    try {
+  Future<bool> updateProfile(UserPostModel m,bool isProfile) async {
+
+    try{
       apiClient.initToken();
 
-      String url =
-          '${UrlContainer.baseUrl}${isProfile ? UrlContainer.updateProfileEndPoint : UrlContainer.profileCompleteEndPoint}';
+      String url = '${UrlContainer.baseUrl}${isProfile?UrlContainer.updateProfileEndPoint:UrlContainer.profileCompleteEndPoint}';
 
-      var request = http.MultipartRequest('POST', Uri.parse(url));
-      Map<String, String> finalMap = {
+
+      var request=http.MultipartRequest('POST',Uri.parse(url));
+       Map<String,String>finalMap={
         'firstname': m.firstname,
         'lastname': m.lastName,
-        'address': m.address ?? '',
-        'zip': m.zip ?? '',
-        'state': m.state ?? "",
-        'city': m.city ?? '',
+        'address': m.address??'',
+        'zip': m.zip??'',
+        'state': m.state??"",
+        'city': m.city??'',
       };
 
-      request.headers.addAll(
-          <String, String>{'Authorization': 'Bearer ${apiClient.token}'});
-      if (m.image != null) {
-        request.files.add(http.MultipartFile(
-            'image', m.image!.readAsBytes().asStream(), m.image!.lengthSync(),
-            filename: m.image!.path.split('/').last));
+      request.headers.addAll(<String,String>{'Authorization' : 'Bearer ${apiClient.token}'});
+      if(m.image!=null){
+        request.files.add( http.MultipartFile('image', m.image!.readAsBytes().asStream(), m.image!.lengthSync(), filename: m.image!.path.split('/').last));
       }
       request.fields.addAll(finalMap);
 
       http.StreamedResponse response = await request.send();
 
-      String jsonResponse = await response.stream.bytesToString();
-      AuthorizationResponseModel model =
-          AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
+      String jsonResponse=await response.stream.bytesToString();
+      AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
 
-      if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        CustomSnackBar.success(
-            successList: model.message?.success ?? [MyStrings.success]);
+      if(model.status?.toLowerCase()==MyStrings.success.toLowerCase()){
+        CustomSnackBar.success(successList: model.message?.success??[MyStrings.success]);
         return true;
-      } else {
-        CustomSnackBar.error(
-            errorList: model.message?.error ?? [MyStrings.requestFail.tr]);
+      }else{
+        CustomSnackBar.error(errorList: model.message?.error??[MyStrings.requestFail.tr]);
         return false;
       }
-    } catch (e) {
+
+    }catch(e){
       return false;
     }
+
   }
 
-  Future<ProfileResponseModel> loadProfileInfo() async {
+  Future<ResponseModel> loadProfileInfo() async {
+
     String url = '${UrlContainer.baseUrl}${UrlContainer.getProfileEndPoint}';
+    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+    return responseModel;
 
-    ResponseModel responseModel =
-        await apiClient.request(url, Method.getMethod, null, passHeader: true);
-
-    if (responseModel.statusCode == 200) {
-      ProfileResponseModel model =
-          ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
-      if (model.status == 'success') {
-        return model;
-      } else {
-        return ProfileResponseModel();
-      }
-    } else {
-      return ProfileResponseModel();
-    }
   }
 }

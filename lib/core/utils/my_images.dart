@@ -33,7 +33,7 @@ class MyImages {
   static const String navBarhome = "assets/images/home.svg";
   static const String navBarSettings = "assets/images/nav_bar_settings.svg";
   static const String navBarprofile = "assets/images/nav_bar_profile.svg";
-
+  static const String userSearchLottie = "assets/animation/user_search.json";
   static const String user = "assets/images/user.svg";
   static const String changePassword = "assets/images/change_password.svg";
   static const String googleSvg = "assets/images/googleSVG.svg";
@@ -79,8 +79,6 @@ class MyImages {
   static const String wrongSvg = "assets/images/wrongFilled.svg";
   static const String totalReward = "assets/images/totalReward.svg";
   static const String mapSVG = "assets/images/Map.svg";
-  static const String world = "assets/images/world.png";
-  static const String userSearchLottie = "assets/animation/user_search.json";
   static const String copySVG = "assets/images/copy_svg.svg";
   static const String roomCreatorSVG = "assets/images/roomCreator.svg";
   static const String onBoard2SVG = "assets/images/intro2.svg";
@@ -155,6 +153,10 @@ class MyImages {
   static const String americanFlagSVG = "assets/images/americanFlag.svg";
   static const String arrowUpSVG = "assets/images/arrow-up_SVg.svg";
   static const String aarrowdownSVG = "assets/images/arrow-up-fill (2).svg";
+  static const String dailyquizSVG = "assets/images/daily_quiz.svg";
+  static const String funAndLearnSVG = "assets/images/fun&learrn.svg";
+  static const String guessTheWordSVG = "assets/images/guessTheWord.svg";
+  static const String examzoneSVG = "assets/images/examZone.svg";
 
   List<String> rightORWrong = [
     MyImages.whiteTikSVG,
@@ -203,6 +205,7 @@ class MyImages {
     MyImages.scienceKitSVG,
   ];
   final List notificatioImages = [eventSVG, joinRoomSVG, eventSVG];
+  final List playDiffrentGamesImages = [dailyquizSVG, funAndLearnSVG, guessTheWordSVG];
   final List flagImages = [germanflagSVG,americanFlagSVG,americanFlagSVG,germanflagSVG,americanFlagSVG];
   final List arrows = [arrowUpSVG,aarrowdownSVG,arrowUpSVG,aarrowdownSVG,arrowUpSVG];
 }
