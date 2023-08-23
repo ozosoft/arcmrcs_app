@@ -12,12 +12,19 @@ import '../../components/text-form-field/custom_drop_down_field.dart';
 import 'appbar-components/customSliverDelegate.dart';
 import 'play-with-friends-bottom-sheet/play_with_friends_bottom_sheet.dart';
 
-class OneVSOneBattleScreen extends StatelessWidget {
+class OneVSOneBattleScreen extends StatefulWidget {
+
   final bool isGroupBattle;
   const OneVSOneBattleScreen({super.key, this.isGroupBattle = false});
 
   @override
+  State<OneVSOneBattleScreen> createState() => _OneVSOneBattleScreenState();
+}
+
+class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
+  @override
   Widget build(BuildContext context) {
+    print(widget.isGroupBattle);
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -26,6 +33,7 @@ class OneVSOneBattleScreen extends StatelessWidget {
               pinned: true,
               floating: true,
               delegate: CustomSliverDelegates(
+                isGroupBattle: widget.isGroupBattle,
                 expandedHeight: Dimensions.space180,
               ),
             ),
@@ -47,6 +55,7 @@ class OneVSOneBattleScreen extends StatelessWidget {
                     RoundedButton(
                         text: isGroupBattle ? MyStrings.groupBattle : MyStrings.letsPlay,
                         press: () {
+
                           Get.toNamed(RouteHelper.findOpponentScreen);
                         },
                         textSize: Dimensions.space20,
@@ -58,7 +67,7 @@ class OneVSOneBattleScreen extends StatelessWidget {
                     const SizedBox(
                       height: Dimensions.space25,
                     ),
-                    RoundedButton(
+                     RoundedButton(
                         text: MyStrings.playWithFriend,
                         press: () {
                           CustomBottomSheet(child: const PlayWithFriendsBottomSheetWidget()).customBottomSheet(context);

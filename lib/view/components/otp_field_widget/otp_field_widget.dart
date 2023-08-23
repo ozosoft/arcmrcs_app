@@ -19,6 +19,7 @@ class OTPFieldWidget extends StatelessWidget {
     this.fromExam = false,
   }) : super(key: key);
 
+
   final ValueChanged<String>? onChanged;
 
   @override
@@ -52,7 +53,7 @@ class OTPFieldWidget extends StatelessWidget {
         cursorColor: MyColor.colorBlack,
         animationDuration: const Duration(milliseconds: 100),
         enableActiveFill: true,
-        keyboardType: TextInputType.number,
+        keyboardType:fromExam?TextInputType.name: TextInputType.number,
         beforeTextPaste: (text) {
           return true;
         },

@@ -34,12 +34,18 @@ class DashBoardController extends GetxController {
       contestlist.clear();
       quizlist.clear();
       contestlist.clear();
-      DashBoardModel dashBoard = DashBoardModel.fromJson(jsonDecode(model.responseJson));
+      DashBoardModel dashBoard =
+          DashBoardModel.fromJson(jsonDecode(model.responseJson));
 
-      if (dashBoard.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+        
+
+      if (dashBoard.status.toString().toLowerCase() ==
+          MyStrings.success.toLowerCase()) {
         rank = dashBoard.data?.rank?.userRank ?? "";
         coins = dashBoard.data?.user?.coins ?? "";
         score = dashBoard.data?.user?.score ?? "";
+
+       
 
         List<Category>? categories = dashBoard.data?.categories;
 
@@ -53,17 +59,18 @@ class DashBoardController extends GetxController {
           contestlist.addAll(contest);
         }
 
-        List<Exams>? exams = dashBoard.data?.exams;
+         List<Exams>? exams = dashBoard.data?.exams;
 
         if (exams != null && exams.isNotEmpty) {
           examZonelist.addAll(exams);
         }
 
-        List<QuizType>? quizType = dashBoard.data?.quizType;
+          List<QuizType>? quizType = dashBoard.data?.quizType;
 
         if (quizType != null && quizType.isNotEmpty) {
           quizlist.addAll(quizType);
         }
+
       } else {
         CustomSnackBar.error(errorList: [dashBoard.status ?? ""]);
       }

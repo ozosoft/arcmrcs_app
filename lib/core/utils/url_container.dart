@@ -7,6 +7,9 @@ class UrlContainer {
   static const String depositMethodUrl = 'deposit/methods';
   static const String depositInsertUrl = 'deposit/insert';
   static const String allcategoriesUrl = 'general-quiz/category/';
+
+  static const String funNLearnallCategoryUrl = 'fun/category-list';
+
   static const String subcategoriesUrl = 'general-quiz/subcategory/';
   static const String quizQuestionsUrl = 'general-quiz/level/question/';
 
@@ -14,6 +17,10 @@ class UrlContainer {
   static const String loginEndPoint = 'login';
   static const String logoutUrl = 'logout';
   static const String submitAnswerUrl = 'general-quiz/answer-submit';
+
+  static const String examsubmitAnswerUrl = 'exam/answer-submit';
+  static const String examZoneQuestionsUrl = 'exam/question-list';
+
   static const String forgetPasswordEndPoint = 'password/email';
   static const String passwordVerifyEndPoint = 'password/verify-code';
   static const String resetPasswordEndPoint = 'password/reset';
@@ -23,8 +30,10 @@ class UrlContainer {
   static const String playdiffrentImage = '$domainUrl/assets/admin/images/quiz/';
   static const String allCategoriesImage = '$domainUrl/assets/admin/images/category/';
   static const String subCategoriesImage = '$domainUrl/assets/admin/images/subcategory/';
-  static const String examZoneImage = '$domainUrl/assets/admin/images/exam/exam-list/';
-  
+
+  static const String examZoneImage = '$domainUrl/assets/admin/images/exam/';
+
+ 
   static const String otpVerify = 'otp-verify';
   static const String otpResend = 'otp-resend';
 

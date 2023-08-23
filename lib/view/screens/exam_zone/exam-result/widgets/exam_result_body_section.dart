@@ -1,29 +1,28 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
+import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/data/controller/quiz_questions/quiz_questions_controller.dart';
-import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
+import 'package:flutter_prime/core/utils/my_strings.dart';
+import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/data/controller/exam_zone/exam_zone_quiz_controller.dart';
+import 'package:flutter_prime/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:flutter_prime/view/components/divider/custom_dashed_divider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../../core/utils/my_color.dart';
-import '../../../../core/utils/my_strings.dart';
-import '../../../../core/utils/style.dart';
-import '../../../components/divider/custom_dashed_divider.dart';
 import 'bottom_section_buttons.dart';
 import 'player_profile_picture.dart';
 import 'rewards_section.dart';
 import 'right_and_wrong_ans_section.dart';
 
-class QuizResultBodySection extends StatefulWidget {
-  const QuizResultBodySection({super.key});
+class ExamResultBodySection extends StatefulWidget {
+  const ExamResultBodySection({super.key});
 
   @override
-  State<QuizResultBodySection> createState() => _QuizResultBodySectionState();
+  State<ExamResultBodySection> createState() => _ExamResultBodySectionState();
 }
 
-class _QuizResultBodySectionState extends State<QuizResultBodySection> {
+class _ExamResultBodySectionState extends State<ExamResultBodySection> {
   bool showQuestions = false;
   bool audienceVote = false;
   bool tapAnswer = false;
@@ -31,20 +30,17 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(QuizquestionsRepo(apiClient: Get.find()));
+    Get.put(ExamZoneRepo(apiClient: Get.find()));
 
-    QuizQuestionsController controller = Get.put(QuizQuestionsController(quizquestionsRepo: Get.find()));
+    ExamZoneQuizController controller = Get.put(ExamZoneQuizController(examZoneRepo: Get.find()));
 
     super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {});
   }
 
   @override
   Widget build(BuildContext context) {
-    
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<QuizQuestionsController>(
+    return GetBuilder<ExamZoneQuizController>(
       builder: (controller) => Stack(
         children: [
           SvgPicture.asset(MyImages.reviewBgImage),
@@ -55,7 +51,7 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Stack(
+                Stack(alignment: Alignment.center,
                   children: [
                     Container(
                       width: double.infinity,
@@ -67,17 +63,21 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
                     ),
                     Container(
                         width: double.infinity,
-                        padding: EdgeInsets.only(left: size.width * .3, top: Dimensions.space140),
+                        padding: EdgeInsets.only(left: size.width * .3, top: Dimensions.space100),
                         child: Text(
                           MyStrings.victory,
                           style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                         )),
+
                     Container(
                         width: double.infinity,
-                        padding: EdgeInsets.only(left: size.width * .22, top: Dimensions.space180),
-                        child: Text(
-                          controller.appreciation,
-                          style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
+                        padding: EdgeInsets.only( top: Dimensions.space180),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            controller.appreciation,
+                            style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
+                          ),
                         )),
                   ],
                 ),
@@ -86,10 +86,11 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
                   children: [
                     RightOrWrongAnsSection(correctAnswer: controller.correctAnswer, wrongAnswer: controller.wrongAnswer, totalQuestions: controller.totalQuestions),
                     const PlayerProfilePicture(),
-                    RewardsSection(
+                    ExamRewardsSection(
                       totalCoin: controller.totalCoin,
                       winningCoin: controller.winningCoin,
-                    )
+                    ),
+                    
                   ],
                 ),
                 const Padding(

@@ -15,7 +15,7 @@ class MyStrings {
   static const String selectPaymentMethod = "Select PaymentMethod";
 
   static const String appName = "Flutter Prime";
-
+  
   static const String reviewAnswer = "Review Answer";
   static const String selectCategory = "Select Category";
   static const String entryCoinsForBattele = "Entry Coins For Battle";
@@ -59,10 +59,12 @@ class MyStrings {
 
   static const String kyc = 'KYC';
   static const String isRequired = 'is required';
+
   static const String viewAllRules = "View all rules";
   static const String examRules = "Exam Rules";
   static const String examKey = "Enter the exam key";
   static const String enterExam = "Enter In Exam";
+
   static const String chooseFile = 'Choose File';
   static const String chooseAvatar = 'Choose Avatar';
   static const String kycUnderReviewMsg = 'Your KYC is under review';
@@ -203,6 +205,7 @@ class MyStrings {
   static const String fifteenPercent = "15%";
   static const String quizQuestions = "The Great Wall is a world-famous historical landmark located in which country?";
   static const String quizQuestions2 = "The Great Wall is a world-famous ?";
+
   static const String levels = "6 Level";
   static const String level1 = "Level 01";
   static const String allCategory = "All categories";
@@ -456,6 +459,7 @@ class MyStrings {
   static const String dailyQuiz = "Daily Quiz";
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
+
   static const String dailynewquiz = "Daily new quiz";
   static const String gamequizwithfun = "Game quiz with fun";
   static const String rules1 = "I Will not copy and give this exam with honesty";
@@ -464,6 +468,7 @@ class MyStrings {
   static const String funvocabulary = "Fun vocabulary";
   static const String whoIsSmartest = "Who is the smartest in your group of friends and family";
   static const String pickTheCorrectAnswer = "Pick the correct answer at the final question to win the prize money";
+
   static const String dontHaveAnaccount = "Don’t have an account?";
   static const String onboardDescription = "There are hundreds of different catagories to choose from";
 
@@ -559,6 +564,12 @@ class MyStrings {
     {'title': guessTheWord, 'sub_title': funvocabulary},
   ];
 
+ final List<Map<String, String>> playDifrentGames = [
+    {'title': dailyQuiz, 'sub_title': dailynewquiz},
+    {'title': funAndLearn, 'sub_title': gamequizwithfun},
+    {'title': guessTheWord, 'sub_title': funvocabulary},
+    ];
+
   final List<Map<String, String>> coinHistoryies = [
     {'title': wonWorldQuizContest, 'date': twelveMay2023, 'reward': twoFiftyUSD},
     {'title': worldQuiz2023, 'date': twenrtyEightMay2023, 'reward': hundredAndTwentyUSD},
@@ -572,4 +583,5 @@ class MyStrings {
   final List<String> questionsList = [quizQuestions, quizQuestions2, questions2, questions, rules1, rules2, rules3];
   final List<String> rules = [rules1, rules2, rules3];
   final List<String> settingsList = [sound, vibration, themes];
+
 }
