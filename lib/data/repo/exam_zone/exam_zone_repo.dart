@@ -14,4 +14,27 @@ class ExamZoneRepo {
 
     return model;
   }
+
+   Future<ResponseModel> getExamQuestionList(String quizInfo_ID,exam_key) async {
+
+    final map = {'quizInfo_id': quizInfo_ID,'exam_key': exam_key};
+
+    String url = '${UrlContainer.baseUrl}${UrlContainer.examZoneQuestionsUrl}';
+    ResponseModel responseModel = await apiClient.request(url, Method.postMethod, map, passHeader: true);
+
+    return responseModel;
+  }
+
+
+   Future<ResponseModel> submitAnswer(Map<String, dynamic> map) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.examsubmitAnswerUrl}';
+    print(url.toString());
+
+    ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
+
+    print(model.responseJson.toLowerCase());
+    print(model.statusCode);
+
+    return model;
+  }
 }

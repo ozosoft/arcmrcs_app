@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
@@ -29,10 +28,8 @@ class _TopCategorySectionState extends State<TopCategorySection> {
     Get.put(DashBoardController(dashRepo: Get.find()));
     Get.put(SubCategoriesRepo(apiClient: Get.find()));
     Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
-    SubCategoriesController controllers =
-        Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
-    DashBoardController controller =
-        Get.put(DashBoardController(dashRepo: Get.find()));
+    SubCategoriesController controllers = Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
+    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
 
     super.initState();
 
@@ -84,9 +81,7 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                               },
                               child: Text(
                                 MyStrings.viewAll,
-                                style: semiBoldLarge.copyWith(
-                                    color: MyColor.colorlighterGrey,
-                                    fontSize: Dimensions.space15),
+                                style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
                               )),
                         ],
                       ),
@@ -94,9 +89,7 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                   ),
                   GetBuilder<SubCategoriesController>(
                     builder: (controllers) => GridView.builder(
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 3, childAspectRatio: .8),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: .8),
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.categorylist.length,
@@ -105,26 +98,17 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                             onTap: () {
                               Get.toNamed(
                                 RouteHelper.subCategories,
-                                arguments: [
-                                  controller.categorylist[index].name
-                                      .toString(),
-                                  controller.categorylist[index].id.toString()
-                                ],
+                                arguments: [controller.categorylist[index].name.toString(), controller.categorylist[index].id.toString()],
                               );
                               controllers.changeExpandIndex(index);
-                              print("this is sub categ+++++++++++++++++++++++++++"+
-                                  controller.categorylist[index].id.toString());
+                              // print("this is sub categ+++++++++++++++++++++++++++"+
+                              //     controller.categorylist[index].id.toString());
                             },
                             child: CustomTopCategoryCard(
                               index: index,
-                              title: controller.categorylist[index].name
-                                  .toString(),
-                              questionsQuantaty: controller
-                                  .categorylist[index].questionsCount
-                                  .toString(),
-                              image: UrlContainer.dashBoardCategoryImage +
-                                  controller.categorylist[index].image
-                                      .toString(),
+                              title: controller.categorylist[index].name.toString(),
+                              questionsQuantaty: controller.categorylist[index].questionsCount.toString(),
+                              image: UrlContainer.dashBoardCategoryImage + controller.categorylist[index].image.toString(),
                             ),
                           );
                         }),
