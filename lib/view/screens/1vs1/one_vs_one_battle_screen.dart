@@ -8,6 +8,7 @@ import 'package:flutter_prime/data/repo/battle/battle_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/divider/or_divider.dart';
+import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 import '../../../data/controller/battle/one_vs_multi_controller.dart';
 import '../../../data/model/battle/battle_category_list.dart';
@@ -88,10 +89,12 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                           RoundedButton(
                               text: widget.isGroupBattle ? MyStrings.groupBattle : MyStrings.letsPlay,
                               press: () async {
-                                await controller.getRandomBattleQuestions().then((value) {
-                                  print(controller.questionsList.length);
-                                  Get.toNamed(RouteHelper.findOpponentScreen, arguments: [controller.questionsList]); //Send Question List and ID to next page
-                                });
+                                if(controller.slectedCategoryID.value == 0){
+                                  CustomSnackBar.error(errorList: [MyStrings.selectACategoryMsg]);
+                                }else{
+                                   Get.toNamed(RouteHelper.findOpponentScreen, arguments: [controller.slectedCategoryID.value]); //Send Question List and ID to next page
+                                }
+                               
                               },
                               textSize: Dimensions.space20,
                               cornerRadius: Dimensions.space10),

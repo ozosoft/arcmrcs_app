@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/authorization/authorization_response_model.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';

@@ -8,6 +8,7 @@ class MyStrings {
   static const String withdrawConfirm = "Withdraw Confirm";
   static const String authorizationMethod = "Authorization Method";
   static const String selectAuthModeMsg = "Please select an authorization mode";
+  static const String selectACategoryMsg = "Please Select A Category First";
   static const String fileDownloadAt = "File download at";
   static const String errorDownloadingFile = "Error downloading file";
   static const String downloading = "Downloading";

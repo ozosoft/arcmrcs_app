@@ -21,7 +21,8 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   get countdownSeconds => _countdownSeconds.value;
   Timer get startTimer => _startTimer;
 
-  var getQuestionList = Get.arguments[0] as List<Question>;
+  var getQuestionList = <Question>[];
+  var getCategoryID = Get.arguments[0] as int;
 
   @override
   void onInit() {
@@ -30,7 +31,7 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
     runImageScrolling(startOrStop: false);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      randomSearch(getQuestionList);
+      randomSearch(getQuestionList, getCategoryID: getCategoryID);
     });
     // Listen for changes in user found state
     ever<UserFoundState>(
@@ -78,7 +79,7 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   }
 
   //Search Random Users
-  randomSearch(List<Question> questionList) {
-    battleRoomController.randomSearchRoom(categoryId: "5", name: battleRepo.apiClient.getUserName(), profileUrl: "", uid: battleRepo.apiClient.getUserID(), questionList: questionList);
+  randomSearch(List<Question> questionList, {int? getCategoryID}) {
+    battleRoomController.randomSearchRoom(categoryId: getCategoryID.toString(), name: battleRepo.apiClient.getUserName(), profileUrl: "", uid: battleRepo.apiClient.getUserID(), questionList: questionList);
   }
 }

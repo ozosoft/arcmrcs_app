@@ -74,8 +74,7 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                         });
                       }
                       return Padding(
-                        padding: const EdgeInsets.only(
-                            left: Dimensions.space15, top: Dimensions.space10, bottom: Dimensions.space25, right: Dimensions.space15),
+                        padding: const EdgeInsets.only(left: Dimensions.space15, top: Dimensions.space10, bottom: Dimensions.space25, right: Dimensions.space15),
                         child: battleRoomController.joinRoomState.value == JoinRoomState.joining
                             ? RoundedLoadingBtn()
                             : RoundedButton(
@@ -84,12 +83,7 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                                   // Get.back();
                                   print(joinRoomCodeController.text);
 
-                                  battleRoomController.joinRoom(
-                                      name: battleRoomController.battleRepo.apiClient.getUserName(),
-                                      roomCode: joinRoomCodeController.text,
-                                      profileUrl: "",
-                                      uid: battleRoomController.battleRepo.apiClient.getUserID(),
-                                      currentCoin: "5000");
+                                  battleRoomController.joinRoom(name: battleRoomController.battleRepo.apiClient.getUserName(), roomCode: joinRoomCodeController.text, profileUrl: "", uid: battleRoomController.battleRepo.apiClient.getUserID(), currentCoin: "5000");
                                   print("${battleRoomController.joinRoomState.value}");
                                 },
                                 color: MyColor.primaryColor,

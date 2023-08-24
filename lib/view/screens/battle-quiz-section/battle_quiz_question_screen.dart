@@ -3,7 +3,7 @@ import 'package:flutter_prime/view/screens/battle-quiz-section/quiz-screen-widge
 import 'package:get/get.dart';
 
 import '../../../core/utils/dimensions.dart';
-import '../../../data/model/quiz_questions_model/quiz_questions_model.dart';
+import '../../../data/model/battle/battle_question_list.dart';
 import '../../components/app-bar/custom_category_appBar.dart';
 
 class BattleQuizQuestionsScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class BattleQuizQuestionsScreen extends StatefulWidget {
 
 class _BattleQuizQuestionsScreenState extends State<BattleQuizQuestionsScreen> {
   final title = Get.arguments[0] as String;
-  final List<Question> qustionsList = Get.arguments[1] as List<Question>;
+  final List<BattleQuestion> qustionsList = Get.arguments[1] as List<BattleQuestion>;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

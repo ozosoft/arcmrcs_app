@@ -11,14 +11,16 @@ import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:get/get.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../../../core/route/route.dart';
-import '../../../../data/model/quiz_questions_model/quiz_questions_model.dart';
+import '../../../../core/utils/url_container.dart';
+import '../../../../data/model/battle/battle_question_list.dart';
 import '../../../../data/services/api_service.dart';
 import '../../../components/alert-dialog/custom_alert_dialog.dart';
 
+import '../../../components/image_widget/my_image_widget.dart';
 import 'battle_quiz_option_button.dart';
 
 class BattleQuizBodySection extends StatefulWidget {
-  final List<Question> qustionsList;
+  final List<BattleQuestion> qustionsList;
   const BattleQuizBodySection({super.key, required this.qustionsList});
 
   @override
@@ -120,10 +122,10 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
       }
       return Obx(() {
         //Get Current Question Data
-        Question currentQuestion = quizController.getCurrentQuestion();
+        BattleQuestion currentQuestion = quizController.getCurrentQuestion();
 
         //Set Animation
-        quizController.updateAnimatedListKeyIfNeeded(currentQuestion.id!);
+        quizController.updateAnimatedListKeyIfNeeded(currentQuestion.id);
 
         return WillPopScope(
           onWillPop: () async {
@@ -230,47 +232,48 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                                     Container(
                                       width: double.infinity,
                                       padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                                      child: Image.network(
-                                        currentQuestion.image,
-                                        fit: BoxFit.cover,
+                                      child: MyImageWidget(
+                                        boxFit: BoxFit.contain,
+                                        height: Get.width / 2,
+                                        imageUrl: "${UrlContainer.battleQuestionImagePath}/${currentQuestion.image}",
                                       ),
                                     ),
                                   ],
                                   Container(
                                       padding: const EdgeInsets.only(top: Dimensions.space20),
                                       child: Text(
-                                        currentQuestion.question!,
+                                        currentQuestion.question,
                                         style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500),
                                         textAlign: TextAlign.center,
                                       )),
                                   const SizedBox(height: 20),
 
                                   Column(
-                                    children: currentQuestion.options!.asMap().entries.map<Widget>((entry) {
+                                    children: currentQuestion.options.asMap().entries.map<Widget>((entry) {
                                       int index = entry.key;
-                                      Option option = entry.value;
+                                      BattleQuestionOption option = entry.value;
                                       String optionLetter = String.fromCharCode('A'.codeUnitAt(0) + index);
 
                                       return OptionButton(
                                         letter: optionLetter,
                                         option: option,
                                         onTap: () async {
-                                          if (!quizController.isOptionSelectedForQuestion(currentQuestion.id!, option) && !quizController.hasSubmittedAnswerForQuestion(currentQuestion.id!)) {
+                                          if (!quizController.isOptionSelectedForQuestion(currentQuestion.id, option) && !quizController.hasSubmittedAnswerForQuestion(currentQuestion.id)) {
                                             print("From Ans Save ");
                                             await quizController.battleRoomController.saveAnswer(
                                               quizController.battleRepo.apiClient.getUserID(),
                                               {
                                                 "qid": option.questionId,
-                                                "ans": option.isAnswer,
+                                                "ans": option.id,
                                               },
                                               option.isAnswer == "1",
                                               10,
                                               questionsList: quizController.questionsList,
                                             );
-                                            quizController.selectOptionForQuestion(currentQuestion.id!, option);
+                                            quizController.selectOptionForQuestion(currentQuestion.id, option);
                                           }
                                         },
-                                        isSelected: quizController.isOptionSelectedForQuestion(currentQuestion.id!, option),
+                                        isSelected: quizController.isOptionSelectedForQuestion(currentQuestion.id, option),
                                       );
                                     }).toList(),
                                   ),
@@ -318,9 +321,9 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                                       ),
                                       ElevatedButton(
                                         onPressed: () {
-                                          setState(() {});
+                                         quizController.finishBattleAndSubmitAnswer();
                                         },
-                                        child: const Text('Clear Ans'),
+                                        child: const Text('Submit Ans To API'),
                                       ),
                                     ],
                                   ),
@@ -354,6 +357,8 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
                       } else {
                         quizController.showLeftPopup(isUpdate: true);
                         print("Show Result page");
+
+                        // quizController.finishbattleExamAndSubmitAnswer();
                         Get.toNamed(RouteHelper.battleQuizResultScreen);
                       }
                     },

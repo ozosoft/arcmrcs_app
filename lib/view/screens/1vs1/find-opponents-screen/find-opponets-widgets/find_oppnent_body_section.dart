@@ -130,7 +130,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                   ),
                 ),
                 Obx(() {
-                  var opUserData = controller.battleRoomController.getOpponentUserDetails(controller.battleRepo.apiClient.getUserID());
+                  var opUserData = controller.battleRoomController.getOpponentUserDetailsOrMy(controller.battleRepo.apiClient.getUserID());
 
                   if (controller.battleRoomController.userFoundState.value == UserFoundState.found) {
                     controller.imageScrollController.stop();

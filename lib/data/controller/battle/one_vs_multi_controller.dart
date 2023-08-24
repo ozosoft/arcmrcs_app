@@ -25,11 +25,11 @@ class OneVsOneController extends GetxController {
   }
 
   // Get battle Questions
-  Future<void> getRandomBattleQuestions() async {
+  Future<void> getRandomBattleQuestions(int id, int user1ID, int user2ID) async {
     isLoadingQuestions.value = true;
     update();
 
-    final model = await battleRepo.getBatttleQuestion(87);
+    final model = await battleRepo.getBatttleQuestion(id, user1ID, user2ID);
 
     if (model.statusCode == 200) {
       questionsList.clear();

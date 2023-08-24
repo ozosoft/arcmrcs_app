@@ -13,12 +13,11 @@ import '../../../core/helper/battle_room_helper.dart';
 import '../../../core/utils/my_strings.dart';
 import '../../../view/components/snack_bar/show_custom_snackbar.dart';
 import '../../model/battle/battleRoom.dart';
+import '../../model/battle/battle_question_list.dart';
 import '../../model/global/response_model/response_model.dart';
-import '../../model/quiz/quiz_list_model.dart';
 import '../../model/submit_answer/submit_answer_model.dart';
 import '../../repo/battle/battle_repo.dart';
 import 'battle_room_controller.dart';
-import '../../model/quiz_questions_model/quiz_questions_model.dart';
 
 class BattleRoomQuizController extends GetxController with GetTickerProviderStateMixin {
   BattleRepo battleRepo;
@@ -28,12 +27,12 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
   StreamSubscription<DocumentSnapshot>? battleRoomStreamSubscription;
   final int duration = 60;
   final CountDownController countDownController = CountDownController();
-  final RxList<Question> questionsList = <Question>[].obs;
+  final RxList<BattleQuestion> questionsList = <BattleQuestion>[].obs;
   late AnimationController _listAnimationController;
   AnimationController get listAnimationController => _listAnimationController;
 
   // Map to track selected options for each question
-  final Map<int, Option?> selectedOptions = <int, Option?>{};
+  final Map<int, BattleQuestionOption?> selectedOptions = <int, BattleQuestionOption?>{};
 
   int currentQuestionIndex = 0;
   final opponentLeftTheGame = false.obs;
@@ -60,14 +59,14 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     update();
   }
 
-  void selectOptionForQuestion(int questionId, Option option) {
+  void selectOptionForQuestion(int questionId, BattleQuestionOption option) {
     if (!selectedOptions.containsKey(questionId)) {
       selectedOptions[questionId] = option;
     }
     update();
   }
 
-  bool isOptionSelectedForQuestion(int questionId, Option option) {
+  bool isOptionSelectedForQuestion(int questionId, BattleQuestionOption option) {
     return selectedOptions.containsKey(questionId) && selectedOptions[questionId] == option;
   }
 
@@ -96,13 +95,13 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     update();
   }
 
-  Question getCurrentQuestion() {
+  BattleQuestion getCurrentQuestion() {
     if (currentQuestionIndex >= 0 && currentQuestionIndex < questionsList.length) {
       return questionsList[currentQuestionIndex];
     }
 
     // Return a placeholder question if index is out of bounds
-    return Question(
+    return BattleQuestion(
       id: -1,
       question: 'Question not found',
       image: null,
@@ -110,7 +109,6 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       status: '',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
-      pivot: Pivot(quizInfoId: '', questionId: ''),
       options: [],
     );
   }
@@ -204,28 +202,43 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     }
   }
 
-  submitAnswer() async {
+//Submit Answer Data to server
+  finishBattleAndSubmitAnswer() async {
+    var ownData = battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true); // Current User Data
+    var opUserData = battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID()); // Opponent Data
+
     Map<String, dynamic> params = {};
 
+    params['opponentId'] = opUserData.uid.toString();
+    params['coin_count'] = 10.toString(); // coin_count value
+
+    // Loop through the questionsList
     for (int i = 0; i < questionsList.length; i++) {
-
       String quizeId = questionsList[i].id.toString();
-      
-      String selectedOptionId = questionsList[i].selectedOptionId.toString();
+      // Add question_id to params
+      params['question_id[$i]'] = quizeId.toString();
+      // Find the answer object with the matching qid for ownData and opUserData
+      var ownAnswer = ownData.answers.firstWhere((answer) => answer['qid'] == quizeId, orElse: () => null);
+      var opUserAnswer = opUserData.answers.firstWhere((answer) => answer['qid'] == quizeId, orElse: () => null);
 
-      params['question_id[$i]'] = quizeId;
-     
-      params['option_$quizeId'] = selectedOptionId;
-    
+      if (ownAnswer != null) {
+        int selectedOptionIdOwn = ownAnswer['ans']; //'ans' holds the selected option index
+        params['my_option_$quizeId'] = selectedOptionIdOwn.toString();
+      }
+
+      if (opUserAnswer != null) {
+        int selectedOptionIdOP = opUserAnswer['ans']; //  'ans' holds the selected option index
+        params['opponent_option_$quizeId'] = selectedOptionIdOP.toString();
+      }
     }
-    print(params['option_']);
 
-    params['quizInfo_id'] = 87;
+    print(params);
 
-    ResponseModel submitModel = await battleRepo.submitAnswer(params);
-
+    ResponseModel submitModel = await battleRepo.finishBattleAndSubmitAnswer(params);
+    print(submitModel.statusCode);
     if (submitModel.statusCode == 200) {
-      SubmitAnswerModel model = SubmitAnswerModel.fromJson(jsonDecode(submitModel.responseJson));
+      SubmitAnswerModel model = submitAnswerModelFromJson(submitModel.responseJson);
+
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
         // appreciation = model.message!.success.toString();
         // totalQuestions = model.data!.totalQuestion.toString();
@@ -243,10 +256,8 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     } else {
       CustomSnackBar.error(errorList: [submitModel.message]);
     }
-    print("this is " + submitModel.message);
-    print("this is " + params.toString());
 
-    update();
+    // update();
   }
 
   @override

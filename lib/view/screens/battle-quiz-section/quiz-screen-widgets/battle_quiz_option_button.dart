@@ -5,10 +5,11 @@ import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/my_color.dart';
 import '../../../../core/utils/my_images.dart';
 import '../../../../core/utils/style.dart';
-import '../../../../data/model/quiz_questions_model/quiz_questions_model.dart';
+import '../../../../data/model/battle/battle_question_list.dart';
+
 
 class OptionButton extends StatelessWidget {
-  final Option option;
+  final BattleQuestionOption option;
   final VoidCallback onTap;
   final bool isSelected;
   final String letter;
