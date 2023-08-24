@@ -84,8 +84,8 @@ class Category {
         status: json["status"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-        subcategoriesCount: json["subcategories_count"],
-        quizInfosCount: json["quiz_infos_count"],
+        subcategoriesCount: json["subcategories_count"].toString(),
+        quizInfosCount: json["quiz_infos_count"].toString(),
     );
 
     Map<String, dynamic> toJson() => {

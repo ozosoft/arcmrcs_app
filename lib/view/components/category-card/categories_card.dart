@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/expanded_widget/expanded_widget.dart';
+import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/widgets/expanded_section.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
@@ -9,11 +10,11 @@ import '../../../core/utils/style.dart';
 
 class CategoriesCard extends StatefulWidget {
   final String title, questions, image, levels, minute, marks, date, subCategoryId;
-  final bool expansionVisible, fromViewAll, fromBookmark, fromExam;
+  final bool expansionVisible, fromViewAll, fromBookmark, fromExam,fromFunNlearn;
   final bool isExpand;
   final int index;
 
-  const CategoriesCard({super.key, required this.title, this.questions = "", this.image = "", this.subCategoryId = "", this.expansionVisible = false, this.fromBookmark = false, required this.fromViewAll, this.levels = "1", this.fromExam = false, this.minute = "", this.marks = "", this.isExpand = false, required this.index, this.date = ""});
+  const CategoriesCard({super.key, required this.title, this.questions = "", this.image = "", this.subCategoryId = "", this.expansionVisible = false,this.fromFunNlearn = false, this.fromBookmark = false, required this.fromViewAll, this.levels = "1", this.fromExam = false, this.minute = "", this.marks = "", this.isExpand = false, required this.index, this.date = ""});
   @override
   State<CategoriesCard> createState() => _CategoriesCardState();
 }
@@ -115,7 +116,9 @@ class _CategoriesCardState extends State<CategoriesCard> {
                       isExpand: widget.isExpand,
                       title: widget.title,
                     )
-                  : const SizedBox(),
+                  : widget.fromFunNlearn?FunNLearnExpandedSections( categoryindex: widget.index,
+                      isExpand: widget.isExpand,
+                      title: widget.title,):SizedBox(),
             ],
           )),
     );

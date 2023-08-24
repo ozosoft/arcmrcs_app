@@ -15,4 +15,23 @@ class FunNLearnRepo {
 
     return model;
   }
+   
+
+  Future<ResponseModel> getFunAndLearnSubCategories(String subcategoryId) async {
+    String url = "${UrlContainer.baseUrl}${UrlContainer.funNLearnsubCategoryUrl+subcategoryId}";
+    print('all categories=====>: ${subcategoryId}');
+    ResponseModel model =
+        await apiClient.request(url, Method.getMethod, null, passHeader: true);
+
+    return model;
+  }
+
+  Future<ResponseModel> getFunAndLearnDescription(String subcategoryId) async {
+    String url = "${UrlContainer.baseUrl}${UrlContainer.funNLearnDescriptionUrl+subcategoryId}";
+    print('all categories=====>: ${subcategoryId}');
+    ResponseModel model =
+        await apiClient.request(url, Method.getMethod, null, passHeader: true);
+
+    return model;
+  }
 }

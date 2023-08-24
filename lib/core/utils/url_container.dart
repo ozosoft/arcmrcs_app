@@ -8,7 +8,10 @@ class UrlContainer {
   static const String depositInsertUrl = 'deposit/insert';
   static const String allcategoriesUrl = 'general-quiz/category/';
   static const String funNLearnallCategoryUrl = 'fun/category-list';
+  static const String funNLearnsubCategoryUrl = 'fun/subcategory-list/';
+  static const String funNLearnDescriptionUrl = 'fun/fun-list/';
   static const String subcategoriesUrl = 'general-quiz/subcategory/';
+  static const String funNLearnsubcategoriesUrl = 'general-quiz/subcategory/';
   static const String quizQuestionsUrl = 'general-quiz/level/question/';
 
   static const String registrationEndPoint = 'register';
@@ -27,6 +30,7 @@ class UrlContainer {
   static const String allCategoriesImage = '$domainUrl/assets/admin/images/category/';
   static const String subCategoriesImage = '$domainUrl/assets/admin/images/subcategory/';
   static const String examZoneImage = '$domainUrl/assets/admin/images/exam/';
+  static const String funNLearnsubCategoryImage = '$domainUrl/assets/admin/images/category/';
   
   static const String otpVerify = 'otp-verify';
   static const String otpResend = 'otp-resend';

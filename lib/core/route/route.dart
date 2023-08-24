@@ -10,6 +10,9 @@ import 'package:flutter_prime/view/screens/exam_zone/exam-result/exam_result_scr
 import 'package:flutter_prime/view/screens/exam_zone/review-answer/review_answer-screen.dart';
 import 'package:flutter_prime/view/screens/exam_zone/widgets/exam_zone_quiz_screen.dart';
 import 'package:flutter_prime/view/screens/notification/notification_screen.dart';
+import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_description_screen.dart';
+import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_screen.dart';
+import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_sub_categories.dart';
 import 'package:flutter_prime/view/screens/profile/profile-edit/Profile_edit_screen.dart';
 import 'package:flutter_prime/view/screens/profile/profile_screen.dart';
 import 'package:flutter_prime/view/screens/quiz-questions/quiz_question_screen.dart';
@@ -69,6 +72,9 @@ class RouteHelper {
   static const String examZoneQuestionScreen = '/exam_zone_questions_screen';
   static const String examZoneResultScreen = '/exam_zone_result_screen';
   static const String examZoneReviewAnswerScreen = '/exam_zone_review_answer_screen';
+  static const String funNlearnScreenScreen = '/fun_n_learn_screen';
+  static const String funNlearnSubCategoryScreenScreen = '/fun_n_learn_sub_category_screen';
+  static const String funNlearndescriptionScreenScreen = '/fun_n_learn_description_screen';
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -102,5 +108,8 @@ class RouteHelper {
     GetPage(name: examZoneQuestionScreen, page: () => const Exam_zone_quiz_screen()),
     GetPage(name: examZoneResultScreen, page: () => const ExamResultScreen()),
     GetPage(name: examZoneReviewAnswerScreen, page: () => const ExamReviewAnswerScreen()),
+    GetPage(name: funNlearnScreenScreen, page: () => const FunNLearnScreen()),
+    GetPage(name: funNlearnSubCategoryScreenScreen, page: () => const FunNLearnSubCategoriesCardScreen(title: '',)),
+    GetPage(name: funNlearndescriptionScreenScreen, page: () => const FunNlearnDescreiptionScreen()),
   ];
 }
