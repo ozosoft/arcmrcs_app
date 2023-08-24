@@ -119,12 +119,12 @@ class _BattleQuizBodySectionState extends State<BattleQuizBodySection> {
         });
       }
       return Obx(() {
+        //Get Current Question Data
         Question currentQuestion = quizController.getCurrentQuestion();
-        int currentQuestionId = currentQuestion.id!;
 
-        // quizController.showLeftPopup(isUpdate: false);
+        //Set Animation
+        quizController.updateAnimatedListKeyIfNeeded(currentQuestion.id!);
 
-        quizController.updateAnimatedListKeyIfNeeded(currentQuestionId);
         return WillPopScope(
           onWillPop: () async {
             CustomAlertDialog(

@@ -10,8 +10,10 @@ import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/divider/or_divider.dart';
 import 'package:get/get.dart';
 import '../../../data/controller/battle/one_vs_multi_controller.dart';
+import '../../../data/model/battle/battle_category_list.dart';
 import '../../components/bottom-sheet/custom_bottom_sheet.dart';
 import '../../components/text-form-field/custom_drop_down_field.dart';
+import '../../components/text-form-field/custom_drop_down_text_field.dart';
 import 'appbar-components/customSliverDelegate.dart';
 import 'play-with-friends-bottom-sheet/play_with_friends_bottom_sheet.dart';
 
@@ -26,10 +28,9 @@ class OneVSOneBattleScreen extends StatefulWidget {
 class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
   @override
   Widget build(BuildContext context) {
-    print(widget.isGroupBattle);
     return GetBuilder<OneVsOneController>(
         init: OneVsOneController(Get.put(BattleRepo(apiClient: Get.put(ApiClient(sharedPreferences: Get.find()))))),
-        initState: (_) {},
+        initState: (_) async {},
         builder: (controller) {
           return Scaffold(
             body: SafeArea(
@@ -54,7 +55,33 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                             MyStrings.selectCategory,
                             style: semiBoldExtraLarge,
                           ),
-                          const CustomDropDownTextField3(selectedValue: null, onChanged: null, items: null, hintText: MyStrings.scienceAndTech),
+                          const SizedBox(
+                            height: Dimensions.space20,
+                          ),
+                          CustomDropDownTextField3(
+                            fillColor: MyColor.colorWhite,
+                            focusColor: MyColor.colorWhite,
+                            dropDownColor: MyColor.colorWhite,
+                            needLabel: false,
+                            selectedValue: null,
+                            onChanged: (value) {
+                              var valueData = value as BattleCategory;
+
+                              controller.slectACategory(valueData.id);
+                            },
+                            items: controller.categoryList.map<DropdownMenuItem<BattleCategory>>((BattleCategory value) {
+                              return DropdownMenuItem<BattleCategory>(
+                                value: value,
+                                child: Text(
+                                  value.name,
+                                  style: const TextStyle(
+                                    fontSize: Dimensions.fontDefault,
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                            hintText: 'Select a country', // Hint text for the drop-down
+                          ),
                           const SizedBox(
                             height: Dimensions.space40,
                           ),

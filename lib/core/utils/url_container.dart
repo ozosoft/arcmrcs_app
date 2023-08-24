@@ -72,4 +72,10 @@ class UrlContainer {
   static const String languageUrl = 'language/';
 
   static const String test1 = 'general-setting';
+
+   //Battle Urls
+ 
+    static const String battleCategoryLIst = 'single-battle';
+    static const String battleQuestionList = 'single-battle/question-list';
+    static const String battleAnswerSubmit = 'single-battle/answer-submit';
 }

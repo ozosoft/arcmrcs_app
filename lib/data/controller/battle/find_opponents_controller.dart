@@ -17,9 +17,10 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   late AnimationController _imageScrollController;
   AnimationController get imageScrollController => _imageScrollController;
   late Timer _startTimer;
-  final _countdownSeconds = 5.obs;
+  final _countdownSeconds = 60.obs;
   get countdownSeconds => _countdownSeconds.value;
   Timer get startTimer => _startTimer;
+
   var getQuestionList = Get.arguments[0] as List<Question>;
 
   @override
@@ -78,12 +79,6 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
 
   //Search Random Users
   randomSearch(List<Question> questionList) {
-    battleRoomController.randomSearchRoom(
-      categoryId: "5",
-      name: battleRepo.apiClient.getUserName(),
-      profileUrl: "",
-      uid: battleRepo.apiClient.getUserID(),
-      questionList: questionList
-    );
+    battleRoomController.randomSearchRoom(categoryId: "5", name: battleRepo.apiClient.getUserName(), profileUrl: "", uid: battleRepo.apiClient.getUserID(), questionList: questionList);
   }
 }

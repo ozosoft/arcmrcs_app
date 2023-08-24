@@ -7,8 +7,10 @@ class BattleRepo {
   ApiClient apiClient;
   BattleRepo({required this.apiClient});
 
-  Future<ResponseModel> getData() async {
-    String url = "${UrlContainer.baseUrl}${UrlContainer.dashBoardUrl}";
+
+
+  Future<ResponseModel> getCategoryListData() async {
+    String url = "${UrlContainer.baseUrl}${UrlContainer.battleCategoryLIst}";
     print('come here: ${url}');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
@@ -19,6 +21,15 @@ class BattleRepo {
     String url = "${UrlContainer.baseUrl}${UrlContainer.quizQuestionsUrl + id.toString()}";
     print('come here: ${url}');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+
+    return model;
+  }
+
+  Future<ResponseModel> submitAnswer(Map<String, dynamic> map) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.submitAnswerUrl}';
+
+    ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
+
 
     return model;
   }
