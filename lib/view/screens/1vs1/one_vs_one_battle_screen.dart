@@ -29,8 +29,8 @@ class OneVSOneBattleScreen extends StatefulWidget {
 class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<OneVsOneController>(
-        init: OneVsOneController(Get.put(BattleRepo(apiClient: Get.put(ApiClient(sharedPreferences: Get.find()))))),
+    return GetBuilder<OneVsMutiController>(
+        init: OneVsMutiController(Get.put(BattleRepo(apiClient: Get.put(ApiClient(sharedPreferences: Get.find()))))),
         initState: (_) async {},
         builder: (controller) {
           return Scaffold(
@@ -81,7 +81,7 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                                 ),
                               );
                             }).toList(),
-                            hintText: 'Select a country', // Hint text for the drop-down
+                            hintText: MyStrings.selectACategoryText,
                           ),
                           const SizedBox(
                             height: Dimensions.space40,
@@ -89,12 +89,15 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                           RoundedButton(
                               text: widget.isGroupBattle ? MyStrings.groupBattle : MyStrings.letsPlay,
                               press: () async {
-                                if(controller.slectedCategoryID.value == 0){
+                                if (controller.slectedCategoryID.value == 0) {
                                   CustomSnackBar.error(errorList: [MyStrings.selectACategoryMsg]);
-                                }else{
-                                   Get.toNamed(RouteHelper.findOpponentScreen, arguments: [controller.slectedCategoryID.value]); //Send Question List and ID to next page
+                                } else {
+                                  Get.toNamed(RouteHelper.findOpponentScreen, arguments: [
+                                    controller.slectedCategoryID.value,
+                                    controller.entryFeeRandomGame.value,
+                                    <BattleCategory>[]
+                                  ]); //Send Question List and ID to next page
                                 }
-                               
                               },
                               textSize: Dimensions.space20,
                               cornerRadius: Dimensions.space10),

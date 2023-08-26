@@ -52,6 +52,7 @@ class MyColor {
   static const Color colorBlack = Color(0xff262626);
   static const Color colorGreen = Color(0xff28C76F);
   static const Color colorRed = Color(0xFFD92027);
+  static const Color spinLoadColor = Colors.black;
   static const Color colorGrey = Color(0xff555555);
   static const Color createRoomButtonBGcolor = Color(0xFFEBEBEB);
   static const Color colorQuizBodyText = Color(0xff8A8281);
@@ -59,6 +60,7 @@ class MyColor {
   static const Color colorlighterGrey = Color(0xFF8A8281);
   static const Color colorLightGrey = Color(0xFFCECECE);
   static const Color colorDarkGrey = Color(0xFFA0A0A0);
+  static const Color textSecondColor = Color(0xFF8A8281);
   static const Color transparentColor = Colors.transparent;
 
   static const Color greenSuccessColor = greenP;
@@ -72,6 +74,7 @@ class MyColor {
   static const Color authBgImageColor = Color(0xFF1E5A82);
   static const Color cardBorderColor = Color(0xFFE7E7E7);
   static const Color cardColor = Color(0xFFF8F8F8);
+  static const Color cardSelectedColor = primaryColor;
   static const Color lobbycardColor = Color(0xFFF5F5F5);
   static const Color lobbycontColor = Color(0xFFFCECE8);
   static const Color lobbycontBorderColor = Color(0xFFE54322);

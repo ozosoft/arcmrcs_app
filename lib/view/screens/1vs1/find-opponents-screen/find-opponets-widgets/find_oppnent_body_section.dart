@@ -38,55 +38,67 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
       return WillPopScope(
         onWillPop: () async {
           CustomAlertDialog(
-              child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 20,
-                ),
-                const Text("Are You sure You Want Close Searching!"),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () async {
-                        if (controller.battleRoomController.battleRoomData.value != null) {
-                          await controller.battleRoomController
-                              .deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false)
-                              .whenComplete(() {
-                            Navigator.of(context).pop(true);
-                            // Return true when "Yes" is pressed
-                            Get.back();
-                          });
-                        } else {
-                          Navigator.of(context).pop(true);
-                          // Return true when "Yes" is pressed
-                          Get.back();
-                        }
-                      },
-                      child: const Text(
-                        "Yes",
-                        style: regularLarge,
-                      ),
+              borderRadius: 10,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(Dimensions.space10),
+                    child: Column(
+                      children: [
+                        Text("Are You sure You Want Close Searching!"),
+                      ],
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                      },
-                      child: const Text(
-                        "Cancel",
-                        style: regularLarge,
-                      ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 1,
+                    color: MyColor.textSecondColor.withOpacity(0.3),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(Dimensions.space10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
+                          },
+                          child: const Text(
+                             MyStrings.cancel,
+                            style: regularLarge,
+                          ),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
+                          onPressed: () async {
+                            if (controller.battleRoomController.battleRoomData.value != null) {
+                              await controller.battleRoomController.deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false).whenComplete(() {
+                                Navigator.of(context).pop(true);
+                                // Return true when "Yes" is pressed
+                                Get.back();
+                              });
+                            } else {
+                              Navigator.of(context).pop(true);
+                              // Return true when "Yes" is pressed
+                              Get.back();
+                            }
+                          },
+                          child: Text(
+                            MyStrings.yes,
+                            style: regularLarge.copyWith(color: MyColor.colorWhite),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                )
-              ],
-            ),
-          )).customAlertDialog(context);
+                  ),
+                ],
+              )).customAlertDialog(context);
           return false; // Disable back button if `start` is true
         },
         child: Column(
@@ -105,9 +117,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                       child: FittedBox(
                         fit: BoxFit.cover,
                         child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(Dimensions.space40),
-                              image: const DecorationImage(image: AssetImage(MyImages.profileimageWomenPng), fit: BoxFit.cover)),
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: const DecorationImage(image: AssetImage(MyImages.profileimageWomenPng), fit: BoxFit.cover)),
                           height: Dimensions.space70,
                           width: Dimensions.space70,
                         ),
@@ -197,14 +207,13 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                 }),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: Dimensions.space10,
             ),
             Stack(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space20),
+                  padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space20),
                   width: double.infinity,
                   child: Lottie.asset(
                     MyImages.userSearchLottie,
@@ -265,9 +274,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               press: () {
                                 print("go");
 
-                                controller.battleRoomController
-                                    .startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true)
-                                    .whenComplete(() {
+                                controller.battleRoomController.startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
                                   // Get.back();
                                   // Get.toNamed(
                                   //   RouteHelper.battleQuizQuestionsScreen,

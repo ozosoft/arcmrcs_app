@@ -23,7 +23,7 @@ class _BattleQuizQuestionsScreenState extends State<BattleQuizQuestionsScreen> {
         body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space50),
-          child: BattleQuizBodySection(
+          child: BattleQuizQuestionsBodySection(
             qustionsList: qustionsList,
           ),
         ));

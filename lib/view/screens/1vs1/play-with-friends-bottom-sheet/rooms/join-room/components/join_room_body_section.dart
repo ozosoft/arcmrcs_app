@@ -67,6 +67,7 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                         WidgetsBinding.instance.addPostFrameCallback((_) {
                           // Navigator.pop(context);
                           CustomBottomSheet(
+                            enableDrag: false,
                             child: const JoinedLobbyBottomSheet(),
                           ).customBottomSheet(context);
 
@@ -79,12 +80,8 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                             ? RoundedLoadingBtn()
                             : RoundedButton(
                                 text: MyStrings.start,
-                                press: () {
-                                  // Get.back();
-                                  print(joinRoomCodeController.text);
-
-                                  battleRoomController.joinRoom(name: battleRoomController.battleRepo.apiClient.getUserName(), roomCode: joinRoomCodeController.text, profileUrl: "", uid: battleRoomController.battleRepo.apiClient.getUserID(), currentCoin: "5000");
-                                  print("${battleRoomController.joinRoomState.value}");
+                                press: () async {
+                                  await battleRoomController.joinRoom(name: battleRoomController.battleRepo.apiClient.getUserName(), roomCode: joinRoomCodeController.text, profileUrl: "", uid: battleRoomController.battleRepo.apiClient.getUserID(), currentCoin: "5000", joinroom: true);
                                 },
                                 color: MyColor.primaryColor,
                                 textColor: MyColor.colorWhite,

@@ -15,13 +15,12 @@ class BattleQuizResultScreen extends StatefulWidget {
 }
 
 class _BattleQuizResultScreenState extends State<BattleQuizResultScreen> {
-  // final title = Get.arguments as String;
   @override
   Widget build(BuildContext context) {
     return const RepaintBoundary(
       child: Scaffold(
           backgroundColor: MyColor.primaryColor,
-          appBar: CustomCategoryAppBar(title: MyStrings.quizResult),
+          appBar: CustomCategoryAppBar(title: MyStrings.battleResult),
           body: SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space50),
