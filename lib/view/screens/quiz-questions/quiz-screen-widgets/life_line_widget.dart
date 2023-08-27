@@ -74,7 +74,6 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
                 controller.flipQuiston(widget.questionIndex);
                 print(controller.flipQuistion);
                 controller.flipQuistion = "1";
-              
               },
               child: const LevelCardButton(
                   // lifelineUsed: controller.showQuestions,

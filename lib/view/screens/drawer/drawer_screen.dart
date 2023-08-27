@@ -5,6 +5,7 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/screens/homepage/homepage-widgets/language-bottom-sheet/language_bottom_sheet_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -172,6 +173,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           .customBottomSheet(context);
                     }),
                 ListTile(
+                  onTap: () {
+                    ApiClient(sharedPreferences: Get.find())
+                        .sharedPreferences
+                        .clear();
+                    Get.offAllNamed(RouteHelper.loginScreen);
+                  },
                   leading: SvgPicture.asset(MyImages.logOutDrawer),
                   title: const Text(
                     MyStrings.logout,

@@ -18,8 +18,7 @@ class VerificationBodySection extends StatefulWidget {
   const VerificationBodySection({super.key});
 
   @override
-  State<VerificationBodySection> createState() =>
-      _VerificationBodySectionState();
+  State<VerificationBodySection> createState() => _VerificationBodySectionState();
 }
 
 class _VerificationBodySectionState extends State<VerificationBodySection> {
@@ -40,9 +39,7 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
   Widget build(BuildContext context) {
     return GetBuilder<VerifyPasswordController>(
       builder: (controller) => controller.isLoading
-          ? Center(
-              child:
-                  CircularProgressIndicator(color: MyColor.getPrimaryColor()))
+          ? Center(child: CircularProgressIndicator(color: MyColor.getPrimaryColor()))
           : Column(
               children: [
                 SizedBox(
@@ -52,18 +49,15 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        MyStrings.enterVerificationcode,
-                        style: regularDefault.copyWith(
-                            fontSize: Dimensions.space20,
-                            fontWeight: FontWeight.w500),
+                        MyStrings.enterVerificationcode.tr,
+                        style: regularDefault.copyWith(fontSize: Dimensions.space20, fontWeight: FontWeight.w500),
                       ),
                       const SizedBox(
                         height: Dimensions.space8,
                       ),
                       Text(
-                        MyStrings.wehaveSentaCode,
-                        style: regularLarge.copyWith(
-                            color: MyColor.authScreenTextColor),
+                        MyStrings.wehaveSentaCode.tr,
+                        style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
                       ),
                     ],
                   ),
@@ -75,15 +69,12 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                     children: [
                       const SizedBox(height: Dimensions.space20),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: Dimensions.space40),
+                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space40),
                         child: PinCodeTextField(
                           appContext: context,
-                          pastedTextStyle: regularDefault.copyWith(
-                              color: MyColor.getPrimaryColor()),
+                          pastedTextStyle: regularDefault.copyWith(color: MyColor.getPrimaryColor()),
                           length: 6,
-                          textStyle: regularExtraLarge.copyWith(
-                              color: MyColor.textColor),
+                          textStyle: regularExtraLarge.copyWith(color: MyColor.textColor),
                           obscureText: false,
                           obscuringCharacter: '*',
                           blinkWhenObscuring: false,
@@ -94,8 +85,7 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                               borderRadius: BorderRadius.circular(5),
                               fieldHeight: 45,
                               fieldWidth: 45,
-                              inactiveColor:
-                                  MyColor.getTextFieldDisableBorder(),
+                              inactiveColor: MyColor.getTextFieldDisableBorder(),
                               inactiveFillColor: MyColor.colorWhite,
                               activeFillColor: MyColor.getScreenBgColor(),
                               activeColor: MyColor.getPrimaryColor(),
@@ -117,30 +107,27 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                       ),
                       const SizedBox(height: Dimensions.space25),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: Dimensions.space38),
-                        child: controller.isLoading?const RoundedLoadingBtn(): RoundedButton(
-                          text: MyStrings.verifyNow,
-                          press: () {
-                            // Get.toNamed(RouteHelper.resetPassword);
-                            if (controller.currentText.length != 6) {
-                              controller.hasError = true;
-                            } else {
-                              controller.verifyForgetPasswordCode(
-                                  controller.currentText);
-                            }
-                          },
-                          textSize: Dimensions.space17,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space38),
+                        child: controller.isLoading
+                            ? const RoundedLoadingBtn()
+                            : RoundedButton(
+                                text: MyStrings.verifyNow.tr,
+                                press: () {
+                                  // Get.toNamed(RouteHelper.resetPassword);
+                                  if (controller.currentText.length != 6) {
+                                    controller.hasError = true;
+                                  } else {
+                                    controller.verifyForgetPasswordCode(controller.currentText);
+                                  }
+                                },
+                                textSize: Dimensions.space17,
+                              ),
                       ),
                       const SizedBox(height: Dimensions.space10),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(MyStrings.didNotReceiveCode,
-                              style: regularLarge.copyWith(
-                                  color: MyColor.getAuthTextColor(),
-                                  fontWeight: FontWeight.w500)),
+                          Text(MyStrings.didNotReceiveCode.tr, style: regularLarge.copyWith(color: MyColor.getAuthTextColor(), fontWeight: FontWeight.w500)),
                           controller.isResendLoading
                               ? const SizedBox(
                                   height: 17,
@@ -153,8 +140,7 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                                   onPressed: () {
                                     controller.resendForgetPassCode();
                                   },
-                                  child: const CustomUndelineText(
-                                      text: MyStrings.resendCode))
+                                  child: CustomUndelineText(text: MyStrings.resendCode.tr))
                         ],
                       ),
                     ],

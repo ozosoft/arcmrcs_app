@@ -26,7 +26,6 @@ class ExpandedSections extends StatefulWidget {
 }
 
 class _ExpandedSectionsState extends State<ExpandedSections> {
-
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
@@ -34,79 +33,69 @@ class _ExpandedSectionsState extends State<ExpandedSections> {
     Get.put(AllCategoriesController(
       allCategoriesRepo: Get.find(),
     ));
-    AllCategoriesController controller =
-        Get.put(AllCategoriesController(allCategoriesRepo: Get.find()));
+    AllCategoriesController controller = Get.put(AllCategoriesController(allCategoriesRepo: Get.find()));
 
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata();
-
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<AllCategoriesController>(
-      builder: (controller) =>
-      controller.loader?CustomLoader():
-       ExpandedSection(
-        duration: 300,
-        expand: widget.isExpand,
-        child: Column(
-          children: [
-            const CustomHorizontalDivider(),
-            Container(
-              color: MyColor.colorWhite,
-              padding: const EdgeInsets.all(Dimensions.space10),
-              child: GridView.builder(
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 2.3, crossAxisCount: 3),
-                  itemCount: controller.allCategoriesList[widget.categoryindex].quizInfos!.length,
-                  itemBuilder: (BuildContext context, int index) {
-                   return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: Dimensions.space5,
-                            horizontal: Dimensions.space5),
-                        child: InkWell(
-                          onTap: () { Get.toNamed(RouteHelper.quizQuestionsScreen,arguments: [widget.title, controller.allCategoriesList[widget.categoryindex].quizInfos![index].id]);},
-                          child: Container(
-                            padding: const EdgeInsets.symmetric( horizontal: Dimensions.space8,vertical: Dimensions.space8),
-                            decoration: BoxDecoration(
-                              color: controller.allCategoriesList[widget.categoryindex].quizInfos![index].playInfo!=null?MyColor.completedlevel:MyColor.lockedLevel,
-                                borderRadius:BorderRadius.circular(Dimensions.space7),
-                                border: Border.all(color: controller.allCategoriesList[widget.categoryindex].quizInfos![index].playInfo!=null?MyColor.completedlevel:MyColor.lockedLevel
-                                    )),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset( controller.allCategoriesList[widget.categoryindex]
-                                      .quizInfos![index].playInfo !=null?  
-                                    MyImages.levelGreenTikSVG
-                                    :   MyImages.lockLevelSVG),
-                                const SizedBox(width: Dimensions.space4),
-                                Text(
-                                  controller.allCategoriesList[widget.categoryindex]
-                                      .quizInfos![index].level!.title
-                                      .toString(),
-                                  style: regularLarge.copyWith(
-                                      // color: textcolor
+      builder: (controller) => controller.loader
+          ? const CustomLoader()
+          : ExpandedSection(
+              duration: 300,
+              expand: widget.isExpand,
+              child: Column(
+                children: [
+                  const CustomHorizontalDivider(),
+                  Container(
+                    color: MyColor.colorWhite,
+                    padding: const EdgeInsets.all(Dimensions.space10),
+                    child: GridView.builder(
+                        shrinkWrap: true,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 2.3, crossAxisCount: 3),
+                        itemCount: controller.allCategoriesList[widget.categoryindex].quizInfos!.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                              padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
+                              child: InkWell(
+                                onTap: () {
+                                  Get.toNamed(RouteHelper.quizQuestionsScreen, arguments: [widget.title, controller.allCategoriesList[widget.categoryindex].quizInfos![index].id]);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.space8, vertical: Dimensions.space8),
+                                  decoration: BoxDecoration(
+                                      color: controller.allCategoriesList[widget.categoryindex].quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel, borderRadius: BorderRadius.circular(Dimensions.space7), border: Border.all(color: controller.allCategoriesList[widget.categoryindex].quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
+                                  child: Row(
+                                    children: [
+                                      SvgPicture.asset(controller.allCategoriesList[widget.categoryindex].quizInfos![index].playInfo != null ? MyImages.levelGreenTikSVG : MyImages.lockLevelSVG),
+                                      const SizedBox(width: Dimensions.space4),
+                                      Text(
+                                        controller.allCategoriesList[widget.categoryindex].quizInfos![index].level!.title.toString(),
+                                        style: regularLarge.copyWith(
+                                            // color: textcolor
+                                            ),
                                       ),
+                                    ],
+                                  ),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ));
-                  }),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(bottom: Dimensions.space20),
-              child: CustomTextWithUndeline(
-                text: MyStrings.viewMore,
+                              ));
+                        }),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(bottom: Dimensions.space20),
+                    child: CustomTextWithUndeline(
+                      text: MyStrings.viewMore,
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
-      ),
+            ),
     );
   }
 }

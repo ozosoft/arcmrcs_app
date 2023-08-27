@@ -21,8 +21,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
   final bool isActionIconAlignEnd;
   final String actionText;
   final bool isActionImage;
-  final double ? height ;
-  
+  final double? height;
 
   const CustomAppBar({
     Key? key,
@@ -38,7 +37,8 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.actionPress,
     this.isActionIconAlignEnd = false,
     this.isActionImage = true,
-    this.iconColor=MyColor.colorBlack, this.height,
+    this.iconColor = MyColor.colorBlack,
+    this.height,
   }) : super(key: key);
 
   @override
@@ -60,7 +60,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   Widget build(BuildContext context) {
     return widget.isShowBackBtn
         ? AppBar(
-          iconTheme: IconThemeData(color:widget.iconColor),
+            iconTheme: IconThemeData(color: widget.iconColor),
             elevation: 0,
             titleSpacing: 0,
             leading: widget.isShowBackBtn
@@ -72,16 +72,13 @@ class _CustomAppBarState extends State<CustomAppBar> {
                         showExitDialog(Get.context!);
                       } else {
                         String previousRoute = Get.previousRoute;
-                        
+                        Get.offAllNamed(previousRoute);
                       }
                     },
-                    icon: Icon(Icons.arrow_back,
-                        color: MyColor.getAppBarContentColor(), size: 20))
+                    icon: Icon(Icons.arrow_back, color: MyColor.getAppBarContentColor(), size: 20))
                 : const SizedBox.shrink(),
             backgroundColor: widget.bgColor,
-            title: Text(widget.title.tr,
-                style: semiBoldExtraLarge.copyWith(
-                    color: MyColor.getAppBarContentColor())),
+            title: Text(widget.title.tr, style: semiBoldExtraLarge.copyWith(color: MyColor.getAppBarContentColor())),
             centerTitle: widget.isTitleCenter,
             toolbarHeight: widget.height,
             actions: [
@@ -89,10 +86,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   ? ActionButtonIconWidget(
                       pressed: widget.actionPress!,
                       isImage: widget.isActionImage,
-                      icon: widget.isActionImage
-                          ? Icons.add
-                          : widget
-                              .actionIcon, //just for demo purpose we put it here
+                      icon: widget.isActionImage ? Icons.add : widget.actionIcon, //just for demo purpose we put it here
                       imageSrc: widget.isActionImage ? widget.actionIcon : '',
                     )
                   : const SizedBox.shrink(),
@@ -105,17 +99,8 @@ class _CustomAppBarState extends State<CustomAppBar> {
             titleSpacing: 0,
             elevation: 0,
             backgroundColor: widget.bgColor,
-            title: Text(widget.title.tr,
-                style: regularLarge.copyWith(color: MyColor.getTextColor())),
-            actions: [
-              widget.isShowActionBtn
-                  ? InkWell(
-                      onTap: () {
-                       
-                      },
-                      child: const SizedBox.shrink())
-                  : const SizedBox()
-            ],
+            title: Text(widget.title.tr, style: regularLarge.copyWith(color: MyColor.getTextColor())),
+            actions: [widget.isShowActionBtn ? InkWell(onTap: () {}, child: const SizedBox.shrink()) : const SizedBox()],
             automaticallyImplyLeading: false,
           );
   }

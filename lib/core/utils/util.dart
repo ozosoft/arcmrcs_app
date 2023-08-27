@@ -6,29 +6,22 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'my_strings.dart';
 
 class MyUtils {
+  static void vibrate() {
+    HapticFeedback.heavyImpact();
+    HapticFeedback.vibrate();
+  }
+
   static splashScreen() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: MyColor.getPrimaryColor(),
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: MyColor.getPrimaryColor(),
-        systemNavigationBarIconBrightness: Brightness.light));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: MyColor.getPrimaryColor(), statusBarIconBrightness: Brightness.light, systemNavigationBarColor: MyColor.getPrimaryColor(), systemNavigationBarIconBrightness: Brightness.light));
   }
 
   static allScreen() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: MyColor.getPrimaryColor(),
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: MyColor.colorWhite,
-        systemNavigationBarIconBrightness: Brightness.dark));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: MyColor.getPrimaryColor(), statusBarIconBrightness: Brightness.light, systemNavigationBarColor: MyColor.colorWhite, systemNavigationBarIconBrightness: Brightness.dark));
   }
 
   static dynamic getShadow() {
     return [
-      BoxShadow(
-          blurRadius: 15.0,
-          offset: const Offset(0, 25),
-          color: Colors.grey.shade500.withOpacity(0.6),
-          spreadRadius: -35.0),
+      BoxShadow(blurRadius: 15.0, offset: const Offset(0, 25), color: Colors.grey.shade500.withOpacity(0.6), spreadRadius: -35.0),
     ];
   }
 

@@ -46,11 +46,13 @@ class _QuizBodySectionState extends State<QuizBodySection> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<QuizQuestionsController>(
-        builder: (controller) => controller.loading
-            ? const CustomLoader()
-            : controller.questionsList.isEmpty
-                ? Text('Empty')
-                : PageView(onPageChanged: (value) {}, children: [
+      builder: (controller) => controller.loading
+          ? const CustomLoader()
+          : controller.questionsList.isEmpty
+              ? Text('Empty')
+              : PageView(
+                  onPageChanged: (value) {},
+                  children: [
                     PageView.builder(
                       controller: controller.pageController,
                       itemCount: controller.questionsList.length,
@@ -106,71 +108,71 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                               Row(
                                                 children: [
                                                   InkWell(
-                                                      onTap: () async {
-                                                        if (controller.questionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
-                                                          return;
-                                                        }
+                                                    onTap: () async {
+                                                      if (controller.questionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
+                                                        return;
+                                                      }
 
-                                                        controller.selectAnswer(optionIndex, questionsIndex);
+                                                      controller.selectAnswer(optionIndex, questionsIndex);
 
-                                                        await Future.delayed(const Duration(seconds: 3));
+                                                      await Future.delayed(const Duration(seconds: 3));
 
-                                                        if (controller.pageController.page! < controller.questionsList.length - 1) {
-                                                          controller.pageController.nextPage(
-                                                            duration: const Duration(milliseconds: 500),
-                                                            curve: Curves.easeInOut,
-                                                          );
-                                                        }
-                                                        if (controller.selectedOptionIndex.toString() == "0"&&controller.selectedOptionIndex.toString() == "1") {
+                                                      if (controller.pageController.page! < controller.questionsList.length - 1) {
+                                                        controller.pageController.nextPage(
+                                                          duration: const Duration(milliseconds: 500),
+                                                          curve: Curves.easeInOut,
+                                                        );
+                                                      }
+                                                      if (controller.selectedOptionIndex.toString() == "0" && controller.selectedOptionIndex.toString() == "1") {
                                                         controller.selectedQuestionsId.add(controller.questionsList[questionsIndex].id);
-                                                          }
-                                                        controller.selectedAnswerId.add(controller.questionsList[questionsIndex].selectedOptionId);
+                                                      }
+                                                      controller.selectedAnswerId.add(controller.questionsList[questionsIndex].selectedOptionId);
 
-                                                        if (questionsIndex == controller.questionsList.length - 1) {
+                                                      if (questionsIndex == controller.questionsList.length - 1) {
                                                         controller.submitAnswer();
-                                                          Get.toNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
-                                                        }
-                                                      },
-                                                      child: Container(
-                                                        margin: const EdgeInsets.all(Dimensions.space8),
-                                                        padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
-                                                        height: Dimensions.space55,
-                                                        width: controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? MediaQuery.of(context).size.width * .65 : MediaQuery.of(context).size.width * .78,
-                                                        decoration: BoxDecoration(
-                                                            color: controller.questionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                ? MyColor.transparentColor
-                                                                : controller.selectedOptionIndex == optionIndex
-                                                                    ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                        ? MyColor.rightAnswerbgColor
-                                                                        : MyColor.wrongAnsColor
-                                                                    : MyColor.transparentColor,
-                                                            borderRadius: BorderRadius.circular(Dimensions.space8),
-                                                            border: Border.all(color: MyColor.colorLightGrey)),
-                                                        child: Row(
-                                                          children: [
-                                                            const SizedBox(width: Dimensions.space8),
-                                                            Text(
-                                                              controller.questionsList[questionsIndex].options![optionIndex].option.toString(),
-                                                              style: regularMediumLarge.copyWith(
-                                                                  color: controller.questionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                      ? MyColor.textColor
-                                                                      : controller.selectedOptionIndex == optionIndex
-                                                                          ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                              ? MyColor.colorWhite
-                                                                              : MyColor.colorWhite
-                                                                          : MyColor.textColor),
-                                                            ),
-                                                            const Spacer(),
-                                                            SizedBox(
-                                                                height: Dimensions.space10,
-                                                                child: SvgPicture.asset(
-                                                                    "${controller.questionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox() : controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
-                                                                    fit: BoxFit.cover))
-                                                          ],
-                                                        ),
+                                                        Get.toNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
+                                                      }
+                                                    },
+                                                    child: Container(
+                                                      margin: const EdgeInsets.all(Dimensions.space8),
+                                                      padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
+                                                      height: Dimensions.space55,
+                                                      width: controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? MediaQuery.of(context).size.width * .65 : MediaQuery.of(context).size.width * .78,
+                                                      decoration: BoxDecoration(
+                                                          color: controller.questionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                              ? MyColor.transparentColor
+                                                              : controller.selectedOptionIndex == optionIndex
+                                                                  ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                      ? MyColor.rightAnswerbgColor
+                                                                      : MyColor.wrongAnsColor
+                                                                  : MyColor.transparentColor,
+                                                          borderRadius: BorderRadius.circular(Dimensions.space8),
+                                                          border: Border.all(color: MyColor.colorLightGrey)),
+                                                      child: Row(
+                                                        children: [
+                                                          const SizedBox(width: Dimensions.space8),
+                                                          Text(
+                                                            controller.questionsList[questionsIndex].options![optionIndex].option.toString(),
+                                                            style: regularMediumLarge.copyWith(
+                                                                color: controller.questionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                    ? MyColor.textColor
+                                                                    : controller.selectedOptionIndex == optionIndex
+                                                                        ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                            ? MyColor.colorWhite
+                                                                            : MyColor.colorWhite
+                                                                        : MyColor.textColor),
+                                                          ),
+                                                          const Spacer(),
+                                                          SizedBox(
+                                                            height: Dimensions.space10,
+                                                            child: SvgPicture.asset(
+                                                                "${controller.questionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox() : controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
+                                                                fit: BoxFit.cover),
+                                                          )
+                                                        ],
                                                       ),
                                                     ),
-                                                  
+                                                  ),
                                                   const Spacer(),
                                                   controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
                                                 ],
@@ -179,58 +181,57 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                           );
                                         }),
                                     const SizedBox(height: Dimensions.space25),
-                                    LifeLinesWidget( questionIndex:questionsIndex ),
+                                    LifeLinesWidget(questionIndex: questionsIndex),
                                     const SizedBox(height: Dimensions.space25),
                                   ],
                                 ),
                               ),
-                          Padding(
-                                  padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .4),
-                                  child: CircularCountDownTimer(
-                                    duration: Dimensions.space2.toInt(),
-                                    initialDuration: 0,
-                                    controller: controller.countDownController,
-                                    width: Dimensions.space60,
-                                    height: Dimensions.space80,
-                                    ringColor: MyColor.primaryColor,
-                                    ringGradient: null,
-                                    fillColor: MyColor.timerbgColor,
-                                    fillGradient: null,
-                                    backgroundColor: MyColor.timerbgColor,
-                                    strokeWidth: Dimensions.space5,
-                                    strokeCap: StrokeCap.round,
-                                    textStyle: semiBoldExtraLarge.copyWith(color: MyColor.primaryColor),
-                                    textFormat: CountdownTextFormat.S,
-                                    isReverse: true,
-                                    isReverseAnimation: false,
-                                    isTimerTextShown: true,
-                                    autoStart: true,
-                                    onComplete: () {
-                                      if (controller.selectedOptionIndex.toString() == "-1") {
-                                        controller.selectedQuestionsId.add(controller.questionsList[questionsIndex].id);
-                                      }
-                                       controller.selectedOptionIndex.toString().isNotEmpty ? print("this is selectedoption index" + controller.selectedOptionIndex.toString()) : print;
-                                      if (questionsIndex == controller.questionsList.length - 1) {
+                              Padding(
+                                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .4),
+                                child: CircularCountDownTimer(
+                                  duration: Dimensions.space2.toInt(),
+                                  initialDuration: 0,
+                                  controller: controller.countDownController,
+                                  width: Dimensions.space60,
+                                  height: Dimensions.space80,
+                                  ringColor: MyColor.primaryColor,
+                                  ringGradient: null,
+                                  fillColor: MyColor.timerbgColor,
+                                  fillGradient: null,
+                                  backgroundColor: MyColor.timerbgColor,
+                                  strokeWidth: Dimensions.space5,
+                                  strokeCap: StrokeCap.round,
+                                  textStyle: semiBoldExtraLarge.copyWith(color: MyColor.primaryColor),
+                                  textFormat: CountdownTextFormat.S,
+                                  isReverse: true,
+                                  isReverseAnimation: false,
+                                  isTimerTextShown: true,
+                                  autoStart: true,
+                                  onComplete: () {
+                                    if (controller.selectedOptionIndex.toString() == "-1") {
+                                      controller.selectedQuestionsId.add(controller.questionsList[questionsIndex].id);
+                                    }
+                                    controller.selectedOptionIndex.toString().isNotEmpty ? print("this is selectedoption index" + controller.selectedOptionIndex.toString()) : print;
+                                    if (questionsIndex == controller.questionsList.length - 1) {
+                                      controller.submitAnswer();
 
-                                         controller.submitAnswer();
-
-                                        
-                                        Get.toNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
-                                      } else {
-                                        controller.pageController.nextPage(
-                                          duration: const Duration(milliseconds: 500),
-                                          curve: Curves.easeInOut,
-                                        );
-                                      }
-                                    },
-                                  ),
+                                      Get.toNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
+                                    } else {
+                                      controller.pageController.nextPage(
+                                        duration: const Duration(milliseconds: 500),
+                                        curve: Curves.easeInOut,
+                                      );
+                                    }
+                                  },
                                 ),
-                              
+                              ),
                             ],
                           ),
                         );
                       },
                     ),
-                  ]));
+                  ],
+                ),
+    );
   }
 }

@@ -24,23 +24,25 @@ Future<void> _messageHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Map<String, Map<String, String>> languages = await di_service.init();
- 
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: MyColor.primaryColor.withOpacity(0.4),
+      statusBarColor: MyColor.primaryColor.withOpacity(0.6), // status bar color
+    ),
+  );
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
   await PushNotificationService().setupInteractedMessage();
 
   HttpOverrides.global = MyHttpOverrides();
- 
+
   runApp(MyApp(languages: languages));
 }
 
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;}
-
-          
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -54,24 +56,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    
     return GetBuilder<LocalizationController>(
       builder: (localizeController) => GetMaterialApp(
-        theme: ThemeData(scaffoldBackgroundColor: MyColor.scaffoldBackgroundColor,
-        appBarTheme:const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle( 
-         statusBarColor: MyColor.colorWhite))),
+        theme: ThemeData(scaffoldBackgroundColor: MyColor.scaffoldBackgroundColor, appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: MyColor.colorWhite))),
         title: MyStrings.appName,
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.noTransition,
         transitionDuration: const Duration(milliseconds: 200),
-        initialRoute: RouteHelper.splashScreen,
+        initialRoute: RouteHelper.gessThewordCatagori,
         navigatorKey: Get.key,
         getPages: RouteHelper().routes,
         locale: localizeController.locale,
         translations: Messages(languages: widget.languages),
-        fallbackLocale: Locale(localizeController.locale.languageCode,
-            localizeController.locale.countryCode),
+        fallbackLocale: Locale(localizeController.locale.languageCode, localizeController.locale.countryCode),
       ),
     );
   }

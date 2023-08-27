@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:30461072894:android:209f48acd6c85d1e8b5caf",
         "android_client_info": {
-          "package_name": "dev.vlab.flutter_prime"
+          "package_name": "dev.vlab.quiz"
         }
       },
       "oauth_client": [

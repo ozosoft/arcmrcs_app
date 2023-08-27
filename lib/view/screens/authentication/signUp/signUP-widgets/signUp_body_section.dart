@@ -27,13 +27,12 @@ class SignUpBodySection extends StatefulWidget {
 class _SignUpBodySectionState extends State<SignUpBodySection> {
   final formKey = GlobalKey<FormState>();
 
-    @override
+  @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GeneralSettingRepo(apiClient: Get.find()));
     Get.put(RegistrationRepo(apiClient: Get.find()));
-    Get.put(RegistrationController(
-        registrationRepo: Get.find(), generalSettingRepo: Get.find()));
+    Get.put(RegistrationController(registrationRepo: Get.find(), generalSettingRepo: Get.find()));
 
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -49,7 +48,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<RegistrationController>(
-      builder: (controller) =>  Padding(
+      builder: (controller) => Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Dimensions.space30,
           vertical: Dimensions.space15,
@@ -58,15 +57,13 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              MyStrings.signUp,
+              MyStrings.signUp.tr,
               style: semiBoldMediumLarge.copyWith(fontSize: Dimensions.space25),
             ),
             const SizedBox(height: Dimensions.space8),
             Text(
-              MyStrings.pleaseEnterDetailstoSignUp,
-              style: regularLarge.copyWith(
-                  color: MyColor.authScreenTextColor,
-                  fontSize: Dimensions.space15),
+              MyStrings.pleaseEnterDetailstoSignUp.tr,
+              style: regularLarge.copyWith(color: MyColor.authScreenTextColor, fontSize: Dimensions.space15),
             ),
             const SocialLoginSection(),
             const CustomDivider(
@@ -84,13 +81,13 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     prefixicon: MyImages.personSVG,
                     animatedLabel: true,
                     needOutlineBorder: true,
-                    labelText: MyStrings.username,
+                    labelText: MyStrings.username.tr,
                     onChanged: (value) {},
                     textInputType: TextInputType.emailAddress,
                     inputAction: TextInputAction.next,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return MyStrings.fieldErrorMsg;
+                        return MyStrings.fieldErrorMsg.tr;
                       } else {
                         return null;
                       }
@@ -104,13 +101,13 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     prefixicon: MyImages.mailSVG,
                     animatedLabel: true,
                     needOutlineBorder: true,
-                    labelText: MyStrings.email,
+                    labelText: MyStrings.email.tr,
                     onChanged: (value) {},
                     textInputType: TextInputType.emailAddress,
                     inputAction: TextInputAction.next,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return MyStrings.fieldErrorMsg;
+                        return MyStrings.fieldErrorMsg.tr;
                       } else {
                         return null;
                       }
@@ -134,7 +131,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     inputAction: TextInputAction.done,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return MyStrings.fieldErrorMsg;
+                        return MyStrings.fieldErrorMsg.tr;
                       } else {
                         return null;
                       }
@@ -144,13 +141,13 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                   const StrongPassWordCheakSection(),
                   const SizedBox(height: Dimensions.space15),
                   CustomTextField(
-                     controller: controller.cPasswordController,
+                    controller: controller.cPasswordController,
                     hastextcolor: true,
                     hasIcon: true,
                     prefixicon: MyImages.lockSVG,
                     animatedLabel: true,
                     needOutlineBorder: true,
-                    labelText: MyStrings.confirmPassword,
+                    labelText: MyStrings.confirmPassword.tr,
                     onChanged: (value) {},
                     isShowSuffixIcon: true,
                     isPassword: true,
@@ -158,7 +155,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     inputAction: TextInputAction.done,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return MyStrings.fieldErrorMsg;
+                        return MyStrings.fieldErrorMsg.tr;
                       } else {
                         return null;
                       }
@@ -166,29 +163,24 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                   ),
                   const SizedBox(height: Dimensions.space25),
                   RoundedButton(
-                    text: MyStrings.signUp,
+                    text: MyStrings.signUp.tr,
                     press: () {
-                       if (formKey.currentState!.validate()) {
-                          controller.signUpUser();
-                        }
+                      if (formKey.currentState!.validate()) {
+                        controller.signUpUser();
+                      }
                     },
                   ),
                   const SizedBox(height: Dimensions.space10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(MyStrings.alreadyAccount,
-                          overflow: TextOverflow.ellipsis,
-                          style: regularLarge.copyWith(
-                              color: MyColor.getAuthTextColor(),
-                              fontWeight: FontWeight.w500)),
-                       TextButton(
+                      Text(MyStrings.alreadyAccount.tr, overflow: TextOverflow.ellipsis, style: regularLarge.copyWith(color: MyColor.getAuthTextColor(), fontWeight: FontWeight.w500)),
+                      TextButton(
                         onPressed: () {
                           Get.toNamed(RouteHelper.loginScreen);
                         },
-                        child: const CustomUndelineText(text: MyStrings.signIn),
+                        child: CustomUndelineText(text: MyStrings.signIn.tr),
                       ),
-                      
                     ],
                   ),
                 ],
