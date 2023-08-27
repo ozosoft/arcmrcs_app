@@ -191,13 +191,21 @@ class BattleRoomController extends GetxController {
           }
 
           if (joinRoomState.value != JoinRoomState.aleadyJoined && battleRoom.readyToPlay == true) {
-            print("called from here to quiz page");
-            Get.back();
+            if (battleQuestionsList.isEmpty) {
+              Get.back();
+             
+              CustomSnackBar.error(errorList: [MyStrings.questionNotFoundMsg]);
+              
+            } else {
+              print("called from here to quiz page");
+              Get.back();
 
-            Get.toNamed(
-              RouteHelper.battleQuizQuestionsScreen,
-              arguments: ["${"${battleRoom.user1!.name} VS ${battleRoom.user2!.name}"} ", battleQuestionsList, categoryList],
-            );
+              Get.toNamed(
+                RouteHelper.battleQuizQuestionsScreen,
+                arguments: ["${"${battleRoom.user1!.name} VS ${battleRoom.user2!.name}"} ", battleQuestionsList, categoryList],
+              );
+            }
+
             toogleBattleJoinedState(JoinRoomState.aleadyJoined);
           }
         }
@@ -223,7 +231,8 @@ class BattleRoomController extends GetxController {
     String? profileUrl,
     String? uid,
     String? roomCode,
-    required String currentCoin, required bool joinroom,
+    required String currentCoin,
+    required bool joinroom,
   }) async {
     try {
       print(roomCode);

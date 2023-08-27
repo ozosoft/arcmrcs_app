@@ -9,6 +9,7 @@ import 'package:lottie/lottie.dart';
 import '../../../../../core/utils/my_color.dart';
 import '../../../../../core/utils/my_images.dart';
 import '../../../../../core/utils/style.dart';
+import '../../../../../core/utils/url_container.dart';
 import '../../../../../data/controller/battle/battle_room_controller.dart';
 import '../../../../../data/services/api_service.dart';
 import '../../../../components/alert-dialog/custom_alert_dialog.dart';
@@ -48,7 +49,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                     padding: EdgeInsets.all(Dimensions.space10),
                     child: Column(
                       children: [
-                        Text("Are You sure You Want Close Searching!"),
+                        Text(MyStrings.areYouSureYouWantToCloseSearching),
                       ],
                     ),
                   ),
@@ -70,7 +71,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                             Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                           },
                           child: const Text(
-                             MyStrings.cancel,
+                            MyStrings.cancel,
                             style: regularLarge,
                           ),
                         ),
@@ -78,7 +79,9 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                           style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
                           onPressed: () async {
                             if (controller.battleRoomController.battleRoomData.value != null) {
-                              await controller.battleRoomController.deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false).whenComplete(() {
+                              await controller.battleRoomController
+                                  .deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false)
+                                  .whenComplete(() {
                                 Navigator.of(context).pop(true);
                                 // Return true when "Yes" is pressed
                                 Get.back();
@@ -110,24 +113,34 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                 Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(Dimensions.space7),
-                      height: Dimensions.space80,
-                      width: Dimensions.space80,
-                      decoration: BoxDecoration(color: MyColor.prifileBG, borderRadius: BorderRadius.circular(Dimensions.space40)),
+                      padding: const EdgeInsets.all(Dimensions.space2),
+                      height: Dimensions.space100,
+                      width: Dimensions.space100,
+                      decoration: BoxDecoration(color: MyColor.colorLightGrey, borderRadius: BorderRadius.circular(Dimensions.space100)),
                       child: FittedBox(
                         fit: BoxFit.cover,
-                        child: Container(
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: const DecorationImage(image: AssetImage(MyImages.profileimageWomenPng), fit: BoxFit.cover)),
-                          height: Dimensions.space70,
-                          width: Dimensions.space70,
-                        ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(Dimensions.space100),
+                            child: controller.battleRepo.apiClient.getUserImagePath() == "null"
+                                ? Image.asset(
+                                    MyImages.defaultAvatar,
+                                    fit: BoxFit.cover,
+                                    height: Dimensions.space50,
+                                    width: Dimensions.space50,
+                                  )
+                                : Image.network(
+                                    "${UrlContainer.userImagePath}/${controller.battleRepo.apiClient.getUserImagePath()}",
+                                    fit: BoxFit.cover,
+                                    height: Dimensions.space50,
+                                    width: Dimensions.space50,
+                                  )),
                       ),
                     ),
                     const SizedBox(
                       height: Dimensions.space10,
                     ),
                     Text(
-                      "${controller.battleRepo.apiClient.getUserName()} ",
+                      "${controller.battleRepo.apiClient.getUserFullName()}  ",
                       style: semiBoldLarge,
                     )
                   ],
@@ -146,59 +159,66 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                     controller.imageScrollController.stop();
                   }
                   return controller.battleRoomController.userFoundState.value == UserFoundState.found
-                      ? SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(Dimensions.space7),
-                                height: Dimensions.space80,
-                                width: Dimensions.space80,
-                                decoration: BoxDecoration(color: MyColor.prifileBG, borderRadius: BorderRadius.circular(Dimensions.space40)),
-                                child: FittedBox(
-                                  fit: BoxFit.cover,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(Dimensions.space40),
-                                    ),
-                                    height: Dimensions.space70,
-                                    width: Dimensions.space70,
-                                  ),
-                                ),
+                      ? Column(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(Dimensions.space2),
+                              height: Dimensions.space100,
+                              width: Dimensions.space100,
+                              decoration: BoxDecoration(color: MyColor.colorLightGrey, borderRadius: BorderRadius.circular(Dimensions.space100)),
+                              child: FittedBox(
+                                fit: BoxFit.cover,
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(Dimensions.space100),
+                                    child: opUserData.profileUrl == "null"
+                                        ? Image.asset(
+                                            MyImages.defaultAvatar,
+                                            fit: BoxFit.cover,
+                                            height: Dimensions.space50,
+                                            width: Dimensions.space50,
+                                          )
+                                        : Image.network(
+                                            "${UrlContainer.userImagePath}/${opUserData.profileUrl}",
+                                            fit: BoxFit.cover,
+                                            height: Dimensions.space50,
+                                            width: Dimensions.space50,
+                                          )),
                               ),
-                              const SizedBox(
-                                height: Dimensions.space10,
-                              ),
-                              Text(
-                                "${opUserData.name} ",
-                                style: semiBoldLarge,
-                              )
-                            ],
-                          ),
+                            ),
+                            const SizedBox(
+                              height: Dimensions.space10,
+                            ),
+                            Text(
+                              "${opUserData.name} ",
+                              style: semiBoldLarge,
+                            )
+                          ],
                         )
                       : SingleChildScrollView(
                           child: Column(
                             children: [
                               Container(
-                                padding: const EdgeInsets.all(Dimensions.space7),
-                                height: Dimensions.space80,
-                                width: Dimensions.space80,
-                                decoration: BoxDecoration(color: MyColor.prifileBG, borderRadius: BorderRadius.circular(Dimensions.space40)),
+                                padding: const EdgeInsets.all(Dimensions.space2),
+                                height: Dimensions.space100,
+                                width: Dimensions.space100,
+                                decoration: BoxDecoration(color: MyColor.colorLightGrey, borderRadius: BorderRadius.circular(Dimensions.space100)),
                                 child: FittedBox(
                                   fit: BoxFit.cover,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(Dimensions.space40),
-                                    ),
-                                    height: Dimensions.space70,
-                                    width: Dimensions.space70,
-                                  ),
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(Dimensions.space100),
+                                      child: Image.asset(
+                                        MyImages.defaultAvatar,
+                                        fit: BoxFit.cover,
+                                        height: Dimensions.space50,
+                                        width: Dimensions.space50,
+                                      )),
                                 ),
                               ),
                               const SizedBox(
                                 height: Dimensions.space10,
                               ),
                               const Text(
-                                "...",
+                                "${MyStrings.searching}...",
                                 style: semiBoldLarge,
                               )
                             ],
@@ -213,7 +233,8 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
             Stack(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space20),
+                  padding:
+                      const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space20),
                   width: double.infinity,
                   child: Lottie.asset(
                     MyImages.userSearchLottie,
@@ -243,7 +264,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               Container(
                                 margin: const EdgeInsets.all(Dimensions.space14),
                                 child: DefaultText(
-                                  text: "The Game Will Begin In",
+                                  text: MyStrings.yourGameWillStartSoon,
                                   fontSize: Dimensions.fontExtraLarge,
                                   textStyle: boldLarge.copyWith(fontStyle: FontStyle.italic),
                                 ),
@@ -251,7 +272,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               Container(
                                 margin: const EdgeInsets.all(Dimensions.space14),
                                 child: DefaultText(
-                                  text: "${controller.countdownSeconds == 0 ? "Started!" : controller.countdownSeconds}",
+                                  text: "${controller.countdownSeconds == 0 ?  MyStrings.started : controller.countdownSeconds}",
                                   fontSize: Dimensions.fontExtraLarge * 3,
                                   textStyle: boldLarge.copyWith(color: MyColor.primaryColor, fontStyle: FontStyle.italic),
                                 ),
@@ -274,7 +295,9 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               press: () {
                                 print("go");
 
-                                controller.battleRoomController.startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
+                                controller.battleRoomController
+                                    .startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true)
+                                    .whenComplete(() {
                                   // Get.back();
                                   // Get.toNamed(
                                   //   RouteHelper.battleQuizQuestionsScreen,

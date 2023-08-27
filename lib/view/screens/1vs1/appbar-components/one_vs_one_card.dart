@@ -73,7 +73,7 @@ class _OneVSOneCustomCardWidgetState extends State<OneVSOneCustomCardWidget> {
                       const CustomDivider(
                         space: Dimensions.space3,
                       ),
-                      const Text("500 ${MyStrings.coins}", style: semiBoldExtraLarge)
+                      Text("${controller.battleRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins}", style: semiBoldExtraLarge)
                     ],
                   )
                 ],

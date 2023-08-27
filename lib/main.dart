@@ -13,6 +13,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/controller/localization/localization_controller.dart';
 import 'package:flutter_prime/push_notification_service.dart';
 import 'core/di_service/di_services.dart' as di_service;
+import 'core/utils/util.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -24,23 +25,20 @@ Future<void> _messageHandler(RemoteMessage message) async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Map<String, Map<String, String>> languages = await di_service.init();
- 
+
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
   await PushNotificationService().setupInteractedMessage();
 
   HttpOverrides.global = MyHttpOverrides();
- 
+  MyUtils.allScreen();
   runApp(MyApp(languages: languages));
 }
 
 class MyHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;}
-
-          
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port) => true;
+  }
 }
 
 class MyApp extends StatefulWidget {
@@ -54,13 +52,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    
     return GetBuilder<LocalizationController>(
       builder: (localizeController) => GetMaterialApp(
-        theme: ThemeData(scaffoldBackgroundColor: MyColor.scaffoldBackgroundColor,
-        appBarTheme:const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle( 
-         statusBarColor: MyColor.colorWhite))),
+        theme: ThemeData(
+            scaffoldBackgroundColor: MyColor.scaffoldBackgroundColor,
+            appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: MyColor.colorWhite))),
         title: MyStrings.appName,
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.noTransition,
@@ -70,8 +66,7 @@ class _MyAppState extends State<MyApp> {
         getPages: RouteHelper().routes,
         locale: localizeController.locale,
         translations: Messages(languages: widget.languages),
-        fallbackLocale: Locale(localizeController.locale.languageCode,
-            localizeController.locale.countryCode),
+        fallbackLocale: Locale(localizeController.locale.languageCode, localizeController.locale.countryCode),
       ),
     );
   }

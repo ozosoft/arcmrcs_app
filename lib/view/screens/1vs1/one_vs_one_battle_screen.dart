@@ -91,6 +91,9 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                               press: () async {
                                 if (controller.slectedCategoryID.value == 0) {
                                   CustomSnackBar.error(errorList: [MyStrings.selectACategoryMsg]);
+                                } else if (int.parse(controller.battleRepo.apiClient.getUserCurrentCoin()) <
+                                    int.parse(controller.entryFeeRandomGame.value)) {
+                                  CustomSnackBar.error(errorList: [MyStrings.youHaveNoCoins]);
                                 } else {
                                   Get.toNamed(RouteHelper.findOpponentScreen, arguments: [
                                     controller.slectedCategoryID.value,

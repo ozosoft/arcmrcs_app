@@ -3,7 +3,7 @@ import 'package:flutter_prime/data/model/model/profile_achivement_model.dart';
 import 'package:flutter_prime/data/model/model/questionsList_model.dart';
 
 class MyStrings {
-    static const String appName = "Flutter Prime";
+    static const String appName = "QuizLAB";
 
   static const String withdrawInformation = "Withdraw Information";
   static const String withdrawLimit = "Withdraw Limit";
@@ -19,7 +19,9 @@ class MyStrings {
   static const String fileDownloadedSuccess = "File downloaded successfully";
   static const String selectPaymentMethod = "Select PaymentMethod";
   static const String areYouSureYouWantToCloseSearching = "Are You sure You Want Close Searching!";
+  static const String searching = "Searching";
   static const String areYouSureYouWantToLeaveThisRoom = "Are You sure You Want to leave this room!";
+  static const String questionNotFoundMsg = "Questions not found! Please try again after a few minutes.";
   static const String oponentLeftTheGame = "Oponent Left The game!";
   static const String youLeftTheGame = "You Left The game!";
   static const String youWon = "You Won";
@@ -27,9 +29,10 @@ class MyStrings {
   static const String collectCoins = "Collect Coins";
   static const String copied = "Copied!";
   static const String ok = "Ok";
+  static const String youHaveNoCoins = "You Have Not Enough Coins!";
+  static const String yourGameWillStartSoon = "The Game Will Begin In";
 
 
-  
   static const String reviewAnswer = "Review Answer";
   static const String selectCategory = "Select Category";
   static const String entryCoinsForBattele = "Entry Coins For Battle";
@@ -120,6 +123,7 @@ class MyStrings {
   static const String zipCode = "Zip Code";
   static const String state = "State";
   static const String start = "Start";
+  static const String started = "Started!";
   static const String city = "City";
   static const String english = "English";
   static const String bangla = "Bangla";
@@ -405,7 +409,8 @@ class MyStrings {
   static const String questions4 = '35 Questions';
   static const String questions5 = '10 Questions';
   static const String victory = 'Victory';
-  static const String defeat = 'Defeat';
+  static const String defeat = 'Defeated';
+  static const String drawn = 'Drawn';
   static const String congratulation = 'Congratulation';
   static const String betterLuckNextTime = 'Better Luck Next Time';
   static const String yourCoins = 'Your Coins';

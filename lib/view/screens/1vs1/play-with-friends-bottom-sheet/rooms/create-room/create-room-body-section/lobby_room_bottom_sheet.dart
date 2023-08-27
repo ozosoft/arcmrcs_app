@@ -71,7 +71,6 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                         TextButton(
                           style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
                           onPressed: () async {
-                            
                             await controller.deleteBattleRoom(controller.battleRoomData.value!.roomId, false).whenComplete(() {
                               Get.offAllNamed(RouteHelper.bottomNavBarScreen);
                             });
@@ -171,7 +170,9 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                               fit: BoxFit.cover,
                               child: Container(
                                 margin: const EdgeInsets.only(top: Dimensions.space20),
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: const DecorationImage(image: AssetImage(MyImages.profileimageWomenPng), fit: BoxFit.cover)),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(Dimensions.space40),
+                                    image: const DecorationImage(image: AssetImage(MyImages.profileimageWomenPng), fit: BoxFit.cover)),
                                 height: Dimensions.space70,
                                 width: Dimensions.space70,
                               ),
@@ -219,7 +220,9 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                               fit: BoxFit.cover,
                               child: Container(
                                 margin: const EdgeInsets.only(top: Dimensions.space20),
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: const DecorationImage(image: AssetImage(MyImages.profileimageWomen2Png), fit: BoxFit.cover)),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(Dimensions.space40),
+                                    image: const DecorationImage(image: AssetImage(MyImages.profileimageWomen2Png), fit: BoxFit.cover)),
                                 height: Dimensions.space70,
                                 width: Dimensions.space70,
                               ),

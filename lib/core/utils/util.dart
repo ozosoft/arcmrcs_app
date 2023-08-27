@@ -17,7 +17,7 @@ class MyUtils {
   static allScreen() {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: MyColor.getPrimaryColor(),
-        statusBarIconBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: MyColor.colorWhite,
         systemNavigationBarIconBrightness: Brightness.dark));
   }

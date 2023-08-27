@@ -164,8 +164,8 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                         const SizedBox(
                           height: Dimensions.space5,
                         ),
-                        const Text(
-                          MyStrings.fivehundred,
+                         Text(
+                          battleRoomController.battleRepo.apiClient.getUserCurrentCoin(),
                           style: semiBoldOverLarge,
                         )
                       ],
@@ -214,7 +214,14 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                             } else if (battleRoomController.entryFeeCustomRoom.value == "0") {
                               CustomSnackBar.error(errorList: [MyStrings.selectEntryCoinText]);
                             } else {
-                              battleRoomController.createNewRoom(categoryId: "${battleRoomController.slectedCategoryID.value}", entryFee: int.parse(battleRoomController.entryFeeCustomRoom.value), name: battleRoomController.battleRepo.apiClient.getUserName(), profileUrl: "", uid: battleRoomController.battleRepo.apiClient.getUserID(), shouldGenerateRoomCode: true, questionList: []);
+                              battleRoomController.createNewRoom(
+                                  categoryId: "${battleRoomController.slectedCategoryID.value}",
+                                  entryFee: int.parse(battleRoomController.entryFeeCustomRoom.value),
+                                  name: battleRoomController.battleRepo.apiClient.getUserFullName(),
+                                  profileUrl: battleRoomController.battleRepo.apiClient.getUserImagePath(),
+                                  uid: battleRoomController.battleRepo.apiClient.getUserID(),
+                                  shouldGenerateRoomCode: true,
+                                  questionList: []);
                             }
 
                             // print("${battleRoomController.roomCreateState.value}");

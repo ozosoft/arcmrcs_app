@@ -81,6 +81,12 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
 
   //Search Random Users
   randomSearch(List<Question> questionList, {int? getCategoryID, required String entryCoin}) {
-    battleRoomController.randomSearchRoom(entryCoin: entryCoin, categoryId: getCategoryID.toString(), name: battleRepo.apiClient.getUserName(), profileUrl: "", uid: battleRepo.apiClient.getUserID(), questionList: questionList);
+    battleRoomController.randomSearchRoom(
+        entryCoin: entryCoin,
+        categoryId: getCategoryID.toString(),
+        name: battleRepo.apiClient.getUserFullName(),
+        profileUrl: battleRepo.apiClient.getUserImagePath(),
+        uid: battleRepo.apiClient.getUserID(),
+        questionList: questionList);
   }
 }
