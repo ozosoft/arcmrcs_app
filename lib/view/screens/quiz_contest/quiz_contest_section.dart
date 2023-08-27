@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
@@ -19,13 +20,12 @@ class QuizContestSection extends StatefulWidget {
 }
 
 class _QuizContestSectionState extends State<QuizContestSection> {
-
-   @override
+  @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DashBoardRepo(apiClient: Get.find()));
     Get.put(DashBoardController(dashRepo: Get.find()));
-    DashBoardController controller =Get.put(DashBoardController(dashRepo: Get.find()));
+    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
 
     super.initState();
 
@@ -37,15 +37,11 @@ class _QuizContestSectionState extends State<QuizContestSection> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(
-    builder: (controller) =>  Column(
+      builder: (controller) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-                bottom: Dimensions.space3,
-                left: Dimensions.space4,
-                right: Dimensions.space4,
-                top: Dimensions.space17),
+            padding: const EdgeInsets.only(bottom: Dimensions.space3, left: Dimensions.space4, right: Dimensions.space4, top: Dimensions.space17),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -53,11 +49,14 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                   MyStrings.quizContest,
                   style: semiBoldMediumLarge,
                 ),
-                Text(
-                  MyStrings.viewAll,
-                  style: semiBoldLarge.copyWith(
-                      color: MyColor.colorlighterGrey,
-                      fontSize: Dimensions.space15),
+                InkWell(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.quizContestListscreen);
+                  },
+                  child: Text(
+                    MyStrings.viewAll,
+                    style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
+                  ),
                 ),
               ],
             ),
@@ -70,15 +69,14 @@ class _QuizContestSectionState extends State<QuizContestSection> {
             child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
-                  children: List.generate(controller.contestlist.length,
+                  children: List.generate(
+                      controller.contestlist.length,
                       (index) => Container(
-                            margin: const EdgeInsets.symmetric(
-                                horizontal: Dimensions.space5),
+                            margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
                             padding: const EdgeInsets.all(Dimensions.space12),
                             decoration: BoxDecoration(
                               color: MyColor.colorWhite,
-                              borderRadius:
-                                  BorderRadius.circular(Dimensions.defaultRadius),
+                              borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
                               boxShadow: const [
                                 BoxShadow(
                                   color: Color.fromARGB(61, 158, 158, 158),
@@ -95,55 +93,44 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment:MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.only(
-                                          top: Dimensions.space7,
-                                          right: Dimensions.space12),
+                                      padding: const EdgeInsets.only(top: Dimensions.space7, right: Dimensions.space12),
                                       height: Dimensions.space70,
                                       width: Dimensions.space50,
                                       child: Align(
                                         alignment: Alignment.topCenter,
-                                        child: Image.network(UrlContainer.quizContestImage+controller.contestlist[index].image.toString()),
+                                        child: Image.network(UrlContainer.quizContestImage + controller.contestlist[index].image.toString()),
                                       ),
                                     ),
                                     Container(
                                       // height: Dimensions.space70,
                                       // width: Dimensions.space220,
-                                      padding: const EdgeInsets.only(
-                                        bottom: Dimensions.space20),
+                                      padding: const EdgeInsets.only(bottom: Dimensions.space20),
                                       child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                        Text(
+                                          Text(
                                             controller.contestlist[index].title.toString(),
                                             style: semiBoldMediumLarge,
                                           ),
-                                          const SizedBox(
-                                              height: Dimensions.space8),
+                                          const SizedBox(height: Dimensions.space8),
                                           Text(
-                                           controller.contestlist[index].description.toString(),
-                                                // .substring(3, 10),
-                                            style: regularDefault.copyWith(
-                                                color: MyColor.colorlighterGrey),
+                                            controller.contestlist[index].description.toString(),
+                                            // .substring(3, 10),
+                                            style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
                                           )
                                         ],
                                       ),
                                     ),
-                                
-                                    
-                                   Padding(
-                                     padding:  EdgeInsets.only(right: 0,
-                                    top: 0,
-                                    bottom: MediaQuery.of(context).size.height*.05,
-                                    left: MediaQuery.of(context).size.width*.25),
-                                     child: SvgPicture.asset(
-                                          MyImages.bookmarkSVG,
-                                        ),
-                                   ),
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 0, top: 0, bottom: MediaQuery.of(context).size.height * .05, left: MediaQuery.of(context).size.width * .25),
+                                      child: SvgPicture.asset(
+                                        MyImages.bookmarkSVG,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Container(
@@ -151,52 +138,32 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                   color: MyColor.colorlighterGrey,
                                 ),
                                 Container(
-                                  padding: const EdgeInsets.only(
-                                      top: Dimensions.space10,
-                                      left: Dimensions.space10),
+                                  padding: const EdgeInsets.only(top: Dimensions.space10, left: Dimensions.space10),
                                   width: Dimensions.space330,
                                   child: Row(
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.all(
-                                            Dimensions.space5),
+                                        padding: const EdgeInsets.all(Dimensions.space5),
                                         child: Container(
-                                          decoration: BoxDecoration(
-                                              color: MyColor.cardColor,
-                                              border: Border.all(
-                                                  color: MyColor.colorlighterGrey,
-                                                  width: 0.3)),
-                                          padding: const EdgeInsets.all(
-                                              Dimensions.space7),
+                                          decoration: BoxDecoration(color: MyColor.cardColor, border: Border.all(color: MyColor.colorlighterGrey, width: 0.3)),
+                                          padding: const EdgeInsets.all(Dimensions.space7),
                                           child: Center(
-                                              child: Text(MyStrings.feeCoins+
-                                            controller.contestlist[index].point.toString(),
-                                            style: regularDefault.copyWith(
-                                                color: MyColor.colorGrey),
+                                              child: Text(
+                                            MyStrings.feeCoins + controller.contestlist[index].point.toString(),
+                                            style: regularDefault.copyWith(color: MyColor.colorGrey),
                                           )),
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.all(
-                                            Dimensions.space5),
+                                        padding: const EdgeInsets.all(Dimensions.space5),
                                         child: Container(
-                                          decoration: BoxDecoration(
-                                              color: MyColor.cardColor,
-                                              border: Border.all(
-                                                  color: MyColor.colorDarkGrey,
-                                                  width: 0.3)),
-                                          padding: const EdgeInsets.all(
-                                              Dimensions.space7),
-                                          child: Center(
-                                              child: Text(MyStrings.end+controller.contestlist[index].endDate.toString(),
-                                                  style: regularDefault.copyWith(
-                                                      color: MyColor.colorGrey))),
+                                          decoration: BoxDecoration(color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
+                                          padding: const EdgeInsets.all(Dimensions.space7),
+                                          child: Center(child: Text(MyStrings.end + controller.contestlist[index].endDate.toString(), style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                         ),
                                       ),
                                       const Spacer(),
-                                      Center(
-                                          child: SvgPicture.asset(
-                                              MyImages.playNowSVG))
+                                      Center(child: SvgPicture.asset(MyImages.playNowSVG))
                                     ],
                                   ),
                                 ),

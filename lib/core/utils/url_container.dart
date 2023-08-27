@@ -13,13 +13,19 @@ class UrlContainer {
   static const String subcategoriesUrl = 'general-quiz/subcategory/';
   static const String funNLearnsubcategoriesUrl = 'general-quiz/subcategory/';
   static const String quizQuestionsUrl = 'general-quiz/level/question/';
+  static const String funNlearnQuestionsUrl = 'fun/question-list/';
+  static const String dailyQuizQuestionsUrl = 'daily-quiz';
+  static const String dailyQuizSubmitAnswerUrl = 'daily-quiz/answer-submit';
 
   static const String registrationEndPoint = 'register';
   static const String loginEndPoint = 'login';
   static const String logoutUrl = 'logout';
   static const String submitAnswerUrl = 'general-quiz/answer-submit';
   static const String examsubmitAnswerUrl = 'exam/answer-submit';
-  static const String examZoneQuestionsUrl = 'exam/question-list';
+  static const String funNlearnsubmitAnswerUrl = 'fun/answer-submit';
+  static const String examZoneQuestionsUrl = 'exam/question-list/';
+  static const String quizContestQuestionsUrl = 'contest/questions/';
+  static const String quizcontestListUrl = 'contest/questions/';
   static const String forgetPasswordEndPoint = 'password/email';
   static const String passwordVerifyEndPoint = 'password/verify-code';
   static const String resetPasswordEndPoint = 'password/reset';
@@ -42,6 +48,8 @@ class UrlContainer {
 
   static const String dashBoardUrl = 'dashboard';
   static const String examZone = 'exam/exam-list';
+  static const String quizList = 'exam/quizList-list';
+  static const String contest = 'contest';
   static const String transactionEndpoint = 'transactions';
 
   static const String addWithdrawRequestUrl = 'withdraw-request';

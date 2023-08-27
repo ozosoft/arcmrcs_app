@@ -34,4 +34,23 @@ class FunNLearnRepo {
 
     return model;
   }
+
+   Future<ResponseModel> getFunNlearnQuestions(String id) async {
+    String url = "${UrlContainer.baseUrl}${UrlContainer.funNlearnQuestionsUrl + id.toString()}";
+    print('come here: ${url}');
+    ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+
+    return model;
+  }
+     Future<ResponseModel> submitAnswer(Map<String, dynamic> map) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.funNlearnsubmitAnswerUrl}';
+    print(url.toString());
+
+    ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
+
+    print(model.responseJson.toLowerCase());
+    print(model.statusCode);
+
+    return model;
+  }
 }

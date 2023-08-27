@@ -64,7 +64,7 @@ class _FunNLearnScreenState extends State<FunNLearnScreen> {
                         controller
                             .allCategoriesList[index].subcategoriesCount
                             .toString() == "0"
-                            ? const SizedBox()
+                            ?  Get.toNamed(RouteHelper.funNlearnListScreen,arguments: [ controller.allCategoriesList[index].name.toString(),controller.allCategoriesList[index].id.toString()])
                             : Get.toNamed(RouteHelper.funNlearnSubCategoryScreenScreen,
                                 arguments: [title,  controller
                             .allCategoriesList[index].id
@@ -81,7 +81,7 @@ class _FunNLearnScreenState extends State<FunNLearnScreen> {
                             controller.allCategoriesList[index].image
                                 .toString(),
                         expansionVisible: false,
-                        fromViewAll: true,
+                        fromViewAll: false,
                         subCategoryId: subCategoryId,
                         index: index,
                       ),

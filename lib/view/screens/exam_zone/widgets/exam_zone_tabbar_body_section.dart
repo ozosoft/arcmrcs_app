@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/exam_zone/exam_zone_controller.dart';
 import 'package:flutter_prime/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
@@ -109,7 +107,25 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> w
                         ),
                       );
                     }),
-                Text("data"),
+                ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: 3,
+                    itemBuilder: (BuildContext context, int index) {
+                      return CategoriesCard(
+                        index: index,
+                        marks: MyStrings.marks,
+                        date: MyStrings.dates,
+                        minute: MyStrings.minutes,
+                        fromExam: true,
+                        title: MyStrings.completed,
+                        // questions: MyStrings().allCategoryies[index]["questions"].toString(),
+                        // image: UrlContainer.examZoneImage+  controller.examcategoryList[index].image.toString(),
+                        expansionVisible: false,
+                        fromViewAll: false,
+                        // levels: MyStrings().allCategoryies[index]["level"].toString(),
+                      );
+                    }),
               ]),
             )),
       ),

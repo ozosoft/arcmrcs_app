@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/expanded_widget/expanded_widget.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/widgets/expanded_section.dart';
+import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/widgets/expanded_section_for_level.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
@@ -23,7 +23,7 @@ class _CategoriesCardState extends State<CategoriesCard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space12, vertical: Dimensions.space10),
+      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space12, vertical: Dimensions.space8),
       child: Container(
           decoration: BoxDecoration(
             color: MyColor.colorWhite,
@@ -119,6 +119,7 @@ class _CategoriesCardState extends State<CategoriesCard> {
                   : widget.fromFunNlearn?FunNLearnExpandedSections( categoryindex: widget.index,
                       isExpand: widget.isExpand,
                       title: widget.title,):SizedBox(),
+                      SizedBox(height: Dimensions.space5,)
             ],
           )),
     );
