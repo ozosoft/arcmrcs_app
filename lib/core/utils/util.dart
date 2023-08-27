@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -6,6 +8,21 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'my_strings.dart';
 
 class MyUtils {
+  //
+  static String shuffleString(String input) {
+    final List<String> characters = input.split('');
+    final Random random = Random();
+
+    for (int i = characters.length - 1; i > 0; i--) {
+      int j = random.nextInt(i + 1);
+      String temp = characters[i];
+      characters[i] = characters[j];
+      characters[j] = temp;
+    }
+
+    return characters.join('');
+  }
+
   static void vibrate() {
     HapticFeedback.heavyImpact();
     HapticFeedback.vibrate();

@@ -106,7 +106,11 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
                                   const SizedBox(height: Dimensions.space40),
                                   AnswarField(length: controller.gessThewordQuesstionList[questionsIndex].options![0].option!.length),
                                   const SizedBox(height: Dimensions.space20),
-                                  IconButton(onPressed: () {}, icon: Icon(Icons.delete_forever_outlined)),
+                                  IconButton(
+                                      onPressed: () {
+                                        controller.removeVAlue();
+                                      },
+                                      icon: const Icon(Icons.delete_forever_outlined)),
                                   const SizedBox(height: Dimensions.space40),
                                   QuestionButton(
                                     ans: controller.gessThewordQuesstionList[questionsIndex].options![0].option.toString(),
@@ -144,8 +148,8 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
                                 isTimerTextShown: true,
                                 autoStart: true,
                                 onComplete: () {
-                                  controller.addAns(controller.gessThewordQuesstionList[questionsIndex].id.toString(), controller.tempAns.join(''));
-                                  controller.nextPage();
+                                  // controller.addAns(controller.gessThewordQuesstionList[questionsIndex].id.toString(), controller.tempAns.join(''));
+                                  // controller.nextPage();
                                 },
                               ),
                             ),

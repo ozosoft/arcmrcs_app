@@ -49,8 +49,7 @@ class _GessWordSubCatagoriScreenState extends State<GessWordSubCatagoriScreen> {
                     },
                     child: GessWordSubCatagoriCard(
                       subcategory: controller.subCatagories[index],
-                      //attention: change img base url
-                      image: 'https://url8.viserlab.com/quizlab/assets/admin/images/subcategory/${controller.subCatagories[index].image}',
+                      image: '${controller.subImgPath}/${controller.subCatagories[index].image}',
                     ),
                   );
                 },

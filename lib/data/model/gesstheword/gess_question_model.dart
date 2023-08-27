@@ -3,6 +3,9 @@
 //     final gesswordQuestionResponse = gesswordQuestionResponseFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:math';
+
+import 'package:flutter_prime/core/utils/util.dart';
 
 import '../global/meassage.dart';
 
@@ -136,7 +139,7 @@ class Option {
   factory Option.fromJson(Map<String, dynamic> json) => Option(
         id: json["id"],
         questionId: json["question_id"],
-        option: json["option"],
+        option: json["option"] == null ? null : MyUtils.shuffleString(json["option"]),
         isAnswer: json["is_answer"],
         audience: json["audience"],
         createdAt: json["created_at"] == null ? null : json["created_at"].toString(),

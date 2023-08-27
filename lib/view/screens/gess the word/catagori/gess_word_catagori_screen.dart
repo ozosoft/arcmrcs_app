@@ -41,20 +41,9 @@ class _GestheWordCatagoriScreenState extends State<GestheWordCatagoriScreen> {
             : ListView.builder(
                 itemCount: controller.catagoriList.length,
                 itemBuilder: (context, i) {
-                  return GestureDetector(
-                    onTap: () {
-                      if (controller.catagoriList[i].subcategoriesCount == "0") {
-                        // skip: go to direct quiz list
-                        log('No subcatagori');
-                      } else {
-                        Get.toNamed(RouteHelper.gessThewordsubCatagori, arguments: controller.catagoriList[i].id);
-                      }
-                    },
-                    child: GessCatagroiCard(
-                      title: controller.catagoriList[i].name ?? '',
-                      image: '${controller.imgPath}/${controller.catagoriList[i].image}',
-                      questions: controller.catagoriList[i].questionsCount.toString(),
-                    ),
+                  return GessCatagroiCard(
+                    catagories: controller.catagoriList[i],
+                    image: '${controller.imgPath}/${controller.catagoriList[i].image}',
                   );
                 },
               );

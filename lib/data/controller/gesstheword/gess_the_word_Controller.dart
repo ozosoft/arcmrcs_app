@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
-import 'dart:developer';
+import 'dart:developer' as dev;
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -36,7 +37,7 @@ class GessThewordController extends GetxController {
       clearAllData();
       pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
     } else {
-      log("Go submit data");
+      dev.log("Go submit data");
     }
   }
 
@@ -46,13 +47,12 @@ class GessThewordController extends GetxController {
 
   void addAns(String questionID, String answar) {
     ans.add({"quizInfo_id": questionID, "option": answar});
-    log(ans.toString());
+    dev.log(ans.toString());
   }
 
 //final submit
   void submit() {
-    log("final submit data");
-    log(ans.toString());
+    dev.log(ans.toString());
   }
 
   // selected index of value list
@@ -69,9 +69,13 @@ class GessThewordController extends GetxController {
     }
   }
 
-  void removeVAlue(String val) {
-    tempAns.remove(val);
-    update();
+  void removeVAlue() {
+    if (selectedIndex != tempAns.length) {
+      tempAns.removeAt(selectedIndex);
+      tempAns.insert(selectedIndex, "-1");
+      selectedIndex = selectedIndex != 0 ? selectedIndex - 1 : selectedIndex;
+      update();
+    }
   }
 
   void replace(String val) {
@@ -79,11 +83,11 @@ class GessThewordController extends GetxController {
       tempAns.removeAt(selectedIndex);
       tempAns.insert(selectedIndex, val);
       selectedIndex = selectedIndex != tempAns.length ? selectedIndex + 1 : selectedIndex;
-      log(selectedIndex.toString(), name: "if part befor update");
+      dev.log(selectedIndex.toString(), name: "if part befor update");
       update();
-      log(selectedIndex.toString(), name: "if part after update");
+      dev.log(selectedIndex.toString(), name: "if part after update");
     } else {
-      log(selectedIndex.toString(), name: "else part");
+      dev.log(selectedIndex.toString(), name: "else part");
     }
   }
 
@@ -143,7 +147,7 @@ class GessThewordController extends GetxController {
   }
 
   Future<void> getQuestion(String id) async {
-    log(id);
+    dev.log(id);
     isLoading = true;
     update();
     ResponseModel response = await gessTheWordRepo.getwordQuestionList(id);
@@ -158,7 +162,7 @@ class GessThewordController extends GetxController {
           questionImgPath = model.data?.questionImagePath;
           ansDuration = int.parse(model.data?.perQuestionAnswerDuration.toString() ?? "30");
           gessThewordQuesstionList.addAll(templist);
-          log(gessThewordQuesstionList.length.toString());
+          dev.log(gessThewordQuesstionList.length.toString());
         }
       } else {
         CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);

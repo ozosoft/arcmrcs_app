@@ -1,7 +1,6 @@
 import 'dart:developer';
-
+import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/style.dart';
@@ -19,14 +18,6 @@ class QuestionButton extends StatefulWidget {
 
 class _QuestionButtonState extends State<QuestionButton> {
   @override
-  void initState() {
-    // TODO: implement initState
-    // widget.ans = generateRandomString(widget.ans.length);
-    // print(widget.ans);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GetBuilder<GessThewordController>(builder: (controller) {
       return Wrap(
@@ -35,11 +26,10 @@ class _QuestionButtonState extends State<QuestionButton> {
         children: List.generate(
           widget.ans.length,
           (index) {
-            return GestureDetector(
+            return InkWell(
               onTap: () {
                 controller.replace(widget.ans[index].toString());
                 MyUtils.vibrate();
-                log(controller.tempAns.toString());
               },
               child: Container(
                 padding: const EdgeInsets.all(Dimensions.space3),
@@ -48,9 +38,9 @@ class _QuestionButtonState extends State<QuestionButton> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
                   border: Border.all(
-                    color: index == 3 ? MyColor.primaryColor : MyColor.borderColor,
+                    color: MyColor.borderColor,
                   ),
-                  color: index == 3 ? MyColor.primaryColor : MyColor.borderColor,
+                  color: MyColor.borderColor,
                 ),
                 child: Center(
                   child: Text(

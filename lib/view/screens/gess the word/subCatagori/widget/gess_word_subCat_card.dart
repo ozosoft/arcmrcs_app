@@ -8,18 +8,16 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/model/gesstheword/gess_subcatagori_model.dart';
+import 'package:flutter_prime/view/components/animated_widget/expanded_widget.dart';
 import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
 import 'package:flutter_prime/view/components/text/custom_text_with_underline.dart';
 
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../../../../components/animated_widget/expanded_widget.dart';
-
 class GessWordSubCatagoriCard extends StatefulWidget {
   GessSubcategory subcategory;
   String image;
-  // final bool expansionVisible, fromViewAll, fromBookmark, fromExam;
 
   GessWordSubCatagoriCard({
     super.key,
