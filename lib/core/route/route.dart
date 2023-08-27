@@ -7,6 +7,7 @@ import 'package:flutter_prime/view/screens/bookmark/bookmark_screen.dart';
 import 'package:flutter_prime/view/screens/coin_history/coin_history_screen.dart';
 import 'package:flutter_prime/view/screens/gess%20the%20word/catagori/gess_word_catagori_screen.dart';
 import 'package:flutter_prime/view/screens/gess%20the%20word/gess_the_word_screen.dart';
+import 'package:flutter_prime/view/screens/gess%20the%20word/result/gess_word_resultScreen.dart';
 import 'package:flutter_prime/view/screens/gess%20the%20word/subCatagori/gess_word_subcatagori_screen.dart';
 import 'package:flutter_prime/view/screens/notification/notification_screen.dart';
 import 'package:flutter_prime/view/screens/profile/profile-edit/Profile_edit_screen.dart';
@@ -66,6 +67,7 @@ class RouteHelper {
   static const String gessTheword = "/gess_the_word";
   static const String gessThewordCatagori = "/gess_the_word_catagori";
   static const String gessThewordsubCatagori = "/gess_the_word_subCatagroi";
+  static const String gessThewordResult = "/gess_the_word_result";
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -104,5 +106,6 @@ class RouteHelper {
     GetPage(name: gessTheword, page: () => const GessThewordScreen()),
     GetPage(name: gessThewordCatagori, page: () => const GestheWordCatagoriScreen()),
     GetPage(name: gessThewordsubCatagori, page: () => const GessWordSubCatagoriScreen()),
+    GetPage(name: gessThewordResult, page: () => const GessWordResultScreen()),
   ];
 }

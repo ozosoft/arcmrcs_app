@@ -65,6 +65,7 @@ class UrlContainer {
   static const String catagoriList = 'category-list';
   static const String subCatagoriList = 'subcategory-list/';
   static const String questionList = 'question-list/';
+  static const String gesswordSubmit = 'answer-submit';
 
   static const String test1 = 'general-setting';
 }

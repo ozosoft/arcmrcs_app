@@ -229,6 +229,7 @@ class MyStrings {
   static const String selectCountry = "Select Country";
   static const String letsPlay = "Let's Play";
   static const String playWithFriend = "Play With Friend";
+  static const String playAgain = "Play Again";
   static const String viewAll = "View all";
   static const String viewMore = "View More";
   static const String rank = "Rank";

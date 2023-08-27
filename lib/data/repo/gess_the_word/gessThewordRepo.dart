@@ -39,4 +39,11 @@ class GessTheWordRepo {
       return ResponseModel(false, MyStrings.somethingWentWrong, 300, '');
     }
   }
+
+  Future<dynamic> submitAnswar(Map<String, dynamic> map) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.gessTheword}${UrlContainer.gesswordSubmit}';
+    log(url, name: 'submit ans');
+    ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
+    return model;
+  }
 }

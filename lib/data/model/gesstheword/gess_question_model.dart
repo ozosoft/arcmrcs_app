@@ -78,19 +78,10 @@ class GessQuestion {
   DateTime? createdAt;
   DateTime? updatedAt;
   Pivot? pivot;
+  String? selectedAnswer;
   List<Option>? options;
 
-  GessQuestion({
-    this.id,
-    this.question,
-    this.image,
-    this.code,
-    this.status,
-    this.createdAt,
-    this.updatedAt,
-    this.pivot,
-    this.options,
-  });
+  GessQuestion({this.id, this.question, this.image, this.code, this.status, this.createdAt, this.updatedAt, this.pivot, this.options, this.selectedAnswer});
 
   factory GessQuestion.fromJson(Map<String, dynamic> json) => GessQuestion(
         id: json["id"],
@@ -98,6 +89,7 @@ class GessQuestion {
         image: json["image"],
         code: json["code"],
         status: json["status"],
+        selectedAnswer: '',
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         pivot: json["pivot"] == null ? null : Pivot.fromJson(json["pivot"]),
@@ -113,8 +105,13 @@ class GessQuestion {
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
         "pivot": pivot?.toJson(),
+        'selectedAnswer': selectedAnswer.toString(),
         "options": options == null ? [] : List<dynamic>.from(options!.map((x) => x.toJson())),
       };
+
+  void setSelectedAnswer(String answer) {
+    selectedAnswer = answer;
+  }
 }
 
 class Option {

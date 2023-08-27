@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
@@ -20,7 +18,7 @@ class _TransectionSectionState extends State<TransectionSection> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      physics:const BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Column(
         children: [
           const SizedBox(height: Dimensions.space20),
@@ -33,14 +31,19 @@ class _TransectionSectionState extends State<TransectionSection> {
           ),
           const Text(MyStrings.fivehundredCoin, style: semiBoldOverLarge),
           const SizedBox(height: Dimensions.space20),
-         const CustomDashedDivider(height: .2, width: double.infinity),
-            const SizedBox(height: Dimensions.space10),
+          const CustomDashedDivider(height: .2, width: double.infinity),
+          const SizedBox(height: Dimensions.space10),
           SizedBox(
             height: MediaQuery.of(context).size.height,
             child: ListView.separated(
-              physics: const NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  return const ReedemRequestCard(amount: MyStrings.twoHundredFortyDollar,paymentType: MyStrings.paymentSystem,date: MyStrings.dates,pending: true,);
+                  return const ReedemRequestCard(
+                    amount: MyStrings.twoHundredFortyDollar,
+                    paymentType: MyStrings.paymentSystem,
+                    date: MyStrings.dates,
+                    pending: true,
+                  );
                 },
                 separatorBuilder: (context, index) {
                   return const Divider(

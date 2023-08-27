@@ -3,11 +3,14 @@ import 'dart:convert';
 import 'dart:developer' as dev;
 import 'dart:math';
 
+import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/gesstheword/gess_catagroi_model.dart';
 import 'package:flutter_prime/data/model/gesstheword/gess_question_model.dart';
 import 'package:flutter_prime/data/model/gesstheword/gess_subcatagori_model.dart';
+import 'package:flutter_prime/data/model/gesstheword/gess_submit_response.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/data/repo/gess_the_word/gessThewordRepo.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
@@ -17,13 +20,21 @@ class GessThewordController extends GetxController {
   GessTheWordRepo gessTheWordRepo;
   GessThewordController({required this.gessTheWordRepo});
   //
-  PageController pageController = PageController();
+  PageController pageController = PageController(initialPage: 0);
+  CountDownController countDownController = CountDownController();
+  //
   String? imgPath = "";
   String? questionImgPath = "";
   String? subImgPath = "";
   int currentPage = 0;
   bool isLoading = false;
   int ansDuration = 30;
+  String? quizInfoId;
+  // result
+  String totalQuestion = '';
+  String correctAnswer = '';
+  String wrongAnswer = '';
+  String totalScore = '';
 
   void initiaValue() async {
     imgPath = "";
@@ -36,23 +47,54 @@ class GessThewordController extends GetxController {
     if (pageController.initialPage < gessThewordQuesstionList.length) {
       clearAllData();
       pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
-    } else {
-      dev.log("Go submit data");
-    }
+    } else {}
   }
 
   // asn
   List<String> tempAns = [];
-  List<Map<String, dynamic>> ans = [];
 
-  void addAns(String questionID, String answar) {
-    ans.add({"quizInfo_id": questionID, "option": answar});
-    dev.log(ans.toString());
+  void addAns(int questionIndex, String answer) {
+    gessThewordQuesstionList[questionIndex].setSelectedAnswer(answer);
   }
 
 //final submit
-  void submit() {
-    dev.log(ans.toString());
+  void submit() async {
+    isLoading = true;
+    update();
+
+    Map<String, dynamic> params = {};
+    params['quizInfo_id'] = quizInfoId;
+    //
+    for (int i = 0; i < gessThewordQuesstionList.length; i++) {
+      String questionId = gessThewordQuesstionList[i].id.toString();
+      // String optionId = gessThewordQuesstionList[i].options![0].id.toString();
+      String selectedOptionId = gessThewordQuesstionList[i].selectedAnswer.toString();
+      dev.log(selectedOptionId, name: " map answar");
+      params['question_id[]'] = questionId.toString();
+      params['option_$questionId'] = selectedOptionId.toString();
+    }
+    //
+    ResponseModel response = await gessTheWordRepo.submitAnswar(params);
+    if (response.statusCode == 200) {
+      GesswordQuestionSubmitResponse model = GesswordQuestionSubmitResponse.fromJson(jsonDecode(response.responseJson));
+      if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+        totalQuestion = model.data?.totalQuestion.toString() ?? '';
+        correctAnswer = model.data?.correctAnswer.toString() ?? '';
+        wrongAnswer = model.data?.wrongAnswer.toString() ?? '';
+        totalScore = model.data?.totalScore.toString() ?? '';
+        Get.toNamed(RouteHelper.gessThewordResult);
+      } else {
+        Get.toNamed(RouteHelper.gessThewordResult);
+
+        dev.log('wrong');
+      }
+    } else {
+      CustomSnackBar.error(errorList: [response.message]);
+      Get.toNamed(RouteHelper.gessThewordCatagori);
+    }
+
+    isLoading = false;
+    update();
   }
 
   // selected index of value list
@@ -83,11 +125,8 @@ class GessThewordController extends GetxController {
       tempAns.removeAt(selectedIndex);
       tempAns.insert(selectedIndex, val);
       selectedIndex = selectedIndex != tempAns.length ? selectedIndex + 1 : selectedIndex;
-      dev.log(selectedIndex.toString(), name: "if part befor update");
+
       update();
-      dev.log(selectedIndex.toString(), name: "if part after update");
-    } else {
-      dev.log(selectedIndex.toString(), name: "else part");
     }
   }
 
@@ -147,7 +186,7 @@ class GessThewordController extends GetxController {
   }
 
   Future<void> getQuestion(String id) async {
-    dev.log(id);
+    quizInfoId = '';
     isLoading = true;
     update();
     ResponseModel response = await gessTheWordRepo.getwordQuestionList(id);
@@ -161,6 +200,7 @@ class GessThewordController extends GetxController {
           gessThewordQuesstionList.clear();
           questionImgPath = model.data?.questionImagePath;
           ansDuration = int.parse(model.data?.perQuestionAnswerDuration.toString() ?? "30");
+          quizInfoId = id;
           gessThewordQuesstionList.addAll(templist);
           dev.log(gessThewordQuesstionList.length.toString());
         }
@@ -177,7 +217,6 @@ class GessThewordController extends GetxController {
   void clearAllData() {
     tempAns.clear();
     selectedIndex = 0;
-
     update();
   }
 }

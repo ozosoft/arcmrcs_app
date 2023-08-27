@@ -24,6 +24,7 @@ class _AnswarFieldState extends State<AnswarField> {
   @override
   void initState() {
     super.initState();
+
     for (var i = 0; i < widget.length; i++) {
       Get.find<GessThewordController>().tempAns.add('-1');
     }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -10,18 +8,13 @@ import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:flutter_prime/data/repo/gess_the_word/gessThewordRepo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_appbar.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_prime/view/screens/gess%20the%20word/widget/answar_field.dart';
 import 'package:flutter_prime/view/screens/gess%20the%20word/widget/question_button.dart';
-import 'package:flutter_prime/view/screens/quiz-questions/quiz-screen-widgets/life_line_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 
-import '../../../core/utils/my_images.dart';
+import 'package:get/get.dart';
 
 class GessThewordScreen extends StatefulWidget {
   const GessThewordScreen({super.key});
@@ -35,12 +28,12 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
   @override
   void initState() {
     id = Get.arguments;
-    log(id.toString());
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GessTheWordRepo(apiClient: Get.find()));
     final controller = Get.put(GessThewordController(gessTheWordRepo: Get.find()));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.clearAllData();
       controller.getQuestion(id.toString());
     });
     super.initState();
@@ -90,7 +83,7 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
                                       LevelCardButton(text: MyStrings.quiestionsLimit, hasIcon: false, hasImage: false),
                                     ],
                                   ),
-                                  // skip: use  preloader or something like this
+                                  // note: use  preloader or something like this
                                   controller.gessThewordQuesstionList[questionsIndex].image != null
                                       ? Container(
                                           width: double.infinity,
@@ -119,8 +112,8 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
                                   RoundedButton(
                                     text: MyStrings.submit,
                                     press: () {
-                                      controller.addAns(controller.gessThewordQuesstionList[questionsIndex].id.toString(), controller.tempAns.join(''));
-                                      controller.gessThewordQuesstionList.length == questionsIndex ? controller.submit() : controller.nextPage();
+                                      controller.addAns(questionsIndex, controller.tempAns.join().toString());
+                                      questionsIndex == controller.gessThewordQuesstionList.length - 1 ? controller.submit() : controller.nextPage();
                                     },
                                   ),
                                   const SizedBox(height: Dimensions.space40),
@@ -148,8 +141,8 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
                                 isTimerTextShown: true,
                                 autoStart: true,
                                 onComplete: () {
-                                  // controller.addAns(controller.gessThewordQuesstionList[questionsIndex].id.toString(), controller.tempAns.join(''));
-                                  // controller.nextPage();
+                                  controller.addAns(questionsIndex, controller.tempAns.join().toString());
+                                  questionsIndex == controller.gessThewordQuesstionList.length - 1 ? controller.submit() : controller.nextPage();
                                 },
                               ),
                             ),

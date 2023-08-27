@@ -75,6 +75,7 @@ class MyImages {
   static const String coin = "assets/images/Coin.svg";
   static const String score = "assets/images/score.svg";
   static const String reviewBgImage = "assets/images/review_answer_bg.svg";
+  static const String cup = "assets/images/cup.svg";
   static const String greenTikSvg = "assets/images/green_tik_svg.svg";
   static const String wrongSvg = "assets/images/wrongFilled.svg";
   static const String totalReward = "assets/images/totalReward.svg";
@@ -171,14 +172,7 @@ class MyImages {
   ];
   List<String> badges = [badge1SVG, badge2SVG, badge3SVG];
 
-  List<String> badgesList = [
-    badge1SVG,
-    badge2SVG,
-    badge3SVG,
-    badge4SVG,
-    badge5SVG,
-    badge6SVG
-  ];
+  List<String> badgesList = [badge1SVG, badge2SVG, badge3SVG, badge4SVG, badge5SVG, badge6SVG];
 
   List<String> avatars = [
     avatar1,
@@ -206,6 +200,6 @@ class MyImages {
   ];
   final List notificatioImages = [eventSVG, joinRoomSVG, eventSVG];
   final List playDiffrentGamesImages = [dailyquizSVG, funAndLearnSVG, guessTheWordSVG];
-  final List flagImages = [germanflagSVG,americanFlagSVG,americanFlagSVG,germanflagSVG,americanFlagSVG];
-  final List arrows = [arrowUpSVG,aarrowdownSVG,arrowUpSVG,aarrowdownSVG,arrowUpSVG];
+  final List flagImages = [germanflagSVG, americanFlagSVG, americanFlagSVG, germanflagSVG, americanFlagSVG];
+  final List arrows = [arrowUpSVG, aarrowdownSVG, arrowUpSVG, aarrowdownSVG, arrowUpSVG];
 }

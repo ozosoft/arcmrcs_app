@@ -58,7 +58,6 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                       itemCount: controller.questionsList.length,
                       itemBuilder: (context, questionsIndex) {
                         controller.setCurrentOption(questionsIndex);
-
                         print('current question index: ${questionsIndex}');
 
                         return SingleChildScrollView(
