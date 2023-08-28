@@ -188,7 +188,9 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                     ),
                   ),
                   const BottomSectionButtons(),
-                  const SizedBox(height: Dimensions.space15,)
+                  const SizedBox(
+                    height: Dimensions.space15,
+                  )
                   // TextButton(
                   //     onPressed: () {
                   //       controller.confettiControllerTopCenter.play();

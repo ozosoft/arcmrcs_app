@@ -18,7 +18,7 @@ import '../../../core/route/route.dart';
 import '../../../core/utils/internet_connectivity.dart';
 import '../../model/battle/battleRoom.dart';
 import '../../model/battle/battle_room_exeption.dart';
-import '../../model/battle/userBattleRoomDetails.dart';
+import '../../model/battle/user_battle_room_details_model.dart';
 
 enum RoomCreateState {
   none,
@@ -214,7 +214,7 @@ class BattleRoomController extends GetxController {
               print("called from here to quiz page");
               Get.back();
 
-              Get.toNamed(
+              Get.offAndToNamed(
                 RouteHelper.battleQuizQuestionsScreen,
                 arguments: ["${"${battleRoom.user1!.name} VS ${battleRoom.user2!.name}"} ", battleQuestionsList, categoryList],
               );
@@ -460,7 +460,7 @@ class BattleRoomController extends GetxController {
     }
   }
 
-  // UserBattleRoomDetails getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
+  // UserBattleRoomDetailsModel getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
   //   if (userFoundState.value == UserFoundState.found) {
   //     if (currentUserId == battleRoomData.value!.user1?.uid) {
   //       return (battleRoomData.value!.user2!);
@@ -468,10 +468,10 @@ class BattleRoomController extends GetxController {
   //       return (battleRoomData.value!.user1!);
   //     }
   //   }
-  //   return UserBattleRoomDetails(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
+  //   return UserBattleRoomDetailsModel(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
   // }
 
-  UserBattleRoomDetails getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
+  UserBattleRoomDetailsModel getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
     if (userFoundState.value == UserFoundState.found) {
       if (isMyData) {
         if (currentUserId == battleRoomData.value!.user1?.uid) {
@@ -487,7 +487,7 @@ class BattleRoomController extends GetxController {
         }
       }
     }
-    return UserBattleRoomDetails(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
+    return UserBattleRoomDetailsModel(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
   }
 //Firebase Part
 
@@ -732,7 +732,6 @@ class BattleRoomController extends GetxController {
       throw (e.toString());
     }
   }
-
 
 //submit answer Firebase
   Future<void> submitAnswerToFirebase({required Map<String, dynamic> submitAnswer, String? battleRoomDocumentId, required bool forMultiUser}) async {

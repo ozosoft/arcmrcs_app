@@ -17,14 +17,21 @@ import '../../model/global/response_model/response_model.dart';
 import '../../repo/battle/battle_repo.dart';
 import 'battle_room_controller.dart';
 import 'package:wakelock/wakelock.dart';
+
 class BattleRoomQuizController extends GetxController with GetTickerProviderStateMixin, WidgetsBindingObserver {
   BattleRepo battleRepo;
   final BattleRoomController battleRoomController;
 
   BattleRoomQuizController(this.battleRoomController, this.battleRepo);
   StreamSubscription<DocumentSnapshot>? battleRoomStreamSubscription;
-  final int duration = 300;
+  final int duration = 60;
+
   final CountDownController countDownController = CountDownController();
+  //Current User CountDown Controller\
+  final CountDownController myCountDownController = CountDownController();
+  //Opponent User CountDown Controller
+  final CountDownController opUserCountDownController = CountDownController();
+
   final RxList<BattleQuestion> questionsList = <BattleQuestion>[].obs;
   late AnimationController _listAnimationController;
   AnimationController get listAnimationController => _listAnimationController;
@@ -235,12 +242,23 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       // Add question_id to params
       params['question_id[$i]'] = quizeId.toString();
       // Find the answer object with the matching qid for ownData and opUserData
+      var ownAnswerIfLeftOP = questionsList.firstWhere(
+        (qus) => qus.id.toString() == quizeId,
+      );
       var ownAnswer = ownData.answers.firstWhere((answer) => answer['qid'] == quizeId, orElse: () => null);
       var opUserAnswer = opUserData.answers.firstWhere((answer) => answer['qid'] == quizeId, orElse: () => null);
 
-      if (ownAnswer != null) {
-        int selectedOptionIdOwn = ownAnswer['ans']; //'ans' holds the selected option index
-        params['my_option_$quizeId'] = selectedOptionIdOwn.toString();
+      if (fromYouWon == false) {
+        if (ownAnswer != null) {
+          int selectedOptionIdOwn = ownAnswer['ans']; //'ans' holds the selected option index
+          params['my_option_$quizeId'] = selectedOptionIdOwn.toString();
+        }
+      } else {
+        var optionID = ownAnswerIfLeftOP.options.where((element) => element.isAnswer == "1");
+
+        params['my_option_$quizeId'] = "${optionID.first.id}";
+
+        // print(optionID.first.id);
       }
 
       if (fromYouWon == false) {
@@ -253,7 +271,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       }
     }
 
-    print(params);
+    // print(params);
 
     ResponseModel submitModel = await battleRepo.finishBattleAndSubmitAnswer(params);
     print(submitModel.statusCode);

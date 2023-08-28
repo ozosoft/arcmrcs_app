@@ -20,12 +20,8 @@ class _BattleQuizQuestionsScreenState extends State<BattleQuizQuestionsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomCategoryAppBar(title: title.toString()),
-        body: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space50),
-          child: BattleQuizQuestionsBodySection(
-            qustionsList: qustionsList,
-          ),
+        body: BattleQuizQuestionsBodySection(
+          qustionsList: qustionsList,
         ));
   }
 }
