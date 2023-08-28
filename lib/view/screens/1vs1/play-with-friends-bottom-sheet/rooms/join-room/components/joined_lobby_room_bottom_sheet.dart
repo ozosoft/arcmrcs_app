@@ -156,7 +156,13 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                               fit: BoxFit.cover,
                               child: Container(
                                 margin: const EdgeInsets.only(top: Dimensions.space20),
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: const DecorationImage(image: AssetImage(MyImages.profileimageWomenPng), fit: BoxFit.cover)),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(Dimensions.space40),
+                                    image: DecorationImage(
+                                        image: AssetImage(controller.battleRoomData.value!.user1!.profileUrl == "null"
+                                            ? MyImages.defaultAvatar
+                                            : controller.battleRoomData.value!.user1!.profileUrl),
+                                        fit: BoxFit.cover)),
                                 height: Dimensions.space70,
                                 width: Dimensions.space70,
                               ),
@@ -204,7 +210,13 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                               fit: BoxFit.cover,
                               child: Container(
                                 margin: const EdgeInsets.only(top: Dimensions.space20),
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: const DecorationImage(image: AssetImage(MyImages.profileimageWomen2Png), fit: BoxFit.cover)),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(Dimensions.space40),
+                                    image: DecorationImage(
+                                        image: AssetImage(controller.battleRoomData.value!.user1!.profileUrl == "null"
+                                            ? MyImages.defaultAvatar
+                                            : controller.battleRoomData.value!.user2!.profileUrl),
+                                        fit: BoxFit.cover)),
                                 height: Dimensions.space70,
                                 width: Dimensions.space70,
                               ),
