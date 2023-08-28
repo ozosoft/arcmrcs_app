@@ -7,6 +7,7 @@ import 'package:flutter_prime/data/repo/gess_the_word/gessThewordRepo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 
 import 'package:flutter_prime/view/components/app-bar/custom_appbar.dart';
+import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_prime/view/screens/gess%20the%20word/catagori/widget/gess_catagori_card.dart';
@@ -34,7 +35,7 @@ class _GestheWordCatagoriScreenState extends State<GestheWordCatagoriScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(title: 'Select Catagroi'),
+      appBar: const CustomCategoryAppBar(title: 'Select Catagories'),
       body: GetBuilder<GessThewordController>(builder: (controller) {
         return controller.isLoading
             ? const CustomLoader()

@@ -8,15 +8,15 @@ import 'package:flutter_prime/core/utils/util.dart';
 import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:get/get.dart';
 
-class QuestionButton extends StatefulWidget {
+class GessWordKeyBoard extends StatefulWidget {
   String ans;
-  QuestionButton({super.key, required this.ans});
+  GessWordKeyBoard({super.key, required this.ans});
 
   @override
-  State<QuestionButton> createState() => _QuestionButtonState();
+  State<GessWordKeyBoard> createState() => _GessWordKeyBoardState();
 }
 
-class _QuestionButtonState extends State<QuestionButton> {
+class _GessWordKeyBoardState extends State<GessWordKeyBoard> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GessThewordController>(builder: (controller) {
@@ -44,7 +44,7 @@ class _QuestionButtonState extends State<QuestionButton> {
                 ),
                 child: Center(
                   child: Text(
-                    widget.ans[index].toUpperCase(),
+                    widget.ans[index],
                     style: semiBoldDefault.copyWith(
                       fontSize: Dimensions.fontMediumLarge,
                     ),

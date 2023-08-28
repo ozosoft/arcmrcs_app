@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
@@ -10,10 +9,10 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/column_widget/bottom_sheet_column.dart';
 import 'package:flutter_prime/view/components/divider/custom_dashed_divider.dart';
+import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
+import 'package:flutter_prime/view/components/divider/custom_vertical_divider.dart';
 import 'package:flutter_prime/view/components/image/custom_svg_picture.dart';
-import 'package:flutter_prime/view/screens/quiz-result/widgets/bottom_section_buttons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -25,19 +24,32 @@ class GessResultBody extends StatefulWidget {
 }
 
 class _GessResultBodyState extends State<GessResultBody> {
-  bool showQuestions = false;
-  bool audienceVote = false;
-  bool tapAnswer = false;
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GessThewordController>(builder: (controller) {
       return Container(
-        margin: const EdgeInsets.only(top: Dimensions.space20),
         padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space30),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space20), color: MyColor.colorWhite),
         child: Column(
           children: [
+            Column(
+              children: [
+                Text(
+                  controller.totalScore,
+                  style: mediumOverLarge,
+                ),
+                const SizedBox(
+                  height: Dimensions.space2,
+                ),
+                const Text(
+                  'Total Score',
+                  style: lightDefault,
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: Dimensions.space40,
+            ),
             Stack(
               children: [
                 Container(
@@ -54,14 +66,84 @@ class _GessResultBodyState extends State<GessResultBody> {
                 ),
               ],
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(vertical: Dimensions.space20),
-              child: CustomDashedDivider(
-                height: Dimensions.space1,
-                width: double.infinity,
-              ),
+            const SizedBox(
+              height: Dimensions.space10,
             ),
-            RoundedButton(text: MyStrings.nextLevel, press: () {}, textSize: Dimensions.space21),
+            Text("Victory!", style: semiBoldExtraLarge.copyWith(fontSize: Dimensions.fontExtraLarge)),
+
+            const SizedBox(
+              height: Dimensions.space20,
+            ),
+            // const CustomDashedDivider(height: 1, width: double.infinity),
+            const CustomHorizontalDivider(),
+            const SizedBox(
+              height: Dimensions.space20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      controller.totalQuestion,
+                      style: mediumLarge,
+                    ),
+                    const SizedBox(
+                      height: Dimensions.space2,
+                    ),
+                    const Text(
+                      'Total Question',
+                      style: lightDefault,
+                    ),
+                  ],
+                ),
+                const CustomVerticalDivider(
+                  height: Dimensions.space20,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      controller.correctAnswer,
+                      style: mediumLarge,
+                    ),
+                    const SizedBox(
+                      height: Dimensions.space2,
+                    ),
+                    Text(
+                      'correctAnswer',
+                      style: lightDefault.copyWith(color: MyColor.greenSuccessColor),
+                    ),
+                  ],
+                ),
+                const CustomVerticalDivider(
+                  height: Dimensions.space20,
+                ),
+                Column(
+                  children: [
+                    Text(
+                      controller.wrongAnswer.toString(),
+                      style: mediumLarge,
+                    ),
+                    const SizedBox(
+                      height: Dimensions.space2,
+                    ),
+                    Text(
+                      'wrongAnswer',
+                      style: lightDefault.copyWith(color: MyColor.redCancelTextColor),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: Dimensions.space40,
+            ),
+            RoundedButton(
+                text: MyStrings.playAgain,
+                press: () {
+                  Get.offAllNamed(RouteHelper.gessThewordCatagori);
+                },
+                textSize: Dimensions.space21),
             const SizedBox(
               height: Dimensions.space20,
             ),

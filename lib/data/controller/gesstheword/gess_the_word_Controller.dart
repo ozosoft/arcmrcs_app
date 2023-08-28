@@ -54,7 +54,8 @@ class GessThewordController extends GetxController {
   List<String> tempAns = [];
 
   void addAns(int questionIndex, String answer) {
-    gessThewordQuesstionList[questionIndex].setSelectedAnswer(answer);
+    String modifiedString = answer.replaceAll('-1', '');
+    gessThewordQuesstionList[questionIndex].setSelectedAnswer(modifiedString);
   }
 
 //final submit
@@ -64,13 +65,13 @@ class GessThewordController extends GetxController {
 
     Map<String, dynamic> params = {};
     params['quizInfo_id'] = quizInfoId;
-    //
     for (int i = 0; i < gessThewordQuesstionList.length; i++) {
+      dev.log(gessThewordQuesstionList[i].id.toString(), name: "submit");
+
       String questionId = gessThewordQuesstionList[i].id.toString();
       // String optionId = gessThewordQuesstionList[i].options![0].id.toString();
       String selectedOptionId = gessThewordQuesstionList[i].selectedAnswer.toString();
-      dev.log(selectedOptionId, name: " map answar");
-      params['question_id[]'] = questionId.toString();
+      params['question_id[]$questionId'] = questionId;
       params['option_$questionId'] = selectedOptionId.toString();
     }
     //
@@ -83,14 +84,14 @@ class GessThewordController extends GetxController {
         wrongAnswer = model.data?.wrongAnswer.toString() ?? '';
         totalScore = model.data?.totalScore.toString() ?? '';
         Get.toNamed(RouteHelper.gessThewordResult);
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
       } else {
-        Get.toNamed(RouteHelper.gessThewordResult);
-
-        dev.log('wrong');
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        Get.toNamed(RouteHelper.gessThewordCatagori);
       }
     } else {
-      CustomSnackBar.error(errorList: [response.message]);
       Get.toNamed(RouteHelper.gessThewordCatagori);
+      CustomSnackBar.error(errorList: [response.message]);
     }
 
     isLoading = false;

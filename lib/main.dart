@@ -63,7 +63,7 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.noTransition,
         transitionDuration: const Duration(milliseconds: 200),
-        initialRoute: RouteHelper.gessThewordCatagori,
+        initialRoute: RouteHelper.splashScreen,
         navigatorKey: Get.key,
         getPages: RouteHelper().routes,
         locale: localizeController.locale,

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -88,10 +89,24 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
                                       ? Container(
                                           width: double.infinity,
                                           padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                                          child: Image.network(
-                                            '${controller.questionImgPath}/${controller.gessThewordQuesstionList[questionsIndex].image}',
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(16),
+                                          ),
+                                          child: CachedNetworkImage(
+                                            imageUrl: '${controller.questionImgPath}/${controller.gessThewordQuesstionList[questionsIndex].image}',
                                             fit: BoxFit.cover,
                                             height: 220,
+                                            placeholder: (context, url) => const CustomLoader(isPagination: true),
+                                            imageBuilder: (context, imageProvider) {
+                                              return Container(
+                                                  decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(14),
+                                                image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ));
+                                            },
                                           ),
                                         )
                                       : const SizedBox.shrink(),
@@ -117,14 +132,14 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
                                     ),
                                   ),
                                   const SizedBox(height: Dimensions.space10),
-                                  QuestionButton(
+                                  GessWordKeyBoard(
                                     ans: controller.gessThewordQuesstionList[questionsIndex].options![0].option.toString(),
                                   ),
                                   const SizedBox(height: Dimensions.space40),
                                   RoundedButton(
                                     text: MyStrings.submit,
                                     press: () {
-                                      controller.addAns(questionsIndex, controller.tempAns.join().toString());
+                                      controller.addAns(questionsIndex, controller.tempAns.join().toLowerCase().toString());
                                       questionsIndex == controller.gessThewordQuesstionList.length - 1 ? controller.submit() : controller.nextPage();
                                     },
                                   ),
@@ -153,7 +168,7 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
                                 isTimerTextShown: true,
                                 autoStart: true,
                                 onComplete: () {
-                                  controller.addAns(questionsIndex, controller.tempAns.join().toString());
+                                  controller.addAns(questionsIndex, controller.tempAns.join().toLowerCase().toString());
                                   questionsIndex == controller.gessThewordQuesstionList.length - 1 ? controller.submit() : controller.nextPage();
                                 },
                               ),
