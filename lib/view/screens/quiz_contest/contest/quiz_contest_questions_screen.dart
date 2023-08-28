@@ -125,8 +125,8 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                                             controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
 
                                                             if (questionsIndex == controller.examQuestionsList.length - 1) {
-                                                              // controller.submitAnswer();
-                                                              Get.toNamed(RouteHelper.dailyQuizresultScreen, arguments: MyStrings.quizResult);
+                                                              controller.submitAnswer();
+                                                              Get.offAndToNamed(RouteHelper.quizContestresultScreen, arguments: MyStrings.quizResult);
                                                             }
                                                           },
                                                           child: Container(
@@ -208,9 +208,9 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                           }
                                           controller.selectedOptionIndex.toString().isNotEmpty ? print("this is selectedoption index" + controller.selectedOptionIndex.toString()) : print;
                                           if (questionsIndex == controller.examQuestionsList.length - 1) {
-                                            // controller.submitAnswer();
+                                            controller.submitAnswer();
 
-                                            Get.toNamed(RouteHelper.dailyQuizresultScreen, arguments: MyStrings.quizResult);
+                                            Get.offAndToNamed(RouteHelper.quizContestresultScreen, arguments: MyStrings.quizResult);
                                           } else {
                                             controller.pageController.nextPage(
                                               duration: const Duration(milliseconds: 500),

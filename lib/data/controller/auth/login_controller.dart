@@ -30,14 +30,14 @@ class LoginController extends GetxController{
 
 
   void forgetPassword() {
-    // Get.toNamed(RouteHelper.forgotPasswordScreen);
+    Get.toNamed(RouteHelper.forgetpasswordScreen);
   }
 
   void checkAndGotoNextStep(LoginResponseModel responseModel) async{
 
     bool needEmailVerification=responseModel.data?.user?.ev == "1" ? false:true;
     bool needSmsVerification=responseModel.data?.user?.sv   == '1' ? false:true;
-    bool isTwoFactorEnable = responseModel.data?.user?.tv   == '1' ? false:true;
+   
 
     if(remember){
       await loginRepo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, true);
@@ -53,33 +53,30 @@ class LoginController extends GetxController{
     await loginRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userNameKey,        responseModel.data?.user?.username??'');
 
 
-    Get.toNamed(RouteHelper.bottomNavBarScreen);
+    // Get.toNamed(RouteHelper.bottomNavBarScreen);
 
-    // await loginRepo.sendUserToken();
+    await loginRepo.sendUserToken();
     
     bool isProfileCompleteEnable = responseModel.data?.user?.regStep == '0'?true:false;
 
-    if( needSmsVerification == false && needEmailVerification == false && isTwoFactorEnable == false) {
+    if( needSmsVerification == false && needEmailVerification == false ) {
 
       if(isProfileCompleteEnable){
-        // Get.offAndToNamed(RouteHelper.profileCompleteScreen);
+        Get.offAndToNamed(RouteHelper.profileCompleteScreen);
       }else{
-        // Get.offAndToNamed(RouteHelper.bottomNavBar);
+        Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
       }
 
-    }else if(needSmsVerification==true&&needEmailVerification==true && isTwoFactorEnable == true){
-      // Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [true,isProfileCompleteEnable,isTwoFactorEnable]);
+    }else if(needSmsVerification==true&&needEmailVerification==true ){
+      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [true,isProfileCompleteEnable]);
     }
     else if(needSmsVerification==true&&needEmailVerification==true){
-      // Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [true,isProfileCompleteEnable,isTwoFactorEnable]);
+      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [true,isProfileCompleteEnable]);
     }else if(needSmsVerification){
-      // Get.offAndToNamed(RouteHelper.smsVerificationScreen,   arguments: [isProfileCompleteEnable,isTwoFactorEnable]);
+      Get.offAndToNamed(RouteHelper.smsVerificationScreen,   arguments: [isProfileCompleteEnable]);
     }else if(needEmailVerification){
-      // Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [false,isProfileCompleteEnable,isTwoFactorEnable]);
-    } else if(isTwoFactorEnable){
-      // Get.offAndToNamed(RouteHelper.twoFactorScreen,         arguments: isProfileCompleteEnable);
-       
-    }
+      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [false,isProfileCompleteEnable]);
+    } 
 
     if(remember){
       changeRememberMe();

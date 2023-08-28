@@ -72,7 +72,7 @@ class ProfileCompleteController extends GetxController {
     bool b= await profileRepo.updateProfile(model,false);
 
     if(b){
-      // Get.offAllNamed(RouteHelper.bottomNavBar);
+      Get.offAllNamed(RouteHelper.bottomNavBarScreen);
       return;
     }
 

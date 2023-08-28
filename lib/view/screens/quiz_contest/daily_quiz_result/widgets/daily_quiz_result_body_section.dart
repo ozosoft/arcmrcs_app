@@ -5,9 +5,8 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/play_diffrent_quizes/daily_quiz/daily_quiz_questions_controller.dart';
-import 'package:flutter_prime/data/controller/play_diffrent_quizes/fun_n_learn/fun_n_learn_quiz_controller.dart';
+import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_questions_controller.dart';
 import 'package:flutter_prime/data/repo/play_diffrent_quizes/daily_quiz/daily_quiz_repo.dart';
-import 'package:flutter_prime/data/repo/play_diffrent_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/divider/custom_dashed_divider.dart';
@@ -18,14 +17,14 @@ import 'player_profile_picture.dart';
 import 'rewards_section.dart';
 import 'right_and_wrong_ans_section.dart';
 
-class DailyQuizResultBodySection extends StatefulWidget {
-  const DailyQuizResultBodySection({super.key});
+class QuizContestResultSection extends StatefulWidget {
+  const QuizContestResultSection({super.key});
 
   @override
-  State<DailyQuizResultBodySection> createState() => _DailyQuizResultBodySectionState();
+  State<QuizContestResultSection> createState() => _QuizContestResultSectionState();
 }
 
-class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection> {
+class _QuizContestResultSectionState extends State<QuizContestResultSection> {
   bool showQuestions = false;
   bool audienceVote = false;
   bool tapAnswer = false;
@@ -35,7 +34,7 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DailyQuizRepo(apiClient: Get.find()));
 
-    DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController( dailyQuizRepo: Get.find(),));
+    DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController(   dailyQuizRepo:  Get.find(),));
 
     super.initState();
   }
@@ -43,7 +42,7 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<DailyQuizQuestionsController>(
+    return GetBuilder<QuizContestQuestionsController>(
       builder: (controller) => Stack(
         children: [
           SvgPicture.asset(MyImages.reviewBgImage),
@@ -74,7 +73,7 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
                         )),
                     Container(
                         width: double.infinity,
-                        padding: EdgeInsets.only(top: Dimensions.space180),
+                        padding:const EdgeInsets.only(top: Dimensions.space180),
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(

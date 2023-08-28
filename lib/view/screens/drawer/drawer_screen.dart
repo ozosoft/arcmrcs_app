@@ -54,8 +54,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   padding: const EdgeInsets.only(top: Dimensions.space30, left: Dimensions.space15),
                   child: FittedBox(
                     fit: BoxFit.cover,
-                    child: Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: DecorationImage(image: NetworkImage(UrlContainer.dashboardUserProfileImage + controller.userImage.toString()), fit: BoxFit.cover)),
+                    child:controller.userImage.toString()!="null"? Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: DecorationImage(image: NetworkImage(UrlContainer.dashboardUserProfileImage + controller.userImage.toString() ), fit: BoxFit.cover)),
+                      height: Dimensions.space45,
+                      width: Dimensions.space45,
+                    ):Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image:const DecorationImage(image: AssetImage(MyImages.defaultAvatar ), fit: BoxFit.cover)),
                       height: Dimensions.space45,
                       width: Dimensions.space45,
                     ),
@@ -197,17 +201,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     minLeadingWidth: Dimensions.space1,
                   ),
                 ),
-                ListTile(
-                  leading: SvgPicture.asset(MyImages.logOutDrawer),
-                  title: const Text(
-                    MyStrings.logout,
-                    style: regularMediumLarge,
-                  ),
-                  onTap: (){
+                // ListTile(
+                //   leading: SvgPicture.asset(MyImages.logOutDrawer),
+                //   title: const Text(
+                //     MyStrings.logout,
+                //     style: regularMediumLarge,
+                //   ),
+                //   onTap: (){
                     
-                  },
-                  minLeadingWidth: Dimensions.space1,
-                ),
+                //   },
+                //   minLeadingWidth: Dimensions.space1,
+                // ),
               ],
             ),
           ),

@@ -10,6 +10,7 @@ import 'package:flutter_prime/data/repo/auth/general_setting_repo.dart';
 import 'package:flutter_prime/data/repo/auth/signup_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
 import 'package:flutter_prime/view/components/divider/custom_divider.dart';
 import 'package:flutter_prime/view/components/social_login/social_login_section.dart';
 import 'package:flutter_prime/view/components/text-form-field/custom_text_field.dart';
@@ -165,7 +166,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     },
                   ),
                   const SizedBox(height: Dimensions.space25),
-                  RoundedButton(
+                controller.submitLoading?const RoundedLoadingBtn():  RoundedButton(
                     text: MyStrings.signUp,
                     press: () {
                        if (formKey.currentState!.validate()) {

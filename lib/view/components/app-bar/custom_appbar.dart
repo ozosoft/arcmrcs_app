@@ -8,6 +8,7 @@ import 'package:flutter_prime/view/components/app-bar/action_button_icon_widget.
 import 'package:flutter_prime/view/components/dialog/exit_dialog.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
+  final bool isShowSingleActionBtn;
   final String title;
   final bool isShowBackBtn;
   final Color bgColor;
@@ -26,6 +27,7 @@ class CustomAppBar extends StatefulWidget implements PreferredSizeWidget {
 
   const CustomAppBar({
     Key? key,
+     this.isShowSingleActionBtn=false,
     this.isProfileCompleted = false,
     this.fromAuth = false,
     this.isTitleCenter = false,

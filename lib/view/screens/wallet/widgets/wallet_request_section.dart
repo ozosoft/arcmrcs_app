@@ -150,19 +150,19 @@ class _WalletRequestSectionState extends State<WalletRequestSection> {
                                 ),
                               );
                             })),
-                    Padding(
-                      padding: const EdgeInsets.all(Dimensions.space14),
-                      child: RoundedButton(
-                        text: MyStrings.reedemNow,
-                        press: () {
-                           CustomBottomSheet(child: const PaymentBottomSheetScreen())
-                          .customBottomSheet(context);
-                        },
-                        textSize: Dimensions.space18,
-                        cornerRadius: Dimensions.space8,
-                        verticalPadding: Dimensions.space15,
-                      ),
-                    )
+                    // Padding(
+                    //   padding: const EdgeInsets.all(Dimensions.space14),
+                    //   child: RoundedButton(
+                    //     text: MyStrings.reedemNow,
+                    //     press: () {
+                    //        CustomBottomSheet(child: const PaymentBottomSheetScreen())
+                    //       .customBottomSheet(context);
+                    //     },
+                    //     textSize: Dimensions.space18,
+                    //     cornerRadius: Dimensions.space8,
+                    //     verticalPadding: Dimensions.space15,
+                    //   ),
+                    // )
                   ],
                 ),
       ),

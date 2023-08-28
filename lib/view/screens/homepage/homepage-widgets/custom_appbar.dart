@@ -55,17 +55,24 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
             fit: BoxFit.cover,
             child: Row(
               children: [
-                CircleAvatar(
-                  radius: Dimensions.space22,
-                  backgroundImage: NetworkImage(UrlContainer.dashboardUserProfileImage + controller.userImage.toString()),
-                  backgroundColor: MyColor.lightprimaryColor,
-                ),
+                if (controller.userImage.toString() != "null")
+                  CircleAvatar(
+                    radius: Dimensions.space22,
+                    backgroundImage: NetworkImage(UrlContainer.dashboardUserProfileImage + controller.userImage.toString()),
+                    backgroundColor: MyColor.lightprimaryColor,
+                  )
+                else
+                  const CircleAvatar(
+                    radius: Dimensions.space22,
+                    backgroundImage: AssetImage(MyImages.defaultAvatar),
+                    backgroundColor: MyColor.lightprimaryColor,
+                  ),
                 const SizedBox(width: Dimensions.space10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      controller.username.toString(),
+                      controller.dashRepo.apiClient.getUserFullName(),
                       style: semiBoldLarge.copyWith(fontSize: Dimensions.space17, color: MyColor.colorWhite),
                     ),
                     const SizedBox(height: Dimensions.space5),

@@ -286,6 +286,7 @@ class MyStrings {
   static const String fiveHundreds = "500";
   static const String more = "More";
   static const String success = 'success';
+  static const String emailVerifiedSuccesfully = 'Email verified successfully';
   static const String version = 'version';
   static const String logoutSuccessMsg = 'Sign Out Successfully';
   static const String invalidEmailMsg = "Enter valid email";

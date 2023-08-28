@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/data/model/exam_zone/exam_zone_model.dart';
+import 'package:flutter_prime/data/model/quiz_contest/quiz_result_model.dart';
 import 'package:flutter_prime/data/model/quiz_questions_model/quiz_questions_model.dart';
 
 import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
@@ -215,55 +216,55 @@ class QuizContestQuestionsController extends GetxController {
   String winningCoin = "";
   String appreciation = "";
 
-  // submitAnswer() async {
-  //   submitLoading = true;
-  //   update();
+  submitAnswer() async {
+    submitLoading = true;
+    update();
 
-  //   print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
+    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
 
-  //   Map<String, dynamic> params = {};
+    Map<String, dynamic> params = {};
 
-  //   for (int i = 0; i < examQuestionsList.length; i++) {
-  //     String quizeId = examQuestionsList[i].id.toString();
-  //     String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
-  //     params['question_id[${i}]'] = quizeId;
-  //     print('quize id: ${quizeId}');
-  //     params['option_$quizeId[]'] = selectedOptionId;
-  //     print("option_$quizeId");
-  //   }
-  //   print(params['option_']);
-  //   params['quizInfo_id'] = quizInfoID.toString();
-  //   params['fifty_fifty'] = fifty_fifty;
-  //   params['audience_poll'] = audiencevotes;
-  //   params['time_reset'] = reset_timer;
-  //   params['flip_question'] = flipQuistion;
+    for (int i = 0; i < examQuestionsList.length; i++) {
+      String quizeId = examQuestionsList[i].id.toString();
+      String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
+      params['question_id[${i}]'] = quizeId;
+      print('quize id: ${quizeId}');
+      params['option_$quizeId[]'] = selectedOptionId;
+      print("option_$quizeId");
+    }
+    print(params['option_']);
+    params['quizInfo_id'] = quizInfoID.toString();
+    params['fifty_fifty'] = fifty_fifty;
+    params['audience_poll'] = audiencevotes;
+    params['time_reset'] = reset_timer;
+    params['flip_question'] = flipQuistion;
 
-  //   ResponseModel submitModel = await examZoneRepo.submitAnswer(params);
+    ResponseModel submitModel = await quizContestRepo.submitAnswer(params);
 
-  //   if (submitModel.statusCode == 200) {
-  //     ExamResultModel model = ExamResultModel.fromJson(jsonDecode(submitModel.responseJson));
-  //     if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-  //       appreciation = model.message!.success.toString();
-  //       totalQuestions = model.data!.totalQuestion.toString();
-  //       correctAnswer = model.data!.correctAnswer.toString();
-  //       wrongAnswer = model.data!.wrongAnswer.toString();
-  //       totalCoin = model.data!.totalCoin.toString();
-  //       winningCoin = model.data!.winingCoin.toString();
+    if (submitModel.statusCode == 200) {
+      QuizResultResponseModel model = QuizResultResponseModel.fromJson(jsonDecode(submitModel.responseJson));
+      if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
+        appreciation = model.message!.success.toString();
+        totalQuestions = model.data!.totalQuestion.toString();
+        correctAnswer = model.data!.correctAnswer.toString();
+        wrongAnswer = model.data!.wrongAnswer.toString();
+        totalCoin = model.data!.totalCoin.toString();
+        winningCoin = model.data!.winingCoin.toString();
 
-  //       CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
-  //     } else {
-  //       CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+      } else {
+        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 
-  //       //need to cheak error msg
-  //     }
-  //   } else {
-  //     CustomSnackBar.error(errorList: [submitModel.message]);
-  //   }
-  //   print("this is " + submitModel.message);
-  //   print("this is " + params.toString());
-  //   submitLoading = false;
-  //   update();
-  // }
+        //need to cheak error msg
+      }
+    } else {
+      CustomSnackBar.error(errorList: [submitModel.message]);
+    }
+    print("this is " + submitModel.message);
+    print("this is " + params.toString());
+    submitLoading = false;
+    update();
+  }
 
   resetallLifelines() {
     showQuestions = false;

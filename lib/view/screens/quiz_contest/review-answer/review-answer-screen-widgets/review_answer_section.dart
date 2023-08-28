@@ -4,28 +4,30 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/play_diffrent_quizes/daily_quiz/daily_quiz_questions_controller.dart';
-import 'package:flutter_prime/data/repo/play_diffrent_quizes/daily_quiz/daily_quiz_repo.dart';
+import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_questions_controller.dart';
+import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ReviewAnswerSection extends StatefulWidget {
-  const ReviewAnswerSection({super.key});
+class QuizContestReviewAnswerSection extends StatefulWidget {
+  const QuizContestReviewAnswerSection({super.key});
 
   @override
-  State<ReviewAnswerSection> createState() => _ReviewAnswerSectionState();
+  State<QuizContestReviewAnswerSection> createState() => _QuizContestReviewAnswerSectionState();
 }
 
-class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
-  @override
+class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswerSection> {
+
+    
+ @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DailyQuizRepo(apiClient: Get.find()));
+    Get.put(QuizContestRepo(apiClient: Get.find()));
 
-    DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController( dailyQuizRepo: Get.find(),));
+    Get.put(QuizContestQuestionsController( quizContestRepo: Get.find()));
 
     // print("++++++++++===============this is id"+quizinfoID.toString());
     super.initState();
@@ -36,9 +38,11 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<DailyQuizQuestionsController>(
-        builder: (controller) =>  controller.examQuestionsList.isEmpty
-                ? const CustomLoader()
+    return GetBuilder<QuizContestQuestionsController>(
+        builder: (controller) => controller.loading
+            ? const CustomLoader()
+            : controller.examQuestionsList.isEmpty
+                ? Text('Empty')
                 : PageView.builder(
                     // physics: NeverScrollableScrollPhysics(),
                     controller: controller.pageController,

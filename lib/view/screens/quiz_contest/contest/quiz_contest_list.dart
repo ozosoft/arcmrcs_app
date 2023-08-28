@@ -40,30 +40,32 @@ class _QuizContestListState extends State<QuizContestList> {
         appBar:const CustomCategoryAppBar(
           title: MyStrings.quizContest,
         ),
-        body: ListView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: controller.examcategoryList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  Get.toNamed(RouteHelper.quizContestQuestionscreen,arguments: [controller.examcategoryList[index].id.toString(),controller.examcategoryList[index].title.toString()]);
-                },
-                child: CategoriesCard(
-                  index: index,
-                  marks: MyStrings.marks,
-                  date: MyStrings.dates,
-                  minute: MyStrings.minutes,
-                  fromExam: true,
-                  title: controller.examcategoryList[index].title.toString(),
-                  // questions: MyStrings().allCategoryies[index]["questions"].toString(),
-                  // image: UrlContainer.examZoneImage+  controller.examcategoryList[index].image.toString(),
-                  expansionVisible: false,
-                  fromViewAll: false,
-                  // levels: MyStrings().allCategoryies[index]["level"].toString(),
-                ),
-              );
-            }),
+        body: SingleChildScrollView(
+          child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: controller.examcategoryList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return InkWell(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.quizContestQuestionscreen,arguments: [controller.examcategoryList[index].id.toString(),controller.examcategoryList[index].title.toString()]);
+                  },
+                  child: CategoriesCard(
+                    index: index,
+                    marks: MyStrings.marks,
+                    date: MyStrings.dates,
+                    minute: MyStrings.minutes,
+                    fromExam: true,
+                    title: controller.examcategoryList[index].title.toString(),
+                    // questions: MyStrings().allCategoryies[index]["questions"].toString(),
+                    // image: UrlContainer.examZoneImage+  controller.examcategoryList[index].image.toString(),
+                    expansionVisible: false,
+                    fromViewAll: false,
+                    // levels: MyStrings().allCategoryies[index]["level"].toString(),
+                  ),
+                );
+              }),
+        ),
       ),
     );
   }

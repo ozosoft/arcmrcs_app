@@ -1,7 +1,12 @@
+import 'package:flutter_prime/view/screens/authentication/email_verification_page/email_verification_screen.dart';
 import 'package:flutter_prime/view/screens/authentication/forget_password/resetPassword/reset_Password_Screen.dart';
 import 'package:flutter_prime/view/screens/authentication/forget_password/verification/verification_screen.dart';
 import 'package:flutter_prime/view/screens/authentication/login/login_screen.dart';
+import 'package:flutter_prime/view/screens/authentication/profile_complete/profile_complete_screen.dart';
+
 import 'package:flutter_prime/view/screens/authentication/signUp/signUp_screen.dart';
+import 'package:flutter_prime/view/screens/authentication/sms_verification_page/sms_verification_screen.dart';
+import 'package:flutter_prime/view/screens/authentication/two_factor_screen/two_factor_verification_screen.dart';
 import 'package:flutter_prime/view/screens/badges/badges_screen.dart';
 import 'package:flutter_prime/view/screens/bookmark/bookmark_screen.dart';
 import 'package:flutter_prime/view/screens/coin_history/coin_history_screen.dart';
@@ -24,6 +29,9 @@ import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/review-answ
 import 'package:flutter_prime/view/screens/profile/profile-edit/Profile_edit_screen.dart';
 import 'package:flutter_prime/view/screens/profile/profile_screen.dart';
 import 'package:flutter_prime/view/screens/quiz-questions/quiz_question_screen.dart';
+import 'package:flutter_prime/view/screens/quiz_contest/daily_quiz_result/quiz_contest_result_screen.dart';
+import 'package:flutter_prime/view/screens/quiz_contest/review-answer/review-answer-screen-widgets/review_answer_section.dart';
+import 'package:flutter_prime/view/screens/quiz_contest/review-answer/review_answer-screen.dart';
 import 'package:flutter_prime/view/screens/splash/splash_screen.dart';
 import 'package:flutter_prime/view/screens/wallet/wallet_screen.dart';
 import 'package:flutter_prime/view/screens/coin_store/coin_store_screen.dart';
@@ -61,6 +69,7 @@ class RouteHelper {
   static const String subCategories          = '/top_categories_screen';
   static const String quizQuestionsScreen    = '/quiz_questions_screen';
   static const String quizResultScreen       = '/quiz_result_screen';
+  static const String profileCompleteScreen       = "/profile_complete_screen";
   //battle
   static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
   static const String battleQuizResultScreen = '/battle_quiz_result_screen';
@@ -97,6 +106,12 @@ class RouteHelper {
   static const String dailyQuizresultReviewScreen = '/daily_quiz_result_review_screen';
   static const String quizContestListscreen = '/quiz_contest_List_screen';
   static const String quizContestQuestionscreen = '/quiz_contest_List_questions_screen';
+  static const String emailVerificationScreen     = "/verify_email_screen" ;
+  static const String smsVerificationScreen       = "/verify_sms_screen";
+  static const String twoFactorScreen             = "/two-factor-screen";
+  static const String quizContestresultScreen             = "/quiz-contest-screen";
+  static const String dailyquizContestresultScreen             = "/_daily_quiz-contest-screen";
+  static const String quizContestresultReviewScreen             = "/_quiz_contest_result_review_screen";
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -139,8 +154,12 @@ class RouteHelper {
     GetPage(name: examZoneReviewAnswerScreen, page: () => const ExamReviewAnswerScreen()),
 
     GetPage(name: funNlearnScreenScreen, page: () => const FunNLearnScreen()),
-    GetPage(name: funNlearnSubCategoryScreenScreen, page: () => const FunNLearnSubCategoriesCardScreen(title: '',)),
-    GetPage(name: funNlearnListScreen, page: () => const FunNlearnListScreen(title: "",)),
+    GetPage(name: funNlearnSubCategoryScreenScreen, page: () => const FunNLearnSubCategoriesCardScreen(title: '')),
+    GetPage(
+        name: funNlearnListScreen,
+        page: () => const FunNlearnListScreen(
+              title: "",
+            )),
     GetPage(name: funNlearnDescriptionScreen, page: () => const FunNLearnDescription()),
     GetPage(name: funNlearnResultScreen, page: () => const FunNlearnResultScreen()),
     GetPage(name: funNlearnResultReviewScreen, page: () => const FunNPlayReviewAnswerScreen()),
@@ -149,5 +168,12 @@ class RouteHelper {
     GetPage(name: dailyQuizresultReviewScreen, page: () => const DailyQuizReviewAnswerScreen()),
     GetPage(name: quizContestListscreen, page: () => const QuizContestList()),
     GetPage(name: quizContestQuestionscreen, page: () => const QuizContestQuestions()),
+    GetPage(name: emailVerificationScreen, page: () => EmailVerificationScreen(needSmsVerification: Get.arguments[0], isProfileCompleteEnabled: Get.arguments[1])),
+    GetPage(name: smsVerificationScreen, page: () => const SmsVerificationScreen()),
+    GetPage(name: twoFactorScreen, page: () => TwoFactorVerificationScreen(isProfileCompleteEnable: Get.arguments)),
+    GetPage(name: profileCompleteScreen, page: () => const ProfileCompleteScreen()),
+    GetPage(name: quizContestresultScreen, page: () => const QuizContestResultScreen()),
+    GetPage(name: dailyquizContestresultScreen, page: () => const DailyQuizResultScreen()),
+    GetPage(name: quizContestresultReviewScreen, page: () => const QuizContestReviewAnswerSection()),
   ];
 }

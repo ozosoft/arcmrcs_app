@@ -87,8 +87,10 @@ class _RankingTabBarState extends State<RankingTabBar>
                                     color: MyColor.leaderBoardTabBar,
                                       borderRadius:
                                           BorderRadius.circular(Dimensions.space40),
-                                      image: DecorationImage(
+                                      image:controller.rank2PlayerAvatar.toString()!="null"?  DecorationImage(
                                           image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank2PlayerAvatar.toString()),
+                                          fit: BoxFit.cover):const DecorationImage(
+                                          image:AssetImage(MyImages.defaultAvatar),
                                           fit: BoxFit.cover)),
                                   height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                                   width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
@@ -119,8 +121,10 @@ class _RankingTabBarState extends State<RankingTabBar>
                                     color: MyColor.leaderBoardTabBar,
                                       borderRadius:
                                           BorderRadius.circular(Dimensions.space40),
-                                      image:  DecorationImage(
-                                          image: NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank1PlayerAvatar.toString()),
+                                      image: controller.rank1PlayerAvatar.toString()!="null"?  DecorationImage(
+                                          image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank1PlayerAvatar.toString()),
+                                          fit: BoxFit.cover):const DecorationImage(
+                                          image:AssetImage(MyImages.defaultAvatar),
                                           fit: BoxFit.cover)),
                                  height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                                   width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
