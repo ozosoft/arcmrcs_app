@@ -69,6 +69,9 @@ class RouteHelper {
   static const String subCategories = '/top_categories_screen';
   static const String quizQuestionsScreen = '/quiz_questions_screen';
   static const String quizResultScreen = '/quiz_result_screen';
+   //battle
+  static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
+  static const String battleQuizResultScreen = '/battle_quiz_result_screen';
   static const String reviewAnswerScreen = '/review_answer_screen';
   static const String oneVSoneBattleScreen = '/battle_screen';
   static const String findOpponentScreen = '/find_opponent_screen';

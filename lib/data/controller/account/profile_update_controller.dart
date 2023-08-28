@@ -9,7 +9,6 @@ import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/model/profile/profile_response_model.dart';
-import 'package:flutter_prime/data/model/user_post_model/user_post_model.dart';
 import 'package:flutter_prime/data/repo/account/profile_repo.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 

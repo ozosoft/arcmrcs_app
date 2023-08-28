@@ -211,9 +211,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     MyStrings.logout,
                     style: regularMediumLarge,
                   ),
-                  onTap: (){
-                    
-                  },
+                 
                   minLeadingWidth: Dimensions.space1,
                 ),
               ],
