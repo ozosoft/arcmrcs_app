@@ -59,15 +59,15 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                         if (subCategoryId != "") {
                           Get.toNamed(RouteHelper.subCategories, arguments: [title, controller.allCategoriesList[index].id.toString()]);
                         }
+                         controller.changeExpandIndex(index);
                       },
                       child: CategoriesCard(
                         title: title,
                         questions: controller.allCategoriesList[index].questionsCount.toString(),
                         image: UrlContainer.allCategoriesImage + controller.allCategoriesList[index].image.toString(),
-                       
                         fromViewAll: true,
                         subCategoryId: subCategoryId,
-                        isExpand: subCategoryId == "" ?true:false ,
+                        isExpand: subCategoryId == "" ?index == controller.expandIndex:false ,
                         index: index,
                         fromAllCategory: true,
                       ),
