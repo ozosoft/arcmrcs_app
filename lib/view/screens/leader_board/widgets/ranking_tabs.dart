@@ -88,7 +88,7 @@ class _RankingTabBarState extends State<RankingTabBar>
                                       borderRadius:
                                           BorderRadius.circular(Dimensions.space40),
                                       image: DecorationImage(
-                                          image:  NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank2PlayerAvatar.toString()),
+                                          image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank2PlayerAvatar.toString()),
                                           fit: BoxFit.cover)),
                                   height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                                   width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
