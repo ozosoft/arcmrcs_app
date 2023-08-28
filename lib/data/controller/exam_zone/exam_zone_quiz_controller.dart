@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -116,10 +117,7 @@ class ExamZoneQuizController extends GetxController {
   }
 
   int remainingTime = 30;
-  void restartTimer() {
-    remainingTime = 30;
-    update();
-  }
+ 
 
   int selectedOptionIndex = -1;
    selectAnswer(
@@ -174,6 +172,36 @@ class ExamZoneQuizController extends GetxController {
     update();
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
+
+   int timerDuration = 20;
+  int countDownTimerIndex = -1;
+  bool restartTimer = false;
+  restartCountDownTimer(int questionIndex) {
+    countDownTimerIndex = countDownTimerIndex;
+    restartTimer = !restartTimer;
+    update();
+  }
+
+  bool fiftyFifty = false;
+  int fiftyFiftyIndex = -1;
+  makeFiftyFifty(int index) {
+    List<Option> allOptions = examQuestionsList[index].options!;
+    var random = Random();
+    Option correctAnswers = allOptions!.firstWhere((element) => element.isAnswer == '1');
+    allOptions.remove(correctAnswers);
+    Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
+    List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);
+
+    examQuestionsList[index].options!.clear();
+    examQuestionsList[index].options!.addAll(optionsToDisplay);
+    update();
+
+    print("object is here");
+    fiftyFiftyIndex = fiftyFiftyIndex;
+    fiftyFifty = !fiftyFifty;
+    update();
+  }
+
 
   void setCurrentOption(int questionsIndex) {
     // optionsList.clear();

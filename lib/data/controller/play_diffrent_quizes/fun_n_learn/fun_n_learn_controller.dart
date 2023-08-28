@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:flutter_prime/data/model/all_cartegories/all_categories_model.dart';
+import 'package:flutter_prime/data/model/play_diffrent_quizes/fun_n_learn/fun_n_learn_category_model.dart';
 import 'package:flutter_prime/data/repo/play_diffrent_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -28,8 +28,8 @@ class FunNLearnCategoriesController extends GetxController {
 
       allCategoriesList.clear();
 
-      AllcategoriesModel allcategories =
-          AllcategoriesModel.fromJson(jsonDecode(model.responseJson));
+      FunNLearncategoryModel allcategories =
+          FunNLearncategoryModel.fromJson(jsonDecode(model.responseJson));
 
       if (allcategories.status.toString().toLowerCase() ==
           MyStrings.success.toLowerCase()) {

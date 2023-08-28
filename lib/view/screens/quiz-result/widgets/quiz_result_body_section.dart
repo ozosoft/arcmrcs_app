@@ -67,17 +67,20 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
                     ),
                     Container(
                         width: double.infinity,
-                        padding: EdgeInsets.only(left: size.width * .3, top: Dimensions.space140),
+                        padding: EdgeInsets.only(left: size.width * .28, top: Dimensions.space140),
                         child: Text(
                           MyStrings.victory,
                           style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                         )),
                     Container(
                         width: double.infinity,
-                        padding: EdgeInsets.only(left: size.width * .22, top: Dimensions.space180),
-                        child: Text(
-                          controller.appreciation,
-                          style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
+                        padding:const EdgeInsets.only( top: Dimensions.space180),
+                        child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            controller.appreciation,
+                            style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
+                          ),
                         )),
                   ],
                 ),
@@ -99,7 +102,7 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
                     width: double.infinity,
                   ),
                 ),
-                const BottomSectionButtons()
+                BottomSectionButtons(title: controller.nextlevelQuizInfoTitle,id : controller.nextlevelQuizInfoId,)
               ],
             ),
           ),

@@ -50,7 +50,7 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
                 title: title,
               ),
               body: controller.loader
-          ? CustomLoader()
+          ? const CustomLoader()
           :  SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(

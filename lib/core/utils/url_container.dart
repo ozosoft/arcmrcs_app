@@ -10,8 +10,14 @@ class UrlContainer {
 
   static const String funNLearnallCategoryUrl = 'fun/category-list';
 
+  static const String funNLearnsubCategoryUrl = 'fun/subcategory-list/';
+  static const String funNLearnDescriptionUrl = 'fun/fun-list/';
   static const String subcategoriesUrl = 'general-quiz/subcategory/';
+  static const String funNLearnsubcategoriesUrl = 'general-quiz/subcategory/';
   static const String quizQuestionsUrl = 'general-quiz/level/question/';
+  static const String funNlearnQuestionsUrl = 'fun/question-list/';
+  static const String dailyQuizQuestionsUrl = 'daily-quiz';
+  static const String dailyQuizSubmitAnswerUrl = 'daily-quiz/answer-submit';
 
   static const String registrationEndPoint = 'register';
   static const String loginEndPoint = 'login';
@@ -19,7 +25,10 @@ class UrlContainer {
   static const String submitAnswerUrl = 'general-quiz/answer-submit';
 
   static const String examsubmitAnswerUrl = 'exam/answer-submit';
-  static const String examZoneQuestionsUrl = 'exam/question-list';
+  static const String funNlearnsubmitAnswerUrl = 'fun/answer-submit';
+  static const String examZoneQuestionsUrl = 'exam/question-list/';
+  static const String quizContestQuestionsUrl = 'contest/questions/';
+  static const String quizcontestListUrl = 'contest/questions/';
 
   static const String forgetPasswordEndPoint = 'password/email';
   static const String passwordVerifyEndPoint = 'password/verify-code';
@@ -32,6 +41,11 @@ class UrlContainer {
   static const String subCategoriesImage = '$domainUrl/assets/admin/images/subcategory/';
   static const String userImagePath = '$domainUrl/assets/images/user/profile';
   static const String examZoneImage = '$domainUrl/assets/admin/images/exam/';
+  static const String funNLearnsubCategoryImage = '$domainUrl/assets/admin/images/category/';
+  static const String dailyQuizQuestionsImage = '$domainUrl/assets/admin/images/question/';
+  static const String quizContestQuestionsImage = '$domainUrl/assets/admin/images/question/';
+  static const String dashboardUserProfileImage = '$domainUrl/assets/images/user/profile/';
+  static const String leaderboardProfileImage = '$domainUrl/assets/images/user/profile/';
 
   static const String otpVerify = 'otp-verify';
   static const String otpResend = 'otp-resend';
@@ -42,7 +56,12 @@ class UrlContainer {
   static const String authorizationCodeEndPoint = 'authorization';
 
   static const String dashBoardUrl = 'dashboard';
+  static const String leaderBoardUrl = 'leader-board';
   static const String examZone = 'exam/exam-list';
+  static const String coinStore = 'coin-store';
+  static const String coinHistory = 'coin-history';
+  static const String quizList = 'exam/quizList-list';
+  static const String contest = 'contest';
   static const String transactionEndpoint = 'transactions';
 
   static const String addWithdrawRequestUrl = 'withdraw-request';
@@ -62,6 +81,7 @@ class UrlContainer {
 
   static const String getProfileEndPoint = 'user-info';
   static const String updateProfileEndPoint = 'profile-setting';
+  static const String updateProfileAvatarEndPoint = 'profile-avatar-update';
   static const String profileCompleteEndPoint = 'user-data-submit';
 
   static const String changePasswordEndPoint = 'change-password';

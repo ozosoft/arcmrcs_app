@@ -267,6 +267,7 @@ class MyStrings {
   static const String coinHistory = "Coin History";
   static const String logout = "Logout";
   static const String hiMariya = "Hi! Mariya Ons";
+  static const String hi = "Hi! ";
   static const String totalCoinFivethousand = "Total Coin 5000";
   static const String letsPlayQuiz = "Let`s Play Quiz";
   static const String bookmarks = "Bookmarks";
@@ -285,6 +286,7 @@ class MyStrings {
   static const String fiveHundreds = "500";
   static const String more = "More";
   static const String success = 'success';
+  static const String ok = 'ok';
   static const String version = 'version';
   static const String logoutSuccessMsg = 'Sign Out Successfully';
   static const String invalidEmailMsg = "Enter valid email";
@@ -379,19 +381,22 @@ class MyStrings {
   static const String vs = "VS";
   static const String request = "Request";
   static const String transection = "Transection";
+  static const String completeTheLevelFirst = "Complete this level first";
 
   static const String A = ' A) ';
   static const String b = ' B) ';
   static const String c = ' C) ';
   static const String d = ' D) ';
+  static const String at = '@';
   static const String historyAndCulture = 'History & Culture';
   static const String roomID = "874541";
   static const String marton = "@marton";
   static const String examZone = "Exam Zone";
   static const String twoHundredFortyDollar = "\$240.00";
   static const String jkobos = "@jkobos";
-  static const String qP = "2,558 QP";
+  static const String qP = " QP";
   static const String points = "1,570 Points";
+  static const String pointss = " Points";
   static const String quantity = '15';
   static const String leaderBoard = 'Leaderboard';
   static const String totalCoins = "Total Coins";
@@ -437,6 +442,8 @@ class MyStrings {
   static const String proPack = "Pro Pack";
   static const String smallPack = "Small Pack";
   static const String twofifty = "\$250 USD";
+  static const String dollarSign = "\$ ";
+  static const String usd = " USD";
   static const String oneTwenty = "\$120 USD";
   static const String eighty = "\$80 USD";
   static const String threeforty = "\$340 USD";

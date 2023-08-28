@@ -49,16 +49,8 @@ class AllCategoriesController extends GetxController {
 
     loader = false;
     update();
-    int expandIndex = -1;
-  void changeExpandIndex(int index) {
-    if (expandIndex == index) {
-      expandIndex = -1;
-      update();
-      return;
-    }
-    expandIndex = index;
-    update();
-  }
+   
+ 
   }
 
 
@@ -66,6 +58,16 @@ class AllCategoriesController extends GetxController {
 
   changeactivestatus() {
     isActive = !isActive;
+    update();
+  }
+ int expandIndex = -1;
+  void changeExpandIndex(int index) {
+    if (expandIndex == index) {
+      expandIndex = -1;
+      update();
+      return;
+    }
+    expandIndex = index;
     update();
   }
 }

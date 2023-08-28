@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -92,89 +93,99 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
             Row(
               children: [
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
-                    decoration: BoxDecoration(
-                      color: MyColor.colorWhite,
-                      borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color.fromARGB(61, 158, 158, 158),
-                          blurRadius: 7,
-                          spreadRadius: .5,
-                          offset: Offset(
-                            .4,
-                            .4,
-                          ),
-                        )
-                      ],
-                    ),
-                    margin: const EdgeInsets.all(Dimensions.space5),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
-
-                        Image.network(UrlContainer.playdiffrentImage + controller.quizlist[0].image.toString()),
-
-                        const SizedBox(
-                          height: Dimensions.space10,
-                        ),
-
-                        Text(
-                          controller.quizlist[0].name.toString(),
-                          style: semiBoldExtraLarge,
-                        ),
-
-                        const SizedBox(height: Dimensions.space3),
-
-                        Text(controller.quizlist[0].shortDescription.toString(),
-                            style: regularDefault.copyWith(
-                              color: MyColor.textColor,
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(RouteHelper.funNlearnScreenScreen);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
+                      decoration: BoxDecoration(
+                        color: MyColor.colorWhite,
+                        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color.fromARGB(61, 158, 158, 158),
+                            blurRadius: 7,
+                            spreadRadius: .5,
+                            offset: Offset(
+                              .4,
+                              .4,
                             ),
-                            textAlign: TextAlign.center),
-                      ],
+                          )
+                        ],
+                      ),
+                      margin: const EdgeInsets.all(Dimensions.space5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
+
+                          Image.network(UrlContainer.playdiffrentImage + controller.quizlist[0].image.toString()),
+
+                          const SizedBox(
+                            height: Dimensions.space10,
+                          ),
+
+                          Text(
+                            controller.quizlist[0].name.toString(),
+                            style: semiBoldExtraLarge,
+                          ),
+
+                          const SizedBox(height: Dimensions.space3),
+
+                          Text(controller.quizlist[0].shortDescription.toString(),
+                              style: regularDefault.copyWith(
+                                color: MyColor.textColor,
+                              ),
+                              textAlign: TextAlign.center),
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
-                    decoration: BoxDecoration(
-                      color: MyColor.colorWhite,
-                      borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Color.fromARGB(61, 158, 158, 158),
-                          blurRadius: 7,
-                          spreadRadius: .5,
-                          offset: Offset(
-                            .4,
-                            .4,
-                          ),
-                        )
-                      ],
-                    ),
-                    margin: const EdgeInsets.all(Dimensions.space5),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
-                        Image.network(UrlContainer.playdiffrentImage + controller.quizlist[1].image.toString()),
-                        const SizedBox(
-                          height: Dimensions.space10,
-                        ),
-                        Text(
-                          controller.quizlist[1].name.toString(),
-                          style: semiBoldExtraLarge,
-                        ),
-                        const SizedBox(height: Dimensions.space3),
-                        Text(controller.quizlist[1].shortDescription.toString(),
-                            style: regularDefault.copyWith(
-                              color: MyColor.textColor,
+                  child: InkWell(
+                    onTap: () {
+                      Get.toNamed(RouteHelper.dailyQuizQuestionsScreen,arguments: [controller.quizlist[2].id.toString()]);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
+                      decoration: BoxDecoration(
+                        color: MyColor.colorWhite,
+                        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color.fromARGB(61, 158, 158, 158),
+                            blurRadius: 7,
+                            spreadRadius: .5,
+                            offset: Offset(
+                              .4,
+                              .4,
                             ),
-                            textAlign: TextAlign.center),
-                      ],
+                          )
+                        ],
+                      ),
+                      margin: const EdgeInsets.all(Dimensions.space5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
+                          Image.network(UrlContainer.playdiffrentImage + controller.quizlist[2].image.toString()),
+                          const SizedBox(
+                            height: Dimensions.space10,
+                          ),
+                          Text(
+                            controller.quizlist[2].name.toString(),
+                            style: semiBoldExtraLarge,
+                          ),
+                          const SizedBox(height: Dimensions.space3),
+                          Text(controller.quizlist[2].shortDescription.toString(),
+                              style: regularDefault.copyWith(
+                                color: MyColor.textColor,
+                              ),
+                              textAlign: TextAlign.center),
+                        ],
+                      ),
                     ),
                   ),
                 )

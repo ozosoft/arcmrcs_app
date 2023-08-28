@@ -3,13 +3,13 @@ import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/controller/all_categories/all_categories_controller.dart';
-import 'package:flutter_prime/data/model/all_cartegories/all_categories_model.dart';
-import 'package:flutter_prime/data/repo/allcategories/all_categories_repo.dart';
+import 'package:flutter_prime/data/controller/play_diffrent_quizes/fun_n_learn/fun_n_learn_controller.dart';
+import 'package:flutter_prime/data/repo/play_diffrent_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:get/get.dart';
-import '../../components/category-card/categories_card.dart';
+import '../../../../data/model/play_diffrent_quizes/fun_n_learn/fun_n_learn_category_model.dart';
+import '../../../components/category-card/categories_card.dart';
 
 class FunNLearnScreen extends StatefulWidget {
   const FunNLearnScreen({super.key});
@@ -22,17 +22,15 @@ class _FunNLearnScreenState extends State<FunNLearnScreen> {
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(AllCategoriesRepo(apiClient: Get.find()));
-    Get.put(AllCategoriesController(
-      allCategoriesRepo: Get.find(),
-    ));
-    AllCategoriesController controller =
-        Get.put(AllCategoriesController(allCategoriesRepo: Get.find()));
+    Get.put(FunNLearnRepo(apiClient: Get.find()));
+    
+    FunNLearnCategoriesController controller =
+        Get.put(FunNLearnCategoriesController(funNLearnRepo: Get.find()));
 
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
+      controller.getFunNLearndata();
 
     });
   }
@@ -40,8 +38,8 @@ class _FunNLearnScreenState extends State<FunNLearnScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomCategoryAppBar(title: MyStrings.allCategory),
-      body: GetBuilder<AllCategoriesController>(
+      appBar: const CustomCategoryAppBar(title: MyStrings.funAndLearn),
+      body: GetBuilder<FunNLearnCategoriesController>(
         builder: (controller) => SingleChildScrollView(
           physics: const ScrollPhysics(),
           child: Column(
@@ -53,37 +51,37 @@ class _FunNLearnScreenState extends State<FunNLearnScreen> {
                   shrinkWrap: true,
                   itemCount: controller.allCategoriesList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    List<QuizInfo>? levelList =
-                        controller.allCategoriesList[index].quizInfos;
+                    List<Category>? levelList = controller.allCategoriesList;
                     String subCategoryId = levelList != null &&
                             levelList.isNotEmpty &&
-                            levelList[0].subCategoryId.toString() != 'null'
-                        ? levelList[0].subCategoryId.toString()
+                            levelList[0].subcategoriesCount.toString() != 'null'
+                        ? levelList[0].subcategoriesCount.toString()
                         : '-1';
                     String title =
                         controller.allCategoriesList[index].name.toString();
                     return InkWell(
                       onTap: () {
-                        subCategoryId == ""
-                            ? const SizedBox()
-                            : Get.toNamed(RouteHelper.subCategories,
+                        controller
+                            .allCategoriesList[index].subcategoriesCount
+                            .toString() == "0"
+                            ?  Get.toNamed(RouteHelper.funNlearnListScreen,arguments: [ controller.allCategoriesList[index].name.toString(),controller.allCategoriesList[index].id.toString()])
+                            : Get.toNamed(RouteHelper.funNlearnSubCategoryScreenScreen,
                                 arguments: [title,  controller
                             .allCategoriesList[index].id
                             .toString()]);
-                        print("this is sub id++++++++++++++++++++"+subCategoryId
-                            .toString());
+                      
                       },
                       child: CategoriesCard(
                        
                         title: title,
                         questions: controller
-                            .allCategoriesList[index].questionsCount
+                            .allCategoriesList[index].quizInfosCount
                             .toString(),
-                        image: UrlContainer.allCategoriesImage +
+                        image: UrlContainer.funNLearnsubCategoryImage +
                             controller.allCategoriesList[index].image
                                 .toString(),
                         expansionVisible: false,
-                        fromViewAll: true,
+                        fromViewAll: false,
                         subCategoryId: subCategoryId,
                         index: index,
                       ),

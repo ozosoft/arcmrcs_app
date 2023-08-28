@@ -14,10 +14,14 @@ class DashBoardController extends GetxController {
   String rank = "";
   String coins = "";
   String score = "";
+  String ?username = "";
+  String ?userImage = "";
+
   List<Category> categorylist = [];
   List<Contest> contestlist = [];
   List<Exams> examZonelist = [];
   List<QuizType> quizlist = [];
+  List<User> userdetails = [];
 
   bool loader = true;
 
@@ -42,6 +46,7 @@ class DashBoardController extends GetxController {
         score = dashBoard.data?.user?.score ?? "";
         //save User Data
         dashRepo.apiClient.setUserData(dashBoard.data!.user!.toJson());
+
         List<Category>? categories = dashBoard.data?.categories;
 
         if (categories != null && categories.isNotEmpty) {
@@ -65,6 +70,8 @@ class DashBoardController extends GetxController {
         if (quizType != null && quizType.isNotEmpty) {
           quizlist.addAll(quizType);
         }
+        username = dashBoard.data?.user!.username;
+        userImage =dashBoard.data?.user!.avatar;
       } else {
         CustomSnackBar.error(errorList: [dashBoard.status ?? ""]);
       }

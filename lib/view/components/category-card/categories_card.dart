@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/expanded_widget/expanded_widget.dart';
+import 'package:flutter_prime/view/screens/all-categories/widgets/allCategories_expanded_section.dart';
+import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/widgets/expanded_section_for_level.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
@@ -9,11 +11,11 @@ import '../../../core/utils/style.dart';
 
 class CategoriesCard extends StatefulWidget {
   final String title, questions, image, levels, minute, marks, date, subCategoryId;
-  final bool expansionVisible, fromViewAll, fromBookmark, fromExam;
+  final bool expansionVisible, fromViewAll, fromBookmark, fromExam, fromFunNlearn, fromAllCategory;
   final bool isExpand;
   final int index;
 
-  const CategoriesCard({super.key, required this.title, this.questions = "", this.image = "", this.subCategoryId = "", this.expansionVisible = false, this.fromBookmark = false, required this.fromViewAll, this.levels = "1", this.fromExam = false, this.minute = "", this.marks = "", this.isExpand = false, required this.index, this.date = ""});
+  const CategoriesCard({super.key, required this.title, this.questions = "", this.image = "", this.subCategoryId = "", this.expansionVisible = false, this.fromFunNlearn = false, this.fromAllCategory = false, this.fromBookmark = false, required this.fromViewAll, this.levels = "1", this.fromExam = false, this.minute = "", this.marks = "", this.isExpand = false, required this.index, this.date = ""});
   @override
   State<CategoriesCard> createState() => _CategoriesCardState();
 }
@@ -21,8 +23,9 @@ class CategoriesCard extends StatefulWidget {
 class _CategoriesCardState extends State<CategoriesCard> {
   @override
   Widget build(BuildContext context) {
+    print("this is from expand++++++++++++++++++++++++++++++++" + widget.fromAllCategory.toString()+ widget.expansionVisible.toString()+widget.fromFunNlearn.toString());
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space12, vertical: Dimensions.space10),
+      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space12, vertical: Dimensions.space8),
       child: Container(
           decoration: BoxDecoration(
             color: MyColor.colorWhite,
@@ -47,13 +50,15 @@ class _CategoriesCardState extends State<CategoriesCard> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(width: Dimensions.space20),
-                 widget.image.isNotEmpty? Padding(
-                    padding: const EdgeInsets.only(top: Dimensions.space20, bottom: Dimensions.space20),
-                    child: Image.network(
-                      widget.image ?? "",
-                      height: Dimensions.space40,
-                    ),
-                  ):SizedBox(),
+                  widget.image.isNotEmpty
+                      ? Padding(
+                          padding: const EdgeInsets.only(top: Dimensions.space20, bottom: Dimensions.space20),
+                          child: Image.network(
+                            widget.image ?? "",
+                            height: Dimensions.space40,
+                          ),
+                        )
+                      :const SizedBox(),
                   const SizedBox(width: Dimensions.space30),
                   Padding(
                     padding: const EdgeInsets.only(top: Dimensions.space15),
@@ -107,15 +112,29 @@ class _CategoriesCardState extends State<CategoriesCard> {
                   const SizedBox(width: Dimensions.space20),
                 ],
               ),
-               SizedBox(height: widget.expansionVisible
-                  ?Dimensions.space3:Dimensions.space10),
+              SizedBox(height: widget.expansionVisible ? Dimensions.space3 : Dimensions.space10),
               widget.expansionVisible
                   ? ExpandedSections(
                       categoryindex: widget.index,
                       isExpand: widget.isExpand,
                       title: widget.title,
                     )
-                  : const SizedBox(),
+                  : widget.fromFunNlearn
+                      ? FunNLearnExpandedSections(
+                          categoryindex: widget.index,
+                          isExpand: widget.isExpand,
+                          title: widget.title,
+                        )
+                      : widget.fromViewAll
+                          ? AllCategoriesExpandedSection(
+                              categoryindex: widget.index,
+                              isExpand: widget.isExpand,
+                              title: widget.title,
+                            )
+                          : const SizedBox(),
+              const SizedBox(
+                height: Dimensions.space5,
+              )
             ],
           )),
     );

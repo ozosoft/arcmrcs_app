@@ -7,7 +7,6 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
-import 'package:flutter_prime/data/repo/submit_answer/submit_answer_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
@@ -15,6 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../data/controller/quiz_questions/quiz_questions_controller.dart';
 import 'life_line_widget.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class QuizBodySection extends StatefulWidget {
   final int id;
@@ -35,13 +35,15 @@ class _QuizBodySectionState extends State<QuizBodySection> {
 
     controller.quizInfoID = Get.arguments[1];
 
-    // print("++++++++++===============this is id"+quizinfoID.toString());
+   
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata(controller.quizInfoID.toString());
     });
   }
+
+  AudioPlayer audioPlayer = AudioPlayer();
 
   @override
   Widget build(BuildContext context) {
@@ -52,18 +54,17 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                 ? Text('Empty')
                 : PageView(onPageChanged: (value) {}, children: [
                     PageView.builder(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics:const NeverScrollableScrollPhysics(),
                       controller: controller.pageController,
                       onPageChanged: (int page) {
-                        print(page);
+                       
                         controller.changePage(page);
-                        print("1234" + controller.pageController.toString());
                       },
                       itemCount: controller.questionsList.length,
                       itemBuilder: (context, questionsIndex) {
                         controller.setCurrentOption(questionsIndex);
 
-                        print('current question index: ${questionsIndex}');
+                        
 
                         return SingleChildScrollView(
                           padding: const EdgeInsets.all(Dimensions.space20),
@@ -107,7 +108,15 @@ class _QuizBodySectionState extends State<QuizBodySection> {
 
                                                       controller.selectAnswer(optionIndex, questionsIndex);
 
-                                                      await Future.delayed(const Duration(seconds: 3));
+                                                        controller.questionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                          ? null
+                                                          : controller.selectedOptionIndex == optionIndex
+                                                              ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                  ?  AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                  :  AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                              : null;
+
+                                                      await Future.delayed(const Duration(seconds: 1));
 
                                                       if (controller.pageController.page! < controller.questionsList.length - 1) {
                                                         controller.pageController.nextPage(
@@ -122,8 +131,11 @@ class _QuizBodySectionState extends State<QuizBodySection> {
 
                                                       if (questionsIndex == controller.questionsList.length - 1) {
                                                         controller.submitAnswer();
-                                                        Get.toNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
+                                                        Get.offAndToNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
                                                       }
+                                                   
+                                                     
+                                                    
                                                     },
                                                     child: Container(
                                                       margin: const EdgeInsets.all(Dimensions.space8),
@@ -180,7 +192,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                               Padding(
                                 padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .4),
                                 child: CircularCountDownTimer(
-                                  duration: Dimensions.space2.toInt(),
+                                  duration: controller.timerDuration,
                                   initialDuration: 0,
                                   controller: controller.countDownController,
                                   width: Dimensions.space60,
@@ -206,7 +218,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                     if (questionsIndex == controller.questionsList.length - 1) {
                                       controller.submitAnswer();
 
-                                      Get.toNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
+                                      Get.offAndToNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
                                     } else {
                                       controller.pageController.nextPage(
                                         duration: const Duration(milliseconds: 500),
