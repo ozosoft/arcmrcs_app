@@ -26,11 +26,14 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Map<String, Map<String, String>> languages = await di_service.init();
 
+
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
   await PushNotificationService().setupInteractedMessage();
 
   HttpOverrides.global = MyHttpOverrides();
+
   MyUtils.allScreen();
+
   runApp(MyApp(languages: languages));
 }
 
@@ -54,9 +57,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetBuilder<LocalizationController>(
       builder: (localizeController) => GetMaterialApp(
+
         theme: ThemeData(
             scaffoldBackgroundColor: MyColor.scaffoldBackgroundColor,
             appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: MyColor.colorWhite))),
+
         title: MyStrings.appName,
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.noTransition,

@@ -7,14 +7,18 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final bool hideTitleWhenExpanded;
   final GlobalKey<ScaffoldState> scaffoldKey;
-  CustomSliverDelegate(
-      {required this.expandedHeight,
-      this.hideTitleWhenExpanded = true,
-      required this.scaffoldKey});
+  CustomSliverDelegate({
+    required this.expandedHeight,
+    this.hideTitleWhenExpanded = true,
+    required this.scaffoldKey,
+  });
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     final appBarSize = expandedHeight - shrinkOffset;
     final cardTopPosition = expandedHeight / 2 - shrinkOffset;
     final proportion = 2 - (expandedHeight / appBarSize);

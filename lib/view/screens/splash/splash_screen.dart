@@ -21,20 +21,19 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-
     MyUtils.splashScreen();
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GeneralSettingRepo(apiClient: Get.find()));
     Get.put(LocalizationController(sharedPreferences: Get.find()));
-    final controller = Get.put(SplashController(repo: Get.find()));
+    final controller = Get.put(
+        SplashController(repo: Get.find(), localizationController: Get.find()));
 
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.gotoNextPage();
     });
-
   }
 
   @override
@@ -46,30 +45,30 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SplashController>(
-      builder: (conroller)=> Stack(
-          children: [
-           SvgPicture.asset(
-           MyImages.splashBGimage,
-           fit: BoxFit.cover,
+      builder: (conroller) => Stack(
+        children: [
+          SvgPicture.asset(
+            MyImages.splashBGimage,
+            fit: BoxFit.cover,
           ),
           Scaffold(
-              backgroundColor: MyColor.primaryColor,
-              body:  Stack(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(Dimensions.space35),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(
-                          MyImages.splashLogoSVG,
-                          ),
-                      ),
+            backgroundColor: MyColor.primaryColor,
+            body: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(Dimensions.space35),
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: SvgPicture.asset(
+                      MyImages.splashLogoSVG,
                     ),
-                    SvgPicture.asset(MyImages.splashBGimage)
-                  ],
+                  ),
                 ),
-              ),
-           ],
+                SvgPicture.asset(MyImages.splashBGimage)
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

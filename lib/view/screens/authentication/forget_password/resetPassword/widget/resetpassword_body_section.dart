@@ -17,14 +17,13 @@ class ResetPasswordBodySection extends StatefulWidget {
   const ResetPasswordBodySection({super.key});
 
   @override
-  State<ResetPasswordBodySection> createState() =>
-      _ResetPasswordBodySectionState();
+  State<ResetPasswordBodySection> createState() => _ResetPasswordBodySectionState();
 }
 
 class _ResetPasswordBodySectionState extends State<ResetPasswordBodySection> {
   final formKey = GlobalKey<FormState>();
 
-     @override
+  @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LoginRepo(apiClient: Get.find()));
@@ -43,7 +42,6 @@ class _ResetPasswordBodySectionState extends State<ResetPasswordBodySection> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ResetPasswordController>(
@@ -55,12 +53,12 @@ class _ResetPasswordBodySectionState extends State<ResetPasswordBodySection> {
         child: Column(
           children: [
             Text(
-              MyStrings.resetpassword,
-              style:regularDefault.copyWith(fontSize: Dimensions.space20,fontWeight: FontWeight.w500),
+              MyStrings.resetpassword.tr,
+              style: regularDefault.copyWith(fontSize: Dimensions.space20, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: Dimensions.space8),
             Text(
-              MyStrings.passwordMustBeDiffrentFromBefore,
+              MyStrings.passwordMustBeDiffrentFromBefore.tr,
               style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
             ),
             Form(
@@ -81,53 +79,52 @@ class _ResetPasswordBodySectionState extends State<ResetPasswordBodySection> {
                     isShowSuffixIcon: true,
                     isPassword: true,
                     labelText: MyStrings.newPassword,
-                     onChanged: (value) {
-                            if (controller.checkPasswordStrength) {
-                              controller.updateValidationList(value);
-                            }
-                            return;
-                          },
+                    onChanged: (value) {
+                      if (controller.checkPasswordStrength) {
+                        controller.updateValidationList(value);
+                      }
+                      return;
+                    },
                     textInputType: TextInputType.emailAddress,
                     inputAction: TextInputAction.next,
-                    
                     validator: (value) {
-                            return controller.validatePassword(value);
-                          },
+                      return controller.validatePassword(value);
+                    },
                   ),
                   const SizedBox(height: Dimensions.space25),
                   CustomTextField(
                     hastextcolor: true,
                     hasIcon: true,
-                     controller: controller.confirmPassController,
+                    controller: controller.confirmPassController,
                     prefixicon: MyImages.lockSVG,
                     animatedLabel: true,
                     needOutlineBorder: true,
                     isShowSuffixIcon: true,
                     isPassword: true,
-                    labelText: MyStrings.confirmPassword,
+                    labelText: MyStrings.confirmPassword.tr,
                     onChanged: (value) {},
                     textInputType: TextInputType.emailAddress,
                     inputAction: TextInputAction.next,
-                     validator: (value) {
-                        if (controller.passController.text.toLowerCase() !=
-                            controller.confirmPassController.text
-                                .toLowerCase()) {
-                          return MyStrings.kMatchPassError.tr;
-                        } else {
-                          return null;
-                        }
-                      },
+                    validator: (value) {
+                      if (controller.passController.text.toLowerCase() != controller.confirmPassController.text.toLowerCase()) {
+                        return MyStrings.kMatchPassError.tr;
+                      } else {
+                        return null;
+                      }
+                    },
                   ),
                   const SizedBox(height: Dimensions.space40),
-                controller.submitLoading? RoundedLoadingBtn():  RoundedButton(
-                      text: MyStrings.continues,
-                      press: () {
-                        if (formKey.currentState!.validate()) {
-                                controller.resetPassword();
-                              }
-                        // Get.toNamed(RouteHelper.loginScreen);
-                      },textSize: Dimensions.space17),
-                 
+                  controller.submitLoading
+                      ? const RoundedLoadingBtn()
+                      : RoundedButton(
+                          text: MyStrings.continues.tr,
+                          press: () {
+                            if (formKey.currentState!.validate()) {
+                              controller.resetPassword();
+                            }
+                            // Get.toNamed(RouteHelper.loginScreen);
+                          },
+                          textSize: Dimensions.space17),
                 ],
               ),
             )

@@ -55,6 +55,7 @@ dependencies:
   shared_preferences: ^2.0.13
   shimmer: ^2.0.0
   simple_animations: ^4.2.0
+  vibration: ^1.8.1
   url_launcher: ^6.0.20  
   audioplayers: ^5.1.0
 

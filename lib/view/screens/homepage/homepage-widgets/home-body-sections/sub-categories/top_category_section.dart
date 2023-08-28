@@ -101,8 +101,7 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                                 arguments: [controller.categorylist[index].name.toString(), controller.categorylist[index].id.toString()],
                               );
                               controllers.changeExpandIndex(index);
-                              // print("this is sub categ+++++++++++++++++++++++++++"+
-                              //     controller.categorylist[index].id.toString());
+
                             },
                             child: CustomTopCategoryCard(
                               index: index,

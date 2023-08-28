@@ -36,6 +36,10 @@ class MyStrings {
 
 
   static const String reviewAnswer = "Review Answer";
+  static const String currectAnswer = "Currect Answer";
+  static const String wrongAnswer = "Wrong Answer";
+  static const String yourAnswer = "Your Answer";
+
   static const String selectCategory = "Select Category";
   static const String entryCoinsForBattele = "Entry Coins For Battle";
   static const String entryRoomCode = "Entry Room Code to Join Room";
@@ -253,6 +257,7 @@ class MyStrings {
   static const String selectCountry = "Select Country";
   static const String letsPlay = "Let's Play";
   static const String playWithFriend = "Play With Friend";
+  static const String playAgain = "Play Again";
   static const String viewAll = "View all";
   static const String viewMore = "View More";
   static const String rank = "Rank";
@@ -426,8 +431,10 @@ class MyStrings {
   static const String reedemableAmount = "Redeemable Amount";
   static const String reedemNow = "Redeem Now";
   static const String sharecodeText = "Share this room code to friend and ask them to join";
+
   static const String pleaseWaitRoomText = "Please wait game will start soon";
   static const String pleaseWaitForYourBattleResultText = "Please Wait For You Battle Result!";
+
   static const String approved = "Approved";
   static const String supper = "Supper";
   static const String supperbattleMan = "Supper Battle Man";
@@ -491,6 +498,9 @@ class MyStrings {
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
 
+  static const String catagori = "Catagori";
+  static const String subcatagori = "Sub Catagori";
+
   static const String dailynewquiz = "Daily new quiz";
   static const String gamequizwithfun = "Game quiz with fun";
   static const String rules1 = "I Will not copy and give this exam with honesty";
@@ -516,12 +526,7 @@ class MyStrings {
     MyLanguageModel(languageName: 'Arabic', countryCode: 'SA', languageCode: 'ar'),
   ];
 
-  List<MyQuestionsModel> quizquestions = [
-    MyQuestionsModel(rank: MyStrings.A, questions: MyStrings.japan),
-    MyQuestionsModel(rank: MyStrings.b, questions: MyStrings.apple),
-    MyQuestionsModel(rank: MyStrings.c, questions: MyStrings.ibm),
-    MyQuestionsModel(rank: MyStrings.d, questions: MyStrings.google)
-  ];
+  List<MyQuestionsModel> quizquestions = [MyQuestionsModel(rank: MyStrings.A, questions: MyStrings.japan), MyQuestionsModel(rank: MyStrings.b, questions: MyStrings.apple), MyQuestionsModel(rank: MyStrings.c, questions: MyStrings.ibm), MyQuestionsModel(rank: MyStrings.d, questions: MyStrings.google)];
 
   List<AchivementModel> achivements = [
     AchivementModel(title: MyStrings.rank, points: MyStrings.zeroEight),

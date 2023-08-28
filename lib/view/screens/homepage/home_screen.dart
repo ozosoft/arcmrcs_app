@@ -54,7 +54,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+
       drawer:const DrawerScreen(),
+
     );
   }
 }

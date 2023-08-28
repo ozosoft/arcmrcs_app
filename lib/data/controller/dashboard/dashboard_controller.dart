@@ -44,6 +44,7 @@ class DashBoardController extends GetxController {
         rank = dashBoard.data?.rank?.userRank ?? "";
         coins = dashBoard.data?.user?.coins ?? "";
         score = dashBoard.data?.user?.score ?? "";
+
         //save User Data
         dashRepo.apiClient.setUserData(dashBoard.data!.user!.toJson());
 
@@ -70,8 +71,10 @@ class DashBoardController extends GetxController {
         if (quizType != null && quizType.isNotEmpty) {
           quizlist.addAll(quizType);
         }
+
         username = dashBoard.data?.user!.username;
         userImage =dashBoard.data?.user!.avatar;
+
       } else {
         CustomSnackBar.error(errorList: [dashBoard.status ?? ""]);
       }
