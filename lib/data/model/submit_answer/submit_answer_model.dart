@@ -56,9 +56,9 @@ class Data {
     factory Data.fromJson(Map<String, dynamic> json) => Data(
         totalQuestion: json["totalQuestion"].toString(),
         correctAnswer: json["correctAnswer"].toString(),
-        wrongAnswer: json["wrongAnswer"],
-        winingScore: json["winingScore"],
-        totalScore: json["totalScore"],
+        wrongAnswer: json["wrongAnswer"].toString(),
+        winingScore: json["winingScore"].toString(),
+        totalScore: json["totalScore"].toString(),
         nextLevelQuizInfo: json["nextLevelQuizInfo"] == null ? null : NextLevelQuizInfo.fromJson(json["nextLevelQuizInfo"]),
     );
 
@@ -136,7 +136,7 @@ class NextLevelQuizInfo {
         examEndTime: json["exam_end_time"],
         examDuration: json["exam_duration"],
         examKey: json["exam_key"],
-        winningMark: json["winning_mark"],
+        winningMark: json["winning_mark"].toString(),
         status: json["status"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),

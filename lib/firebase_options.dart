@@ -4,6 +4,16 @@ import 'package:firebase_core/firebase_core.dart' show FirebaseOptions;
 import 'package:flutter/foundation.dart'
     show defaultTargetPlatform, kIsWeb, TargetPlatform;
 
+/// Default [FirebaseOptions] for use with your Firebase apps.
+///
+/// Example:
+/// ```dart
+/// import 'firebase_options.dart';
+/// // ...
+/// await Firebase.initializeApp(
+///   options: DefaultFirebaseOptions.currentPlatform,
+/// );
+/// ```
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
@@ -37,31 +47,31 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAO3jegfZNbXIVj4Q2wE4yB8ZqcIjz8R3c',
-    appId: '1:30461072894:web:ec960b3b543723798b5caf',
-    messagingSenderId: '30461072894',
-    projectId: 'flutter-prime',
-    authDomain: 'flutter-prime.firebaseapp.com',
-    storageBucket: 'flutter-prime.appspot.com',
-    measurementId: 'G-7MNB062LGM',
+    apiKey: 'AIzaSyDvwNmASYHTrqhcY00KOTFlB_ntLByMdxw',
+    appId: '1:756507339207:web:adf543c829f480a423d1e2',
+    messagingSenderId: '756507339207',
+    projectId: 'quiz-lab-f9e22',
+    authDomain: 'quiz-lab-f9e22.firebaseapp.com',
+    storageBucket: 'quiz-lab-f9e22.appspot.com',
+    measurementId: 'G-HQ1FF4L0VC',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD98HQIOu8FbYGb9bdAsnMIlCfgbS_SwVA',
-    appId: '1:30461072894:android:209f48acd6c85d1e8b5caf',
-    messagingSenderId: '30461072894',
-    projectId: 'flutter-prime',
-    storageBucket: 'flutter-prime.appspot.com',
+    apiKey: 'AIzaSyAkkzPYATMfiWIKyRVfn3EqLDXdZ85Q0Sg',
+    appId: '1:756507339207:android:f7fe66f16e7c8c6c23d1e2',
+    messagingSenderId: '756507339207',
+    projectId: 'quiz-lab-f9e22',
+    storageBucket: 'quiz-lab-f9e22.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCuvLjWgweWQ8qtImFGopgWCQfubsWLyI0',
-    appId: '1:30461072894:ios:4f80e76934a4b3728b5caf',
-    messagingSenderId: '30461072894',
-    projectId: 'flutter-prime',
-    storageBucket: 'flutter-prime.appspot.com',
-    iosClientId:
-        '30461072894-lb8gq4v89b1jcspca7qe9r4dr47g1i8v.apps.googleusercontent.com',
+    apiKey: 'AIzaSyAjFp0css7ZjMy5i9LveuSzVO4OH_onwJA',
+    appId: '1:756507339207:ios:494cca4f1822a0c923d1e2',
+    messagingSenderId: '756507339207',
+    projectId: 'quiz-lab-f9e22',
+    storageBucket: 'quiz-lab-f9e22.appspot.com',
+    androidClientId: '756507339207-al6uohh0khqteh1c1jlj4c12fem0voc7.apps.googleusercontent.com',
+    iosClientId: '756507339207-fqqhbp7aeadm2hckh6l40ca3bm5ogmhi.apps.googleusercontent.com',
     iosBundleId: 'com.example.flutterPrime',
   );
 }

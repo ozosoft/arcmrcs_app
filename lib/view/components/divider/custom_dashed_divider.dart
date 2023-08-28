@@ -1,27 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/utils/my_color.dart';
 
 class CustomDashedDivider extends StatelessWidget {
-  final double height,width;
+  final double height, width, strokeWidth;
+  final Color color;
 
-  const CustomDashedDivider({super.key, required this.height, required this.width});
+  const CustomDashedDivider({super.key, required this.height, required this.width, this.color = MyColor.colorDarkGrey, this.strokeWidth = 1});
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: width,
       height: height,
       child: CustomPaint(
-        painter: DashedDividerPainter(),
+        painter: DashedDividerPainter(color: color, strokeWidth: strokeWidth),
       ),
     );
   }
 }
 
 class DashedDividerPainter extends CustomPainter {
+  final Color color;
+  final double strokeWidth;
+  DashedDividerPainter({
+    required this.color,
+    required this.strokeWidth,
+  });
+
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
-      ..color = Colors.grey // Adjust the color of the dashed line as needed
-      ..strokeWidth = 2 // Adjust the thickness of the dashed line as needed
+      ..color = color // Adjust the color of the dashed line as needed
+      ..strokeWidth = strokeWidth // Adjust the thickness of the dashed line as needed
       ..strokeCap = StrokeCap.square;
 
     final double dashWidth = 4;

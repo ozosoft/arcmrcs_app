@@ -3,13 +3,10 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
 import 'package:flutter_prime/view/screens/wallet/widgets/wallet_request_section.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-import '../../../../core/utils/my_images.dart';
-import 'coin-redeem/payment_bottomSheet.dart';
 import 'transection_section.dart';
 
 class TabBarWithButtons extends StatefulWidget {
@@ -37,46 +34,48 @@ class _TabBarWithButtonsState extends State<TabBarWithButtons>
     Size size = MediaQuery.of(context).size;
     return  DefaultTabController(
         length: 2,
-        child: Scaffold(
-          backgroundColor: MyColor.colorWhite,
-          appBar: TabBar(
-              controller: tabController,
-              unselectedLabelColor: MyColor.textColor,
-              labelStyle: regularMediumLarge,
-              indicatorPadding: EdgeInsets.zero,
-              indicator: ShapeDecoration(
-                  color: MyColor.primaryColor,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: selectedIndex == 0
-                          ? const BorderRadius.only(
-                              topLeft: Radius.circular(Dimensions.space10),
-                            )
-                          : const BorderRadius.only(
-                              topRight: Radius.circular(Dimensions.space10),
-                            ))),
-              onTap: (value) {
-                setState(() {
-                  selectedIndex = tabController.index;
-                });
-              },
-              tabs: const [
-                Tab(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(MyStrings.request),
+        child:  GetBuilder<DashBoardController>(
+           builder: (controller) => Scaffold(
+            backgroundColor: MyColor.colorWhite,
+            appBar: TabBar(
+                controller: tabController,
+                unselectedLabelColor: MyColor.textColor,
+                labelStyle: regularMediumLarge,
+                indicatorPadding: EdgeInsets.zero,
+                indicator: ShapeDecoration(
+                    color: MyColor.primaryColor,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: selectedIndex == 0
+                            ? const BorderRadius.only(
+                                topLeft: Radius.circular(Dimensions.space10),
+                              )
+                            : const BorderRadius.only(
+                                topRight: Radius.circular(Dimensions.space10),
+                              ))),
+                onTap: (value) {
+                  setState(() {
+                    selectedIndex = tabController.index;
+                  });
+                },
+                tabs: const [
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(MyStrings.request),
+                    ),
                   ),
-                ),
-                Tab(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(MyStrings.transaction),
+                  Tab(
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(MyStrings.transaction),
+                    ),
                   ),
-                ),
-              ]),
-          body: TabBarView(controller: tabController, children: const[
-             WalletRequestSection(),
-             TransectionSection()
-          ]),
+                ]),
+            body: TabBarView(controller: tabController, children: const[
+               WalletRequestSection(),
+               TransectionSection()
+            ]),
+          ),
         ));
   }
 }

@@ -3,18 +3,37 @@ import 'package:flutter_prime/data/model/model/profile_achivement_model.dart';
 import 'package:flutter_prime/data/model/model/questionsList_model.dart';
 
 class MyStrings {
+    static const String appName = "QuizLAB";
+
   static const String withdrawInformation = "Withdraw Information";
   static const String withdrawLimit = "Withdraw Limit";
   static const String withdrawConfirm = "Withdraw Confirm";
   static const String authorizationMethod = "Authorization Method";
   static const String selectAuthModeMsg = "Please select an authorization mode";
+  static const String selectACategoryMsg = "Please Select A Category First";
+  static const String selectACategoryText = "Select A Category";
+  static const String selectEntryCoinText = "Select Entry Coin";
   static const String fileDownloadAt = "File download at";
   static const String errorDownloadingFile = "Error downloading file";
   static const String downloading = "Downloading";
   static const String fileDownloadedSuccess = "File downloaded successfully";
   static const String selectPaymentMethod = "Select PaymentMethod";
+  static const String areYouSureYouWantToCloseSearching = "Are You sure You Want Close Searching!";
+  static const String searching = "Searching";
+  static const String areYouSureYouWantToLeaveThisRoom = "Are You sure You Want to leave this room!";
+  static const String questionNotFoundMsg = "Questions not found! Please try again after a few minutes.";
+  static const String oponentLeftTheGame = "Oponent Left The game!";
+  static const String youLeftTheGame = "You Left The game!";
+  static const String youWon = "You Won";
+  static const String lose = "Sorry You Lose";
+  static const String collectCoins = "Collect Coins";
+  static const String copied = "Copied!";
+  static const String ok = "Ok";
+  static const String youHaveNoCoins = "You Have Not Enough Coins!";
+  static const String roomCodeIsWrong = "Room Code May be Wrong!";
+  static const String yourGameWillStartSoon = "The Game Will Begin In";
+  static const String sorryRoomISFull = "Sorry! Room Is Full";
 
-  static const String appName = "Flutter Prime";
 
   static const String reviewAnswer = "Review Answer";
   static const String currectAnswer = "Currect Answer";
@@ -63,10 +82,12 @@ class MyStrings {
 
   static const String kyc = 'KYC';
   static const String isRequired = 'is required';
+
   static const String viewAllRules = "View all rules";
   static const String examRules = "Exam Rules";
   static const String examKey = "Enter the exam key";
   static const String enterExam = "Enter In Exam";
+
   static const String chooseFile = 'Choose File';
   static const String chooseAvatar = 'Choose Avatar';
   static const String kycUnderReviewMsg = 'Your KYC is under review';
@@ -108,6 +129,7 @@ class MyStrings {
   static const String zipCode = "Zip Code";
   static const String state = "State";
   static const String start = "Start";
+  static const String started = "Started!";
   static const String city = "City";
   static const String english = "English";
   static const String bangla = "Bangla";
@@ -204,9 +226,11 @@ class MyStrings {
   static const String bankName = "Bank Name";
   static const String accountName = "Account Name";
   static const String quizResult = "Quiz Result";
+  static const String battleResult = "Battle Result";
   static const String fifteenPercent = "15%";
   static const String quizQuestions = "The Great Wall is a world-famous historical landmark located in which country?";
   static const String quizQuestions2 = "The Great Wall is a world-famous ?";
+
   static const String levels = "6 Level";
   static const String level1 = "Level 01";
   static const String allCategory = "All categories";
@@ -250,6 +274,7 @@ class MyStrings {
   static const String coinHistory = "Coin History";
   static const String logout = "Logout";
   static const String hiMariya = "Hi! Mariya Ons";
+  static const String hi = "Hi! ";
   static const String totalCoinFivethousand = "Total Coin 5000";
   static const String letsPlayQuiz = "Let`s Play Quiz";
   static const String bookmarks = "Bookmarks";
@@ -351,6 +376,7 @@ class MyStrings {
   static const String twoByTen = "2/10";
   static const String eightByTen = "8/10";
   static const String nextLevel = "Next Level";
+  static const String next = "Next";
   static const String sixlevel = "6 Level";
   static const String eightlevel = "8 Level";
   static const String sevenlevel = "7 Level";
@@ -361,19 +387,22 @@ class MyStrings {
   static const String vs = "VS";
   static const String request = "Request";
   static const String transection = "Transection";
+  static const String completeTheLevelFirst = "Complete this level first";
 
   static const String A = ' A) ';
   static const String b = ' B) ';
   static const String c = ' C) ';
   static const String d = ' D) ';
+  static const String at = '@';
   static const String historyAndCulture = 'History & Culture';
   static const String roomID = "874541";
   static const String marton = "@marton";
   static const String examZone = "Exam Zone";
   static const String twoHundredFortyDollar = "\$240.00";
   static const String jkobos = "@jkobos";
-  static const String qP = "2,558 QP";
+  static const String qP = " QP";
   static const String points = "1,570 Points";
+  static const String pointss = " Points";
   static const String quantity = '15';
   static const String leaderBoard = 'Leaderboard';
   static const String totalCoins = "Total Coins";
@@ -391,7 +420,10 @@ class MyStrings {
   static const String questions4 = '35 Questions';
   static const String questions5 = '10 Questions';
   static const String victory = 'Victory';
+  static const String defeat = 'Defeated';
+  static const String drawn = 'Drawn';
   static const String congratulation = 'Congratulation';
+  static const String betterLuckNextTime = 'Better Luck Next Time';
   static const String yourCoins = 'Your Coins';
   static const String fivehundred = '500.00';
   static const String twoForty = '\$240.00';
@@ -399,6 +431,9 @@ class MyStrings {
   static const String reedemableAmount = "Redeemable Amount";
   static const String reedemNow = "Redeem Now";
   static const String sharecodeText = "Share this room code to friend and ask them to join";
+
+  static const String pleaseWaitRoomText = "Please wait game will start soon";
+  static const String pleaseWaitForYourBattleResultText = "Please Wait For You Battle Result!";
 
   static const String approved = "Approved";
   static const String supper = "Supper";
@@ -415,6 +450,8 @@ class MyStrings {
   static const String proPack = "Pro Pack";
   static const String smallPack = "Small Pack";
   static const String twofifty = "\$250 USD";
+  static const String dollarSign = "\$ ";
+  static const String usd = " USD";
   static const String oneTwenty = "\$120 USD";
   static const String eighty = "\$80 USD";
   static const String threeforty = "\$340 USD";
@@ -441,7 +478,7 @@ class MyStrings {
   static const String twoJune2023 = "02 Jun 2023";
   static const String twoFiftyUSD = "+ \$250 USD";
   static const String hundredAndTwentyUSD = "- \$120 USD";
-  static const String enterCoins = "Enter the coins";
+  static const String enterCoins = "Enter Custom coins";
   static const String rewardNotification = "Rewards Notification";
   static const String joinwithnewroom = "Join with new room";
   static const String eventNotification = "Event Notification";
@@ -460,8 +497,10 @@ class MyStrings {
   static const String dailyQuiz = "Daily Quiz";
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
+
   static const String catagori = "Catagori";
   static const String subcatagori = "Sub Catagori";
+
   static const String dailynewquiz = "Daily new quiz";
   static const String gamequizwithfun = "Game quiz with fun";
   static const String rules1 = "I Will not copy and give this exam with honesty";
@@ -470,6 +509,7 @@ class MyStrings {
   static const String funvocabulary = "Fun vocabulary";
   static const String whoIsSmartest = "Who is the smartest in your group of friends and family";
   static const String pickTheCorrectAnswer = "Pick the correct answer at the final question to win the prize money";
+
   static const String dontHaveAnaccount = "Don’t have an account?";
   static const String onboardDescription = "There are hundreds of different catagories to choose from";
 
@@ -573,4 +613,5 @@ class MyStrings {
   final List<String> questionsList = [quizQuestions, quizQuestions2, questions2, questions, rules1, rules2, rules3];
   final List<String> rules = [rules1, rules2, rules3];
   final List<String> settingsList = [sound, vibration, themes];
+
 }

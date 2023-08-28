@@ -33,7 +33,13 @@ class MyUtils {
   }
 
   static allScreen() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: MyColor.getPrimaryColor(), statusBarIconBrightness: Brightness.light, systemNavigationBarColor: MyColor.colorWhite, systemNavigationBarIconBrightness: Brightness.dark));
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarColor: MyColor.getPrimaryColor(),
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: MyColor.colorWhite,
+        systemNavigationBarIconBrightness: Brightness.dark));
+
   }
 
   static dynamic getShadow() {

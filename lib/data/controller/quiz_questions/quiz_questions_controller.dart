@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_prime/data/model/quiz_questions_model/quiz_questions_model.dart';
 import 'package:flutter_prime/data/model/submit_answer/submit_answer_model.dart';
 import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
-import 'package:flutter_prime/data/repo/submit_answer/submit_answer_repo.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
@@ -19,6 +19,8 @@ class QuizQuestionsController extends GetxController {
   bool audienceVote = false;
   bool tapAnswer = false;
   bool flipQuistions = false;
+  bool restartTimer = false;
+
   String flipQuistion = "0";
   String fifty_fifty = "0";
   String audiencevotes = "0";
@@ -26,6 +28,7 @@ class QuizQuestionsController extends GetxController {
 
   int rightAnswerIndex = 0;
   int selectedAnswerIndex = -1;
+  int timerDuration = 20;
 
   int currentQuestionIndex = 0;
 
@@ -41,6 +44,14 @@ class QuizQuestionsController extends GetxController {
 
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
+  int currentPage = 0;
+
+  changePage(int page) {
+    currentPage = page;
+    update();
+  }
+
+  String successmessage = "";
 
   void getdata(String subcategoryId) async {
     loading = true;
@@ -64,13 +75,17 @@ class QuizQuestionsController extends GetxController {
           questionsList.addAll(subcategorylist);
         }
 
-        print("this is questions list" + subcategorylist![0].question.toString());
+        timerDuration = int.parse(quizquestions.data!.perQuestionAnswerDuration.toString());
+        update();
 
-        List<Option>? optionslist = quizquestions.data!.questions![1].options;
+        successmessage = quizquestions.message!.success.toString()??"";
+
+        List<Option>? optionslist = quizquestions.data!.questions![0].options;
 
         if (optionslist != null && optionslist.isNotEmpty) {
           optionsList.addAll(optionslist);
         }
+        print(optionslist);
       } else {
         CustomSnackBar.error(errorList: [quizquestions.status ?? ""]);
       }
@@ -86,12 +101,6 @@ class QuizQuestionsController extends GetxController {
 
   showQuestion() {
     showQuestions = !showQuestions;
-  }
-
-  int remainingTime = 30;
-  void restartTimer() {
-    remainingTime = 30;
-    update();
   }
 
   int selectedOptionIndex = -1;
@@ -111,13 +120,15 @@ class QuizQuestionsController extends GetxController {
     update();
   }
 
+  String questionId = "";
+  String thisQuestionId = "";
   isValidAnswer(int index, int optionIndex) {
-    String questionId = questionsList[index].selectedOptionId.toString();
-    String thisQuestionId = optionsList[optionIndex].id.toString();
+    questionId = questionsList[index].selectedOptionId.toString();
+    thisQuestionId = optionsList[optionIndex].id.toString();
 
     print('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
 
-    print('questionId: ${questionId}');
+    print('questionId=========================================================================: ${questionId}');
 
     if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
       return true;
@@ -141,6 +152,33 @@ class QuizQuestionsController extends GetxController {
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
 
+  int countDownTimerIndex = -1;
+  restartCountDownTimer(int questionIndex) {
+    countDownTimerIndex = countDownTimerIndex;
+    restartTimer = !restartTimer;
+    update();
+  }
+
+  bool fiftyFifty = false;
+  int fiftyFiftyIndex = -1;
+  makeFiftyFifty(int index) {
+    List<Option> allOptions = questionsList[index].options!;
+    var random = Random();
+    Option correctAnswers = allOptions!.firstWhere((element) => element.isAnswer == '1');
+    allOptions.remove(correctAnswers);
+    Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
+    List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);
+    print('come here: ${optionsList.length}');
+    print(optionsList.length);
+    questionsList[index].options!.clear();
+    questionsList[index].options!.addAll(optionsToDisplay);
+    update();
+
+    fiftyFiftyIndex = fiftyFiftyIndex;
+    fiftyFifty = !fiftyFifty;
+    update();
+  }
+
   void setCurrentOption(int questionsIndex) {
     // optionsList.clear();
     if (questionsList[questionsIndex].options != null) {
@@ -149,6 +187,17 @@ class QuizQuestionsController extends GetxController {
   }
 
   bool submitLoading = false;
+
+  String totalQuestions = "";
+  String correctAnswer = "";
+  String wrongAnswer = "";
+  String totalCoin = "";
+  String winningCoin = "";
+  String appreciation = "";
+
+  String nextlevelQuizInfoTitle = "";
+  int nextlevelQuizInfoId = 0;
+
   submitAnswer() async {
     submitLoading = true;
     update();
@@ -160,14 +209,14 @@ class QuizQuestionsController extends GetxController {
     for (int i = 0; i < questionsList.length; i++) {
       String quizeId = questionsList[i].id.toString();
       String selectedOptionId = questionsList[i].selectedOptionId.toString();
-      if (selectedOptionId.isNotEmpty) {
-        params['question_id[${i}]'] = quizeId;
-        print('quize id: ${quizeId}');
-        params['option_$quizeId'] = selectedOptionId;
-        print("option_$quizeId");
-      }
-    }
 
+      params['question_id[${i}]'] = quizeId;
+      print('quize id: ${quizeId}');
+      params['option_$quizeId'] = selectedOptionId;
+      print("option_$quizeId");
+
+    }
+    print(params['option_']);
     params['quizInfo_id'] = quizInfoID.toString();
     params['fifty_fifty'] = fifty_fifty;
     params['audience_poll'] = audiencevotes;
@@ -179,7 +228,21 @@ class QuizQuestionsController extends GetxController {
     if (submitModel.statusCode == 200) {
       SubmitAnswerModel model = SubmitAnswerModel.fromJson(jsonDecode(submitModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        appreciation = model.message!.success.toString();
+        totalQuestions = model.data!.totalQuestion.toString();
+        correctAnswer = model.data!.correctAnswer.toString();
+        wrongAnswer = model.data!.wrongAnswer.toString();
+        totalCoin = model.data!.totalScore.toString();
+        winningCoin = model.data!.winingScore.toString();
+
+        if (model.data?.nextLevelQuizInfo != null) {
+          nextlevelQuizInfoId = model.data!.nextLevelQuizInfo?.id! ?? 0;
+          nextlevelQuizInfoTitle = model.data!.nextLevelQuizInfo!.title ?? "";
+        } else {
+          return;
+        }
+
+        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 

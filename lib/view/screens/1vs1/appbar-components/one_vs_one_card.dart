@@ -4,84 +4,84 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/view/components/divider/custom_divider.dart';
+import 'package:get/get.dart';
+import '../../../../data/controller/battle/one_vs_multi_controller.dart';
 import '../../../components/divider/custom_vertical_divider.dart';
 
 class OneVSOneCustomCardWidget extends StatefulWidget {
   const OneVSOneCustomCardWidget({super.key});
 
   @override
-  State<OneVSOneCustomCardWidget> createState() =>
-      _OneVSOneCustomCardWidgetState();
+  State<OneVSOneCustomCardWidget> createState() => _OneVSOneCustomCardWidgetState();
 }
 
 class _OneVSOneCustomCardWidgetState extends State<OneVSOneCustomCardWidget> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.space10)),
-      elevation: .5,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          SizedBox(
-            height: Dimensions.space50,
-            width: Dimensions.space80,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      MyStrings.entryFees,
-                      style: regularMediumLarge.copyWith(
-                          color: MyColor.battleTextColor),
-                    ),
-                    const CustomDivider(
-                      space: Dimensions.space3,
-                    ),
-                    const Text(MyStrings.tenCoins, style: semiBoldExtraLarge)
-                  ],
-                )
-              ],
+    return GetBuilder<OneVsMutiController>(builder: (controller) {
+      return Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.space10)),
+        elevation: .5,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            SizedBox(
+              height: Dimensions.space50,
+              width: Dimensions.space80,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        MyStrings.entryFees,
+                        style: regularMediumLarge.copyWith(color: MyColor.battleTextColor),
+                      ),
+                      const CustomDivider(
+                        space: Dimensions.space3,
+                      ),
+                      Text("${controller.entryFeeRandomGame.value} ${MyStrings.coins}", style: semiBoldExtraLarge)
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-          const CustomVerticalDivider(
-            height: Dimensions.space25,
-          ),
-          SizedBox(
-            height: Dimensions.space50,
-            width: Dimensions.space110,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  width: Dimensions.space8,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      MyStrings.currentCoin,
-                      style: regularMediumLarge.copyWith(
-                          color: MyColor.battleTextColor),
-                    ),
-                    const CustomDivider(
-                      space: Dimensions.space3,
-                    ),
-                    const Text(MyStrings.fiveHundreds,
-                        style: semiBoldExtraLarge)
-                  ],
-                )
-              ],
+            const CustomVerticalDivider(
+              height: Dimensions.space25,
             ),
-          ),
-        ],
-      ),
-    );
+            SizedBox(
+              height: Dimensions.space50,
+              width: Dimensions.space110,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    width: Dimensions.space8,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        MyStrings.currentCoin,
+                        style: regularMediumLarge.copyWith(color: MyColor.battleTextColor),
+                      ),
+                      const CustomDivider(
+                        space: Dimensions.space3,
+                      ),
+                      Text("${controller.battleRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins}", style: semiBoldExtraLarge)
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

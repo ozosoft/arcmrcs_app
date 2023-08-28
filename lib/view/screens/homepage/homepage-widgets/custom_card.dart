@@ -25,16 +25,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
    @override
   void initState() {
 
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DashBoardRepo(apiClient: Get.find()));
-    Get.put(DashBoardController(dashRepo: Get.find()));
-    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
+    // Get.put(ApiClient(sharedPreferences: Get.find()));
+    // Get.put(DashBoardRepo(apiClient: Get.find()));
+    // Get.put(DashBoardController(dashRepo: Get.find()));
+    // Get.put(DashBoardController(dashRepo: Get.find()));
 
-    super.initState();
+    // super.initState();
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
-    });
+    
 
   }
 

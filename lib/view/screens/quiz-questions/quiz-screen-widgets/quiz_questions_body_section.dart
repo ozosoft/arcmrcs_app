@@ -7,7 +7,6 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
-import 'package:flutter_prime/data/repo/submit_answer/submit_answer_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
@@ -15,6 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../data/controller/quiz_questions/quiz_questions_controller.dart';
 import 'life_line_widget.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class QuizBodySection extends StatefulWidget {
   final int id;
@@ -35,7 +35,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
 
     controller.quizInfoID = Get.arguments[1];
 
-    // print("++++++++++===============this is id"+quizinfoID.toString());
+   
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -43,22 +43,28 @@ class _QuizBodySectionState extends State<QuizBodySection> {
     });
   }
 
+  AudioPlayer audioPlayer = AudioPlayer();
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<QuizQuestionsController>(
-      builder: (controller) => controller.loading
-          ? const CustomLoader()
-          : controller.questionsList.isEmpty
-              ? Text('Empty')
-              : PageView(
-                  onPageChanged: (value) {},
-                  children: [
+        builder: (controller) => controller.loading
+            ? const CustomLoader()
+            : controller.questionsList.isEmpty
+                ? Text('Empty')
+                : PageView(onPageChanged: (value) {}, children: [
                     PageView.builder(
+                      physics:const NeverScrollableScrollPhysics(),
                       controller: controller.pageController,
+                      onPageChanged: (int page) {
+                       
+                        controller.changePage(page);
+                      },
                       itemCount: controller.questionsList.length,
                       itemBuilder: (context, questionsIndex) {
                         controller.setCurrentOption(questionsIndex);
-                        print('current question index: ${questionsIndex}');
+
+                        
 
                         return SingleChildScrollView(
                           padding: const EdgeInsets.all(Dimensions.space20),
@@ -70,11 +76,9 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                 padding: const EdgeInsets.all(Dimensions.space15),
                                 child: Column(
                                   children: [
-                                    const Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    Row(
                                       children: [
-                                        LevelCardButton(text: MyStrings.oneFiftycoins, hasIcon: false, hasImage: false),
-                                        LevelCardButton(text: MyStrings.quiestionsLimit, hasIcon: false, hasImage: false),
+                                        LevelCardButton(text: "${controller.currentPage + 1} / ${controller.questionsList.length.toString()}", hasIcon: false, hasImage: false),
                                       ],
                                     ),
                                     Container(
@@ -87,16 +91,6 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                     ),
                                     Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.questionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                     const SizedBox(height: Dimensions.space25),
-                                    // ElevatedButton(
-                                    //     onPressed: () {
-                                    //       if (_pageController.page! > 0) {
-                                    //         _pageController.previousPage(
-                                    //           duration:const Duration(milliseconds: 500),
-                                    //           curve: Curves.easeInOut,
-                                    //         );
-                                    //       }
-                                    //     },
-                                    //     child: Text("tap")),
                                     ListView.builder(
                                         physics: const NeverScrollableScrollPhysics(),
                                         shrinkWrap: true,
@@ -114,7 +108,15 @@ class _QuizBodySectionState extends State<QuizBodySection> {
 
                                                       controller.selectAnswer(optionIndex, questionsIndex);
 
-                                                      await Future.delayed(const Duration(seconds: 3));
+                                                        controller.questionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                          ? null
+                                                          : controller.selectedOptionIndex == optionIndex
+                                                              ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                  ?  AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                  :  AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                              : null;
+
+                                                      await Future.delayed(const Duration(seconds: 1));
 
                                                       if (controller.pageController.page! < controller.questionsList.length - 1) {
                                                         controller.pageController.nextPage(
@@ -129,14 +131,17 @@ class _QuizBodySectionState extends State<QuizBodySection> {
 
                                                       if (questionsIndex == controller.questionsList.length - 1) {
                                                         controller.submitAnswer();
-                                                        Get.toNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
+                                                        Get.offAndToNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
                                                       }
+                                                   
+                                                     
+                                                    
                                                     },
                                                     child: Container(
                                                       margin: const EdgeInsets.all(Dimensions.space8),
                                                       padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
                                                       height: Dimensions.space55,
-                                                      width: controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? MediaQuery.of(context).size.width * .65 : MediaQuery.of(context).size.width * .78,
+                                                      width: controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? MediaQuery.of(context).size.width * .65 : MediaQuery.of(context).size.width * .75,
                                                       decoration: BoxDecoration(
                                                           color: controller.questionsList[questionsIndex].selectedOptionId!.isEmpty
                                                               ? MyColor.transparentColor
@@ -163,11 +168,10 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                                           ),
                                                           const Spacer(),
                                                           SizedBox(
-                                                            height: Dimensions.space10,
-                                                            child: SvgPicture.asset(
-                                                                "${controller.questionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox() : controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
-                                                                fit: BoxFit.cover),
-                                                          )
+                                                              height: Dimensions.space10,
+                                                              child: SvgPicture.asset(
+                                                                  "${controller.questionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox() : controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
+                                                                  fit: BoxFit.cover))
                                                         ],
                                                       ),
                                                     ),
@@ -188,7 +192,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                               Padding(
                                 padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .4),
                                 child: CircularCountDownTimer(
-                                  duration: Dimensions.space2.toInt(),
+                                  duration: controller.timerDuration,
                                   initialDuration: 0,
                                   controller: controller.countDownController,
                                   width: Dimensions.space60,
@@ -214,7 +218,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                     if (questionsIndex == controller.questionsList.length - 1) {
                                       controller.submitAnswer();
 
-                                      Get.toNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
+                                      Get.offAndToNamed(RouteHelper.quizResultScreen, arguments: MyStrings.quizResult);
                                     } else {
                                       controller.pageController.nextPage(
                                         duration: const Duration(milliseconds: 500),
@@ -229,8 +233,6 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                         );
                       },
                     ),
-                  ],
-                ),
-    );
+                  ]));
   }
 }

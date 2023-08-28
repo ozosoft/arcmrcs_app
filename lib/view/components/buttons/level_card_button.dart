@@ -4,7 +4,7 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LevelCardButton extends StatelessWidget {
-  final bool hasIcon;
+  final bool hasIcon ,hasbgColor,hastextColor;
   final bool hasImage,lifelineUsed;
   final double ? height,width;
   final String? text, image;
@@ -17,17 +17,17 @@ class LevelCardButton extends StatelessWidget {
       this.bgColor = MyColor.primaryColor,
       this.contentColor = MyColor.colorWhite,
       required this.hasIcon,
-      this.image, this.height, this.width, required this.hasImage, this.lifelineUsed=false})
+      this.image, this.height, this.width, required this.hasImage, this.lifelineUsed=false, this.hasbgColor=false, this.hastextColor=false})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-    child: Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: Dimensions.space15, vertical: Dimensions.space15),
+    return Container(
+      height: height,
+        padding:  EdgeInsets.symmetric(
+            horizontal: Dimensions.space15, vertical:hasbgColor? Dimensions.space1: Dimensions.space15),
         decoration: BoxDecoration(
-            color: MyColor.cardColor,
+            color:hasbgColor ?bgColor: MyColor.cardColor,
             borderRadius: BorderRadius.circular(Dimensions.space5),
             border: Border.all(color: MyColor.cardBorderColor)),
         child: Center(
@@ -37,11 +37,10 @@ class LevelCardButton extends StatelessWidget {
             hasImage==false? const SizedBox(
               width: 3,
             ):const SizedBox(),
-          hasImage==false?  Text(text.toString()):SvgPicture.asset(image!,fit: BoxFit.cover,),
+          hasImage==false?  Text(text.toString(),style: TextStyle(color:hastextColor? MyColor.colorWhite:MyColor.colorBlack),):SvgPicture.asset(image!,fit: BoxFit.cover,),
 
           ],
         )),
-      ),
-    );
+      );
   }
 }

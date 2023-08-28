@@ -45,13 +45,13 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SubCategoriesController>(
-      builder: (controller) => controller.loader
-          ? CustomLoader()
-          : Scaffold(
+      builder: (controller) => Scaffold(
               appBar: CustomCategoryAppBar(
                 title: title,
               ),
-              body: SingleChildScrollView(
+              body: controller.loader
+          ? const CustomLoader()
+          :  SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
