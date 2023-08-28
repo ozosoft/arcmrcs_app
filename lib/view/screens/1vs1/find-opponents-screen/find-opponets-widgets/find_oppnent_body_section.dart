@@ -286,7 +286,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
             ),
             Obx(() => Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Dimensions.space25),
-                  child: controller.battleRoomController.userFoundState.value == UserFoundState.found
+                  child: controller.battleRoomController.userFoundState.value == UserFoundState.found && controller.battleRoomController.battleQuestionsList.isNotEmpty
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

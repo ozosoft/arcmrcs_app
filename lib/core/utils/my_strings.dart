@@ -30,7 +30,9 @@ class MyStrings {
   static const String copied = "Copied!";
   static const String ok = "Ok";
   static const String youHaveNoCoins = "You Have Not Enough Coins!";
+  static const String roomCodeIsWrong = "Room Code May be Wrong!";
   static const String yourGameWillStartSoon = "The Game Will Begin In";
+  static const String sorryRoomISFull = "Sorry! Room Is Full";
 
 
   static const String reviewAnswer = "Review Answer";

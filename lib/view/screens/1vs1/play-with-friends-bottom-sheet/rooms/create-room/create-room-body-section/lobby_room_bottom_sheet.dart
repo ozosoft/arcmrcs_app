@@ -165,14 +165,18 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: Dimensions.space10),
+                            padding: EdgeInsets.only(top: Dimensions.space10),
                             child: FittedBox(
                               fit: BoxFit.cover,
                               child: Container(
-                                margin: const EdgeInsets.only(top: Dimensions.space20),
+                                margin: EdgeInsets.only(top: Dimensions.space20),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(Dimensions.space40),
-                                    image: const DecorationImage(image: AssetImage(MyImages.profileimageWomenPng), fit: BoxFit.cover)),
+                                    image: DecorationImage(
+                                        image: AssetImage(controller.battleRoomData.value!.user1!.profileUrl == "null"
+                                            ? MyImages.defaultAvatar
+                                            : controller.battleRoomData.value!.user1!.profileUrl),
+                                        fit: BoxFit.cover)),
                                 height: Dimensions.space70,
                                 width: Dimensions.space70,
                               ),
@@ -222,7 +226,11 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                                 margin: const EdgeInsets.only(top: Dimensions.space20),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(Dimensions.space40),
-                                    image: const DecorationImage(image: AssetImage(MyImages.profileimageWomen2Png), fit: BoxFit.cover)),
+                                    image: DecorationImage(
+                                        image: AssetImage(controller.battleRoomData.value!.user1!.profileUrl == "null"
+                                            ? MyImages.defaultAvatar
+                                            : controller.battleRoomData.value!.user2!.profileUrl),
+                                        fit: BoxFit.cover)),
                                 height: Dimensions.space70,
                                 width: Dimensions.space70,
                               ),
@@ -235,7 +243,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                             padding: const EdgeInsets.all(Dimensions.space2),
                             child: Center(
                               child: Text(
-                                controller.battleRoomData.value!.user2!.name.isEmpty ? "Player 2" : controller.battleRoomData.value!.user2!.name,
+                                controller.battleRoomData.value!.user2!.name.isEmpty ? "...." : controller.battleRoomData.value!.user2!.name,
                                 textAlign: TextAlign.center,
                                 style: semiBoldMediumLarge.copyWith(color: MyColor.colorBlack),
                               ),
