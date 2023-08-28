@@ -17,6 +17,8 @@ import 'package:flutter_prime/view/screens/gess%20the%20word/widget/question_but
 
 import 'package:get/get.dart';
 
+import '../../components/app-bar/custom_category_appBar.dart';
+
 class GessThewordScreen extends StatefulWidget {
   const GessThewordScreen({super.key});
 
@@ -44,16 +46,17 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColor.scaffoldBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: MyColor.primaryColor,
-        leading: GestureDetector(
-          onTap: () {
-            Get.offAllNamed(RouteHelper.gessThewordCatagori);
-          },
-          child: const Icon(Icons.arrow_back_ios),
-        ),
-        title: const Text("Gess the Word"),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: MyColor.primaryColor,
+      //   leading: GestureDetector(
+      //     onTap: () {
+      //       Get.offAllNamed(RouteHelper.gessThewordCatagori);
+      //     },
+      //     child: const Icon(Icons.arrow_back_ios),
+      //   ),
+      //   title: const Text("Gess the Word"),
+      // ),
+      appBar: const CustomCategoryAppBar(title: "Gess the Word",),
       body: GetBuilder<GessThewordController>(builder: (controller) {
         return controller.isLoading
             ? const CustomLoader()

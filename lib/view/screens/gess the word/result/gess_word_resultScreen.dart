@@ -26,9 +26,9 @@ class _GessWordResultScreenState extends State<GessWordResultScreen> {
     return WillPopWidget(
       nextRoute: RouteHelper.gessThewordCatagori,
       child: Scaffold(
-          appBar: const CustomAppBar(
+          appBar: const CustomCategoryAppBar(
             title: MyStrings.quizResult,
-            isShowBackBtn: false,
+         
           ),
           body: SingleChildScrollView(
             child: Padding(
