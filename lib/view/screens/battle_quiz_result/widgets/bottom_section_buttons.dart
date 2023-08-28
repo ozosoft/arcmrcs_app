@@ -14,27 +14,19 @@ class BottomSectionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(
-              top: Dimensions.space15,
-              left: Dimensions.space15,
-              right: Dimensions.space15),
-          child: RoundedButton(
-              text: MyStrings.nextLevel,
-              press: () {},
-              textSize: Dimensions.space21),
-        ),
+        
         Padding(
           padding: const EdgeInsets.all(Dimensions.space15),
           child: RoundedButton(
-            text: MyStrings.reviewAnswer,
+            text: MyStrings.home,
             press: () {
-              Get.toNamed(RouteHelper.reviewAnswerScreen);
+              Get.offAllNamed(RouteHelper.bottomNavBarScreen);
             },
             color: MyColor.colorBlack,
             textSize: Dimensions.space21,
           ),
         )
+        
       ],
     );
   }

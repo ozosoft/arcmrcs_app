@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../../model/quiz_questions_model/quiz_questions_model.dart';
 import '../../repo/battle/battle_repo.dart';
 import 'battle_room_controller.dart';
 
@@ -13,12 +13,18 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   BattleRoomController battleRoomController;
 
   FindOpponentsController(this.battleRoomController, this.battleRepo);
+  //Variables
   late AnimationController _imageScrollController;
   AnimationController get imageScrollController => _imageScrollController;
   late Timer _startTimer;
-  final _countdownSeconds = 5.obs;
+  final _countdownSeconds = 10.obs;
   get countdownSeconds => _countdownSeconds.value;
   Timer get startTimer => _startTimer;
+
+  var getQuestionList = <Question>[];
+  var getCategoryID = Get.arguments[0] as int;
+  var getEntryCoin = Get.arguments[1] as String;
+
   @override
   void onInit() {
     super.onInit();
@@ -26,7 +32,7 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
     runImageScrolling(startOrStop: false);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      randomSearch();
+      randomSearch(getQuestionList, getCategoryID: getCategoryID, entryCoin: getEntryCoin);
     });
     // Listen for changes in user found state
     ever<UserFoundState>(
@@ -74,12 +80,13 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   }
 
   //Search Random Users
-  randomSearch() {
+  randomSearch(List<Question> questionList, {int? getCategoryID, required String entryCoin}) {
     battleRoomController.randomSearchRoom(
-      categoryId: "5",
-      name: battleRepo.apiClient.getUserName(),
-      profileUrl: "",
-      uid: battleRepo.apiClient.getUserID(),
-    );
+        entryCoin: entryCoin,
+        categoryId: getCategoryID.toString(),
+        name: battleRepo.apiClient.getUserFullName(),
+        profileUrl: battleRepo.apiClient.getUserImagePath(),
+        uid: battleRepo.apiClient.getUserID(),
+        questionList: questionList);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
@@ -9,6 +10,7 @@ import 'package:flutter_prime/view/components/alert-dialog/custom_alert_dialog.d
 import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_header_row.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -30,51 +32,59 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
       return WillPopScope(
         onWillPop: () async {
           CustomAlertDialog(
-              child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 20,
-                ),
-                Text("Are You sure You Want to leave this room!"),
-                SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    TextButton(
-                      onPressed: () async {
-                        await controller
-                            .deleteBattleRoom(
-                                controller.battleRoomData.value!.roomId, false)
-                            .whenComplete(() {
-                          Navigator.of(context)
-                              .pop(true); // Return true when "Yes" is pressed
-                          Get.back();
-                        });
-                      },
-                      child: Text(
-                        "Yes",
-                        style: regularLarge,
-                      ),
+              barrierDismissible: false,
+              willPop: true,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(Dimensions.space10),
+                    child: Text(
+                      MyStrings.areYouSureYouWantToLeaveThisRoom,
+                      style: regularLarge.copyWith(color: MyColor.textSecondColor),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop(
-                            false); // Return false when "Cancel" is pressed
-                      },
-                      child: Text(
-                        "Cancel",
-                        style: regularLarge,
-                      ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: double.infinity,
+                    height: 1,
+                    color: MyColor.textSecondColor.withOpacity(0.3),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(Dimensions.space10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
+                          },
+                          child: const Text(
+                            MyStrings.cancel,
+                            style: regularLarge,
+                          ),
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
+                          onPressed: () async {
+                            await controller.deleteBattleRoom(controller.battleRoomData.value!.roomId, false).whenComplete(() {
+                              Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+                            });
+                          },
+                          child: Text(
+                            MyStrings.yes,
+                            style: regularLarge.copyWith(color: MyColor.colorWhite),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                )
-              ],
-            ),
-          )).customAlertDialog(context);
+                  ),
+                ],
+              )).customAlertDialog(context);
           return false; // Disable back button if `start` is true
         },
         child: Padding(
@@ -82,8 +92,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
           child: Column(
             children: [
               const Padding(
-                padding: EdgeInsets.only(
-                    top: Dimensions.space8, bottom: Dimensions.space30),
+                padding: EdgeInsets.only(top: Dimensions.space8, bottom: Dimensions.space30),
                 child: BottomSheetBar(),
               ),
               Container(
@@ -92,31 +101,35 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                 child: Column(
                   children: [
                     const SizedBox(height: Dimensions.space30),
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: Dimensions.space12,
-                          vertical: Dimensions.space12),
-                      decoration: BoxDecoration(
-                        color: MyColor.lobbycontColor,
-                        border: Border.all(
-                            color: MyColor.lobbycontBorderColor, width: .1),
-                        borderRadius: BorderRadius.circular(Dimensions.space8),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "${controller.battleRoomData.value!.roomCode}",
-                            style: semiBoldExtraLarge.copyWith(
-                                color: MyColor.primaryColor),
-                          ),
-                          const SizedBox(width: Dimensions.space5),
-                          SvgPicture.asset(
-                            MyImages.copySVG,
-                            fit: BoxFit.cover,
-                          )
-                        ],
+                    GestureDetector(
+                      onTap: () {
+                        Clipboard.setData(ClipboardData(text: controller.battleRoomData.value!.roomCode!)).then((value) {
+                          print("copied");
+                          CustomSnackBar.success(successList: [(MyStrings.copied)]);
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space12, vertical: Dimensions.space12),
+                        decoration: BoxDecoration(
+                          color: MyColor.lobbycontColor,
+                          border: Border.all(color: MyColor.lobbycontBorderColor, width: .1),
+                          borderRadius: BorderRadius.circular(Dimensions.space8),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              "${controller.battleRoomData.value!.roomCode}",
+                              style: semiBoldExtraLarge.copyWith(color: MyColor.primaryColor),
+                            ),
+                            const SizedBox(width: Dimensions.space5),
+                            SvgPicture.asset(
+                              MyImages.copySVG,
+                              fit: BoxFit.cover,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                     Container(
@@ -127,17 +140,12 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                         child: Text(
                           MyStrings.sharecodeText,
                           textAlign: TextAlign.center,
-                          style:
-                              regularLarge.copyWith(color: MyColor.textColor),
+                          style: regularLarge.copyWith(color: MyColor.textColor),
                         ),
                       ),
                     )
                   ],
                 ),
-              ),
-              Text(
-                "${controller.battleRoomData.value!.readyToPlay}",
-                style: semiBoldExtraLarge.copyWith(color: MyColor.primaryColor),
               ),
               const SizedBox(
                 height: Dimensions.space21,
@@ -152,28 +160,19 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                           border: Border.all(
                             color: MyColor.cardBorderColors,
                           ),
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.space6)),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: Dimensions.space10,
-                          vertical: Dimensions.space30),
+                          borderRadius: BorderRadius.circular(Dimensions.space6)),
+                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space30),
                       child: Column(
                         children: [
                           Padding(
-                            padding:
-                                const EdgeInsets.only(top: Dimensions.space10),
+                            padding: const EdgeInsets.only(top: Dimensions.space10),
                             child: FittedBox(
                               fit: BoxFit.cover,
                               child: Container(
-                                margin: const EdgeInsets.only(
-                                    top: Dimensions.space20),
+                                margin: const EdgeInsets.only(top: Dimensions.space20),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.space40),
-                                    image: const DecorationImage(
-                                        image: AssetImage(
-                                            MyImages.profileimageWomenPng),
-                                        fit: BoxFit.cover)),
+                                    borderRadius: BorderRadius.circular(Dimensions.space40),
+                                    image: const DecorationImage(image: AssetImage(MyImages.profileimageWomenPng), fit: BoxFit.cover)),
                                 height: Dimensions.space70,
                                 width: Dimensions.space70,
                               ),
@@ -186,18 +185,16 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                             padding: const EdgeInsets.all(Dimensions.space2),
                             child: Center(
                               child: Text(
-                                "${controller.battleRoomData.value!.user1!.name}",
+                                controller.battleRoomData.value!.user1!.name,
                                 textAlign: TextAlign.center,
-                                style: semiBoldMediumLarge.copyWith(
-                                    color: MyColor.colorBlack),
+                                style: semiBoldMediumLarge.copyWith(color: MyColor.colorBlack),
                               ),
                             ),
                           ),
                           Text(
                             MyStrings.creator,
                             textAlign: TextAlign.center,
-                            style:
-                                regularLarge.copyWith(color: MyColor.textColor),
+                            style: regularLarge.copyWith(color: MyColor.textColor),
                           ),
                         ],
                       ),
@@ -213,28 +210,19 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                           border: Border.all(
                             color: MyColor.cardBorderColors,
                           ),
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.space6)),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: Dimensions.space10,
-                          vertical: Dimensions.space30),
+                          borderRadius: BorderRadius.circular(Dimensions.space6)),
+                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space30),
                       child: Column(
                         children: [
                           Padding(
-                            padding:
-                                const EdgeInsets.only(top: Dimensions.space10),
+                            padding: const EdgeInsets.only(top: Dimensions.space10),
                             child: FittedBox(
                               fit: BoxFit.cover,
                               child: Container(
-                                margin: const EdgeInsets.only(
-                                    top: Dimensions.space20),
+                                margin: const EdgeInsets.only(top: Dimensions.space20),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.space40),
-                                    image: const DecorationImage(
-                                        image: AssetImage(
-                                            MyImages.profileimageWomen2Png),
-                                        fit: BoxFit.cover)),
+                                    borderRadius: BorderRadius.circular(Dimensions.space40),
+                                    image: const DecorationImage(image: AssetImage(MyImages.profileimageWomen2Png), fit: BoxFit.cover)),
                                 height: Dimensions.space70,
                                 width: Dimensions.space70,
                               ),
@@ -247,22 +235,16 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                             padding: const EdgeInsets.all(Dimensions.space2),
                             child: Center(
                               child: Text(
-                                controller.battleRoomData.value!.user2!.name
-                                        .isEmpty
-                                    ? "Player 2"
-                                    : controller
-                                        .battleRoomData.value!.user2!.name,
+                                controller.battleRoomData.value!.user2!.name.isEmpty ? "Player 2" : controller.battleRoomData.value!.user2!.name,
                                 textAlign: TextAlign.center,
-                                style: semiBoldMediumLarge.copyWith(
-                                    color: MyColor.colorBlack),
+                                style: semiBoldMediumLarge.copyWith(color: MyColor.colorBlack),
                               ),
                             ),
                           ),
                           Text(
                             MyStrings.player,
                             textAlign: TextAlign.center,
-                            style:
-                                regularLarge.copyWith(color: MyColor.textColor),
+                            style: regularLarge.copyWith(color: MyColor.textColor),
                           ),
                         ],
                       ),
@@ -280,12 +262,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                         });
                         print("go");
 
-                        controller
-                            .startBattleQuiz(
-                                controller.battleRoomData.value!.roomId,
-                                "battle",
-                                readyToPlay: true)
-                            .whenComplete(() {
+                        controller.startBattleQuiz(controller.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
                           // Get.back();
                           // Get.toNamed(
                           //   RouteHelper.battleQuizQuestionsScreen,

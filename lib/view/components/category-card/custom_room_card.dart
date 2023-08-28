@@ -3,13 +3,15 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
 class CustomCreateRoomCoinCard extends StatelessWidget {
   final String title, image;
-
+  final bool selected;
   const CustomCreateRoomCoinCard({
     super.key,
     required this.title,
     required this.image,
+    required this.selected,
   });
 
   @override
@@ -19,10 +21,7 @@ class CustomCreateRoomCoinCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: Dimensions.space10),
         width: Dimensions.space103,
-        decoration: BoxDecoration(
-            color: MyColor.cardColor,
-            border: Border.all(color: MyColor.cardBorderColor),
-            borderRadius: BorderRadius.circular(Dimensions.space8)),
+        decoration: BoxDecoration(color: selected ? MyColor.colorLightGrey: MyColor.cardColor, border: Border.all(color: MyColor.cardBorderColor), borderRadius: BorderRadius.circular(Dimensions.space8)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -31,12 +30,11 @@ class CustomCreateRoomCoinCard extends StatelessWidget {
               height: Dimensions.space8,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: Dimensions.space1, horizontal: Dimensions.space5),
+              padding: const EdgeInsets.symmetric(vertical: Dimensions.space1, horizontal: Dimensions.space5),
               child: Text(
                 title.toString(),
                 textAlign: TextAlign.center,
-                style: semiBoldMediumLarge,
+                style: semiBoldMediumLarge.copyWith(color: MyColor.colorBlack),
               ),
             ),
           ],

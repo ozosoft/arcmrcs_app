@@ -1,5 +1,6 @@
 class MyImages {
   static const String appLogoCircle = "assets/images/app_logo_circle.png";
+  static const String defaultAvatar = "assets/images/default-avatar.png";
 
   static const String addMoney = "assets/images/add_money.png";
   static const String placeHolderImage = "assets/images/place_holder.png";

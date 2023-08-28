@@ -3,19 +3,36 @@ import 'package:flutter_prime/data/model/model/profile_achivement_model.dart';
 import 'package:flutter_prime/data/model/model/questionsList_model.dart';
 
 class MyStrings {
+    static const String appName = "QuizLAB";
+
   static const String withdrawInformation = "Withdraw Information";
   static const String withdrawLimit = "Withdraw Limit";
   static const String withdrawConfirm = "Withdraw Confirm";
   static const String authorizationMethod = "Authorization Method";
   static const String selectAuthModeMsg = "Please select an authorization mode";
+  static const String selectACategoryMsg = "Please Select A Category First";
+  static const String selectACategoryText = "Select A Category";
+  static const String selectEntryCoinText = "Select Entry Coin";
   static const String fileDownloadAt = "File download at";
   static const String errorDownloadingFile = "Error downloading file";
   static const String downloading = "Downloading";
   static const String fileDownloadedSuccess = "File downloaded successfully";
   static const String selectPaymentMethod = "Select PaymentMethod";
+  static const String areYouSureYouWantToCloseSearching = "Are You sure You Want Close Searching!";
+  static const String searching = "Searching";
+  static const String areYouSureYouWantToLeaveThisRoom = "Are You sure You Want to leave this room!";
+  static const String questionNotFoundMsg = "Questions not found! Please try again after a few minutes.";
+  static const String oponentLeftTheGame = "Oponent Left The game!";
+  static const String youLeftTheGame = "You Left The game!";
+  static const String youWon = "You Won";
+  static const String lose = "Sorry You Lose";
+  static const String collectCoins = "Collect Coins";
+  static const String copied = "Copied!";
+  static const String ok = "Ok";
+  static const String youHaveNoCoins = "You Have Not Enough Coins!";
+  static const String yourGameWillStartSoon = "The Game Will Begin In";
 
-  static const String appName = "Flutter Prime";
-  
+
   static const String reviewAnswer = "Review Answer";
   static const String selectCategory = "Select Category";
   static const String entryCoinsForBattele = "Entry Coins For Battle";
@@ -106,6 +123,7 @@ class MyStrings {
   static const String zipCode = "Zip Code";
   static const String state = "State";
   static const String start = "Start";
+  static const String started = "Started!";
   static const String city = "City";
   static const String english = "English";
   static const String bangla = "Bangla";
@@ -202,6 +220,7 @@ class MyStrings {
   static const String bankName = "Bank Name";
   static const String accountName = "Account Name";
   static const String quizResult = "Quiz Result";
+  static const String battleResult = "Battle Result";
   static const String fifteenPercent = "15%";
   static const String quizQuestions = "The Great Wall is a world-famous historical landmark located in which country?";
   static const String quizQuestions2 = "The Great Wall is a world-famous ?";
@@ -390,7 +409,10 @@ class MyStrings {
   static const String questions4 = '35 Questions';
   static const String questions5 = '10 Questions';
   static const String victory = 'Victory';
+  static const String defeat = 'Defeated';
+  static const String drawn = 'Drawn';
   static const String congratulation = 'Congratulation';
+  static const String betterLuckNextTime = 'Better Luck Next Time';
   static const String yourCoins = 'Your Coins';
   static const String fivehundred = '500.00';
   static const String twoForty = '\$240.00';
@@ -399,6 +421,7 @@ class MyStrings {
   static const String reedemNow = "Redeem Now";
   static const String sharecodeText = "Share this room code to friend and ask them to join";
   static const String pleaseWaitRoomText = "Please wait game will start soon";
+  static const String pleaseWaitForYourBattleResultText = "Please Wait For You Battle Result!";
   static const String approved = "Approved";
   static const String supper = "Supper";
   static const String supperbattleMan = "Supper Battle Man";
@@ -440,7 +463,7 @@ class MyStrings {
   static const String twoJune2023 = "02 Jun 2023";
   static const String twoFiftyUSD = "+ \$250 USD";
   static const String hundredAndTwentyUSD = "- \$120 USD";
-  static const String enterCoins = "Enter the coins";
+  static const String enterCoins = "Enter Custom coins";
   static const String rewardNotification = "Rewards Notification";
   static const String joinwithnewroom = "Join with new room";
   static const String eventNotification = "Event Notification";

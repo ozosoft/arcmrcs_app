@@ -3,6 +3,7 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -10,6 +11,7 @@ import '../../../../../../../core/utils/my_images.dart';
 import '../../../../../../../core/utils/my_strings.dart';
 import '../../../../../../../core/utils/style.dart';
 import '../../../../../../../data/controller/battle/battle_room_controller.dart';
+import '../../../../../../../data/model/battle/battle_category_list.dart';
 import '../../../../../../../data/repo/battle/battle_repo.dart';
 import '../../../../../../../data/services/api_service.dart';
 import '../../../../../../components/buttons/rounded_loading_button.dart';
@@ -25,7 +27,7 @@ class CreateRoomBodySection extends StatefulWidget {
 }
 
 class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
-  List coins = ["6", "12", "18", "24"];
+  List<int> coinValues = [5, 10, 15, 20]; // Coin values as integers
 
   final TextEditingController _textEditingController = TextEditingController();
 
@@ -39,7 +41,11 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<BattleRoomController>(builder: (battleRoomController) {
+    return GetBuilder<BattleRoomController>(initState: (state) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        state.controller!.setCategoryData();
+      });
+    }, builder: (battleRoomController) {
       return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(Dimensions.space20),
@@ -50,7 +56,31 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                 MyStrings.selectCategory,
                 style: semiBoldMediumLarge,
               ),
-              const CustomDropDownTextField3(selectedValue: null, onChanged: null, items: null, hintText: MyStrings.scienceAndTech),
+              const SizedBox(height: Dimensions.space15),
+              CustomDropDownTextField3(
+                fillColor: MyColor.colorWhite,
+                focusColor: MyColor.colorWhite,
+                dropDownColor: MyColor.colorWhite,
+                needLabel: false,
+                selectedValue: null,
+                onChanged: (value) {
+                  var valueData = value as BattleCategory;
+
+                  battleRoomController.slectACategory(valueData.id);
+                },
+                items: battleRoomController.categoryList.map<DropdownMenuItem<BattleCategory>>((BattleCategory value) {
+                  return DropdownMenuItem<BattleCategory>(
+                    value: value,
+                    child: Text(
+                      value.name,
+                      style: const TextStyle(
+                        fontSize: Dimensions.fontDefault,
+                      ),
+                    ),
+                  );
+                }).toList(),
+                hintText: MyStrings.selectACategoryText,
+              ),
               const SizedBox(height: Dimensions.space25),
               Container(
                   padding: const EdgeInsets.all(Dimensions.space15),
@@ -70,16 +100,24 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                         ),
                       ),
                       GridView.builder(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .84, crossAxisCount: 4),
-                          itemCount: 4,
-                          itemBuilder: (BuildContext context, index) {
-                            return CustomCreateRoomCoinCard(
-                              title: coins[index] ?? "",
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .84, crossAxisCount: 4),
+                        itemCount: coinValues.length, // Use coinValues.length
+                        itemBuilder: (BuildContext context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              battleRoomController.setEntryFeeCustomRoom(coinValues[index].toString());
+                            },
+                            child: CustomCreateRoomCoinCard(
+                              title: coinValues[index].toString(),
                               image: MyImages.coin,
-                            );
-                          }),
+                              selected: battleRoomController.entryFeeCustomRoom.toString() == coinValues[index].toString() ? true : false,
+                            ),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: Dimensions.space25),
                       SizedBox(
                         height: Dimensions.space47,
                         child: TextField(
@@ -94,6 +132,9 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                               borderSide: BorderSide.none,
                             ),
                           ),
+                          onChanged: (v) {
+                            battleRoomController.setEntryFeeCustomRoom(v);
+                          },
                         ),
                       ),
                       const SizedBox(
@@ -123,23 +164,23 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                         const SizedBox(
                           height: Dimensions.space5,
                         ),
-                        const Text(
-                          MyStrings.fivehundred,
+                         Text(
+                          battleRoomController.battleRepo.apiClient.getUserCurrentCoin(),
                           style: semiBoldOverLarge,
                         )
                       ],
                     ),
                     const Spacer(),
-                    Container(
-                      height: Dimensions.space43,
-                      width: Dimensions.space110,
-                      decoration: BoxDecoration(color: MyColor.createRoomButtonBGcolor, borderRadius: BorderRadius.circular(Dimensions.space10)),
-                      child: Center(
-                          child: Text(
-                        MyStrings.buyCoins,
-                        style: semiBoldMediumLarge.copyWith(color: MyColor.textColor),
-                      )),
-                    )
+                    // Container(
+                    //   height: Dimensions.space43,
+                    //   width: Dimensions.space110,
+                    //   decoration: BoxDecoration(color: MyColor.createRoomButtonBGcolor, borderRadius: BorderRadius.circular(Dimensions.space10)),
+                    //   child: Center(
+                    //       child: Text(
+                    //     MyStrings.buyCoins,
+                    //     style: semiBoldMediumLarge.copyWith(color: MyColor.textColor),
+                    //   )),
+                    // )
                   ],
                 ),
               ),
@@ -150,6 +191,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                     // Navigator.pop(context);
 
                     CustomBottomSheet(
+                      enableDrag: false,
                       child: const LobbyBottomSheet(),
                     ).customBottomSheet(context);
 
@@ -160,19 +202,29 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                 return Padding(
                   padding: const EdgeInsets.only(top: Dimensions.space40),
                   child: battleRoomController.roomCreateState.value == RoomCreateState.creatingRoom
-                      ? RoundedLoadingBtn()
+                      ? const RoundedLoadingBtn()
                       : RoundedButton(
                           text: MyStrings.createRoom,
                           press: () {
-                            battleRoomController.createNewRoom(
-                              categoryId: "1",
-                              entryFee: 10,
-                              name: battleRoomController.battleRepo.apiClient.getUserName(),
-                              profileUrl: "",
-                              uid: battleRoomController.battleRepo.apiClient.getUserID(),
-                              shouldGenerateRoomCode: true,
-                            );
-                            print("${battleRoomController.roomCreateState.value}");
+                            print(battleRoomController.slectedCategoryID.value);
+                            print(battleRoomController.entryFeeCustomRoom.value);
+
+                            if (battleRoomController.slectedCategoryID.value == 0) {
+                              CustomSnackBar.error(errorList: [MyStrings.selectACategoryText]);
+                            } else if (battleRoomController.entryFeeCustomRoom.value == "0") {
+                              CustomSnackBar.error(errorList: [MyStrings.selectEntryCoinText]);
+                            } else {
+                              battleRoomController.createNewRoom(
+                                  categoryId: "${battleRoomController.slectedCategoryID.value}",
+                                  entryFee: int.parse(battleRoomController.entryFeeCustomRoom.value),
+                                  name: battleRoomController.battleRepo.apiClient.getUserFullName(),
+                                  profileUrl: battleRoomController.battleRepo.apiClient.getUserImagePath(),
+                                  uid: battleRoomController.battleRepo.apiClient.getUserID(),
+                                  shouldGenerateRoomCode: true,
+                                  questionList: []);
+                            }
+
+                            // print("${battleRoomController.roomCreateState.value}");
                           },
                           textSize: Dimensions.space20),
                 );
@@ -188,7 +240,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Text("Sheet");
+        return const Text("Sheet");
       },
     );
   }

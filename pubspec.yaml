@@ -16,6 +16,7 @@ dependencies:
   carousel_slider: ^4.1.1
   circular_countdown_timer: ^0.2.3
   cloud_firestore: ^4.8.5
+  confetti: ^0.7.0
   connectivity_plus: ^2.3.6+1
   country_picker: ^2.0.11
   cupertino_icons: ^1.0.2

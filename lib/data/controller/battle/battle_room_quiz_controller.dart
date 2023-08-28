@@ -9,12 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/battle_room_helper.dart';
+import '../../../core/route/route.dart';
+import '../../../view/components/snack_bar/show_custom_snackbar.dart';
 import '../../model/battle/battleRoom.dart';
-import '../../model/quiz/quiz_list_model.dart';
+import '../../model/battle/battle_question_list.dart';
+import '../../model/battle/battle_result_submit_model.dart';
+import '../../model/global/response_model/response_model.dart';
 import '../../repo/battle/battle_repo.dart';
 import 'battle_room_controller.dart';
 
-class BattleRoomQuizController extends GetxController with GetTickerProviderStateMixin {
+class BattleRoomQuizController extends GetxController with GetTickerProviderStateMixin, WidgetsBindingObserver {
   BattleRepo battleRepo;
   final BattleRoomController battleRoomController;
 
@@ -22,17 +26,20 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
   StreamSubscription<DocumentSnapshot>? battleRoomStreamSubscription;
   final int duration = 60;
   final CountDownController countDownController = CountDownController();
-  final RxList<Question> questionsList = <Question>[].obs;
+  final RxList<BattleQuestion> questionsList = <BattleQuestion>[].obs;
   late AnimationController _listAnimationController;
   AnimationController get listAnimationController => _listAnimationController;
 
   // Map to track selected options for each question
-  final Map<int, Option?> selectedOptions = <int, Option?>{};
+  final Map<int, BattleQuestionOption?> selectedOptions = <int, BattleQuestionOption?>{};
 
   int currentQuestionIndex = 0;
   final opponentLeftTheGame = false.obs;
   final showLeftPopupValue = false.obs;
   final meLeftTheGame = false.obs;
+
+  //Answer
+  final isAnsSubmitting = false.obs;
 
   GlobalKey<AnimatedListState> animatedListKey = GlobalKey<AnimatedListState>();
   int previousQuestionId = -1; // Initialize with a value that won't match any valid question id
@@ -47,6 +54,8 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     );
 
     setupBattleRoomSubmitListener();
+    // Register the WidgetsBindingObserver
+    WidgetsBinding.instance.addObserver(this);
   }
 
   showLeftPopupUpdate(bool value) {
@@ -54,14 +63,19 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     update();
   }
 
-  void selectOptionForQuestion(int questionId, Option option) {
+  showMeLeftPopupUpdate(bool value) {
+    meLeftTheGame(value);
+    update();
+  }
+
+  void selectOptionForQuestion(int questionId, BattleQuestionOption option) {
     if (!selectedOptions.containsKey(questionId)) {
       selectedOptions[questionId] = option;
     }
     update();
   }
 
-  bool isOptionSelectedForQuestion(int questionId, Option option) {
+  bool isOptionSelectedForQuestion(int questionId, BattleQuestionOption option) {
     return selectedOptions.containsKey(questionId) && selectedOptions[questionId] == option;
   }
 
@@ -90,13 +104,13 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     update();
   }
 
-  Question getCurrentQuestion() {
+  BattleQuestion getCurrentQuestion() {
     if (currentQuestionIndex >= 0 && currentQuestionIndex < questionsList.length) {
       return questionsList[currentQuestionIndex];
     }
 
     // Return a placeholder question if index is out of bounds
-    return Question(
+    return BattleQuestion(
       id: -1,
       question: 'Question not found',
       image: null,
@@ -104,7 +118,6 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       status: '',
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
-      pivot: Pivot(quizInfoId: '', questionId: ''),
       options: [],
     );
   }
@@ -117,12 +130,17 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     return selectedOptions.containsKey(questionId);
   }
 
+  toogleSubmitAns(bool value) {
+    isAnsSubmitting.value = value;
+    update();
+  }
   // Firebase
 
   Stream<DocumentSnapshot> listenToBattleRoomDocument(String battleRoomDocumentId) {
     return battleRoomController.firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(battleRoomDocumentId).snapshots();
   }
 
+//Listen Firebase Data
   void setupBattleRoomSubmitListener() {
     print("From Quiz Stream");
     battleRoomStreamSubscription = listenToBattleRoomDocument(battleRoomController.battleRoomData.value!.roomId!).listen((event) {
@@ -162,50 +180,6 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     }
   }
 
-  // void checkUserAnswer(BattleRoom battleRoom) {
-  //   List user1Answers = battleRoom.user1!.answers;
-  //   List user2Answers = battleRoom.user2!.answers;
-
-  //   String currentQuestionId = questionsList[currentQuestionIndex].id.toString();
-  //   String nextQuestionId = (currentQuestionIndex + 1 < questionsList.length) ? questionsList[currentQuestionIndex + 1].id.toString() : "";
-
-  //   bool user1AnsweredCurrent = user1Answers.any((answer) => answer["qid"].toString() == currentQuestionId);
-  //   bool user2AnsweredCurrent = user2Answers.any((answer) => answer["qid"].toString() == currentQuestionId);
-
-  //   if (user1AnsweredCurrent && user2AnsweredCurrent) {
-  //     print("Both users have answered the current and next questions, and timer completed");
-  //     // goToNextQuestion();
-
-  //     print("From Counter Next Querstion");
-  //     if (hasMoreQuestions()) {
-  //       goToNextQuestion();
-  //     } else {
-  //       // Both users have answered all questions correctly
-  //       String winnerUserId;
-  //       String winnerUserName = "";
-
-  //       int user1CorrectAnswers = user1Answers.where((answer) => answer["ans"] == "1").length;
-  //       int user2CorrectAnswers = user2Answers.where((answer) => answer["ans"] == "1").length;
-
-  //       if (user1CorrectAnswers > user2CorrectAnswers) {
-  //         winnerUserId = battleRoom.user1!.uid;
-  //         winnerUserName = battleRoom.user1!.name;
-  //         Get.snackbar("Winner Is", " $winnerUserName ", backgroundColor: Colors.green);
-  //       } else if (user2CorrectAnswers > user1CorrectAnswers) {
-  //         winnerUserId = battleRoom.user2!.uid;
-  //         winnerUserName = battleRoom.user2!.name;
-  //         Get.snackbar("Winner Is", " $winnerUserName ");
-  //       } else {
-  //         // It's a tie
-  //         winnerUserId = "TIE";
-  //         Get.snackbar("Game Is", "Drawn!");
-  //       }
-
-  //       print("Winner User ID: $winnerUserId");
-  //     }
-  //   }
-  // }
-
   void checkUserAnswer(BattleRoom battleRoom) {
     List user1Answers = battleRoom.user1!.answers;
     List user2Answers = battleRoom.user2!.answers;
@@ -226,61 +200,127 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
         if (hasMoreQuestions()) {
           goToNextQuestion();
         } else {
-          int user1CorrectAnswers = user1Answers.where((answer) => answer["ans"] == "1").length;
-          int user2CorrectAnswers = user2Answers.where((answer) => answer["ans"] == "1").length;
+          finishBattleAndSubmitAnswer();
+          // int user1CorrectAnswers = user1Answers.where((answer) => answer["ans"] == "1").length;
+          // int user2CorrectAnswers = user2Answers.where((answer) => answer["ans"] == "1").length;
 
-          if (user1CorrectAnswers > user2CorrectAnswers) {
-            Get.snackbar("Winner Is", " ${battleRoom.user1!.name} ", backgroundColor: Colors.green);
-          } else if (user2CorrectAnswers > user1CorrectAnswers) {
-            Get.snackbar("Winner Is", " ${battleRoom.user2!.name} ");
-          } else {
-            Get.snackbar("Game Is", "Drawn!");
-          }
+          // if (user1CorrectAnswers > user2CorrectAnswers) {
+          //   Get.snackbar("Winner Is", " ${battleRoom.user1!.name} ", backgroundColor: Colors.green);
+          // } else if (user2CorrectAnswers > user1CorrectAnswers) {
+          //   Get.snackbar("Winner Is", " ${battleRoom.user2!.name} ");
+          // } else {
+          //   Get.snackbar("Game Is", "Drawn!");
+          // }
         }
       }
     }
   }
 
-  void selectOptionForQuestion2(int questionId, Option option) {
-    // Check if user1 has already submitted an answer for this question
-    bool user1HasSubmittedAnswer = battleRoomController.battleRoomData.value!.user1!.answers.any((answer) => answer.qid == questionId);
+//Submit Answer Data to server
+  Future finishBattleAndSubmitAnswer() async {
+    toogleSubmitAns(true);
+    var ownData = battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true); // Current User Data
+    var opUserData = battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID()); // Opponent Data
 
-    // Check if user2 has already submitted an answer for this question
-    bool user2HasSubmittedAnswer = battleRoomController.battleRoomData.value!.user2!.answers.any((answer) => answer.qid == questionId);
+    Map<String, dynamic> params = {};
 
-    if (!selectedOptions.containsKey(questionId) && !user1HasSubmittedAnswer && !user2HasSubmittedAnswer) {
-      // Only allow selecting an option and submitting if neither user has submitted for this question
-      selectedOptions[questionId] = option;
+    params['opponentId'] = opUserData.uid.toString();
+    params['coin_count'] = battleRoomController.battleRoomData.value!.entryFee.toString(); // coin_count value
 
-      // Check if all necessary conditions are met to proceed to the next question
-      if (user1HasSubmittedAllAnswers() && user2HasSubmittedAllAnswers() && !hasSubmittedAnswerForQuestion(questionId)) {
-        goToNextQuestion();
+    // Loop through the questionsList
+    for (int i = 0; i < questionsList.length; i++) {
+      String quizeId = questionsList[i].id.toString();
+      // Add question_id to params
+      params['question_id[$i]'] = quizeId.toString();
+      // Find the answer object with the matching qid for ownData and opUserData
+      var ownAnswer = ownData.answers.firstWhere((answer) => answer['qid'] == quizeId, orElse: () => null);
+      var opUserAnswer = opUserData.answers.firstWhere((answer) => answer['qid'] == quizeId, orElse: () => null);
+
+      if (ownAnswer != null) {
+        int selectedOptionIdOwn = ownAnswer['ans']; //'ans' holds the selected option index
+        params['my_option_$quizeId'] = selectedOptionIdOwn.toString();
+      }
+
+      if (opUserAnswer != null) {
+        int selectedOptionIdOP = opUserAnswer['ans']; //  'ans' holds the selected option index
+        params['opponent_option_$quizeId'] = selectedOptionIdOP.toString();
       }
     }
-    update();
-  }
 
-  bool user1HasSubmittedAllAnswers() {
-    BattleRoom battleRoom = battleRoomController.battleRoomData.value!;
-    List<Question> questionsList = battleRoomController.questionsData.data.questions;
+    print(params);
 
-    List<String> user1AnsweredQuestionIds = battleRoom.user1!.answers.map((answer) => answer.qid.toString()).toList();
+    ResponseModel submitModel = await battleRepo.finishBattleAndSubmitAnswer(params);
+    print(submitModel.statusCode);
+    if (submitModel.statusCode == 200) {
+      BattleAnswerSubmitModel submitAnswerModel = battleAnswerSubmitModelFromJson(submitModel.responseJson);
+      var battleRoomData = battleRoomController.battleRoomData.value;
+      await battleRoomController.deleteBattleRoom(battleRoomController.battleRoomData.value!.roomId, false).then((value) {
+        Get.offAndToNamed(RouteHelper.battleQuizResultScreen, arguments: [submitAnswerModel, battleRoomData]);
+      });
+      toogleSubmitAns(false);
+    } else {
+      CustomSnackBar.error(errorList: [submitModel.message]);
+    }
 
-    return user1AnsweredQuestionIds.length == questionsList.length;
-  }
-
-  bool user2HasSubmittedAllAnswers() {
-    BattleRoom battleRoom = battleRoomController.battleRoomData.value!;
-    List<Question> questionsList = battleRoomController.questionsData.data.questions;
-
-    List<String> user2AnsweredQuestionIds = battleRoom.user2!.answers.map((answer) => answer.qid.toString()).toList();
-
-    return user2AnsweredQuestionIds.length == questionsList.length;
+    // update();
   }
 
   @override
   void onClose() {
     battleRoomStreamSubscription!.cancel();
+    // Unregister the WidgetsBindingObserver
+    WidgetsBinding.instance.removeObserver(this);
     super.onClose();
+  }
+
+  @override
+  Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
+    super.didChangeAppLifecycleState(state);
+    // Handle the app lifecycle changes here
+    switch (state) {
+      case AppLifecycleState.resumed:
+        print('App resumed');
+        // Reactivate any necessary functionality
+        print(battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true).status);
+        if (battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true).status == false) {
+          showMeLeftPopupUpdate(true);
+        }
+
+        break;
+      case AppLifecycleState.inactive:
+        print('App inactive');
+        // Handle when the app is in an inactive state (e.g., during a phone call)
+        break;
+      case AppLifecycleState.paused:
+        print('App paused');
+        if (opponentLeftTheGame.isTrue) {
+          // left User
+          await battleRoomController
+              .deleteBattleRoom(
+            battleRoomController.battleRoomData.value!.roomId,
+            false,
+          )
+              .whenComplete(() {
+            // Get.offAll(RouteHelper.bottomNavBarScreen);
+          });
+        } else {
+          // left User
+          await battleRoomController.leftBattleRoomFirebase(battleRoomController.battleRoomData.value!.roomId, false, currentUserId: battleRepo.apiClient.getUserID()).whenComplete(() {
+            // Get.offAll(RouteHelper.bottomNavBarScreen);
+          });
+        }
+        break;
+      case AppLifecycleState.detached:
+        print('App detached');
+        // Handle when the app is detached (not available on all platforms)
+        break;
+      case AppLifecycleState.hidden:
+        print('App hidden');
+        // Handle when the app is hidden (this case was missing before)
+        break;
+      default:
+        // Handle any other cases that might be added in the future
+        break;
+    }
   }
 }

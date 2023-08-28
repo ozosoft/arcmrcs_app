@@ -5,7 +5,10 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_prime/data/model/quiz/quiz_list_model.dart';
+import 'package:flutter_prime/core/utils/my_strings.dart';
+import 'package:flutter_prime/data/model/battle/battle_question_list.dart';
+import '../../model/battle/battle_category_list.dart';
+import '../../model/quiz_questions_model/quiz_questions_model.dart';
 import 'package:flutter_prime/data/repo/battle/battle_repo.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
@@ -60,16 +63,19 @@ class BattleRoomController extends GetxController {
   Rx<RoomCreateState> roomCreateState = RoomCreateState.none.obs;
   Rx<JoinRoomState> joinRoomState = JoinRoomState.none.obs;
   Rx<UserFoundState> userFoundState = UserFoundState.none.obs;
-
-  final Random _rnd = Random.secure();
-
+  final Random _randomRoomID = Random.secure();
   Rx<BattleRoom?> battleRoomData = Rx<BattleRoom?>(null);
+  final battleQuestionsList = <BattleQuestion>[].obs;
 
-  var questionsData = quizListModelFromJson(jsonEncode(BattleRoomHelper.demoQuestionList));
+  //Custom Room Setup
+  final categoryList = <BattleCategory>[].obs;
+  final categoryListArgs = Get.arguments == null ? <BattleCategory>[] : Get.arguments[2] as List<BattleCategory>;
+  // final categoryListArgs = Get.arguments == null ? <BattleCategory>[] : <BattleCategory>[];
+  final slectedCategoryID = 0.obs;
+  final entryFeeCustomRoom = "0".obs;
 
 // Random Room COde
-  String generateRoomCode(int length) => String.fromCharCodes(Iterable.generate(
-      length, (_) => BattleRoomHelper.roomCodeGenerateCharacters.codeUnitAt(_rnd.nextInt(BattleRoomHelper.roomCodeGenerateCharacters.length))));
+  String generateRoomCode(int length) => String.fromCharCodes(Iterable.generate(length, (_) => BattleRoomHelper.roomCodeGenerateCharacters.codeUnitAt(_randomRoomID.nextInt(BattleRoomHelper.roomCodeGenerateCharacters.length))));
 
   toogleBattleCreatedState(RoomCreateState value) {
     roomCreateState.value = value;
@@ -86,9 +92,28 @@ class BattleRoomController extends GetxController {
     update();
   }
 
+  //Select A Category
+  slectACategory(int value) {
+    slectedCategoryID.value = value;
+    update();
+  }
+
+  //Set Category To This CategoryList
+  setCategoryData() {
+    if (categoryListArgs.isNotEmpty) {
+      categoryList.addAll([...categoryListArgs]);
+    }
+    update();
+  }
+
+  //Set  Entry Fee
+  setEntryFeeCustomRoom(String value) {
+    entryFeeCustomRoom.value = value;
+    update();
+  }
+
 // Craete A Room
-  void createNewRoom(
-      {required String categoryId, String? name, String? profileUrl, String? uid, int? entryFee, required bool shouldGenerateRoomCode}) async {
+  void createNewRoom({required String categoryId, String? name, String? profileUrl, String? uid, int? entryFee, required bool shouldGenerateRoomCode, required List<Question> questionList}) async {
     try {
       toogleBattleCreatedState(RoomCreateState.creatingRoom);
       print("From Create Room");
@@ -99,18 +124,15 @@ class BattleRoomController extends GetxController {
       }
       print("Room Code $roomCode");
 
-      final DocumentSnapshot craeteNewRoomSnapshot = await createBattleRoomFirebase(
-        categoryId: categoryId,
-        name: name!,
-        profileUrl: profileUrl!,
-        uid: uid!,
-        roomCode: roomCode,
-        entryFee: entryFee,
-      );
+      final DocumentSnapshot craeteNewRoomSnapshot = await createBattleRoomFirebase(categoryId: categoryId, name: name!, profileUrl: profileUrl!, uid: uid!, roomCode: roomCode, entryFee: entryFee, questionList: questionList);
 
       BattleRoom.fromDocumentSnapshot(craeteNewRoomSnapshot);
 
-      subscribeToBattleRoom(craeteNewRoomSnapshot.id, questionsData.data.questions, false);
+      subscribeToBattleRoom(
+        craeteNewRoomSnapshot.id,
+        questionList,
+        false,
+      );
     } catch (e) {
       toogleBattleCreatedState(RoomCreateState.failed);
       print(e.toString());
@@ -119,9 +141,13 @@ class BattleRoomController extends GetxController {
   }
 
   //subscribe battle room
-  void subscribeToBattleRoom(String battleRoomDocumentId, List<Question> questions, bool forMultiUser) {
+  void subscribeToBattleRoom(
+    String battleRoomDocumentId,
+    List<Question> questions,
+    bool forMultiUser,
+  ) {
     //for realtimeness
-    _battleRoomStreamSubscription = subscribeToBattleRoomFirebase(battleRoomDocumentId, forMultiUser).listen((event) {
+    _battleRoomStreamSubscription = subscribeToBattleRoomFirebase(battleRoomDocumentId, forMultiUser).listen((event) async {
       if (event.exists) {
         //emit new state
         BattleRoom battleRoom = BattleRoom.fromDocumentSnapshot(event);
@@ -146,19 +172,40 @@ class BattleRoomController extends GetxController {
           battleRoomData.value = battleRoom;
           print("User Found ${joinRoomState.value}");
 
+          // if user found then get question list from api
+
           if (joinRoomState.value != JoinRoomState.aleadyJoined) {
             if (joinRoomState.value != JoinRoomState.joined) {
               toogleBattleJoinedState(JoinRoomState.joined);
               toogleUserFoundState(UserFoundState.found);
+              //Fetch Questions
+              await getRandomBattleQuestions(
+                int.parse(battleRoom.categoryId!),
+                int.parse(battleRoom.user1!.uid),
+                int.parse(battleRoom.user2!.uid),
+              ).then((value) {
+                battleQuestionsList.value = value;
+                update();
+              });
             }
           }
+
           if (joinRoomState.value != JoinRoomState.aleadyJoined && battleRoom.readyToPlay == true) {
-            print("called from here to quiz page");
-            Get.back();
-            Get.toNamed(
-              RouteHelper.battleQuizQuestionsScreen,
-              arguments: ["${"${battleRoom.user1!.name} VS ${battleRoom.user2!.name}"} ", questions],
-            );
+            if (battleQuestionsList.isEmpty) {
+              Get.back();
+             
+              CustomSnackBar.error(errorList: [MyStrings.questionNotFoundMsg]);
+              
+            } else {
+              print("called from here to quiz page");
+              Get.back();
+
+              Get.toNamed(
+                RouteHelper.battleQuizQuestionsScreen,
+                arguments: ["${"${battleRoom.user1!.name} VS ${battleRoom.user2!.name}"} ", battleQuestionsList, categoryList],
+              );
+            }
+
             toogleBattleJoinedState(JoinRoomState.aleadyJoined);
           }
         }
@@ -179,18 +226,26 @@ class BattleRoomController extends GetxController {
   }
 
 //to join battle room
-  void joinRoom({String? name, String? profileUrl, String? uid, String? roomCode, required String currentCoin}) async {
+  Future joinRoom({
+    String? name,
+    String? profileUrl,
+    String? uid,
+    String? roomCode,
+    required String currentCoin,
+    required bool joinroom,
+  }) async {
     try {
       print(roomCode);
       toogleBattleJoinedState(JoinRoomState.joining);
-      final result = await joinBattleRoomFrd(
+      final result = await joinBattleRoomFriendFirebase(
         name: name,
         profileUrl: profileUrl,
         roomCode: roomCode,
         uid: uid,
+        joinroom: joinroom,
         currentCoin: int.parse(currentCoin),
       );
-      print(result['questions']);
+
       subscribeToBattleRoom(
         result['roomId'],
         result['questions'],
@@ -209,8 +264,26 @@ class BattleRoomController extends GetxController {
     }
   }
 
+  // Get battle Questions From Api IF USER FOUND
+  Future<List<BattleQuestion>> getRandomBattleQuestions(int id, int user1ID, int user2ID) async {
+    final model = await battleRepo.getBatttleQuestion(id, user1ID, user2ID);
+
+    if (model.statusCode == 200) {
+      final quizquestions = battleQuestionListFromJson(model.responseJson);
+
+      if (quizquestions.status.toLowerCase() == MyStrings.success.toLowerCase()) {
+        final questionList = quizquestions.data.questions;
+
+        if (questionList.isNotEmpty) {
+          return questionList;
+        }
+      }
+    }
+    return [];
+  }
+
 //join multi user battle room
-  Future<Map<String, dynamic>> joinBattleRoomFrd({String? name, String? profileUrl, String? uid, String? roomCode, int? currentCoin}) async {
+  Future<Map<String, dynamic>> joinBattleRoomFriendFirebase({String? name, String? profileUrl, String? uid, String? roomCode, int? currentCoin, required bool joinroom}) async {
     try {
       //verify roomCode is valid or not
       QuerySnapshot querySnapshot = await getMultiUserBattleRoomFirebase(roomCode, "battle");
@@ -246,12 +319,13 @@ class BattleRoomController extends GetxController {
             "user2.name": name,
             "user2.uid": uid,
             "user2.profileUrl": profileUrl,
+            "user2.status": joinroom,
           });
         } else {
           //room is full
           throw BattleRoomException(errorMessageCode: "roomIsFullCode");
         }
-        return {"roomId": documentSnapshot.id, "questions": questionsData.data.questions};
+        return {"roomId": documentSnapshot.id, "questions": <Question>[]};
       });
     } catch (e) {
       throw BattleRoomException(errorMessageCode: e.toString());
@@ -271,6 +345,8 @@ class BattleRoomController extends GetxController {
     required String name,
     required String profileUrl,
     required String uid,
+    required String entryCoin,
+    required List<Question> questionList,
   }) async {
     try {
       List<DocumentSnapshot> documents = await randomSearchBattleRoom(
@@ -283,19 +359,14 @@ class BattleRoomController extends GetxController {
       if (documents.isNotEmpty) {
         //find any random room
         DocumentSnapshot room = documents[Random.secure().nextInt(documents.length)];
-        // emit(BattleRoomJoining());
 
-        // List<Question> questions = await _battleRoomRepository.getQuestions(
-        //   categoryId: categoryId,
-        //   matchId: room.id,
-        //   forMultiUser: false,
-        //   roomDocumentId: room.id,
-        //   languageId: questionLanguageId,
-        //   roomCreater: false,
-        //   destroyBattleRoom: "0",
-        // );
-
-        final searchAgain = await randomJoinBattleRoom(battleRoomDocumentId: room.id, name: name, profileUrl: profileUrl, uid: uid);
+        final searchAgain = await randomJoinBattleRoom(
+          battleRoomDocumentId: room.id,
+          name: name,
+          profileUrl: profileUrl,
+          uid: uid,
+          categoryId: categoryId,
+        );
         if (searchAgain) {
           //if user falis to join room then searchAgain
           randomSearchRoom(
@@ -303,12 +374,26 @@ class BattleRoomController extends GetxController {
             name: name,
             profileUrl: profileUrl,
             uid: uid,
+            entryCoin: entryCoin,
+            questionList: questionList,
           );
         } else {
-          subscribeToBattleRoom(room.id, questionsData.data.questions, false);
+          subscribeToBattleRoom(
+            room.id,
+            questionList,
+            false,
+          );
         }
       } else {
-        createNewRoom(categoryId: categoryId, entryFee: 5, name: name, profileUrl: profileUrl, shouldGenerateRoomCode: false, uid: uid);
+        createNewRoom(
+          categoryId: categoryId,
+          entryFee: int.parse(entryCoin),
+          name: name,
+          profileUrl: profileUrl,
+          shouldGenerateRoomCode: false,
+          uid: uid,
+          questionList: questionList,
+        );
       }
     } catch (e) {
       // emit(BattleRoomFailure(e.toString()));
@@ -316,14 +401,15 @@ class BattleRoomController extends GetxController {
   }
 
   //to join battle room (one to one)
-  Future<bool> randomJoinBattleRoom({String? battleRoomDocumentId, String? name, String? profileUrl, String? uid}) async {
+  Future<bool> randomJoinBattleRoom({
+    String? battleRoomDocumentId,
+    String? name,
+    String? profileUrl,
+    String? uid,
+    required String categoryId,
+  }) async {
     try {
-      return await joinBattleRoomFirebase(
-        battleRoomDocumentId: battleRoomDocumentId,
-        name: name,
-        profileUrl: profileUrl,
-        uid: uid,
-      );
+      return await joinBattleRoomFirebase(battleRoomDocumentId: battleRoomDocumentId, name: name, profileUrl: profileUrl, uid: uid, categoryId: categoryId);
     } catch (e) {
       throw BattleRoomException(errorMessageCode: e.toString());
     }
@@ -352,18 +438,35 @@ class BattleRoomController extends GetxController {
     }
   }
 
-  UserBattleRoomDetails getOpponentUserDetails(String currentUserId) {
+  // UserBattleRoomDetails getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
+  //   if (userFoundState.value == UserFoundState.found) {
+  //     if (currentUserId == battleRoomData.value!.user1?.uid) {
+  //       return (battleRoomData.value!.user2!);
+  //     } else {
+  //       return (battleRoomData.value!.user1!);
+  //     }
+  //   }
+  //   return UserBattleRoomDetails(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
+  // }
+
+  UserBattleRoomDetails getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
     if (userFoundState.value == UserFoundState.found) {
-      if (currentUserId == battleRoomData.value!.user1?.uid) {
-        print(battleRoomData.value!.user2!);
-        return (battleRoomData.value!.user2!);
+      if (isMyData) {
+        if (currentUserId == battleRoomData.value!.user1?.uid) {
+          return battleRoomData.value!.user1!;
+        } else {
+          return battleRoomData.value!.user2!;
+        }
       } else {
-        return (battleRoomData.value!.user1!);
+        if (currentUserId == battleRoomData.value!.user1?.uid) {
+          return battleRoomData.value!.user2!;
+        } else {
+          return battleRoomData.value!.user1!;
+        }
       }
     }
     return UserBattleRoomDetails(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
   }
-
 //Firebase Part
 
   //to create room to play quiz
@@ -374,6 +477,7 @@ class BattleRoomController extends GetxController {
     required String uid,
     String? roomCode,
     int? entryFee,
+    required List<Question> questionList,
   }) async {
     try {
       //hasLeft,categoryId
@@ -386,6 +490,7 @@ class BattleRoomController extends GetxController {
         "user1": {"name": name, "points": 0, "answers": [], "uid": uid, "profileUrl": profileUrl, "status": true},
         "user2": {"name": "", "points": 0, "answers": [], "uid": "", "profileUrl": "", "status": false},
         "createdAt": Timestamp.now(),
+        "questions_list": json.encode(questionList.map((question) => question.toJson()).toList()),
       });
       return await documentReference.get();
     } on SocketException catch (_) {
@@ -398,17 +503,17 @@ class BattleRoomController extends GetxController {
   }
 
 //to create room to play quiz
-  Future<bool> joinBattleRoomFirebase({String? name, String? profileUrl, String? uid, String? battleRoomDocumentId}) async {
+  Future<bool> joinBattleRoomFirebase({String? name, String? profileUrl, String? uid, String? battleRoomDocumentId, required String categoryId}) async {
     try {
-      DocumentReference documentReference =
-          (await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(battleRoomDocumentId).get()).reference;
+      DocumentReference documentReference = (await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(battleRoomDocumentId).get()).reference;
       print("Join user here ");
       return FirebaseFirestore.instance.runTransaction((transaction) async {
         //get latest document
         DocumentSnapshot documentSnapshot = await documentReference.get();
-        Map user2Details = Map.from(documentSnapshot.data() as Map<String, dynamic>)['user2'];
+        Map documentSnapshotDetails = Map.from(documentSnapshot.data() as Map<String, dynamic>);
+        Map user2Details = Map.from(documentSnapshotDetails)['user2'];
         print("User 2 : $user2Details");
-        if (user2Details['uid'].toString().isEmpty) {
+        if (user2Details['uid'].toString().isEmpty && Map.from(documentSnapshotDetails)["categoryId"] == categoryId) {
           //print("Join user");
           //join as user2
           transaction.update(documentReference, {
@@ -532,10 +637,7 @@ class BattleRoomController extends GetxController {
   //get room by roomCode (multiUserBattleRoom)
   Future<QuerySnapshot> getMultiUserBattleRoomFirebase(String? roomCode, String? type) async {
     try {
-      QuerySnapshot querySnapshot = await _firebaseFirestore
-          .collection(type == "battle" ? BattleRoomHelper.battleroomCollection : BattleRoomHelper.battleroomCollectionMulti)
-          .where("roomCode", isEqualTo: roomCode)
-          .get();
+      QuerySnapshot querySnapshot = await _firebaseFirestore.collection(type == "battle" ? BattleRoomHelper.battleroomCollection : BattleRoomHelper.battleroomCollectionMulti).where("roomCode", isEqualTo: roomCode).get();
       return querySnapshot;
     } on SocketException catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());
@@ -549,10 +651,7 @@ class BattleRoomController extends GetxController {
   //delete user from multiple user room
   Future<void> updateMultiUserRoom(String? documentId, Map<String, dynamic> updatedData, String battle) async {
     try {
-      _firebaseFirestore
-          .collection(battle == "battle" ? BattleRoomHelper.battleroomCollection : BattleRoomHelper.battleroomCollectionMulti)
-          .doc(documentId)
-          .update(updatedData);
+      _firebaseFirestore.collection(battle == "battle" ? BattleRoomHelper.battleroomCollection : BattleRoomHelper.battleroomCollectionMulti).doc(documentId).update(updatedData);
     } on SocketException catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());
     } on PlatformException catch (_) {
@@ -564,9 +663,9 @@ class BattleRoomController extends GetxController {
 
 //submit anser
 
-  Future saveAnswer(String? currentUserId, Map submittedAnswer, bool isCorrectAnswer, int points, {List<Question>? questionsList}) async {
+  Future saveAnswer(String? currentUserId, Map submittedAnswer, bool isCorrectAnswer, int points, {List<BattleQuestion>? questionsList}) async {
     BattleRoom battleRoom = battleRoomData.value!;
-    List<Question>? questions = questionsList;
+    List<BattleQuestion>? questions = questionsList;
 
     //need to check submitting answer for user1 or user2
     if (currentUserId == battleRoom.user1!.uid) {
