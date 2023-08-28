@@ -6,8 +6,8 @@ import 'package:flutter_prime/view/screens/authentication/signUp/signUp_screen.d
 import 'package:flutter_prime/view/screens/badges/badges_screen.dart';
 import 'package:flutter_prime/view/screens/bookmark/bookmark_screen.dart';
 import 'package:flutter_prime/view/screens/coin_history/coin_history_screen.dart';
-import 'package:flutter_prime/view/screens/contest/quiz_contest_list.dart';
-import 'package:flutter_prime/view/screens/contest/quiz_contest_questions_screen.dart';
+import 'package:flutter_prime/view/screens/quiz_contest/contest/quiz_contest_list.dart';
+import 'package:flutter_prime/view/screens/quiz_contest/contest/quiz_contest_questions_screen.dart';
 import 'package:flutter_prime/view/screens/exam_zone/exam-result/exam_result_screen.dart';
 import 'package:flutter_prime/view/screens/exam_zone/review-answer/review_answer-screen.dart';
 import 'package:flutter_prime/view/screens/exam_zone/widgets/exam_zone_quiz_screen.dart';

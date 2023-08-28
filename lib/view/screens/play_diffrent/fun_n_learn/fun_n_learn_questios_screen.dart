@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -113,6 +114,15 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
 
                                                       controller.selectAnswer(optionIndex, questionsIndex);
 
+                                                      
+                                                      controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                          ? null
+                                                          : controller.selectedOptionIndex == optionIndex
+                                                              ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                  ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                  : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                              : null;
+
                                                       await Future.delayed(const Duration(seconds: 3));
 
                                                       if (controller.pageController.page! < controller.examQuestionsList.length - 1) {
@@ -179,7 +189,7 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
                                         );
                                       }),
                                   const SizedBox(height: Dimensions.space25),
-                                  LifeLinesWidget(questionIndex: questionsIndex),
+                                  // LifeLinesWidget(questionIndex: questionsIndex),
                                   const SizedBox(height: Dimensions.space25),
                                 ],
                               ),

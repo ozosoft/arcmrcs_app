@@ -37,6 +37,10 @@ class UrlContainer {
   static const String subCategoriesImage = '$domainUrl/assets/admin/images/subcategory/';
   static const String examZoneImage = '$domainUrl/assets/admin/images/exam/';
   static const String funNLearnsubCategoryImage = '$domainUrl/assets/admin/images/category/';
+  static const String dailyQuizQuestionsImage = '$domainUrl/assets/admin/images/question/';
+  static const String quizContestQuestionsImage = '$domainUrl/assets/admin/images/question/';
+  static const String dashboardUserProfileImage = '$domainUrl/assets/images/user/profile/';
+  static const String leaderboardProfileImage = '$domainUrl/assets/images/user/profile/';
   
   static const String otpVerify = 'otp-verify';
   static const String otpResend = 'otp-resend';
@@ -47,7 +51,10 @@ class UrlContainer {
   static const String authorizationCodeEndPoint = 'authorization';
 
   static const String dashBoardUrl = 'dashboard';
+  static const String leaderBoardUrl = 'leader-board';
   static const String examZone = 'exam/exam-list';
+  static const String coinStore = 'coin-store';
+  static const String coinHistory = 'coin-history';
   static const String quizList = 'exam/quizList-list';
   static const String contest = 'contest';
   static const String transactionEndpoint = 'transactions';
@@ -69,6 +76,7 @@ class UrlContainer {
 
   static const String getProfileEndPoint = 'user-info';
   static const String updateProfileEndPoint = 'profile-setting';
+  static const String updateProfileAvatarEndPoint = 'profile-avatar-update';
   static const String profileCompleteEndPoint = 'user-data-submit';
 
   static const String changePasswordEndPoint = 'change-password';

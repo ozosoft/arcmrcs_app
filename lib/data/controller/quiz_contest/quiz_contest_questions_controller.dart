@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/data/model/exam_zone/exam_zone_model.dart';
@@ -34,6 +35,7 @@ class QuizContestQuestionsController extends GetxController {
   bool loading = true;
 
   String? quizInfoID;
+  String? title;
   late int questionsIndex;
   List<Exam> examcategoryList = [];
   List<Question> examQuestionsList = [];
@@ -62,13 +64,17 @@ class QuizContestQuestionsController extends GetxController {
 
   TextEditingController enterExamKeys = TextEditingController();
 
-  getQuizContestQuestions(String quizInfoId,) async {
+  getQuizContestQuestions(
+    String quizInfoId,
+  ) async {
     loading = true;
     update();
 
     print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
 
-    ResponseModel getQuestionsModel = await quizContestRepo.getExamQuestionList(quizInfoId,);
+    ResponseModel getQuestionsModel = await quizContestRepo.getExamQuestionList(
+      quizInfoId,
+    );
 
     if (getQuestionsModel.statusCode == 200) {
       examQuestionsList.clear();
@@ -84,13 +90,11 @@ class QuizContestQuestionsController extends GetxController {
           examQuestionsList.addAll(examQuestion);
         }
 
-          List<Option>? optionslist = model.data!.questions![1].options;
+        List<Option>? optionslist = model.data!.questions![1].options;
 
         if (optionslist != null && optionslist.isNotEmpty) {
           optionsList.addAll(optionslist);
         }
-
-        
 
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
@@ -111,14 +115,8 @@ class QuizContestQuestionsController extends GetxController {
     showQuestions = !showQuestions;
   }
 
-  int remainingTime = 30;
-  void restartTimer() {
-    remainingTime = 30;
-    update();
-  }
-
   int selectedOptionIndex = -1;
-   selectAnswer(
+  selectAnswer(
     int optionIndex,
     int questionIndex,
   ) {
@@ -169,6 +167,35 @@ class QuizContestQuestionsController extends GetxController {
     flipQuistions = !flipQuistions;
     update();
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
+  }
+
+  int timerDuration = 20;
+  int countDownTimerIndex = -1;
+  bool restartTimer = false;
+  restartCountDownTimer(int questionIndex) {
+    countDownTimerIndex = countDownTimerIndex;
+    restartTimer = !restartTimer;
+    update();
+  }
+
+  bool fiftyFifty = false;
+  int fiftyFiftyIndex = -1;
+  makeFiftyFifty(int index) {
+    List<Option> allOptions = examQuestionsList[index].options!;
+    var random = Random();
+    Option correctAnswers = allOptions!.firstWhere((element) => element.isAnswer == '1');
+    allOptions.remove(correctAnswers);
+    Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
+    List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);
+
+    examQuestionsList[index].options!.clear();
+    examQuestionsList[index].options!.addAll(optionsToDisplay);
+    update();
+
+    print("object is here");
+    fiftyFiftyIndex = fiftyFiftyIndex;
+    fiftyFifty = !fiftyFifty;
+    update();
   }
 
   void setCurrentOption(int questionsIndex) {
@@ -222,10 +249,7 @@ class QuizContestQuestionsController extends GetxController {
   //       wrongAnswer = model.data!.wrongAnswer.toString();
   //       totalCoin = model.data!.totalCoin.toString();
   //       winningCoin = model.data!.winingCoin.toString();
-   
-       
- 
-     
+
   //       CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
   //     } else {
   //       CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);

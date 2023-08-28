@@ -1,10 +1,10 @@
 name: flutter_prime
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.5 <4.0.0'
+  sdk: ">=3.0.5 <4.0.0"
 
 dependencies:
   flutter:
@@ -52,7 +52,7 @@ dependencies:
   image_gallery_saver: ^2.0.3
   introduction_screen: ^3.1.11
   curved_navigation_bar: ^1.0.3
-
+  audioplayers: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -61,12 +61,9 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-
   uses-material-design: true
 
   assets:
     - assets/images/
     - assets/animation/
-
-
-
+    - assets/audios/

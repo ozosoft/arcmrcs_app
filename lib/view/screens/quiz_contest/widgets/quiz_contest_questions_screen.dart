@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
@@ -14,6 +16,7 @@ import 'package:flutter_prime/view/screens/quiz-questions/quiz-screen-widgets/li
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../data/controller/quiz_questions/quiz_questions_controller.dart';
+
 class QuizQuestiuonScreen extends StatefulWidget {
   final int id;
 
@@ -40,7 +43,7 @@ class _QuizQuestiuonScreenState extends State<QuizQuestiuonScreen> {
       controller.getdata(controller.quizInfoID.toString());
     });
   }
-
+AudioPlayer audioPlayer = AudioPlayer();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<QuizQuestionsController>(
@@ -55,7 +58,7 @@ class _QuizQuestiuonScreenState extends State<QuizQuestiuonScreen> {
                       onPageChanged: (int page) {
                         print(page);
                         controller.changePage(page);
-                        print("1234" + controller.pageController.toString());
+                        
                       },
                       itemCount: controller.questionsList.length,
                       itemBuilder: (context, questionsIndex) {
@@ -81,10 +84,10 @@ class _QuizQuestiuonScreenState extends State<QuizQuestiuonScreen> {
                                     Container(
                                       width: double.infinity,
                                       padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                                      child: Image.asset(
-                                        MyImages.greatWallPNG,
+                                      child:controller.questionsList[questionsIndex].question!=null? Image.asset(UrlContainer.quizContestQuestionsImage +
+                                       controller.questionsList[questionsIndex].image,
                                         fit: BoxFit.cover,
-                                      ),
+                                      ):const SizedBox(),
                                     ),
                                     Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.questionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                     const SizedBox(height: Dimensions.space25),
@@ -104,6 +107,14 @@ class _QuizQuestiuonScreenState extends State<QuizQuestiuonScreen> {
                                                       }
 
                                                       controller.selectAnswer(optionIndex, questionsIndex);
+
+                                                      controller.questionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                          ? null
+                                                          : controller.selectedOptionIndex == optionIndex
+                                                              ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                  ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                  : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                              : null;
 
                                                       await Future.delayed(const Duration(seconds: 3));
 
@@ -144,6 +155,7 @@ class _QuizQuestiuonScreenState extends State<QuizQuestiuonScreen> {
                                                           Text(
                                                             controller.questionsList[questionsIndex].options![optionIndex].option.toString(),
                                                             style: regularMediumLarge.copyWith(
+                                                                overflow: TextOverflow.ellipsis,
                                                                 color: controller.questionsList[questionsIndex].selectedOptionId!.isEmpty
                                                                     ? MyColor.textColor
                                                                     : controller.selectedOptionIndex == optionIndex

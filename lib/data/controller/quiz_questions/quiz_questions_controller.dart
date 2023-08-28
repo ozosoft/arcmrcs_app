@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_prime/data/model/quiz_questions_model/quiz_questions_model.dart';
@@ -18,6 +19,8 @@ class QuizQuestionsController extends GetxController {
   bool audienceVote = false;
   bool tapAnswer = false;
   bool flipQuistions = false;
+  bool restartTimer = false;
+
   String flipQuistion = "0";
   String fifty_fifty = "0";
   String audiencevotes = "0";
@@ -25,6 +28,7 @@ class QuizQuestionsController extends GetxController {
 
   int rightAnswerIndex = 0;
   int selectedAnswerIndex = -1;
+  int timerDuration = 20;
 
   int currentQuestionIndex = 0;
 
@@ -46,6 +50,8 @@ class QuizQuestionsController extends GetxController {
     currentPage = page;
     update();
   }
+
+  String successmessage = "";
 
   void getdata(String subcategoryId) async {
     loading = true;
@@ -69,9 +75,12 @@ class QuizQuestionsController extends GetxController {
           questionsList.addAll(subcategorylist);
         }
 
-        print("this is questions list" + subcategorylist![0].question.toString());
+        timerDuration = int.parse(quizquestions.data!.perQuestionAnswerDuration.toString());
+        update();
 
-        List<Option>? optionslist = quizquestions.data!.questions![1].options;
+        successmessage = quizquestions.message!.success.toString()??"";
+
+        List<Option>? optionslist = quizquestions.data!.questions![0].options;
 
         if (optionslist != null && optionslist.isNotEmpty) {
           optionsList.addAll(optionslist);
@@ -92,12 +101,6 @@ class QuizQuestionsController extends GetxController {
 
   showQuestion() {
     showQuestions = !showQuestions;
-  }
-
-  int remainingTime = 30;
-  void restartTimer() {
-    remainingTime = 30;
-    update();
   }
 
   int selectedOptionIndex = -1;
@@ -149,6 +152,33 @@ class QuizQuestionsController extends GetxController {
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
 
+  int countDownTimerIndex = -1;
+  restartCountDownTimer(int questionIndex) {
+    countDownTimerIndex = countDownTimerIndex;
+    restartTimer = !restartTimer;
+    update();
+  }
+
+  bool fiftyFifty = false;
+  int fiftyFiftyIndex = -1;
+  makeFiftyFifty(int index) {
+    List<Option> allOptions = questionsList[index].options!;
+    var random = Random();
+    Option correctAnswers = allOptions!.firstWhere((element) => element.isAnswer == '1');
+    allOptions.remove(correctAnswers);
+    Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
+    List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);
+    print('come here: ${optionsList.length}');
+    print(optionsList.length);
+    questionsList[index].options!.clear();
+    questionsList[index].options!.addAll(optionsToDisplay);
+    update();
+
+    fiftyFiftyIndex = fiftyFiftyIndex;
+    fiftyFifty = !fiftyFifty;
+    update();
+  }
+
   void setCurrentOption(int questionsIndex) {
     // optionsList.clear();
     if (questionsList[questionsIndex].options != null) {
@@ -164,6 +194,9 @@ class QuizQuestionsController extends GetxController {
   String totalCoin = "";
   String winningCoin = "";
   String appreciation = "";
+
+  String nextlevelQuizInfoTitle = "";
+  int nextlevelQuizInfoId = 0;
 
   submitAnswer() async {
     submitLoading = true;
@@ -200,7 +233,14 @@ class QuizQuestionsController extends GetxController {
         totalCoin = model.data!.totalScore.toString();
         winningCoin = model.data!.winingScore.toString();
 
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        if (model.data?.nextLevelQuizInfo != null) {
+          nextlevelQuizInfoId = model.data!.nextLevelQuizInfo?.id! ?? 0;
+          nextlevelQuizInfoTitle = model.data!.nextLevelQuizInfo!.title ?? "";
+        } else {
+          return;
+        }
+
+        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 

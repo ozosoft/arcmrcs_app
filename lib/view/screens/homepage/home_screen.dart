@@ -50,11 +50,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SliverToBoxAdapter(child: PlayDiffrentQuizes()),
+            const SliverToBoxAdapter(child: PlayDiffrentQuizes()),
           ],
         ),
       ),
-      drawer: DrawerScreen(),
+      drawer:const DrawerScreen(),
     );
   }
 }

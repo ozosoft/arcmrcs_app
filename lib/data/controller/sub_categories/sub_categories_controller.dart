@@ -20,6 +20,7 @@ class SubCategoriesController extends GetxController {
   bool loader = true;
 
   bool isActive = false;
+  bool viewMore  = false;
 
   void getdata(String subcategoryId) async {
     loader = true;

@@ -38,16 +38,18 @@ class _DailyQuizLifeLinesWidgetState extends State<DailyQuizLifeLinesWidget> {
         children: [
           InkWell(
             onTap: () {
-              controller.showQuestion();
-              print("object");
+              controller.makeFiftyFifty(widget.questionIndex);
             },
-            child: const LevelCardButton(
-              // lifelineUsed: controller.showQuestions,
-              hasIcon: false,
-              height: Dimensions.space75,
-              width: Dimensions.space78,
-              hasImage: true,
-              image: MyImages.fiftyFiftySVG,
+            child: Visibility(
+               visible: !controller.fiftyFifty,
+              child: const LevelCardButton(
+                // lifelineUsed: controller.showQuestions,
+                hasIcon: false,
+                height: Dimensions.space75,
+                width: Dimensions.space78,
+                hasImage: true,
+                image: MyImages.fiftyFiftySVG,
+              ),
             ),
           ),
           Visibility(
@@ -59,13 +61,22 @@ class _DailyQuizLifeLinesWidgetState extends State<DailyQuizLifeLinesWidget> {
               child: LevelCardButton(lifelineUsed: controller.audienceVote, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.groupSVG),
             ),
           ),
-          const LevelCardButton(
-             
-              hasIcon: false,
-              height: Dimensions.space75,
-              width: Dimensions.space78,
-              hasImage: true,
-              image: MyImages.timeSVG),
+           InkWell(
+            onTap: () {
+              controller.countDownController.restart();
+              controller.restartCountDownTimer(widget.questionIndex);
+            },
+            child: Visibility(
+              visible: !controller.restartTimer,
+              child: const LevelCardButton(
+                  // lifelineUsed: controller.showQuestions,
+                  hasIcon: false,
+                  height: Dimensions.space75,
+                  width: Dimensions.space78,
+                  hasImage: true,
+                  image: MyImages.timeSVG),
+            ),
+          ),
           Visibility(
 
             visible: !controller.flipQuistions,

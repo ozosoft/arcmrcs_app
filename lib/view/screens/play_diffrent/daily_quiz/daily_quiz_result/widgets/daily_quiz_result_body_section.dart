@@ -29,15 +29,15 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
   bool audienceVote = false;
   bool tapAnswer = false;
 
-  @override
-  void initState() {
-    // Get.put(ApiClient(sharedPreferences: Get.find()));
-    // Get.put(DailyQuizRepo(apiClient: Get.find()));
+  // @override
+  // void initState() {
+  //   // Get.put(ApiClient(sharedPreferences: Get.find()));
+  //   // Get.put(DailyQuizRepo(apiClient: Get.find()));
 
-    // DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController( dailyQuizRepo: Get.find(),));
+  //   // DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController( dailyQuizRepo: Get.find(),));
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -81,11 +81,7 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
                             style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
                           ),
                         )),
-                    IconButton(
-                        onPressed: () {
-                          print(controller.quizInfoId);
-                        },
-                        icon: Icon(Icons.abc))
+                   
                   ],
                 ),
                 Row(

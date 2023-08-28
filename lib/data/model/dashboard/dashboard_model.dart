@@ -123,7 +123,7 @@ class Contest {
     String? title;
     String? image;
     DateTime? startDate;
-    DateTime? endDate;
+    String? endDate;
     String? prize;
     String? point;
     dynamic description;
@@ -168,7 +168,7 @@ class Contest {
         title: json["title"],
         image: json["image"],
         startDate: json["start_date"] == null ? null : DateTime.parse(json["start_date"]),
-        endDate: json["end_date"] == null ? null : DateTime.parse(json["end_date"]),
+        endDate: json["end_date"] == null ? null : json["end_date"].toString(),
         prize: json["prize"],
         point: json["point"],
         description: json["description"]!=null?json["description"]:"",
@@ -191,7 +191,7 @@ class Contest {
         "title": title,
         "image": image,
         "start_date": "${startDate!.year.toString().padLeft(4, '0')}-${startDate!.month.toString().padLeft(2, '0')}-${startDate!.day.toString().padLeft(2, '0')}",
-        "end_date": "${endDate!.year.toString().padLeft(4, '0')}-${endDate!.month.toString().padLeft(2, '0')}-${endDate!.day.toString().padLeft(2, '0')}",
+        "end_date": "${endDate!.toString().padLeft(4, '0')}-${endDate!.toString().padLeft(2, '0')}-${endDate!.toString().padLeft(2, '0')}",
         "prize": prize,
         "point": point,
         "description": description,
@@ -374,6 +374,7 @@ class User {
     String? firstname;
     String? lastname;
     String? username;
+    String? avatar;
     String? email;
     String? countryCode;
     String? mobile;
@@ -400,6 +401,7 @@ class User {
         this.firstname,
         this.lastname,
         this.username,
+        this.avatar,
         this.email,
         this.countryCode,
         this.mobile,
@@ -427,6 +429,7 @@ class User {
         firstname: json["firstname"],
         lastname: json["lastname"],
         username: json["username"],
+        avatar: json["avatar"],
         email: json["email"],
         countryCode: json["country_code"],
         mobile: json["mobile"],
@@ -454,6 +457,7 @@ class User {
         "firstname": firstname,
         "lastname": lastname,
         "username": username,
+        "avatar": avatar,
         "email": email,
         "country_code": countryCode,
         "mobile": mobile,

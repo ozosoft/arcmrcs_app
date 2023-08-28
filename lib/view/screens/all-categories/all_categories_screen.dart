@@ -26,14 +26,12 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
     Get.put(AllCategoriesController(
       allCategoriesRepo: Get.find(),
     ));
-    AllCategoriesController controller =
-        Get.put(AllCategoriesController(allCategoriesRepo: Get.find()));
+    AllCategoriesController controller = Get.put(AllCategoriesController(allCategoriesRepo: Get.find()));
 
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata();
-
     });
   }
 
@@ -53,39 +51,25 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                   shrinkWrap: true,
                   itemCount: controller.allCategoriesList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    List<QuizInfo>? levelList =
-                        controller.allCategoriesList[index].quizInfos;
-                    String subCategoryId = levelList != null &&
-                            levelList.isNotEmpty &&
-                            levelList[0].subCategoryId.toString() != 'null'
-                        ? levelList[0].subCategoryId.toString()
-                        : '-1';
-                    String title =
-                        controller.allCategoriesList[index].name.toString();
+                    List<QuizInfo>? levelList = controller.allCategoriesList[index].quizInfos;
+                    String subCategoryId = levelList != null && levelList.isNotEmpty && levelList[0].subCategoryId.toString() != 'null' ? levelList[0].subCategoryId.toString() : '-1';
+                    String title = controller.allCategoriesList[index].name.toString();
                     return InkWell(
                       onTap: () {
-                        subCategoryId == ""
-                            ? const SizedBox()
-                            : Get.toNamed(RouteHelper.subCategories,
-                                arguments: [title,  controller
-                            .allCategoriesList[index].id
-                            .toString()]);
-                        print("this is sub id++++++++++++++++++++"+subCategoryId
-                            .toString());
+                        if (subCategoryId != "") {
+                          Get.toNamed(RouteHelper.subCategories, arguments: [title, controller.allCategoriesList[index].id.toString()]);
+                        }
                       },
                       child: CategoriesCard(
-                       
                         title: title,
-                        questions: controller
-                            .allCategoriesList[index].questionsCount
-                            .toString(),
-                        image: UrlContainer.allCategoriesImage +
-                            controller.allCategoriesList[index].image
-                                .toString(),
-                        expansionVisible: false,
+                        questions: controller.allCategoriesList[index].questionsCount.toString(),
+                        image: UrlContainer.allCategoriesImage + controller.allCategoriesList[index].image.toString(),
+                       
                         fromViewAll: true,
                         subCategoryId: subCategoryId,
+                        isExpand: subCategoryId == "" ?true:false ,
                         index: index,
+                        fromAllCategory: true,
                       ),
                     );
                   }),
