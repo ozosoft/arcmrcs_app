@@ -17,6 +17,10 @@ class MyStrings {
   static const String appName = "Flutter Prime";
 
   static const String reviewAnswer = "Review Answer";
+  static const String currectAnswer = "Currect Answer";
+  static const String wrongAnswer = "Wrong Answer";
+  static const String yourAnswer = "Your Answer";
+
   static const String selectCategory = "Select Category";
   static const String entryCoinsForBattele = "Entry Coins For Battle";
   static const String entryRoomCode = "Entry Room Code to Join Room";

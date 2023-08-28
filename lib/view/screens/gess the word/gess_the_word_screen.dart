@@ -98,13 +98,25 @@ class _GessThewordScreenState extends State<GessThewordScreen> {
                                   Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.gessThewordQuesstionList[questionsIndex].question.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                   const SizedBox(height: Dimensions.space40),
                                   AnswarField(length: controller.gessThewordQuesstionList[questionsIndex].options![0].option!.length),
-                                  const SizedBox(height: Dimensions.space20),
-                                  IconButton(
-                                      onPressed: () {
-                                        controller.removeVAlue();
-                                      },
-                                      icon: const Icon(Icons.delete_forever_outlined)),
-                                  const SizedBox(height: Dimensions.space40),
+                                  const SizedBox(height: Dimensions.space10),
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: MyColor.primaryColor,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: IconButton(
+                                          onPressed: () {
+                                            controller.removeVAlue();
+                                          },
+                                          icon: const Icon(
+                                            Icons.delete_forever_outlined,
+                                            color: MyColor.colorWhite,
+                                          )),
+                                    ),
+                                  ),
+                                  const SizedBox(height: Dimensions.space10),
                                   QuestionButton(
                                     ans: controller.gessThewordQuesstionList[questionsIndex].options![0].option.toString(),
                                   ),

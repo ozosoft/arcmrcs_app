@@ -118,6 +118,7 @@ class Option {
   int? id;
   String? questionId;
   String? option;
+  String? currectAns;
   String? isAnswer;
   String? audience;
   String? createdAt;
@@ -127,6 +128,7 @@ class Option {
     this.id,
     this.questionId,
     this.option,
+    this.currectAns,
     this.isAnswer,
     this.audience,
     this.createdAt,
@@ -137,6 +139,7 @@ class Option {
         id: json["id"],
         questionId: json["question_id"],
         option: json["option"] == null ? null : MyUtils.shuffleString(json["option"]),
+        currectAns: json["option"] == null ? null : json["option"].toString(),
         isAnswer: json["is_answer"],
         audience: json["audience"],
         createdAt: json["created_at"] == null ? null : json["created_at"].toString(),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -29,7 +31,6 @@ class _GessResultBodyState extends State<GessResultBody> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<GessThewordController>(builder: (controller) {
       return Container(
         margin: const EdgeInsets.only(top: Dimensions.space20),
@@ -65,9 +66,9 @@ class _GessResultBodyState extends State<GessResultBody> {
               height: Dimensions.space20,
             ),
             RoundedButton(
-              text: MyStrings.playAgain,
+              text: MyStrings.reviewAnswer,
               press: () {
-                Get.toNamed(RouteHelper.reviewAnswerScreen);
+                Get.toNamed(RouteHelper.gessThewordResultReview);
               },
               color: MyColor.colorBlack,
               textSize: Dimensions.space21,
