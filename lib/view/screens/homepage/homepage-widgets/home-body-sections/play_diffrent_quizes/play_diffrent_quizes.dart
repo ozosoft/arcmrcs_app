@@ -197,7 +197,7 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                       Get.toNamed(RouteHelper.dailyQuizQuestionsScreen, arguments: [controller.quizlist[1].id.toString()]);
+                       Get.toNamed(RouteHelper.dailyQuizQuestionsScreen, arguments: [controller.quizlist[2].id.toString()]);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
