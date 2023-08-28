@@ -52,14 +52,16 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                   itemCount: controller.allCategoriesList.length,
                   itemBuilder: (BuildContext context, int index) {
                     List<QuizInfo>? levelList = controller.allCategoriesList[index].quizInfos;
-                    String subCategoryId = levelList != null && levelList.isNotEmpty && levelList[0].subCategoryId.toString() != 'null' ? levelList[0].subCategoryId.toString() : '-1';
+                    String subCategoryId = levelList != null && levelList.isNotEmpty && levelList[0].subCategoryId.toString() != 'null'
+                        ? levelList[0].subCategoryId.toString()
+                        : '-1';
                     String title = controller.allCategoriesList[index].name.toString();
                     return InkWell(
                       onTap: () {
                         if (subCategoryId != "") {
                           Get.toNamed(RouteHelper.subCategories, arguments: [title, controller.allCategoriesList[index].id.toString()]);
                         }
-                         controller.changeExpandIndex(index);
+                        controller.changeExpandIndex(index);
                       },
                       child: CategoriesCard(
                         title: title,
@@ -67,7 +69,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                         image: UrlContainer.allCategoriesImage + controller.allCategoriesList[index].image.toString(),
                         fromViewAll: true,
                         subCategoryId: subCategoryId,
-                        isExpand: subCategoryId == "" ?index == controller.expandIndex:false ,
+                        isExpand: subCategoryId == "" ? index == controller.expandIndex : false,
                         index: index,
                         fromAllCategory: true,
                       ),
