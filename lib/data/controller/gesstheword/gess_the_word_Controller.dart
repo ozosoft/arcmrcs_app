@@ -208,10 +208,10 @@ class GuessThewordController extends GetxController {
           dev.log(gessThewordQuesstionList.length.toString());
         }
       } else {
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        // CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
       }
     } else {
-      CustomSnackBar.error(errorList: [response.message]);
+      // CustomSnackBar.error(errorList: [response.message]);
     }
     isLoading = false;
     update();
