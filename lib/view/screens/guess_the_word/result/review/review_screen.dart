@@ -12,20 +12,20 @@ import 'package:flutter_prime/view/components/app-bar/custom_appbar.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
-class GessWordReviewResult extends StatefulWidget {
-  const GessWordReviewResult({super.key});
+class GuessWordReviewResult extends StatefulWidget {
+  const GuessWordReviewResult({super.key});
 
   @override
-  State<GessWordReviewResult> createState() => _GessWordReviewResultState();
+  State<GuessWordReviewResult> createState() => _GuessWordReviewResultState();
 }
 
-class _GessWordReviewResultState extends State<GessWordReviewResult> {
+class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: const CustomAppBar(title: MyStrings.reviewAnswer, isTitleCenter: true),
-        body: GetBuilder<GessThewordController>(builder: (controller) {
+        body: GetBuilder<GuessThewordController>(builder: (controller) {
           return Padding(
             padding: Dimensions.screenPaddingHV,
             child: PageView.builder(

@@ -16,17 +16,17 @@ import 'package:flutter_prime/view/components/image/custom_svg_picture.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class GessResultBody extends StatefulWidget {
-  const GessResultBody({super.key});
+class GuessResultBody extends StatefulWidget {
+  const GuessResultBody({super.key});
 
   @override
-  State<GessResultBody> createState() => _GessResultBodyState();
+  State<GuessResultBody> createState() => _GuessResultBodyState();
 }
 
-class _GessResultBodyState extends State<GessResultBody> {
+class _GuessResultBodyState extends State<GuessResultBody> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GessThewordController>(builder: (controller) {
+    return GetBuilder<GuessThewordController>(builder: (controller) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space30),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space20), color: MyColor.colorWhite),
@@ -141,7 +141,7 @@ class _GessResultBodyState extends State<GessResultBody> {
             RoundedButton(
                 text: MyStrings.playAgain,
                 press: () {
-                  Get.offAllNamed(RouteHelper.gessThewordCatagori);
+                  Get.offAllNamed(RouteHelper.guessTheWordCategory);
                 },
                 textSize: Dimensions.space21),
             const SizedBox(

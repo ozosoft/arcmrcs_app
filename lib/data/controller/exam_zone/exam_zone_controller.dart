@@ -93,7 +93,8 @@ class ExamZoneController extends GetxController {
     submitLoading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
+    print(
+        "submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
 
     ResponseModel getQuestionsModel = await examZoneRepo.getExamQuestionList(quizInfoId, enterExamKey);
 
@@ -111,7 +112,7 @@ class ExamZoneController extends GetxController {
         //   examQuestionsList.addAll(examQuestion);
         // }
 
-        Get.toNamed(RouteHelper.examZoneQuestionScreen,arguments:[quizInfoId,enterExamKey]);
+        Get.toNamed(RouteHelper.examZoneQuestionScreen, arguments: [quizInfoId, enterExamKey]);
 
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {

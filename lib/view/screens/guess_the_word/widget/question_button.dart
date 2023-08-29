@@ -8,18 +8,18 @@ import 'package:flutter_prime/core/utils/util.dart';
 import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:get/get.dart';
 
-class GessWordKeyBoard extends StatefulWidget {
+class GuessWordKeyBoard extends StatefulWidget {
   String ans;
-  GessWordKeyBoard({super.key, required this.ans});
+  GuessWordKeyBoard({super.key, required this.ans});
 
   @override
-  State<GessWordKeyBoard> createState() => _GessWordKeyBoardState();
+  State<GuessWordKeyBoard> createState() => _GuessWordKeyBoardState();
 }
 
-class _GessWordKeyBoardState extends State<GessWordKeyBoard> {
+class _GuessWordKeyBoardState extends State<GuessWordKeyBoard> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GessThewordController>(builder: (controller) {
+    return GetBuilder<GuessThewordController>(builder: (controller) {
       return Wrap(
         spacing: 10,
         runSpacing: 10,

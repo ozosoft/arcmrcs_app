@@ -2,31 +2,32 @@
 //
 //     final gesswordQuestionResponse = gesswordQuestionResponseFromJson(jsonString);
 
+// ignore_for_file: prefer_null_aware_operators
+
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter_prime/core/utils/util.dart';
 
 import '../global/meassage.dart';
 
-GesswordQuestionResponse gesswordQuestionResponseFromJson(String str) => GesswordQuestionResponse.fromJson(json.decode(str));
+GuesswordQuestionResponse gesswordQuestionResponseFromJson(String str) => GuesswordQuestionResponse.fromJson(json.decode(str));
 
-String gesswordQuestionResponseToJson(GesswordQuestionResponse data) => json.encode(data.toJson());
+String gesswordQuestionResponseToJson(GuesswordQuestionResponse data) => json.encode(data.toJson());
 
-class GesswordQuestionResponse {
+class GuesswordQuestionResponse {
   String? remark;
   String? status;
   Message? message;
   Data? data;
 
-  GesswordQuestionResponse({
+  GuesswordQuestionResponse({
     this.remark,
     this.status,
     this.message,
     this.data,
   });
 
-  factory GesswordQuestionResponse.fromJson(Map<String, dynamic> json) => GesswordQuestionResponse(
+  factory GuesswordQuestionResponse.fromJson(Map<String, dynamic> json) => GuesswordQuestionResponse(
         remark: json["remark"],
         status: json["status"],
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
@@ -43,7 +44,7 @@ class GesswordQuestionResponse {
 
 class Data {
   QuizInfo? quizInfo;
-  List<GessQuestion>? questions;
+  List<GuessQuestion>? questions;
   String? perQuestionAnswerDuration;
   String? questionImagePath;
 
@@ -56,7 +57,7 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         quizInfo: json["quizInfo"] == null ? null : QuizInfo.fromJson(json["quizInfo"]),
-        questions: json["questions"] == null ? [] : List<GessQuestion>.from(json["questions"]!.map((x) => GessQuestion.fromJson(x))),
+        questions: json["questions"] == null ? [] : List<GuessQuestion>.from(json["questions"]!.map((x) => GuessQuestion.fromJson(x))),
         perQuestionAnswerDuration: json["per_question_answer_duration"],
         questionImagePath: json["question_image_path"],
       );
@@ -69,7 +70,7 @@ class Data {
       };
 }
 
-class GessQuestion {
+class GuessQuestion {
   int? id;
   String? question;
   String? image;
@@ -81,9 +82,9 @@ class GessQuestion {
   String? selectedAnswer;
   List<Option>? options;
 
-  GessQuestion({this.id, this.question, this.image, this.code, this.status, this.createdAt, this.updatedAt, this.pivot, this.options, this.selectedAnswer});
+  GuessQuestion({this.id, this.question, this.image, this.code, this.status, this.createdAt, this.updatedAt, this.pivot, this.options, this.selectedAnswer});
 
-  factory GessQuestion.fromJson(Map<String, dynamic> json) => GessQuestion(
+  factory GuessQuestion.fromJson(Map<String, dynamic> json) => GuessQuestion(
         id: json["id"],
         question: json["question"],
         image: json["image"],

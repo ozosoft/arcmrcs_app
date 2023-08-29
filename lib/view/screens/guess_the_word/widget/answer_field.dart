@@ -5,15 +5,15 @@ import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:get/get.dart';
 
-class AnswarField extends StatefulWidget {
-  int length;
-  AnswarField({super.key, required this.length});
+class AnswerField extends StatefulWidget {
+  final int length;
+  const AnswerField({super.key, required this.length});
 
   @override
-  State<AnswarField> createState() => _AnswarFieldState();
+  State<AnswerField> createState() => _AnswerFieldState();
 }
 
-class _AnswarFieldState extends State<AnswarField> {
+class _AnswerFieldState extends State<AnswerField> {
   late List<int> submittedAnswer = [];
   late List<String> correctAnswerLetterList = [];
   //to controll the answer text
@@ -24,15 +24,15 @@ class _AnswarFieldState extends State<AnswarField> {
   @override
   void initState() {
     super.initState();
-    Get.find<GessThewordController>().tempAns.clear();
+    Get.find<GuessThewordController>().tempAns.clear();
     for (var i = 0; i < widget.length; i++) {
-      Get.find<GessThewordController>().tempAns.add('-1');
+      Get.find<GuessThewordController>().tempAns.add('-1');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GessThewordController>(builder: (controller) {
+    return GetBuilder<GuessThewordController>(builder: (controller) {
       return Wrap(
         spacing: 10,
         runSpacing: 10,
@@ -49,16 +49,17 @@ class _AnswarFieldState extends State<AnswarField> {
               child: Container(
                 padding: const EdgeInsets.all(Dimensions.space3),
                 height: Dimensions.space30,
-                width: Dimensions.space30,
+                width: Dimensions.space40,
                 decoration: BoxDecoration(
                   border: controller.selectedIndex == index
-                      ? Border.all(
-                          color: MyColor.primaryColor,
+                      ? const Border(
+                          top: BorderSide(width: 1, color: MyColor.primaryColor),
+                          bottom: BorderSide(width: 1, color: MyColor.primaryColor),
                         )
                       : const Border(
                           bottom: BorderSide(width: 1.5, color: MyColor.borderColor),
                         ),
-                  color: MyColor.borderColor.withOpacity(0.4),
+                  // color: MyColor.borderColor.withOpacity(0.4),
                 ),
                 child: Center(
                   child: Text(

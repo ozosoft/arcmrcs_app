@@ -498,8 +498,8 @@ class MyStrings {
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
 
-  static const String catagori = "Catagori";
-  static const String subcatagori = "Sub Catagori";
+  static const String category = "Category";
+  static const String subcategory = "Sub Category";
 
   static const String dailynewquiz = "Daily new quiz";
   static const String gamequizwithfun = "Game quiz with fun";
@@ -511,7 +511,7 @@ class MyStrings {
   static const String pickTheCorrectAnswer = "Pick the correct answer at the final question to win the prize money";
 
   static const String dontHaveAnaccount = "Don’t have an account?";
-  static const String onboardDescription = "There are hundreds of different catagories to choose from";
+  static const String onboardDescription = "There are hundreds of different categories to choose from";
 
   static const String transactionType = "Transaction Type";
   static const String minimumReedemAmount = "Minimum Redeemable amount is \$2 (10 coins).";

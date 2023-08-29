@@ -93,9 +93,9 @@ class UrlContainer {
   static const String languageUrl = 'language/';
   static const String changeLanguageUrl = 'change/';
   // gess the word
-  static const String gessTheword = 'guess-word/';
-  static const String catagoriList = 'category-list';
-  static const String subCatagoriList = 'subcategory-list/';
+  static const String guessTheword = 'guess-word/';
+  static const String categoryList = 'category-list';
+  static const String subCategoryList = 'subcategory-list/';
   static const String questionList = 'question-list/';
   static const String gesswordSubmit = 'answer-submit';
 

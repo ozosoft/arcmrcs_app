@@ -4,20 +4,20 @@
 
 import 'package:flutter_prime/data/model/global/meassage.dart';
 
-class GesswordQuestionSubmitResponse {
+class GuesswordQuestionSubmitResponse {
   String? remark;
   String? status;
   Message? message;
   Data? data;
 
-  GesswordQuestionSubmitResponse({
+  GuesswordQuestionSubmitResponse({
     this.remark,
     this.status,
     this.message,
     this.data,
   });
 
-  factory GesswordQuestionSubmitResponse.fromJson(Map<String, dynamic> json) => GesswordQuestionSubmitResponse(
+  factory GuesswordQuestionSubmitResponse.fromJson(Map<String, dynamic> json) => GuesswordQuestionSubmitResponse(
         remark: json["remark"],
         status: json["status"],
         message: json["message"] == null ? null : Message.fromJson(json["message"]),

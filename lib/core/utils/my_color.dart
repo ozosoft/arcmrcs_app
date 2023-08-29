@@ -5,6 +5,7 @@ class MyColor {
   static const Color scaffoldBackgroundColor = Color(0xffF8F8F8);
   static const Color battleTextColor = Color(0xffABA8B0);
   static const Color bottomNavBarIconInActiveColor = Color(0xffABA8B0);
+  static const Color greyTextColor = Color(0xffABA8B0);
   static const Color authScreenTextColor = Color(0xFF5E5E5E);
   static const Color timerbgColor = Color(0xFFFFE2DA);
   static const Color lightprimaryColor = Color(0x92FF7357);

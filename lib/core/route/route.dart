@@ -6,11 +6,10 @@ import 'package:flutter_prime/view/screens/badges/badges_screen.dart';
 import 'package:flutter_prime/view/screens/bookmark/bookmark_screen.dart';
 import 'package:flutter_prime/view/screens/coin_history/coin_history_screen.dart';
 
-import 'package:flutter_prime/view/screens/gess%20the%20word/catagori/gess_word_catagori_screen.dart';
-import 'package:flutter_prime/view/screens/gess%20the%20word/gess_the_word_screen.dart';
-import 'package:flutter_prime/view/screens/gess%20the%20word/result/gess_word_resultScreen.dart';
-import 'package:flutter_prime/view/screens/gess%20the%20word/result/review/review_screen.dart';
-import 'package:flutter_prime/view/screens/gess%20the%20word/subCatagori/gess_word_subcatagori_screen.dart';
+import 'package:flutter_prime/view/screens/guess_the_word/category/guess_word_catagory_screen.dart';
+import 'package:flutter_prime/view/screens/guess_the_word/main_screen/guess_the_word_screen.dart';
+import 'package:flutter_prime/view/screens/guess_the_word/result/review/review_screen.dart';
+import 'package:flutter_prime/view/screens/guess_the_word/subCategory/guess_word_sub_categories_screen.dart';
 
 import 'package:flutter_prime/view/screens/quiz_contest/contest/quiz_contest_list.dart';
 import 'package:flutter_prime/view/screens/quiz_contest/contest/quiz_contest_questions_screen.dart';
@@ -49,6 +48,7 @@ import '../../view/screens/battle_quiz_result/battle_quiz_result_screen.dart';
 import '../../view/screens/bottom_nav_bar/bottom_navigation_bar_screen.dart';
 import '../../view/screens/exam_zone/exam_zone_screen.dart';
 import '../../view/screens/exam_zone/exam_zone_homepage_category_screen.dart';
+import '../../view/screens/guess_the_word/result/guess_word_result_screen.dart';
 import '../../view/screens/homepage/homepage-widgets/home-body-sections/sub-categories/sub_categories_card_screen.dart';
 import '../../view/screens/intro_section/onboard_intro_screen.dart';
 import '../../view/screens/leader_board/leader_board_screen.dart';
@@ -89,9 +89,9 @@ class RouteHelper {
   static const String examZoneCategoryScreen = '/exam_zone_category_screen';
   static const String leaderBoardScreen = '/leader_board_screen';
   // guess the word
-  static const String gessTheword = "/gess_the_word";
-  static const String gessThewordCatagori = "/gess_the_word_catagori";
-  static const String gessThewordsubCatagori = "/gess_the_word_subCatagroi";
+  static const String guessTheword = "/gess_the_word";
+  static const String guessTheWordCategory = "/gess_the_word_category";
+  static const String guessTheWordSubCategory = "/gess_the_word_sub_categroy";
   static const String gessThewordResult = "/gess_the_word_result";
   static const String gessThewordResultReview = "/gess_the_word_result_review";
 
@@ -153,11 +153,11 @@ class RouteHelper {
     GetPage(name: leaderBoardScreen, page: () => const LeaderBoardScreen()),
 
     // guess the word
-    GetPage(name: gessTheword, page: () => const GessThewordScreen()),
-    GetPage(name: gessThewordCatagori, page: () => const GestheWordCatagoriScreen()),
-    GetPage(name: gessThewordsubCatagori, page: () => const GessWordSubCatagoriScreen()),
-    GetPage(name: gessThewordResult, page: () => const GessWordResultScreen()),
-    GetPage(name: gessThewordResultReview, page: () => const GessWordReviewResult()),
+    GetPage(name: guessTheword, page: () => const GuessThewordScreen()),
+    GetPage(name: guessTheWordCategory, page: () => const GestheWordCategoryScreen()),
+    GetPage(name: guessTheWordSubCategory, page: () => const GuessWordSubCategoryScreen()),
+    GetPage(name: gessThewordResult, page: () => const GuessWordResultScreen()),
+    GetPage(name: gessThewordResultReview, page: () => const GuessWordReviewResult()),
 
     GetPage(name: examZoneQuestionScreen, page: () => const Exam_zone_quiz_screen()),
     GetPage(name: funNlearnQuizScreen, page: () => const FunNlearnQuizScreen()),
