@@ -21,8 +21,9 @@ class BottomSectionButtons extends StatelessWidget {
           child: RoundedButton(
               text: MyStrings.nextLevel,
               press: () {
-                id != 0?
-                Get.offAndToNamed(RouteHelper.quizQuestionsScreen, arguments: [title, id]):CustomSnackBar.error(errorList: [MyStrings.completeTheLevelFirst]);
+                id != 0
+                    ? Get.offAndToNamed(RouteHelper.quizQuestionsScreen, arguments: [title, id])
+                    : CustomSnackBar.error(errorList: [MyStrings.completeTheLevelFirst]);
               },
               textSize: Dimensions.space21),
         ),
@@ -31,7 +32,6 @@ class BottomSectionButtons extends StatelessWidget {
           child: RoundedButton(
             text: MyStrings.reviewAnswer,
             press: () {
-             
               Get.toNamed(RouteHelper.reviewAnswerScreen);
               print(id);
             },

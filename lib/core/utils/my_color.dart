@@ -18,6 +18,7 @@ class MyColor {
   static const Color bodyTextColor = Color(0xFF747475);
   static const Color textColor = Color(0xFF8A8281);
   static const Color notActivatedFadeColor = Color(0x5AFFFFFF);
+  static const Color lightGray = Color(0xFFFAFAFA);
 
   static const Color titleColor = Color(0xff373e4a);
   static const Color labelTextColor = Color(0xff444444);

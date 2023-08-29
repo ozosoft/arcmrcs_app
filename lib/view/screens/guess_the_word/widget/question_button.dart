@@ -9,8 +9,8 @@ import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controll
 import 'package:get/get.dart';
 
 class GuessWordKeyBoard extends StatefulWidget {
-  String ans;
-  GuessWordKeyBoard({super.key, required this.ans});
+  final String ans;
+  const GuessWordKeyBoard({super.key, required this.ans});
 
   @override
   State<GuessWordKeyBoard> createState() => _GuessWordKeyBoardState();
@@ -33,14 +33,14 @@ class _GuessWordKeyBoardState extends State<GuessWordKeyBoard> {
               },
               child: Container(
                 padding: const EdgeInsets.all(Dimensions.space3),
-                height: 40,
-                width: 40,
+                height: Dimensions.space40,
+                width: Dimensions.space40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
                   border: Border.all(
-                    color: MyColor.borderColor,
+                    color: MyColor.borderColor.withOpacity(0.3),
                   ),
-                  color: MyColor.borderColor,
+                  color: MyColor.lightGray,
                 ),
                 child: Center(
                   child: Text(

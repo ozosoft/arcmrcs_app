@@ -9,12 +9,13 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/divider/custom_dashed_divider.dart';
 import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
 import 'package:flutter_prime/view/components/divider/custom_vertical_divider.dart';
 import 'package:flutter_prime/view/components/image/custom_svg_picture.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../../../../../data/model/guess_the_word/guess_question_model.dart';
 
 class GuessResultBody extends StatefulWidget {
   const GuessResultBody({super.key});
@@ -89,7 +90,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
                       style: mediumLarge,
                     ),
                     const SizedBox(
-                      height: Dimensions.space2,
+                      height: Dimensions.space5,
                     ),
                     const Text(
                       'Total Question',
@@ -107,10 +108,10 @@ class _GuessResultBodyState extends State<GuessResultBody> {
                       style: mediumLarge,
                     ),
                     const SizedBox(
-                      height: Dimensions.space2,
+                      height: Dimensions.space5,
                     ),
                     Text(
-                      'correctAnswer',
+                      'Correct Answer',
                       style: lightDefault.copyWith(color: MyColor.greenSuccessColor),
                     ),
                   ],
@@ -125,10 +126,10 @@ class _GuessResultBodyState extends State<GuessResultBody> {
                       style: mediumLarge,
                     ),
                     const SizedBox(
-                      height: Dimensions.space2,
+                      height: Dimensions.space5,
                     ),
                     Text(
-                      'wrongAnswer',
+                      'Wrong Answer',
                       style: lightDefault.copyWith(color: MyColor.redCancelTextColor),
                     ),
                   ],
@@ -141,7 +142,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
             RoundedButton(
                 text: MyStrings.playAgain,
                 press: () {
-                  Get.offAllNamed(RouteHelper.guessTheWordCategory);
+                  Get.offAndToNamed(RouteHelper.guessTheword, arguments: int.parse(controller.quizInfoId.toString()));
                 },
                 textSize: Dimensions.space21),
             const SizedBox(
@@ -150,7 +151,19 @@ class _GuessResultBodyState extends State<GuessResultBody> {
             RoundedButton(
               text: MyStrings.reviewAnswer,
               press: () {
-                Get.toNamed(RouteHelper.gessThewordResultReview);
+                Get.offAndToNamed(RouteHelper.gessThewordResultReview,
+                    arguments: [controller.gessThewordQuesstionList.isNotEmpty ? controller.gessThewordQuesstionList : <GuessQuestion>[]]);
+              },
+              color: MyColor.greenSuccessColor,
+              textSize: Dimensions.space21,
+            ),
+            const SizedBox(
+              height: Dimensions.space20,
+            ),
+            RoundedButton(
+              text: MyStrings.home,
+              press: () {
+                Get.offAllNamed(RouteHelper.bottomNavBarScreen);
               },
               color: MyColor.colorBlack,
               textSize: Dimensions.space21,

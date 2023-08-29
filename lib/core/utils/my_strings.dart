@@ -97,6 +97,7 @@ class MyStrings {
   static const String verifyNow = "Verify Now";
   static const String withdraw = "Withdrawals";
   static const String seeAll = "See All";
+  static const String goHome = "Go Home";
   static const String home = "Home";
   static const String transaction = "Transaction";
   static const String transactionId = "Transaction ID";
@@ -497,6 +498,7 @@ class MyStrings {
   static const String dailyQuiz = "Daily Quiz";
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
+  static const String sorryNoCategory = "Sorry No Category Found";
 
   static const String category = "Category";
   static const String subcategory = "Sub Category";

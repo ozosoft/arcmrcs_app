@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
@@ -8,25 +9,45 @@ import 'package:flutter_prime/core/utils/style.dart';
 
 class NoDataWidget extends StatelessWidget {
   final double margin;
+  final String? messages;
+  final Widget? child;
+  final bool showHomeButton;
 
-  const NoDataWidget({Key? key, this.margin = 4}) : super(key: key);
+  const NoDataWidget({Key? key, this.margin = 4, this.messages, this.child, this.showHomeButton = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height / margin),
+      margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height / margin),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(MyImages.noDataFound, height: 120, width: 120),
-          const SizedBox(height: Dimensions.space3),
+          child ?? Image.asset(MyImages.noContentFound, height: 120, width: 120),
+          const SizedBox(height: Dimensions.space20),
           Text(
-            MyStrings.noDataToShow.tr,
+            messages ?? MyStrings.noDataToShow.tr,
             style: regularLarge.copyWith(color: MyColor.getTextColor()),
-          )
+          ),
+          const SizedBox(height: Dimensions.space30),
+          if (showHomeButton == true)
+            TextButton(
+              onPressed: () {
+               Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+              },
+              style: TextButton.styleFrom(
+                splashFactory: InkSplash.splashFactory, // Use the default splash factory
+                backgroundColor: MyColor.primaryColor.withOpacity(0.2),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  " ${MyStrings.home} ",
+                  style: regularLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.bold),
+                ),
+              ),
+            )
         ],
       ),
     );

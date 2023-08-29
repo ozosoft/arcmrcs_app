@@ -140,6 +140,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                         padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
                                         child: InkWell(
                                           onTap: () {
+
                                             if (widget.categories.quizInfos![index].playInfo != null) {
                                               Get.toNamed(
                                                 RouteHelper.guessTheword,

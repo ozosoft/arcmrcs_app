@@ -19,7 +19,7 @@ import '../../model/guess_the_word/guess_category_model.dart';
 class GuessThewordController extends GetxController {
   GuessTheWordRepo gessTheWordRepo;
   GuessThewordController({required this.gessTheWordRepo});
-  //
+
   PageController pageController = PageController(initialPage: 0);
   CountDownController countDownController = CountDownController();
   //
@@ -28,7 +28,7 @@ class GuessThewordController extends GetxController {
   String? subImgPath = "";
   int currentPage = 0;
   bool isLoading = false;
-  int ansDuration = 300;
+  int ansDuration = 30;
   String? quizInfoId;
   // result
   String totalQuestion = '';
@@ -83,11 +83,13 @@ class GuessThewordController extends GetxController {
         correctAnswer = model.data?.correctAnswer.toString() ?? '';
         wrongAnswer = model.data?.wrongAnswer.toString() ?? '';
         totalScore = model.data?.totalScore.toString() ?? '';
-        Get.toNamed(RouteHelper.gessThewordResult);
+        Get.offAndToNamed(
+          RouteHelper.gessThewordResult,
+        );
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
       } else {
         CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
-        Get.toNamed(RouteHelper.guessTheWordCategory);
+        Get.offAndToNamed(RouteHelper.guessTheWordCategory);
       }
     } else {
       Get.toNamed(RouteHelper.guessTheWordCategory);
@@ -200,7 +202,7 @@ class GuessThewordController extends GetxController {
         if (templist != null) {
           gessThewordQuesstionList.clear();
           questionImgPath = model.data?.questionImagePath;
-          // ansDuration = int.parse(model.data?.perQuestionAnswerDuration.toString() ?? "30");
+          ansDuration = int.parse(model.data?.perQuestionAnswerDuration.toString() ?? "30");
           quizInfoId = id;
           gessThewordQuesstionList.addAll(templist);
           dev.log(gessThewordQuesstionList.length.toString());
