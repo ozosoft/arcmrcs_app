@@ -146,7 +146,7 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      Get.toNamed(RouteHelper.gessThewordCatagori);
+                      Get.toNamed(RouteHelper.guessTheWordCategory);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),

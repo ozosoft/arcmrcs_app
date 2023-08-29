@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final gesswordCatagorisResponse = gesswordCatagorisResponseFromJson(jsonString);
+//     final gesswordCategorysResponse = gesswordCategorysResponseFromJson(jsonString);
 
 // ignore_for_file: prefer_null_aware_operators
 
@@ -8,24 +8,24 @@ import 'dart:convert';
 
 import 'package:flutter_prime/data/model/global/meassage.dart';
 
-GesswordCatagorisResponse gesswordCatagorisResponseFromJson(String str) => GesswordCatagorisResponse.fromJson(json.decode(str));
+GuesswordCategorysResponse gesswordCategorysResponseFromJson(String str) => GuesswordCategorysResponse.fromJson(json.decode(str));
 
-String gesswordCatagorisResponseToJson(GesswordCatagorisResponse data) => json.encode(data.toJson());
+String gesswordCategorysResponseToJson(GuesswordCategorysResponse data) => json.encode(data.toJson());
 
-class GesswordCatagorisResponse {
+class GuesswordCategorysResponse {
   String? remark;
   String? status;
   Message? message;
   Data? data;
 
-  GesswordCatagorisResponse({
+  GuesswordCategorysResponse({
     this.remark,
     this.status,
     this.message,
     this.data,
   });
 
-  factory GesswordCatagorisResponse.fromJson(Map<String, dynamic> json) => GesswordCatagorisResponse(
+  factory GuesswordCategorysResponse.fromJson(Map<String, dynamic> json) => GuesswordCategorysResponse(
         remark: json["remark"],
         status: json["status"],
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
@@ -41,7 +41,7 @@ class GesswordCatagorisResponse {
 }
 
 class Data {
-  List<GeusCatagories>? categories;
+  List<GuessCategories>? categories;
   String? categoryImagePath;
 
   Data({
@@ -50,7 +50,7 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        categories: json["categories"] == null ? [] : List<GeusCatagories>.from(json["categories"]!.map((x) => GeusCatagories.fromJson(x))),
+        categories: json["categories"] == null ? [] : List<GuessCategories>.from(json["categories"]!.map((x) => GuessCategories.fromJson(x))),
         categoryImagePath: json["category_image_path"],
       );
 
@@ -60,7 +60,7 @@ class Data {
       };
 }
 
-class GeusCatagories {
+class GuessCategories {
   int? id;
   String? name;
   String? image;
@@ -71,7 +71,7 @@ class GeusCatagories {
   String? questionsCount;
   List<QuizInfo>? quizInfos;
 
-  GeusCatagories({
+  GuessCategories({
     this.id,
     this.name,
     this.image,
@@ -83,7 +83,7 @@ class GeusCatagories {
     this.quizInfos,
   });
 
-  factory GeusCatagories.fromJson(Map<String, dynamic> json) => GeusCatagories(
+  factory GuessCategories.fromJson(Map<String, dynamic> json) => GuessCategories(
         id: json["id"],
         name: json["name"],
         image: json["image"],

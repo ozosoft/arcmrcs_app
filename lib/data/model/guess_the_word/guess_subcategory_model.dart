@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final gesswordSubCatagoriResponse = gesswordSubCatagoriResponseFromJson(jsonString);
+//     final gesswordSubCategoryResponse = gesswordSubCategoryResponseFromJson(jsonString);
 
 // ignore_for_file: prefer_null_aware_operators
 
@@ -8,24 +8,24 @@ import 'dart:convert';
 
 import 'package:flutter_prime/data/model/global/meassage.dart';
 
-GesswordSubCatagoriResponse gesswordSubCatagoriResponseFromJson(String str) => GesswordSubCatagoriResponse.fromJson(json.decode(str));
+GuesswordSubCategoryResponse gesswordSubCategoryResponseFromJson(String str) => GuesswordSubCategoryResponse.fromJson(json.decode(str));
 
-String gesswordSubCatagoriResponseToJson(GesswordSubCatagoriResponse data) => json.encode(data.toJson());
+String gesswordSubCategoryResponseToJson(GuesswordSubCategoryResponse data) => json.encode(data.toJson());
 
-class GesswordSubCatagoriResponse {
+class GuesswordSubCategoryResponse {
   String? remark;
   String? status;
   Message? message;
   Data? data;
 
-  GesswordSubCatagoriResponse({
+  GuesswordSubCategoryResponse({
     this.remark,
     this.status,
     this.message,
     this.data,
   });
 
-  factory GesswordSubCatagoriResponse.fromJson(Map<String, dynamic> json) => GesswordSubCatagoriResponse(
+  factory GuesswordSubCategoryResponse.fromJson(Map<String, dynamic> json) => GuesswordSubCategoryResponse(
         remark: json["remark"],
         status: json["status"],
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
@@ -41,7 +41,7 @@ class GesswordSubCatagoriResponse {
 }
 
 class Data {
-  List<GessSubcategory>? subcategories;
+  List<GuessSubCategory>? subcategories;
   String? imgPath;
 
   Data({
@@ -51,7 +51,7 @@ class Data {
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         imgPath: json["subcategory_image_path"].toString(),
-        subcategories: json["subcategories"] == null ? [] : List<GessSubcategory>.from(json["subcategories"]!.map((x) => GessSubcategory.fromJson(x))),
+        subcategories: json["subcategories"] == null ? [] : List<GuessSubCategory>.from(json["subcategories"]!.map((x) => GuessSubCategory.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -59,7 +59,7 @@ class Data {
       };
 }
 
-class GessSubcategory {
+class GuessSubCategory {
   int? id;
   String? name;
   String? categoryId;
@@ -70,7 +70,7 @@ class GessSubcategory {
   String? questionsCount;
   List<QuizInfo>? quizInfos;
 
-  GessSubcategory({
+  GuessSubCategory({
     this.id,
     this.name,
     this.categoryId,
@@ -82,7 +82,7 @@ class GessSubcategory {
     this.quizInfos,
   });
 
-  factory GessSubcategory.fromJson(Map<String, dynamic> json) => GessSubcategory(
+  factory GuessSubCategory.fromJson(Map<String, dynamic> json) => GuessSubCategory(
         id: json["id"],
         name: json["name"] == null ? null : json["name"].toString(),
         categoryId: json["category_id"].toString(),

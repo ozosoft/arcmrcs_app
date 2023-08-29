@@ -8,18 +8,18 @@ import 'package:flutter_prime/core/utils/util.dart';
 import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:get/get.dart';
 
-class GessWordKeyBoard extends StatefulWidget {
-  String ans;
-  GessWordKeyBoard({super.key, required this.ans});
+class GuessWordKeyBoard extends StatefulWidget {
+  final String ans;
+  const GuessWordKeyBoard({super.key, required this.ans});
 
   @override
-  State<GessWordKeyBoard> createState() => _GessWordKeyBoardState();
+  State<GuessWordKeyBoard> createState() => _GuessWordKeyBoardState();
 }
 
-class _GessWordKeyBoardState extends State<GessWordKeyBoard> {
+class _GuessWordKeyBoardState extends State<GuessWordKeyBoard> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GessThewordController>(builder: (controller) {
+    return GetBuilder<GuessThewordController>(builder: (controller) {
       return Wrap(
         spacing: 10,
         runSpacing: 10,
@@ -33,14 +33,14 @@ class _GessWordKeyBoardState extends State<GessWordKeyBoard> {
               },
               child: Container(
                 padding: const EdgeInsets.all(Dimensions.space3),
-                height: 40,
-                width: 40,
+                height: Dimensions.space40,
+                width: Dimensions.space40,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(2),
                   border: Border.all(
-                    color: MyColor.borderColor,
+                    color: MyColor.borderColor.withOpacity(0.3),
                   ),
-                  color: MyColor.borderColor,
+                  color: MyColor.lightGray,
                 ),
                 child: Center(
                   child: Text(

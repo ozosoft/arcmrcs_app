@@ -5,6 +5,7 @@ class MyColor {
   static const Color scaffoldBackgroundColor = Color(0xffF8F8F8);
   static const Color battleTextColor = Color(0xffABA8B0);
   static const Color bottomNavBarIconInActiveColor = Color(0xffABA8B0);
+  static const Color greyTextColor = Color(0xffABA8B0);
   static const Color authScreenTextColor = Color(0xFF5E5E5E);
   static const Color timerbgColor = Color(0xFFFFE2DA);
   static const Color lightprimaryColor = Color(0x92FF7357);
@@ -17,6 +18,7 @@ class MyColor {
   static const Color bodyTextColor = Color(0xFF747475);
   static const Color textColor = Color(0xFF8A8281);
   static const Color notActivatedFadeColor = Color(0x5AFFFFFF);
+  static const Color lightGray = Color(0xFFFAFAFA);
 
   static const Color titleColor = Color(0xff373e4a);
   static const Color labelTextColor = Color(0xff444444);

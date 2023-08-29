@@ -39,6 +39,7 @@ class UrlContainer {
   static const String playdiffrentImage = '$domainUrl/assets/admin/images/quiz/';
   static const String allCategoriesImage = '$domainUrl/assets/admin/images/category/';
   static const String subCategoriesImage = '$domainUrl/assets/admin/images/subcategory/';
+  static const String questionImagePath = '$domainUrl/assets/admin/images/question';
 
   static const String userImagePath = '$domainUrl/assets/images/user/profile';
   static const String examZoneImage = '$domainUrl/assets/admin/images/exam/';
@@ -47,7 +48,6 @@ class UrlContainer {
   static const String quizContestQuestionsImage = '$domainUrl/assets/admin/images/question/';
   static const String dashboardUserProfileImage = '$domainUrl/assets/images/user/profile/';
   static const String leaderboardProfileImage = '$domainUrl/assets/images/user/profile/';
-
 
   static const String otpVerify = 'otp-verify';
   static const String otpResend = 'otp-resend';
@@ -93,9 +93,9 @@ class UrlContainer {
   static const String languageUrl = 'language/';
   static const String changeLanguageUrl = 'change/';
   // gess the word
-  static const String gessTheword = 'guess-word/';
-  static const String catagoriList = 'category-list';
-  static const String subCatagoriList = 'subcategory-list/';
+  static const String guessTheword = 'guess-word/';
+  static const String categoryList = 'category-list';
+  static const String subCategoryList = 'subcategory-list/';
   static const String questionList = 'question-list/';
   static const String gesswordSubmit = 'answer-submit';
 

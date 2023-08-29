@@ -97,6 +97,7 @@ class MyStrings {
   static const String verifyNow = "Verify Now";
   static const String withdraw = "Withdrawals";
   static const String seeAll = "See All";
+  static const String goHome = "Go Home";
   static const String home = "Home";
   static const String transaction = "Transaction";
   static const String transactionId = "Transaction ID";
@@ -497,9 +498,10 @@ class MyStrings {
   static const String dailyQuiz = "Daily Quiz";
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
+  static const String sorryNoCategory = "Sorry No Category Found";
 
-  static const String catagori = "Catagori";
-  static const String subcatagori = "Sub Catagori";
+  static const String category = "Category";
+  static const String subcategory = "Sub Category";
 
   static const String dailynewquiz = "Daily new quiz";
   static const String gamequizwithfun = "Game quiz with fun";
@@ -511,7 +513,7 @@ class MyStrings {
   static const String pickTheCorrectAnswer = "Pick the correct answer at the final question to win the prize money";
 
   static const String dontHaveAnaccount = "Don’t have an account?";
-  static const String onboardDescription = "There are hundreds of different catagories to choose from";
+  static const String onboardDescription = "There are hundreds of different categories to choose from";
 
   static const String transactionType = "Transaction Type";
   static const String minimumReedemAmount = "Minimum Redeemable amount is \$2 (10 coins).";

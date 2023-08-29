@@ -7,7 +7,6 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/model/gesstheword/gess_subcatagori_model.dart';
 import 'package:flutter_prime/view/components/animated_widget/expanded_widget.dart';
 import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
 import 'package:flutter_prime/view/components/text/custom_text_with_underline.dart';
@@ -15,20 +14,22 @@ import 'package:flutter_prime/view/components/text/custom_text_with_underline.da
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class GessWordSubCatagoriCard extends StatefulWidget {
-  GessSubcategory subcategory;
-  String image;
+import '../../../../../data/model/guess_the_word/guess_subcategory_model.dart';
 
-  GessWordSubCatagoriCard({
+class GuessWordSubCategoryCard extends StatefulWidget {
+  final GuessSubCategory subcategory;
+  final String image;
+
+  const GuessWordSubCategoryCard({
     super.key,
     required this.subcategory,
     this.image = "",
   });
   @override
-  State<GessWordSubCatagoriCard> createState() => _GessWordSubCatagoriCardState();
+  State<GuessWordSubCategoryCard> createState() => _GuessWordSubCategoryCardState();
 }
 
-class _GessWordSubCatagoriCardState extends State<GessWordSubCatagoriCard> {
+class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
   bool isExpande = false;
   int labelCount = 0;
 
@@ -94,9 +95,14 @@ class _GessWordSubCatagoriCardState extends State<GessWordSubCatagoriCard> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Container(
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space3), color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(Dimensions.space3),
+                                    color: MyColor.cardColor,
+                                    border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
                                 padding: const EdgeInsets.symmetric(vertical: Dimensions.space2, horizontal: Dimensions.space5),
-                                child: Center(child: Text(widget.subcategory.questionsCount.toString() + MyStrings.questionse, style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                child: Center(
+                                    child: Text(widget.subcategory.questionsCount.toString() + MyStrings.questionse,
+                                        style: regularDefault.copyWith(color: MyColor.colorGrey))),
                               ),
                             ],
                           ),
@@ -129,20 +135,30 @@ class _GessWordSubCatagoriCardState extends State<GessWordSubCatagoriCard> {
                                     return Padding(
                                         padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
                                         child: InkWell(
-                                          onTap: () {
+                                          onTap: () { 
                                             if (widget.subcategory.quizInfos![index].playInfo != null) {
                                               Get.toNamed(
-                                                RouteHelper.gessTheword,
+                                                RouteHelper.guessTheword,
                                                 arguments: widget.subcategory.quizInfos![index].id,
                                               );
                                             }
                                           },
                                           child: Container(
                                             padding: const EdgeInsets.symmetric(horizontal: Dimensions.space8, vertical: Dimensions.space8),
-                                            decoration: BoxDecoration(color: widget.subcategory.quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel, borderRadius: BorderRadius.circular(Dimensions.space7), border: Border.all(color: widget.subcategory.quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
+                                            decoration: BoxDecoration(
+                                                color: widget.subcategory.quizInfos![index].playInfo != null
+                                                    ? MyColor.completedlevel
+                                                    : MyColor.lockedLevel,
+                                                borderRadius: BorderRadius.circular(Dimensions.space7),
+                                                border: Border.all(
+                                                    color: widget.subcategory.quizInfos![index].playInfo != null
+                                                        ? MyColor.completedlevel
+                                                        : MyColor.lockedLevel)),
                                             child: Row(
                                               children: [
-                                                SvgPicture.asset(widget.subcategory.quizInfos![index].playInfo != null ? MyImages.levelGreenTikSVG : MyImages.lockLevelSVG),
+                                                SvgPicture.asset(widget.subcategory.quizInfos![index].playInfo != null
+                                                    ? MyImages.levelGreenTikSVG
+                                                    : MyImages.lockLevelSVG),
                                                 const SizedBox(width: Dimensions.space4),
                                                 Text(
                                                   widget.subcategory.quizInfos![index].level!.title.toString(),

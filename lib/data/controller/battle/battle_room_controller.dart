@@ -18,7 +18,7 @@ import '../../../core/route/route.dart';
 import '../../../core/utils/internet_connectivity.dart';
 import '../../model/battle/battleRoom.dart';
 import '../../model/battle/battle_room_exeption.dart';
-import '../../model/battle/userBattleRoomDetails.dart';
+import '../../model/battle/user_battle_room_details_model.dart';
 
 enum RoomCreateState {
   none,
@@ -214,7 +214,7 @@ class BattleRoomController extends GetxController {
               print("called from here to quiz page");
               Get.back();
 
-              Get.toNamed(
+              Get.offAndToNamed(
                 RouteHelper.battleQuizQuestionsScreen,
                 arguments: ["${"${battleRoom.user1!.name} VS ${battleRoom.user2!.name}"} ", battleQuestionsList, categoryList],
               );
@@ -272,17 +272,13 @@ class BattleRoomController extends GetxController {
       if (e.toString() == "roomIsFullCode") {
         toogleBattleJoinedState(JoinRoomState.full);
         CustomSnackBar.error(errorList: [(MyStrings.sorryRoomISFull)]);
-      } 
-      else if (e.toString() == "notEnoughCoinsCode") {
+      } else if (e.toString() == "notEnoughCoinsCode") {
         toogleBattleJoinedState(JoinRoomState.failed);
         CustomSnackBar.error(errorList: [(MyStrings.youHaveNoCoins)]);
-      } 
-      else if (e.toString() == "roomCodeInvalidCode") {
+      } else if (e.toString() == "roomCodeInvalidCode") {
         toogleBattleJoinedState(JoinRoomState.failed);
         CustomSnackBar.error(errorList: [(MyStrings.roomCodeIsWrong)]);
-      } 
-      
-      else {
+      } else {
         CustomSnackBar.error(errorList: [(e.toString())]);
       }
     }
@@ -464,7 +460,7 @@ class BattleRoomController extends GetxController {
     }
   }
 
-  // UserBattleRoomDetails getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
+  // UserBattleRoomDetailsModel getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
   //   if (userFoundState.value == UserFoundState.found) {
   //     if (currentUserId == battleRoomData.value!.user1?.uid) {
   //       return (battleRoomData.value!.user2!);
@@ -472,10 +468,10 @@ class BattleRoomController extends GetxController {
   //       return (battleRoomData.value!.user1!);
   //     }
   //   }
-  //   return UserBattleRoomDetails(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
+  //   return UserBattleRoomDetailsModel(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
   // }
 
-  UserBattleRoomDetails getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
+  UserBattleRoomDetailsModel getOpponentUserDetailsOrMy(String currentUserId, {bool isMyData = false}) {
     if (userFoundState.value == UserFoundState.found) {
       if (isMyData) {
         if (currentUserId == battleRoomData.value!.user1?.uid) {
@@ -491,7 +487,7 @@ class BattleRoomController extends GetxController {
         }
       }
     }
-    return UserBattleRoomDetails(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
+    return UserBattleRoomDetailsModel(points: 0, answers: [], correctAnswers: 0, name: "name", profileUrl: "profileUrl", uid: "uid", status: false);
   }
 //Firebase Part
 
@@ -695,9 +691,9 @@ class BattleRoomController extends GetxController {
     }
   }
 
-//submit anser
+//submit answer To Handler
 
-  Future saveAnswer(String? currentUserId, Map submittedAnswer, bool isCorrectAnswer, int points, {List<BattleQuestion>? questionsList}) async {
+  Future saveAnswer(String? currentUserId, Map submittedAnswer, bool isCorrectAnswer, {List<BattleQuestion>? questionsList}) async {
     BattleRoom battleRoom = battleRoomData.value!;
     List<BattleQuestion>? questions = questionsList;
 
@@ -706,7 +702,6 @@ class BattleRoomController extends GetxController {
       if (battleRoom.user1!.answers.length != questions!.length) {
         submitAnswerHandle(
           battleRoomDocumentId: battleRoom.roomId,
-          points: isCorrectAnswer ? (battleRoom.user1!.points + points) : battleRoom.user1!.points,
           forUser1: true,
           submittedAnswer: List.from(battleRoom.user1!.answers)..add(submittedAnswer),
         );
@@ -717,34 +712,6 @@ class BattleRoomController extends GetxController {
         submitAnswerHandle(
           submittedAnswer: List.from(battleRoom.user2!.answers)..add(submittedAnswer),
           battleRoomDocumentId: battleRoom.roomId,
-          points: isCorrectAnswer ? (battleRoom.user2!.points + points) : battleRoom.user2!.points,
-          forUser1: false,
-        );
-      }
-    }
-  }
-
-  Future submitAnswer(String? currentUserId, String? submittedAnswer, bool isCorrectAnswer, int points, {List<Question>? questionsList}) async {
-    BattleRoom battleRoom = battleRoomData.value!;
-    List<Question>? questions = questionsList;
-
-    //need to check submitting answer for user1 or user2
-    if (currentUserId == battleRoom.user1!.uid) {
-      if (battleRoom.user1!.answers.length != questions!.length) {
-        submitAnswerHandle(
-          battleRoomDocumentId: battleRoom.roomId,
-          points: isCorrectAnswer ? (battleRoom.user1!.points + points) : battleRoom.user1!.points,
-          forUser1: true,
-          submittedAnswer: List.from(battleRoom.user1!.answers)..add(submittedAnswer),
-        );
-      }
-    } else {
-      //submit answer for user2
-      if (battleRoom.user2!.answers.length != questions!.length) {
-        submitAnswerHandle(
-          submittedAnswer: List.from(battleRoom.user2!.answers)..add(submittedAnswer),
-          battleRoomDocumentId: battleRoom.roomId,
-          points: isCorrectAnswer ? (battleRoom.user2!.points + points) : battleRoom.user2!.points,
           forUser1: false,
         );
       }
@@ -756,27 +723,17 @@ class BattleRoomController extends GetxController {
     try {
       Map<String, dynamic> submitAnswer = {};
       if (forUser1) {
-        submitAnswer.addAll({"user1.answers": submittedAnswer, "user1.points": points});
+        submitAnswer.addAll({"user1.answers": submittedAnswer});
       } else {
-        submitAnswer.addAll({"user2.answers": submittedAnswer, "user2.points": points});
+        submitAnswer.addAll({"user2.answers": submittedAnswer});
       }
       await submitAnswerToFirebase(battleRoomDocumentId: battleRoomDocumentId, submitAnswer: submitAnswer, forMultiUser: false);
-    } catch (e) {}
+    } catch (e) {
+      throw (e.toString());
+    }
   }
 
-  Future<void> saveAnswerHandle({required bool forUser1, List? submittedAnswer, String? battleRoomDocumentId, int? points}) async {
-    try {
-      Map<String, dynamic> submitAnswer = {};
-      if (forUser1) {
-        submitAnswer.addAll({"user1.answers": submittedAnswer, "user1.points": points});
-      } else {
-        submitAnswer.addAll({"user2.answers": submittedAnswer, "user2.points": points});
-      }
-      await submitAnswerToFirebase(battleRoomDocumentId: battleRoomDocumentId, submitAnswer: submitAnswer, forMultiUser: false);
-    } catch (e) {}
-  }
-
-//submit answer
+//submit answer Firebase
   Future<void> submitAnswerToFirebase({required Map<String, dynamic> submitAnswer, String? battleRoomDocumentId, required bool forMultiUser}) async {
     try {
       if (forMultiUser) {

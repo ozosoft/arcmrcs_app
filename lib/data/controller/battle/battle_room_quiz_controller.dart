@@ -7,7 +7,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../../core/helper/battle_room_helper.dart';
 import '../../../core/route/route.dart';
 import '../../../view/components/snack_bar/show_custom_snackbar.dart';
@@ -17,6 +16,7 @@ import '../../model/battle/battle_result_submit_model.dart';
 import '../../model/global/response_model/response_model.dart';
 import '../../repo/battle/battle_repo.dart';
 import 'battle_room_controller.dart';
+import 'package:wakelock/wakelock.dart';
 
 class BattleRoomQuizController extends GetxController with GetTickerProviderStateMixin, WidgetsBindingObserver {
   BattleRepo battleRepo;
@@ -25,7 +25,13 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
   BattleRoomQuizController(this.battleRoomController, this.battleRepo);
   StreamSubscription<DocumentSnapshot>? battleRoomStreamSubscription;
   final int duration = 60;
+
   final CountDownController countDownController = CountDownController();
+  //Current User CountDown Controller\
+  final CountDownController myCountDownController = CountDownController();
+  //Opponent User CountDown Controller
+  final CountDownController opUserCountDownController = CountDownController();
+
   final RxList<BattleQuestion> questionsList = <BattleQuestion>[].obs;
   late AnimationController _listAnimationController;
   AnimationController get listAnimationController => _listAnimationController;
@@ -54,6 +60,9 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     );
 
     setupBattleRoomSubmitListener();
+    // The following line will enable the Android and iOS wakelock.
+    Wakelock.enable();
+
     // Register the WidgetsBindingObserver
     WidgetsBinding.instance.addObserver(this);
   }
@@ -217,7 +226,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
   }
 
 //Submit Answer Data to server
-  Future finishBattleAndSubmitAnswer() async {
+  Future finishBattleAndSubmitAnswer({bool fromYouWon = false}) async {
     toogleSubmitAns(true);
     var ownData = battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true); // Current User Data
     var opUserData = battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID()); // Opponent Data
@@ -233,21 +242,36 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       // Add question_id to params
       params['question_id[$i]'] = quizeId.toString();
       // Find the answer object with the matching qid for ownData and opUserData
+      var ownAnswerIfLeftOP = questionsList.firstWhere(
+        (qus) => qus.id.toString() == quizeId,
+      );
       var ownAnswer = ownData.answers.firstWhere((answer) => answer['qid'] == quizeId, orElse: () => null);
       var opUserAnswer = opUserData.answers.firstWhere((answer) => answer['qid'] == quizeId, orElse: () => null);
 
-      if (ownAnswer != null) {
-        int selectedOptionIdOwn = ownAnswer['ans']; //'ans' holds the selected option index
-        params['my_option_$quizeId'] = selectedOptionIdOwn.toString();
+      if (fromYouWon == false) {
+        if (ownAnswer != null) {
+          int selectedOptionIdOwn = ownAnswer['ans']; //'ans' holds the selected option index
+          params['my_option_$quizeId'] = selectedOptionIdOwn.toString();
+        }
+      } else {
+        var optionID = ownAnswerIfLeftOP.options.where((element) => element.isAnswer == "1");
+
+        params['my_option_$quizeId'] = "${optionID.first.id}";
+
+        // print(optionID.first.id);
       }
 
-      if (opUserAnswer != null) {
-        int selectedOptionIdOP = opUserAnswer['ans']; //  'ans' holds the selected option index
-        params['opponent_option_$quizeId'] = selectedOptionIdOP.toString();
+      if (fromYouWon == false) {
+        if (opUserAnswer != null) {
+          int selectedOptionIdOP = opUserAnswer['ans']; //  'ans' holds the selected option index
+          params['opponent_option_$quizeId'] = selectedOptionIdOP.toString();
+        }
+      } else {
+        params['opponent_option_$quizeId'] = "0";
       }
     }
 
-    print(params);
+    // print(params);
 
     ResponseModel submitModel = await battleRepo.finishBattleAndSubmitAnswer(params);
     print(submitModel.statusCode);
@@ -255,7 +279,11 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       BattleAnswerSubmitModel submitAnswerModel = battleAnswerSubmitModelFromJson(submitModel.responseJson);
       var battleRoomData = battleRoomController.battleRoomData.value;
       await battleRoomController.deleteBattleRoom(battleRoomController.battleRoomData.value!.roomId, false).then((value) {
-        Get.offAndToNamed(RouteHelper.battleQuizResultScreen, arguments: [submitAnswerModel, battleRoomData]);
+        if (fromYouWon == false) {
+          Get.offAndToNamed(RouteHelper.battleQuizResultScreen, arguments: [submitAnswerModel, battleRoomData]);
+        } else {
+          Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
+        }
       });
       toogleSubmitAns(false);
     } else {
@@ -268,6 +296,9 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
   @override
   void onClose() {
     battleRoomStreamSubscription!.cancel();
+    // The next line disables the wakelock again.
+    Wakelock.disable();
+
     // Unregister the WidgetsBindingObserver
     WidgetsBinding.instance.removeObserver(this);
     super.onClose();
@@ -304,8 +335,11 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
             // Get.offAll(RouteHelper.bottomNavBarScreen);
           });
         } else {
+          countDownController.pause();
           // left User
-          await battleRoomController.leftBattleRoomFirebase(battleRoomController.battleRoomData.value!.roomId, false, currentUserId: battleRepo.apiClient.getUserID()).whenComplete(() {
+          await battleRoomController
+              .leftBattleRoomFirebase(battleRoomController.battleRoomData.value!.roomId, false, currentUserId: battleRepo.apiClient.getUserID())
+              .whenComplete(() {
             // Get.offAll(RouteHelper.bottomNavBarScreen);
           });
         }

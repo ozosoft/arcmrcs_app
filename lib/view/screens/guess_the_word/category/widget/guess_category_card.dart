@@ -1,7 +1,3 @@
-// ignore_for_file: unnecessary_null_comparison
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
@@ -9,7 +5,6 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/model/gesstheword/gess_catagroi_model.dart';
 import 'package:flutter_prime/view/components/animated_widget/expanded_widget.dart';
 import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
 import 'package:flutter_prime/view/components/text/custom_text_with_underline.dart';
@@ -17,21 +12,22 @@ import 'package:flutter_prime/view/components/text/custom_text_with_underline.da
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class GessCatagroiCard extends StatefulWidget {
-  final GeusCatagories catagories;
-  String image;
-  // final bool expansionVisible, fromViewAll, fromBookmark, fromExam;
+import '../../../../../data/model/guess_the_word/guess_category_model.dart';
 
-  GessCatagroiCard({
+class GuessCategoryCard extends StatefulWidget {
+  final GuessCategories categories;
+  final String image;
+
+  const GuessCategoryCard({
     super.key,
-    required this.catagories,
+    required this.categories,
     this.image = "",
   });
   @override
-  State<GessCatagroiCard> createState() => _GessCatagroiCardState();
+  State<GuessCategoryCard> createState() => _GuessCategoryCardState();
 }
 
-class _GessCatagroiCardState extends State<GessCatagroiCard> {
+class _GuessCategoryCardState extends State<GuessCategoryCard> {
   bool isExpande = false;
   int labelCount = 0;
   void toggleExpande() {
@@ -42,7 +38,7 @@ class _GessCatagroiCardState extends State<GessCatagroiCard> {
 
   @override
   void initState() {
-    labelCount = widget.catagories.quizInfos!.length > 3 ? 3 : widget.catagories.quizInfos!.length;
+    labelCount = widget.categories.quizInfos!.length > 3 ? 3 : widget.categories.quizInfos!.length;
     super.initState();
   }
 
@@ -50,10 +46,10 @@ class _GessCatagroiCardState extends State<GessCatagroiCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (widget.catagories.subcategoriesCount == "0") {
+        if (widget.categories.subcategoriesCount == "0") {
           toggleExpande();
         } else {
-          Get.toNamed(RouteHelper.gessThewordsubCatagori, arguments: widget.catagories.id);
+          Get.toNamed(RouteHelper.guessTheWordSubCategory, arguments: widget.categories.id);
         }
       },
       child: Padding(
@@ -97,15 +93,20 @@ class _GessCatagroiCardState extends State<GessCatagroiCard> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(widget.catagories.name.toString(), style: semiBoldMediumLarge),
+                          Text(widget.categories.name.toString(), style: semiBoldMediumLarge),
                           const SizedBox(height: Dimensions.space12),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Container(
-                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space3), color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(Dimensions.space3),
+                                    color: MyColor.cardColor,
+                                    border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
                                 padding: const EdgeInsets.symmetric(vertical: Dimensions.space2, horizontal: Dimensions.space5),
-                                child: Center(child: Text(widget.catagories.questionsCount.toString() + MyStrings.questionse, style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                child: Center(
+                                    child: Text(widget.categories.questionsCount.toString() + MyStrings.questionse,
+                                        style: regularDefault.copyWith(color: MyColor.colorGrey))),
                               ),
                             ],
                           ),
@@ -120,7 +121,7 @@ class _GessCatagroiCardState extends State<GessCatagroiCard> {
                     const SizedBox(width: Dimensions.space20),
                   ],
                 ),
-                widget.catagories.quizInfos != null
+                widget.categories.quizInfos != null
                     ? ExpandedSection(
                         duration: 300,
                         expand: isExpande,
@@ -139,22 +140,33 @@ class _GessCatagroiCardState extends State<GessCatagroiCard> {
                                         padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
                                         child: InkWell(
                                           onTap: () {
-                                            if (widget.catagories.quizInfos![index].playInfo != null) {
+
+                                            if (widget.categories.quizInfos![index].playInfo != null) {
                                               Get.toNamed(
-                                                RouteHelper.gessTheword,
-                                                arguments: widget.catagories.quizInfos![index].id,
+                                                RouteHelper.guessTheword,
+                                                arguments: widget.categories.quizInfos![index].id,
                                               );
                                             }
                                           },
                                           child: Container(
                                             padding: const EdgeInsets.symmetric(horizontal: Dimensions.space8, vertical: Dimensions.space8),
-                                            decoration: BoxDecoration(color: widget.catagories.quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel, borderRadius: BorderRadius.circular(Dimensions.space7), border: Border.all(color: widget.catagories.quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
+                                            decoration: BoxDecoration(
+                                                color: widget.categories.quizInfos![index].playInfo != null
+                                                    ? MyColor.completedlevel
+                                                    : MyColor.lockedLevel,
+                                                borderRadius: BorderRadius.circular(Dimensions.space7),
+                                                border: Border.all(
+                                                    color: widget.categories.quizInfos![index].playInfo != null
+                                                        ? MyColor.completedlevel
+                                                        : MyColor.lockedLevel)),
                                             child: Row(
                                               children: [
-                                                SvgPicture.asset(widget.catagories.quizInfos![index].playInfo != null ? MyImages.levelGreenTikSVG : MyImages.lockLevelSVG),
+                                                SvgPicture.asset(widget.categories.quizInfos![index].playInfo != null
+                                                    ? MyImages.levelGreenTikSVG
+                                                    : MyImages.lockLevelSVG),
                                                 const SizedBox(width: Dimensions.space4),
                                                 Text(
-                                                  widget.catagories.quizInfos![index].level!.title.toString(),
+                                                  widget.categories.quizInfos![index].level!.title.toString(),
                                                   style: regularLarge.copyWith(color: MyColor.textColor),
                                                 ),
                                               ],
@@ -164,11 +176,11 @@ class _GessCatagroiCardState extends State<GessCatagroiCard> {
                                   }),
                             ),
                             // attention: view more logic
-                            widget.catagories.quizInfos!.length > 3
+                            widget.categories.quizInfos!.length > 3
                                 ? GestureDetector(
                                     onTap: () {
                                       setState(() {
-                                        labelCount = widget.catagories.quizInfos!.length;
+                                        labelCount = widget.categories.quizInfos!.length;
                                       });
                                     },
                                     child: const Padding(

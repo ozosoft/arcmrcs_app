@@ -62,17 +62,17 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                       ),
                     ),
                     Obx(() {
-                      print(battleRoomController.joinRoomState.value);
-                      if (battleRoomController.joinRoomState.value == JoinRoomState.joined) {
-                        WidgetsBinding.instance.addPostFrameCallback((_) {
-                          // Navigator.pop(context);
-                          CustomBottomSheet(
-                            enableDrag: false,
-                            child: const JoinedLobbyBottomSheet(),
-                          ).customBottomSheet(context);
-
-                          battleRoomController.toogleBattleJoinedState(JoinRoomState.none);
-                        });
+                      if (battleRoomController.joinRoomState.value != JoinRoomState.none) {
+                        if (battleRoomController.joinRoomState.value == JoinRoomState.joined) {
+                          WidgetsBinding.instance.addPostFrameCallback((_) {
+// Navigator.pop(context);
+                            CustomBottomSheet(
+                              enableDrag: false,
+                              child: const JoinedLobbyBottomSheet(),
+                            ).customBottomSheet(context);
+                            battleRoomController.toogleBattleJoinedState(JoinRoomState.none);
+                          });
+                        }
                       }
                       return Padding(
                         padding: const EdgeInsets.only(
