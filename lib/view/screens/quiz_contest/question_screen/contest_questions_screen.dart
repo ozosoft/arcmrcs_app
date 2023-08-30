@@ -10,6 +10,7 @@ import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_questions_controller.dart';
 import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:flutter_prime/view/components/app-bar/custom_appbar.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
@@ -29,16 +30,16 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(QuizContestRepo(apiClient: Get.find()));
-
+   
     QuizContestQuestionsController controller = Get.put(QuizContestQuestionsController(quizContestRepo: Get.find()));
-
+  
     controller.quizInfoID = Get.arguments[0];
     controller.title = Get.arguments[1];
 
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getQuizContestQuestions(controller.quizInfoID.toString());
+      controller.getQuizContestQuestions();
     });
   }
 
@@ -46,7 +47,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
   Widget build(BuildContext context) {
     return GetBuilder<QuizContestQuestionsController>(
         builder: (controller) => Scaffold(
-              appBar: CustomCategoryAppBar(title: controller.title.toString()),
+              appBar: CustomAppBar(title: controller.title.toString(),isShowBackBtn: true),
               body: controller.loading
                   ? const CustomLoader()
                   : controller.examQuestionsList.isEmpty
@@ -126,7 +127,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
 
                                                             if (questionsIndex == controller.examQuestionsList.length - 1) {
                                                               controller.submitAnswer();
-                                                              Get.offAndToNamed(RouteHelper.quizContestresultScreen, arguments: MyStrings.quizResult);
+                                                              Get.toNamed(RouteHelper.quizContestresultScreen, arguments: MyStrings.quizResult);
                                                             }
                                                           },
                                                           child: Container(
@@ -210,7 +211,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                           if (questionsIndex == controller.examQuestionsList.length - 1) {
                                             controller.submitAnswer();
 
-                                            Get.offAndToNamed(RouteHelper.quizContestresultScreen, arguments: MyStrings.quizResult);
+                                            Get.toNamed(RouteHelper.quizContestresultScreen, arguments: MyStrings.quizResult);
                                           } else {
                                             controller.pageController.nextPage(
                                               duration: const Duration(milliseconds: 500),
