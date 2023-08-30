@@ -1,11 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-
-import 'review-answer-screen-widgets/review_answer_section.dart';
-
-
-
+import 'package:flutter_prime/view/screens/quiz_contest/review-answer/widget/review_answer_section.dart';
 
 class QuizContestReviewAnswerScreen extends StatefulWidget {
  

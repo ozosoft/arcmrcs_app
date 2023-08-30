@@ -15,9 +15,9 @@ class ExamZoneRepo {
     return model;
   }
 
-   Future<ResponseModel> getExamQuestionList(String quizInfo_ID,exam_key) async {
+   Future<ResponseModel> getExamQuestionList(String quizInfoID,examkey) async {
 
-    final map = {'quizInfo_id': quizInfo_ID,'exam_key': exam_key};
+    final map = {'quizInfo_id': quizInfoID,'exam_key': examkey};
 
     String url = '${UrlContainer.baseUrl}${UrlContainer.examZoneQuestionsUrl}';
     ResponseModel responseModel = await apiClient.request(url, Method.postMethod, map, passHeader: true);

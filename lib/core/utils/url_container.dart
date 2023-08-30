@@ -27,7 +27,7 @@ class UrlContainer {
   static const String examsubmitAnswerUrl = 'exam/answer-submit';
   static const String quizContestsubmitAnswerUrl = 'contest/answer-submit';
   static const String funNlearnsubmitAnswerUrl = 'fun/answer-submit';
-  static const String examZoneQuestionsUrl = 'exam/question-list/';
+  static const String examZoneQuestionsUrl = 'exam/question-list';
   static const String quizContestQuestionsUrl = 'contest/questions/';
   static const String quizcontestListUrl = 'contest/questions/';
 

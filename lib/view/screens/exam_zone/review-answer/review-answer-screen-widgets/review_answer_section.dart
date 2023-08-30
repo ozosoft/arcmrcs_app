@@ -20,17 +20,7 @@ class ExamReviewAnswerSection extends StatefulWidget {
 }
 
 class _ExamReviewAnswerSectionState extends State<ExamReviewAnswerSection> {
-  @override
-  void initState() {
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(ExamZoneRepo(apiClient: Get.find()));
-    Get.put(ExamZoneQuizController(examZoneRepo: Get.find()));
 
-    // print("++++++++++===============this is id"+quizinfoID.toString());
-    super.initState();
-
-    
-  }
 
   @override
   Widget build(BuildContext context) {

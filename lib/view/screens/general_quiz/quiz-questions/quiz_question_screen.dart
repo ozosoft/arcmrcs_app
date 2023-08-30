@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/screens/quiz-questions/quiz-screen-widgets/quiz_questions_body_section.dart';
+import 'package:flutter_prime/view/screens/general_quiz/quiz-questions/quiz-screen-widgets/quiz_questions_body_section.dart';
 import 'package:get/get.dart';
 
 class QuizQuestionsScreen extends StatefulWidget {

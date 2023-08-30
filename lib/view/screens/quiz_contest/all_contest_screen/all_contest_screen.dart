@@ -8,14 +8,14 @@ import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dar
 import 'package:flutter_prime/view/components/category-card/categories_card.dart';
 import 'package:get/get.dart';
 
-class QuizContestList extends StatefulWidget {
-  const QuizContestList({super.key});
+class AllContestScreen extends StatefulWidget {
+  const AllContestScreen({super.key});
 
   @override
-  State<QuizContestList> createState() => _QuizContestListState();
+  State<AllContestScreen> createState() => _AllContestScreenState();
 }
 
-class _QuizContestListState extends State<QuizContestList> {
+class _AllContestScreenState extends State<AllContestScreen> {
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));

@@ -3,7 +3,8 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/view/screens/homepage/home_screen.dart';
+import 'package:flutter_prime/view/screens/coin_store/coin_store_screen.dart';
+import 'package:flutter_prime/view/screens/home_page/home_screen.dart';
 import 'package:flutter_prime/view/screens/leader_board/leader_board_screen.dart';
 import 'package:flutter_prime/view/screens/profile/profile_screen.dart';
 import 'package:flutter_prime/view/screens/settings/settings_screen.dart';
@@ -26,7 +27,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   static const List<Widget> _widgetOptions = <Widget>[
-    WalletScreen(),
+    CoinStoreScreen(),
     SettingsScreen(),
     HomeScreen(),
     LeaderBoardScreen(),
@@ -53,8 +54,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           Padding(
             padding: const EdgeInsets.all(Dimensions.space8),
             child: SvgPicture.asset(
-              MyImages.walletFilledSVG,
-              height: Dimensions.space25,
+              MyImages.coinStoreDrawer,
+              height: Dimensions.space35,
               width: Dimensions.space50,
                color: _page == 0 ?MyColor.colorWhite
                   : MyColor.bottomNavBarIconInActiveColor

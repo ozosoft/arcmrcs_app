@@ -29,15 +29,7 @@ class _QuizContestResultSectionState extends State<QuizContestResultSection> {
   bool audienceVote = false;
   bool tapAnswer = false;
 
-  @override
-  void initState() {
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DailyQuizRepo(apiClient: Get.find()));
 
-    DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController(   dailyQuizRepo:  Get.find(),));
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

@@ -8,10 +8,10 @@ import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dar
 import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../../core/utils/my_color.dart';
-import '../../../../core/utils/my_images.dart';
-import '../../../../core/utils/style.dart';
-import 'language-bottom-sheet/language_bottom_sheet_screen.dart';
+import '../../../../../core/utils/my_color.dart';
+import '../../../../../core/utils/my_images.dart';
+import '../../../../../core/utils/style.dart';
+import '../language-bottom-sheet/language_bottom_sheet_screen.dart';
 
 class CustomHomeAppBar extends StatefulWidget {
   final double appbarSize;

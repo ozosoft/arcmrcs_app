@@ -7,7 +7,7 @@ import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/category-card/categories_card.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
-import '../../../../../components/app-bar/custom_category_appBar.dart';
+import '../../../../../../components/app-bar/custom_category_appBar.dart';
 
 class SubCategoriesCardScreen extends StatefulWidget {
   final String title;

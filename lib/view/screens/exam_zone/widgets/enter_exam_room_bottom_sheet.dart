@@ -45,6 +45,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
       builder: (controller) => Padding(
         padding: const EdgeInsets.only(top: Dimensions.space10, left: Dimensions.space10, right: Dimensions.space10),
         child: Column(
+          
           children: [
             const BottomSheetBar(),
             const SizedBox(height: Dimensions.space20),
@@ -82,6 +83,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                     style: semiBoldMediumLarge,
                   ),
                   ListView.builder(
+                   
                       itemCount: viewAll == true ? 3 : 2,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {

@@ -5,7 +5,7 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
-import '../../../../core/utils/my_strings.dart';
+import '../../../../../core/utils/my_strings.dart';
 
 class BottomSectionButtons extends StatelessWidget {
   final String title;

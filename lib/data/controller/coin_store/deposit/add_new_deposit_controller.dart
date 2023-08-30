@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/helper/string_format_helper.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/deposit/deposit_insert_response_model.dart';
 import 'package:flutter_prime/data/model/deposit/deposit_method_response_model.dart';
@@ -86,13 +87,14 @@ class AddNewDepositController extends GetxController {
     submitLoading = true;
     update();
 
-    ResponseModel responseModel = await depositRepo.insertDeposit(amount: amount, methodCode: paymentMethod?.methodCode ?? "", currency: paymentMethod?.currency ?? "",coinID:coinId );
+    ResponseModel responseModel = await depositRepo.insertDeposit(amount: amount, methodCode: paymentMethod?.methodCode ?? "", currency: paymentMethod?.currency ?? "", coinID: coinId);
 
+    print("this is cpon id from deposit" + coinId.toString());
     if (responseModel.statusCode == 200) {
       DepositInsertResponseModel insertResponseModel = DepositInsertResponseModel.fromJson(jsonDecode(responseModel.responseJson));
 
       if (insertResponseModel.status.toString().toLowerCase() == "success") {
-        // showWebView(insertResponseModel.data?.redirectUrl ?? "");
+        showWebView(insertResponseModel.data?.redirectUrl ?? "");
       } else {
         CustomSnackBar.error(errorList: insertResponseModel.message?.error ?? [MyStrings.somethingWentWrong]);
       }
@@ -144,7 +146,7 @@ class AddNewDepositController extends GetxController {
     }
   }
 
-  // void showWebView(String redirectUrl) {
-  //   Get.offAndToNamed(RouteHelper.depositWebViewScreen, arguments: redirectUrl);
-  // }
+  void showWebView(String redirectUrl) {
+    Get.offAndToNamed(RouteHelper.depositWebViewScreen, arguments: redirectUrl);
+  }
 }

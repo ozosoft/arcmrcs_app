@@ -29,7 +29,7 @@ class OTPFieldWidget extends StatelessWidget {
       child: PinCodeTextField(
         appContext: context,
         pastedTextStyle: regularDefault.copyWith(color: MyColor.getTextColor()),
-        length: fromExam ? 4 : 6,
+        length: fromExam ? 6 : 4,
         textStyle: regularExtraLarge.copyWith(color: MyColor.textColor),
         obscureText: false,
         controller: tController,

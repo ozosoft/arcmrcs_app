@@ -5,9 +5,9 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/view/screens/1vs1/one_vs_one_battle_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../../../core/utils/dimensions.dart';
-import '../../../../../core/utils/my_strings.dart';
-import '../../../../../core/utils/style.dart';
+import '../../../../../../core/utils/dimensions.dart';
+import '../../../../../../core/utils/my_strings.dart';
+import '../../../../../../core/utils/style.dart';
 
 class BattleOfTheDaySection extends StatefulWidget {
   const BattleOfTheDaySection({

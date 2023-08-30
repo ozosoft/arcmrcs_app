@@ -7,10 +7,10 @@ import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../../core/utils/my_color.dart';
-import '../../../../core/utils/my_strings.dart';
-import '../../../../core/utils/style.dart';
-import '../../../components/divider/custom_dashed_divider.dart';
+import '../../../../../core/utils/my_color.dart';
+import '../../../../../core/utils/my_strings.dart';
+import '../../../../../core/utils/style.dart';
+import '../../../../components/divider/custom_dashed_divider.dart';
 import 'bottom_section_buttons.dart';
 import 'player_profile_picture.dart';
 import 'rewards_section.dart';

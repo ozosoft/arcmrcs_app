@@ -10,7 +10,7 @@ import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/divider/custom_divider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../components/divider/custom_vertical_divider.dart';
+import '../../../../components/divider/custom_vertical_divider.dart';
 
 class CustomCardWidget extends StatefulWidget {
   const CustomCardWidget({super.key});

@@ -3,8 +3,8 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/screens/quiz_contest/daily_quiz_result/widgets/daily_quiz_result_body_section.dart';
 import 'package:get/get.dart';
+import 'widgets/quiz_contest_result_body_section.dart';
 
 class QuizContestResultScreen extends StatefulWidget {
  
@@ -15,7 +15,7 @@ class QuizContestResultScreen extends StatefulWidget {
 }
 
 class _QuizContestResultScreenState extends State<QuizContestResultScreen> {
-  final title = Get.arguments as String;
+
   @override
   Widget build(BuildContext context) {
     return const RepaintBoundary(

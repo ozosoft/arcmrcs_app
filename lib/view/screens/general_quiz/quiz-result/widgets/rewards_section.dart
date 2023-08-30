@@ -5,7 +5,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../../../../core/utils/my_color.dart';
+import '../../../../../core/utils/my_color.dart';
 
 class RewardsSection extends StatelessWidget {
   final String winningCoin, totalCoin;

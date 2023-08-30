@@ -7,13 +7,11 @@ import 'package:flutter_prime/data/controller/coin_store/coin_store_controller.d
 import 'package:flutter_prime/data/repo/coin_store/coin_store_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
 import 'package:flutter_prime/view/components/divider/custom_vertical_divider.dart';
 import 'package:flutter_prime/view/screens/coin_store/deposit_widget/deposit_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../core/utils/dimensions.dart';
-import '../wallet/widgets/coin-redeem/payment_bottomSheet.dart';
 
 class CoinStoreScreen extends StatefulWidget {
   const CoinStoreScreen({super.key});

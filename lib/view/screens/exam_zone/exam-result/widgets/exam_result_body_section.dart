@@ -71,7 +71,7 @@ class _ExamResultBodySectionState extends State<ExamResultBodySection> {
 
                     Container(
                         width: double.infinity,
-                        padding: EdgeInsets.only( top: Dimensions.space180),
+                        padding:const EdgeInsets.only( top: Dimensions.space180),
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(

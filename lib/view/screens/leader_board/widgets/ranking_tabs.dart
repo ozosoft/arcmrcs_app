@@ -5,7 +5,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/leader_board/leader_board_controller.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:get/get.dart';
 import '../../../../core/utils/my_images.dart';
 
@@ -81,20 +81,18 @@ class _RankingTabBarState extends State<RankingTabBar>
                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color:  MyColor.leaderBoardTabBar,),
                          child: FittedBox(
                                 fit: BoxFit.cover,
-                                child: Container(
+                                child: controller.leaderBoardlist[2].avatar.toString()!="null"? Container(
                                   margin: EdgeInsets.all( orientation!=Orientation.portrait? Dimensions.space5:Dimensions.space8),
                                   decoration: BoxDecoration(
                                     color: MyColor.leaderBoardTabBar,
                                       borderRadius:
                                           BorderRadius.circular(Dimensions.space40),
-                                      image:controller.rank2PlayerAvatar.toString()!="null"?  DecorationImage(
+                                      image: DecorationImage(
                                           image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank2PlayerAvatar.toString()),
-                                          fit: BoxFit.cover):const DecorationImage(
-                                          image:AssetImage(MyImages.defaultAvatar),
                                           fit: BoxFit.cover)),
                                   height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                                   width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
-                                ),
+                                ):Image.asset(MyImages.defaultAvatar,height: Dimensions.space70,),
                               ),
                        ),
                        Text(MyStrings.at+ controller.rank2PlayerName,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
@@ -102,7 +100,7 @@ class _RankingTabBarState extends State<RankingTabBar>
                        Container(
                         decoration:const BoxDecoration(color: MyColor.leaderBoardContainer,borderRadius:BorderRadius.all(Radius.circular(Dimensions.space30))),
                         padding:const EdgeInsets.all(Dimensions.space7),
-                        child: Text(MyStrings.qP,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
+                        child: Text(MyStrings.qP+controller.rank2PlayerScore,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
                      ],
                                   ),
                    ),
@@ -115,20 +113,18 @@ class _RankingTabBarState extends State<RankingTabBar>
                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color:  MyColor.leaderBoardTabBar,),
                          child: FittedBox(
                                 fit: BoxFit.cover,
-                                child: Container(
-                                  margin:const EdgeInsets.all(  Dimensions.space8),
+                                child: controller.leaderBoardlist[0].avatar.toString()!="null"? Container(
+                                  margin: EdgeInsets.all( orientation!=Orientation.portrait? Dimensions.space5:Dimensions.space8),
                                   decoration: BoxDecoration(
                                     color: MyColor.leaderBoardTabBar,
                                       borderRadius:
                                           BorderRadius.circular(Dimensions.space40),
-                                      image: controller.rank1PlayerAvatar.toString()!="null"?  DecorationImage(
+                                      image: DecorationImage(
                                           image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank1PlayerAvatar.toString()),
-                                          fit: BoxFit.cover):const DecorationImage(
-                                          image:AssetImage(MyImages.defaultAvatar),
                                           fit: BoxFit.cover)),
-                                 height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
+                                  height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                                   width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
-                                ),
+                                ):Image.asset(MyImages.defaultAvatar,height: Dimensions.space60,),
                               ),
                        ),
                        Text(MyStrings.at+ controller.rank1PlayerName,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
@@ -147,28 +143,27 @@ class _RankingTabBarState extends State<RankingTabBar>
                      children: [
                        Container(
                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color:  MyColor.leaderBoardTabBar,),
-                         child: FittedBox(
+                         child:FittedBox(
                                 fit: BoxFit.cover,
-                                child: Container(
-                                  margin:const EdgeInsets.all(  Dimensions.space8),
+                                child: controller.leaderBoardlist[2].avatar.toString()!="null"? Container(
+                                  margin: EdgeInsets.all( orientation!=Orientation.portrait? Dimensions.space5:Dimensions.space8),
                                   decoration: BoxDecoration(
                                     color: MyColor.leaderBoardTabBar,
-                                      borderRadius:
-                                          BorderRadius.circular(Dimensions.space40),
+                                      borderRadius:BorderRadius.circular(Dimensions.space40),
                                       image: DecorationImage(
-                                          image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank2PlayerAvatar.toString()),
+                                          image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank3PlayerAvatar.toString()),
                                           fit: BoxFit.cover)),
-                                height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
+                                  height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
                                   width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
-                                ),
+                                ):Image.asset(MyImages.defaultAvatar,height: Dimensions.space60,),
                               ),
                        ),
-                       Text(MyStrings.at+ controller.rank2PlayerName,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
+                       Text(MyStrings.at+ controller.rank3PlayerName,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
                       const SizedBox(height: Dimensions.space5,),
                        Container(
                         decoration:const BoxDecoration(color: MyColor.leaderBoardContainer,borderRadius:BorderRadius.all(Radius.circular(Dimensions.space30))),
                         padding:const EdgeInsets.all(Dimensions.space7),
-                        child: Text(MyStrings.qP,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
+                        child: Text(MyStrings.qP+controller.rank3PlayerScore,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
                      ],
                                   ),
                    ),

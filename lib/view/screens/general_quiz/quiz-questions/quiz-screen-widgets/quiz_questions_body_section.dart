@@ -12,7 +12,7 @@ import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import '../../../../data/controller/quiz_questions/quiz_questions_controller.dart';
+import '../../../../../data/controller/quiz_questions/quiz_questions_controller.dart';
 import 'life_line_widget.dart';
 import 'package:audioplayers/audioplayers.dart';
 

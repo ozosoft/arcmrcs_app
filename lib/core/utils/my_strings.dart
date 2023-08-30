@@ -81,6 +81,7 @@ class MyStrings {
   static const String examRules = "Exam Rules";
   static const String examKey = "Enter the exam key";
   static const String enterExam = "Enter In Exam";
+  static const String examResult = "Exam Result";
 
   static const String chooseFile = 'Choose File';
   static const String chooseAvatar = 'Choose Avatar';

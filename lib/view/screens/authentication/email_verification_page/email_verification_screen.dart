@@ -73,7 +73,6 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             fromAuth: true,
             title: MyStrings.emailVerification.tr,
             isShowBackBtn: true,
-            isShowSingleActionBtn: false,
             bgColor: MyColor.getAppBarColor()
           ),
           body: GetBuilder<EmailVerificationController>(

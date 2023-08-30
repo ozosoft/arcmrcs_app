@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 
-import '../../../../core/utils/dimensions.dart';
+import '../../../../../core/utils/dimensions.dart';
 
 class PlayerProfilePicture extends StatelessWidget {
   const PlayerProfilePicture({super.key});

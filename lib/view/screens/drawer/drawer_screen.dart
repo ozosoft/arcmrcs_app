@@ -10,7 +10,7 @@ import 'package:flutter_prime/data/controller/auth/logout/logout_controller.dart
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
 import 'package:flutter_prime/data/repo/auth/logout/logout_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/screens/homepage/homepage-widgets/language-bottom-sheet/language_bottom_sheet_screen.dart';
+import 'package:flutter_prime/view/screens/home_page/homepage-widgets/language-bottom-sheet/language_bottom_sheet_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -128,17 +128,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 // const Divider(
                 //   endIndent: Dimensions.space70,
                 // ),
-                ListTile(
-                  leading: SvgPicture.asset(MyImages.walletDrawer),
-                  title: const Text(
-                    MyStrings.wallet,
-                    style: regularMediumLarge,
-                  ),
-                  minLeadingWidth: Dimensions.space1,
-                  onTap: () {
-                    Get.toNamed(RouteHelper.walletScreen);
-                  },
-                ),
+                // ListTile(
+                //   leading: SvgPicture.asset(MyImages.walletDrawer),
+                //   title: const Text(
+                //     MyStrings.wallet,
+                //     style: regularMediumLarge,
+                //   ),
+                //   minLeadingWidth: Dimensions.space1,
+                //   onTap: () {
+                //     Get.toNamed(RouteHelper.walletScreen);
+                //   },
+                // ),
                 ListTile(
                   leading: SvgPicture.asset(MyImages.coinStoreDrawer),
                   title: const Text(

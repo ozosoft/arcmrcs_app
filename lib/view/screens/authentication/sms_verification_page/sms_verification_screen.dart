@@ -57,7 +57,6 @@ class _SmsVerificationScreenState extends State<SmsVerificationScreen> {
             fromAuth: true,
             title: MyStrings.smsVerification.tr,
             isShowBackBtn: true,
-            isShowSingleActionBtn: false,
             bgColor: MyColor.getAppBarColor(),
           ),
           body: GetBuilder<SmsVerificationController>(

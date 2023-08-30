@@ -10,10 +10,11 @@ import 'package:flutter_prime/view/screens/authentication/two_factor_screen/two_
 import 'package:flutter_prime/view/screens/badges/badges_screen.dart';
 import 'package:flutter_prime/view/screens/bookmark/bookmark_screen.dart';
 import 'package:flutter_prime/view/screens/coin_history/coin_history_screen.dart';
-import 'package:flutter_prime/view/screens/quiz_contest/contest/quiz_contest_list.dart';
-import 'package:flutter_prime/view/screens/quiz_contest/contest/quiz_contest_questions_screen.dart';
-import 'package:flutter_prime/view/screens/exam_zone/exam-result/exam_result_screen.dart';
+import 'package:flutter_prime/view/screens/coin_store/coin_store_webview/coin_store_webview_screen.dart';
+import 'package:flutter_prime/view/screens/coin_store/deposit_widget/deposit_screen.dart';
 import 'package:flutter_prime/view/screens/exam_zone/review-answer/review_answer-screen.dart';
+import 'package:flutter_prime/view/screens/quiz_contest/all_contest_screen/all_contest_screen.dart';
+import 'package:flutter_prime/view/screens/exam_zone/exam-result/exam_result_screen.dart';
 import 'package:flutter_prime/view/screens/exam_zone/widgets/exam_zone_quiz_screen.dart';
 import 'package:flutter_prime/view/screens/notification/notification_screen.dart';
 import 'package:flutter_prime/view/screens/play_diffrent/daily_quiz/daily_quiz_questions_screen.dart';
@@ -28,9 +29,7 @@ import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn
 import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/review-answer/review_answer-screen.dart';
 import 'package:flutter_prime/view/screens/profile/profile-edit/Profile_edit_screen.dart';
 import 'package:flutter_prime/view/screens/profile/profile_screen.dart';
-import 'package:flutter_prime/view/screens/quiz-questions/quiz_question_screen.dart';
-import 'package:flutter_prime/view/screens/quiz_contest/daily_quiz_result/quiz_contest_result_screen.dart';
-import 'package:flutter_prime/view/screens/quiz_contest/review-answer/review-answer-screen-widgets/review_answer_section.dart';
+import 'package:flutter_prime/view/screens/general_quiz/quiz-questions/quiz_question_screen.dart';
 import 'package:flutter_prime/view/screens/quiz_contest/review-answer/review_answer-screen.dart';
 import 'package:flutter_prime/view/screens/splash/splash_screen.dart';
 import 'package:flutter_prime/view/screens/wallet/wallet_screen.dart';
@@ -48,14 +47,16 @@ import '../../view/screens/battle-quiz-section/battle_quiz_question_screen.dart'
 import '../../view/screens/battle_quiz_result/battle_quiz_result_screen.dart';
 import '../../view/screens/bottom_nav_bar/bottom_navigation_bar_screen.dart';
 import '../../view/screens/exam_zone/exam_zone_screen.dart';
-import '../../view/screens/exam_zone/exam_zone_homepage_category_screen.dart';
-import '../../view/screens/homepage/homepage-widgets/home-body-sections/sub-categories/sub_categories_card_screen.dart';
+import '../../view/screens/home_page/homepage-widgets/home-body-sections/exam_zone_section/exam_zone_homepage_category_screen.dart';
+import '../../view/screens/home_page/homepage-widgets/home-body-sections/home_top_category_section/sub-categories/sub_categories_card_screen.dart';
 import '../../view/screens/intro_section/onboard_intro_screen.dart';
 import '../../view/screens/leader_board/leader_board_screen.dart';
-import '../../view/screens/quiz-result/quiz_result_screen.dart';
-import '../../view/screens/review-answer/review_answer-screen.dart';
+import '../../view/screens/general_quiz/quiz-result/quiz_result_screen.dart';
+import '../../view/screens/general_quiz/review-answer/review_answer-screen.dart';
+import '../../view/screens/quiz_contest/contest_result_screen/contest_result_screen.dart';
+import '../../view/screens/quiz_contest/question_screen/contest_questions_screen.dart';
 
-class RouteHelper {
+class RouteHelper { 
 
   static const String splashScreen           = "/splash_screen";
   static const String onboardScreen          = '/onboard_screen';
@@ -111,7 +112,11 @@ class RouteHelper {
   static const String twoFactorScreen             = "/two-factor-screen";
   static const String quizContestresultScreen             = "/quiz-contest-screen";
   static const String dailyquizContestresultScreen             = "/_daily_quiz-contest-screen";
-  static const String quizContestresultReviewScreen             = "/_quiz_contest_result_review_screen";
+  static const String quizContestreviewScreen             = "/quiz_contest_review_screen";
+  static const String depositsScreen              = "/deposits";
+static const String depositsDetailsScreen       = "/deposits_details";
+static const String newDepositScreenScreen      = "/deposits_money";
+static const String depositWebViewScreen        = '/deposit_webView';
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -166,7 +171,7 @@ class RouteHelper {
     GetPage(name: dailyQuizQuestionsScreen, page: () => const DailyQuizQuestionsScreen()),
     GetPage(name: dailyQuizresultScreen, page: () => const DailyQuizResultScreen()),
     GetPage(name: dailyQuizresultReviewScreen, page: () => const DailyQuizReviewAnswerScreen()),
-    GetPage(name: quizContestListscreen, page: () => const QuizContestList()),
+    GetPage(name: quizContestListscreen, page: () => const AllContestScreen()),
     GetPage(name: quizContestQuestionscreen, page: () => const QuizContestQuestions()),
     GetPage(name: emailVerificationScreen, page: () => EmailVerificationScreen(needSmsVerification: Get.arguments[0], isProfileCompleteEnabled: Get.arguments[1])),
     GetPage(name: smsVerificationScreen, page: () => const SmsVerificationScreen()),
@@ -174,6 +179,10 @@ class RouteHelper {
     GetPage(name: profileCompleteScreen, page: () => const ProfileCompleteScreen()),
     GetPage(name: quizContestresultScreen, page: () => const QuizContestResultScreen()),
     GetPage(name: dailyquizContestresultScreen, page: () => const DailyQuizResultScreen()),
-    GetPage(name: quizContestresultReviewScreen, page: () => const QuizContestReviewAnswerSection()),
+    GetPage(name: quizContestreviewScreen, page: () => const QuizContestReviewAnswerScreen()),
+     GetPage(name: depositsScreen,               page: () => const NewDepositScreen(price: '', id: '',)),
+     
+    
+    GetPage(name: depositWebViewScreen,         page: () => CoinStroreWebViewScreen(redirectUrl: Get.arguments)),
   ];
 }

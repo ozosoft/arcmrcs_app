@@ -1,16 +1,16 @@
+
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/model/exam_zone/exam_zone_model.dart';
-import 'package:flutter_prime/data/model/quiz_contest/quiz_result_model.dart';
-import 'package:flutter_prime/data/model/quiz_questions_model/quiz_questions_model.dart';
-
-import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
-import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
+import 'package:flutter_prime/data/model/quiz_contest/quiz_contest_questions_model.dart';
+import 'package:flutter_prime/data/model/quiz_contest/quiz_result_model.dart';
+import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:get/get.dart';
 
 class QuizContestQuestionsController extends GetxController {
   QuizContestRepo quizContestRepo;
@@ -36,9 +36,8 @@ class QuizContestQuestionsController extends GetxController {
   bool loading = true;
 
   String? quizInfoID;
-  String? title;
   late int questionsIndex;
-  List<Exam> examcategoryList = [];
+   String? title ="";
   List<Question> examQuestionsList = [];
   List<Option> optionsList = [];
 
@@ -65,21 +64,15 @@ class QuizContestQuestionsController extends GetxController {
 
   TextEditingController enterExamKeys = TextEditingController();
 
-  getQuizContestQuestions(
-    String quizInfoId,
-  ) async {
+  getQuizContestQuestions() async {
     loading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
-
-    ResponseModel getQuestionsModel = await quizContestRepo.getExamQuestionList(
-      quizInfoId,
-    );
+    ResponseModel getQuestionsModel = await quizContestRepo.getExamQuestionList(quizInfoId);
 
     if (getQuestionsModel.statusCode == 200) {
       examQuestionsList.clear();
-      QuizquestionsModel model = QuizquestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
+      QuizContestQuestionsModel model = QuizContestQuestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
         print("get answer done");
         // print(model.data);
@@ -91,11 +84,13 @@ class QuizContestQuestionsController extends GetxController {
           examQuestionsList.addAll(examQuestion);
         }
 
-        List<Option>? optionslist = model.data!.questions![1].options;
+        //   List<Option>? optionslist = model.data!.questions![1].options;
 
-        if (optionslist != null && optionslist.isNotEmpty) {
-          optionsList.addAll(optionslist);
-        }
+        // if (optionslist != null && optionslist.isNotEmpty) {
+        //   optionsList.addAll(optionslist);
+        // }
+
+        
 
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
@@ -116,8 +111,11 @@ class QuizContestQuestionsController extends GetxController {
     showQuestions = !showQuestions;
   }
 
+  int remainingTime = 30;
+ 
+
   int selectedOptionIndex = -1;
-  selectAnswer(
+   selectAnswer(
     int optionIndex,
     int questionIndex,
   ) {
@@ -170,7 +168,7 @@ class QuizContestQuestionsController extends GetxController {
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
 
-  int timerDuration = 20;
+   int timerDuration = 20;
   int countDownTimerIndex = -1;
   bool restartTimer = false;
   restartCountDownTimer(int questionIndex) {
@@ -198,6 +196,7 @@ class QuizContestQuestionsController extends GetxController {
     fiftyFifty = !fiftyFifty;
     update();
   }
+
 
   void setCurrentOption(int questionsIndex) {
     // optionsList.clear();
@@ -250,7 +249,10 @@ class QuizContestQuestionsController extends GetxController {
         wrongAnswer = model.data!.wrongAnswer.toString();
         totalCoin = model.data!.totalCoin.toString();
         winningCoin = model.data!.winingCoin.toString();
-
+   
+       
+ 
+     
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
