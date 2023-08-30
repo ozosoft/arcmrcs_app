@@ -29,17 +29,13 @@ class MyUtils {
   }
 
   static splashScreen() {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: MyColor.getPrimaryColor(), statusBarIconBrightness: Brightness.light, systemNavigationBarColor: MyColor.getPrimaryColor(), systemNavigationBarIconBrightness: Brightness.light));
   }
 
   static allScreen() {
-
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: MyColor.getPrimaryColor(),
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarColor: MyColor.colorWhite,
-        systemNavigationBarIconBrightness: Brightness.dark));
-
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: MyColor.getPrimaryColor(), statusBarIconBrightness: Brightness.light, systemNavigationBarColor: MyColor.getPrimaryColor(), systemNavigationBarIconBrightness: Brightness.light));
   }
 
   static dynamic getShadow() {
@@ -81,6 +77,18 @@ class MyUtils {
       return title.tr;
     } else {
       return value.tr;
+    }
+  }
+
+  String formatNumberWithLeadingZero(String number) {
+    if (number.isEmpty) {
+      return "00";
+    } else {
+      if (int.parse(number) < 10) {
+        return '0$number';
+      } else {
+        return number.toString();
+      }
     }
   }
 }

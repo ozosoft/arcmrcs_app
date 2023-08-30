@@ -60,8 +60,8 @@ class _MyAppState extends State<MyApp> {
 
         theme: ThemeData(
             scaffoldBackgroundColor: MyColor.scaffoldBackgroundColor,
-            appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: MyColor.colorWhite))),
-
+            // appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: MyColor.colorWhite))
+            ),
         title: MyStrings.appName,
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.noTransition,

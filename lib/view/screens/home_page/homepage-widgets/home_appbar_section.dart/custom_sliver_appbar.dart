@@ -40,9 +40,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
               child: Opacity(
                 opacity: percent,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Dimensions.space12 * percent,
-                      vertical: Dimensions.space8 * percent),
+                  padding: EdgeInsets.symmetric(horizontal: Dimensions.space12 * percent, vertical: Dimensions.space8 * percent),
                   child: const CustomCardWidget(),
                 ),
               ),

@@ -50,14 +50,11 @@ class _TopCategorySectionState extends State<TopCategorySection> {
               borderRadius: BorderRadius.circular(Dimensions.space10),
               boxShadow: const [
                 BoxShadow(
-                  color: Color.fromARGB(61, 158, 158, 158),
-                  blurRadius: 7,
-                  spreadRadius: .5,
-                  offset: Offset(
-                    .4,
-                    .4,
-                  ),
-                )
+                  color: MyColor.cardShaddowColor2,
+                  offset: Offset(0, 8),
+                  blurRadius: 60,
+                  spreadRadius: 0,
+                ),
               ],
             ),
             child: Padding(
@@ -76,20 +73,27 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                             style: semiBoldMediumLarge,
                           ),
                           InkWell(
-                              onTap: () {
-                                Get.toNamed(RouteHelper.allCategories);
-                              },
+                            onTap: () {
+                              Get.toNamed(RouteHelper.allCategories);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(Dimensions.space5),
                               child: Text(
                                 MyStrings.viewAll,
                                 style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
-                              )),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: Dimensions.space15,
+                  ),
                   GetBuilder<SubCategoriesController>(
                     builder: (controllers) => GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: .8),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: context.isLandscape ? 5 : 3, childAspectRatio: .7),
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.categorylist.length,
@@ -101,7 +105,6 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                                 arguments: [controller.categorylist[index].name.toString(), controller.categorylist[index].id.toString()],
                               );
                               controllers.changeExpandIndex(index);
-
                             },
                             child: CustomTopCategoryCard(
                               index: index,

@@ -18,14 +18,13 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
       body: SafeArea(
         child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
           slivers: <Widget>[
             SliverPersistentHeader(
               pinned: true,
@@ -44,17 +43,19 @@ class _HomeScreenState extends State<HomeScreen> {
                     BattleOfTheDaySection(),
                     QuizContestSection(),
                     ExamZoneCategoryScreen(),
+                    SizedBox(
+                      height: Dimensions.space100,
+                    )
                   ],
                 ),
               ),
             ),
-            const SliverToBoxAdapter(child: PlayDiffrentQuizes()),
+
+            // const SliverToBoxAdapter(child: PlayDiffrentQuizes()),
           ],
         ),
       ),
-
-      drawer:const DrawerScreen(),
-
+      drawer: const DrawerScreen(),
     );
   }
 }
