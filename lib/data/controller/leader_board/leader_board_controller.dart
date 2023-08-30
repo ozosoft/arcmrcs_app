@@ -51,8 +51,10 @@ class LeaderBoardController extends GetxController {
         rank2PlayerScore = leaderBoardModel.data!.user![1].score!;
         rank3PlayerScore = leaderBoardModel.data!.user![2].score!;
         rank1PlayerAvatar = leaderBoardModel.data!.user![0].avatar!;
-        rank2PlayerAvatar = leaderBoardModel.data!.user![1].avatar!??"";
+        rank2PlayerAvatar = leaderBoardModel.data!.user![1].avatar! ?? "";
         rank2PlayerAvatar = leaderBoardModel.data!.user![2].avatar!;
+        loader = false;
+        update();
       } else {
         CustomSnackBar.error(errorList: [leaderBoardModel.status ?? ""]);
       }

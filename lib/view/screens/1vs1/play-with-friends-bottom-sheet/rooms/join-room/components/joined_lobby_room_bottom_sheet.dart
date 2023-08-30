@@ -10,6 +10,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../core/route/route.dart';
+import '../../../../../../../core/utils/url_container.dart';
 import '../../../../../../components/alert-dialog/custom_alert_dialog.dart';
 
 class JoinedLobbyBottomSheet extends StatefulWidget {
@@ -151,20 +152,29 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: Dimensions.space10),
-                            child: FittedBox(
-                              fit: BoxFit.cover,
-                              child: Container(
-                                margin: const EdgeInsets.only(top: Dimensions.space20),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(Dimensions.space40),
-                                    image: DecorationImage(
-                                        image: AssetImage(controller.battleRoomData.value!.user1!.profileUrl == "null"
-                                            ? MyImages.defaultAvatar
-                                            : controller.battleRoomData.value!.user1!.profileUrl),
-                                        fit: BoxFit.cover)),
-                                height: Dimensions.space70,
-                                width: Dimensions.space70,
+                            padding: const EdgeInsets.all(Dimensions.space10),
+                            child: Container(
+                              padding: const EdgeInsets.all(Dimensions.space2),
+                              height: Dimensions.space70,
+                              width: Dimensions.space70,
+                              decoration: BoxDecoration(color: MyColor.colorLightGrey, borderRadius: BorderRadius.circular(Dimensions.space100)),
+                              child: FittedBox(
+                                fit: BoxFit.cover,
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(Dimensions.space100),
+                                    child: controller.battleRoomData.value!.user1!.profileUrl == "null" || controller.battleRoomData.value!.user1!.profileUrl.isEmpty
+                                        ? Image.asset(
+                                            MyImages.defaultAvatar,
+                                            fit: BoxFit.cover,
+                                            height: Dimensions.space70,
+                                            width: Dimensions.space70,
+                                          )
+                                        : Image.network(
+                                            "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user1!.profileUrl}",
+                                            fit: BoxFit.cover,
+                                            height: Dimensions.space70,
+                                            width: Dimensions.space70,
+                                          )),
                               ),
                             ),
                           ),
@@ -205,20 +215,29 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: Dimensions.space10),
-                            child: FittedBox(
-                              fit: BoxFit.cover,
-                              child: Container(
-                                margin: const EdgeInsets.only(top: Dimensions.space20),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(Dimensions.space40),
-                                    image: DecorationImage(
-                                        image: AssetImage(controller.battleRoomData.value!.user1!.profileUrl == "null"
-                                            ? MyImages.defaultAvatar
-                                            : controller.battleRoomData.value!.user2!.profileUrl),
-                                        fit: BoxFit.cover)),
-                                height: Dimensions.space70,
-                                width: Dimensions.space70,
+                            padding: const EdgeInsets.all(Dimensions.space10),
+                            child: Container(
+                              padding: const EdgeInsets.all(Dimensions.space2),
+                              height: Dimensions.space70,
+                              width: Dimensions.space70,
+                              decoration: BoxDecoration(color: MyColor.colorLightGrey, borderRadius: BorderRadius.circular(Dimensions.space100)),
+                              child: FittedBox(
+                                fit: BoxFit.cover,
+                                child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(Dimensions.space100),
+                                    child: controller.battleRoomData.value!.user2!.profileUrl == "null" || controller.battleRoomData.value!.user2!.profileUrl.isEmpty
+                                        ? Image.asset(
+                                            MyImages.defaultAvatar,
+                                            fit: BoxFit.cover,
+                                            height: Dimensions.space70,
+                                            width: Dimensions.space70,
+                                          )
+                                        : Image.network(
+                                            "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user2!.profileUrl}",
+                                            fit: BoxFit.cover,
+                                            height: Dimensions.space70,
+                                            width: Dimensions.space70,
+                                          )),
                               ),
                             ),
                           ),

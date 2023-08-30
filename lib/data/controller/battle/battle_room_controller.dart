@@ -75,8 +75,7 @@ class BattleRoomController extends GetxController {
   final entryFeeCustomRoom = "0".obs;
 
 // Random Room COde
-  String generateRoomCode(int length) => String.fromCharCodes(Iterable.generate(length,
-      (_) => BattleRoomHelper.roomCodeGenerateCharacters.codeUnitAt(_randomRoomID.nextInt(BattleRoomHelper.roomCodeGenerateCharacters.length))));
+  String generateRoomCode(int length) => String.fromCharCodes(Iterable.generate(length, (_) => BattleRoomHelper.roomCodeGenerateCharacters.codeUnitAt(_randomRoomID.nextInt(BattleRoomHelper.roomCodeGenerateCharacters.length))));
 
   toogleBattleCreatedState(RoomCreateState value) {
     roomCreateState.value = value;
@@ -114,14 +113,7 @@ class BattleRoomController extends GetxController {
   }
 
 // Craete A Room
-  void createNewRoom(
-      {required String categoryId,
-      String? name,
-      String? profileUrl,
-      String? uid,
-      int? entryFee,
-      required bool shouldGenerateRoomCode,
-      required List<Question> questionList}) async {
+  void createNewRoom({required String categoryId, String? name, String? profileUrl, String? uid, int? entryFee, required bool shouldGenerateRoomCode, required List<Question> questionList}) async {
     try {
       toogleBattleCreatedState(RoomCreateState.creatingRoom);
       print("From Create Room");
@@ -132,14 +124,7 @@ class BattleRoomController extends GetxController {
       }
       print("Room Code $roomCode");
 
-      final DocumentSnapshot craeteNewRoomSnapshot = await createBattleRoomFirebase(
-          categoryId: categoryId,
-          name: name!,
-          profileUrl: profileUrl!,
-          uid: uid!,
-          roomCode: roomCode,
-          entryFee: entryFee,
-          questionList: questionList);
+      final DocumentSnapshot craeteNewRoomSnapshot = await createBattleRoomFirebase(categoryId: categoryId, name: name!, profileUrl: profileUrl!, uid: uid!, roomCode: roomCode, entryFee: entryFee, questionList: questionList);
 
       BattleRoom.fromDocumentSnapshot(craeteNewRoomSnapshot);
 
@@ -303,8 +288,7 @@ class BattleRoomController extends GetxController {
   }
 
 //join multi user battle room
-  Future<Map<String, dynamic>> joinBattleRoomFriendFirebase(
-      {String? name, String? profileUrl, String? uid, String? roomCode, int? currentCoin, required bool joinroom}) async {
+  Future<Map<String, dynamic>> joinBattleRoomFriendFirebase({String? name, String? profileUrl, String? uid, String? roomCode, int? currentCoin, required bool joinroom}) async {
     try {
       //verify roomCode is valid or not
       QuerySnapshot querySnapshot = await getMultiUserBattleRoomFirebase(roomCode, "battle");
@@ -430,8 +414,7 @@ class BattleRoomController extends GetxController {
     required String categoryId,
   }) async {
     try {
-      return await joinBattleRoomFirebase(
-          battleRoomDocumentId: battleRoomDocumentId, name: name, profileUrl: profileUrl, uid: uid, categoryId: categoryId);
+      return await joinBattleRoomFirebase(battleRoomDocumentId: battleRoomDocumentId, name: name, profileUrl: profileUrl, uid: uid, categoryId: categoryId);
     } catch (e) {
       throw BattleRoomException(errorMessageCode: e.toString());
     }
@@ -525,11 +508,9 @@ class BattleRoomController extends GetxController {
   }
 
 //to create room to play quiz
-  Future<bool> joinBattleRoomFirebase(
-      {String? name, String? profileUrl, String? uid, String? battleRoomDocumentId, required String categoryId}) async {
+  Future<bool> joinBattleRoomFirebase({String? name, String? profileUrl, String? uid, String? battleRoomDocumentId, required String categoryId}) async {
     try {
-      DocumentReference documentReference =
-          (await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(battleRoomDocumentId).get()).reference;
+      DocumentReference documentReference = (await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(battleRoomDocumentId).get()).reference;
       print("Join user here ");
       return FirebaseFirestore.instance.runTransaction((transaction) async {
         //get latest document
@@ -661,10 +642,7 @@ class BattleRoomController extends GetxController {
   //get room by roomCode (multiUserBattleRoom)
   Future<QuerySnapshot> getMultiUserBattleRoomFirebase(String? roomCode, String? type) async {
     try {
-      QuerySnapshot querySnapshot = await _firebaseFirestore
-          .collection(type == "battle" ? BattleRoomHelper.battleroomCollection : BattleRoomHelper.battleroomCollectionMulti)
-          .where("roomCode", isEqualTo: roomCode)
-          .get();
+      QuerySnapshot querySnapshot = await _firebaseFirestore.collection(type == "battle" ? BattleRoomHelper.battleroomCollection : BattleRoomHelper.battleroomCollectionMulti).where("roomCode", isEqualTo: roomCode).get();
       return querySnapshot;
     } on SocketException catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());
@@ -678,10 +656,7 @@ class BattleRoomController extends GetxController {
   //delete user from multiple user room
   Future<void> updateMultiUserRoom(String? documentId, Map<String, dynamic> updatedData, String battle) async {
     try {
-      _firebaseFirestore
-          .collection(battle == "battle" ? BattleRoomHelper.battleroomCollection : BattleRoomHelper.battleroomCollectionMulti)
-          .doc(documentId)
-          .update(updatedData);
+      _firebaseFirestore.collection(battle == "battle" ? BattleRoomHelper.battleroomCollection : BattleRoomHelper.battleroomCollectionMulti).doc(documentId).update(updatedData);
     } on SocketException catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());
     } on PlatformException catch (_) {

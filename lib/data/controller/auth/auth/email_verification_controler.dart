@@ -7,6 +7,8 @@ import 'package:flutter_prime/data/model/global/response_model/response_model.da
 import 'package:flutter_prime/data/repo/auth/sms_email_verification_repo.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
+import '../../../../core/route/route.dart';
+
 class EmailVerificationController extends GetxController {
   SmsEmailVerificationRepo repo;
   EmailVerificationController({required this.repo});

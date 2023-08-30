@@ -18,9 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  void _openDrawer() {
-    _scaffoldKey.currentState?.openDrawer();
-  }
+
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,7 @@ import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/leader_board/leader_board_controller.dart';
 import 'package:flutter_prime/data/repo/leaderBoard/leaderBoard_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../core/utils/my_color.dart';
@@ -80,7 +81,6 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                         padding: const EdgeInsets.all(Dimensions.space12),
                         child: Row(
                           children: [
-                            
                             item.avatar.toString() != "null"
                                 ? Container(
                                     decoration: BoxDecoration(
@@ -97,7 +97,10 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                                       ),
                                     ),
                                   )
-                                : Image.asset(MyImages.defaultAvatar,height: Dimensions.space30,),
+                                : Image.asset(
+                                    MyImages.defaultAvatar,
+                                    height: Dimensions.space30,
+                                  ),
                             const SizedBox(
                               width: Dimensions.space10,
                             ),

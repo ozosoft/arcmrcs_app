@@ -19,14 +19,12 @@ class RegistrationController extends GetxController {
   RegistrationRepo registrationRepo;
   GeneralSettingRepo generalSettingRepo;
 
-  RegistrationController(
-      {required this.registrationRepo, required this.generalSettingRepo});
+  RegistrationController({required this.registrationRepo, required this.generalSettingRepo});
 
   bool isLoading = true;
   bool agreeTC = false;
 
-  GeneralSettingResponseModel generalSettingMainModel =
-      GeneralSettingResponseModel();
+  GeneralSettingResponseModel generalSettingMainModel = GeneralSettingResponseModel();
 
   bool checkPasswordStrength = false;
   bool needAgree = true;
@@ -124,10 +122,8 @@ class RegistrationController extends GetxController {
   }
 
   void checkAndGotoNextStep(RegistrationResponseModel responseModel) async {
-    bool needEmailVerification =
-        responseModel.data?.user?.ev == "1" ? false : true;
-    bool needSmsVerification =
-        responseModel.data?.user?.sv == "1" ? false : true;
+    bool needEmailVerification = responseModel.data?.user?.ev == "1" ? false : true;
+    bool needSmsVerification = responseModel.data?.user?.sv == "1" ? false : true;
 
     SharedPreferences preferences = registrationRepo.apiClient.sharedPreferences;
 
@@ -220,9 +216,9 @@ class RegistrationController extends GetxController {
 
   //   ResponseModel mainResponse = await registrationRepo.getCountryList();
 
-    if (mainResponse.statusCode == 200) {
-      CountryModel model = CountryModel.fromJson(jsonDecode(mainResponse.responseJson));
-      List<Countries>? tempList = model.data?.countries;
+  //   if (mainResponse.statusCode == 200) {
+  //     CountryModel model = CountryModel.fromJson(jsonDecode(mainResponse.responseJson));
+  //     List<Countries>? tempList = model.data?.countries;
 
   //     if (tempList != null && tempList.isNotEmpty) {
   //       countryList.addAll(tempList);
@@ -259,14 +255,12 @@ class RegistrationController extends GetxController {
     update();
   }
 
-  
-  void updateValidationList(String value){
-
-    passwordValidationRules[0].hasError = value.contains(RegExp(r'[A-Z]'))?false:true;
-    passwordValidationRules[1].hasError = value.contains(RegExp(r'[a-z]'))?false:true;
-    passwordValidationRules[2].hasError = value.contains(RegExp(r'[0-9]'))?false:true;
-    passwordValidationRules[3].hasError = value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))?false:true;
-    passwordValidationRules[4].hasError = value.length>=6?false:true;
+  void updateValidationList(String value) {
+    passwordValidationRules[0].hasError = value.contains(RegExp(r'[A-Z]')) ? false : true;
+    passwordValidationRules[1].hasError = value.contains(RegExp(r'[a-z]')) ? false : true;
+    passwordValidationRules[2].hasError = value.contains(RegExp(r'[0-9]')) ? false : true;
+    passwordValidationRules[3].hasError = value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]')) ? false : true;
+    passwordValidationRules[4].hasError = value.length >= 6 ? false : true;
 
     update();
   }
@@ -276,5 +270,4 @@ class RegistrationController extends GetxController {
     hasPasswordFocus = hasFocus;
     update();
   }
-}
 }
