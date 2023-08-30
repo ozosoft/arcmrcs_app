@@ -32,13 +32,11 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LeaderBoardRepo(apiClient: Get.find()));
 
-   LeaderBoardController controller= Get.put(LeaderBoardController(
-      leaderBoardRepo: Get.find(),
-    ));
-  tabController = TabController(vsync: this, length: 1);
+    LeaderBoardController controller = Get.put(LeaderBoardController(leaderBoardRepo: Get.find()));
+    tabController = TabController(vsync: this, length: 1);
     selectedIndex = tabController.index;
 
-     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata();
     });
     super.initState();
@@ -73,43 +71,40 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
             child: ListView.builder(
                 physics: const BouncingScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: controller.LeaderBoardlist.length - 3 >= 0 ?controller.LeaderBoardlist.length- 3 : 0,
+                itemCount: controller.leaderBoardlist.length - 3 >= 0 ? controller.leaderBoardlist.length - 3 : 0,
                 itemBuilder: (BuildContext context, int index) {
-                  final item = controller.LeaderBoardlist[index + 3];
+                  final item = controller.leaderBoardlist[index + 3];
                   return Card(
                       margin: const EdgeInsets.all(Dimensions.space10),
                       child: Padding(
                         padding: const EdgeInsets.all(Dimensions.space12),
                         child: Row(
                           children: [
-                            // SvgPicture.asset(MyImages().avatars[index]),
-                            item.avatar.toString()!=null?
-                            Container(
-                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color:  MyColor.leaderBoardTabBar,),
-                       child: FittedBox(
-                              fit: BoxFit.cover,
-                              child: Container(
-                                margin: EdgeInsets.all( orientation!=Orientation.portrait? Dimensions.space5:Dimensions.space5),
-                                decoration: BoxDecoration(
-                                  color: MyColor.leaderBoardTabBar,
-                                    borderRadius:
-                                        BorderRadius.circular(Dimensions.space30),
-                                    image:  DecorationImage(
-                                        image:  NetworkImage(UrlContainer.leaderboardProfileImage+item.avatar.toString()),
-                                        fit: BoxFit.cover)),
-                                height:orientation!=Orientation.portrait? Dimensions.space30: Dimensions.space50,
-                                width: orientation!=Orientation.portrait? Dimensions.space30: Dimensions.space50,
-                              ),
-                            ),
-                     )
-                            :SvgPicture.asset(MyImages.avatar1),
+                            
+                            item.avatar.toString() != "null"
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: MyColor.leaderBoardTabBar,
+                                    ),
+                                    child: FittedBox(
+                                      fit: BoxFit.cover,
+                                      child: Container(
+                                        margin: EdgeInsets.all(orientation != Orientation.portrait ? Dimensions.space5 : Dimensions.space5),
+                                        decoration: BoxDecoration(color: MyColor.leaderBoardTabBar, borderRadius: BorderRadius.circular(Dimensions.space30), image: DecorationImage(image: NetworkImage(UrlContainer.leaderboardProfileImage + item.avatar.toString()), fit: BoxFit.cover)),
+                                        height: orientation != Orientation.portrait ? Dimensions.space30 : Dimensions.space50,
+                                        width: orientation != Orientation.portrait ? Dimensions.space30 : Dimensions.space50,
+                                      ),
+                                    ),
+                                  )
+                                : Image.asset(MyImages.defaultAvatar,height: Dimensions.space30,),
                             const SizedBox(
                               width: Dimensions.space10,
                             ),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                 Text(
+                                Text(
                                   item.username.toString(),
                                   style: semiBoldMediumLarge,
                                 ),
@@ -122,7 +117,7 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                                       width: Dimensions.space8,
                                     ),
                                     Text(
-                                      item.score.toString()+MyStrings.pointss,
+                                      item.score.toString() + MyStrings.pointss,
                                       style: semiBoldLarge.copyWith(color: MyColor.textColor),
                                     ),
                                     // SvgPicture.asset(MyImages().arrows[index]),

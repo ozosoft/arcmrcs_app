@@ -23,7 +23,7 @@ class _TabBarWithButtonsState extends State<TabBarWithButtons>
 
 
   void initState() {
-    tabController = TabController(vsync: this, length: 2);
+    tabController = TabController(vsync: this, length: 1);
     setState(() {
       selectedIndex = tabController.index;
     });
@@ -33,7 +33,7 @@ class _TabBarWithButtonsState extends State<TabBarWithButtons>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return  DefaultTabController(
-        length: 2,
+        length: 1,
         child:  GetBuilder<DashBoardController>(
            builder: (controller) => Scaffold(
             backgroundColor: MyColor.colorWhite,
@@ -42,16 +42,20 @@ class _TabBarWithButtonsState extends State<TabBarWithButtons>
                 unselectedLabelColor: MyColor.textColor,
                 labelStyle: regularMediumLarge,
                 indicatorPadding: EdgeInsets.zero,
-                indicator: ShapeDecoration(
+                indicator:const ShapeDecoration(
                     color: MyColor.primaryColor,
                     shape: RoundedRectangleBorder(
-                        borderRadius: selectedIndex == 0
-                            ? const BorderRadius.only(
-                                topLeft: Radius.circular(Dimensions.space10),
+                        borderRadius: 
+                        // selectedIndex == 0
+                        //     ? 
+                            BorderRadius.only(
+                                topLeft: Radius.circular(Dimensions.space10),topRight: Radius.circular(Dimensions.space10)
                               )
-                            : const BorderRadius.only(
-                                topRight: Radius.circular(Dimensions.space10),
-                              ))),
+                            // : const BorderRadius.only(
+                            //     topRight: Radius.circular(Dimensions.space10),
+                            //   ),
+                              
+                              )),
                 onTap: (value) {
                   setState(() {
                     selectedIndex = tabController.index;
@@ -64,16 +68,16 @@ class _TabBarWithButtonsState extends State<TabBarWithButtons>
                       child: Text(MyStrings.request),
                     ),
                   ),
-                  Tab(
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Text(MyStrings.transaction),
-                    ),
-                  ),
+                  // Tab(
+                  //   child: Align(
+                  //     alignment: Alignment.center,
+                  //     child: Text(MyStrings.transaction),
+                  //   ),
+                  // ),
                 ]),
             body: TabBarView(controller: tabController, children: const[
                WalletRequestSection(),
-               TransectionSection()
+              //  TransectionSection()
             ]),
           ),
         ));

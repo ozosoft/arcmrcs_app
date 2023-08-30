@@ -348,6 +348,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
         print('App detached');
         // Handle when the app is detached (not available on all platforms)
         break;
+      
 
       default:
         // Handle any other cases that might be added in the future

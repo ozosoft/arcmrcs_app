@@ -21,7 +21,7 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
     return const RepaintBoundary(
       child: Scaffold(
         backgroundColor: MyColor.primaryColor,
-         appBar: CustomCategoryAppBar(title: MyStrings.quizResult),
+         appBar: CustomCategoryAppBar(title: MyStrings.examResult),
           body: SingleChildScrollView(
             child:  Padding(
               padding: EdgeInsets.symmetric(horizontal:Dimensions.space15,vertical: Dimensions.space50),

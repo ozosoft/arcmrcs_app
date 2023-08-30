@@ -88,11 +88,13 @@ class ExamZoneQuizController extends GetxController {
           examQuestionsList.addAll(examQuestion);
         }
 
-        List<Option>? optionslist = model.data!.questions![1].options;
+        //   List<Option>? optionslist = model.data!.questions![1].options;
 
-        if (optionslist != null && optionslist.isNotEmpty) {
-          optionsList.addAll(optionslist);
-        }
+        // if (optionslist != null && optionslist.isNotEmpty) {
+        //   optionsList.addAll(optionslist);
+        // }
+
+        
 
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {

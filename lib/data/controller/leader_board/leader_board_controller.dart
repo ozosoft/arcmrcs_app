@@ -11,7 +11,7 @@ class LeaderBoardController extends GetxController {
 
   LeaderBoardController({required this.leaderBoardRepo});
 
-  List<User> LeaderBoardlist = [];
+  List<User> leaderBoardlist = [];
 
   String rank1PlayerName = "";
   String rank2PlayerName = "";
@@ -34,7 +34,7 @@ class LeaderBoardController extends GetxController {
     ResponseModel model = await leaderBoardRepo.getLeaderBoardData();
 
     if (model.statusCode == 200) {
-      LeaderBoardlist.clear();
+      leaderBoardlist.clear();
 
       LeaderBoardModel leaderBoardModel = LeaderBoardModel.fromJson(jsonDecode(model.responseJson));
 
@@ -42,16 +42,16 @@ class LeaderBoardController extends GetxController {
         List<User>? leaderBoardList = leaderBoardModel.data?.user;
 
         if (leaderBoardList != null && leaderBoardList.isNotEmpty) {
-          LeaderBoardlist.addAll(leaderBoardList);
+          leaderBoardlist.addAll(leaderBoardList);
         }
         rank1PlayerName = leaderBoardModel.data!.user![0].username!;
-        rank2PlayerName = leaderBoardModel.data!.user![2].username!;
-        rank3PlayerName = leaderBoardModel.data!.user![3].username!;
+        rank2PlayerName = leaderBoardModel.data!.user![1].username!;
+        rank3PlayerName = leaderBoardModel.data!.user![2].username!;
         rank1PlayerScore = leaderBoardModel.data!.user![0].score!;
         rank2PlayerScore = leaderBoardModel.data!.user![1].score!;
         rank3PlayerScore = leaderBoardModel.data!.user![2].score!;
         rank1PlayerAvatar = leaderBoardModel.data!.user![0].avatar!;
-        rank2PlayerAvatar = leaderBoardModel.data!.user![1].avatar!;
+        rank2PlayerAvatar = leaderBoardModel.data!.user![1].avatar!??"";
         rank2PlayerAvatar = leaderBoardModel.data!.user![2].avatar!;
       } else {
         CustomSnackBar.error(errorList: [leaderBoardModel.status ?? ""]);

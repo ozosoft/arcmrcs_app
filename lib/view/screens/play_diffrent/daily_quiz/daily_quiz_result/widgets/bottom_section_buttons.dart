@@ -29,7 +29,7 @@ class BottomSectionButtons extends StatelessWidget {
           child: RoundedButton(
             text: MyStrings.reviewAnswer,
             press: () {
-              Get.toNamed(RouteHelper.dailyQuizresultReviewScreen);
+              Get.toNamed(RouteHelper.dailyquizContestresultScreen);
             },
             color: MyColor.colorBlack,
             textSize: Dimensions.space21,

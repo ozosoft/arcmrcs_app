@@ -8,6 +8,7 @@ import 'package:flutter_prime/data/controller/play_diffrent_quizes/daily_quiz/da
 import 'package:flutter_prime/data/controller/play_diffrent_quizes/fun_n_learn/fun_n_learn_quiz_controller.dart';
 import 'package:flutter_prime/data/repo/play_diffrent_quizes/daily_quiz/daily_quiz_repo.dart';
 import 'package:flutter_prime/data/repo/play_diffrent_quizes/fun_n_learn/fun_n_learn_repo.dart';
+import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/divider/custom_dashed_divider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,15 +30,15 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
   bool audienceVote = false;
   bool tapAnswer = false;
 
-  // @override
-  // void initState() {
-  //   // Get.put(ApiClient(sharedPreferences: Get.find()));
-  //   // Get.put(DailyQuizRepo(apiClient: Get.find()));
+  @override
+  void initState() {
+    Get.put(ApiClient(sharedPreferences: Get.find()));
+    Get.put(DailyQuizRepo(apiClient: Get.find()));
 
-  //   // DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController( dailyQuizRepo: Get.find(),));
+    DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController( dailyQuizRepo: Get.find(),));
 
-  //   super.initState();
-  // }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

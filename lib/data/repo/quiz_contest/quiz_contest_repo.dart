@@ -26,16 +26,16 @@ class QuizContestRepo {
   }
 
 
-  //  Future<ResponseModel> submitAnswer(Map<String, dynamic> map) async {
-  //   String url = '${UrlContainer.baseUrl}${UrlContainer.examsubmitAnswerUrl}';
-  //   print(url.toString());
+   Future<ResponseModel> submitAnswer(Map<String, dynamic> map) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.quizContestsubmitAnswerUrl}';
+    print(url.toString());
 
-  //   ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
+    ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
 
-  //   print(model.responseJson.toLowerCase());
-  //   print(model.statusCode);
+    print(model.responseJson.toLowerCase());
+    print(model.statusCode);
 
-  //   return model;
-  // }
+    return model;
+  }
 
 }

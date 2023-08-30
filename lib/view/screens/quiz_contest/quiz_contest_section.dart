@@ -4,8 +4,10 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
+import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_questions_controller.dart';
 import 'package:flutter_prime/data/controller/quiz_questions/quiz_questions_controller.dart';
 import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
+import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
@@ -28,9 +30,9 @@ class _QuizContestSectionState extends State<QuizContestSection> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DashBoardRepo(apiClient: Get.find()));
     Get.put(DashBoardController(dashRepo: Get.find()));
-     Get.put(QuizquestionsRepo(apiClient: Get.find()));
+     Get.put(QuizContestRepo(apiClient: Get.find()));
 
-     Get.put(QuizQuestionsController(quizquestionsRepo: Get.find()));
+     Get.put(QuizContestQuestionsController(quizContestRepo:Get.find(),));
     DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
 
     super.initState();
@@ -78,12 +80,12 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                 child: Row(
                   children: List.generate(
                       controller.contestlist.length,
-                      (index) => GetBuilder<QuizQuestionsController>(
+                      (index) => GetBuilder<QuizContestQuestionsController>(
                          builder: (quizQuestionscontrollers) => InkWell(
                               onTap: () {
-                                print(quizQuestionscontrollers.successmessage!);
-                               if (quizQuestionscontrollers.successmessage !="") {
-                                  Get.offAndToNamed(RouteHelper.quizContestQuestionscreen, arguments: [
+                                print(quizQuestionscontrollers.examQuestionsList!);
+                               if (quizQuestionscontrollers.examQuestionsList !="") {
+                                  Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [
                                   controller.contestlist[index].id.toString(),
                                   controller.contestlist[index].title.toString(),
                                 ]);

@@ -51,6 +51,7 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("this is coin id from deposit screen" + widget.id);
     return GetBuilder<AddNewDepositController>(
       builder: (controller) => SafeArea(
           child: Scaffold(

@@ -1,15 +1,16 @@
+
 import 'dart:convert';
 import 'dart:math';
+
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/model/exam_zone/exam_zone_model.dart';
-import 'package:flutter_prime/data/model/quiz_questions_model/quiz_questions_model.dart';
-
-import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
-import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
+import 'package:flutter_prime/data/model/quiz_contest/quiz_contest_questions_model.dart';
+import 'package:flutter_prime/data/model/quiz_contest/quiz_result_model.dart';
+import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:get/get.dart';
 
 class QuizContestQuestionsController extends GetxController {
   QuizContestRepo quizContestRepo;
@@ -35,9 +36,8 @@ class QuizContestQuestionsController extends GetxController {
   bool loading = true;
 
   String? quizInfoID;
-  String? title;
   late int questionsIndex;
-  List<Exam> examcategoryList = [];
+   String? title ="";
   List<Question> examQuestionsList = [];
   List<Option> optionsList = [];
 
@@ -64,21 +64,15 @@ class QuizContestQuestionsController extends GetxController {
 
   TextEditingController enterExamKeys = TextEditingController();
 
-  getQuizContestQuestions(
-    String quizInfoId,
-  ) async {
+  getQuizContestQuestions() async {
     loading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
-
-    ResponseModel getQuestionsModel = await quizContestRepo.getExamQuestionList(
-      quizInfoId,
-    );
+    ResponseModel getQuestionsModel = await quizContestRepo.getExamQuestionList(quizInfoId);
 
     if (getQuestionsModel.statusCode == 200) {
       examQuestionsList.clear();
-      QuizquestionsModel model = QuizquestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
+      QuizContestQuestionsModel model = QuizContestQuestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
         print("get answer done");
         // print(model.data);
@@ -90,11 +84,13 @@ class QuizContestQuestionsController extends GetxController {
           examQuestionsList.addAll(examQuestion);
         }
 
-        List<Option>? optionslist = model.data!.questions![1].options;
+        //   List<Option>? optionslist = model.data!.questions![1].options;
 
-        if (optionslist != null && optionslist.isNotEmpty) {
-          optionsList.addAll(optionslist);
-        }
+        // if (optionslist != null && optionslist.isNotEmpty) {
+        //   optionsList.addAll(optionslist);
+        // }
+
+        
 
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
@@ -115,8 +111,11 @@ class QuizContestQuestionsController extends GetxController {
     showQuestions = !showQuestions;
   }
 
+  int remainingTime = 30;
+ 
+
   int selectedOptionIndex = -1;
-  selectAnswer(
+   selectAnswer(
     int optionIndex,
     int questionIndex,
   ) {
@@ -169,7 +168,7 @@ class QuizContestQuestionsController extends GetxController {
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
 
-  int timerDuration = 20;
+   int timerDuration = 20;
   int countDownTimerIndex = -1;
   bool restartTimer = false;
   restartCountDownTimer(int questionIndex) {
@@ -198,6 +197,7 @@ class QuizContestQuestionsController extends GetxController {
     update();
   }
 
+
   void setCurrentOption(int questionsIndex) {
     // optionsList.clear();
 
@@ -215,55 +215,58 @@ class QuizContestQuestionsController extends GetxController {
   String winningCoin = "";
   String appreciation = "";
 
-  // submitAnswer() async {
-  //   submitLoading = true;
-  //   update();
+  submitAnswer() async {
+    submitLoading = true;
+    update();
 
-  //   print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
+    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
 
-  //   Map<String, dynamic> params = {};
+    Map<String, dynamic> params = {};
 
-  //   for (int i = 0; i < examQuestionsList.length; i++) {
-  //     String quizeId = examQuestionsList[i].id.toString();
-  //     String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
-  //     params['question_id[${i}]'] = quizeId;
-  //     print('quize id: ${quizeId}');
-  //     params['option_$quizeId[]'] = selectedOptionId;
-  //     print("option_$quizeId");
-  //   }
-  //   print(params['option_']);
-  //   params['quizInfo_id'] = quizInfoID.toString();
-  //   params['fifty_fifty'] = fifty_fifty;
-  //   params['audience_poll'] = audiencevotes;
-  //   params['time_reset'] = reset_timer;
-  //   params['flip_question'] = flipQuistion;
+    for (int i = 0; i < examQuestionsList.length; i++) {
+      String quizeId = examQuestionsList[i].id.toString();
+      String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
+      params['question_id[${i}]'] = quizeId;
+      print('quize id: ${quizeId}');
+      params['option_$quizeId[]'] = selectedOptionId;
+      print("option_$quizeId");
+    }
+    print(params['option_']);
+    params['quizInfo_id'] = quizInfoID.toString();
+    params['fifty_fifty'] = fifty_fifty;
+    params['audience_poll'] = audiencevotes;
+    params['time_reset'] = reset_timer;
+    params['flip_question'] = flipQuistion;
 
-  //   ResponseModel submitModel = await examZoneRepo.submitAnswer(params);
+    ResponseModel submitModel = await quizContestRepo.submitAnswer(params);
 
-  //   if (submitModel.statusCode == 200) {
-  //     ExamResultModel model = ExamResultModel.fromJson(jsonDecode(submitModel.responseJson));
-  //     if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-  //       appreciation = model.message!.success.toString();
-  //       totalQuestions = model.data!.totalQuestion.toString();
-  //       correctAnswer = model.data!.correctAnswer.toString();
-  //       wrongAnswer = model.data!.wrongAnswer.toString();
-  //       totalCoin = model.data!.totalCoin.toString();
-  //       winningCoin = model.data!.winingCoin.toString();
+    if (submitModel.statusCode == 200) {
+      QuizResultResponseModel model = QuizResultResponseModel.fromJson(jsonDecode(submitModel.responseJson));
+      if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
+        appreciation = model.message!.success.toString();
+        totalQuestions = model.data!.totalQuestion.toString();
+        correctAnswer = model.data!.correctAnswer.toString();
+        wrongAnswer = model.data!.wrongAnswer.toString();
+        totalCoin = model.data!.totalCoin.toString();
+        winningCoin = model.data!.winingCoin.toString();
+   
+       
+ 
+     
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+      } else {
+        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 
-  //       CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
-  //     } else {
-  //       CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
-
-  //       //need to cheak error msg
-  //     }
-  //   } else {
-  //     CustomSnackBar.error(errorList: [submitModel.message]);
-  //   }
-  //   print("this is " + submitModel.message);
-  //   print("this is " + params.toString());
-  //   submitLoading = false;
-  //   update();
-  // }
+        //need to cheak error msg
+      }
+    } else {
+      CustomSnackBar.error(errorList: [submitModel.message]);
+    }
+    print("this is " + submitModel.message);
+    print("this is " + params.toString());
+    submitLoading = false;
+    update();
+  }
 
   resetallLifelines() {
     showQuestions = false;

@@ -9,7 +9,7 @@ class SharedPreferenceHelper {
   static const String generalSettingKey = 'general-setting-key';
   static const String moduleSettingKey = 'module-setting-key';
   static const String fcmDeviceKey = 'device-key';
-  static const String needTwoFactorVerification = 'need-tfa';
+  // static const String needTwoFactorVerification = 'need-tfa';
 
   static const String userIdKey = 'user_id';
   static const String userDataKey = 'user_data_key';
