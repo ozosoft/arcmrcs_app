@@ -78,21 +78,19 @@ class ProfileRepo {
 
       var request = http.MultipartRequest('POST', Uri.parse(url));
   
-      if (profilePic != null) {
-        request.files.add(http.MultipartFile(
-            'avatar', profilePic!.readAsBytes().asStream(), profilePic!.lengthSync(),
-            filename: profilePic!.path.split('/').last));
-      }
-      
-      http.StreamedResponse response = await request.send();
+      request.files.add(http.MultipartFile(
+          'avatar', profilePic.readAsBytes().asStream(), profilePic.lengthSync(),
+          filename: profilePic.path.split('/').last));
 
+      request.headers.addAll(<String,String>{'Authorization' : 'Bearer ${apiClient.token}'});
+
+      http.StreamedResponse response = await request.send();
       String jsonResponse = await response.stream.bytesToString();
-      AuthorizationResponseModel model =
-          AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
+
+      AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
 
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        CustomSnackBar.success(
-            successList: model.message?.success ?? [MyStrings.success]);
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
         return true;
       } else {
         CustomSnackBar.error(
@@ -100,6 +98,7 @@ class ProfileRepo {
         return false;
       }
     } catch (e) {
+      print('error: ${e.toString()}');
       return false;
     }
   }

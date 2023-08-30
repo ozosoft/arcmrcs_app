@@ -18,7 +18,7 @@ class _NotificationCardScreenState extends State<NotificationCardScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-            ListView.builder(
+           /* ListView.builder(
               physics:const NeverScrollableScrollPhysics(),
               padding:const EdgeInsets.only(top: Dimensions.space25),
               shrinkWrap: true,
@@ -34,7 +34,7 @@ class _NotificationCardScreenState extends State<NotificationCardScreen> {
                   details: MyStrings().notifications[index]["detail_Notification"].toString() ,
                   date: MyStrings().notifications[index]["date"].toString() ,
                 );
-              }),
+              }),*/
        ],
       ),
     );

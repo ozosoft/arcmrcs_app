@@ -21,7 +21,6 @@ class BottomNavigationBarScreen extends StatefulWidget {
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
-  int _selectedIndex = 2;
 
   int _page = 2;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
@@ -34,11 +33,6 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
     ProfileScreen()
   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +104,6 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         animationDuration: const Duration(milliseconds: 400),
         onTap: (index) {
           setState(() {
-            _selectedIndex = index;
             _page = index;
           });
         },

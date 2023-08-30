@@ -8,6 +8,7 @@ import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_question
 import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
 import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:flutter_prime/view/components/divider/custom_divider.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -28,18 +29,20 @@ class _QuizContestSectionState extends State<QuizContestSection> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DashBoardRepo(apiClient: Get.find()));
     Get.put(DashBoardController(dashRepo: Get.find()));
-     Get.put(QuizContestRepo(apiClient: Get.find()));
+    Get.put(QuizContestRepo(apiClient: Get.find()));
 
-     Get.put(QuizContestQuestionsController(quizContestRepo:Get.find(),));
+    QuizContestQuestionsController quizquestionsController = Get.put(QuizContestQuestionsController(
+      quizContestRepo: Get.find(),
+    ));
     DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
 
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata();
+      quizquestionsController.getQuizContestQuestions();
     });
   }
- 
 
   @override
   Widget build(BuildContext context) {
@@ -79,17 +82,19 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                   children: List.generate(
                       controller.contestlist.length,
                       (index) => GetBuilder<QuizContestQuestionsController>(
-                         builder: (quizQuestionscontrollers) => InkWell(
+                            builder: (quizQuestionscontrollers) => InkWell(
                               onTap: () {
-                                print(quizQuestionscontrollers.examQuestionsList!);
-                               if (quizQuestionscontrollers.examQuestionsList !="") {
-                                  Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [
-                                  controller.contestlist[index].id.toString(),
-                                  controller.contestlist[index].title.toString(),
-                                ]);
-                               } else {
-                                 CustomSnackBar.error(errorList: ["Sorry this contest is not available right now"]);
-                               }
+                                print("this is quiz Questions============" + quizQuestionscontrollers.examQuestionsList.toString()!);
+                                 if (quizQuestionscontrollers.examQuestionsList !="[]") {
+                                    Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [
+                                    controller.contestlist[index].id.toString(),
+                                    controller.contestlist[index].title.toString(),
+                                    print("this is quiz id"+controller.contestlist[index].id.toString()),
+                                    print("this is quiz title"+controller.contestlist[index].title.toString())
+                                  ]);
+                                 } else {
+                                   CustomSnackBar.error(errorList: ["Sorry this contest is not available right now"]);
+                                 }
                               },
                               child: Container(
                                 margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
@@ -119,9 +124,12 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                           padding: const EdgeInsets.only(top: Dimensions.space7, right: Dimensions.space12),
                                           height: Dimensions.space70,
                                           width: Dimensions.space50,
-                                          child: Align(
+                                          child:controller.contestlist[index].image.toString()!="null"? Align(
                                             alignment: Alignment.topCenter,
-                                            child: Image.network(UrlContainer.quizContestImage + controller.contestlist[index].image.toString()),
+                                            child: Image.network(UrlContainer.quizContestImage + controller.contestlist[index].image.toString() ),
+                                          ):Align(
+                                            alignment: Alignment.topCenter,
+                                            child: Image.asset(MyImages.defaultcategoryImage,height:Dimensions.space25,),
                                           ),
                                         ),
                                         Container(
@@ -145,18 +153,16 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                             ],
                                           ),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(right: 0, top: 0, bottom: MediaQuery.of(context).size.height * .05, left: MediaQuery.of(context).size.width * .25),
-                                          child: SvgPicture.asset(
-                                            MyImages.bookmarkSVG,
-                                          ),
-                                        ),
+                                        // Padding(
+                                        //   padding: EdgeInsets.only(right: 0, top: 0, bottom: MediaQuery.of(context).size.height * .05, left: MediaQuery.of(context).size.width * .25),
+                                        //   child: SvgPicture.asset(
+                                        //     MyImages.bookmarkSVG,
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
-                                    Container(
-                                      height: 0.1,
-                                      color: MyColor.colorlighterGrey,
-                                    ),
+                                    // const CustomDivider(space: 5,color: Colors.black,),
+                                    Container(height: .4,width: MediaQuery.of(context).size.width*.8,color: Colors.black,),
                                     Container(
                                       padding: const EdgeInsets.only(top: Dimensions.space10, left: Dimensions.space10),
                                       width: Dimensions.space330,
@@ -191,7 +197,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                 ),
                               ),
                             ),
-                      )),
+                          )),
                 )),
           ),
         ],

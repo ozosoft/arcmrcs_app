@@ -24,8 +24,8 @@ class ProfileController extends GetxController {
   bool isLoading = false;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  late TextEditingController userNameController = TextEditingController(text: username.toString());
-  late TextEditingController emailController = TextEditingController(text: email.toString());
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController mobileNoController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController stateController = TextEditingController();
@@ -54,17 +54,20 @@ class ProfileController extends GetxController {
   loadProfileInfo() async {
     isLoading = true;
     update();
+
     ResponseModel responseModel = await profileRepo.loadProfileInfo();
     if (responseModel.statusCode == 200) {
       model = ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (model.data != null && model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
+
         loadData(model);
-        username = model.data!.user!.username!;
-        rank = model.data!.rank!.userRank!;
-        coins = model.data!.user!.coins!;
-        score = model.data!.user!.score!;
-        avatar = model.data!.user!.avatar!;
-        email = model.data!.user!.email!;
+        username = model.data?.user?.username ?? '';
+        rank = model.data?.rank?.userRank ?? '--';
+        coins = model.data?.user?.coins ?? '00';
+        score = model.data?.user?.score ?? '00';
+        avatar = model.data?.user?.avatar ?? '';
+        email = model.data?.user?.email ?? '';
+
       } else {
         isLoading = false;
         update();
@@ -74,42 +77,6 @@ class ProfileController extends GetxController {
     }
   }
 
-  bool isSubmitLoading = false;
-  updateProfile() async {
-    isSubmitLoading = true;
-    update();
-
-    String firstName = firstNameController.text;
-    String lastName = lastNameController.text.toString();
-    String address = addressController.text.toString();
-    String city = cityController.text.toString();
-    String zip = zipCodeController.text.toString();
-    String state = stateController.text.toString();
-    User? user = model.data?.user;
-
-    if (firstName.isNotEmpty && lastName.isNotEmpty) {
-      isLoading = true;
-      update();
-
-      UserPostModel model = UserPostModel(firstname: firstName, lastName: lastName, mobile: user?.mobile ?? '', email: user?.email ?? '', username: user?.username ?? '', countryCode: user?.countryCode ?? '', country: user?.address?.country ?? '', mobileCode: '880', image: imageFile, address: address, state: state, zip: zip, city: city);
-
-      bool b = await profileRepo.updateProfile(model, true);
-
-      if (b) {
-        await loadProfileInfo();
-      }
-    } else {
-      if (firstName.isEmpty) {
-        CustomSnackBar.error(errorList: [MyStrings.kFirstNameNullError.tr]);
-      }
-      if (lastName.isEmpty) {
-        CustomSnackBar.error(errorList: [MyStrings.kLastNameNullError.tr]);
-      }
-    }
-
-    isSubmitLoading = false;
-    update();
-  }
 
   void loadData(ProfileResponseModel? model) {
     profileRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userNameKey, '${model?.data?.user?.username}');

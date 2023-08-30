@@ -68,7 +68,7 @@ class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
             if(url.toString()=='${UrlContainer.domainUrl}user/deposit/history'){
               Get.offAndToNamed(RouteHelper.depositsScreen);
               CustomSnackBar.success(successList: [MyStrings.requestSuccess]);
-            } else if(url.toString()=='${UrlContainer.baseUrl}user/deposit'){
+            } else if(url.toString()== '${UrlContainer.baseUrl}user/deposit'){
               Get.back();
               CustomSnackBar.error(errorList: [MyStrings.requestFail]);
             }

@@ -6,7 +6,6 @@ class MyImages {
 
   static const String addMoney = "assets/images/add_money.png";
   static const String placeHolderImage = "assets/images/place_holder.png";
-
   static const String profile = "assets/images/profile.png";
   static const String person = "assets/images/person.png";
   static const String password = "assets/images/password.png";
@@ -161,6 +160,7 @@ class MyImages {
   static const String funAndLearnSVG = "assets/images/fun&learrn.svg";
   static const String guessTheWordSVG = "assets/images/guessTheWord.svg";
   static const String examzoneSVG = "assets/images/examZone.svg";
+   static const String defaultcategoryImage = "assets/images/category.png";
 
   List<String> rightORWrong = [
     MyImages.whiteTikSVG,

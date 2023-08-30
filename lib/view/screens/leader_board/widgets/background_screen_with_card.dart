@@ -21,24 +21,17 @@ class BackGroundWithRankCard extends StatefulWidget {
 }
 
 class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with SingleTickerProviderStateMixin {
-  bool showQuestions = false;
-  bool audienceVote = false;
-  bool tapAnswer = false;
 
-  late final TabController tabController;
-  int selectedIndex = 1;
 
   @override
   void initState() {
+
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LeaderBoardRepo(apiClient: Get.find()));
-
     LeaderBoardController controller = Get.put(LeaderBoardController(leaderBoardRepo: Get.find()));
-    tabController = TabController(vsync: this, length: 1);
-    selectedIndex = tabController.index;
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
+      controller.getData();
     });
     super.initState();
   }
@@ -48,25 +41,29 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
     Orientation orientation = MediaQuery.of(context).orientation;
     Size size = MediaQuery.of(context).size;
     return GetBuilder<LeaderBoardController>(
-      builder: (controller) => Stack(
+      builder: (controller) => Column(
         children: [
-          SvgPicture.asset(MyImages.leaderBoardSVG, fit: BoxFit.cover),
+
           const Padding(
             padding: EdgeInsets.all(Dimensions.space10),
             child: SizedBox(
-              height: Dimensions.space300,
               child: RankingTabBar(),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(top: orientation != Orientation.portrait ? size.height * .43 : size.height * .33, left: orientation != Orientation.portrait ? size.width * .25 : size.width * .13),
-            child: SvgPicture.asset(
-              MyImages.leaderBoardRankSVG,
-              width: orientation != Orientation.portrait ? size.width * .5 : size.width * .7,
-            ),
+
+          const SizedBox(height: Dimensions.space15),
+
+          SvgPicture.asset(
+            MyImages.leaderBoardRankSVG,
+            width: orientation != Orientation.portrait ? size.width * .5 : size.width * .7,
           ),
+
+          const SizedBox(height: Dimensions.space20),
+
+          controller.isLoading?
+          const CustomLoader(isPagination: true) : 
           Container(
-            margin: EdgeInsets.only(top: orientation != Orientation.portrait ? size.height * .6 : size.height * .45, left: Dimensions.space20, right: Dimensions.space20),
+            margin: const EdgeInsets.only( left: Dimensions.space20, right: Dimensions.space20),
             padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),
             decoration: const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(Dimensions.space20), topRight: Radius.circular(Dimensions.space20)), color: MyColor.colorWhite),
             child: ListView.builder(
@@ -87,14 +84,11 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                                       borderRadius: BorderRadius.circular(50),
                                       color: MyColor.leaderBoardTabBar,
                                     ),
-                                    child: FittedBox(
-                                      fit: BoxFit.cover,
-                                      child: Container(
-                                        margin: EdgeInsets.all(orientation != Orientation.portrait ? Dimensions.space5 : Dimensions.space5),
-                                        decoration: BoxDecoration(color: MyColor.leaderBoardTabBar, borderRadius: BorderRadius.circular(Dimensions.space30), image: DecorationImage(image: NetworkImage(UrlContainer.leaderboardProfileImage + item.avatar.toString()), fit: BoxFit.cover)),
-                                        height: orientation != Orientation.portrait ? Dimensions.space30 : Dimensions.space50,
-                                        width: orientation != Orientation.portrait ? Dimensions.space30 : Dimensions.space50,
-                                      ),
+                                    child: Container(
+                                      margin: EdgeInsets.all(orientation != Orientation.portrait ? Dimensions.space5 : Dimensions.space5),
+                                      decoration: BoxDecoration(color: MyColor.leaderBoardTabBar, borderRadius: BorderRadius.circular(Dimensions.space30), image: DecorationImage(image: NetworkImage(UrlContainer.leaderboardProfileImage + item.avatar.toString()), fit: BoxFit.cover)),
+                                      height: orientation != Orientation.portrait ? Dimensions.space30 : Dimensions.space50,
+                                      width: orientation != Orientation.portrait ? Dimensions.space30 : Dimensions.space50,
                                     ),
                                   )
                                 : Image.asset(

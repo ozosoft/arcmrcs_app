@@ -12,21 +12,15 @@ import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
-class ProfileOverAllAchivementSection extends StatefulWidget {
-  const ProfileOverAllAchivementSection({super.key});
+class ProfileTopSection extends StatefulWidget {
+  const ProfileTopSection({super.key});
 
   @override
-  State<ProfileOverAllAchivementSection> createState() => _ProfileOverAllAchivementSectionState();
+  State<ProfileTopSection> createState() => _ProfileTopSectionState();
 }
 
-class _ProfileOverAllAchivementSectionState extends State<ProfileOverAllAchivementSection> {
-  // bool _showNotch = false;
+class _ProfileTopSectionState extends State<ProfileTopSection> {
 
-  // void _toggleNotch() {
-  //   setState(() {
-  //     _showNotch = !_showNotch;
-  //   });
-  // }
 
   @override
   void initState() {
@@ -46,7 +40,6 @@ class _ProfileOverAllAchivementSectionState extends State<ProfileOverAllAchiveme
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     Orientation orientation = MediaQuery.of(context).orientation;
-    print(size.width);
 
     return GetBuilder<ProfileController>(
       builder: (controller) => Padding(
@@ -61,7 +54,7 @@ class _ProfileOverAllAchivementSectionState extends State<ProfileOverAllAchiveme
                 children: [
                   Stack(
                     children: [
-                     controller.avatar !="null"? FittedBox(
+                     controller.avatar != "null"? FittedBox(
                         fit: BoxFit.cover,
                         child:  Container(
                           margin: const EdgeInsets.only(top: Dimensions.space20),
@@ -81,7 +74,7 @@ class _ProfileOverAllAchivementSectionState extends State<ProfileOverAllAchiveme
                           margin: const EdgeInsets.only(top: Dimensions.space20),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(Dimensions.space40),
-                              image: DecorationImage(
+                              image: const DecorationImage(
                                   image: AssetImage(MyImages.defaultAvatar),
                                   fit: BoxFit.cover)),
                           height: Dimensions.space70,
@@ -102,7 +95,7 @@ class _ProfileOverAllAchivementSectionState extends State<ProfileOverAllAchiveme
                     ],
                   ),
                   Text(
-                    MyStrings.hi + controller.username.toString(),
+                    MyStrings.hi + controller.username,
                     style: semiBoldExtraLarge,
                   ),
                   const SizedBox(
@@ -126,7 +119,7 @@ class _ProfileOverAllAchivementSectionState extends State<ProfileOverAllAchiveme
                               child: SvgPicture.asset(MyImages().achivementsType[0].toString()),
                             ),
                             Text(
-                              MyStrings().achivements[0].title,
+                              MyStrings.rank,
                               style: semiBoldMediumLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w500),
                             ),
                             Padding(
@@ -160,7 +153,7 @@ class _ProfileOverAllAchivementSectionState extends State<ProfileOverAllAchiveme
                               child: SvgPicture.asset(MyImages().achivementsType[1].toString()),
                             ),
                             Text(
-                              MyStrings().achivements[1].title,
+                              MyStrings.coins,
                               style: semiBoldMediumLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w500),
                             ),
                             Padding(
@@ -194,7 +187,7 @@ class _ProfileOverAllAchivementSectionState extends State<ProfileOverAllAchiveme
                               child: SvgPicture.asset(MyImages().achivementsType[2].toString()),
                             ),
                             Text(
-                              MyStrings().achivements[2].title,
+                              MyStrings.score,
                               style: semiBoldMediumLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w500),
                             ),
                             Padding(

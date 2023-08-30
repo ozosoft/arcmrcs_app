@@ -8,6 +8,7 @@ import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
 import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
 class PlayDiffrentQuizes extends StatefulWidget {
@@ -35,7 +36,7 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(
-      builder: (controller) => Padding(
+      builder: (controller) =>controller.loader ==true? const CustomLoader(): Padding(
         padding: const EdgeInsets.all(Dimensions.space10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

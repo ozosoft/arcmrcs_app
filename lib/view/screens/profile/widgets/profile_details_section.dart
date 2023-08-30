@@ -37,18 +37,14 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
               child: Column(
                 children: [
                   ListTile(
-                         title: Text(MyStrings().itemList[0]['title']!,style: regularDefault.copyWith(color: MyColor.textColor),),
-                         subtitle: Text(controller.username,style: semiBoldLarge.copyWith(color: MyColor.colorBlack,fontWeight: FontWeight.w500 )),
-                         onTap: () {
-                         },
-                       ),
-                      const Divider(height:Dimensions.space3),
+                    title: Text(MyStrings.username,style: regularDefault.copyWith(color: MyColor.textColor),),
+                    subtitle: Text(controller.username,style: semiBoldLarge.copyWith(color: MyColor.colorBlack,fontWeight: FontWeight.w500 )),
+                  ),
+                  const Divider(height:Dimensions.space3),
                   ListTile(
-                         title: Text(MyStrings().itemList[1]['title']!,style: regularDefault.copyWith(color: MyColor.textColor),),
-                         subtitle: Text(controller.email,style: semiBoldLarge.copyWith(color: MyColor.colorBlack,fontWeight: FontWeight.w500 )),
-                         onTap: () {
-                         },
-                       ),
+                   title: Text(MyStrings.emailAddress,style: regularDefault.copyWith(color: MyColor.textColor),),
+                   subtitle: Text(controller.email,style: semiBoldLarge.copyWith(color: MyColor.colorBlack,fontWeight: FontWeight.w500 )),
+                   ),
                 ],
               )
             ),

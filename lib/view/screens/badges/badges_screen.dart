@@ -3,7 +3,6 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -47,11 +46,11 @@ class _BadgesScreenState extends State<BadgesScreen> {
                         borderRadius:BorderRadius.circular(Dimensions.space8)),
                     child: Column(
                       children: [
-                        Text(MyStrings().badgeLists[index]['title']!,
+                        /*Text(MyStrings().badgeLists[index]['title']!,
                             style: regularDefault.copyWith(
                                 color: MyColor.textColor),
                                 textAlign: TextAlign.center,
-                                ),
+                                ),*/
                       ],
                     ),
                   ),
@@ -62,9 +61,9 @@ class _BadgesScreenState extends State<BadgesScreen> {
                         MyImages().badgesList[index],
                         height: Dimensions.space45,
                       )),
-                     Container(
+                    /* Container(
                        padding: EdgeInsets.only(top:orientation!=Orientation.portrait? Dimensions.space20:Dimensions.space30),
-                       height: Dimensions.space100,width: size.width,color: MyStrings().badgeLists[index]['title'] !=MyStrings.supperbattleMan? MyColor.notActivatedFadeColor:MyColor.transparentColor)
+                       height: Dimensions.space100,width: size.width,color: MyStrings().badgeLists[index]['title'] !=MyStrings.supperbattleMan? MyColor.notActivatedFadeColor:MyColor.transparentColor)*/
                  ],
               );
             }),

@@ -17,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [ProfileOverAllAchivementSection(),ProfileDetailsSection()])
+          children: [ProfileTopSection(),ProfileDetailsSection()])
       ),
     );
   }
