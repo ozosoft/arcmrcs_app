@@ -8,7 +8,6 @@ import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/battle/battle_room_controller.dart';
 import 'package:flutter_prime/view/components/alert-dialog/custom_alert_dialog.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_header_row.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -104,7 +103,8 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                     GestureDetector(
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: controller.battleRoomData.value!.roomCode!)).then((value) {
-                          print("copied");
+                         
+                         print("copiedx");
                           CustomSnackBar.success(successList: [(MyStrings.copied)]);
                         });
                       },
