@@ -77,7 +77,7 @@ class User {
       String? username,
       String? countryCode,
       String? mobile,
-      Address? address,
+     
       String? status,
       String? ev,
       String? sv,
@@ -89,7 +89,7 @@ class User {
     _username = username;
     _countryCode = countryCode;
     _mobile = mobile;
-    _address = address;
+   
     _status = status;
     _ev = ev;
     _sv = sv;
@@ -104,8 +104,7 @@ class User {
     _username = json['username'];
     _countryCode = json['country_code'].toString();
     _mobile = json['mobile'].toString();
-    _address =
-        json['address'] == null ? Address.fromJson(json['address']) : null;
+   
     _status = json['status'].toString();
     _ev = json['ev'].toString();
     _sv = json['sv'].toString();
@@ -119,7 +118,7 @@ class User {
   String? _username;
   String? _countryCode;
   String? _mobile;
-  Address? _address;
+  
   String? _status;
   String? _ev;
   String? _sv;
@@ -132,7 +131,7 @@ class User {
   String? get username => _username;
   String? get countryCode => _countryCode;
   String? get mobile => _mobile;
-  Address? get address => _address;
+
   String? get status => _status;
   String? get ev => _ev;
   String? get sv => _sv;
@@ -147,9 +146,7 @@ class User {
     map['username'] = _username;
     map['country_code'] = _countryCode;
     map['mobile'] = _mobile;
-    if (_address != null) {
-      map['address'] = _address?.toJson();
-    }
+   
     map['status'] = _status;
     map['ev'] = _ev;
     map['sv'] = _sv;
@@ -161,50 +158,6 @@ class User {
   }
 }
 
-class Address {
-  Address(
-      {String? address,
-      String? state,
-      String? zip,
-      String? country,
-      String? city}) {
-    _address = address;
-    _state = state;
-    _zip = zip;
-    _country = country;
-    _city = city;
-  }
-
-  Address.fromJson(dynamic json) {
-    _address = json['address'];
-    _state = json['state'];
-    _zip = json['zip'].toString();
-    _country = json['country'];
-    _city = json['city'];
-  }
-
-  String? _address;
-  String? _state;
-  String? _zip;
-  String? _country;
-  String? _city;
-
-  String? get address => _address;
-  String? get state => _state;
-  String? get zip => _zip;
-  String? get country => _country;
-  String? get city => _city;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['address'] = _address;
-    map['state'] = _state;
-    map['zip'] = _zip;
-    map['country'] = _country;
-    map['city'] = _city;
-    return map;
-  }
-}
 
 class Message {
   Message({List<String>? success, List<String>? error}) {

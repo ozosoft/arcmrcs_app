@@ -14,16 +14,7 @@ class BottomSectionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(
-              top: Dimensions.space15,
-              left: Dimensions.space15,
-              right: Dimensions.space15),
-          child: RoundedButton(
-              text: MyStrings.nextLevel,
-              press: () {},
-              textSize: Dimensions.space21),
-        ),
+       
         Padding(
           padding: const EdgeInsets.all(Dimensions.space15),
           child: RoundedButton(

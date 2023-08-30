@@ -12,7 +12,7 @@ import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dar
 import 'package:flutter_prime/data/repo/auth/logout/logout_repo.dart';
 
 import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/screens/homepage/homepage-widgets/language-bottom-sheet/language_bottom_sheet_screen.dart';
+import 'package:flutter_prime/view/screens/home_page/homepage-widgets/language-bottom-sheet/language_bottom_sheet_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -56,8 +56,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   padding: const EdgeInsets.only(top: Dimensions.space30, left: Dimensions.space15),
                   child: FittedBox(
                     fit: BoxFit.cover,
-                    child: Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: DecorationImage(image: NetworkImage(UrlContainer.dashboardUserProfileImage + controller.userImage.toString()), fit: BoxFit.cover)),
+                    child:controller.userImage.toString()!="null"? Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: DecorationImage(image: NetworkImage(UrlContainer.dashboardUserProfileImage + controller.userImage.toString() ), fit: BoxFit.cover)),
+                      height: Dimensions.space45,
+                      width: Dimensions.space45,
+                    ):Container(
+                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image:const DecorationImage(image: AssetImage(MyImages.defaultAvatar ), fit: BoxFit.cover)),
                       height: Dimensions.space45,
                       width: Dimensions.space45,
                     ),
@@ -126,17 +130,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 // const Divider(
                 //   endIndent: Dimensions.space70,
                 // ),
-                ListTile(
-                  leading: SvgPicture.asset(MyImages.walletDrawer),
-                  title: const Text(
-                    MyStrings.wallet,
-                    style: regularMediumLarge,
-                  ),
-                  minLeadingWidth: Dimensions.space1,
-                  onTap: () {
-                    Get.toNamed(RouteHelper.walletScreen);
-                  },
-                ),
+                // ListTile(
+                //   leading: SvgPicture.asset(MyImages.walletDrawer),
+                //   title: const Text(
+                //     MyStrings.wallet,
+                //     style: regularMediumLarge,
+                //   ),
+                //   minLeadingWidth: Dimensions.space1,
+                //   onTap: () {
+                //     Get.toNamed(RouteHelper.walletScreen);
+                //   },
+                // ),
                 ListTile(
                   leading: SvgPicture.asset(MyImages.coinStoreDrawer),
                   title: const Text(
@@ -199,21 +203,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     minLeadingWidth: Dimensions.space1,
                   ),
                 ),
-                ListTile(
-                  onTap: () {
-                    ApiClient(sharedPreferences: Get.find())
-                        .sharedPreferences
-                        .clear();
-                    Get.offAllNamed(RouteHelper.loginScreen);
-                  },
-                  leading: SvgPicture.asset(MyImages.logOutDrawer),
-                  title: const Text(
-                    MyStrings.logout,
-                    style: regularMediumLarge,
-                  ),
-                 
-                  minLeadingWidth: Dimensions.space1,
-                ),
+                // ListTile(
+                //   leading: SvgPicture.asset(MyImages.logOutDrawer),
+                //   title: const Text(
+                //     MyStrings.logout,
+                //     style: regularMediumLarge,
+                //   ),
+                //   onTap: (){
+                    
+                //   },
+                //   minLeadingWidth: Dimensions.space1,
+                // ),
               ],
             ),
           ),

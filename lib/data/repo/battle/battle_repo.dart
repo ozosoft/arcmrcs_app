@@ -16,7 +16,7 @@ class BattleRepo {
   }
 
   Future<ResponseModel> getBatttleQuestion(int id, int user1ID, int user2ID) async {
-    String url = "${UrlContainer.baseUrl}${UrlContainer.battleQuestionList}/${id.toString()}/${user1ID.toString()}/${user2ID.toString()}";
+    String url = "${UrlContainer.baseUrl}${UrlContainer.battleQuestionList}/${user1ID.toString()}/${user2ID.toString()}/${id.toString()}";
     print('come here: ${url}');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 

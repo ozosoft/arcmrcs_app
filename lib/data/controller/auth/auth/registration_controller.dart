@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -17,14 +19,12 @@ class RegistrationController extends GetxController {
   RegistrationRepo registrationRepo;
   GeneralSettingRepo generalSettingRepo;
 
-  RegistrationController(
-      {required this.registrationRepo, required this.generalSettingRepo});
+  RegistrationController({required this.registrationRepo, required this.generalSettingRepo});
 
   bool isLoading = true;
   bool agreeTC = false;
 
-  GeneralSettingResponseModel generalSettingMainModel =
-      GeneralSettingResponseModel();
+  GeneralSettingResponseModel generalSettingMainModel = GeneralSettingResponseModel();
 
   bool checkPasswordStrength = false;
   bool needAgree = true;
@@ -65,23 +65,15 @@ class RegistrationController extends GetxController {
   bool submitLoading = false;
 
   signUpUser() async {
-    if (countryName == null) {
-      CustomSnackBar.error(errorList: [MyStrings.selectACountry]);
-      update();
+    if (emailController.text.isEmpty) {
+      CustomSnackBar.error(errorList: [MyStrings.enterYourEmail]);
       return;
     }
 
-    if (mobileController.text.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.enterYourPhoneNumber]);
-      return;
-    }
-
-    if (needAgree && !agreeTC) {
-      CustomSnackBar.error(
-        errorList: [MyStrings.agreePolicyMessage],
-      );
-      return;
-    }
+    // if(needAgree && !agreeTC) {
+    //   CustomSnackBar.error(errorList: [MyStrings.agreePolicyMessage],);
+    //   return;
+    // }
 
     submitLoading = true;
     update();
@@ -90,16 +82,12 @@ class RegistrationController extends GetxController {
     ResponseModel responseModel = await registrationRepo.registerUser(model);
 
     if (responseModel.statusCode == 200) {
-      RegistrationResponseModel model = RegistrationResponseModel.fromJson(
-          jsonDecode(responseModel.responseJson));
+      RegistrationResponseModel model = RegistrationResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        CustomSnackBar.success(
-            successList: model.message?.success ?? [MyStrings.success.tr]);
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
         checkAndGotoNextStep(model);
       } else {
-        CustomSnackBar.error(
-            errorList:
-                model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
       }
     } else {
       CustomSnackBar.error(errorList: [responseModel.message]);
@@ -123,49 +111,42 @@ class RegistrationController extends GetxController {
 
   SignUpModel getUserData() {
     SignUpModel model = SignUpModel(
-      companyName: companyNameController.text.toString(),
-      mobile: mobileController.text.toString(),
-      email: emailController.text.toString(),
-      agree: agreeTC ? true : false,
-      username: userNameController.text.toString(),
-      password: passwordController.text.toString(),
-      country: countryName.toString(),
-      mobileCode: mobileCode != null ? mobileCode!.replaceAll("[+]", "") : "",
-      countryCode: countryCode ?? '',
-    );
+
+        // agree: agreeTC ? true : false,
+        username: userNameController.text.toString(),
+        email: emailController.text.toString(),
+        password: passwordController.text.toString(),
+        confirmPassword: cPasswordController.text.toString());
 
     return model;
   }
 
   void checkAndGotoNextStep(RegistrationResponseModel responseModel) async {
-    bool needEmailVerification =
-        responseModel.data?.user?.ev == "1" ? false : true;
-    bool needSmsVerification =
-        responseModel.data?.user?.sv == "1" ? false : true;
+    bool needEmailVerification = responseModel.data?.user?.ev == "1" ? false : true;
+    bool needSmsVerification = responseModel.data?.user?.sv == "1" ? false : true;
 
-    SharedPreferences preferences =
-        registrationRepo.apiClient.sharedPreferences;
+    SharedPreferences preferences = registrationRepo.apiClient.sharedPreferences;
 
-    // await preferences.setString(SharedPreferenceHelper.userIdKey, responseModel.data?.user?.id.toString()??'-1');
-    // await preferences.setString(SharedPreferenceHelper.accessTokenKey, responseModel.data?.accessToken ?? '');
-    // await preferences.setString(SharedPreferenceHelper.accessTokenType, responseModel.data?.tokenType ?? '');
-    // await preferences.setString(SharedPreferenceHelper.userEmailKey, responseModel.data?.user?.email ?? '');
-    // await preferences.setString(SharedPreferenceHelper.userNameKey, responseModel.data?.user?.username ?? '');
+    await preferences.setString(SharedPreferenceHelper.userIdKey, responseModel.data?.user?.id.toString() ?? '-1');
+    await preferences.setString(SharedPreferenceHelper.accessTokenKey, responseModel.data?.accessToken ?? '');
+    await preferences.setString(SharedPreferenceHelper.accessTokenType, responseModel.data?.tokenType ?? '');
+    await preferences.setString(SharedPreferenceHelper.userEmailKey, responseModel.data?.user?.email ?? '');
+    await preferences.setString(SharedPreferenceHelper.userNameKey, responseModel.data?.user?.username ?? '');
     // await preferences.setString(SharedPreferenceHelper.userPhoneNumberKey, responseModel.data?.user?.mobile ?? '');
 
     await registrationRepo.sendUserToken();
 
     bool isProfileCompleteEnable = true;
-    bool isTwoFactorEnable = false;
+  
 
     if (needEmailVerification == false && needSmsVerification == false) {
-      // Get.offAndToNamed(RouteHelper.profileCompleteScreen);
+      Get.offAndToNamed(RouteHelper.profileCompleteScreen);
     } else if (needEmailVerification == true && needSmsVerification == true) {
-      // Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [true,isProfileCompleteEnable,isTwoFactorEnable]);
+      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [true, isProfileCompleteEnable,]);
     } else if (needEmailVerification) {
-      // Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [false,isProfileCompleteEnable,isTwoFactorEnable]);
+      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [false, isProfileCompleteEnable, ]);
     } else if (needSmsVerification) {
-      // Get.offAndToNamed(RouteHelper.smsVerificationScreen,arguments: [isProfileCompleteEnable,isTwoFactorEnable]);
+      Get.offAndToNamed(RouteHelper.smsVerificationScreen, arguments: [isProfileCompleteEnable,]);
     }
   }
 
@@ -198,19 +179,18 @@ class RegistrationController extends GetxController {
   void initData() async {
     isLoading = true;
     update();
-    //skip: uncomment if country data need
     // await getCountryData();
 
     ResponseModel response = await generalSettingRepo.getGeneralSetting();
     if (response.statusCode == 200) {
-      GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(
-          jsonDecode(response.responseJson));
+      print("I am from reg cont");
+      GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(jsonDecode(response.responseJson));
       if (model.status?.toLowerCase() == 'success') {
         generalSettingMainModel = model;
         registrationRepo.apiClient.storeGeneralSetting(model);
       } else {
         List<String> message = [MyStrings.somethingWentWrong.tr];
-        CustomSnackBar.error(errorList: model.message?.error ?? message);
+        CustomSnackBar.error(errorList: model.message?.success ?? message);
         return;
       }
     } else {
@@ -222,16 +202,8 @@ class RegistrationController extends GetxController {
       return;
     }
 
-    needAgree =
-        generalSettingMainModel.data?.generalSetting?.agree.toString() == '0'
-            ? false
-            : true;
-    checkPasswordStrength = generalSettingMainModel
-                .data?.generalSetting?.securePassword
-                .toString() ==
-            '0'
-        ? false
-        : true;
+    // needAgree = generalSettingMainModel.data?.generalSetting?.agree.toString() == '0' ? false : true;
+    // checkPasswordStrength = generalSettingMainModel.data?.generalSetting?.securePassword.toString() == '0' ? false : true;
 
     isLoading = false;
     update();
@@ -240,24 +212,25 @@ class RegistrationController extends GetxController {
   bool countryLoading = true;
   List<Countries> countryList = [];
 
-  Future<dynamic> getCountryData() async {
-    ResponseModel mainResponse = await registrationRepo.getCountryList();
+  // Future<dynamic> getCountryData() async {
 
-    if (mainResponse.statusCode == 200) {
-      CountryModel model =
-          CountryModel.fromJson(jsonDecode(mainResponse.responseJson));
-      List<Countries>? tempList = model.data?.countries;
+  //   ResponseModel mainResponse = await registrationRepo.getCountryList();
 
-      if (tempList != null && tempList.isNotEmpty) {
-        countryList.addAll(tempList);
-      }
-    } else {
-      CustomSnackBar.error(errorList: [mainResponse.message]);
-    }
+  //   if (mainResponse.statusCode == 200) {
+  //     CountryModel model = CountryModel.fromJson(jsonDecode(mainResponse.responseJson));
+  //     List<Countries>? tempList = model.data?.countries;
 
-    countryLoading = false;
-    update();
-  }
+  //     if (tempList != null && tempList.isNotEmpty) {
+  //       countryList.addAll(tempList);
+  //     }
+  //   } else {
+  //     CustomSnackBar.error(errorList: [mainResponse.message]);
+  //   }
+
+  //   countryLoading = false;
+  //   update();
+
+  // }
 
   String? validatePassword(String value) {
     if (value.isEmpty) {
@@ -283,14 +256,10 @@ class RegistrationController extends GetxController {
   }
 
   void updateValidationList(String value) {
-    passwordValidationRules[0].hasError =
-        value.contains(RegExp(r'[A-Z]')) ? false : true;
-    passwordValidationRules[1].hasError =
-        value.contains(RegExp(r'[a-z]')) ? false : true;
-    passwordValidationRules[2].hasError =
-        value.contains(RegExp(r'[0-9]')) ? false : true;
-    passwordValidationRules[3].hasError =
-        value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]')) ? false : true;
+    passwordValidationRules[0].hasError = value.contains(RegExp(r'[A-Z]')) ? false : true;
+    passwordValidationRules[1].hasError = value.contains(RegExp(r'[a-z]')) ? false : true;
+    passwordValidationRules[2].hasError = value.contains(RegExp(r'[0-9]')) ? false : true;
+    passwordValidationRules[3].hasError = value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]')) ? false : true;
     passwordValidationRules[4].hasError = value.length >= 6 ? false : true;
 
     update();

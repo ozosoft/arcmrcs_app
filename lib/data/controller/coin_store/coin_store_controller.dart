@@ -15,7 +15,7 @@ class CoinStoreController extends GetxController {
 
   List<CoinPlan> coinPlanList = [];
 
-  bool loader = true;
+  bool loader = false;
 
   bool isActive = false;
 
@@ -26,26 +26,17 @@ class CoinStoreController extends GetxController {
     ResponseModel model = await coinStoreRepo.coinStoreData();
 
     if (model.statusCode == 200) {
-     
       CoinStoreModel coinPlanModel = CoinStoreModel.fromJson(jsonDecode(model.responseJson));
 
       if (coinPlanModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
-      
- 
-
-     
-
-     
-
-     
-
         List<CoinPlan>? coinplan = coinPlanModel.data?.coinPlans;
 
         if (coinplan != null && coinplan.isNotEmpty) {
           coinPlanList.addAll(coinplan);
         }
 
-        
+        loader = false;
+        update();
       } else {
         CustomSnackBar.error(errorList: [coinPlanModel.status ?? ""]);
       }

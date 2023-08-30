@@ -87,6 +87,7 @@ class MyStrings {
   static const String examRules = "Exam Rules";
   static const String examKey = "Enter the exam key";
   static const String enterExam = "Enter In Exam";
+  static const String examResult = "Exam Result";
 
   static const String chooseFile = 'Choose File';
   static const String chooseAvatar = 'Choose Avatar';
@@ -294,6 +295,7 @@ class MyStrings {
   static const String fiveHundreds = "500";
   static const String more = "More";
   static const String success = 'success';
+  static const String emailVerifiedSuccesfully = 'Email verified successfully';
   static const String version = 'version';
   static const String logoutSuccessMsg = 'Sign Out Successfully';
   static const String invalidEmailMsg = "Enter valid email";

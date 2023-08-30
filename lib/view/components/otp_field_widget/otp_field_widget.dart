@@ -7,6 +7,7 @@ import '../../../core/utils/my_color.dart';
 class OTPFieldWidget extends StatelessWidget {
   final Color textcolor, activeColor, inActiveColor;
   final bool fromExam;
+  final int length;
   final TextEditingController? tController; // Changed to optional
 
   const OTPFieldWidget({
@@ -17,8 +18,8 @@ class OTPFieldWidget extends StatelessWidget {
     this.activeColor = MyColor.screenBgColor,
     this.inActiveColor = MyColor.cardBorderColors,
     this.fromExam = false,
+    this.length = 6,
   }) : super(key: key);
-
 
   final ValueChanged<String>? onChanged;
 
@@ -29,7 +30,7 @@ class OTPFieldWidget extends StatelessWidget {
       child: PinCodeTextField(
         appContext: context,
         pastedTextStyle: regularDefault.copyWith(color: MyColor.getTextColor()),
-        length: fromExam ? 4 : 6,
+        length: length,
         textStyle: regularExtraLarge.copyWith(color: MyColor.textColor),
         obscureText: false,
         controller: tController,
@@ -53,7 +54,7 @@ class OTPFieldWidget extends StatelessWidget {
         cursorColor: MyColor.colorBlack,
         animationDuration: const Duration(milliseconds: 100),
         enableActiveFill: true,
-        keyboardType:fromExam?TextInputType.name: TextInputType.number,
+        keyboardType: fromExam ? TextInputType.name : TextInputType.number,
         beforeTextPaste: (text) {
           return true;
         },

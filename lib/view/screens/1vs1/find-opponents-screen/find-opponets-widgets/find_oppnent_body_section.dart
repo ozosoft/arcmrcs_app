@@ -119,7 +119,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                         fit: BoxFit.cover,
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(Dimensions.space100),
-                            child: controller.battleRepo.apiClient.getUserImagePath() == "null"
+                            child: controller.battleRepo.apiClient.getUserImagePath() == "null" || controller.battleRepo.apiClient.getUserImagePath().isEmpty
                                 ? Image.asset(
                                     MyImages.defaultAvatar,
                                     fit: BoxFit.cover,
@@ -168,7 +168,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                                 fit: BoxFit.cover,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(Dimensions.space100),
-                                    child: opUserData.profileUrl == "null"
+                                    child: opUserData.profileUrl == "null" || opUserData.profileUrl.isEmpty
                                         ? Image.asset(
                                             MyImages.defaultAvatar,
                                             fit: BoxFit.cover,

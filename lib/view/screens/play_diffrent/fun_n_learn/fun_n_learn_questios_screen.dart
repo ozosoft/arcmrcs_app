@@ -13,7 +13,7 @@ import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
-import 'package:flutter_prime/view/screens/quiz-questions/quiz-screen-widgets/life_line_widget.dart';
+import 'package:flutter_prime/view/screens/general_quiz/quiz-questions/quiz-screen-widgets/life_line_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 

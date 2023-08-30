@@ -18,6 +18,7 @@ class _QuizContestLifeLinesWidgetState extends State<QuizContestLifeLinesWidget>
 
   @override
   Widget build(BuildContext context) {
+    print("========================this is index"+widget.questionIndex.toString());
     return GetBuilder<QuizContestQuestionsController>(
       builder: (controller) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -7,6 +7,8 @@ import 'package:flutter_prime/data/model/user_post_model/user_post_model.dart';
 import 'package:flutter_prime/data/repo/account/profile_repo.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
+import '../../../core/route/route.dart';
+
 class ProfileCompleteController extends GetxController {
   ProfileRepo profileRepo;
   ProfileCompleteController({required this.profileRepo});
@@ -59,7 +61,7 @@ class ProfileCompleteController extends GetxController {
     bool b = await profileRepo.updateProfile(model, false);
 
     if (b) {
-      // Get.offAllNamed(RouteHelper.bottomNavBar);
+      Get.offAllNamed(RouteHelper.bottomNavBarScreen);
       return;
     }
 
