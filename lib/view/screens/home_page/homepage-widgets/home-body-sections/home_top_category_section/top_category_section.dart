@@ -7,9 +7,6 @@ import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
 import 'package:flutter_prime/data/controller/sub_categories/sub_categories_controller.dart';
-import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
-import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:get/get.dart';
 import '../../../../../components/category-card/custom_top_category_card.dart';
 
@@ -22,21 +19,7 @@ class TopCategorySection extends StatefulWidget {
 
 class _TopCategorySectionState extends State<TopCategorySection> {
   @override
-  void initState() {
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DashBoardRepo(apiClient: Get.find()));
-    Get.put(DashBoardController(dashRepo: Get.find()));
-    Get.put(SubCategoriesRepo(apiClient: Get.find()));
-    Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
-    SubCategoriesController controllers = Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
-    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
 
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +33,11 @@ class _TopCategorySectionState extends State<TopCategorySection> {
               borderRadius: BorderRadius.circular(Dimensions.space10),
               boxShadow: const [
                 BoxShadow(
-                  color: Color.fromARGB(61, 158, 158, 158),
-                  blurRadius: 7,
-                  spreadRadius: .5,
-                  offset: Offset(
-                    .4,
-                    .4,
-                  ),
-                )
+                  color: MyColor.cardShaddowColor2,
+                  offset: Offset(0, 8),
+                  blurRadius: 60,
+                  spreadRadius: 0,
+                ),
               ],
             ),
             child: Padding(
@@ -76,20 +56,27 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                             style: semiBoldMediumLarge,
                           ),
                           InkWell(
-                              onTap: () {
-                                Get.toNamed(RouteHelper.allCategories);
-                              },
+                            onTap: () {
+                              Get.toNamed(RouteHelper.allCategories);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(Dimensions.space5),
                               child: Text(
                                 MyStrings.viewAll,
                                 style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
-                              )),
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
+                  const SizedBox(
+                    height: Dimensions.space15,
+                  ),
                   GetBuilder<SubCategoriesController>(
                     builder: (controllers) => GridView.builder(
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: .8),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: context.isLandscape ? 5 : 3, childAspectRatio: .7),
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.categorylist.length,
@@ -101,7 +88,6 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                                 arguments: [controller.categorylist[index].name.toString(), controller.categorylist[index].id.toString()],
                               );
                               controllers.changeExpandIndex(index);
-
                             },
                             child: CustomTopCategoryCard(
                               index: index,

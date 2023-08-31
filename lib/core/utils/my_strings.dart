@@ -88,6 +88,8 @@ class MyStrings {
   static const String examKey = "Enter the exam key";
   static const String enterExam = "Enter In Exam";
   static const String examResult = "Exam Result";
+  static const String noExamFound = "Sorry! No exam is currently running.";
+  static const String noContestFound = "Sorry! No contest is currently running.";
 
   static const String chooseFile = 'Choose File';
   static const String chooseAvatar = 'Choose Avatar';
@@ -250,17 +252,17 @@ class MyStrings {
   static const String healthAndQuizdescription = "The health Quiz feature aims to bring the excitement";
   static const String topCategory = "Top Categories";
   static const String quizContest = "Quiz Contest";
-  static const String battleOfTheDay = "Battles of the Day";
-  static const String oneVSone = "1 vs 1 Battle Quiz";
+  static const String battleOfTheDay = "Battle's of the Day";
+  static const String oneVSone = "1 v/s 1 Battle Quiz";
   static const String groupBattle = "Group Battle";
-  static const String battleQuiz = "Battle quiz one on one";
+  static const String battleQuiz = "Battle with one vs one";
   static const String groupbattleQuiz = "Battle quiz with group of players";
   static const String currentCoin = "Current Coin";
   static const String selectCountry = "Select Country";
   static const String letsPlay = "Let's Play";
   static const String playWithFriend = "Play With Friend";
   static const String playAgain = "Play Again";
-  static const String viewAll = "View all";
+  static const String viewAll = "View All";
   static const String viewMore = "View More";
   static const String rank = "Rank";
   static const String entryFees = "Entry Fees";

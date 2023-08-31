@@ -14,33 +14,40 @@ class DashBoardController extends GetxController {
   String rank = "";
   String coins = "";
   String score = "";
-  String ?username = "";
-  String ?userImage = "";
+  String? username = "";
+  String? userImage = "";
 
   List<Category> categorylist = [];
   List<Contest> contestlist = [];
   List<Exams> examZonelist = [];
-  List<QuizType> quizlist = [];
+  List<QuizType> differentQuizlist = [];
   List<User> userdetails = [];
 
-  bool loader = true;
+  bool loader = false;
 
   bool isActive = false;
 
-  void getdata() async {
-    loader = true;
+  void getHomePageData({bool fromRefresh = false}) async {
+    if (userdetails.isEmpty || fromRefresh == true) {
+      loader = true;
+    } else {
+      loader = false;
+    }
     update();
 
     ResponseModel model = await dashRepo.getData();
 
     if (model.statusCode == 200) {
+      userdetails.clear();
       categorylist.clear();
       contestlist.clear();
-      quizlist.clear();
+      differentQuizlist.clear();
       contestlist.clear();
+      examZonelist.clear();
       DashBoardModel dashBoard = DashBoardModel.fromJson(jsonDecode(model.responseJson));
 
       if (dashBoard.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+        userdetails.add(dashBoard.data!.user!);
         rank = dashBoard.data?.rank?.userRank ?? "";
         coins = dashBoard.data?.user?.coins ?? "";
         score = dashBoard.data?.user?.score ?? "";
@@ -69,12 +76,11 @@ class DashBoardController extends GetxController {
         List<QuizType>? quizType = dashBoard.data?.quizType;
 
         if (quizType != null && quizType.isNotEmpty) {
-          quizlist.addAll(quizType);
+          differentQuizlist.addAll(quizType);
         }
 
         username = dashBoard.data?.user!.username;
-        userImage =dashBoard.data?.user!.avatar;
-
+        userImage = dashBoard.data?.user!.avatar;
       } else {
         CustomSnackBar.error(errorList: [dashBoard.status ?? ""]);
       }

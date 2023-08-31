@@ -6,6 +6,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
+import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../../core/utils/my_color.dart';
@@ -23,15 +24,12 @@ class CustomHomeAppBar extends StatefulWidget {
 }
 
 class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
-
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: widget.appbarSize < kToolbarHeight ? kToolbarHeight : widget.appbarSize,
       child: GetBuilder<DashBoardController>(
         builder: (controller) => AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: MyColor.primaryColor),
           leadingWidth: Dimensions.space30,
           leading: IconButton(
               onPressed: () {
@@ -47,29 +45,37 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
           backgroundColor: MyColor.primaryColor,
           automaticallyImplyLeading: false,
           elevation: 0.0,
-          title: FittedBox(
-            fit: BoxFit.cover,
-            child: Row(
-              children: [
-                if (controller.userImage.toString() != "null")
-                  CircleAvatar(
-                    radius: Dimensions.space22,
-                    backgroundImage: NetworkImage(UrlContainer.dashboardUserProfileImage + controller.userImage.toString()),
-                    backgroundColor: MyColor.lightprimaryColor,
-                  )
-                else
-                  const CircleAvatar(
-                    radius: Dimensions.space22,
-                    backgroundImage: AssetImage(MyImages.defaultAvatar),
-                    backgroundColor: MyColor.lightprimaryColor,
+          title: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              if (controller.userImage.toString() != "null")
+                SizedBox(
+                  child: CircleAvatar(
+                    backgroundColor: MyColor.colorWhite.withOpacity(0.2),
+                    child: Padding(
+                      padding: const EdgeInsets.all(Dimensions.space5),
+                      child: MyImageWidget(
+                        radius: Dimensions.space100,
+                        imageUrl: UrlContainer.dashboardUserProfileImage + controller.userImage.toString(),
+                      ),
+                    ),
                   ),
-                const SizedBox(width: Dimensions.space10),
-                Column(
+                )
+              else
+                const CircleAvatar(
+                  radius: Dimensions.space22,
+                  backgroundImage: AssetImage(MyImages.defaultAvatar),
+                  backgroundColor: MyColor.lightprimaryColor,
+                ),
+              const SizedBox(width: Dimensions.space10),
+              Expanded(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      controller.dashRepo.apiClient.getUserFullName(),
-                      style: semiBoldLarge.copyWith(fontSize: Dimensions.space17, color: MyColor.colorWhite),
+                      "${MyStrings.hi} ${controller.dashRepo.apiClient.getUserFullName()}",
+                      style: semiBoldLarge.copyWith(fontSize: Dimensions.fontMediumLarge, color: MyColor.colorWhite),
                     ),
                     const SizedBox(height: Dimensions.space5),
                     Text(
@@ -78,8 +84,8 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                     ),
                   ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
           actions: [
             InkWell(

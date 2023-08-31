@@ -3,6 +3,7 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
 
 class CustomTopCategoryCard extends StatelessWidget {
   final String title, questionsQuantaty, image;
@@ -12,7 +13,8 @@ class CustomTopCategoryCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.questionsQuantaty,
-    required this.image, this.index,
+    required this.image,
+    this.index,
   });
 
   @override
@@ -22,28 +24,31 @@ class CustomTopCategoryCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: Dimensions.space1),
         width: Dimensions.space103,
-        decoration: BoxDecoration(
-            color: MyColor.cardColor,
-            border: Border.all(color: MyColor.cardBorderColor),
-            borderRadius: BorderRadius.circular(Dimensions.space8)),
+        decoration: BoxDecoration(color: MyColor.cardBgLighGreyColor, border: Border.all(color: MyColor.primaryColor.withOpacity(0.05)), borderRadius: BorderRadius.circular(Dimensions.space8)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.network(image),
+            // Image.network(image),
+            MyImageWidget(
+              imageUrl: image,
+              width: Dimensions.space40,
+              height: Dimensions.space40,
+            ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: Dimensions.space10, horizontal: Dimensions.space5),
+              padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space5),
               child: Text(
                 title.toString(),
                 textAlign: TextAlign.center,
-                style: semiBoldDefault,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                style: mediumDefault.copyWith(fontWeight: FontWeight.normal, color: MyColor.primaryTextColor),
               ),
             ),
-            Text(questionsQuantaty + MyStrings.questionse,
-                textAlign: TextAlign.center,
-                style: regularDefault.copyWith(
-                    color: MyColor.colorlighterGrey,
-                    fontSize: Dimensions.space12))
+            Text(
+              questionsQuantaty + MyStrings.questionse,
+              textAlign: TextAlign.center,
+              style: regularDefault.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space12),
+            )
           ],
         ),
       ),
