@@ -1,10 +1,13 @@
 import 'dart:convert';
-import 'package:flutter_prime/data/model/sub_categories/sub_categories_model.dart';
+
+import 'package:flutter_prime/data/model/play_diffrent_quizes/fun_n_learn/fun_n_learn_category_model.dart';
 import 'package:flutter_prime/data/repo/play_diffrent_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+
+import '../../../model/play_diffrent_quizes/fun_n_learn/fun_n_learn_sub_category_model.dart';
 
 class FunNLearnSubCategoriesController extends GetxController {
   FunNLearnRepo funNLearnRepo;
@@ -32,20 +35,18 @@ class FunNLearnSubCategoriesController extends GetxController {
     if (model.statusCode == 200) {
       subCategoriesList.clear();
 
-      SubcategoriesModel subcategories =
-          SubcategoriesModel.fromJson(jsonDecode(model.responseJson));
+      FunSubCategoryListModel subcategories = funSubCategoryListModelFromJson(model.responseJson);
 
-      if (subcategories.status.toString().toLowerCase() ==
-          MyStrings.success.toLowerCase()) {
+      if (subcategories.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         // id =subcategories.data.subcategories.
 
-        List<Subcategory>? subcategorylist = subcategories.data?.subcategories;
+        List<Subcategory>? subcategorylist = subcategories.data.subcategories;
 
         if (subcategorylist != null && subcategorylist.isNotEmpty) {
           subCategoriesList.addAll(subcategorylist);
         }
 
-        itemCount = subcategorylist?.length ?? 0;
+        itemCount = subcategorylist.length ?? 0;
       } else {
         CustomSnackBar.error(errorList: [subcategories.status ?? ""]);
       }

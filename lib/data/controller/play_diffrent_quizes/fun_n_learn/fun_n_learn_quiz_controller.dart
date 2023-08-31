@@ -11,6 +11,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
+import '../../../../core/route/route.dart';
 import '../../../model/play_diffrent_quizes/fun_n_learn/fun_n_learn_questions_model.dart';
 
 class FunNlearnQuizController extends GetxController {
@@ -33,7 +34,6 @@ class FunNlearnQuizController extends GetxController {
   int selectedAnswerIndex = -1;
 
   int currentQuestionIndex = 0;
-
 
   bool loading = true;
 
@@ -71,8 +71,6 @@ class FunNlearnQuizController extends GetxController {
     loading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
-
     ResponseModel getQuestionsModel = await funNLearnRepo.getFunNlearnQuestions(quizInfoId);
 
     if (getQuestionsModel.statusCode == 200) {
@@ -82,8 +80,6 @@ class FunNlearnQuizController extends GetxController {
         print("get answer done");
         // print(model.data);
         List<Question>? examQuestion = model.data!.questions! as List<Question>?;
-
-        
 
         if (examQuestion != null && examQuestion.isNotEmpty) {
           examQuestionsList.addAll(examQuestion);
@@ -95,9 +91,7 @@ class FunNlearnQuizController extends GetxController {
         //   optionsList.addAll(optionslist);
         // }
 
-        
-
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 
@@ -116,7 +110,7 @@ class FunNlearnQuizController extends GetxController {
     showQuestions = !showQuestions;
   }
 
- int timerDuration = 20;
+  int timerDuration = 20;
   int countDownTimerIndex = -1;
   bool restartTimer = false;
   restartCountDownTimer(int questionIndex) {
@@ -124,8 +118,9 @@ class FunNlearnQuizController extends GetxController {
     restartTimer = !restartTimer;
     update();
   }
+
   int selectedOptionIndex = -1;
-   selectAnswer(
+  selectAnswer(
     int optionIndex,
     int questionIndex,
   ) {
@@ -178,7 +173,7 @@ class FunNlearnQuizController extends GetxController {
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
 
-   bool fiftyFifty = false;
+  bool fiftyFifty = false;
   int fiftyFiftyIndex = -1;
   makeFiftyFifty(int index) {
     List<Option> allOptions = examQuestionsList[index].options!;
@@ -197,7 +192,6 @@ class FunNlearnQuizController extends GetxController {
     fiftyFifty = !fiftyFifty;
     update();
   }
-
 
   void setCurrentOption(int questionsIndex) {
     // optionsList.clear();
@@ -220,19 +214,17 @@ class FunNlearnQuizController extends GetxController {
     submitLoading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
-
     Map<String, dynamic> params = {};
 
     for (int i = 0; i < examQuestionsList.length; i++) {
       String quizeId = examQuestionsList[i].id.toString();
       String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
       params['question_id[${i}]'] = quizeId;
-      print('quize id: ${quizeId}');
+      // print('quize id: ${quizeId}');
       params['option_$quizeId[]'] = selectedOptionId;
-      print("option_$quizeId");
+      // print("option_$quizeId");
     }
-    print(params['option_']);
+    // print(params['option_']);
     params['quizInfo_id'] = quizInfoID.toString();
     params['fifty_fifty'] = fifty_fifty;
     params['audience_poll'] = audiencevotes;
@@ -250,11 +242,11 @@ class FunNlearnQuizController extends GetxController {
         wrongAnswer = model.data!.wrongAnswer.toString();
         totalCoin = model.data!.totalScore.toString();
         winningCoin = model.data!.winingScore.toString();
-   
+
+        Get.toNamed(RouteHelper.funNlearnResultScreen, arguments: [examQuestionsList, optionsList])!.whenComplete(() {
+          Get.back();
+        });
        
- 
-     
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 

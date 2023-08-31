@@ -12,6 +12,7 @@ import '../../../../../../core/helper/date_converter.dart';
 import '../../../../../../core/utils/dimensions.dart';
 import '../../../../../../core/utils/my_strings.dart';
 import '../../../../../../core/utils/style.dart';
+import '../../../../../components/chips/custom_chips_widget.dart';
 import '../../../../../components/image_widget/my_image_widget.dart';
 
 class QuizContestSection extends StatefulWidget {
@@ -160,28 +161,16 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                             width: Dimensions.space330,
                                             child: Row(
                                               children: [
-                                                Container(
-                                                  margin: const EdgeInsets.only(right: Dimensions.space10),
-                                                  decoration: BoxDecoration(
-                                                    color: MyColor.cardBgLighGreyColor,
-                                                    borderRadius: BorderRadius.circular(Dimensions.space5),
-                                                    border: Border.all(color: MyColor.colorlighterGrey, width: 0.3),
-                                                  ),
-                                                  padding: const EdgeInsets.all(Dimensions.space7),
+                                                CustomChipsWidget(
+                                                  right: Dimensions.space7,
                                                   child: Center(
                                                       child: Text(
                                                     MyStrings.feeCoins + controller.contestlist[index].point.toString(),
                                                     style: regularDefault.copyWith(color: MyColor.colorGrey),
                                                   )),
                                                 ),
-                                                Container(
-                                                  margin: const EdgeInsets.only(right: Dimensions.space10),
-                                                  decoration: BoxDecoration(
-                                                    color: MyColor.cardBgLighGreyColor,
-                                                    borderRadius: BorderRadius.circular(Dimensions.space5),
-                                                    border: Border.all(color: MyColor.colorlighterGrey, width: 0.3),
-                                                  ),
-                                                  padding: const EdgeInsets.all(Dimensions.space7),
+                                                CustomChipsWidget(
+                                                  right: Dimensions.space7,
                                                   child: Center(
                                                     child: Text(
                                                       '${MyStrings.end}${DateConverter.stringDateToDate(controller.contestlist[index].endDate.toString())}',

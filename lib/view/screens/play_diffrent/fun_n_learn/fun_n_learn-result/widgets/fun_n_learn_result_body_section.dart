@@ -4,9 +4,7 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/exam_zone/exam_zone_quiz_controller.dart';
 import 'package:flutter_prime/data/controller/play_diffrent_quizes/fun_n_learn/fun_n_learn_quiz_controller.dart';
-import 'package:flutter_prime/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:flutter_prime/data/repo/play_diffrent_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/divider/custom_dashed_divider.dart';
@@ -29,15 +27,17 @@ class _FunNLearnResultBodySectionState extends State<FunNLearnResultBodySection>
   bool audienceVote = false;
   bool tapAnswer = false;
 
-  @override
-  void initState() {
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(FunNLearnRepo(apiClient: Get.find()));
+  // @override
+  // void initState() {
+  //   Get.put(ApiClient(sharedPreferences: Get.find()));
+  //   Get.put(FunNLearnRepo(apiClient: Get.find()));
 
-    FunNlearnQuizController controller = Get.put(FunNlearnQuizController(  funNLearnRepo:Get.find(),));
+  //   FunNlearnQuizController controller = Get.put(FunNlearnQuizController(
+  //     funNLearnRepo: Get.find(),
+  //   ));
 
-    super.initState();
-  }
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,8 @@ class _FunNLearnResultBodySectionState extends State<FunNLearnResultBodySection>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Stack(alignment: Alignment.center,
+                Stack(
+                  alignment: Alignment.center,
                   children: [
                     Container(
                       width: double.infinity,
@@ -70,10 +71,9 @@ class _FunNLearnResultBodySectionState extends State<FunNLearnResultBodySection>
                           MyStrings.victory,
                           style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                         )),
-
                     Container(
                         width: double.infinity,
-                        padding: EdgeInsets.only( top: Dimensions.space180),
+                        padding: const EdgeInsets.only(top: Dimensions.space180),
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
@@ -83,16 +83,20 @@ class _FunNLearnResultBodySectionState extends State<FunNLearnResultBodySection>
                         )),
                   ],
                 ),
+                const SizedBox(
+                  height: Dimensions.space12,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RightOrWrongAnsSection(correctAnswer: controller.correctAnswer, wrongAnswer: controller.wrongAnswer, totalQuestions: controller.totalQuestions),
-                    const PlayerProfilePicture(),
+                    PlayerProfilePicture(
+                      imagePath: controller.funNLearnRepo.apiClient.getUserImagePath(),
+                    ),
                     ExamRewardsSection(
                       totalCoin: controller.totalCoin,
                       winningCoin: controller.winningCoin,
                     ),
-                    
                   ],
                 ),
                 const Padding(

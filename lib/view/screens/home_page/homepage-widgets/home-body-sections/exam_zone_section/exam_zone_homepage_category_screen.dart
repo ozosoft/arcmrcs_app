@@ -6,14 +6,13 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
-import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
 import 'package:flutter_prime/view/screens/exam_zone/widgets/enter_exam_room_bottom_sheet.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../core/utils/url_container.dart';
+import '../../../../../components/chips/custom_chips_widget.dart';
 import '../../../../../components/image_widget/my_image_widget.dart';
 
 class ExamZoneCategoryScreen extends StatefulWidget {
@@ -158,38 +157,20 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                           width: Dimensions.space330,
                                           child: Row(
                                             children: [
-                                              Container(
-                                                margin: const EdgeInsets.only(right: Dimensions.space10),
-                                                decoration: BoxDecoration(
-                                                  color: MyColor.cardBgLighGreyColor,
-                                                  borderRadius: BorderRadius.circular(Dimensions.space5),
-                                                  border: Border.all(color: MyColor.colorlighterGrey, width: 0.3),
-                                                ),
-                                                padding: const EdgeInsets.all(Dimensions.space7),
+                                              CustomChipsWidget(
+                                                right: Dimensions.space7,
                                                 child: Center(
                                                     child: Text(
                                                   MyStrings.feeCoins + controller.examZonelist[index].point.toString(),
                                                   style: regularDefault.copyWith(color: MyColor.colorGrey),
                                                 )),
                                               ),
-                                              Container(
-                                                margin: const EdgeInsets.only(right: Dimensions.space10),
-                                                decoration: BoxDecoration(
-                                                  color: MyColor.cardBgLighGreyColor,
-                                                  borderRadius: BorderRadius.circular(Dimensions.space5),
-                                                  border: Border.all(color: MyColor.colorlighterGrey, width: 0.3),
-                                                ),
-                                                padding: const EdgeInsets.all(Dimensions.space7),
+                                              CustomChipsWidget(
+                                                right: Dimensions.space7,
                                                 child: Center(child: Text(controller.examZonelist[index].winningmark.toString() + MyStrings.markss, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                               ),
-                                              Container(
-                                                margin: const EdgeInsets.only(right: Dimensions.space10),
-                                                decoration: BoxDecoration(
-                                                  color: MyColor.cardBgLighGreyColor,
-                                                  borderRadius: BorderRadius.circular(Dimensions.space5),
-                                                  border: Border.all(color: MyColor.colorlighterGrey, width: 0.3),
-                                                ),
-                                                padding: const EdgeInsets.all(Dimensions.space7),
+                                              CustomChipsWidget(
+                                                right: Dimensions.space7,
                                                 child: Center(child: Text(controller.examZonelist[index].examDuration.toString() + MyStrings.minutess, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                               ),
                                             ],

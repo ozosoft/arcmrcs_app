@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'widgets/fun_n_learn_result_body_section.dart';
 
 class FunNlearnResultScreen extends StatefulWidget {
- 
   const FunNlearnResultScreen({super.key});
 
   @override
@@ -15,20 +14,19 @@ class FunNlearnResultScreen extends StatefulWidget {
 }
 
 class _FunNlearnResultScreenState extends State<FunNlearnResultScreen> {
-  final title = Get.arguments as String;
+ 
   @override
   Widget build(BuildContext context) {
     return const RepaintBoundary(
       child: Scaffold(
-        backgroundColor: MyColor.primaryColor,
-         appBar: CustomCategoryAppBar(title: MyStrings.quizResult),
+          backgroundColor: MyColor.primaryColor,
+          appBar: CustomCategoryAppBar(title: MyStrings.quizResult),
           body: SingleChildScrollView(
-            child:  Padding(
-              padding: EdgeInsets.symmetric(horizontal:Dimensions.space15,vertical: Dimensions.space50),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space50),
               child: FunNLearnResultBodySection(),
             ),
-          )
-        ),
+          )),
     );
   }
 }

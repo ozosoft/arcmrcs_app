@@ -22,6 +22,7 @@ class MyStrings {
   static const String searching = "Searching";
   static const String areYouSureYouWantToLeaveThisRoom = "Are You sure You Want to leave this room!";
   static const String questionNotFoundMsg = "Questions not found! Please try again after a few minutes.";
+  static const String noQuestionFoundMsg = "Sorry! No Questions!";
   static const String oponentLeftTheGame = "Oponent Left The game!";
   static const String youLeftTheGame = "You Left The game!";
   static const String youWon = "You Won";
@@ -252,6 +253,7 @@ class MyStrings {
   static const String healthAndQuizdescription = "The health Quiz feature aims to bring the excitement";
   static const String topCategory = "Top Categories";
   static const String quizContest = "Quiz Contest";
+  static const String quiz = "Quiz";
   static const String battleOfTheDay = "Battle's of the Day";
   static const String oneVSone = "1 v/s 1 Battle Quiz";
   static const String groupBattle = "Group Battle";

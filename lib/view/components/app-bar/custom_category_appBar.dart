@@ -13,7 +13,7 @@ class CustomCategoryAppBar extends StatelessWidget implements PreferredSizeWidge
     return AppBar(
       title: Text(
         title,
-        style: semiBoldExtraLarge,
+        style: semiBoldMediumLarge,
       ),
       backgroundColor: MyColor.colorWhite,
       iconTheme: const IconThemeData(color: MyColor.colorBlack),
@@ -29,6 +29,6 @@ class CustomCategoryAppBar extends StatelessWidget implements PreferredSizeWidge
   @override
   Size get preferredSize => const Size(
         double.maxFinite,
-        Dimensions.space70,
+        Dimensions.space56,
       );
 }

@@ -63,25 +63,25 @@ class _FunNLearnSubCategoriesCardScreenState extends State<FunNLearnSubCategorie
                         shrinkWrap: true,
                         itemCount: controller.subCategoriesList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            onTap: () {
-                              String title = controller.subCategoriesList[index].name.toString();
+                          return CategoriesCard(
+                            index: index,
+                            image: UrlContainer.subCategoriesImage + controller.subCategoriesList[index].image.toString(),
+                            title: controller.subCategoriesList[index].name.toString(),
+                            questions: controller.subCategoriesList[index].quizInfosCount.toString(),
+                            expansionVisible: false,
+                            fromViewAll: false,
+                            isExpand: false,
+                            showLevel: false,
+                            levels: controller.itemCount.toString(),
+                            fromFunNlearn: true,
+                            onTap: (){
+                               String title = controller.subCategoriesList[index].name.toString();
                               controller.showExpandedSection = true;
                               controller.changeExpandIndex(index);
 
-                              Get.toNamed(RouteHelper.funNlearnListScreen,arguments: [ controller.subCategoriesList[index].name.toString(),controller.subCategoriesList[index].id.toString()]);
+                              Get.toNamed(RouteHelper.funNlearnListScreen, arguments: [controller.subCategoriesList[index].name.toString(), controller.subCategoriesList[index].id.toString()]);
+                    
                             },
-                            child: CategoriesCard(
-                              index: index,
-                              image: UrlContainer.subCategoriesImage + controller.subCategoriesList[index].image.toString(),
-                              title: controller.subCategoriesList[index].name.toString(),
-                              questions: controller.subCategoriesList[index].quizInfos.toString(),
-                              expansionVisible: false,
-                              fromViewAll: false,
-                              isExpand: false,
-                              levels: controller.itemCount.toString(),
-                              fromFunNlearn: true,
-                            ),
                           );
                         }),
                   ],

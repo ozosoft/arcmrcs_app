@@ -21,8 +21,6 @@ class PlayDiffrentQuizes extends StatefulWidget {
 }
 
 class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
-
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(

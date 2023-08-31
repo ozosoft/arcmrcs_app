@@ -58,6 +58,9 @@ class _MyAppState extends State<MyApp> {
       builder: (localizeController) => GetMaterialApp(
         theme: ThemeData(
           scaffoldBackgroundColor: MyColor.scaffoldBackgroundColor,
+           appBarTheme: const AppBarTheme(
+          systemOverlayStyle: SystemUiOverlayStyle(statusBarBrightness: Brightness.light)
+           )
         ),
         title: MyStrings.appName,
         debugShowCheckedModeBanner: false,

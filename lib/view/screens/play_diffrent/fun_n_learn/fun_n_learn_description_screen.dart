@@ -55,7 +55,7 @@ class _FunNLearnDescriptionState extends State<FunNLearnDescription> {
                           text: MyStrings.letsPlay,
                           press: () {
                             Get.toNamed(RouteHelper.funNlearnQuizScreen, arguments: [controller.title, controller.subCategoryId]);
-                            print("Tttttttttthis isssssssssssss sub cat"+controller.subCategoryId);
+
                           })
                     ],
                   ),

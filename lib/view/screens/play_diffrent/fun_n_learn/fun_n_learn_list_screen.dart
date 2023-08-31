@@ -7,7 +7,11 @@ import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/category-card/categories_card.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
+
+import '../../../../core/utils/my_strings.dart';
+import '../../../../core/utils/url_container.dart';
 
 class FunNlearnListScreen extends StatefulWidget {
   final String title;
@@ -62,23 +66,24 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
                         shrinkWrap: true,
                         itemCount: controller.fun_N_Learn_descriptionList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
+                          return CategoriesCard(
                             onTap: () {
-                              Get.toNamed(RouteHelper.funNlearnDescriptionScreen,arguments: [controller.fun_N_Learn_descriptionList[index].title.toString(),controller.fun_N_Learn_descriptionList[index].id.toString(),controller.fun_N_Learn_descriptionList[index].description.toString()]);
-                              controller.changeExpandIndex(index);
+                              if (controller.fun_N_Learn_descriptionList[index].questionsCount.toString() == "0") {
+                                CustomSnackBar.error(errorList: [MyStrings.noQuestionFoundMsg]);
+                              } else {
+                                Get.toNamed(RouteHelper.funNlearnDescriptionScreen, arguments: [controller.fun_N_Learn_descriptionList[index].title.toString(), controller.fun_N_Learn_descriptionList[index].id.toString(), controller.fun_N_Learn_descriptionList[index].description.toString()]);
+                                // controller.changeExpandIndex(index);
+                              }
                             },
-                            child: CategoriesCard(
-                              index: index,
-                              // image: UrlContainer.subCategoriesImage +
-                              //     controller.fun_N_Learn_descriptionList[index].image
-                              //         .toString(),
-                              title: controller.fun_N_Learn_descriptionList[index].title.toString(),
-                              questions: controller.fun_N_Learn_descriptionList[index].questionsCount.toString(),
-                              expansionVisible: false,
-                              fromViewAll: false,
-                              isExpand: index == controller.expandIndex,
-                              // levels: controller.itemCount.toString(),
-                            ),
+                            showLevel: false,
+                            index: index,
+                            image: UrlContainer.subCategoriesImage + controller.fun_N_Learn_descriptionList[index].image.toString(),
+                            title: controller.fun_N_Learn_descriptionList[index].title.toString(),
+                            questions: controller.fun_N_Learn_descriptionList[index].questionsCount.toString(),
+                            expansionVisible: false,
+                            fromViewAll: false,
+                            isExpand: index == controller.expandIndex,
+                            // levels: controller.itemCount.toString(),
                           );
                         }),
                   ],
