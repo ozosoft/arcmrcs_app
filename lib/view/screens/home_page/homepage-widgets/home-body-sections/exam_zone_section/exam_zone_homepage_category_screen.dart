@@ -25,51 +25,35 @@ class ExamZoneCategoryScreen extends StatefulWidget {
 
 class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
   @override
-  void initState() {
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DashBoardRepo(apiClient: Get.find()));
-    Get.put(DashBoardController(dashRepo: Get.find()));
-    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
-
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(
       builder: (controller) => Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          controller.examZonelist.isNotEmpty
-              ? Padding(
-                  padding: const EdgeInsets.only(bottom: Dimensions.space5, left: Dimensions.space5, right: Dimensions.space5, top: Dimensions.space20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        MyStrings.examZone,
-                        style: semiBoldMediumLarge,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Get.toNamed(RouteHelper.examZoneScreen);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(Dimensions.space5),
-                          child: Text(
-                            MyStrings.viewAll,
-                            style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
-                          ),
-                        ),
-                      ),
-                    ],
+          Padding(
+            padding: const EdgeInsets.only(bottom: Dimensions.space5, left: Dimensions.space5, right: Dimensions.space5, top: Dimensions.space20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  MyStrings.examZone,
+                  style: semiBoldMediumLarge,
+                ),
+                InkWell(
+                  onTap: () {
+                    Get.toNamed(RouteHelper.examZoneScreen);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimensions.space5),
+                    child: Text(
+                      MyStrings.viewAll,
+                      style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
+                    ),
                   ),
-                )
-              : const SizedBox(),
+                ),
+              ],
+            ),
+          ),
           const SizedBox(
             height: Dimensions.space8,
           ),
@@ -83,7 +67,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                       children: List.generate(
                           controller.examZonelist.length,
                           (index) => SizedBox(
-                                width: context.width * 0.8,
+                                width: context.width * 0.85,
                                 child: GestureDetector(
                                   onTap: () {
                                     // Get.toNamed(RouteHelper.examZoneScreen);
@@ -117,14 +101,25 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                             children: [
                                               //Image
-                                              Container(
-                                                margin: const EdgeInsets.only(right: Dimensions.space10),
-                                                child: MyImageWidget(
-                                                  height: context.width * 0.15,
-                                                  width: context.width * 0.15,
-                                                  imageUrl: UrlContainer.examZoneImage + controller.examZonelist[index].image.toString(),
+                                              if (controller.examZonelist[index].image.toString() == "null") ...[
+                                                Container(
+                                                  margin: const EdgeInsets.only(right: Dimensions.space10),
+                                                  child: SvgPicture.asset(
+                                                    MyImages.examzoneSVG,
+                                                    height: context.width * 0.15,
+                                                    width: context.width * 0.15,
+                                                  ),
                                                 ),
-                                              ),
+                                              ] else ...[
+                                                Container(
+                                                  margin: const EdgeInsets.only(right: Dimensions.space10),
+                                                  child: MyImageWidget(
+                                                    height: context.width * 0.15,
+                                                    width: context.width * 0.15,
+                                                    imageUrl: UrlContainer.examZoneImage + controller.examZonelist[index].image.toString(),
+                                                  ),
+                                                ),
+                                              ],
                                               //Contents
                                               Expanded(
                                                 child: Container(
@@ -150,6 +145,9 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                               ),
                                             ],
                                           ),
+                                        ),
+                                        const SizedBox(
+                                          height: Dimensions.space20,
                                         ),
                                         Container(
                                           height: 0.1,
@@ -205,7 +203,31 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                     ),
                   ),
                 )
-              : const SizedBox(),
+              : Container(
+                  width: double.infinity,
+                  margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
+                  padding: const EdgeInsets.all(Dimensions.space20),
+                  decoration: BoxDecoration(
+                    color: MyColor.colorWhite,
+                    borderRadius: BorderRadius.circular(Dimensions.space10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: MyColor.cardShaddowColor2,
+                        offset: Offset(0, 8),
+                        blurRadius: 60,
+                        spreadRadius: 0,
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      MyStrings.noExamFound,
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                      style: regularDefault.copyWith(color: MyColor.spinLoadColor),
+                    ),
+                  ),
+                ),
         ],
       ),
     );

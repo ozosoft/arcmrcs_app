@@ -77,6 +77,7 @@ class Dimensions {
   static const double space60  = 60;
   static const double space43  = 43;
   static const double space120 = 120;
+  static const double space125 = 125;
   static const double space140 = 140;
   static const double space130 = 130;
   static const double space100 = 100;

@@ -88,6 +88,8 @@ class MyStrings {
   static const String examKey = "Enter the exam key";
   static const String enterExam = "Enter In Exam";
   static const String examResult = "Exam Result";
+  static const String noExamFound = "Sorry! No exam is currently running.";
+  static const String noContestFound = "Sorry! No contest is currently running.";
 
   static const String chooseFile = 'Choose File';
   static const String chooseAvatar = 'Choose Avatar';

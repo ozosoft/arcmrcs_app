@@ -26,24 +26,6 @@ class QuizContestSection extends StatefulWidget {
 
 class _QuizContestSectionState extends State<QuizContestSection> {
   @override
-  void initState() {
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DashBoardRepo(apiClient: Get.find()));
-    Get.put(DashBoardController(dashRepo: Get.find()));
-     Get.put(QuizContestRepo(apiClient: Get.find()));
-
-     Get.put(QuizContestQuestionsController(quizContestRepo:Get.find(),));
-    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
-
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
-    });
-  }
- 
-
-  @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(
       builder: (controller) => Column(
@@ -81,17 +63,17 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                   children: List.generate(
                       controller.contestlist.length,
                       (index) => GetBuilder<QuizContestQuestionsController>(
-                         builder: (quizQuestionscontrollers) => InkWell(
+                            builder: (quizQuestionscontrollers) => InkWell(
                               onTap: () {
                                 print(quizQuestionscontrollers.examQuestionsList!);
-                               if (quizQuestionscontrollers.examQuestionsList !="") {
+                                if (quizQuestionscontrollers.examQuestionsList != "") {
                                   Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [
-                                  controller.contestlist[index].id.toString(),
-                                  controller.contestlist[index].title.toString(),
-                                ]);
-                               } else {
-                                 CustomSnackBar.error(errorList: ["Sorry this contest is not available right now"]);
-                               }
+                                    controller.contestlist[index].id.toString(),
+                                    controller.contestlist[index].title.toString(),
+                                  ]);
+                                } else {
+                                  CustomSnackBar.error(errorList: ["Sorry this contest is not available right now"]);
+                                }
                               },
                               child: Container(
                                 margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
@@ -193,7 +175,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                 ),
                               ),
                             ),
-                      )),
+                          )),
                 )),
           ),
         ],

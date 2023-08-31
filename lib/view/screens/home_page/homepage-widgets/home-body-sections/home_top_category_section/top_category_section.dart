@@ -7,9 +7,6 @@ import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
 import 'package:flutter_prime/data/controller/sub_categories/sub_categories_controller.dart';
-import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
-import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:get/get.dart';
 import '../../../../../components/category-card/custom_top_category_card.dart';
 
@@ -22,21 +19,7 @@ class TopCategorySection extends StatefulWidget {
 
 class _TopCategorySectionState extends State<TopCategorySection> {
   @override
-  void initState() {
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DashBoardRepo(apiClient: Get.find()));
-    Get.put(DashBoardController(dashRepo: Get.find()));
-    Get.put(SubCategoriesRepo(apiClient: Get.find()));
-    Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
-    SubCategoriesController controllers = Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
-    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
 
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {

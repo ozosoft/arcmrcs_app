@@ -30,7 +30,6 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
       height: widget.appbarSize < kToolbarHeight ? kToolbarHeight : widget.appbarSize,
       child: GetBuilder<DashBoardController>(
         builder: (controller) => AppBar(
-          // systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: MyColor.primaryColor),
           leadingWidth: Dimensions.space30,
           leading: IconButton(
               onPressed: () {
@@ -76,7 +75,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                   children: [
                     Text(
                       "${MyStrings.hi} ${controller.dashRepo.apiClient.getUserFullName()}",
-                      style: semiBoldLarge.copyWith(fontSize: Dimensions.fontMediumLarge,  color: MyColor.colorWhite),
+                      style: semiBoldLarge.copyWith(fontSize: Dimensions.fontMediumLarge, color: MyColor.colorWhite),
                     ),
                     const SizedBox(height: Dimensions.space5),
                     Text(

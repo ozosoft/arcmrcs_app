@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/view/screens/1vs1/one_vs_one_battle_screen.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/utils/dimensions.dart';
 import '../../../../../../core/utils/my_strings.dart';
@@ -65,35 +63,34 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      Expanded(
+                        child: Container(
+                          height: Dimensions.space50,
+                          width: Dimensions.space220,
+                          padding: const EdgeInsets.only(top: Dimensions.space7),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                MyStrings.oneVSone,
+                                style: semiBoldMediumLarge,
+                              ),
+                              const SizedBox(height: Dimensions.space8),
+                              Text(
+                                MyStrings.battleQuiz,
+                                style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                      // const Spacer(),
+                      Image.asset(
+                        MyImages.battleKnife,
+                        height: context.width * 0.18,
+                      ),
                       const SizedBox(
                         width: Dimensions.space10,
-                      ),
-                      Container(
-                        height: Dimensions.space50,
-                        width: Dimensions.space220,
-                        padding: const EdgeInsets.only(top: Dimensions.space7),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              MyStrings.oneVSone,
-                              style: semiBoldMediumLarge,
-                            ),
-                            const SizedBox(height: Dimensions.space8),
-                            Text(
-                              MyStrings.battleQuiz,
-                              style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
-                            )
-                          ],
-                        ),
-                      ),
-                      const Spacer(),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Image.asset(
-                          MyImages.battleKnife,
-                          height: context.width * 0.2,
-                        ),
                       ),
                     ],
                   ),
