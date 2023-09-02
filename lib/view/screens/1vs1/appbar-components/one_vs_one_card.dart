@@ -27,7 +27,6 @@ class _OneVSOneCustomCardWidgetState extends State<OneVSOneCustomCardWidget> {
           children: [
             SizedBox(
               height: Dimensions.space50,
-              width: Dimensions.space80,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,7 +53,6 @@ class _OneVSOneCustomCardWidgetState extends State<OneVSOneCustomCardWidget> {
             ),
             SizedBox(
               height: Dimensions.space50,
-              width: Dimensions.space110,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,

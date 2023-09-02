@@ -37,7 +37,7 @@ class UrlContainer {
   static const String verify2FAUrl = 'verify-g2fa';
   static const String dashBoardCategoryImage = '$domainUrl/assets/admin/images/category/';
   static const String quizContestImage = '$domainUrl/assets/admin/images/contest/';
-  static const String playdiffrentImage = '$domainUrl/assets/admin/images/quiz/';
+  static const String playdifferentImage = '$domainUrl/assets/admin/images/quiz/';
   static const String allCategoriesImage = '$domainUrl/assets/admin/images/category/';
   static const String subCategoriesImage = '$domainUrl/assets/admin/images/subcategory/';
   static const String questionImagePath = '$domainUrl/assets/admin/images/question';

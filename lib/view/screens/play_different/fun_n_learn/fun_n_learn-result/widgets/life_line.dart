@@ -1,28 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/data/controller/play_different_quizes/daily_quiz/daily_quiz_questions_controller.dart';
 import 'package:flutter_prime/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_quiz_controller.dart';
-import 'package:flutter_prime/data/repo/play_different_quizes/daily_quiz/daily_quiz_repo.dart';
+import 'package:flutter_prime/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:get/get.dart';
 
-class DailyQuizLifeLinesWidget extends StatefulWidget {
+class FunNLearnLifeLinesWidget extends StatefulWidget {
   final int questionIndex;
-  const DailyQuizLifeLinesWidget({super.key, required this.questionIndex});
+  const FunNLearnLifeLinesWidget({super.key, required this.questionIndex});
 
   @override
-  State<DailyQuizLifeLinesWidget> createState() => _DailyQuizLifeLinesWidgetState();
+  State<FunNLearnLifeLinesWidget> createState() => _FunNLearnLifeLinesWidgetState();
 }
 
-class _DailyQuizLifeLinesWidgetState extends State<DailyQuizLifeLinesWidget> {
+class _FunNLearnLifeLinesWidgetState extends State<FunNLearnLifeLinesWidget> {
   @override
   void initState() {
-  Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DailyQuizRepo(apiClient: Get.find()));
-
-    DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController( dailyQuizRepo: Get.find(),));
+    Get.put(ApiClient(sharedPreferences: Get.find()));
+    Get.put(FunNLearnRepo(apiClient: Get.find()));
+    FunNlearnQuizController controller = Get.put(FunNlearnQuizController( funNLearnRepo: Get.find()));
 
     controller.quizInfoID = Get.arguments[1];
 
@@ -38,18 +36,16 @@ class _DailyQuizLifeLinesWidgetState extends State<DailyQuizLifeLinesWidget> {
         children: [
           InkWell(
             onTap: () {
-              controller.makeFiftyFifty(widget.questionIndex);
+              controller.showQuestion();
+              print("object");
             },
-            child: Visibility(
-               visible: !controller.fiftyFifty,
-              child: const LevelCardButton(
-                // lifelineUsed: controller.showQuestions,
-                hasIcon: false,
-                height: Dimensions.space75,
-                width: Dimensions.space78,
-                hasImage: true,
-                image: MyImages.fiftyFiftySVG,
-              ),
+            child: const LevelCardButton(
+              // lifelineUsed: controller.showQuestions,
+              hasIcon: false,
+              height: Dimensions.space75,
+              width: Dimensions.space78,
+              hasImage: true,
+              image: MyImages.fiftyFiftySVG,
             ),
           ),
           Visibility(
@@ -61,22 +57,13 @@ class _DailyQuizLifeLinesWidgetState extends State<DailyQuizLifeLinesWidget> {
               child: LevelCardButton(lifelineUsed: controller.audienceVote, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.groupSVG),
             ),
           ),
-           InkWell(
-            onTap: () {
-              controller.countDownController.restart();
-              controller.restartCountDownTimer(widget.questionIndex);
-            },
-            child: Visibility(
-              visible: !controller.restartTimer,
-              child: const LevelCardButton(
-                  // lifelineUsed: controller.showQuestions,
-                  hasIcon: false,
-                  height: Dimensions.space75,
-                  width: Dimensions.space78,
-                  hasImage: true,
-                  image: MyImages.timeSVG),
-            ),
-          ),
+          const LevelCardButton(
+             
+              hasIcon: false,
+              height: Dimensions.space75,
+              width: Dimensions.space78,
+              hasImage: true,
+              image: MyImages.timeSVG),
           Visibility(
 
             visible: !controller.flipQuistions,

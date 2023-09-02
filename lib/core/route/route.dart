@@ -24,16 +24,16 @@ import 'package:flutter_prime/view/screens/exam_zone/exam-result/exam_result_scr
 import 'package:flutter_prime/view/screens/exam_zone/widgets/exam_zone_quiz_screen.dart';
 
 import 'package:flutter_prime/view/screens/notification/notification_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/daily_quiz/daily_quiz_questions_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/daily_quiz/daily_quiz_result/daily_quiz_result_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/daily_quiz/review-answer/review_answer-screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn-result/fun_N_learn_result_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_description_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_list_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_questios_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_sub_categories.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/review-answer/review_answer-screen.dart';
+import 'package:flutter_prime/view/screens/play_different/daily_quiz/daily_quiz_questions_screen.dart';
+import 'package:flutter_prime/view/screens/play_different/daily_quiz/daily_quiz_result/daily_quiz_result_screen.dart';
+import 'package:flutter_prime/view/screens/play_different/daily_quiz/review-answer/review_answer-screen.dart';
+import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn-result/fun_N_learn_result_screen.dart';
+import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn_description_screen.dart';
+import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn_list_screen.dart';
+import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn_questios_screen.dart';
+import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn_screen.dart';
+import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn_sub_categories.dart';
+import 'package:flutter_prime/view/screens/play_different/fun_n_learn/review-answer/review_answer-screen.dart';
 import 'package:flutter_prime/view/screens/profile/profile-edit/Profile_edit_screen.dart';
 import 'package:flutter_prime/view/screens/profile/profile_screen.dart';
 import 'package:flutter_prime/view/screens/general_quiz/quiz-questions/quiz_question_screen.dart';
@@ -64,8 +64,7 @@ import '../../view/screens/general_quiz/review-answer/review_answer-screen.dart'
 import '../../view/screens/quiz_contest/contest_result_screen/contest_result_screen.dart';
 import '../../view/screens/quiz_contest/question_screen/contest_questions_screen.dart';
 
-class RouteHelper { 
-
+class RouteHelper {
   static const String splashScreen = "/splash_screen";
   static const String onboardScreen = '/onboard_screen';
   static const String loginScreen = '/login_screen';
@@ -78,8 +77,8 @@ class RouteHelper {
   static const String subCategories = '/top_categories_screen';
   static const String quizQuestionsScreen = '/quiz_questions_screen';
   static const String quizResultScreen = '/quiz_result_screen';
-  static const String profileCompleteScreen       = "/profile_complete_screen";
-   //battle
+  static const String profileCompleteScreen = "/profile_complete_screen";
+  //battle
   static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
   static const String battleQuizResultScreen = '/battle_quiz_result_screen';
   static const String reviewAnswerScreen = '/review_answer_screen';
@@ -105,11 +104,10 @@ class RouteHelper {
   static const String gessThewordResult = "/gess_the_word_result";
   static const String gessThewordResultReview = "/gess_the_word_result_review";
 
-
   static const String examZoneQuestionScreen = '/exam_zone_questions_screen';
   static const String examZoneResultScreen = '/exam_zone_result_screen';
   static const String examZoneReviewAnswerScreen = '/exam_zone_review_answer_screen';
-  
+
   static const String funNlearnScreenScreen = '/fun_n_learn_screen';
   static const String funNlearnSubCategoryScreenScreen = '/fun_n_learn_sub_category_screen';
   static const String funNlearnListScreen = '/fun_n_learn_list_screen';
@@ -122,17 +120,16 @@ class RouteHelper {
   static const String dailyQuizresultReviewScreen = '/daily_quiz_result_review_screen';
   static const String quizContestListscreen = '/quiz_contest_List_screen';
   static const String quizContestQuestionscreen = '/quiz_contest_List_questions_screen';
-  static const String emailVerificationScreen     = "/verify_email_screen" ;
-  static const String smsVerificationScreen       = "/verify_sms_screen";
-  static const String twoFactorScreen             = "/two-factor-screen";
-  static const String quizContestresultScreen             = "/quiz-contest-screen";
-  static const String dailyquizContestresultScreen             = "/_daily_quiz-contest-screen";
-  static const String quizContestreviewScreen             = "/quiz_contest_review_screen";
-  static const String depositsScreen              = "/deposits";
-static const String depositsDetailsScreen       = "/deposits_details";
-static const String newDepositScreenScreen      = "/deposits_money";
-static const String depositWebViewScreen        = '/deposit_webView';
-
+  static const String emailVerificationScreen = "/verify_email_screen";
+  static const String smsVerificationScreen = "/verify_sms_screen";
+  static const String twoFactorScreen = "/two-factor-screen";
+  static const String quizContestresultScreen = "/quiz-contest-screen";
+  static const String dailyquizContestresultScreen = "/_daily_quiz-contest-screen";
+  static const String quizContestreviewScreen = "/quiz_contest_review_screen";
+  static const String depositsScreen = "/deposits";
+  static const String depositsDetailsScreen = "/deposits_details";
+  static const String newDepositScreenScreen = "/deposits_money";
+  static const String depositWebViewScreen = '/deposit_webView';
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -144,8 +141,6 @@ static const String depositWebViewScreen        = '/deposit_webView';
     GetPage(name: resetPassword, page: () => const ResetPasswordScreen()),
     GetPage(name: bottomNavBarScreen, page: () => const BottomNavigationBarScreen()),
 
-
-
     GetPage(name: subCategories, page: () => const SubCategoriesCardScreen(title: "")),
     GetPage(name: allCategories, page: () => const AllCategoriesScreen()),
     GetPage(name: quizQuestionsScreen, page: () => const QuizQuestionsScreen()),
@@ -153,7 +148,6 @@ static const String depositWebViewScreen        = '/deposit_webView';
     //battle
     GetPage(name: battleQuizQuestionsScreen, page: () => const BattleQuizQuestionsScreen()),
     GetPage(name: battleQuizResultScreen, page: () => const BattleQuizResultScreen()),
-
 
     GetPage(name: reviewAnswerScreen, page: () => const ReviewAnswerScreen()),
     GetPage(name: oneVSoneBattleScreen, page: () => const OneVSOneBattleScreen()),
@@ -186,11 +180,7 @@ static const String depositWebViewScreen        = '/deposit_webView';
 
     GetPage(name: funNlearnScreenScreen, page: () => const FunNLearnScreen()),
     GetPage(name: funNlearnSubCategoryScreenScreen, page: () => const FunNLearnSubCategoriesCardScreen(title: '')),
-    GetPage(
-        name: funNlearnListScreen,
-        page: () => const FunNlearnListScreen(
-              title: "",
-            )),
+    GetPage(name: funNlearnListScreen, page: () => const FunNlearnListScreen(title: "")),
     GetPage(name: funNlearnDescriptionScreen, page: () => const FunNLearnDescription()),
     GetPage(name: funNlearnResultScreen, page: () => const FunNlearnResultScreen()),
     GetPage(name: funNlearnResultReviewScreen, page: () => const FunNPlayReviewAnswerScreen()),
@@ -206,10 +196,13 @@ static const String depositWebViewScreen        = '/deposit_webView';
     GetPage(name: quizContestresultScreen, page: () => const QuizContestResultScreen()),
     GetPage(name: dailyquizContestresultScreen, page: () => const DailyQuizResultScreen()),
     GetPage(name: quizContestreviewScreen, page: () => const QuizContestReviewAnswerScreen()),
-     GetPage(name: depositsScreen,               page: () => const NewDepositScreen(price: '', id: '',)),
-     
-    
-    GetPage(name: depositWebViewScreen,         page: () => CoinStroreWebViewScreen(redirectUrl: Get.arguments)),
+    GetPage(
+        name: depositsScreen,
+        page: () => const NewDepositScreen(
+              price: '',
+              id: '',
+            )),
 
+    GetPage(name: depositWebViewScreen, page: () => CoinStroreWebViewScreen(redirectUrl: Get.arguments)),
   ];
 }

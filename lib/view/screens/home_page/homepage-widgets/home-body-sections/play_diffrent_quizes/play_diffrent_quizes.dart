@@ -79,7 +79,7 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                         child: MyImageWidget(
                           height: context.width * 0.14,
                           width: context.width * 0.14,
-                          imageUrl: UrlContainer.playdiffrentImage + controller.differentQuizlist[index].image.toString(),
+                          imageUrl: UrlContainer.playdifferentImage + controller.differentQuizlist[index].image.toString(),
                         ),
                       ),
                       const SizedBox(

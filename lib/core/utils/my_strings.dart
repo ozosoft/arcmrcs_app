@@ -289,7 +289,7 @@ class MyStrings {
   static const String accountNumber = "Account Number";
   static const String routingNumber = "Routing Number";
   static const String profileDetails = "Profile Details";
-  static const String playDiffrentQuizs = "Play Diffrent Quizs";
+  static const String playDiffrentQuizs = "Play Different Quizs";
   static const String payNow = "PAY NOW";
   static const String noDepositFound = "No Deposit Found";
   static const String noWithdrawFound = "No Withdraw Found";
@@ -505,6 +505,7 @@ class MyStrings {
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
   static const String sorryNoCategory = "Sorry No Category Found";
+  static const String sorryNoQuizFound = "Sorry No Quiz Available Right Now!";
 
   static const String category = "Category";
   static const String subcategory = "Sub Category";

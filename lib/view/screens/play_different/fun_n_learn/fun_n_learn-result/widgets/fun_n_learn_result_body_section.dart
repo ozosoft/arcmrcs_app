@@ -4,11 +4,7 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/play_different_quizes/daily_quiz/daily_quiz_questions_controller.dart';
-import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_questions_controller.dart';
-import 'package:flutter_prime/data/repo/play_different_quizes/daily_quiz/daily_quiz_repo.dart';
-import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:flutter_prime/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_quiz_controller.dart';
 import 'package:flutter_prime/view/components/divider/custom_dashed_divider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -17,27 +13,25 @@ import 'player_profile_picture.dart';
 import 'rewards_section.dart';
 import 'right_and_wrong_ans_section.dart';
 
-class QuizContestResultSection extends StatefulWidget {
-  const QuizContestResultSection({super.key});
+class FunNLearnResultBodySection extends StatefulWidget {
+  const FunNLearnResultBodySection({super.key});
 
   @override
-  State<QuizContestResultSection> createState() => _QuizContestResultSectionState();
+  State<FunNLearnResultBodySection> createState() => _FunNLearnResultBodySectionState();
 }
 
-class _QuizContestResultSectionState extends State<QuizContestResultSection> {
+class _FunNLearnResultBodySectionState extends State<FunNLearnResultBodySection> {
   bool showQuestions = false;
   bool audienceVote = false;
   bool tapAnswer = false;
 
-
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<QuizContestQuestionsController>(
+    return GetBuilder<FunNlearnQuizController>(
       builder: (controller) => Stack(
         children: [
-          SvgPicture.asset(MyImages.reviewBgImage),
+          // SvgPicture.asset(MyImages.reviewBgImage),
           Container(
             margin: const EdgeInsets.only(top: Dimensions.space20),
             padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),
@@ -51,36 +45,48 @@ class _QuizContestResultSectionState extends State<QuizContestResultSection> {
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                      child: SvgPicture.asset(
-                        MyImages.victory,
-                        fit: BoxFit.cover,
-                      ),
+                      child: controller.appreciation == "Failed"
+                          ? SvgPicture.asset(
+                              MyImages.victory,
+                              fit: BoxFit.cover,
+                              color: Colors.grey,
+                            )
+                          : SvgPicture.asset(
+                              MyImages.victory,
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                          padding: const EdgeInsets.only(top: Dimensions.space100),
+                          child: Text(
+                            controller.appreciation,
+                            style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
+                          )),
                     ),
                     Container(
                         width: double.infinity,
-                        padding: EdgeInsets.only(left: size.width * .3, top: Dimensions.space100),
-                        child: Text(
-                          MyStrings.victory,
-                          style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
-                        )),
-                    Container(
-                        width: double.infinity,
-                        padding:const EdgeInsets.only(top: Dimensions.space180),
+                        padding: const EdgeInsets.only(top: Dimensions.space180),
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            controller.appreciation,
+                            controller.appreciation == "Failed" ? MyStrings.betterLuckNextTime : MyStrings.victory,
                             style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
                           ),
                         )),
-                   
                   ],
+                ),
+                const SizedBox(
+                  height: Dimensions.space12,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RightOrWrongAnsSection(correctAnswer: controller.correctAnswer, wrongAnswer: controller.wrongAnswer, totalQuestions: controller.totalQuestions),
-                    const PlayerProfilePicture(),
+                    PlayerProfilePicture(
+                      imagePath: controller.funNLearnRepo.apiClient.getUserImagePath(),
+                    ),
                     ExamRewardsSection(
                       totalCoin: controller.totalCoin,
                       winningCoin: controller.winningCoin,

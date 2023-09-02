@@ -11,8 +11,8 @@ import '../../../core/utils/my_images.dart';
 import '../../../core/utils/style.dart';
 
 class CategoriesCard extends StatefulWidget {
-  final String title, questions, image, levels, minute, marks, date, subCategoryId;
-  final bool expansionVisible, fromViewAll, fromBookmark, fromExam, fromFunNlearn, fromAllCategory;
+  final String title, questions, image, imageMainPath, levels, minute, marks, date, subCategoryId;
+  final bool expansionVisible, fromViewAll, fromExam, fromFunNlearn, fromAllCategory;
   final bool isExpand;
   final bool showLevel;
   final int index;
@@ -28,7 +28,6 @@ class CategoriesCard extends StatefulWidget {
       this.expansionVisible = false,
       this.fromFunNlearn = false,
       this.fromAllCategory = false,
-      this.fromBookmark = false,
       required this.fromViewAll,
       this.levels = "1",
       this.fromExam = false,
@@ -37,7 +36,8 @@ class CategoriesCard extends StatefulWidget {
       this.isExpand = false,
       required this.index,
       this.date = "",
-      this.onTap});
+      this.onTap,
+      this.imageMainPath = ""});
   @override
   State<CategoriesCard> createState() => _CategoriesCardState();
 }
@@ -75,14 +75,15 @@ class _CategoriesCardState extends State<CategoriesCard> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const SizedBox(width: Dimensions.space20),
-                      Container(
-                        margin: const EdgeInsets.only(right: Dimensions.space14, top: Dimensions.space10),
-                        width: Dimensions.space40,
-                        height: Dimensions.space40,
-                        child: MyImageWidget(
-                          imageUrl: widget.image,
+                      
+                        Container(
+                          margin: const EdgeInsets.only(right: Dimensions.space14, top: Dimensions.space10),
+                          width: Dimensions.space40,
+                          height: Dimensions.space40,
+                          child: MyImageWidget(
+                            imageUrl: widget.image,
+                          ),
                         ),
-                      ),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsets.only(top: Dimensions.space15),
@@ -100,7 +101,7 @@ class _CategoriesCardState extends State<CategoriesCard> {
                                           child: Center(child: Text(widget.fromExam ? widget.marks : widget.levels, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                         )
                                       : const SizedBox(),
-                                  const SizedBox(width: Dimensions.space10),
+                      
                                   CustomChipsWidget(
                                     padding: Dimensions.space5,
                                     child: Center(child: Text(widget.fromExam ? widget.date : widget.questions + (widget.fromFunNlearn == true ? " ${MyStrings.quiz}" : MyStrings.questionse), style: regularDefault.copyWith(color: MyColor.colorGrey))),
@@ -110,12 +111,6 @@ class _CategoriesCardState extends State<CategoriesCard> {
                                       ? CustomChipsWidget(
                                           padding: Dimensions.space5,
                                           child: Center(child: Text(widget.fromExam ? widget.minute : widget.questions, style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                        )
-                                      : const SizedBox(),
-                                  widget.fromViewAll == false
-                                      ? Align(
-                                          alignment: Alignment.topCenter,
-                                          child: widget.fromExam ? const SizedBox() : SvgPicture.asset(widget.fromBookmark ? MyImages.deleteSVG : MyImages.bookmarkSVG, height: Dimensions.space20),
                                         )
                                       : const SizedBox(),
                                 ],

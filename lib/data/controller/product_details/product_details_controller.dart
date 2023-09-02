@@ -1,10 +1,7 @@
-import 'dart:ui';
 
-import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/data/controller/home/home_controller.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/my_images.dart';
 
 class ProductDetailsController extends GetxController{
 
