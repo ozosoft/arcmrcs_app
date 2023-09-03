@@ -2,10 +2,8 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/data/model/exam_zone/exam_result_model.dart';
 import 'package:flutter_prime/data/model/exam_zone/exam_zone_model.dart';
-import 'package:flutter_prime/data/model/submit_answer/submit_answer_model.dart';
 
 import 'package:flutter_prime/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:get/get.dart';
@@ -71,7 +69,8 @@ class ExamZoneQuizController extends GetxController {
     loading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
+    print(
+        "submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
 
     ResponseModel getQuestionsModel = await examZoneRepo.getExamQuestionList(quizInfoId, enterExamKey);
 
@@ -117,10 +116,9 @@ class ExamZoneQuizController extends GetxController {
   }
 
   int remainingTime = 30;
- 
 
   int selectedOptionIndex = -1;
-   selectAnswer(
+  selectAnswer(
     int optionIndex,
     int questionIndex,
   ) {
@@ -173,7 +171,7 @@ class ExamZoneQuizController extends GetxController {
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
 
-   int timerDuration = 20;
+  int timerDuration = 20;
   int countDownTimerIndex = -1;
   bool restartTimer = false;
   restartCountDownTimer(int questionIndex) {
@@ -202,7 +200,6 @@ class ExamZoneQuizController extends GetxController {
     update();
   }
 
-
   void setCurrentOption(int questionsIndex) {
     // optionsList.clear();
 
@@ -224,7 +221,8 @@ class ExamZoneQuizController extends GetxController {
     submitLoading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
+    print(
+        "submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
 
     Map<String, dynamic> params = {};
 
@@ -254,10 +252,7 @@ class ExamZoneQuizController extends GetxController {
         wrongAnswer = model.data!.wrongAnswer.toString();
         totalCoin = model.data!.totalCoin.toString();
         winningCoin = model.data!.winingCoin.toString();
-   
-       
- 
-     
+
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);

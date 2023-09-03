@@ -111,7 +111,7 @@ class ExamZoneController extends GetxController {
         //   examQuestionsList.addAll(examQuestion);
         // }
 
-        Get.toNamed(RouteHelper.examZoneQuestionScreen, arguments: [quizInfoId, enterExamKey]);
+        Get.toNamed(RouteHelper.examZoneQuestionScreen,  arguments:  [quizInfoId,  enterExamKey]);
         print("this is quiz info id"+quizInfoId);
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {

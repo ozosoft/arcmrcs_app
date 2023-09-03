@@ -7,7 +7,6 @@ import 'package:flutter_prime/view/screens/general_quiz/quiz-result/widgets/quiz
 import 'package:get/get.dart';
 
 class QuizResultScreen extends StatefulWidget {
- 
   const QuizResultScreen({super.key});
 
   @override
@@ -20,15 +19,14 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
   Widget build(BuildContext context) {
     return const RepaintBoundary(
       child: Scaffold(
-        backgroundColor: MyColor.primaryColor,
-         appBar: CustomCategoryAppBar(title: MyStrings.quizResult),
+          backgroundColor: MyColor.primaryColor,
+          appBar: CustomCategoryAppBar(title: MyStrings.quizResult),
           body: SingleChildScrollView(
-            child:  Padding(
-              padding: EdgeInsets.symmetric(horizontal:Dimensions.space15,vertical: Dimensions.space50),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space50),
               child: QuizResultBodySection(),
             ),
-          )
-        ),
+          )),
     );
   }
 }

@@ -27,8 +27,6 @@ class LoginBodySection extends StatefulWidget {
 class _LoginBodySectionState extends State<LoginBodySection> {
   final formKey = GlobalKey<FormState>();
 
- 
-
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
@@ -37,10 +35,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
 
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Get.find<LoginController>().emailController;
-      Get.find<LoginController>().passwordController;
-      Get.find<LoginController>().remember;
-   
+      Get.find<LoginController>().remember = false;
     });
   }
 
@@ -48,8 +43,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
   Widget build(BuildContext context) {
     return GetBuilder<LoginController>(
       builder: (controller) => Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: Dimensions.space35, vertical: Dimensions.space7),
+        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space35, vertical: Dimensions.space7),
         child: Column(
           children: [
             SizedBox(
@@ -59,16 +53,18 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    MyStrings.welcomeBack,
+                    MyStrings.welcomeBack.tr,
                     style: semiBoldMediumLarge.copyWith(
-                        fontSize: Dimensions.space25),
+                      fontSize: Dimensions.space25,
+                    ),
                   ),
                   const SizedBox(height: Dimensions.space6),
                   Text(
-                    MyStrings.pleaseEnterDetails,
+                    MyStrings.pleaseEnterDetails.tr,
                     style: regularLarge.copyWith(
-                        color: MyColor.authScreenTextColor,
-                        fontSize: Dimensions.space15),
+                      color: MyColor.authScreenTextColor,
+                      fontSize: Dimensions.space15,
+                    ),
                   ),
                 ],
               ),
@@ -87,13 +83,13 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                     prefixicon: MyImages.personSVG,
                     animatedLabel: true,
                     needOutlineBorder: true,
-                    labelText: MyStrings.username,
+                    labelText: MyStrings.username.tr,
                     onChanged: (value) {},
                     textInputType: TextInputType.emailAddress,
                     inputAction: TextInputAction.next,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return MyStrings.fieldErrorMsg;
+                        return MyStrings.fieldErrorMsg.tr;
                       } else {
                         return null;
                       }
@@ -107,7 +103,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                     hastextcolor: true,
                     animatedLabel: true,
                     needOutlineBorder: true,
-                    labelText: MyStrings.password,
+                    labelText: MyStrings.password.tr,
                     onChanged: (value) {},
                     isShowSuffixIcon: true,
                     isPassword: true,
@@ -115,7 +111,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                     inputAction: TextInputAction.done,
                     validator: (value) {
                       if (value!.isEmpty) {
-                        return MyStrings.fieldErrorMsg;
+                        return MyStrings.fieldErrorMsg.tr;
                       } else {
                         return null;
                       }
@@ -131,19 +127,12 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                             width: Dimensions.space25,
                             height: Dimensions.space25,
                             child: Checkbox(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        Dimensions.space5)),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.space5)),
                                 activeColor: MyColor.primaryColor,
                                 checkColor: MyColor.colorWhite,
                                 value: controller.remember,
                                 side: MaterialStateBorderSide.resolveWith(
-                                  (states) => BorderSide(
-                                      width: Dimensions.space1,
-                                      color: controller.remember
-                                          ? MyColor.getTextFieldEnableBorder()
-                                          : MyColor
-                                              .getTextFieldDisableBorder()),
+                                  (states) => BorderSide(width: Dimensions.space1, color: controller.remember ? MyColor.getTextFieldEnableBorder() : MyColor.getTextFieldDisableBorder()),
                                 ),
                                 onChanged: (value) {
                                   setState(() {
@@ -153,7 +142,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                           ),
                           const SizedBox(width: Dimensions.space8),
                           DefaultText(
-                            text: MyStrings.rememberMe,
+                            text: MyStrings.rememberMe.tr,
                             textColor: MyColor.getAuthTextColor(),
                           )
                         ],
@@ -163,23 +152,24 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                           Get.toNamed(RouteHelper.forgetpasswordScreen);
                         },
                         child: DefaultText(
-                          text: MyStrings.forgotPassword,
+                          text: MyStrings.forgotPassword.tr,
                           textColor: MyColor.getAuthTextColor(),
                         ),
                       )
                     ],
                   ),
                   const SizedBox(height: Dimensions.space25),
-                controller.isSubmitLoading?const RoundedLoadingBtn():  RoundedButton(
-                      text: MyStrings.signIn,
-                      press: () {
-                        // Get.toNamed(RouteHelper.bottomNavBarScreen);
+                  controller.isSubmitLoading
+                      ? const RoundedLoadingBtn()
+                      : RoundedButton(
+                          text: MyStrings.signIn.tr,
+                          press: () {
+                            // Get.toNamed(RouteHelper.bottomNavBarScreen);
 
-                         if (formKey.currentState!.validate()) {
+                            if (formKey.currentState!.validate()) {
                               controller.loginUser();
-                             
                             }
-                      }),
+                          }),
                   const SizedBox(height: Dimensions.space10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

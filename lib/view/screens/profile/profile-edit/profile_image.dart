@@ -34,13 +34,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
 
    @override
   void initState() {
+
+     print('image : ${widget.imagePath}');
+
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ProfileRepo(apiClient: Get.find()));
 
-   Get.put(ProfileUpdateController(profileRepo: Get.find()));
+    Get.put(ProfileUpdateController(profileRepo: Get.find()));
 
     super.initState();
-
   
   } 
 
@@ -146,9 +148,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         type: FileType.custom,
         allowedExtensions: ['png', 'jpg', 'jpeg']);
     setState(() {
-      Get.find<ProfileController>().imageFile =
-          File(result!.files.single.path!);
-      imageFile = XFile(result.files.single.path!);
+      if(result !=null && result.files.single.path != null){
+        Get.find<ProfileUpdateController>().imageFile = File(result.files.single.path!);
+        imageFile = XFile(result.files.single.path!);
+      }
     });
   }
 }

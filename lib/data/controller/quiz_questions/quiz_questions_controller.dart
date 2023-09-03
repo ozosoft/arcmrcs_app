@@ -209,10 +209,12 @@ class QuizQuestionsController extends GetxController {
     for (int i = 0; i < questionsList.length; i++) {
       String quizeId = questionsList[i].id.toString();
       String selectedOptionId = questionsList[i].selectedOptionId.toString();
+
       params['question_id[${i}]'] = quizeId;
       print('quize id: ${quizeId}');
       params['option_$quizeId'] = selectedOptionId;
       print("option_$quizeId");
+
     }
     print(params['option_']);
     params['quizInfo_id'] = quizInfoID.toString();

@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_prime/data/model/battle/userBattleRoomDetails.dart';
+import 'package:flutter_prime/data/model/battle/user_battle_room_details_model.dart';
 
 class BattleRoom {
   final String? roomId;
@@ -7,12 +7,12 @@ class BattleRoom {
   final String? createdBy;
   final String? languageId;
 
-  final UserBattleRoomDetails? user1;
+  final UserBattleRoomDetailsModel? user1;
   //it will be in use for multiUserBattleRoom
   //user1 will be the creator of this room
-  final UserBattleRoomDetails? user2; //it will be in use for multiUserBattleRoom
-  final UserBattleRoomDetails? user3; //it will be in use for multiUserBattleRoom
-  final UserBattleRoomDetails? user4; //it will be in use for multiUserBattleRoom
+  final UserBattleRoomDetailsModel? user2; //it will be in use for multiUserBattleRoom
+  final UserBattleRoomDetailsModel? user3; //it will be in use for multiUserBattleRoom
+  final UserBattleRoomDetailsModel? user4; //it will be in use for multiUserBattleRoom
   final int? entryFee; //it will be in use for multiUserBattleRoom
   final String? roomCode; //it will be in use for multiUserBattleRoom
   final bool? readyToPlay; //it will be in use for multiUserBattleRoom
@@ -30,10 +30,10 @@ class BattleRoom {
         readyToPlay: data['readyToPlay'] ?? false,
         entryFee: data['entryFee'] ?? 0,
         roomCode: data['roomCode'] ?? "",
-        user1: UserBattleRoomDetails.fromJson(Map.from(data['user1'])),
-        user2: UserBattleRoomDetails.fromJson(Map.from(data['user2'])),
-        user3: UserBattleRoomDetails.fromJson(Map.from(data['user3'] ?? {})),
-        user4: UserBattleRoomDetails.fromJson(Map.from(data['user4'] ?? {})),
+        user1: UserBattleRoomDetailsModel.fromJson(Map.from(data['user1'])),
+        user2: UserBattleRoomDetailsModel.fromJson(Map.from(data['user2'])),
+        user3: UserBattleRoomDetailsModel.fromJson(Map.from(data['user3'] ?? {})),
+        user4: UserBattleRoomDetailsModel.fromJson(Map.from(data['user4'] ?? {})),
         questions_list: data["questions_list"]);
   }
 

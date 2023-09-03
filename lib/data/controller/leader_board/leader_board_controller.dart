@@ -23,12 +23,12 @@ class LeaderBoardController extends GetxController {
   String rank2PlayerAvatar = "";
   String rank3PlayerAvatar = "";
 
-  bool loader = true;
+  bool isLoading = true;
 
   bool isActive = false;
 
-  void getdata() async {
-    loader = true;
+  void getData() async {
+    isLoading = true;
     update();
 
     ResponseModel model = await leaderBoardRepo.getLeaderBoardData();
@@ -44,15 +44,30 @@ class LeaderBoardController extends GetxController {
         if (leaderBoardList != null && leaderBoardList.isNotEmpty) {
           leaderBoardlist.addAll(leaderBoardList);
         }
-        rank1PlayerName = leaderBoardModel.data!.user![0].username!;
-        rank2PlayerName = leaderBoardModel.data!.user![1].username!;
-        rank3PlayerName = leaderBoardModel.data!.user![2].username!;
-        rank1PlayerScore = leaderBoardModel.data!.user![0].score!;
-        rank2PlayerScore = leaderBoardModel.data!.user![1].score!;
-        rank3PlayerScore = leaderBoardModel.data!.user![2].score!;
-        rank1PlayerAvatar = leaderBoardModel.data!.user![0].avatar!;
-        rank2PlayerAvatar = leaderBoardModel.data!.user![1].avatar!??"";
-        rank2PlayerAvatar = leaderBoardModel.data!.user![2].avatar!;
+
+        for (int i = 0; i < leaderBoardlist.length && i < 3; i++) {
+          switch (i) {
+            case 0:
+              rank1PlayerName = leaderBoardList?[i].username ?? '';
+              rank1PlayerScore = leaderBoardList?[i].score ?? '';
+              rank1PlayerAvatar = leaderBoardList?[i].avatar ?? '';
+              break;
+            case 1:
+              rank2PlayerName = leaderBoardList?[i].username ?? '';
+              rank2PlayerScore = leaderBoardList?[i].score ?? '';
+              rank2PlayerAvatar = leaderBoardList?[i].avatar ?? '';
+              break;
+            case 2:
+              rank3PlayerName = leaderBoardList?[i].username ?? '';
+              rank3PlayerScore = leaderBoardList?[i].score ?? '';
+              rank3PlayerAvatar = leaderBoardList?[i].avatar ?? '';
+              break;
+            default:
+              break;
+          }
+        }
+
+
       } else {
         CustomSnackBar.error(errorList: [leaderBoardModel.status ?? ""]);
       }
@@ -62,12 +77,8 @@ class LeaderBoardController extends GetxController {
 
     print('---------------------${model.statusCode}');
 
-    loader = false;
+    isLoading = false;
     update();
   }
 
-  changeactivestatus() {
-    isActive = !isActive;
-    update();
-  }
 }

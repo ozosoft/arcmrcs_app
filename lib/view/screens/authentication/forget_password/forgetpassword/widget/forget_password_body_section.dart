@@ -17,15 +17,12 @@ class ForgetPasswordBodySection extends StatefulWidget {
   const ForgetPasswordBodySection({super.key});
 
   @override
-  State<ForgetPasswordBodySection> createState() =>
-      _ForgetPasswordBodySectionState();
+  State<ForgetPasswordBodySection> createState() => _ForgetPasswordBodySectionState();
 }
 
 class _ForgetPasswordBodySectionState extends State<ForgetPasswordBodySection> {
   final formKey = GlobalKey<FormState>();
 
-
-  
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
@@ -43,7 +40,7 @@ class _ForgetPasswordBodySectionState extends State<ForgetPasswordBodySection> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ForgetPasswordController>(
-       builder: (auth) => Padding(
+      builder: (auth) => Padding(
         padding: const EdgeInsets.symmetric(
           horizontal: Dimensions.space40,
           vertical: Dimensions.space30,
@@ -54,17 +51,16 @@ class _ForgetPasswordBodySectionState extends State<ForgetPasswordBodySection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  MyStrings.forgetPassword,
-                  style:regularDefault.copyWith(fontSize: Dimensions.space20,fontWeight: FontWeight.w500),
+                  MyStrings.forgetPassword.tr,
+                  style: regularDefault.copyWith(fontSize: Dimensions.space20, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: Dimensions.space8),
                 Text(
-                  MyStrings.enterEmailAndPassword,
+                  MyStrings.enterEmailAndPassword.tr,
                   style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
                 ),
               ],
             ),
-           
             Form(
               key: formKey,
               child: Column(
@@ -72,33 +68,34 @@ class _ForgetPasswordBodySectionState extends State<ForgetPasswordBodySection> {
                 children: [
                   const SizedBox(height: Dimensions.space20),
                   CustomTextField(
-                    controller: auth.emailOrUsernameController,
-                    hastextcolor: true,
-                    hasIcon: true,
-                    prefixicon: MyImages.mailSVG,
-                    animatedLabel: true,
-                    needOutlineBorder: true,
-                    labelText: MyStrings.email,
-                    onChanged: (value) {},
-                    textInputType: TextInputType.emailAddress,
-                    inputAction: TextInputAction.next,
-                     validator: (value) {
-                          if (auth.emailOrUsernameController.text.isEmpty) {
-                            return MyStrings.enterEmailOrUserName.tr;
-                          } else {
-                            return null;
-                          }
+                      controller: auth.emailOrUsernameController,
+                      hastextcolor: true,
+                      hasIcon: true,
+                      prefixicon: MyImages.mailSVG,
+                      animatedLabel: true,
+                      needOutlineBorder: true,
+                      labelText: MyStrings.email.tr,
+                      onChanged: (value) {},
+                      textInputType: TextInputType.emailAddress,
+                      inputAction: TextInputAction.next,
+                      validator: (value) {
+                        if (auth.emailOrUsernameController.text.isEmpty) {
+                          return MyStrings.enterEmailOrUserName.tr;
+                        } else {
+                          return null;
                         }
-                  ),
-                  const SizedBox(height: Dimensions.space40),
-                auth.submitLoading?const RoundedLoadingBtn():  RoundedButton(
-                      text: MyStrings.continues,
-                      press: () {
-                        // Get.toNamed(RouteHelper.verificationScreen);
-                         if (formKey.currentState!.validate()) {
-                                auth.submitForgetPassCode();
-                              }
                       }),
+                  const SizedBox(height: Dimensions.space40),
+                  auth.submitLoading
+                      ? const RoundedLoadingBtn()
+                      : RoundedButton(
+                          text: MyStrings.continues.tr,
+                          press: () {
+                            // Get.toNamed(RouteHelper.verificationScreen);
+                            if (formKey.currentState!.validate()) {
+                              auth.submitForgetPassCode();
+                            }
+                          }),
                   const SizedBox(height: Dimensions.space10),
                 ],
               ),

@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
@@ -14,13 +13,13 @@ import 'package:flutter_prime/data/repo/account/profile_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
 import 'package:flutter_prime/view/components/divider/custom_divider.dart';
 import 'package:flutter_prime/view/components/divider/or_divider.dart';
 import 'package:flutter_prime/view/components/text-form-field/custom_text_field.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
 import 'profile_image.dart';
 
 class ProfileEditScreen extends StatefulWidget {
@@ -52,7 +51,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomCategoryAppBar(
-        title: MyStrings.editProfile,
+        title: MyStrings.editProfile
       ),
       body: GetBuilder<ProfileUpdateController>(
         builder: (controller) => SingleChildScrollView(
@@ -64,24 +63,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Stack(
-                  children: [
-                    FittedBox(fit: BoxFit.cover, child: ProfileWidget(isEdit: true, imagePath: UrlContainer.dashboardUserProfileImage + controller.avatar, onClicked: () async {})),
-                    // InkWell(
-                    //   onTap: () {
-                    //     _openGallery(context);
-                    //   },
-                    //   child: Container(
-                    //     margin: const EdgeInsets.only(top: Dimensions.space70, right: 0, bottom: 0, left: Dimensions.space45),
-                    //     child: InkWell(
-                    //       child: SvgPicture.asset(
-                    //         MyImages.cameraSVG,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                  ],
-                ),
+                ProfileWidget(isEdit: true, imagePath: UrlContainer.dashboardUserProfileImage + controller.avatar, onClicked: () async {}),
                 const SizedBox(
                   height: Dimensions.space10,
                 ),
@@ -151,6 +133,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         fontColor: MyColor.colorBlack,
                       ),
                       const CustomDivider(),
+                      controller.isSubmitLoading?
+                      const RoundedLoadingBtn() :
                       RoundedButton(
                         text: MyStrings.updateProfile,
                         press: () {
@@ -168,21 +152,5 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         ),
       ),
     );
-  }
-
-  void _openGallery(BuildContext context) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
-
-    if (result != null && result.files.isNotEmpty) {
-      final pickedFile = result.files.single;
-      final imagePath = pickedFile.path;
-
-      if (imagePath != null) {
-        setState(() {
-          Get.find<ProfileController>().imageFile = File(result!.files.single.path!);
-          imageFile = XFile(result.files.single.path!);
-        });
-      }
-    }
   }
 }

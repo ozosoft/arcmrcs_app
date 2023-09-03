@@ -8,6 +8,7 @@ import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
 import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
 class PlayDiffrentQuizes extends StatefulWidget {
@@ -35,7 +36,7 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(
-      builder: (controller) => Padding(
+      builder: (controller) =>controller.loader ==true? const CustomLoader(): Padding(
         padding: const EdgeInsets.all(Dimensions.space10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,7 +147,7 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                 Expanded(
                   child: InkWell(
                     onTap: () {
-                      Get.toNamed(RouteHelper.dailyQuizQuestionsScreen,arguments: [controller.quizlist[2].id.toString()]);
+                      Get.toNamed(RouteHelper.guessTheWordCategory);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
@@ -170,15 +171,71 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
-                          Image.network(UrlContainer.playdiffrentImage + controller.quizlist[2].image.toString()),
+                          Image.network(UrlContainer.playdiffrentImage + controller.quizlist[1].image.toString()),
                           const SizedBox(
                             height: Dimensions.space10,
                           ),
                           Text(
-                            controller.quizlist[2].name.toString(),
+                            controller.quizlist[1].name.toString(),
                             style: semiBoldExtraLarge,
                           ),
                           const SizedBox(height: Dimensions.space3),
+                          Text(controller.quizlist[1].shortDescription.toString(),
+                              style: regularDefault.copyWith(
+                                color: MyColor.textColor,
+                              ),
+                              textAlign: TextAlign.center),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            Row(
+              children: [
+                Expanded(
+                  child: InkWell(
+                    onTap: () {
+                       Get.toNamed(RouteHelper.dailyQuizQuestionsScreen, arguments: [controller.quizlist[2].id.toString()]);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
+                      decoration: BoxDecoration(
+                        color: MyColor.colorWhite,
+                        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Color.fromARGB(61, 158, 158, 158),
+                            blurRadius: 7,
+                            spreadRadius: .5,
+                            offset: Offset(
+                              .4,
+                              .4,
+                            ),
+                          )
+                        ],
+                      ),
+                      margin: const EdgeInsets.all(Dimensions.space5),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
+
+                          Image.network(UrlContainer.playdiffrentImage + controller.quizlist[2].image.toString()),
+
+                          const SizedBox(
+                            height: Dimensions.space10,
+                          ),
+
+                          Text(
+                            controller.quizlist[2].name.toString(),
+                            style: semiBoldExtraLarge,
+                          ),
+
+                          const SizedBox(height: Dimensions.space3),
+
                           Text(controller.quizlist[2].shortDescription.toString(),
                               style: regularDefault.copyWith(
                                 color: MyColor.textColor,
@@ -188,13 +245,12 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
-

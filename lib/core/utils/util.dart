@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -6,29 +8,43 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'my_strings.dart';
 
 class MyUtils {
+  //
+  static String shuffleString(String input) {
+    final List<String> characters = input.split('');
+    final Random random = Random();
+
+    for (int i = characters.length - 1; i > 0; i--) {
+      int j = random.nextInt(i + 1);
+      String temp = characters[i];
+      characters[i] = characters[j];
+      characters[j] = temp;
+    }
+
+    return characters.join('');
+  }
+
+  static void vibrate() {
+    HapticFeedback.heavyImpact();
+    HapticFeedback.vibrate();
+  }
+
   static splashScreen() {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: MyColor.getPrimaryColor(),
-        statusBarIconBrightness: Brightness.light,
-        systemNavigationBarColor: MyColor.getPrimaryColor(),
-        systemNavigationBarIconBrightness: Brightness.light));
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(statusBarColor: MyColor.getPrimaryColor(), statusBarIconBrightness: Brightness.light, systemNavigationBarColor: MyColor.getPrimaryColor(), systemNavigationBarIconBrightness: Brightness.light));
   }
 
   static allScreen() {
+
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: MyColor.getPrimaryColor(),
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarColor: MyColor.colorWhite,
         systemNavigationBarIconBrightness: Brightness.dark));
+
   }
 
   static dynamic getShadow() {
     return [
-      BoxShadow(
-          blurRadius: 15.0,
-          offset: const Offset(0, 25),
-          color: Colors.grey.shade500.withOpacity(0.6),
-          spreadRadius: -35.0),
+      BoxShadow(blurRadius: 15.0, offset: const Offset(0, 25), color: Colors.grey.shade500.withOpacity(0.6), spreadRadius: -35.0),
     ];
   }
 

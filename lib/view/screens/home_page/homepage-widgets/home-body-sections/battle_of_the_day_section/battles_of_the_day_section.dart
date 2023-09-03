@@ -24,11 +24,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
     return Column(
       children: [
         const Padding(
-          padding: EdgeInsets.only(
-              bottom: Dimensions.space3,
-              left: Dimensions.space4,
-              right: Dimensions.space4,
-              top: Dimensions.space17),
+          padding: EdgeInsets.only(bottom: Dimensions.space3, left: Dimensions.space4, right: Dimensions.space4, top: Dimensions.space17),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -78,8 +74,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                         child: Container(
                           height: Dimensions.space50,
                           width: Dimensions.space220,
-                          padding:
-                              const EdgeInsets.only(top: Dimensions.space7),
+                          padding: const EdgeInsets.only(top: Dimensions.space7),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -90,8 +85,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                               const SizedBox(height: Dimensions.space8),
                               Text(
                                 MyStrings.battleQuiz,
-                                style: regularDefault.copyWith(
-                                    color: MyColor.colorlighterGrey),
+                                style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
                               )
                             ],
                           ),
@@ -103,8 +97,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                           Get.to(() => const OneVSOneBattleScreen());
                         },
                         child: Container(
-                          padding:
-                              const EdgeInsets.only(top: Dimensions.space7),
+                          padding: const EdgeInsets.only(top: Dimensions.space7),
                           height: Dimensions.space50,
                           width: Dimensions.space50,
                           child: Align(
@@ -120,39 +113,27 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Dimensions.space15,
-                      vertical: Dimensions.space5),
+                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space5),
                   child: Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(Dimensions.space8),
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: MyColor.cardColor,
-                              border: Border.all(
-                                  color: MyColor.colorlighterGrey, width: 0.3)),
+                          decoration: BoxDecoration(color: MyColor.cardColor, border: Border.all(color: MyColor.colorlighterGrey, width: 0.3)),
                           padding: const EdgeInsets.all(Dimensions.space7),
                           child: Center(
                               child: Text(
                             MyStrings.fee50Coins,
-                            style: regularDefault.copyWith(
-                                color: MyColor.colorGrey),
+                            style: regularDefault.copyWith(color: MyColor.colorGrey),
                           )),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(Dimensions.space8),
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: MyColor.cardColor,
-                              border: Border.all(
-                                  color: MyColor.colorDarkGrey, width: 0.3)),
+                          decoration: BoxDecoration(color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
                           padding: const EdgeInsets.all(Dimensions.space7),
-                          child: Center(
-                              child: Text(MyStrings.currentCoin,
-                                  style: regularDefault.copyWith(
-                                      color: MyColor.colorGrey))),
+                          child: Center(child: Text(MyStrings.currentCoin, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                         ),
                       ),
                     ],
@@ -167,7 +148,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
         ),
         InkWell(
           onTap: () {
-             Get.to(()=> const OneVSOneBattleScreen(isGroupBattle: true));
+            Get.to(() => const OneVSOneBattleScreen(isGroupBattle: true));
           },
           child: Container(
             margin: const EdgeInsets.symmetric(horizontal: Dimensions.space2),
@@ -199,13 +180,14 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                       ),
                       InkWell(
                         onTap: () {
-                            Get.to(()=> const OneVSOneBattleScreen(isGroupBattle: true,));
+                          Get.to(() => const OneVSOneBattleScreen(
+                                isGroupBattle: true,
+                              ));
                         },
                         child: Container(
                           height: Dimensions.space50,
                           width: Dimensions.space220,
-                          padding:
-                              const EdgeInsets.only(top: Dimensions.space7),
+                          padding: const EdgeInsets.only(top: Dimensions.space7),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -216,8 +198,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                               const SizedBox(height: Dimensions.space8),
                               Text(
                                 MyStrings.groupbattleQuiz,
-                                style: regularDefault.copyWith(
-                                    color: MyColor.colorlighterGrey),
+                                style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
                               )
                             ],
                           ),
@@ -229,8 +210,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                           Get.toNamed(RouteHelper.oneVSoneBattleScreen);
                         },
                         child: Container(
-                          padding:
-                              const EdgeInsets.only(top: Dimensions.space7),
+                          padding: const EdgeInsets.only(top: Dimensions.space7),
                           height: Dimensions.space50,
                           width: Dimensions.space50,
                           child: Align(
@@ -246,39 +226,27 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Dimensions.space15,
-                      vertical: Dimensions.space5),
+                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space5),
                   child: Row(
                     children: [
                       Padding(
                         padding: const EdgeInsets.all(Dimensions.space8),
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: MyColor.cardColor,
-                              border: Border.all(
-                                  color: MyColor.colorlighterGrey, width: 0.3)),
+                          decoration: BoxDecoration(color: MyColor.cardColor, border: Border.all(color: MyColor.colorlighterGrey, width: 0.3)),
                           padding: const EdgeInsets.all(Dimensions.space7),
                           child: Center(
                               child: Text(
                             MyStrings.fee50Coins,
-                            style: regularDefault.copyWith(
-                                color: MyColor.colorGrey),
+                            style: regularDefault.copyWith(color: MyColor.colorGrey),
                           )),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(Dimensions.space8),
                         child: Container(
-                          decoration: BoxDecoration(
-                              color: MyColor.cardColor,
-                              border: Border.all(
-                                  color: MyColor.colorDarkGrey, width: 0.3)),
+                          decoration: BoxDecoration(color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
                           padding: const EdgeInsets.all(Dimensions.space7),
-                          child: Center(
-                              child: Text(MyStrings.currentCoin,
-                                  style: regularDefault.copyWith(
-                                      color: MyColor.colorGrey))),
+                          child: Center(child: Text(MyStrings.currentCoin, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                         ),
                       ),
                     ],

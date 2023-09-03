@@ -102,6 +102,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                       ),
                       const SizedBox(height: 30),
                       OTPFieldWidget(
+                        
                         onChanged: (value) {
                           controller.currentText = value;
                         },

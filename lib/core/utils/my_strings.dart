@@ -5,6 +5,7 @@ import 'package:flutter_prime/data/model/model/questionsList_model.dart';
 class MyStrings {
     static const String appName = "QuizLAB";
 
+  static const String selectAnImage = "Please select an image";
   static const String withdrawInformation = "Withdraw Information";
   static const String withdrawLimit = "Withdraw Limit";
   static const String withdrawConfirm = "Withdraw Confirm";
@@ -30,10 +31,16 @@ class MyStrings {
   static const String copied = "Copied!";
   static const String ok = "Ok";
   static const String youHaveNoCoins = "You Have Not Enough Coins!";
+  static const String roomCodeIsWrong = "Room Code May be Wrong!";
   static const String yourGameWillStartSoon = "The Game Will Begin In";
+  static const String sorryRoomISFull = "Sorry! Room Is Full";
 
 
   static const String reviewAnswer = "Review Answer";
+  static const String currectAnswer = "Currect Answer";
+  static const String wrongAnswer = "Wrong Answer";
+  static const String yourAnswer = "Your Answer";
+
   static const String selectCategory = "Select Category";
   static const String entryCoinsForBattele = "Entry Coins For Battle";
   static const String entryRoomCode = "Entry Room Code to Join Room";
@@ -43,6 +50,7 @@ class MyStrings {
   static const String signUp = "Sign up";
   static const String twobyTen = "2/10";
   static const String email = "Email";
+  static const String emailAddress = "Email Address";
   static const String attachment = "Attachment";
   static const String depositCharge = "Deposit Charge";
   static const String finalAmount = "Final Amount";
@@ -92,6 +100,7 @@ class MyStrings {
   static const String verifyNow = "Verify Now";
   static const String withdraw = "Withdrawals";
   static const String seeAll = "See All";
+  static const String goHome = "Go Home";
   static const String home = "Home";
   static const String transaction = "Transaction";
   static const String transactionId = "Transaction ID";
@@ -252,6 +261,7 @@ class MyStrings {
   static const String selectCountry = "Select Country";
   static const String letsPlay = "Let's Play";
   static const String playWithFriend = "Play With Friend";
+  static const String playAgain = "Play Again";
   static const String viewAll = "View all";
   static const String viewMore = "View More";
   static const String rank = "Rank";
@@ -426,8 +436,10 @@ class MyStrings {
   static const String reedemableAmount = "Redeemable Amount";
   static const String reedemNow = "Redeem Now";
   static const String sharecodeText = "Share this room code to friend and ask them to join";
+
   static const String pleaseWaitRoomText = "Please wait game will start soon";
   static const String pleaseWaitForYourBattleResultText = "Please Wait For You Battle Result!";
+
   static const String approved = "Approved";
   static const String supper = "Supper";
   static const String supperbattleMan = "Supper Battle Man";
@@ -490,6 +502,10 @@ class MyStrings {
   static const String dailyQuiz = "Daily Quiz";
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
+  static const String sorryNoCategory = "Sorry No Category Found";
+
+  static const String category = "Category";
+  static const String subcategory = "Sub Category";
 
   static const String dailynewquiz = "Daily new quiz";
   static const String gamequizwithfun = "Game quiz with fun";
@@ -501,7 +517,7 @@ class MyStrings {
   static const String pickTheCorrectAnswer = "Pick the correct answer at the final question to win the prize money";
 
   static const String dontHaveAnaccount = "Don’t have an account?";
-  static const String onboardDescription = "There are hundreds of different catagories to choose from";
+  static const String onboardDescription = "There are hundreds of different categories to choose from";
 
   static const String transactionType = "Transaction Type";
   static const String minimumReedemAmount = "Minimum Redeemable amount is \$2 (10 coins).";
@@ -516,28 +532,10 @@ class MyStrings {
     MyLanguageModel(languageName: 'Arabic', countryCode: 'SA', languageCode: 'ar'),
   ];
 
-  List<MyQuestionsModel> quizquestions = [
-    MyQuestionsModel(rank: MyStrings.A, questions: MyStrings.japan),
-    MyQuestionsModel(rank: MyStrings.b, questions: MyStrings.apple),
-    MyQuestionsModel(rank: MyStrings.c, questions: MyStrings.ibm),
-    MyQuestionsModel(rank: MyStrings.d, questions: MyStrings.google)
-  ];
+  List<MyQuestionsModel> quizquestions = [MyQuestionsModel(rank: MyStrings.A, questions: MyStrings.japan), MyQuestionsModel(rank: MyStrings.b, questions: MyStrings.apple), MyQuestionsModel(rank: MyStrings.c, questions: MyStrings.ibm), MyQuestionsModel(rank: MyStrings.d, questions: MyStrings.google)];
 
-  List<AchivementModel> achivements = [
-    AchivementModel(title: MyStrings.rank, points: MyStrings.zeroEight),
-    AchivementModel(title: MyStrings.coins, points: MyStrings.fiveHundreds),
-    AchivementModel(title: MyStrings.score, points: MyStrings.zeroEight),
-  ];
-  final List<Map<String, String>> itemList = [
-    {'title': 'Username', 'description': 'mariyaonas'},
-    {'title': 'Email Address', 'description': 'mariyaonas478@gmail.com'},
-  ];
-  final List<Map<String, String>> badgeList = [
-    {'title': MyStrings.supper, 'description': MyStrings.battleMan},
-    {'title': MyStrings.silver, 'description': MyStrings.battleMan},
-    {'title': MyStrings.golden, 'description': MyStrings.player},
-  ];
-  final List<Map<String, String>> badgeLists = [
+
+ /* final List<Map<String, String>> badgeLists = [
     {
       'title': MyStrings.supperbattleMan,
     },
@@ -601,7 +599,7 @@ class MyStrings {
     {'title': quizChallenge, 'date': twoJune2023, 'reward': hundredAndTwentyUSD},
     {'title': battelQuizEvent, 'date': twelveMay2023, 'reward': twoFiftyUSD},
     {'title': quizGameChallenge, 'date': twoJune2023, 'reward': twoFiftyUSD},
-  ];
+  ];*/
 
   List<String> rewardsList = [twoFiftyUSD, twoFiftyUSD, hundredAndTwentyUSD, twoFiftyUSD, hundredAndTwentyUSD];
   final List<String> languages = [english, bangla, hindi, spanish];

@@ -8,6 +8,7 @@ import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/controller/battle/one_vs_multi_controller.dart';
+import '../../../../data/model/battle/battle_category_list.dart';
 
 class PlayWithFriendsBottomSheetWidget extends StatelessWidget {
   const PlayWithFriendsBottomSheetWidget({super.key});
@@ -25,7 +26,8 @@ class PlayWithFriendsBottomSheetWidget extends StatelessWidget {
               text: MyStrings.createRoom,
               press: () {
                 Get.back();
-                Get.toNamed(RouteHelper.createRoomScreen, arguments: [null, null, controller.categoryList]);
+                Get.toNamed(RouteHelper.createRoomScreen,
+                    arguments: [null, null, controller.categoryList.isNotEmpty ? controller.categoryList : <BattleCategory>[]]);
               },
               textSize: Dimensions.space20,
               cornerRadius: Dimensions.space10,
@@ -37,7 +39,7 @@ class PlayWithFriendsBottomSheetWidget extends StatelessWidget {
               text: MyStrings.joinRoom,
               press: () {
                 Get.back();
-                Get.toNamed(RouteHelper.joinRoomScreen, arguments: [null, null,controller.categoryList]);
+                Get.toNamed(RouteHelper.joinRoomScreen, arguments: [null, null, controller.categoryList]);
               },
               color: MyColor.colorBlack,
               textSize: Dimensions.space20,

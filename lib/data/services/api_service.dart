@@ -153,6 +153,26 @@ class ApiClient extends GetxService {
     return jsonDecode(userdata);
   }
 
+  Future<void> setSoundStatus(bool value) async {
+    await sharedPreferences.setBool(SharedPreferenceHelper.soundKey, value);
+  }
+
+  bool getSoundStatus()  {
+    return  sharedPreferences.getBool(SharedPreferenceHelper.soundKey) ?? false;
+  }
+
+  Future setVibrationStatus(bool value) async {
+    await sharedPreferences.setBool(SharedPreferenceHelper.vibrationKey, value);
+  }
+
+  bool getVibrationStatus()  {
+    return  sharedPreferences.getBool(SharedPreferenceHelper.vibrationKey) ?? false;
+  }
+
+  Future setTheme(bool value) async {
+    await sharedPreferences.setBool(SharedPreferenceHelper.themeKey, value);
+  }
+
   String getUserEmail() {
     String email = sharedPreferences.getString(SharedPreferenceHelper.userEmailKey) ?? '';
     return email;

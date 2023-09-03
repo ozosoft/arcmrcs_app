@@ -23,11 +23,7 @@ class CustomHomeAppBar extends StatefulWidget {
 }
 
 class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
-  // GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // void _openDrawer() {
-  //   _scaffoldKey.currentState?.openDrawer();
-  // }
 
   @override
   Widget build(BuildContext context) {

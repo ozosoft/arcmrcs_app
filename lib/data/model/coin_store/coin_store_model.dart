@@ -1,8 +1,7 @@
-// To parse this JSON data, do
-//
-//     final coinStoreModel = coinStoreModelFromJson(jsonString);
+
 
 import 'dart:convert';
+import '../auth/sign_up_model/registration_response_model.dart';
 
 CoinStoreModel coinStoreModelFromJson(String str) => CoinStoreModel.fromJson(json.decode(str));
 
@@ -77,8 +76,8 @@ class CoinPlan {
         id: json["id"],
         title: json["title"],
         image: json["image"],
-        coinsAmount: json["coins_amount"],
-        price: json["price"],
+        coinsAmount: json["coins_amount"] != null ? json["coins_amount"].toString() : '',
+        price: json["price"] != null ? json["price"].toString() : '',
         status: json["status"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
@@ -96,18 +95,4 @@ class CoinPlan {
     };
 }
 
-class Message {
-    List<String>? success;
 
-    Message({
-        this.success,
-    });
-
-    factory Message.fromJson(Map<String, dynamic> json) => Message(
-        success: json["success"] == null ? [] : List<String>.from(json["success"]!.map((x) => x)),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "success": success == null ? [] : List<dynamic>.from(success!.map((x) => x)),
-    };
-}

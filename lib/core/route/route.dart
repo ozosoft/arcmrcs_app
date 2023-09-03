@@ -10,12 +10,19 @@ import 'package:flutter_prime/view/screens/authentication/two_factor_screen/two_
 import 'package:flutter_prime/view/screens/badges/badges_screen.dart';
 import 'package:flutter_prime/view/screens/bookmark/bookmark_screen.dart';
 import 'package:flutter_prime/view/screens/coin_history/coin_history_screen.dart';
+
+import 'package:flutter_prime/view/screens/guess_the_word/category/guess_word_catagory_screen.dart';
+import 'package:flutter_prime/view/screens/guess_the_word/main_screen/guess_the_word_screen.dart';
+import 'package:flutter_prime/view/screens/guess_the_word/result/review/review_screen.dart';
+import 'package:flutter_prime/view/screens/guess_the_word/subCategory/guess_word_sub_categories_screen.dart';
+
 import 'package:flutter_prime/view/screens/coin_store/coin_store_webview/coin_store_webview_screen.dart';
 import 'package:flutter_prime/view/screens/coin_store/deposit_widget/deposit_screen.dart';
 import 'package:flutter_prime/view/screens/exam_zone/review-answer/review_answer-screen.dart';
 import 'package:flutter_prime/view/screens/quiz_contest/all_contest_screen/all_contest_screen.dart';
 import 'package:flutter_prime/view/screens/exam_zone/exam-result/exam_result_screen.dart';
 import 'package:flutter_prime/view/screens/exam_zone/widgets/exam_zone_quiz_screen.dart';
+
 import 'package:flutter_prime/view/screens/notification/notification_screen.dart';
 import 'package:flutter_prime/view/screens/play_diffrent/daily_quiz/daily_quiz_questions_screen.dart';
 import 'package:flutter_prime/view/screens/play_diffrent/daily_quiz/daily_quiz_result/daily_quiz_result_screen.dart';
@@ -48,6 +55,7 @@ import '../../view/screens/battle_quiz_result/battle_quiz_result_screen.dart';
 import '../../view/screens/bottom_nav_bar/bottom_navigation_bar_screen.dart';
 import '../../view/screens/exam_zone/exam_zone_screen.dart';
 import '../../view/screens/home_page/homepage-widgets/home-body-sections/exam_zone_section/exam_zone_homepage_category_screen.dart';
+import '../../view/screens/guess_the_word/result/guess_word_result_screen.dart';
 import '../../view/screens/home_page/homepage-widgets/home-body-sections/home_top_category_section/sub-categories/sub_categories_card_screen.dart';
 import '../../view/screens/intro_section/onboard_intro_screen.dart';
 import '../../view/screens/leader_board/leader_board_screen.dart';
@@ -58,44 +66,51 @@ import '../../view/screens/quiz_contest/question_screen/contest_questions_screen
 
 class RouteHelper { 
 
-  static const String splashScreen           = "/splash_screen";
-  static const String onboardScreen          = '/onboard_screen';
-  static const String loginScreen            = '/login_screen';
-  static const String signupScreen           = '/signUp_screen';
-  static const String forgetpasswordScreen   = '/forget_password_screen';
-  static const String verificationScreen     = '/verification_screen';
-  static const String resetPassword          = '/reset_password_screen';
-  static const String bottomNavBarScreen     = '/bottom_navigation_screen';
-  static const String allCategories          = '/all_categories_screen';
-  static const String subCategories          = '/top_categories_screen';
-  static const String quizQuestionsScreen    = '/quiz_questions_screen';
-  static const String quizResultScreen       = '/quiz_result_screen';
+  static const String splashScreen = "/splash_screen";
+  static const String onboardScreen = '/onboard_screen';
+  static const String loginScreen = '/login_screen';
+  static const String signupScreen = '/signUp_screen';
+  static const String forgetpasswordScreen = '/forget_password_screen';
+  static const String verificationScreen = '/verification_screen';
+  static const String resetPassword = '/reset_password_screen';
+  static const String bottomNavBarScreen = '/bottom_navigation_screen';
+  static const String allCategories = '/all_categories_screen';
+  static const String subCategories = '/top_categories_screen';
+  static const String quizQuestionsScreen = '/quiz_questions_screen';
+  static const String quizResultScreen = '/quiz_result_screen';
   static const String profileCompleteScreen       = "/profile_complete_screen";
-  //battle
+   //battle
   static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
   static const String battleQuizResultScreen = '/battle_quiz_result_screen';
- 
- static const String reviewAnswerScreen     = '/review_answer_screen';
-  static const String oneVSoneBattleScreen   = '/battle_screen';
-  static const String findOpponentScreen     = '/find_opponent_screen';
-  static const String createRoomScreen       = '/create_room_screen';
-  static const String joinRoomScreen         = '/join_room_screen';
-  static const String profileScreen          = '/profile_screen';
-  static const String profileEditScreen      = '/profile__edit_screen';
-  static const String coinStroeScreen        = '/coin_store_screen';
-  static const String badgesScreen           = '/badges_screen';
-  static const String coinHistoryScreen      = '/coin_history_screen';
-  static const String walletScreen           = '/wallet_screen';
-  static const String bookmarkScreen         = '/bookmark_screen';
-  static const String notificationScreen     = '/notification_screen';
-  static const String examZoneScreen         = '/exam_zone_screen';
+  static const String reviewAnswerScreen = '/review_answer_screen';
+  static const String oneVSoneBattleScreen = '/battle_screen';
+  static const String findOpponentScreen = '/find_opponent_screen';
+  static const String createRoomScreen = '/create_room_screen';
+  static const String joinRoomScreen = '/join_room_screen';
+  static const String profileScreen = '/profile_screen';
+  static const String profileEditScreen = '/profile__edit_screen';
+  static const String coinStroeScreen = '/coin_store_screen';
+  static const String badgesScreen = '/badges_screen';
+  static const String coinHistoryScreen = '/coin_history_screen';
+  static const String walletScreen = '/wallet_screen';
+  static const String bookmarkScreen = '/bookmark_screen';
+  static const String notificationScreen = '/notification_screen';
+  static const String examZoneScreen = '/exam_zone_screen';
   static const String examZoneCategoryScreen = '/exam_zone_category_screen';
-  static const String leaderBoardScreen      = '/leader_board_screen';
+  static const String leaderBoardScreen = '/leader_board_screen';
+  // guess the word
+  static const String guessTheword = "/gess_the_word";
+  static const String guessTheWordCategory = "/gess_the_word_category";
+  static const String guessTheWordSubCategory = "/gess_the_word_sub_categroy";
+  static const String gessThewordResult = "/gess_the_word_result";
+  static const String gessThewordResultReview = "/gess_the_word_result_review";
+
+
   static const String examZoneQuestionScreen = '/exam_zone_questions_screen';
   static const String examZoneResultScreen = '/exam_zone_result_screen';
   static const String examZoneReviewAnswerScreen = '/exam_zone_review_answer_screen';
   
-    static const String funNlearnScreenScreen = '/fun_n_learn_screen';
+  static const String funNlearnScreenScreen = '/fun_n_learn_screen';
   static const String funNlearnSubCategoryScreenScreen = '/fun_n_learn_sub_category_screen';
   static const String funNlearnListScreen = '/fun_n_learn_list_screen';
   static const String funNlearnQuizScreen = '/fun_n_learn_quiz_screen';
@@ -118,6 +133,7 @@ static const String depositsDetailsScreen       = "/deposits_details";
 static const String newDepositScreenScreen      = "/deposits_money";
 static const String depositWebViewScreen        = '/deposit_webView';
 
+
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
     GetPage(name: onboardScreen, page: () => const OnBoardIntroScreen()),
@@ -128,6 +144,8 @@ static const String depositWebViewScreen        = '/deposit_webView';
     GetPage(name: resetPassword, page: () => const ResetPasswordScreen()),
     GetPage(name: bottomNavBarScreen, page: () => const BottomNavigationBarScreen()),
 
+
+
     GetPage(name: subCategories, page: () => const SubCategoriesCardScreen(title: "")),
     GetPage(name: allCategories, page: () => const AllCategoriesScreen()),
     GetPage(name: quizQuestionsScreen, page: () => const QuizQuestionsScreen()),
@@ -135,6 +153,7 @@ static const String depositWebViewScreen        = '/deposit_webView';
     //battle
     GetPage(name: battleQuizQuestionsScreen, page: () => const BattleQuizQuestionsScreen()),
     GetPage(name: battleQuizResultScreen, page: () => const BattleQuizResultScreen()),
+
 
     GetPage(name: reviewAnswerScreen, page: () => const ReviewAnswerScreen()),
     GetPage(name: oneVSoneBattleScreen, page: () => const OneVSOneBattleScreen()),
@@ -152,6 +171,13 @@ static const String depositWebViewScreen        = '/deposit_webView';
     GetPage(name: examZoneScreen, page: () => const ExamZoneScreen()),
     GetPage(name: examZoneCategoryScreen, page: () => const ExamZoneCategoryScreen()),
     GetPage(name: leaderBoardScreen, page: () => const LeaderBoardScreen()),
+
+    // guess the word
+    GetPage(name: guessTheword, page: () => const GuessThewordScreen()),
+    GetPage(name: guessTheWordCategory, page: () => const GestheWordCategoryScreen()),
+    GetPage(name: guessTheWordSubCategory, page: () => const GuessWordSubCategoryScreen()),
+    GetPage(name: gessThewordResult, page: () => const GuessWordResultScreen()),
+    GetPage(name: gessThewordResultReview, page: () => const GuessWordReviewResult()),
 
     GetPage(name: examZoneQuestionScreen, page: () => const Exam_zone_quiz_screen()),
     GetPage(name: funNlearnQuizScreen, page: () => const FunNlearnQuizScreen()),
@@ -184,5 +210,6 @@ static const String depositWebViewScreen        = '/deposit_webView';
      
     
     GetPage(name: depositWebViewScreen,         page: () => CoinStroreWebViewScreen(redirectUrl: Get.arguments)),
+
   ];
 }

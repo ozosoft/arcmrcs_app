@@ -39,26 +39,14 @@ class CustomSliverDelegates extends SliverPersistentHeaderDelegate {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  padding: const EdgeInsets.all(Dimensions.space5),
                   margin: const EdgeInsets.only(top: Dimensions.space55),
+                  padding: const EdgeInsets.all(Dimensions.space5),
                   height: Dimensions.space60,
                   width: Dimensions.space60,
                   decoration: BoxDecoration(
                       color: MyColor.prifileBG,
-                      borderRadius: BorderRadius.circular(Dimensions.space30)),
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius:
-                              BorderRadius.circular(Dimensions.space40),
-                          image: const DecorationImage(
-                              image: AssetImage(MyImages.profileimageWomenPng),
-                              fit: BoxFit.cover)),
-                      height: Dimensions.space70,
-                      width: Dimensions.space70,
-                    ),
-                  ),
+                      borderRadius: BorderRadius.circular(30)),
+                  child: SvgPicture.asset(MyImages.avatar1),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: Dimensions.space55),

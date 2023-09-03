@@ -79,9 +79,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                           style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
                           onPressed: () async {
                             if (controller.battleRoomController.battleRoomData.value != null) {
-                              await controller.battleRoomController
-                                  .deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false)
-                                  .whenComplete(() {
+                              await controller.battleRoomController.deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false).whenComplete(() {
                                 Navigator.of(context).pop(true);
                                 // Return true when "Yes" is pressed
                                 Get.back();
@@ -121,7 +119,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                         fit: BoxFit.cover,
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(Dimensions.space100),
-                            child: controller.battleRepo.apiClient.getUserImagePath() == "null"
+                            child: controller.battleRepo.apiClient.getUserImagePath() == "null" || controller.battleRepo.apiClient.getUserImagePath().isEmpty
                                 ? Image.asset(
                                     MyImages.defaultAvatar,
                                     fit: BoxFit.cover,
@@ -170,7 +168,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                                 fit: BoxFit.cover,
                                 child: ClipRRect(
                                     borderRadius: BorderRadius.circular(Dimensions.space100),
-                                    child: opUserData.profileUrl == "null"
+                                    child: opUserData.profileUrl == "null" || opUserData.profileUrl.isEmpty
                                         ? Image.asset(
                                             MyImages.defaultAvatar,
                                             fit: BoxFit.cover,
@@ -233,8 +231,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
             Stack(
               children: [
                 Container(
-                  padding:
-                      const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space20),
+                  padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space20),
                   width: double.infinity,
                   child: Lottie.asset(
                     MyImages.userSearchLottie,
@@ -272,7 +269,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               Container(
                                 margin: const EdgeInsets.all(Dimensions.space14),
                                 child: DefaultText(
-                                  text: "${controller.countdownSeconds == 0 ?  MyStrings.started : controller.countdownSeconds}",
+                                  text: "${controller.countdownSeconds == 0 ? MyStrings.started : controller.countdownSeconds}",
                                   fontSize: Dimensions.fontExtraLarge * 3,
                                   textStyle: boldLarge.copyWith(color: MyColor.primaryColor, fontStyle: FontStyle.italic),
                                 ),
@@ -286,7 +283,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
             ),
             Obx(() => Padding(
                   padding: const EdgeInsets.symmetric(horizontal: Dimensions.space25),
-                  child: controller.battleRoomController.userFoundState.value == UserFoundState.found
+                  child: controller.battleRoomController.userFoundState.value == UserFoundState.found && controller.battleRoomController.battleQuestionsList.isNotEmpty
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -295,9 +292,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               press: () {
                                 print("go");
 
-                                controller.battleRoomController
-                                    .startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true)
-                                    .whenComplete(() {
+                                controller.battleRoomController.startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
                                   // Get.back();
                                   // Get.toNamed(
                                   //   RouteHelper.battleQuizQuestionsScreen,

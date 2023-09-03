@@ -28,7 +28,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-              ListView.builder(
+            /*  ListView.builder(
                 physics:const NeverScrollableScrollPhysics(),
                 padding:const EdgeInsets.only(top: Dimensions.space25),
                 shrinkWrap: true,
@@ -44,7 +44,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                     levels: MyStrings().allCategoryies[index]["level"].toString(),
                     fromBookmark: true,
                   );
-                }),
+                }),*/
          ],
         ),
       ),
