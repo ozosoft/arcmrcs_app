@@ -15,9 +15,8 @@ class ExamZoneRepo {
     return model;
   }
 
-   Future<ResponseModel> getExamQuestionList(String quizInfoID,examkey) async {
-
-    final map = {'quizInfo_id': quizInfoID,'exam_key': examkey};
+  Future<ResponseModel> getExamQuestionList(String quizInfoID, examkey) async {
+    final map = {'quizInfo_id': quizInfoID, 'exam_key': examkey};
 
     String url = '${UrlContainer.baseUrl}${UrlContainer.examZoneQuestionsUrl}';
     ResponseModel responseModel = await apiClient.request(url, Method.postMethod, map, passHeader: true);
@@ -25,8 +24,20 @@ class ExamZoneRepo {
     return responseModel;
   }
 
+  Future<ResponseModel> getExamDetails(String quizID) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.examDetails}/$quizID';
+    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
-   Future<ResponseModel> submitAnswer(Map<String, dynamic> map) async {
+    return responseModel;
+  }
+  Future<ResponseModel> getExamCode(String quizID) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.examCode}/$quizID';
+    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+
+    return responseModel;
+  }
+
+  Future<ResponseModel> submitAnswer(Map<String, dynamic> map) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.examsubmitAnswerUrl}';
     print(url.toString());
 

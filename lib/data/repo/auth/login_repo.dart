@@ -128,7 +128,9 @@ class LoginRepo {
   Future<bool> sendUpdatedToken(String deviceToken) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.deviceTokenEndPoint}';
     Map<String, String> map = deviceTokenMap(deviceToken);
-    await apiClient.request(url, Method.postMethod, map, passHeader: true);
+ var  data  =  await apiClient.request(url, Method.postMethod, map, passHeader: true);
+
+ print("FCCM KEY ${data.responseJson}");
     return true;
   }
 

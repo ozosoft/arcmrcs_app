@@ -135,4 +135,32 @@ class DateConverter {
     final DateFormat outputFormat = DateFormat('d MMM yyyy');
     return outputFormat.format(date);
   }
+
+  int calculateDurationToEndTime(String endTime) {
+    // Get the current time
+    DateTime currentTime = DateTime.now();
+
+    // Split the endTime string into hours and minutes
+    List<String> timeComponents = endTime.split(':');
+    int endHour = int.parse(timeComponents[0]);
+    int endMinute = int.parse(timeComponents[1].split(' ')[0]);
+    String amPm = timeComponents[1].split(' ')[1].toLowerCase();
+
+    if (amPm == 'pm' && endHour != 12) {
+      endHour += 12;
+    } else if (amPm == 'am' && endHour == 12) {
+      endHour = 0;
+    }
+
+    // Create a DateTime object for the specified end time
+    DateTime parsedEndTime = DateTime(currentTime.year, currentTime.month, currentTime.day, endHour, endMinute);
+
+    // Calculate the time difference
+    Duration difference = parsedEndTime.difference(currentTime);
+
+    // Convert the time difference to minutes
+    int durationInMinutes = difference.inMinutes;
+
+    return durationInMinutes;
+  }
 }

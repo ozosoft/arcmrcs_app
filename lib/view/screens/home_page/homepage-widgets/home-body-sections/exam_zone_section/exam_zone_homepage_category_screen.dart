@@ -73,7 +73,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
 
                                     CustomBottomSheet(
                                         child: EnterRoomBottomSheetWidget(
-                                      quizInfo_id: controller.examZonelist[index].id.toString(),
+                                      quizInfoId: controller.examZonelist[index].id.toString(),
                                     )).customBottomSheet(context);
                                   },
                                   child: Container(
@@ -160,10 +160,11 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                               CustomChipsWidget(
                                                 right: Dimensions.space7,
                                                 child: Center(
-                                                    child: Text(
-                                                  MyStrings.feeCoins + controller.examZonelist[index].point.toString(),
-                                                  style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                                )),
+                                                  child: Text(
+                                                    MyStrings.feeCoins + controller.examZonelist[index].point.toString(),
+                                                    style: regularDefault.copyWith(color: MyColor.colorGrey),
+                                                  ),
+                                                ),
                                               ),
                                               CustomChipsWidget(
                                                 right: Dimensions.space7,
@@ -171,7 +172,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                               ),
                                               CustomChipsWidget(
                                                 right: Dimensions.space7,
-                                                child: Center(child: Text(controller.examZonelist[index].examDuration.toString() + MyStrings.minutess, style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                                child: Center(child: Text("${controller.examZonelist[index].examDuration} ${MyStrings.min}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                               ),
                                             ],
                                           ),

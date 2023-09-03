@@ -22,6 +22,18 @@ class BottomSectionButtons extends StatelessWidget {
             press: () {
               Get.toNamed(RouteHelper.examZoneReviewAnswerScreen);
             },
+            color: MyColor.primaryColor,
+            textSize: Dimensions.space21,
+          ),
+        ),
+        SizedBox(height: Dimensions.space5,),
+        Padding(
+          padding: const EdgeInsets.all(Dimensions.space15),
+          child: RoundedButton(
+            text: MyStrings.home,
+            press: () {
+              Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+            },
             color: MyColor.colorBlack,
             textSize: Dimensions.space21,
           ),

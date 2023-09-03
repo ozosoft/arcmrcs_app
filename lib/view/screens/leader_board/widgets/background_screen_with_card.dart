@@ -7,7 +7,6 @@ import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/leader_board/leader_board_controller.dart';
 import 'package:flutter_prime/data/repo/leaderBoard/leaderBoard_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../core/utils/my_color.dart';
@@ -120,7 +119,7 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                                       width: Dimensions.space8,
                                     ),
                                     Text(
-                                      item.score.toString() + MyStrings.pointss,
+                                      item.score.toString() + MyStrings.points,
                                       style: semiBoldLarge.copyWith(color: MyColor.textColor),
                                     ),
                                     // SvgPicture.asset(MyImages().arrows[index]),

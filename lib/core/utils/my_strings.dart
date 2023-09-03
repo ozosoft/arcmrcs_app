@@ -3,7 +3,7 @@ import 'package:flutter_prime/data/model/model/profile_achivement_model.dart';
 import 'package:flutter_prime/data/model/model/questionsList_model.dart';
 
 class MyStrings {
-    static const String appName = "QuizLAB";
+  static const String appName = "QuizLAB";
 
   static const String withdrawInformation = "Withdraw Information";
   static const String withdrawLimit = "Withdraw Limit";
@@ -34,7 +34,6 @@ class MyStrings {
   static const String roomCodeIsWrong = "Room Code May be Wrong!";
   static const String yourGameWillStartSoon = "The Game Will Begin In";
   static const String sorryRoomISFull = "Sorry! Room Is Full";
-
 
   static const String reviewAnswer = "Review Answer";
   static const String currectAnswer = "Currect Answer";
@@ -89,7 +88,12 @@ class MyStrings {
   static const String examKey = "Enter the exam key";
   static const String enterExam = "Enter In Exam";
   static const String examResult = "Exam Result";
+
   static const String noExamFound = "Sorry! No exam is currently running.";
+  static const String examNotStartYet = "Exam Will Be Start Soon!";
+  static const String examAlreadyGiven = "Exam Already Given!";
+  static const String examFinished = "Exam Time Finished!";
+
   static const String noContestFound = "Sorry! No contest is currently running.";
 
   static const String chooseFile = 'Choose File';
@@ -248,7 +252,7 @@ class MyStrings {
   static const String marks = "10 Marks";
   static const String markss = " Marks";
   static const String minutes = "25 min";
-  static const String minutess = " min";
+  static const String min = "min";
   static const String healthAndQuiz = "Health Quiz Contest";
   static const String healthAndQuizdescription = "The health Quiz feature aims to bring the excitement";
   static const String topCategory = "Top Categories";
@@ -408,8 +412,7 @@ class MyStrings {
   static const String twoHundredFortyDollar = "\$240.00";
   static const String jkobos = "@jkobos";
   static const String qP = " QP";
-  static const String points = "1,570 Points";
-  static const String pointss = " Points";
+  static const String points = "Points";
   static const String quantity = '15';
   static const String leaderBoard = 'Leaderboard';
   static const String totalCoins = "Total Coins";
@@ -622,5 +625,4 @@ class MyStrings {
   final List<String> questionsList = [quizQuestions, quizQuestions2, questions2, questions, rules1, rules2, rules3];
   final List<String> rules = [rules1, rules2, rules3];
   final List<String> settingsList = [sound, vibration, themes];
-
 }

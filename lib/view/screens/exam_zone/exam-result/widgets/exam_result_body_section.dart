@@ -51,50 +51,62 @@ class _ExamResultBodySectionState extends State<ExamResultBodySection> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Stack(alignment: Alignment.center,
+                Stack(
+                  alignment: Alignment.center,
                   children: [
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                      child: SvgPicture.asset(
-                        MyImages.victory,
-                        fit: BoxFit.cover,
-                      ),
+                      child: controller.appreciation == "Failed"
+                          ? SvgPicture.asset(
+                              MyImages.victory,
+                              fit: BoxFit.cover,
+                              color: Colors.grey,
+                            )
+                          : SvgPicture.asset(
+                              MyImages.victory,
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                    Align(
+                      alignment: Alignment.center,
+                      child: Container(
+                          padding: const EdgeInsets.only(top: Dimensions.space100),
+                          child: Text(
+                            controller.appreciation,
+                            style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
+                          )),
                     ),
                     Container(
                         width: double.infinity,
-                        padding: EdgeInsets.only(left: size.width * .3, top: Dimensions.space100),
-                        child: Text(
-                          MyStrings.victory,
-                          style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
-                        )),
-
-                    Container(
-                        width: double.infinity,
-                        padding:const EdgeInsets.only( top: Dimensions.space180),
+                        padding: const EdgeInsets.only(top: Dimensions.space180),
                         child: Align(
                           alignment: Alignment.center,
                           child: Text(
-                            controller.appreciation,
+                            controller.appreciation == "Failed" ? MyStrings.betterLuckNextTime : MyStrings.victory,
                             style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
                           ),
                         )),
                   ],
                 ),
+                SizedBox(
+                  height: Dimensions.space10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     RightOrWrongAnsSection(correctAnswer: controller.correctAnswer, wrongAnswer: controller.wrongAnswer, totalQuestions: controller.totalQuestions),
-                    const PlayerProfilePicture(),
+                    PlayerProfilePicture(
+                      imagePath: controller.examZoneRepo.apiClient.getUserImagePath(),
+                    ),
                     ExamRewardsSection(
                       totalCoin: controller.totalCoin,
                       winningCoin: controller.winningCoin,
                     ),
-                    
                   ],
                 ),
                 const Padding(
-                  padding: EdgeInsets.symmetric(vertical: Dimensions.space50),
+                  padding: EdgeInsets.symmetric(vertical: Dimensions.space40),
                   child: CustomDashedDivider(
                     height: Dimensions.space1,
                     width: double.infinity,

@@ -24,6 +24,11 @@ class ExamZoneQuizController extends GetxController {
   bool audienceVote = false;
   bool tapAnswer = false;
   bool flipQuistions = false;
+
+  bool examNotStartYet = false;
+  bool examAlreadyGiven = false;
+  bool examFinished = false;
+
   String flipQuistion = "0";
   String fifty_fifty = "0";
   String audiencevotes = "0";
@@ -48,11 +53,9 @@ class ExamZoneQuizController extends GetxController {
   late final TabController tabController;
   int selectedIndex = 1;
 
-  TextEditingController _textEditingController = TextEditingController();
-  String _inputText = "";
-
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
+  PageController reviewPageController = PageController();
   int currentPage = 0;
 
   changePage(int page) {
@@ -69,34 +72,41 @@ class ExamZoneQuizController extends GetxController {
     loading = true;
     update();
 
-    print(
-        "submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
-
     ResponseModel getQuestionsModel = await examZoneRepo.getExamQuestionList(quizInfoId, enterExamKey);
 
     if (getQuestionsModel.statusCode == 200) {
       examQuestionsList.clear();
       ExamZoneQuestionsModel model = ExamZoneQuestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
+      // model.data.exam.examDuration
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        print("get answer done");
-        // print(model.data);
-        List<Question>? examQuestion = model.data!.questions! as List<Question>?;
+        if (model.message!.success!.first.contains("start soon")) {
+          examNotStartYet = true;
+          loading = false;
+          update();
+          CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        } else if (model.message!.success!.first.contains("already finished")) {
+          examAlreadyGiven = true;
+          loading = false;
+          update();
+          CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        } else if (model.message!.success!.first.contains("closed")) {
+          examFinished = true;
+          loading = false;
+          update();
+          CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        } else {
+          List<Question>? examQuestion = model.data!.questions!;
 
-        print(examQuestion);
+          if (examQuestion.isNotEmpty) {
+            examQuestionsList.addAll(examQuestion);
+          }
 
-        if (examQuestion != null && examQuestion.isNotEmpty) {
-          examQuestionsList.addAll(examQuestion);
+          // List<Option>? optionslist = model.data!.questions![1].options;
+
+          // if (optionslist != null && optionslist.isNotEmpty) {
+          //   optionsList.addAll(optionslist);
+          // }
         }
-
-        //   List<Option>? optionslist = model.data!.questions![1].options;
-
-        // if (optionslist != null && optionslist.isNotEmpty) {
-        //   optionsList.addAll(optionslist);
-        // }
-
-        
-
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 
@@ -185,7 +195,7 @@ class ExamZoneQuizController extends GetxController {
   makeFiftyFifty(int index) {
     List<Option> allOptions = examQuestionsList[index].options!;
     var random = Random();
-    Option correctAnswers = allOptions!.firstWhere((element) => element.isAnswer == '1');
+    Option correctAnswers = allOptions.firstWhere((element) => element.isAnswer == '1');
     allOptions.remove(correctAnswers);
     Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
     List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);
@@ -221,8 +231,7 @@ class ExamZoneQuizController extends GetxController {
     submitLoading = true;
     update();
 
-    print(
-        "submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
+    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
 
     Map<String, dynamic> params = {};
 
@@ -246,7 +255,7 @@ class ExamZoneQuizController extends GetxController {
     if (submitModel.statusCode == 200) {
       ExamResultModel model = ExamResultModel.fromJson(jsonDecode(submitModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        appreciation = model.message!.success.toString();
+        appreciation = model.message!.success!.first;
         totalQuestions = model.data!.totalQuestion.toString();
         correctAnswer = model.data!.correctAnswer.toString();
         wrongAnswer = model.data!.wrongAnswer.toString();

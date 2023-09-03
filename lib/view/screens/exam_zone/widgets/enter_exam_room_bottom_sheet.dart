@@ -12,10 +12,12 @@ import 'package:flutter_prime/view/components/otp_field_widget/otp_field_widget.
 import 'package:flutter_prime/view/components/text/default_text.dart';
 import 'package:get/get.dart';
 
-class EnterRoomBottomSheetWidget extends StatefulWidget {
+import '../../../components/buttons/circle_animated_button_with_text.dart';
+import '../../../components/buttons/rounded_loading_button.dart';
 
-  final String quizInfo_id;
-  EnterRoomBottomSheetWidget({super.key, required this.quizInfo_id});
+class EnterRoomBottomSheetWidget extends StatefulWidget {
+  final String quizInfoId;
+  const EnterRoomBottomSheetWidget({super.key, required this.quizInfoId});
 
   @override
   State<EnterRoomBottomSheetWidget> createState() => _EnterRoomBottomSheetWidgetState();
@@ -30,13 +32,11 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ExamZoneRepo(apiClient: Get.find()));
 
-     Get.put(ExamZoneController(
+    Get.put(ExamZoneController(
       examZoneRepo: Get.find(),
     ));
 
     super.initState();
-
-   
   }
 
   @override
@@ -45,7 +45,6 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
       builder: (controller) => Padding(
         padding: const EdgeInsets.only(top: Dimensions.space10, left: Dimensions.space10, right: Dimensions.space10),
         child: Column(
-          
           children: [
             const BottomSheetBar(),
             const SizedBox(height: Dimensions.space20),
@@ -58,9 +57,11 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                 style: regularLarge.copyWith(
                   color: MyColor.textColor,
                 )),
-            const SizedBox(height: Dimensions.space15),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
+              // padding: const EdgeInsets.only(right: Dimensions.space10,),
+              padding: const EdgeInsets.symmetric(
+                vertical: Dimensions.space10,
+              ),
               child: OTPFieldWidget(
                 onChanged: (value) {
                   controller.enterExamKey = value;
@@ -83,7 +84,6 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                     style: semiBoldMediumLarge,
                   ),
                   ListView.builder(
-                   
                       itemCount: viewAll == true ? 3 : 2,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
@@ -149,15 +149,16 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
               ),
             ),
             const SizedBox(height: Dimensions.space30),
-            RoundedButton(
-              text: MyStrings.submit,
-              press: () {
-                // Get.toNamed(RouteHelper.createRoomScreen);
-                controller.enterExamZone(widget.quizInfo_id, controller.enterExamKey);
-              },
-              textSize: Dimensions.space20,
-              cornerRadius: Dimensions.space10,
-            ),
+            controller.submitLoading == true
+                ? RoundedLoadingBtn()
+                : RoundedButton(
+                    text: MyStrings.submit,
+                    press: () {
+                      controller.enterExamZone(widget.quizInfoId, controller.enterExamKey);
+                    },
+                    textSize: Dimensions.space20,
+                    cornerRadius: Dimensions.space10,
+                  ),
             const SizedBox(
               height: Dimensions.space20,
             ),

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/data/model/exam_zone/exam_zone_model.dart';
 
 import 'package:flutter_prime/data/repo/exam_zone/exam_zone_repo.dart';
@@ -10,9 +9,10 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
+import '../../../core/route/route.dart';
 import '../../model/exam_zone/exam_zone_question_list_model.dart';
 
-class ExamZoneController extends GetxController {
+class ExamZoneController extends GetxController with GetSingleTickerProviderStateMixin {
   ExamZoneRepo examZoneRepo;
 
   ExamZoneController({
@@ -35,23 +35,32 @@ class ExamZoneController extends GetxController {
   List selectedQuestionsId = [];
   List selectedAnswerId = [];
 
-  late final TabController tabController;
+  late TabController tabController;
   int selectedIndex = 1;
-
-  TextEditingController _textEditingController = TextEditingController();
-  String _inputText = "";
 
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
   int currentPage = 0;
+
+  @override
+  void onInit() {
+    super.onInit();
+    tabController = TabController(vsync: this, length: 2);
+
+    selectedIndex = tabController.index;
+  }
 
   changePage(int page) {
     currentPage = page;
     update();
   }
 
-  void examZonegetdata() async {
-    loading = true;
+  void examZoneListData({bool fromLoad = false}) async {
+    if (fromLoad == true) {
+      loading = true;
+    } else {
+      loading = false;
+    }
 
     update();
 
@@ -89,40 +98,32 @@ class ExamZoneController extends GetxController {
   String quizInfoId = "";
 
   bool submitLoading = false;
+
   enterExamZone(String quizInfoId, enterExamKey) async {
     submitLoading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + quizInfoId.toString());
-
-    ResponseModel getQuestionsModel = await examZoneRepo.getExamQuestionList(quizInfoId.toString(), enterExamKey);
+    //GET EXAM DETAILS
+    ResponseModel getQuestionsModel = await examZoneRepo.getExamDetails(quizInfoId.toString());
 
     if (getQuestionsModel.statusCode == 200) {
       examQuestionsList.clear();
-      ExamZoneQuestionsModel model = ExamZoneQuestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
-      if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        print("key enter done");
-        // print(model.data);
-        // List<Question>? examQuestion = model.data!.questions! as List<Question>?;
-
-        // print(examQuestion);
-
-        // if (examQuestion != null && examQuestion.isNotEmpty) {
-        //   examQuestionsList.addAll(examQuestion);
-        // }
-
-        Get.toNamed(RouteHelper.examZoneQuestionScreen,  arguments:  [quizInfoId,  enterExamKey]);
-        print("this is quiz info id"+quizInfoId);
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+      ExamZoneQuestionsModel modelData = ExamZoneQuestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
+      if (modelData.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
+        if (modelData.message!.success!.first.contains("already finished")) {
+          Get.back();
+          CustomSnackBar.success(successList: modelData.message!.success!);
+        } else {
+          Get.toNamed(RouteHelper.examZoneQuestionScreen, arguments: [quizInfoId, enterExamKey]);
+        }
       } else {
-        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: modelData.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }
     } else {
       CustomSnackBar.error(errorList: [getQuestionsModel.message]);
     }
-    print("this is " + getQuestionsModel.message);
 
     submitLoading = false;
     update();
@@ -135,7 +136,6 @@ class ExamZoneController extends GetxController {
   ) {
     selectedOptionIndex = optionIndex;
     print('work here');
-    String optionId = optionsList[optionIndex].id.toString();
 
     print('not work here');
     // questionsList[questionIndex].setSelectedOptionId(optionId);
