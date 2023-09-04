@@ -8,16 +8,16 @@ import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:intl/intl.dart';
 
 import '../../../core/route/route.dart';
+import '../../model/exam_zone/completed_exam_zone_model.dart';
 import '../../model/exam_zone/exam_zone_question_list_model.dart';
 
 class ExamZoneController extends GetxController with GetSingleTickerProviderStateMixin {
   ExamZoneRepo examZoneRepo;
 
-  ExamZoneController({
-    required this.examZoneRepo,
-  });
+  ExamZoneController({required this.examZoneRepo});
 
   int rightAnswerIndex = 0;
   int selectedAnswerIndex = -1;
@@ -25,11 +25,13 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
   int currentQuestionIndex = 0;
 
   bool loading = true;
+  bool loadingForCompletedList = true;
 
   String? quizInfoID;
   late int questionsIndex;
   List<Exam> examcategoryList = [];
-  List<Question> examQuestionsList = [];
+  List<CompletedExam> completedExamDataList = [];
+
   List<Option> optionsList = [];
 
   List selectedQuestionsId = [];
@@ -41,6 +43,11 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
   int currentPage = 0;
+  bool agreeExamRules = false;
+  String enterExamKey = "";
+  String quizInfoId = "";
+
+  bool submitLoading = false;
 
   @override
   void onInit() {
@@ -50,11 +57,22 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
     selectedIndex = tabController.index;
   }
 
+  changeExamRules(bool value) {
+    agreeExamRules = value;
+    update();
+  }
+
   changePage(int page) {
     currentPage = page;
     update();
   }
 
+  selectTab() {
+    selectedIndex = tabController.index;
+    update();
+  }
+
+  //Todays Exam List
   void examZoneListData({bool fromLoad = false}) async {
     if (fromLoad == true) {
       loading = true;
@@ -65,8 +83,6 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
     update();
 
     ResponseModel model = await examZoneRepo.examZoneData();
-
-    print("object" + quizInfoID.toString());
 
     if (model.statusCode == 200) {
       examcategoryList.clear();
@@ -80,7 +96,7 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
           examcategoryList.addAll(examList);
         }
 
-        print("this is exam list" + examList![0].id.toString());
+  
       } else {
         CustomSnackBar.error(errorList: [examZoneModel.status ?? ""]);
       }
@@ -94,11 +110,43 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
     update();
   }
 
-  String enterExamKey = "";
-  String quizInfoId = "";
+  // Completed Exam LIst
+  void completedExamList({bool fromLoad = false}) async {
+    if (fromLoad == true) {
+      loadingForCompletedList = true;
+    } else {
+      loadingForCompletedList = false;
+    }
 
-  bool submitLoading = false;
+    update();
 
+    ResponseModel model = await examZoneRepo.completedExamListData();
+
+    if (model.statusCode == 200) {
+      completedExamDataList.clear();
+
+      CompletedExamListModel examZoneModel = completedExamListModelFromJson(model.responseJson);
+
+      if (examZoneModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+        List<CompletedExam>? examList = examZoneModel.data.exams;
+
+        if (examList != null && examList.isNotEmpty) {
+          completedExamDataList.addAll(examList);
+        }
+      } else {
+        CustomSnackBar.error(errorList: [examZoneModel.status ?? ""]);
+      }
+    } else {
+      CustomSnackBar.error(errorList: [model.message]);
+    }
+
+    print('---------------------${model.statusCode}');
+
+    loadingForCompletedList = false;
+    update();
+  }
+
+  //Enter to exam
   enterExamZone(String quizInfoId, enterExamKey) async {
     submitLoading = true;
     update();
@@ -107,7 +155,6 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
     ResponseModel getQuestionsModel = await examZoneRepo.getExamDetails(quizInfoId.toString());
 
     if (getQuestionsModel.statusCode == 200) {
-      examQuestionsList.clear();
       ExamZoneQuestionsModel modelData = ExamZoneQuestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
       if (modelData.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
         if (modelData.message!.success!.first.contains("already finished")) {
@@ -127,43 +174,5 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
 
     submitLoading = false;
     update();
-  }
-
-  int selectedOptionIndex = -1;
-  selectAnswer(
-    int optionIndex,
-    int questionIndex,
-  ) {
-    selectedOptionIndex = optionIndex;
-    print('work here');
-
-    print('not work here');
-    // questionsList[questionIndex].setSelectedOptionId(optionId);
-
-    print('done');
-
-    update();
-  }
-
-  selectTab() {
-    selectedIndex = tabController.index;
-    update();
-  }
-
-  String questionId = "";
-  String thisQuestionId = "";
-  isValidAnswer(int index, int optionIndex) {
-    // questionId = questionsList[index].selectedOptionId.toString();
-    thisQuestionId = optionsList[optionIndex].id.toString();
-
-    print('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
-
-    print('questionId=========================================================================: ${questionId}');
-
-    if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

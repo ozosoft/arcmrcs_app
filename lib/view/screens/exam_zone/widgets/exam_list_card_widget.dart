@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/my_color.dart';
 import '../../../../core/utils/my_images.dart';
+import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/style.dart';
 import '../../../../core/utils/url_container.dart';
+import '../../../../data/model/exam_zone/exam_zone_model.dart';
 import '../../../components/chips/custom_chips_widget.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 
@@ -13,6 +16,7 @@ class ExamListTileCard extends StatefulWidget {
   final String title, image, minute, marks, date;
 
   final int index;
+  final Exam exam;
   final VoidCallback? onTap;
 
   const ExamListTileCard({
@@ -24,6 +28,7 @@ class ExamListTileCard extends StatefulWidget {
     required this.index,
     this.date = "",
     this.onTap,
+    required this.exam,
   });
   @override
   State<ExamListTileCard> createState() => _ExamListTileCardState();
@@ -90,7 +95,16 @@ class _ExamListTileCardState extends State<ExamListTileCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               //Title here
-                              Text(widget.title, style: semiBoldMediumLarge),
+                              Text(widget.exam.title!.tr, style: semiBoldMediumLarge),
+
+                              const SizedBox(height: Dimensions.space15),
+                              //Title here
+                              Text("${MyStrings.youNeedtoScoreLong.replaceAll("{point}", widget.exam.winningMark.toString()).tr} ", style: regularSmall),
+
+                              const SizedBox(height: Dimensions.space15),
+                              // //Title here
+                              //Title here
+                              Text("${MyStrings.entryFee.tr} - ${widget.exam.point.toString().tr} ${int.parse(widget.exam.point.toString()) > 1 ? MyStrings.coins.tr : MyStrings.coin.tr}", style: regularSmall),
 
                               const SizedBox(height: Dimensions.space15),
                               //Chips Here
@@ -109,16 +123,6 @@ class _ExamListTileCardState extends State<ExamListTileCard> {
                                           padding: Dimensions.space5,
                                           child: Center(
                                             child: Text(
-                                              widget.minute,
-                                              style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                            ),
-                                          ),
-                                        ),
-                                        CustomChipsWidget(
-                                          right: Dimensions.space10,
-                                          padding: Dimensions.space5,
-                                          child: Center(
-                                            child: Text(
                                               widget.marks,
                                               style: regularDefault.copyWith(color: MyColor.colorGrey),
                                             ),
@@ -131,6 +135,16 @@ class _ExamListTileCardState extends State<ExamListTileCard> {
                                           child: Center(
                                             child: Text(
                                               widget.date,
+                                              style: regularDefault.copyWith(color: MyColor.colorGrey),
+                                            ),
+                                          ),
+                                        ),
+                                        CustomChipsWidget(
+                                          right: Dimensions.space10,
+                                          padding: Dimensions.space5,
+                                          child: Center(
+                                            child: Text(
+                                              widget.minute,
                                               style: regularDefault.copyWith(color: MyColor.colorGrey),
                                             ),
                                           ),

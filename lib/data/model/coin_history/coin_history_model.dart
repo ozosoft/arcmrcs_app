@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../model/message_model/message_model.dart';
+
 CoinHistoryModel coinHistoryModelFromJson(String str) => CoinHistoryModel.fromJson(json.decode(str));
 
 String coinHistoryModelToJson(CoinHistoryModel data) => json.encode(data.toJson());
@@ -144,18 +146,4 @@ class CoinPlan {
     };
 }
 
-class Message {
-    List<String>? success;
 
-    Message({
-        this.success,
-    });
-
-    factory Message.fromJson(Map<String, dynamic> json) => Message(
-        success: json["success"] == null ? [] : List<String>.from(json["success"]!.map((x) => x)),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "success": success == null ? [] : List<dynamic>.from(success!.map((x) => x)),
-    };
-}

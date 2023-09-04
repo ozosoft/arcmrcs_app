@@ -1,5 +1,4 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/helper/date_converter.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -14,10 +13,15 @@ import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:slide_countdown/slide_countdown.dart';
 
+import '../../../../core/utils/url_container.dart';
+import '../../../components/alert-dialog/custom_alert_dialog.dart';
+import '../../../components/buttons/rounded_button.dart';
+import '../../../components/image_widget/my_image_widget.dart';
 import '../../../components/no_data.dart';
 
 class Exam_zone_quiz_screen extends StatefulWidget {
@@ -30,6 +34,8 @@ class Exam_zone_quiz_screen extends StatefulWidget {
 class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
   @override
   void initState() {
+    super.initState();
+
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ExamZoneRepo(apiClient: Get.find()));
 
@@ -40,10 +46,6 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
     controller.quizInfoID = Get.arguments[0];
     controller.enterExamKey = Get.arguments[1];
 
-    // print("++++++++++===============this is id"+quizinfoID.toString());
-    super.initState();
-
-    print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" + controller.enterExamKey + controller.quizInfoID.toString());
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getExamZoneQuestions(controller.quizInfoID.toString(), controller.enterExamKey);
     });
@@ -66,225 +68,342 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                       ? MyStrings.examFinished.tr
                                       : MyStrings.noDataToShow.tr,
                         )
-                      : Stack(
-                          children: [
-                            PageView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              controller: controller.pageController,
-                              onPageChanged: (int page) {
-                                controller.changePage(page);
-                              },
-                              itemCount: controller.examQuestionsList.length,
-                              itemBuilder: (context, questionsIndex) {
-                                controller.setCurrentOption(questionsIndex);
-
-                                print('current question index: ${questionsIndex}');
-
-                                return SingleChildScrollView(
-                                  padding: const EdgeInsets.all(Dimensions.space20),
-                                  child: Stack(
-                                    children: [
-                                      Container(
-                                        key: ValueKey<int>(controller.currentQuestionIndex),
-                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space20), color: MyColor.colorWhite),
-                                        padding: const EdgeInsets.all(Dimensions.space15),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                LevelCardButton(text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
-                                              ],
+                      : WillPopScope(
+                          onWillPop: () async {
+                            if (controller.examAlreadyGiven == false && controller.examFinished == false && controller.examNotStartYet == false && controller.examStarted == false) {
+                              return true;
+                            }
+                            CustomAlertDialog(
+                                borderRadius: 100,
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(Dimensions.space10),
+                                      child: Text(
+                                        MyStrings.areYouSureYouWantToLeaveExamRoom,
+                                        style: regularLarge.copyWith(color: MyColor.textSecondColor),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    Container(
+                                      width: double.infinity,
+                                      height: 1,
+                                      color: MyColor.textSecondColor.withOpacity(0.3),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(Dimensions.space10),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
+                                            },
+                                            child: const Text(
+                                              MyStrings.cancel,
+                                              style: regularLarge,
                                             ),
-                                            Container(
-                                              width: double.infinity,
-                                              padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                                              child: Image.asset(
-                                                MyImages.greatWallPNG,
-                                                fit: BoxFit.cover,
+                                          ),
+                                          TextButton(
+                                            style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
+                                            onPressed: () async {
+                                              Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
+                                            },
+                                            child: Text(
+                                              MyStrings.yes,
+                                              style: regularLarge.copyWith(color: MyColor.colorWhite),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                )).customAlertDialog(context);
+                            return false; // Disable back button if `start` is true
+                          },
+                          child: Stack(
+                            children: [
+                              PageView.builder(
+                                physics: const BouncingScrollPhysics(),
+                                controller: controller.pageController,
+                                onPageChanged: (int page) {
+                                  controller.changePage(page);
+                                },
+                                itemCount: controller.examQuestionsList.length,
+                                itemBuilder: (context, questionsIndex) {
+                                  controller.setCurrentOption(questionsIndex);
+
+                                  print('current question index: ${questionsIndex}');
+
+                                  return SingleChildScrollView(
+                                    padding: const EdgeInsets.all(Dimensions.space20),
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          key: ValueKey<int>(controller.currentQuestionIndex),
+                                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space20), color: MyColor.colorWhite),
+                                          padding: const EdgeInsets.all(Dimensions.space15),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  LevelCardButton(text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
+                                                ],
                                               ),
-                                            ),
-                                            Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
-                                            const SizedBox(height: Dimensions.space25),
-                                            ListView.builder(
-                                                physics: const NeverScrollableScrollPhysics(),
-                                                shrinkWrap: true,
-                                                itemCount: controller.examQuestionsList[questionsIndex].options!.length,
-                                                itemBuilder: (BuildContext context, int optionIndex) {
-                                                  return Column(
-                                                    children: [
-                                                      Row(
-                                                        children: [
-                                                          InkWell(
-                                                            onTap: () async {
-                                                              if (controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
-                                                                return;
-                                                              }
+                                              const SizedBox(
+                                                height: Dimensions.space30,
+                                              ),
+                                              if (controller.examQuestionsList[questionsIndex].image != null) ...[
+                                                Container(
+                                                  width: double.infinity,
+                                                  padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                                                  child: MyImageWidget(
+                                                    boxFit: BoxFit.contain,
+                                                    height: Get.width / 2,
+                                                    imageUrl: "${UrlContainer.battleQuestionImagePath}/${controller.examQuestionsList[questionsIndex].image}",
+                                                  ),
+                                                ),
+                                              ],
 
-                                                              controller.selectAnswer(optionIndex, questionsIndex);
+                                              Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                                              const SizedBox(height: Dimensions.space25),
+                                              ListView.builder(
+                                                  physics: const NeverScrollableScrollPhysics(),
+                                                  shrinkWrap: true,
+                                                  itemCount: controller.examQuestionsList[questionsIndex].options!.length,
+                                                  itemBuilder: (BuildContext context, int optionIndex) {
+                                                    return Column(
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            InkWell(
+                                                              onTap: () async {
+                                                                if (controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
+                                                                  return;
+                                                                }
 
-                                                              controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                  ? null
-                                                                  : controller.selectedOptionIndex == optionIndex
-                                                                      ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                          ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
-                                                                          : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
-                                                                      : null;
+                                                                controller.selectAnswer(optionIndex, questionsIndex);
 
-                                                              await Future.delayed(const Duration(seconds: 2));
+                                                                controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                    ? null
+                                                                    : controller.selectedOptionIndex == optionIndex
+                                                                        ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                            ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                            : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                                        : null;
 
-                                                              if (controller.pageController.page! < controller.examQuestionsList.length - 1) {
-                                                                controller.pageController.nextPage(
-                                                                  duration: const Duration(milliseconds: 500),
-                                                                  curve: Curves.easeInOut,
-                                                                );
-                                                              }
-                                                              if (controller.selectedOptionIndex.toString() == "0" && controller.selectedOptionIndex.toString() == "1") {
-                                                                controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
-                                                              }
-                                                              controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
+                                                                await Future.delayed(const Duration(seconds: 2));
 
-                                                              if (questionsIndex == controller.examQuestionsList.length - 1) {
-                                                                controller.submitAnswer();
-                                                                Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult);
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              margin: const EdgeInsets.all(Dimensions.space8),
-                                                              padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
-                                                              height: Dimensions.space55,
-                                                              width: controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? MediaQuery.of(context).size.width * .65 : MediaQuery.of(context).size.width * .75,
-                                                              decoration: BoxDecoration(
-                                                                  color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                      ? MyColor.transparentColor
-                                                                      : controller.selectedOptionIndex == optionIndex
-                                                                          ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                              ? MyColor.rightAnswerbgColor
-                                                                              : MyColor.wrongAnsColor
-                                                                          : MyColor.transparentColor,
-                                                                  borderRadius: BorderRadius.circular(Dimensions.space8),
-                                                                  border: Border.all(color: MyColor.colorLightGrey)),
-                                                              child: Row(
-                                                                children: [
-                                                                  const SizedBox(width: Dimensions.space8),
-                                                                  Text(
-                                                                    controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString(),
-                                                                    style: regularMediumLarge.copyWith(
-                                                                        color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                            ? MyColor.textColor
-                                                                            : controller.selectedOptionIndex == optionIndex
-                                                                                ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                                    ? MyColor.colorWhite
-                                                                                    : MyColor.colorWhite
-                                                                                : MyColor.textColor),
-                                                                  ),
-                                                                  const Spacer(),
-                                                                  SizedBox(
-                                                                      height: Dimensions.space10,
-                                                                      child: SvgPicture.asset(
-                                                                          "${controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox() : controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
-                                                                          fit: BoxFit.cover))
-                                                                ],
+                                                                if (controller.pageController.page! < controller.examQuestionsList.length - 1) {
+                                                                  controller.pageController.nextPage(
+                                                                    duration: const Duration(milliseconds: 500),
+                                                                    curve: Curves.easeInOut,
+                                                                  );
+                                                                }
+                                                                if (controller.selectedOptionIndex.toString() == "0" && controller.selectedOptionIndex.toString() == "1") {
+                                                                  controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
+                                                                }
+                                                                controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
+
+                                                                // if (questionsIndex == controller.examQuestionsList.length - 1) {
+                                                                //   controller.submitAnswer();
+                                                                //   Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult);
+                                                                // }
+                                                                // controller.update();
+                                                              },
+                                                              child: Container(
+                                                                margin: const EdgeInsets.all(Dimensions.space8),
+                                                                padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
+                                                                height: Dimensions.space55,
+                                                                width: controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? MediaQuery.of(context).size.width * .65 : MediaQuery.of(context).size.width * .75,
+                                                                decoration: BoxDecoration(
+                                                                    color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                        ? MyColor.transparentColor
+                                                                        : controller.selectedOptionIndex == optionIndex
+                                                                            ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                                ? MyColor.rightAnswerbgColor
+                                                                                : MyColor.wrongAnsColor
+                                                                            : MyColor.transparentColor,
+                                                                    borderRadius: BorderRadius.circular(Dimensions.space8),
+                                                                    border: Border.all(color: MyColor.colorLightGrey)),
+                                                                child: Row(
+                                                                  children: [
+                                                                    const SizedBox(width: Dimensions.space8),
+                                                                    Text(
+                                                                      "${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()} - ${controller.examQuestionsList[questionsIndex].options![optionIndex].isAnswer.toString()}",
+                                                                      style: regularMediumLarge.copyWith(
+                                                                          color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                              ? MyColor.textColor
+                                                                              : controller.selectedOptionIndex == optionIndex
+                                                                                  ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                                      ? MyColor.colorWhite
+                                                                                      : MyColor.colorWhite
+                                                                                  : MyColor.textColor),
+                                                                    ),
+                                                                    const Spacer(),
+                                                                    SizedBox(
+                                                                        height: Dimensions.space10,
+                                                                        child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                            ? const SizedBox()
+                                                                            : SvgPicture.asset(
+                                                                                "${controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
+                                                                                fit: BoxFit.cover))
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
-                                                          const Spacer(),
-                                                          controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  );
-                                                }),
-                                            const SizedBox(height: Dimensions.space25),
-                                            // LifeLinesWidget(questionIndex: questionsIndex),
-                                            const SizedBox(height: Dimensions.space25),
+                                                            const Spacer(),
+                                                            controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    );
+                                                  }),
+                                              const SizedBox(height: Dimensions.space25),
+                                              // LifeLinesWidget(questionIndex: questionsIndex),
+                                              const SizedBox(height: Dimensions.space25),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                              Positioned(
+                                top: Dimensions.space40,
+                                left: 0,
+                                right: Dimensions.space40,
+                                child: Align(
+                                    alignment: Alignment.topRight,
+                                    child: Builder(builder: (c) {
+                                      int durationInMinutes = DateConverter().calculateDurationToEndTime("${controller.examFullInfoData.examEndTime}");
+
+                                      return SlideCountdownSeparated(
+                                        streamDuration: StreamDuration(Duration(minutes: durationInMinutes)),
+                                        width: 40,
+                                        height: 40,
+                                        separatorType: SeparatorType.symbol,
+                                        slideDirection: SlideDirection.down,
+                                        separatorStyle: const TextStyle(color: MyColor.primaryColor, fontSize: 20),
+                                        textStyle: const TextStyle(backgroundColor: Colors.transparent, color: MyColor.primaryColor, fontSize: 25, fontWeight: FontWeight.bold),
+                                        decoration: const BoxDecoration(
+                                          color: MyColor.timerbgColor,
+                                          borderRadius: BorderRadius.all(Radius.circular(Dimensions.space5)),
+                                        ),
+                                        padding: const EdgeInsets.all(0),
+                                        separatorPadding: const EdgeInsets.all(5),
+                                        onChanged: (v) {
+                                          print(v);
+                                          print(v);
+                                          if (v.toString() == "0:00:01.000000") {
+                                            print("Exam Finished onchange");
+
+                                            controller.submitAnswer();
+                                          }
+                                        },
+                                        onDone: () {
+                                          print("Exam Finished ccc");
+
+                                          controller.submitAnswer();
+                                        },
+                                        showZeroValue: false,
+                                      );
+                                    })),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child: Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space10),
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: Dimensions.space5),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "${controller.selectedAnswerId.length} ${MyStrings.attempted}",
+                                                      style: regularMediumLarge.copyWith(color: MyColor.colorDarkGrey),
+                                                    ),
+                                                    SizedBox(
+                                                      height: Dimensions.space6,
+                                                    ),
+                                                    Text(
+                                                      "${controller.examQuestionsList.length - controller.selectedAnswerId.length} ${MyStrings.unAttempted}",
+                                                      style: regularMediumLarge.copyWith(color: MyColor.colorDarkGrey),
+                                                    )
+                                                  ],
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: RoundedButton(
+                                              text: MyStrings.submit,
+                                              color: MyColor.primaryColor,
+                                              press: () {
+                                                print("Exam Finished button");
+
+                                                controller.submitAnswer();
+                                              }),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              //Load bar
+                              if (controller.submitLoading == true) ...[
+                                Positioned.fill(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Container(
+                                      color: MyColor.colorWhite.withOpacity(0.9),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            SpinKitPouringHourGlass(
+                                              color: MyColor.spinLoadColor,
+                                            ),
+                                            SizedBox(
+                                              height: Dimensions.space20,
+                                            ),
+                                            Text(
+                                              MyStrings.pleaseWaitForYourResultText,
+                                            )
                                           ],
                                         ),
                                       ),
-                                      // Padding(
-                                      //   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .4),
-                                      //   child: Row(
-                                      //     children: [
-                                      //       CircularCountDownTimer(
-                                      //         duration: Dimensions.space100.toInt(),
-                                      //         initialDuration: 0,
-                                      //         controller: controller.countDownController,
-                                      //         width: Dimensions.space60,
-                                      //         height: Dimensions.space80,
-                                      //         ringColor: MyColor.primaryColor,
-                                      //         ringGradient: null,
-                                      //         fillColor: MyColor.timerbgColor,
-                                      //         fillGradient: null,
-                                      //         backgroundColor: MyColor.timerbgColor,
-                                      //         strokeWidth: Dimensions.space5,
-                                      //         strokeCap: StrokeCap.round,
-                                      //         textStyle: semiBoldExtraLarge.copyWith(color: MyColor.primaryColor),
-                                      //         textFormat: CountdownTextFormat.S,
-                                      //         isReverse: true,
-                                      //         isReverseAnimation: false,
-                                      //         isTimerTextShown: true,
-                                      //         autoStart: true,
-                                      //         onComplete: () {
-                                      //           // if (controller.selectedOptionIndex.toString() == "-1") {
-                                      //           //   controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
-                                      //           // }
-                                      //           // controller.selectedOptionIndex.toString().isNotEmpty ? print("this is selectedoption index" + controller.selectedOptionIndex.toString()) : print;
-                                      //           // if (questionsIndex == controller.examQuestionsList.length - 1) {
-                                      //           //   controller.submitAnswer();
-
-                                      //           //   Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult);
-                                      //           // } else {
-                                      //           //   controller.pageController.nextPage(
-                                      //           //     duration: const Duration(milliseconds: 500),
-                                      //           //     curve: Curves.easeInOut,
-                                      //           //   );
-                                      //           // }
-                                      //         },
-                                      //       ),
-                                      //     ],
-                                      //   ),
-                                      // ),
-                                    ],
+                                    ),
                                   ),
-                                );
-                              },
-                            ),
-                            Positioned(
-                              top: Dimensions.space40,
-                              left: 0,
-                              right: Dimensions.space40,
-                              child: Align(
-                                  alignment: Alignment.topRight,
-                                  child: Builder(builder: (context) {
-                                    int durationInMinutes = DateConverter().calculateDurationToEndTime("09:10 pm");
-
-                                    return SlideCountdownSeparated(
-                                      streamDuration: StreamDuration(Duration(minutes: durationInMinutes)),
-                                      width: 40,
-                                      height: 40,
-                                      separatorType: SeparatorType.symbol,
-                                      slideDirection: SlideDirection.down,
-
-                                      separatorStyle: const TextStyle(color: MyColor.primaryColor, fontSize: 20),
-                                      textStyle: const TextStyle(backgroundColor: Colors.transparent, color: MyColor.primaryColor, fontSize: 25, fontWeight: FontWeight.bold),
-                                      decoration: const BoxDecoration(
-                                        color: MyColor.timerbgColor,
-                                        borderRadius: BorderRadius.all(Radius.circular(Dimensions.space10)),
-                                      ),
-                                      padding: const EdgeInsets.all(0),
-
-                                      separatorPadding: const EdgeInsets.all(5),
-                                      onChanged: (v) {
-                                        print(v);
-                                      },
-                                      onDone: () {
-                                        print("Doness");
-                                      },
-
-                                      //showZeroValue: true,
-                                    );
-                                  })),
-                            ),
-                          ],
+                                ),
+                              ],
+                            ],
+                          ),
                         ),
             ));
   }

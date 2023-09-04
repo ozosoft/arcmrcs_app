@@ -9,15 +9,19 @@ import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/otp_field_widget/otp_field_widget.dart';
+import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_prime/view/components/text/default_text.dart';
 import 'package:get/get.dart';
 
+import '../../../../data/model/dashboard/dashboard_model.dart';
+import '../../../../data/model/exam_zone/exam_zone_model.dart';
 import '../../../components/buttons/circle_animated_button_with_text.dart';
 import '../../../components/buttons/rounded_loading_button.dart';
 
 class EnterRoomBottomSheetWidget extends StatefulWidget {
-  final String quizInfoId;
-  const EnterRoomBottomSheetWidget({super.key, required this.quizInfoId});
+  final Exam? quizInfo;
+  final Exams? quizInfoDashBoard;
+  const EnterRoomBottomSheetWidget({super.key, this.quizInfo, this.quizInfoDashBoard});
 
   @override
   State<EnterRoomBottomSheetWidget> createState() => _EnterRoomBottomSheetWidgetState();
@@ -25,7 +29,6 @@ class EnterRoomBottomSheetWidget extends StatefulWidget {
 
 class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget> {
   bool viewAll = false;
-  bool agree = false;
 
   @override
   void initState() {
@@ -48,8 +51,8 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
           children: [
             const BottomSheetBar(),
             const SizedBox(height: Dimensions.space20),
-            const Text(
-              MyStrings.enterExam,
+            Text(
+              "${widget.quizInfo != null ? widget.quizInfo!.title : widget.quizInfoDashBoard != null ? widget.quizInfoDashBoard!.title : MyStrings.enterExam}",
               style: semiBoldExtraLarge,
             ),
             const SizedBox(height: Dimensions.space15),
@@ -84,6 +87,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                     style: semiBoldMediumLarge,
                   ),
                   ListView.builder(
+                      physics: const BouncingScrollPhysics(),
                       itemCount: viewAll == true ? 3 : 2,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
@@ -108,14 +112,15 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                         );
                       }),
                   InkWell(
-                      onTap: () {
-                        print(viewAll);
-                        viewAll = !viewAll;
-                      },
-                      child: Text(
-                        MyStrings.viewAllRules,
-                        style: regularLarge.copyWith(color: MyColor.textColor),
-                      )),
+                    onTap: () {
+                      print(viewAll);
+                      viewAll = !viewAll;
+                    },
+                    child: Text(
+                      MyStrings.viewAllRules,
+                      style: regularLarge.copyWith(color: MyColor.textColor),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -130,14 +135,12 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.space5)),
                         activeColor: MyColor.primaryColor,
                         checkColor: MyColor.colorWhite,
-                        value: agree,
+                        value: controller.agreeExamRules,
                         side: MaterialStateBorderSide.resolveWith(
-                          (states) => BorderSide(width: Dimensions.space1, color: agree ? MyColor.getTextFieldEnableBorder() : MyColor.getTextFieldDisableBorder()),
+                          (states) => BorderSide(width: Dimensions.space1, color: controller.agreeExamRules ? MyColor.getTextFieldEnableBorder() : MyColor.getTextFieldDisableBorder()),
                         ),
                         onChanged: (value) {
-                          setState(() {
-                            agree = !agree;
-                          });
+                          controller.changeExamRules(value!);
                         }),
                   ),
                   const SizedBox(width: Dimensions.space8),
@@ -150,11 +153,24 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
             ),
             const SizedBox(height: Dimensions.space30),
             controller.submitLoading == true
-                ? RoundedLoadingBtn()
+                ? const RoundedLoadingBtn()
                 : RoundedButton(
                     text: MyStrings.submit,
                     press: () {
-                      controller.enterExamZone(widget.quizInfoId, controller.enterExamKey);
+                      if (controller.enterExamKey == "") {
+                        CustomSnackBar.error(errorList: [(MyStrings.examKeyMsg)]);
+                      } else {
+                        if (controller.agreeExamRules == true) {
+                          if (widget.quizInfo != null) {
+                            controller.enterExamZone(widget.quizInfo!.id.toString(), controller.enterExamKey);
+                          }
+                          if (widget.quizInfoDashBoard != null) {
+                            controller.enterExamZone(widget.quizInfoDashBoard!.id.toString(), controller.enterExamKey);
+                          }
+                        } else {
+                          CustomSnackBar.error(errorList: [(MyStrings.agreeExamRules)]);
+                        }
+                      }
                     },
                     textSize: Dimensions.space20,
                     cornerRadius: Dimensions.space10,

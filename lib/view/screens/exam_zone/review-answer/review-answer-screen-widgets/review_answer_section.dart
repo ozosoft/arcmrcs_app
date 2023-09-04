@@ -27,8 +27,8 @@ class _ExamReviewAnswerSectionState extends State<ExamReviewAnswerSection> {
         builder: (controller) => controller.examQuestionsList.isEmpty
             ? const CustomLoader()
             : PageView.builder(
-                // physics: NeverScrollableScrollPhysics(),
-                controller: controller.pageController,
+                physics: BouncingScrollPhysics(),
+                controller: controller.reviewPageController,
                 itemCount: controller.examQuestionsList.length,
                 itemBuilder: (context, questionsIndex) {
                   controller.setCurrentOption(questionsIndex);
@@ -122,9 +122,11 @@ class _ExamReviewAnswerSectionState extends State<ExamReviewAnswerSection> {
                                                   const Spacer(),
                                                   SizedBox(
                                                       height: Dimensions.space10,
-                                                      child: SvgPicture.asset(
-                                                          "${controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox() : controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : controller.optionsList[optionIndex].isAnswer == '1' ? MyImages.whiteTikSVG : const SizedBox()}",
-                                                          fit: BoxFit.cover))
+                                                      child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                          ? const SizedBox()
+                                                          : SvgPicture.asset(
+                                                              "${controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : controller.optionsList[optionIndex].isAnswer == '1' ? MyImages.whiteTikSVG : const SizedBox()}",
+                                                              fit: BoxFit.cover))
                                                 ],
                                               ),
                                             ),

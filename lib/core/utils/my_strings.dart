@@ -21,6 +21,7 @@ class MyStrings {
   static const String areYouSureYouWantToCloseSearching = "Are You sure You Want Close Searching!";
   static const String searching = "Searching";
   static const String areYouSureYouWantToLeaveThisRoom = "Are You sure You Want to leave this room!";
+  static const String areYouSureYouWantToLeaveExamRoom = "Are You sure You Want to leave Exam room!";
   static const String questionNotFoundMsg = "Questions not found! Please try again after a few minutes.";
   static const String noQuestionFoundMsg = "Sorry! No Questions!";
   static const String oponentLeftTheGame = "Oponent Left The game!";
@@ -34,6 +35,8 @@ class MyStrings {
   static const String roomCodeIsWrong = "Room Code May be Wrong!";
   static const String yourGameWillStartSoon = "The Game Will Begin In";
   static const String sorryRoomISFull = "Sorry! Room Is Full";
+  static const String youNeedtoScoreLong = "You need to score {point}% marks to win.";
+  static const String  youNeedtoScoreSort = "Need {point}% marks to win";
 
   static const String reviewAnswer = "Review Answer";
   static const String currectAnswer = "Currect Answer";
@@ -50,6 +53,8 @@ class MyStrings {
   static const String twobyTen = "2/10";
   static const String email = "Email";
   static const String attachment = "Attachment";
+  static const String attempted = "Attempted";
+  static const String unAttempted = "Un Attempted";
   static const String depositCharge = "Deposit Charge";
   static const String finalAmount = "Final Amount";
   static const String yes = "Yes";
@@ -86,8 +91,10 @@ class MyStrings {
   static const String viewAllRules = "View all rules";
   static const String examRules = "Exam Rules";
   static const String examKey = "Enter the exam key";
+  static const String examKeyMsg = "Please Enter the exam key";
   static const String enterExam = "Enter In Exam";
   static const String examResult = "Exam Result";
+  static const String examStartTime = "Exam Start Time:";
 
   static const String noExamFound = "Sorry! No exam is currently running.";
   static const String examNotStartYet = "Exam Will Be Start Soon!";
@@ -132,6 +139,7 @@ class MyStrings {
   static const String changePassword = "Change Password";
   static const String currentPassword = "Current Password";
   static const String submit = "Submit";
+  static const String submitAnswer = "Submit Answers";
 
   static const String name = "Name";
   static const String phone = "Phone";
@@ -272,8 +280,10 @@ class MyStrings {
   static const String viewMore = "View More";
   static const String rank = "Rank";
   static const String entryFees = "Entry Fees";
+  static const String entryFee = "Entry Fee";
   static const String currentCoins = "Current Coins";
   static const String coins = "Coins";
+  static const String coin = "Coin";
   static const String oneFiftycoins = "150 Coins";
   static const String quiestionsLimit = "01/10";
   static const String score = "Score";
@@ -286,6 +296,7 @@ class MyStrings {
   static const String hiMariya = "Hi! Mariya Ons";
   static const String hi = "Hi! ";
   static const String totalCoinFivethousand = "Total Coin 5000";
+  static const String total = "Total:";
   static const String letsPlayQuiz = "Let`s Play Quiz";
   static const String bookmarks = "Bookmarks";
   static const String settings = "Settings";
@@ -444,6 +455,7 @@ class MyStrings {
 
   static const String pleaseWaitRoomText = "Please wait game will start soon";
   static const String pleaseWaitForYourBattleResultText = "Please Wait For You Battle Result!";
+  static const String pleaseWaitForYourResultText = "Please Wait For You Result!";
 
   static const String approved = "Approved";
   static const String supper = "Supper";
@@ -531,6 +543,7 @@ class MyStrings {
   static const String remarkType = "Remark Type";
   static const String dot = "⚈";
   static const String agreePolicyMessage = "You must agree with our privacy & policies";
+  static const String agreeExamRules = "You must agree with Exam rules";
 
   static RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
   static List<MyLanguageModel> myLanguages = [

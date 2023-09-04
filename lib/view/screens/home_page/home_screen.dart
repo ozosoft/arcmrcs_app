@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
+import 'package:flutter_prime/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/screens/drawer/drawer_screen.dart';
 import 'package:flutter_prime/view/screens/home_page/homepage-widgets/home-body-sections/exam_zone_section/exam_zone_homepage_category_screen.dart';
@@ -34,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DashBoardRepo(apiClient: Get.find()));
+    Get.put(ExamZoneRepo(apiClient: Get.find()));
     Get.put(SubCategoriesRepo(apiClient: Get.find()));
     Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
 
@@ -43,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       quizContestRepo: Get.find(),
     ));
 
-    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
+    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find(), examZoneRepo: Get.find()));
 
     controller.getHomePageData();
   }

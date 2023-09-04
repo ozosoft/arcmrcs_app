@@ -57,11 +57,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
     }, builder: (quizController) {
       if (quizController.meLeftTheGame.value == true) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (quizController.battleRoomController
-                  .getOpponentUserDetailsOrMy(quizController.battleRepo.apiClient.getUserID(), isMyData: true)
-                  .status ==
-              false) {
-                
+          if (quizController.battleRoomController.getOpponentUserDetailsOrMy(quizController.battleRepo.apiClient.getUserID(), isMyData: true).status == false) {
             CustomAlertDialog(
                     willPop: false,
                     borderRadius: 10,
@@ -267,10 +263,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                       });
                                     } else {
                                       // left User
-                                      await quizController.battleRoomController
-                                          .leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false,
-                                              currentUserId: quizController.battleRepo.apiClient.getUserID())
-                                          .whenComplete(() {
+                                      await quizController.battleRoomController.leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false, currentUserId: quizController.battleRepo.apiClient.getUserID()).whenComplete(() {
                                         Navigator.of(context).pop(true); // Return true when "Yes" is pressed
                                         Get.back();
                                       });
@@ -313,10 +306,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                     hasIcon: false,
                                     hasImage: false,
                                   ),
-                                  LevelCardButton(
-                                      text: "${quizController.currentQuestionIndex + 1}/${widget.qustionsList.length}",
-                                      hasIcon: false,
-                                      hasImage: false),
+                                  LevelCardButton(text: "${quizController.currentQuestionIndex + 1}/${widget.qustionsList.length}", hasIcon: false, hasImage: false),
                                 ],
                               ),
                               const SizedBox(
@@ -339,8 +329,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                           if (currentQuestion.image != null) ...[
                                             Container(
                                               width: double.infinity,
-                                              padding:
-                                                  const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                                              padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
                                               child: MyImageWidget(
                                                 boxFit: BoxFit.contain,
                                                 height: Get.width / 2,
@@ -366,8 +355,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                                 letter: optionLetter,
                                                 option: option,
                                                 onTap: () async {
-                                                  if (!quizController.isOptionSelectedForQuestion(currentQuestion.id, option) &&
-                                                      !quizController.hasSubmittedAnswerForQuestion(currentQuestion.id)) {
+                                                  if (!quizController.isOptionSelectedForQuestion(currentQuestion.id, option) && !quizController.hasSubmittedAnswerForQuestion(currentQuestion.id)) {
                                                     print("From Ans Save ");
                                                     await quizController.battleRoomController.saveAnswer(
                                                       quizController.battleRepo.apiClient.getUserID(),

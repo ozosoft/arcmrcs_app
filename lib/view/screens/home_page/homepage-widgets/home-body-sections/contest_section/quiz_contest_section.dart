@@ -165,7 +165,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                                   right: Dimensions.space7,
                                                   child: Center(
                                                       child: Text(
-                                                    MyStrings.feeCoins + controller.contestlist[index].point.toString(),
+                                                    "${MyStrings.entryFee} - ${controller.contestlist[index].point}",
                                                     style: regularDefault.copyWith(color: MyColor.colorGrey),
                                                   )),
                                                 ),

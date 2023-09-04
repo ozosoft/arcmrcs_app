@@ -11,6 +11,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
+import '../../../core/route/route.dart';
 import '../../model/exam_zone/exam_zone_question_list_model.dart';
 
 class ExamZoneQuizController extends GetxController {
@@ -28,6 +29,7 @@ class ExamZoneQuizController extends GetxController {
   bool examNotStartYet = false;
   bool examAlreadyGiven = false;
   bool examFinished = false;
+  bool examStarted = false;
 
   String flipQuistion = "0";
   String fifty_fifty = "0";
@@ -43,6 +45,7 @@ class ExamZoneQuizController extends GetxController {
 
   String? quizInfoID;
   late int questionsIndex;
+  Exams examFullInfoData = Exams();
   List<Exam> examcategoryList = [];
   List<Question> examQuestionsList = [];
   List<Option> optionsList = [];
@@ -68,6 +71,7 @@ class ExamZoneQuizController extends GetxController {
 
   TextEditingController enterExamKeys = TextEditingController();
 
+//Get Exam Questions
   getExamZoneQuestions(String quizInfoId, enterExamKey) async {
     loading = true;
     update();
@@ -95,27 +99,23 @@ class ExamZoneQuizController extends GetxController {
           update();
           CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
         } else {
+          examStarted = true;
+          examFullInfoData = model.data!.exam!;
           List<Question>? examQuestion = model.data!.questions!;
 
           if (examQuestion.isNotEmpty) {
             examQuestionsList.addAll(examQuestion);
           }
-
-          // List<Option>? optionslist = model.data!.questions![1].options;
-
-          // if (optionslist != null && optionslist.isNotEmpty) {
-          //   optionsList.addAll(optionslist);
-          // }
+          update();
         }
       } else {
-        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }
     } else {
       CustomSnackBar.error(errorList: [getQuestionsModel.message]);
     }
-    print("this is " + getQuestionsModel.message);
 
     loading = false;
     update();
@@ -231,8 +231,6 @@ class ExamZoneQuizController extends GetxController {
     submitLoading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
-
     Map<String, dynamic> params = {};
 
     for (int i = 0; i < examQuestionsList.length; i++) {
@@ -262,17 +260,19 @@ class ExamZoneQuizController extends GetxController {
         totalCoin = model.data!.totalCoin.toString();
         winningCoin = model.data!.winingCoin.toString();
 
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult)!.whenComplete(() {
+          Get.back();
+        });
+        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
-        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }
     } else {
       CustomSnackBar.error(errorList: [submitModel.message]);
     }
-    print("this is " + submitModel.message);
-    print("this is " + params.toString());
+
     submitLoading = false;
     update();
   }

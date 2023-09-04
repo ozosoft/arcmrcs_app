@@ -63,125 +63,152 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                     physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: List.generate(
-                          controller.examZonelist.length,
-                          (index) => SizedBox(
-                                width: context.width * 0.85,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    // Get.toNamed(RouteHelper.examZoneScreen);
+                      children: List.generate(controller.examZonelist.length, (index) {
+                        var item = controller.examZonelist[index];
+                        return SizedBox(
+                          width: context.width * 0.85,
+                          child: GestureDetector(
+                            onTap: () async {
+                              CustomBottomSheet(
+                                child: EnterRoomBottomSheetWidget(quizInfoDashBoard: item),
+                              ).customBottomSheet(context);
 
-                                    CustomBottomSheet(
-                                        child: EnterRoomBottomSheetWidget(
-                                      quizInfoId: controller.examZonelist[index].id.toString(),
-                                    )).customBottomSheet(context);
-                                  },
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
-                                    decoration: BoxDecoration(
-                                      color: MyColor.colorWhite,
-                                      borderRadius: BorderRadius.circular(Dimensions.space10),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: MyColor.cardShaddowColor2,
-                                          offset: Offset(0, 8),
-                                          blurRadius: 60,
-                                          spreadRadius: 0,
-                                        ),
-                                      ],
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                              await controller.examZoneRepo.getExamCode(item.id.toString());
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
+                              decoration: BoxDecoration(
+                                color: MyColor.colorWhite,
+                                borderRadius: BorderRadius.circular(Dimensions.space10),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: MyColor.cardShaddowColor2,
+                                    offset: Offset(0, 8),
+                                    blurRadius: 60,
+                                    spreadRadius: 0,
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    margin: const EdgeInsets.only(top: Dimensions.space3),
+                                    padding: const EdgeInsets.all(Dimensions.space12),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
-                                        Container(
-                                          margin: const EdgeInsets.only(top: Dimensions.space3),
-                                          padding: const EdgeInsets.all(Dimensions.space12),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              //Image
-                                              if (controller.examZonelist[index].image.toString() == "null") ...[
-                                                Container(
-                                                  margin: const EdgeInsets.only(right: Dimensions.space10),
-                                                  child: SvgPicture.asset(
-                                                    MyImages.examzoneSVG,
-                                                    height: context.width * 0.15,
-                                                    width: context.width * 0.15,
+                                        //Image
+                                        if (item.image.toString() == "null") ...[
+                                          Container(
+                                            margin: const EdgeInsets.only(right: Dimensions.space10),
+                                            child: SvgPicture.asset(
+                                              MyImages.examzoneSVG,
+                                              height: context.width * 0.15,
+                                              width: context.width * 0.15,
+                                            ),
+                                          ),
+                                        ] else ...[
+                                          Container(
+                                            margin: const EdgeInsets.only(right: Dimensions.space10),
+                                            child: MyImageWidget(
+                                              height: context.width * 0.15,
+                                              width: context.width * 0.15,
+                                              imageUrl: UrlContainer.examZoneImage + item.image.toString(),
+                                            ),
+                                          ),
+                                        ],
+                                        //Contents
+                                        Expanded(
+                                          child: Container(
+                                            padding: const EdgeInsets.only(bottom: Dimensions.space20),
+                                            child: Column(
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Text(
+                                                  item.title.toString(),
+                                                  style: semiBoldMediumLarge,
+                                                ),
+                                                const SizedBox(height: Dimensions.space8),
+                                                Text(
+                                                  "${item.description.toString()} ",
+                                                  maxLines: 3,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: regularDefault.copyWith(color: MyColor.textSecondColor),
+                                                ),
+                                                const SizedBox(height: Dimensions.space10),
+                                                Text(
+                                                  "${MyStrings.examStartTime.tr} ${item.examStartTime.toString()}",
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: regularDefault.copyWith(
+                                                    fontSize: Dimensions.fontSmall,
+                                                    color: MyColor.colorlighterGrey,
                                                   ),
                                                 ),
-                                              ] else ...[
-                                                Container(
-                                                  margin: const EdgeInsets.only(right: Dimensions.space10),
-                                                  child: MyImageWidget(
-                                                    height: context.width * 0.15,
-                                                    width: context.width * 0.15,
-                                                    imageUrl: UrlContainer.examZoneImage + controller.examZonelist[index].image.toString(),
+                                                const SizedBox(
+                                                  height: Dimensions.space3,
+                                                ),
+                                                Text(
+                                                  "${MyStrings.total.tr} ${item.examDuration.toString()} ${MyStrings.min} ",
+                                                  maxLines: 2,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  style: regularDefault.copyWith(
+                                                    fontSize: Dimensions.fontSmall,
+                                                    color: MyColor.colorlighterGrey,
                                                   ),
                                                 ),
                                               ],
-                                              //Contents
-                                              Expanded(
-                                                child: Container(
-                                                  padding: const EdgeInsets.only(bottom: Dimensions.space20),
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    mainAxisSize: MainAxisSize.min,
-                                                    children: [
-                                                      Text(
-                                                        controller.examZonelist[index].title.toString(),
-                                                        style: semiBoldMediumLarge,
-                                                      ),
-                                                      const SizedBox(height: Dimensions.space8),
-                                                      Text(
-                                                        "${controller.examZonelist[index].description.toString()} ",
-                                                        maxLines: 3,
-                                                        overflow: TextOverflow.ellipsis,
-                                                        style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: Dimensions.space20,
-                                        ),
-                                        Container(
-                                          height: 0.1,
-                                          color: MyColor.colorlighterGrey,
-                                        ),
-                                        Container(
-                                          padding: const EdgeInsets.all(Dimensions.space10),
-                                          width: Dimensions.space330,
-                                          child: Row(
-                                            children: [
-                                              CustomChipsWidget(
-                                                right: Dimensions.space7,
-                                                child: Center(
-                                                  child: Text(
-                                                    MyStrings.feeCoins + controller.examZonelist[index].point.toString(),
-                                                    style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                                  ),
-                                                ),
-                                              ),
-                                              CustomChipsWidget(
-                                                right: Dimensions.space7,
-                                                child: Center(child: Text(controller.examZonelist[index].winningmark.toString() + MyStrings.markss, style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                              ),
-                                              CustomChipsWidget(
-                                                right: Dimensions.space7,
-                                                child: Center(child: Text("${controller.examZonelist[index].examDuration} ${MyStrings.min}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                              ),
-                                            ],
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                ),
-                              )),
+                                  Container(
+                                    height: 0.1,
+                                    color: MyColor.colorlighterGrey,
+                                  ),
+                                  SingleChildScrollView(
+                                    physics: const BouncingScrollPhysics(),
+                                    scrollDirection: Axis.horizontal,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(Dimensions.space10),
+                                      child: Row(
+                                        children: [
+                                          CustomChipsWidget(
+                                            right: Dimensions.space7,
+                                            child: Center(
+                                              child: Text(
+                                                "${MyStrings.entryFee.tr} - ${item.point.toString().tr}",
+                                                style: regularDefault.copyWith(color: MyColor.colorGrey),
+                                              ),
+                                            ),
+                                          ),
+                                          CustomChipsWidget(
+                                            right: Dimensions.space7,
+                                            child: Center(child: Text(MyStrings.youNeedtoScoreSort.replaceAll("{point}", item.point.toString()).tr, style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                          ),
+                                          // CustomChipsWidget(
+                                          //   right: Dimensions.space7,
+                                          //   child: Center(child: Text("${item.examStartTime}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                          // ),
+                                          // CustomChipsWidget(
+                                          //   right: Dimensions.space7,
+                                          //   child: Center(child: Text("${item.examDuration} ${MyStrings.min}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                          // ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
                     ),
                   ),
                 )

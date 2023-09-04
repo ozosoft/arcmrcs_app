@@ -63,6 +63,7 @@ class UrlContainer {
   static const String examZone = 'exam/exam-list';
   static const String examDetails = 'exam/exam-details';
   static const String examCode = 'exam/exam-code';
+  static const String examCompletedList = 'exam/completed-exam';
   static const String coinStore = 'coin-store';
   static const String coinHistory = 'coin-history';
   static const String quizList = 'exam/quizList-list';

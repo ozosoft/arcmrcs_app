@@ -15,6 +15,14 @@ class ExamZoneRepo {
     return model;
   }
 
+  Future<ResponseModel> completedExamListData() async {
+    String url = "${UrlContainer.baseUrl}${UrlContainer.examCompletedList}";
+    print('come here: ${url}');
+    ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+
+    return model;
+  }
+
   Future<ResponseModel> getExamQuestionList(String quizInfoID, examkey) async {
     final map = {'quizInfo_id': quizInfoID, 'exam_key': examkey};
 
@@ -30,6 +38,7 @@ class ExamZoneRepo {
 
     return responseModel;
   }
+
   Future<ResponseModel> getExamCode(String quizID) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.examCode}/$quizID';
     ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);

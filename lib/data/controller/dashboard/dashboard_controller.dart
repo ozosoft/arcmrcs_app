@@ -6,10 +6,13 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
+import '../../repo/exam_zone/exam_zone_repo.dart';
+
 class DashBoardController extends GetxController {
   DashBoardRepo dashRepo;
+    ExamZoneRepo examZoneRepo;
 
-  DashBoardController({required this.dashRepo});
+  DashBoardController({required this.dashRepo,required this.examZoneRepo});
 
   String rank = "";
   String coins = "";

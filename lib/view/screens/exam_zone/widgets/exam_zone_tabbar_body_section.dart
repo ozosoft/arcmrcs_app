@@ -12,6 +12,7 @@ import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/helper/date_converter.dart';
+import 'completed_exam_list_card_widget.dart';
 import 'enter_exam_room_bottom_sheet.dart';
 import 'exam_list_card_widget.dart';
 
@@ -32,6 +33,7 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.examZoneListData(fromLoad: true);
+      controller.completedExamList(fromLoad: true);
     });
   }
 
@@ -48,13 +50,21 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(size.height * .4),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space30),
+                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space10),
+                  decoration: BoxDecoration(
+                    // color: Colors.amber,
+                    borderRadius: BorderRadius.circular(Dimensions.space25),
+                  ), // Make it rounded),
                   child: TabBar(
                       controller: controller.tabController,
                       unselectedLabelColor: MyColor.textColor,
-                      labelStyle: regularMediumLarge,
+                      labelColor: MyColor.colorWhite,
+                      labelStyle: regularMediumLarge.copyWith(),
                       indicatorPadding: EdgeInsets.zero,
-                      indicator: const ShapeDecoration(color: MyColor.primaryColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(Dimensions.space25)))),
+                      indicator: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.space25), // Make it rounded
+                        color: MyColor.primaryColor, // Change the color to green
+                      ),
                       onTap: (value) {
                         controller.selectTab();
                       },
@@ -74,9 +84,9 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                       ]),
                 ),
               ),
-              body: controller.loading == true
+              body: controller.loading == true || controller.loadingForCompletedList == true
                   ? const CustomLoader()
-                  : TabBarView(controller: controller.tabController, children: [
+                  : TabBarView(physics: const BouncingScrollPhysics(), controller: controller.tabController, children: [
                       RefreshIndicator(
                         color: MyColor.primaryColor,
                         onRefresh: () async {
@@ -89,21 +99,21 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                             itemBuilder: (BuildContext context, int index) {
                               var item = controller.examcategoryList[index];
                               return ExamListTileCard(
+                                exam: item,
                                 index: index,
-                                marks: "${item.prize.toString()} ${MyStrings.points}",
-                                date: "${DateConverter.formatValidityDate(item.startDate.toString())} - ${item.examStartTime.toString()}",
+                                marks: "${item.prize.toString()} ${MyStrings.points.tr}",
+                                date: "${item.examStartTime.toString()} ",
                                 minute: "${item.examDuration.toString()} ${MyStrings.min}",
                                 image: item.image.toString(),
                                 title: item.title.toString(),
                                 onTap: () async {
-                                  controller.enterExamKey = item.examKey!;
-                                  await controller.examZoneRepo.getExamCode(item.id.toString()).then((v) {
-                                    CustomBottomSheet(
-                                      child: EnterRoomBottomSheetWidget(
-                                        quizInfoId: item.id.toString(),
-                                      ),
-                                    ).customBottomSheet(context);
-                                  });
+                                  // controller.enterExamKey = item.examKey!;
+                                  CustomBottomSheet(
+                                    child: EnterRoomBottomSheetWidget(
+                                      quizInfo: item,
+                                    ),
+                                  ).customBottomSheet(context);
+                                  await controller.examZoneRepo.getExamCode(item.id.toString());
                                 },
                               );
                             }),
@@ -111,31 +121,86 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                       RefreshIndicator(
                         color: MyColor.primaryColor,
                         onRefresh: () async {
-                          controller.examZoneListData(fromLoad: true);
+                          controller.completedExamList(fromLoad: true);
                         },
                         child: ListView.builder(
                             physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                             shrinkWrap: true,
-                            itemCount: 3,
+                            itemCount: controller.completedExamDataList.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return CategoriesCard(
+                              var item = controller.completedExamDataList[index];
+                              return CompletedExamListTileCard(
+                                exam: item,
                                 index: index,
-                                marks: MyStrings.marks,
-                                date: MyStrings.dates,
-                                minute: MyStrings.minutes,
-                                fromExam: true,
-                                title: MyStrings.completed,
-                                // questions: MyStrings().allCategoryies[index]["questions"].toString(),
-                                // image: UrlContainer.examZoneImage+  controller.examcategoryList[index].image.toString(),
-                                expansionVisible: false,
-                                fromViewAll: false,
-                                // levels: MyStrings().allCategoryies[index]["level"].toString(),
+                                image: item.image.toString(),
+                                title: item.title.toString(),
+                                onTap: () {
+                                  return;
+                                },
                               );
                             }),
                       ),
                     ]),
             )),
       ),
+    );
+  }
+}
+
+class RoundedTabIndicator extends Decoration {
+  RoundedTabIndicator({
+    Color color = Colors.red,
+    double radius = 2.0,
+    double width = 20.0,
+    double height = 4.0,
+    double bottomMargin = 10.0,
+  }) : _painter = _RoundedRectanglePainter(
+          color,
+          width,
+          height,
+          radius,
+          bottomMargin,
+        );
+
+  final BoxPainter _painter;
+
+  @override
+  BoxPainter createBoxPainter([VoidCallback? onChanged]) {
+    return _painter;
+  }
+}
+
+class _RoundedRectanglePainter extends BoxPainter {
+  _RoundedRectanglePainter(
+    Color color,
+    this.width,
+    this.height,
+    this.radius,
+    this.bottomMargin,
+  ) : _paint = Paint()
+          ..color = color
+          ..isAntiAlias = true;
+
+  final Paint _paint;
+  final double radius;
+  final double width;
+  final double height;
+  final double bottomMargin;
+
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
+    final centerX = (cfg.size?.width ?? 0) / 2 + offset.dx;
+    final bottom = (cfg.size?.height) ?? 0 - bottomMargin;
+    final halfWidth = width / 2;
+    canvas.drawRRect(
+      RRect.fromLTRBR(
+        centerX - halfWidth,
+        bottom - height,
+        centerX + halfWidth,
+        bottom,
+        Radius.circular(radius),
+      ),
+      _paint,
     );
   }
 }

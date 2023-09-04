@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../model/message_model/message_model.dart';
+
 BattleCategoryList battleCategoryListFromJson(String str) => BattleCategoryList.fromJson(json.decode(str));
 
 String battleCategoryListToJson(BattleCategoryList data) => json.encode(data.toJson());
@@ -92,18 +94,4 @@ class BattleCategory {
     };
 }
 
-class Message {
-    List<String> success;
 
-    Message({
-        required this.success,
-    });
-
-    factory Message.fromJson(Map<String, dynamic> json) => Message(
-        success: List<String>.from(json["success"].map((x) => x)),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "success": List<dynamic>.from(success.map((x) => x)),
-    };
-}

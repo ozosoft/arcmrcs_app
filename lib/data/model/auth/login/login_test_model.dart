@@ -1,3 +1,5 @@
+import '../../model/message_model/message_model.dart';
+
 class login_model {
   String? remark;
   String? status;
@@ -24,22 +26,6 @@ class login_model {
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
-    return data;
-  }
-}
-
-class Message {
-  List<String>? success;
-
-  Message({this.success});
-
-  Message.fromJson(Map<String, dynamic> json) {
-    success = json['success'].cast<String>();
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['success'] = this.success;
     return data;
   }
 }

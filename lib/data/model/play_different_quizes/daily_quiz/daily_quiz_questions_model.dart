@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../../model/message_model/message_model.dart';
+
 DailyQuizQuestionsModel dailyQuizQuestionsModelFromJson(String str) => DailyQuizQuestionsModel.fromJson(json.decode(str));
 
 String dailyQuizQuestionsModelToJson(DailyQuizQuestionsModel data) => json.encode(data.toJson());
@@ -270,25 +272,5 @@ class Pivot {
   Map<String, dynamic> toJson() => {
         "quiz_info_id": quizInfoId,
         "question_id": questionId,
-      };
-}
-
-class Message {
-  List<String>? success;
-  List<String>? error;
-
-  Message({
-    this.success,
-    this.error,
-  });
-
-  factory Message.fromJson(Map<String, dynamic> json) => Message(
-        success: json["success"] == null ? [] : List<String>.from(json["success"]!.map((x) => x)),
-        error: json["error"] == null ? [] : List<String>.from(json["error"]!.map((x) => x)),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "success": success == null ? [] : List<dynamic>.from(success!.map((x) => x)),
-        "error": error == null ? [] : List<dynamic>.from(error!.map((x) => x)),
       };
 }
