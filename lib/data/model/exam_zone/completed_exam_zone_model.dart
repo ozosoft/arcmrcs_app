@@ -75,7 +75,7 @@ class CompletedExam {
     String examEndTime;
     String examDuration;
     String examKey;
-    int winningMark;
+    double winningMark;
     String status;
     DateTime createdAt;
     DateTime updatedAt;
@@ -124,7 +124,7 @@ class CompletedExam {
         examEndTime: json["exam_end_time"],
         examDuration: json["exam_duration"],
         examKey: json["exam_key"],
-        winningMark: json["winning_mark"],
+        winningMark: double.parse(json["winning_mark"].toString()),
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),

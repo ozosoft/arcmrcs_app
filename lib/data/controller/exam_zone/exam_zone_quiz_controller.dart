@@ -72,7 +72,8 @@ class ExamZoneQuizController extends GetxController {
   TextEditingController enterExamKeys = TextEditingController();
 
 //Get Exam Questions
-  getExamZoneQuestions(String quizInfoId, enterExamKey) async {
+ 
+ Future getExamZoneQuestions(String quizInfoId, enterExamKey) async {
     loading = true;
     update();
 
@@ -151,13 +152,10 @@ class ExamZoneQuizController extends GetxController {
 
   String questionId = "";
   String thisQuestionId = "";
+
   isValidAnswer(int index, int optionIndex) {
     questionId = examQuestionsList[index].selectedOptionId.toString();
     thisQuestionId = optionsList[optionIndex].id.toString();
-
-    print('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
-
-    print('questionId=========================================================================: ${questionId}');
 
     if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
       return true;
@@ -261,7 +259,7 @@ class ExamZoneQuizController extends GetxController {
         winningCoin = model.data!.winingCoin.toString();
 
         Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult)!.whenComplete(() {
-          Get.back();
+          Get.offAllNamed(RouteHelper.bottomNavBarScreen);
         });
         // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {

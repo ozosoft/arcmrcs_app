@@ -32,6 +32,8 @@ class Exam_zone_quiz_screen extends StatefulWidget {
 }
 
 class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
+  late final StreamDuration _streamDuration;
+
   @override
   void initState() {
     super.initState();
@@ -46,9 +48,23 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
     controller.quizInfoID = Get.arguments[0];
     controller.enterExamKey = Get.arguments[1];
 
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getExamZoneQuestions(controller.quizInfoID.toString(), controller.enterExamKey);
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      print("from addframe callback");
+      await controller.getExamZoneQuestions(controller.quizInfoID.toString(), controller.enterExamKey).whenComplete(() {
+        if (controller.examFullInfoData.examEndTime != null) {
+          int durationInMinutes = DateConverter().calculateDurationToEndTime("${controller.examFullInfoData.examEndTime}");
+
+          _streamDuration = StreamDuration(Duration(minutes: durationInMinutes));
+        }
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _streamDuration.dispose();
   }
 
   @override
@@ -170,6 +186,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                                 ),
                                               ],
 
+                                              Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].id.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                               Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                               const SizedBox(height: Dimensions.space25),
                                               ListView.builder(
@@ -209,12 +226,11 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                                                   controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
                                                                 }
                                                                 controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
-
+                                                                controller.update();
                                                                 // if (questionsIndex == controller.examQuestionsList.length - 1) {
                                                                 //   controller.submitAnswer();
                                                                 //   Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult);
                                                                 // }
-                                                                // controller.update();
                                                               },
                                                               child: Container(
                                                                 margin: const EdgeInsets.all(Dimensions.space8),
@@ -235,7 +251,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                                                   children: [
                                                                     const SizedBox(width: Dimensions.space8),
                                                                     Text(
-                                                                      "${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()} - ${controller.examQuestionsList[questionsIndex].options![optionIndex].isAnswer.toString()}",
+                                                                      "${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()} - ${controller.examQuestionsList[questionsIndex].options![optionIndex].id.toString()} - ${controller.examQuestionsList[questionsIndex].options![optionIndex].isAnswer.toString()}",
                                                                       style: regularMediumLarge.copyWith(
                                                                           color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
                                                                               ? MyColor.textColor
@@ -280,41 +296,40 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                 left: 0,
                                 right: Dimensions.space40,
                                 child: Align(
-                                    alignment: Alignment.topRight,
-                                    child: Builder(builder: (c) {
-                                      int durationInMinutes = DateConverter().calculateDurationToEndTime("${controller.examFullInfoData.examEndTime}");
+                                  alignment: Alignment.topRight,
+                                  child: SlideCountdownSeparated(
+                                    streamDuration: _streamDuration ?? StreamDuration(Duration.zero),
+                                    width: 40,
+                                    height: 40,
+                                    separatorType: SeparatorType.symbol,
+                                    slideDirection: SlideDirection.down,
+                                    separatorStyle: const TextStyle(color: MyColor.primaryColor, fontSize: 20),
+                                    textStyle: const TextStyle(backgroundColor: Colors.transparent, color: MyColor.primaryColor, fontSize: 25, fontWeight: FontWeight.bold),
+                                    decoration: const BoxDecoration(
+                                      color: MyColor.timerbgColor,
+                                      borderRadius: BorderRadius.all(Radius.circular(Dimensions.space5)),
+                                    ),
+                                    padding: const EdgeInsets.all(0),
+                                    separatorPadding: const EdgeInsets.all(5),
+                                    onChanged: (v) {
+                                      // print(v);
+                                      // print(v);
+                                      if (v.toString() == "0:00:01.000000") {
+                                        print("Exam Finished onchange");
 
-                                      return SlideCountdownSeparated(
-                                        streamDuration: StreamDuration(Duration(minutes: durationInMinutes)),
-                                        width: 40,
-                                        height: 40,
-                                        separatorType: SeparatorType.symbol,
-                                        slideDirection: SlideDirection.down,
-                                        separatorStyle: const TextStyle(color: MyColor.primaryColor, fontSize: 20),
-                                        textStyle: const TextStyle(backgroundColor: Colors.transparent, color: MyColor.primaryColor, fontSize: 25, fontWeight: FontWeight.bold),
-                                        decoration: const BoxDecoration(
-                                          color: MyColor.timerbgColor,
-                                          borderRadius: BorderRadius.all(Radius.circular(Dimensions.space5)),
-                                        ),
-                                        padding: const EdgeInsets.all(0),
-                                        separatorPadding: const EdgeInsets.all(5),
-                                        onChanged: (v) {
-                                          print(v);
-                                          print(v);
-                                          if (v.toString() == "0:00:01.000000") {
-                                            print("Exam Finished onchange");
+                                        controller.submitAnswer();
+                                        _streamDuration.pause();
+                                      }
+                                    },
+                                    onDone: () {
+                                      print("Exam Finished ccc");
 
-                                            controller.submitAnswer();
-                                          }
-                                        },
-                                        onDone: () {
-                                          print("Exam Finished ccc");
-
-                                          controller.submitAnswer();
-                                        },
-                                        showZeroValue: false,
-                                      );
-                                    })),
+                                      controller.submitAnswer();
+                                      _streamDuration.pause();
+                                    },
+                                    showZeroValue: false,
+                                  ),
+                                ),
                               ),
                               Positioned(
                                 bottom: 0,
@@ -343,7 +358,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                                       "${controller.selectedAnswerId.length} ${MyStrings.attempted}",
                                                       style: regularMediumLarge.copyWith(color: MyColor.colorDarkGrey),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: Dimensions.space6,
                                                     ),
                                                     Text(
@@ -363,7 +378,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                               color: MyColor.primaryColor,
                                               press: () {
                                                 print("Exam Finished button");
-
+                                                _streamDuration.pause();
                                                 controller.submitAnswer();
                                               }),
                                         ),

@@ -8,7 +8,6 @@ import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
-import 'package:intl/intl.dart';
 
 import '../../../core/route/route.dart';
 import '../../model/exam_zone/completed_exam_zone_model.dart';
@@ -104,8 +103,6 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
-
     loading = false;
     update();
   }
@@ -130,17 +127,15 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
       if (examZoneModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<CompletedExam>? examList = examZoneModel.data.exams;
 
-        if (examList != null && examList.isNotEmpty) {
+        if (examList.isNotEmpty) {
           completedExamDataList.addAll(examList);
         }
       } else {
-        CustomSnackBar.error(errorList: [examZoneModel.status ?? ""]);
+        CustomSnackBar.error(errorList: [examZoneModel.status]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);
     }
-
-    print('---------------------${model.statusCode}');
 
     loadingForCompletedList = false;
     update();
