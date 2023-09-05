@@ -6,7 +6,11 @@ import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/category-card/categories_card.dart';
+import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
+
+import '../../../../core/utils/url_container.dart';
+import 'widget/contest_title_card_widget.dart';
 
 class AllContestScreen extends StatefulWidget {
   const AllContestScreen({super.key});
@@ -37,35 +41,28 @@ class _AllContestScreenState extends State<AllContestScreen> {
     Size size = MediaQuery.of(context).size;
     return GetBuilder<QuizQuestionsListController>(
       builder: (controller) => Scaffold(
-        appBar:const CustomCategoryAppBar(
+        appBar: const CustomCategoryAppBar(
           title: MyStrings.quizContest,
         ),
-        body: SingleChildScrollView(
-          child: ListView.builder(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: controller.examcategoryList.length,
-              itemBuilder: (BuildContext context, int index) {
-                return InkWell(
-                  onTap: () {
-                    Get.toNamed(RouteHelper.quizContestQuestionscreen,arguments: [controller.examcategoryList[index].id.toString(),controller.examcategoryList[index].title.toString()]);
-                  },
-                  child: CategoriesCard(
-                    index: index,
-                    marks: MyStrings.marks,
-                    date: MyStrings.dates,
-                    minute: MyStrings.minutes,
-                    fromExam: true,
-                    title: controller.examcategoryList[index].title.toString(),
-                    // questions: MyStrings().allCategoryies[index]["questions"].toString(),
-                    // image: UrlContainer.examZoneImage+  controller.examcategoryList[index].image.toString(),
-                    expansionVisible: false,
-                    fromViewAll: false,
-                    // levels: MyStrings().allCategoryies[index]["level"].toString(),
-                  ),
-                );
-              }),
-        ),
+        body: controller.loading == true
+            ? const CustomLoader()
+            : SingleChildScrollView(
+                child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: controller.examcategoryList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var contestItem = controller.examcategoryList[index];
+                      return ContestListTileCard(
+                        onTap: () {
+                          Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.examcategoryList[index].id.toString(), controller.examcategoryList[index].title.toString()]);
+                        },
+                        contest: contestItem,
+                        index: index,
+                        image: contestItem.image.toString(),
+                      );
+                    }),
+              ),
       ),
     );
   }

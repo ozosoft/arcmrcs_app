@@ -3,7 +3,6 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:get/get.dart';
 import 'widgets/quiz_contest_result_body_section.dart';
 
 class QuizContestResultScreen extends StatefulWidget {

@@ -37,12 +37,13 @@ class MyStrings {
   static const String sorryRoomISFull = "Sorry! Room Is Full";
   static const String youNeedtoScoreLong = "You need to score {point}% marks to win.";
   static const String  youNeedtoScoreSort = "Need {point}% marks to win";
-
+  static const String thisContestIsNotAvailableRightNow = 'This Contest Is Not Available Right Now';
   static const String reviewAnswer = "Review Answer";
   static const String currectAnswer = "Currect Answer";
   static const String wrongAnswer = "Wrong Answer";
   static const String yourAnswer = "Your Answer";
-
+  static const String continueWithGmail = "Continue with Gmail";
+  static const String continueWithPhone = "Continue with Phone";
   static const String selectCategory = "Select Category";
   static const String entryCoinsForBattele = "Entry Coins For Battle";
   static const String entryRoomCode = "Entry Room Code to Join Room";
@@ -63,14 +64,13 @@ class MyStrings {
   static const String please = "Please";
   static const String selectRemarks = "Select Remarks";
   static const String selectTrxType = "Select Trx Type";
-
+  static const String username = "User Name";
+  static const String fullname = "Full Name";
   static const String beforeCharge = "Before Charge";
   static const String remainingBalance = "Remaining Balance";
-
+  static const String emailAddress = "Email Address";
   static const String enterTransactionNo = "Enter transaction no.";
   static const String latestTransactions = "Latest Transactions";
-
-  static const String username = "User Name";
   static const String password = "Password";
   static const String rememberMe = "Remember Me";
   static const String iAgreewithrules = "I agree with all exam rules";
@@ -247,7 +247,7 @@ class MyStrings {
   static const String fifteenPercent = "15%";
   static const String quizQuestions = "The Great Wall is a world-famous historical landmark located in which country?";
   static const String quizQuestions2 = "The Great Wall is a world-famous ?";
-
+  static const String percent = "%";
   static const String levels = "6 Level";
   static const String level1 = "Level 01";
   static const String allCategory = "All categories";

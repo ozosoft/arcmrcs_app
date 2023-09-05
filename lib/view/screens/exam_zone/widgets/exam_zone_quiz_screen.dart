@@ -186,8 +186,8 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                                 ),
                                               ],
 
-                                              Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].id.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
-                                              Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                                              Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+
                                               const SizedBox(height: Dimensions.space25),
                                               ListView.builder(
                                                   physics: const NeverScrollableScrollPhysics(),
@@ -198,82 +198,81 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                                       children: [
                                                         Row(
                                                           children: [
-                                                            InkWell(
-                                                              onTap: () async {
-                                                                if (controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
-                                                                  return;
-                                                                }
+                                                            Expanded(
+                                                              child: InkWell(
+                                                                onTap: () async {
+                                                                  if (controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
+                                                                    return;
+                                                                  }
 
-                                                                controller.selectAnswer(optionIndex, questionsIndex);
+                                                                  controller.selectAnswer(optionIndex, questionsIndex);
 
-                                                                controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                    ? null
-                                                                    : controller.selectedOptionIndex == optionIndex
-                                                                        ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                            ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
-                                                                            : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
-                                                                        : null;
+                                                                  controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                      ? null
+                                                                      : controller.selectedOptionIndex == optionIndex
+                                                                          ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                              ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                              : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                                          : null;
 
-                                                                await Future.delayed(const Duration(seconds: 2));
+                                                                  await Future.delayed(const Duration(seconds: 2));
 
-                                                                if (controller.pageController.page! < controller.examQuestionsList.length - 1) {
-                                                                  controller.pageController.nextPage(
-                                                                    duration: const Duration(milliseconds: 500),
-                                                                    curve: Curves.easeInOut,
-                                                                  );
-                                                                }
-                                                                if (controller.selectedOptionIndex.toString() == "0" && controller.selectedOptionIndex.toString() == "1") {
-                                                                  controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
-                                                                }
-                                                                controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
-                                                                controller.update();
-                                                                // if (questionsIndex == controller.examQuestionsList.length - 1) {
-                                                                //   controller.submitAnswer();
-                                                                //   Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult);
-                                                                // }
-                                                              },
-                                                              child: Container(
-                                                                margin: const EdgeInsets.all(Dimensions.space8),
-                                                                padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
-                                                                height: Dimensions.space55,
-                                                                width: controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? MediaQuery.of(context).size.width * .65 : MediaQuery.of(context).size.width * .75,
-                                                                decoration: BoxDecoration(
-                                                                    color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                        ? MyColor.transparentColor
-                                                                        : controller.selectedOptionIndex == optionIndex
-                                                                            ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                                ? MyColor.rightAnswerbgColor
-                                                                                : MyColor.wrongAnsColor
-                                                                            : MyColor.transparentColor,
-                                                                    borderRadius: BorderRadius.circular(Dimensions.space8),
-                                                                    border: Border.all(color: MyColor.colorLightGrey)),
-                                                                child: Row(
-                                                                  children: [
-                                                                    const SizedBox(width: Dimensions.space8),
-                                                                    Text(
-                                                                      "${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()} - ${controller.examQuestionsList[questionsIndex].options![optionIndex].id.toString()} - ${controller.examQuestionsList[questionsIndex].options![optionIndex].isAnswer.toString()}",
-                                                                      style: regularMediumLarge.copyWith(
-                                                                          color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                              ? MyColor.textColor
-                                                                              : controller.selectedOptionIndex == optionIndex
-                                                                                  ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                                      ? MyColor.colorWhite
-                                                                                      : MyColor.colorWhite
-                                                                                  : MyColor.textColor),
-                                                                    ),
-                                                                    const Spacer(),
-                                                                    SizedBox(
-                                                                        height: Dimensions.space10,
-                                                                        child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                            ? const SizedBox()
-                                                                            : SvgPicture.asset(
-                                                                                "${controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
-                                                                                fit: BoxFit.cover))
-                                                                  ],
+                                                                  if (controller.pageController.page! < controller.examQuestionsList.length - 1) {
+                                                                    controller.pageController.nextPage(
+                                                                      duration: const Duration(milliseconds: 500),
+                                                                      curve: Curves.easeInOut,
+                                                                    );
+                                                                  }
+                                                                  if (controller.selectedOptionIndex.toString() == "0" && controller.selectedOptionIndex.toString() == "1") {
+                                                                    controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
+                                                                  }
+                                                                  controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
+                                                                  controller.update();
+                                                                  // if (questionsIndex == controller.examQuestionsList.length - 1) {
+                                                                  //   controller.submitAnswer();
+                                                                  //   Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult);
+                                                                  // }
+                                                                },
+                                                                child: Container(
+                                                                  margin: const EdgeInsets.all(Dimensions.space8),
+                                                                  padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
+                                                                  decoration: BoxDecoration(
+                                                                      color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                          ? MyColor.transparentColor
+                                                                          : controller.selectedOptionIndex == optionIndex
+                                                                              ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                                  ? MyColor.rightAnswerbgColor
+                                                                                  : MyColor.wrongAnsColor
+                                                                              : MyColor.transparentColor,
+                                                                      borderRadius: BorderRadius.circular(Dimensions.space8),
+                                                                      border: Border.all(color: MyColor.colorLightGrey)),
+                                                                  child: Row(
+                                                                    children: [
+                                                                      Expanded(
+                                                                        child: Text(
+                                                                          "${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()} ",
+                                                                          style: regularMediumLarge.copyWith(
+                                                                              color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                                  ? MyColor.textColor
+                                                                                  : controller.selectedOptionIndex == optionIndex
+                                                                                      ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                                          ? MyColor.colorWhite
+                                                                                          : MyColor.colorWhite
+                                                                                      : MyColor.textColor),
+                                                                        ),
+                                                                      ),
+                                                                      SizedBox(
+                                                                          height: Dimensions.space10,
+                                                                          child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                              ? const SizedBox()
+                                                                              : SvgPicture.asset(
+                                                                                  "${controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
+                                                                                  fit: BoxFit.cover))
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),
-                                                            const Spacer(),
                                                             controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
                                                           ],
                                                         ),

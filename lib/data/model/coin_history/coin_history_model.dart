@@ -145,5 +145,3 @@ class CoinPlan {
         "updated_at": updatedAt?.toString(),
     };
 }
-
-

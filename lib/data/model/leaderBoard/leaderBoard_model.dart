@@ -85,5 +85,3 @@ class User {
         "user_rank": userRank,
     };
 }
-
-

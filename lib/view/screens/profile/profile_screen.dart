@@ -5,7 +5,6 @@ import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dar
 import 'widgets/profile_details_section.dart';
 import 'widgets/profile_overall_achivements_section.dart';
 
-
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -17,7 +16,11 @@ class ProfileScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [ProfileOverAllAchivementSection(),ProfileDetailsSection()])
+          children: [
+            ProfileTopSection(),
+            ProfileDetailsSection(),
+          ],
+        ),
       ),
     );
   }

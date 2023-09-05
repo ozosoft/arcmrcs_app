@@ -7,11 +7,9 @@ import 'package:flutter_prime/data/controller/exam_zone/exam_zone_controller.dar
 import 'package:flutter_prime/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
-import 'package:flutter_prime/view/components/category-card/categories_card.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/helper/date_converter.dart';
 import 'completed_exam_list_card_widget.dart';
 import 'enter_exam_room_bottom_sheet.dart';
 import 'exam_list_card_widget.dart';

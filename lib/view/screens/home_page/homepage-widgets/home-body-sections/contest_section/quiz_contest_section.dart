@@ -70,12 +70,8 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                 child: GetBuilder<QuizContestQuestionsController>(
                                   builder: (quizQuestionscontrollers) => GestureDetector(
                                     onTap: () {
-                                      print(quizQuestionscontrollers.examQuestionsList);
-                                      if (quizQuestionscontrollers.examQuestionsList.isNotEmpty) {
-                                        Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [
-                                          controller.contestlist[index].id.toString(),
-                                          controller.contestlist[index].title.toString(),
-                                        ]);
+                                      if (quizQuestionscontrollers.examQuestionsList != "[]") {
+                                        Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.contestlist[index].id.toString(), controller.contestlist[index].title.toString(), print("this is quiz id" + controller.contestlist[index].id.toString()), print("this is quiz title" + controller.contestlist[index].title.toString())]);
                                       } else {
                                         CustomSnackBar.error(errorList: ["Sorry this contest is not available right now"]);
                                       }

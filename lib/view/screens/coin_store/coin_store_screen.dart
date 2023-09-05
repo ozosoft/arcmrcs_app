@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/helper/string_format_helper.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/coin_store/coin_store_controller.dart';
-import 'package:flutter_prime/data/repo/coin_store/coin_store_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
@@ -14,6 +14,7 @@ import 'package:flutter_prime/view/screens/coin_store/deposit_widget/deposit_scr
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../core/utils/dimensions.dart';
+import '../../../data/repo/coin_store/coin_store_repo.dart';
 
 class CoinStoreScreen extends StatefulWidget {
   const CoinStoreScreen({super.key});
@@ -33,18 +34,18 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
+      controller.getData();
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomCategoryAppBar(title: MyStrings.coins),
+      appBar: const CustomCategoryAppBar(title: MyStrings.coinStore),
       body: GetBuilder<CoinStoreController>(
-        builder: (controller) => controller.loader == true
+        builder: (controller) => controller.isLoading == true
             ? const CustomLoader()
-            : controller.coinPlanList.isNotEmpty
+            : controller.coinPlanList.isEmpty
                 ? const NoDataWidget()
                 : ListView.builder(
                     padding: const EdgeInsets.only(top: Dimensions.space25),
@@ -71,12 +72,14 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Container(
+                                  Expanded(
+                                    flex: 3,
+                                    child: Container(
                                     padding: const EdgeInsets.all(
                                       Dimensions.space10,
                                     ),
                                     child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                       children: [
                                         SvgPicture.asset(
                                           MyImages.coin,
@@ -86,35 +89,46 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
                                         const SizedBox(
                                           width: Dimensions.space10,
                                         ),
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              controller.coinPlanList[index].title.toString(),
-                                              style: regularLarge.copyWith(color: MyColor.textColor),
-                                            ),
-                                            const SizedBox(
-                                              height: Dimensions.space5,
-                                            ),
-                                            Text(
-                                              controller.coinPlanList[index].coinsAmount.toString(),
-                                              style: semiBoldMediumLarge.copyWith(fontWeight: FontWeight.w500),
-                                            )
-                                          ],
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                               controller.coinPlanList[index].title?.tr ?? '',
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: regularLarge.copyWith(color: MyColor.textColor),
+                                              ),
+                                              const SizedBox(
+                                                height: Dimensions.space5,
+                                              ),
+                                              Text(
+                                               Converter.roundDoubleAndRemoveTrailingZero( controller.coinPlanList[index].coinsAmount??'0'),
+                                                style: semiBoldMediumLarge.copyWith(fontWeight: FontWeight.w500),
+                                              )
+                                            ],
+                                          ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    width: Dimensions.space10,
-                                  ),
-                                  const CustomVerticalDivider(
-                                    height: Dimensions.space30,
-                                  ),
-                                  const SizedBox(
-                                    width: Dimensions.space20,
-                                  ),
-                                  SizedBox(child: Text(MyStrings.dollarSign + controller.coinPlanList[index].price.toString() + MyStrings.usd, style: semiBoldExtraLarge))
+                                  )),
+                                 Expanded(
+                                   flex: 4,
+                                    child: Row(
+                                   children: [
+                                     const SizedBox(
+                                       width: Dimensions.space10,
+                                     ),
+                                     const CustomVerticalDivider(
+                                       height: Dimensions.space30,
+                                     ),
+                                     const SizedBox(
+                                       width: Dimensions.space20,
+                                     ),
+                                     SizedBox(child: Text( "${Converter.formatNumber(controller.coinPlanList[index].price ?? '00')} ${controller.currency}", style: semiBoldExtraLarge))
+                                   ],
+                                 ))
                                 ],
                               ),
                             ),

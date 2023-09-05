@@ -15,28 +15,31 @@ class CoinStoreController extends GetxController {
 
   List<CoinPlan> coinPlanList = [];
 
-  bool loader = false;
-
+  bool isLoading = false;
   bool isActive = false;
+  String currency = '';
 
-  void getdata() async {
-    loader = true;
+  void getData() async {
+
+    currency = coinStoreRepo.apiClient.getCurrencyOrUsername();
+
+    isLoading = true;
     update();
 
     ResponseModel model = await coinStoreRepo.coinStoreData();
+
+    coinPlanList.clear();
 
     if (model.statusCode == 200) {
       CoinStoreModel coinPlanModel = CoinStoreModel.fromJson(jsonDecode(model.responseJson));
 
       if (coinPlanModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
-        List<CoinPlan>? coinplan = coinPlanModel.data?.coinPlans;
+        List<CoinPlan>? tempCoinPlanList = coinPlanModel.data?.coinPlans;
 
-        if (coinplan != null && coinplan.isNotEmpty) {
-          coinPlanList.addAll(coinplan);
+        if (tempCoinPlanList != null && tempCoinPlanList.isNotEmpty) {
+          coinPlanList.addAll(tempCoinPlanList);
         }
 
-        loader = false;
-        update();
       } else {
         CustomSnackBar.error(errorList: [coinPlanModel.status ?? ""]);
       }
@@ -44,14 +47,8 @@ class CoinStoreController extends GetxController {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
-
-    loader = false;
+    isLoading = false;
     update();
   }
 
-  changeactivestatus() {
-    isActive = !isActive;
-    update();
-  }
 }

@@ -14,13 +14,11 @@ class ProfileDetailsSection extends StatefulWidget {
 }
 
 class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
-
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
        builder: (controller) => Padding(
-        padding: const EdgeInsets.all( Dimensions.space18),
+        padding: const EdgeInsets.all(Dimensions.space18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,27 +29,43 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
             ),
              const SizedBox(height: Dimensions.space10),
             Container(
-              decoration: BoxDecoration(
-                  color: MyColor.colorWhite,
-                  borderRadius: BorderRadius.circular(Dimensions.space10)),
+                decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space10)),
               child: Column(
                 children: [
                   ListTile(
-                         title: Text(MyStrings().itemList[0]['title']!,style: regularDefault.copyWith(color: MyColor.textColor),),
-                         subtitle: Text(controller.username,style: semiBoldLarge.copyWith(color: MyColor.colorBlack,fontWeight: FontWeight.w500 )),
-                         onTap: () {
-                         },
-                       ),
-                      const Divider(height:Dimensions.space3),
+                      title: Text(
+                        MyStrings.fullname,
+                        style: regularDefault.copyWith(color: MyColor.textColor),
+                  ),
+                      subtitle: Text(controller.profileRepo.apiClient.getUserFullName(), style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                    ),
+                    const Divider(height: Dimensions.space3),
                   ListTile(
-                         title: Text(MyStrings().itemList[1]['title']!,style: regularDefault.copyWith(color: MyColor.textColor),),
-                         subtitle: Text(controller.email,style: semiBoldLarge.copyWith(color: MyColor.colorBlack,fontWeight: FontWeight.w500 )),
-                         onTap: () {
-                         },
-                       ),
+                      title: Text(
+                        MyStrings.emailAddress,
+                        style: regularDefault.copyWith(color: MyColor.textColor),
+                      ),
+                      subtitle: Text(controller.email, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                    ),
+                    const Divider(height: Dimensions.space3),
+                    ListTile(
+                      title: Text(
+                        MyStrings.address,
+                        style: regularDefault.copyWith(color: MyColor.textColor),
+                      ),
+                      subtitle: Text(controller.addressController.text, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                    ),
+                    const Divider(height: Dimensions.space3),
+                    ListTile(
+                      title: Text(
+                        MyStrings.city,
+                        style: regularDefault.copyWith(color: MyColor.textColor),
+                      ),
+                      subtitle: Text(controller.cityController.text, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                    ),
+                    
                 ],
-              )
-            ),
+                )),
           ],
         ),
       ),

@@ -51,7 +51,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
     return GetBuilder<RegistrationController>(
       builder: (controller) => Padding(
         padding: const EdgeInsets.symmetric(
-          horizontal: Dimensions.space30,
+          horizontal: Dimensions.space22,
           vertical: Dimensions.space15,
         ),
         child: Column(

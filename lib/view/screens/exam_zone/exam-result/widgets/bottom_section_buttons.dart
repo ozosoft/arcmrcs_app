@@ -26,7 +26,7 @@ class BottomSectionButtons extends StatelessWidget {
             textSize: Dimensions.space21,
           ),
         ),
-        SizedBox(height: Dimensions.space5,),
+        const SizedBox(height: Dimensions.space5,),
         Padding(
           padding: const EdgeInsets.all(Dimensions.space15),
           child: RoundedButton(

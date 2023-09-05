@@ -23,21 +23,16 @@ class CoinHistoryController extends GetxController {
     loader = true;
     update();
 
+
     ResponseModel model = await coinHistoryRepo.coinHistoryData();
 
     if (model.statusCode == 200) {
-     
+     coinHistoryList.clear();
       CoinHistoryModel coinPlanModel = CoinHistoryModel.fromJson(jsonDecode(model.responseJson));
 
       if (coinPlanModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
       
- 
 
-     
-
-     
-
-     
 
         List<CoinLog>? coinhistory = coinPlanModel.data?.coinLogs;
 

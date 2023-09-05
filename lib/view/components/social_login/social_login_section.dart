@@ -4,7 +4,8 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_prime/view/components/social_login/widgets/social_login_button.dart';
+
 import 'package:get/get.dart';
 
 class SocialLoginSection extends StatelessWidget {
@@ -14,34 +15,33 @@ class SocialLoginSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(Dimensions.space20),
+        const SizedBox(
+          height: Dimensions.space20,
+        ),
+       const Padding(
+          padding: EdgeInsets.all(Dimensions.space1),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
-                  onTap: () {},
-                  child: SvgPicture.asset(
-                    MyImages.facebook,
-                    height: Dimensions.space45,
-                    width: Dimensions.space50,
-                  )),
-              InkWell(
-                  onTap: () {},
-                  child: SvgPicture.asset(
-                    MyImages.google,
-                    height: Dimensions.space45,
-                    width: Dimensions.space50,
-                  )),
-              InkWell(
-                  onTap: () {},
-                  child: SvgPicture.asset(
-                    MyImages.telephone,
-                    height: Dimensions.space45,
-                    width: Dimensions.space50,
-                  ))
+              // SizedBox(
+              //   height: Dimensions.space10,
+              // ),
+              SocialLoginButton(
+                title: MyStrings.continueWithGmail,
+                image: MyImages.google,
+              ),
+              // SizedBox(
+              //   width: Dimensions.space15,
+              // ),
+              SocialLoginButton(
+                title: MyStrings.continueWithPhone,
+                image: MyImages.telephone,
+              ),
             ],
           ),
+        ),
+        const SizedBox(
+          height: Dimensions.space20,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

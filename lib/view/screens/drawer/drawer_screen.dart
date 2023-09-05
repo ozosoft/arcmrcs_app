@@ -26,7 +26,7 @@ class DrawerScreen extends StatefulWidget {
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
     Get.put(LogoutRepo(apiClient: Get.find()));
     Get.put(LogoutController( logoutRepo:Get.find()));
 
-    // print("++++++++++===============this is id"+quizinfoID.toString());
+   
     super.initState();
 
     
@@ -76,7 +76,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        controller.username.toString(),
+                        controller.dashRepo.apiClient.getUserFullName(),
                         style: semiBoldMediumLarge,
                       ),
                       const SizedBox(height: Dimensions.space7),

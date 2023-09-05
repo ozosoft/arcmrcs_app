@@ -1,9 +1,9 @@
-
 import 'dart:convert';
 import 'dart:math';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/data/model/quiz_contest/quiz_contest_questions_model.dart';
@@ -18,6 +18,8 @@ class QuizContestQuestionsController extends GetxController {
   QuizContestQuestionsController({
     required this.quizContestRepo,
   });
+
+  String examStartTimes = "";
 
   bool showQuestions = false;
   bool audienceVote = false;
@@ -34,10 +36,11 @@ class QuizContestQuestionsController extends GetxController {
   int currentQuestionIndex = 0;
 
   bool loading = true;
+  bool showaudienceVote = false;
 
-  String? quizInfoID;
+  String quizInfoID = "";
   late int questionsIndex;
-   String? title ="";
+  String? title = "";
   List<Question> examQuestionsList = [];
   List<Option> optionsList = [];
 
@@ -68,40 +71,31 @@ class QuizContestQuestionsController extends GetxController {
     loading = true;
     update();
 
-    ResponseModel getQuestionsModel = await quizContestRepo.getExamQuestionList(quizInfoId);
+    ResponseModel getQuestionsModel = await quizContestRepo.getExamQuestionList(quizInfoID);
 
     if (getQuestionsModel.statusCode == 200) {
       examQuestionsList.clear();
       QuizContestQuestionsModel model = QuizContestQuestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        print("get answer done");
-        // print(model.data);
-        List<Question>? examQuestion = model.data!.questions! as List<Question>?;
+        List<Question>? examQuestion = model.data!.questions!;
 
-        print(examQuestion);
-
-        if (examQuestion != null && examQuestion.isNotEmpty) {
+        if (examQuestion.isNotEmpty) {
           examQuestionsList.addAll(examQuestion);
         }
+        if (model.data != null) {
+          examStartTimes = model.data!.contest!.examStartTime!;
+        }
+        timerDuration = int.parse(model.data!.contestAnsDuration.toString());
 
-        //   List<Option>? optionslist = model.data!.questions![1].options;
-
-        // if (optionslist != null && optionslist.isNotEmpty) {
-        //   optionsList.addAll(optionslist);
-        // }
-
-        
-
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
-        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }
     } else {
       CustomSnackBar.error(errorList: [getQuestionsModel.message]);
     }
-    print("this is " + getQuestionsModel.message);
 
     loading = false;
     update();
@@ -112,21 +106,17 @@ class QuizContestQuestionsController extends GetxController {
   }
 
   int remainingTime = 30;
- 
 
   int selectedOptionIndex = -1;
-   selectAnswer(
+  selectAnswer(
     int optionIndex,
     int questionIndex,
   ) {
     selectedOptionIndex = optionIndex;
-    print('work here');
+
     String optionId = optionsList[optionIndex].id.toString();
 
-    print('not work here');
     examQuestionsList[questionIndex].setSelectedOptionId(optionId);
-
-    print('done');
 
     update();
   }
@@ -142,10 +132,6 @@ class QuizContestQuestionsController extends GetxController {
     questionId = examQuestionsList[index].selectedOptionId.toString();
     thisQuestionId = optionsList[optionIndex].id.toString();
 
-    print('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
-
-    print('questionId=========================================================================: ${questionId}');
-
     if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
       return true;
     } else {
@@ -157,6 +143,10 @@ class QuizContestQuestionsController extends GetxController {
   audienceVotes(int questionIndex) {
     audienceVoteIndex = questionIndex;
     audienceVote = !audienceVote;
+    showaudienceVote = !showaudienceVote;
+    if (audienceVote == true) {
+      audiencevotes = "1";
+    }
     update();
   }
 
@@ -164,16 +154,22 @@ class QuizContestQuestionsController extends GetxController {
   flipQuiston(int questionIndex) {
     flipQuestionsIndex = flipQuestionsIndex;
     flipQuistions = !flipQuistions;
+    if (flipQuistions == true) {
+      flipQuistion = "1";
+    }
     update();
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
 
-   int timerDuration = 20;
+  int timerDuration = 20;
   int countDownTimerIndex = -1;
   bool restartTimer = false;
   restartCountDownTimer(int questionIndex) {
     countDownTimerIndex = countDownTimerIndex;
     restartTimer = !restartTimer;
+    if (restartTimer == true) {
+      reset_timer = "1";
+    }
     update();
   }
 
@@ -194,9 +190,12 @@ class QuizContestQuestionsController extends GetxController {
     print("object is here");
     fiftyFiftyIndex = fiftyFiftyIndex;
     fiftyFifty = !fiftyFifty;
+
+    if (fiftyFifty == true) {
+      fifty_fifty = "1";
+    }
     update();
   }
-
 
   void setCurrentOption(int questionsIndex) {
     // optionsList.clear();
@@ -218,8 +217,6 @@ class QuizContestQuestionsController extends GetxController {
   submitAnswer() async {
     submitLoading = true;
     update();
-
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
 
     Map<String, dynamic> params = {};
 
@@ -243,17 +240,27 @@ class QuizContestQuestionsController extends GetxController {
     if (submitModel.statusCode == 200) {
       QuizResultResponseModel model = QuizResultResponseModel.fromJson(jsonDecode(submitModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        appreciation = model.message!.success.toString();
+        appreciation = model.message!.success!.first;
         totalQuestions = model.data!.totalQuestion.toString();
         correctAnswer = model.data!.correctAnswer.toString();
         wrongAnswer = model.data!.wrongAnswer.toString();
         totalCoin = model.data!.totalCoin.toString();
         winningCoin = model.data!.winingCoin.toString();
-   
-       
- 
-     
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        countDownController.pause();
+        Get.toNamed(RouteHelper.quizContestresultScreen, arguments: [
+          examQuestionsList,
+          appreciation,
+          totalQuestions,
+          correctAnswer,
+          wrongAnswer,
+          totalCoin,
+          winningCoin,
+        ])!
+            .whenComplete(() {
+          // Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+        });
+
+        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 

@@ -89,7 +89,7 @@ class _ExamResultBodySectionState extends State<ExamResultBodySection> {
                         )),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: Dimensions.space10,
                 ),
                 Row(

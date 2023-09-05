@@ -51,7 +51,7 @@ class BattlePlayerProfileDetails extends StatelessWidget {
                   // Callback function when countdown completes
                 },
                 onChange: (v) {
-                  // print("${userData.name} - $v");
+                
                   if (userData.answers.any((answer) => answer["qid"] == quizController.getCurrentQuestion().id.toString()) == true) {
                     countDownController.pause();
                   } else {

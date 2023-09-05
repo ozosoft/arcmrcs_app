@@ -5,174 +5,139 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/leader_board/leader_board_controller.dart';
-
 import 'package:get/get.dart';
+
 import '../../../../core/utils/my_images.dart';
 
 class RankingTabBar extends StatefulWidget {
-  const RankingTabBar({super.key});
+  const RankingTabBar({Key? key}) : super(key: key);
 
   @override
   State<RankingTabBar> createState() => _RankingTabBarState();
 }
 
-class _RankingTabBarState extends State<RankingTabBar>
-    with SingleTickerProviderStateMixin {
-  late final TabController tabController;
-  int selectedIndex = 1;
-
-  TextEditingController _textEditingController = TextEditingController();
-  String _inputText = ""; 
+class _RankingTabBarState extends State<RankingTabBar> {
+  @override
   void initState() {
-    tabController = TabController(vsync: this, length: 1);
-    setState(() {
-      selectedIndex = tabController.index;
-    });
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     Orientation orientation = MediaQuery.of(context).orientation;
-    return 
-    DefaultTabController(
-        length: 1,
-        child: Scaffold(
-          backgroundColor: MyColor.transparentColor,
-          appBar: TabBar(
-              controller: tabController,
-              unselectedLabelColor: MyColor.colorWhite,
-              labelStyle: regularMediumLarge,
-              indicatorPadding: EdgeInsets.zero,
-              indicator:const ShapeDecoration(
-                
-                  color: MyColor.leaderBoardTabBar,
-                  shape: RoundedRectangleBorder(
-                      borderRadius:   BorderRadius.all(Radius.circular(Dimensions.space14) )
-                          )),
-              onTap: (value) {
-                setState(() {
-                  selectedIndex = tabController.index;
-                });
-              },
-              tabs: const [
-                // Tab(
-                //   child: Align(
-                //     alignment: Alignment.center,
-                //     child: Text(MyStrings.weekly),
-                //   ),
-                // ),
-                Tab(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(MyStrings.allTimes),
-                  ),
-                ),
-              ]),
-          body: GetBuilder<LeaderBoardController>(
-            builder: (controller) => TabBarView(controller: tabController, children: [
-              Row(
-                children: [
-                      Padding(
-                     padding:  EdgeInsets.only(left:orientation!=Orientation.portrait? size.width*.24:size.width*.08,top:orientation!=Orientation.portrait?size.width*.05:size.width*.1),
-                     child: Column(
-                     children: [
-                       Container(
-                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color:  MyColor.leaderBoardTabBar,),
-                         child: FittedBox(
-                                fit: BoxFit.cover,
-                                child: controller.leaderBoardlist[2].avatar.toString()!="null"? Container(
-                                  margin: EdgeInsets.all( orientation!=Orientation.portrait? Dimensions.space5:Dimensions.space8),
-                                  decoration: BoxDecoration(
-                                    color: MyColor.leaderBoardTabBar,
-                                      borderRadius:
-                                          BorderRadius.circular(Dimensions.space40),
-                                      image: DecorationImage(
-                                          image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank2PlayerAvatar.toString()),
-                                          fit: BoxFit.cover)),
-                                  height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
-                                  width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
-                                ):Image.asset(MyImages.defaultAvatar,height: Dimensions.space70,),
-                              ),
-                       ),
-                       Text(MyStrings.at+ controller.rank2PlayerName,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
-                      const SizedBox(height: Dimensions.space5,),
-                       Container(
-                        decoration:const BoxDecoration(color: MyColor.leaderBoardContainer,borderRadius:BorderRadius.all(Radius.circular(Dimensions.space30))),
-                        padding:const EdgeInsets.all(Dimensions.space7),
-                        child: Text(MyStrings.qP+controller.rank2PlayerScore,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
-                     ],
-                                  ),
-                   ),
-               
-                   Padding(
-                     padding:  EdgeInsets.only(left: size.width*.05,top: Dimensions.space10),
-                     child: Column(
-                     children: [
-                       Container(
-                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color:  MyColor.leaderBoardTabBar,),
-                         child: FittedBox(
-                                fit: BoxFit.cover,
-                                child: controller.leaderBoardlist[0].avatar.toString()!="null"? Container(
-                                  margin: EdgeInsets.all( orientation!=Orientation.portrait? Dimensions.space5:Dimensions.space8),
-                                  decoration: BoxDecoration(
-                                    color: MyColor.leaderBoardTabBar,
-                                      borderRadius:
-                                          BorderRadius.circular(Dimensions.space40),
-                                      image: DecorationImage(
-                                          image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank1PlayerAvatar.toString()),
-                                          fit: BoxFit.cover)),
-                                  height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
-                                  width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
-                                ):Image.asset(MyImages.defaultAvatar,height: Dimensions.space60,),
-                              ),
-                       ),
-                       Text(MyStrings.at+ controller.rank1PlayerName,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
-                      const SizedBox(height: Dimensions.space5,),
-                       Container(
-                        decoration:const BoxDecoration(color: MyColor.leaderBoardContainer,borderRadius:BorderRadius.all(Radius.circular(Dimensions.space30))),
-                        padding:const EdgeInsets.all(Dimensions.space7),
-                        child: Text(MyStrings.qP +controller.rank1PlayerScore,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
-                     ],
-                                  ),
-                   ),
-                 
-                     Padding(
-                     padding:  EdgeInsets.only(left: size.width*.03,top:orientation!=Orientation.portrait? size.width*.07:size.width*.15),
-                     child: Column(
-                     children: [
-                       Container(
-                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(50), color:  MyColor.leaderBoardTabBar,),
-                         child:FittedBox(
-                                fit: BoxFit.cover,
-                                child: controller.leaderBoardlist[2].avatar.toString()!="null"? Container(
-                                  margin: EdgeInsets.all( orientation!=Orientation.portrait? Dimensions.space5:Dimensions.space8),
-                                  decoration: BoxDecoration(
-                                    color: MyColor.leaderBoardTabBar,
-                                      borderRadius:BorderRadius.circular(Dimensions.space40),
-                                      image: DecorationImage(
-                                          image:NetworkImage(UrlContainer.leaderboardProfileImage+controller.rank3PlayerAvatar.toString()),
-                                          fit: BoxFit.cover)),
-                                  height:orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
-                                  width: orientation!=Orientation.portrait? Dimensions.space40: Dimensions.space60,
-                                ):Image.asset(MyImages.defaultAvatar,height: Dimensions.space60,),
-                              ),
-                       ),
-                       Text(MyStrings.at+ controller.rank3PlayerName,style: regularMediumLarge.copyWith(color: MyColor.colorWhite,)),
-                      const SizedBox(height: Dimensions.space5,),
-                       Container(
-                        decoration:const BoxDecoration(color: MyColor.leaderBoardContainer,borderRadius:BorderRadius.all(Radius.circular(Dimensions.space30))),
-                        padding:const EdgeInsets.all(Dimensions.space7),
-                        child: Text(MyStrings.qP+controller.rank3PlayerScore,style: semiBoldDefault.copyWith(color: MyColor.colorWhite,))),
-                     ],
-                                  ),
-                   ),
-               
-                 ],
+
+    return SizedBox(
+      child: GetBuilder<LeaderBoardController>(
+        builder: (controller) => Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+           
+            _buildRankingItem(
+              controller.rank2PlayerAvatar,
+              controller.rank2PlayerName,
+              controller.rank2PlayerScore,
+              size,
+              orientation,
+              2, // Player 2
+            ), _buildRankingItem(
+              controller.rank1PlayerAvatar,
+              controller.rank1PlayerName,
+              controller.rank1PlayerScore,
+              size,
+              orientation,
+              1, // Player 1
+            ),
+            _buildRankingItem(
+              controller.rank3PlayerAvatar,
+              controller.rank3PlayerName,
+              controller.rank3PlayerScore,
+              size,
+              orientation,
+              3, // Player 3
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildRankingItem(
+    String playerAvatar,
+    String playerName,
+    String playerScore,
+    Size size,
+    Orientation orientation,
+    int rank,
+  ) {
+    double topPadding = 0.0;
+    double leftPadding = 0.0;
+
+    if (rank == 1) {
+      topPadding = orientation != Orientation.portrait ? size.width * 0.14 : size.width * 0;
+    } else if (rank == 2) {
+      topPadding = orientation != Orientation.portrait ? size.width * 0.28 : size.width * 0.1;
+      leftPadding = orientation != Orientation.portrait ? size.width * 0.1 : size.width * 0.02;
+    } else if (rank == 3) {
+      topPadding = orientation != Orientation.portrait ? size.width * 0.42 : size.width * 0.11;
+    }
+
+    return Expanded(
+      child: Padding(
+        padding: EdgeInsets.only(top: topPadding, left: leftPadding),
+        child: Column(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: MyColor.leaderBoardTabBar,
               ),
-              
-            ]),
-          ),
-        ));
+              child: FittedBox(
+                fit: BoxFit.cover,
+                child: playerAvatar.isNotEmpty
+                    ? Container(
+                        margin: EdgeInsets.all(
+                          orientation != Orientation.portrait ? Dimensions.space10 : Dimensions.space8,
+                        ),
+                        decoration: BoxDecoration(
+                          color: MyColor.leaderBoardTabBar,
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                            image: NetworkImage(UrlContainer.leaderboardProfileImage + playerAvatar),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                        width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                      )
+                    : Image.asset(MyImages.defaultAvatar, height: Dimensions.space70),
+              ),
+            ),
+            Text(
+              MyStrings.at + playerName,
+              style: regularMediumLarge.copyWith(
+                color: MyColor.colorWhite,
+              ),
+            ),
+            const SizedBox(
+              height: Dimensions.space5,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: MyColor.leaderBoardContainer,
+                borderRadius: BorderRadius.all(Radius.circular(Dimensions.space30)),
+              ),
+              padding: EdgeInsets.all(Dimensions.space7),
+              child: Text(
+                MyStrings.qP + playerScore,
+                style: semiBoldDefault.copyWith(
+                  color: MyColor.colorWhite,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

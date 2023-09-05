@@ -43,7 +43,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
   Widget build(BuildContext context) {
     return GetBuilder<LoginController>(
       builder: (controller) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space35, vertical: Dimensions.space7),
+        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space25, vertical: Dimensions.space7),
         child: Column(
           children: [
             SizedBox(
