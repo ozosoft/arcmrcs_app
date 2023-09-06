@@ -63,10 +63,10 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                   ),
                 )
               else
-                const CircleAvatar(
+                CircleAvatar(
                   radius: Dimensions.space22,
-                  backgroundImage: AssetImage(MyImages.defaultAvatar),
-                  backgroundColor: MyColor.lightprimaryColor,
+                  backgroundColor: MyColor.colorWhite.withOpacity(0.2),
+                  child: Padding(padding: const EdgeInsets.all(Dimensions.space5), child: Image.asset(MyImages.defaultAvatar)),
                 ),
               const SizedBox(width: Dimensions.space10),
               Expanded(

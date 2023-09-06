@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import '../../../data/controller/dashboard/dashboard_controller.dart';
 import '../../../data/controller/quiz_contest/quiz_contest_questions_controller.dart';
 import '../../../data/controller/sub_categories/sub_categories_controller.dart';
+import '../../../data/repo/auth/logout/logout_repo.dart';
 import '../../../data/repo/dashboard/dashboard_repo.dart';
 import '../../../data/repo/quiz_contest/quiz_contest_repo.dart';
 import '../../../data/repo/sub_categories/sub_categories_repo.dart';
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DashBoardRepo(apiClient: Get.find()));
+    Get.put(DashBoardRepo(apiClient: Get.find()));
     Get.put(ExamZoneRepo(apiClient: Get.find()));
     Get.put(SubCategoriesRepo(apiClient: Get.find()));
     Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
@@ -45,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
       quizContestRepo: Get.find(),
     ));
 
-    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find(), examZoneRepo: Get.find()));
+    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find(), examZoneRepo: Get.find(), logoutRepo: Get.put(LogoutRepo(apiClient: Get.find()))));
 
     controller.getHomePageData();
   }

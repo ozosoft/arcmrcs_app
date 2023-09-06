@@ -18,21 +18,15 @@ class SocialLoginSection extends StatelessWidget {
         const SizedBox(
           height: Dimensions.space20,
         ),
-       const Padding(
+        const Padding(
           padding: EdgeInsets.all(Dimensions.space1),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // SizedBox(
-              //   height: Dimensions.space10,
-              // ),
               SocialLoginButton(
                 title: MyStrings.continueWithGmail,
                 image: MyImages.google,
               ),
-              // SizedBox(
-              //   width: Dimensions.space15,
-              // ),
               SocialLoginButton(
                 title: MyStrings.continueWithPhone,
                 image: MyImages.telephone,

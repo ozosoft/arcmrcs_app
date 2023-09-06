@@ -11,117 +11,122 @@ SubmitAnswerModel submitAnswerModelFromJson(String str) => SubmitAnswerModel.fro
 String submitAnswerModelToJson(SubmitAnswerModel data) => json.encode(data.toJson());
 
 class SubmitAnswerModel {
-    String? remark;
-    String? status;
-    Message? message;
-    Data? data;
+  String remark;
+  String status;
+  Message message;
+  Data data;
 
-    SubmitAnswerModel({
-        this.remark,
-        this.status,
-        this.message,
-        this.data,
-    });
+  SubmitAnswerModel({
+    required this.remark,
+    required this.status,
+    required this.message,
+    required this.data,
+  });
 
-    factory SubmitAnswerModel.fromJson(Map<String, dynamic> json) => SubmitAnswerModel(
+  factory SubmitAnswerModel.fromJson(Map<String, dynamic> json) => SubmitAnswerModel(
         remark: json["remark"],
         status: json["status"],
-        message: json["message"] == null ? null : Message.fromJson(json["message"]),
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
-    );
+        message: Message.fromJson(json["message"]),
+        data: Data.fromJson(json["data"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "remark": remark,
         "status": status,
-        "message": message?.toJson(),
-        "data": data?.toJson(),
-    };
+        "message": message.toJson(),
+        "data": data.toJson(),
+      };
 }
 
 class Data {
-    String? totalQuestion;
-    String? correctAnswer;
-    String? wrongAnswer;
-    String? winingScore;
-    String? totalScore;
-    NextLevelQuizInfo? nextLevelQuizInfo;
+  int totalQuestion;
+  int correctAnswer;
+  int wrongAnswer;
+  int winingScore;
+  int totalScore;
+  NextLevelQuizInfo? nextLevelQuizInfo;
 
-    Data({
-        this.totalQuestion,
-        this.correctAnswer,
-        this.wrongAnswer,
-        this.winingScore,
-        this.totalScore,
-        this.nextLevelQuizInfo,
-    });
+  Data({
+    required this.totalQuestion,
+    required this.correctAnswer,
+    required this.wrongAnswer,
+    required this.winingScore,
+    required this.totalScore,
+    required this.nextLevelQuizInfo,
+  });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
-        totalQuestion: json["totalQuestion"].toString(),
-        correctAnswer: json["correctAnswer"].toString(),
-        wrongAnswer: json["wrongAnswer"].toString(),
-        winingScore: json["winingScore"].toString(),
-        totalScore: json["totalScore"].toString(),
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        totalQuestion: json["totalQuestion"],
+        correctAnswer: json["correctAnswer"],
+        wrongAnswer: json["wrongAnswer"],
+        winingScore: json["winingScore"],
+        totalScore: json["totalScore"],
+        // nextLevelQuizInfo: NextLevelQuizInfo.fromJson(json["nextLevelQuizInfo"]),
         nextLevelQuizInfo: json["nextLevelQuizInfo"] == null ? null : NextLevelQuizInfo.fromJson(json["nextLevelQuizInfo"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "totalQuestion": totalQuestion,
         "correctAnswer": correctAnswer,
         "wrongAnswer": wrongAnswer,
         "winingScore": winingScore,
         "totalScore": totalScore,
-        "nextLevelQuizInfo": nextLevelQuizInfo?.toJson(),
-    };
+        "nextLevelQuizInfo": nextLevelQuizInfo!.toJson(),
+      };
 }
 
 class NextLevelQuizInfo {
-    int? id;
-    String? typeId;
-    String? categoryId;
-    dynamic subCategoryId;
-    dynamic title;
-    dynamic image;
-    dynamic startDate;
-    dynamic endDate;
-    dynamic prize;
-    dynamic point;
-    dynamic description;
-    String? levelId;
-    String? examStartTime;
-    String? examEndTime;
-    dynamic examDuration;
-    dynamic examKey;
-    String? winningMark;
-    String? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    Level? level;
+  int id;
+  String? typeId;
+  String? categoryId;
+  String? subCategoryId;
+  String? title;
+  String? image;
+  String? startDate;
+  String? endDate;
+  String? prize;
+  String? point;
+  String? description;
+  String? levelId;
+  String? examStartTime;
+  String? examEndTime;
+  String? examDuration;
+  String? examKey;
+  double winningMark;
+  String status;
+  DateTime createdAt;
+  DateTime updatedAt;
+  Category? category;
+  Category? subcategory;
+  Level? level;
 
-    NextLevelQuizInfo({
-        this.id,
-        this.typeId,
-        this.categoryId,
-        this.subCategoryId,
-        this.title,
-        this.image,
-        this.startDate,
-        this.endDate,
-        this.prize,
-        this.point,
-        this.description,
-        this.levelId,
-        this.examStartTime,
-        this.examEndTime,
-        this.examDuration,
-        this.examKey,
-        this.winningMark,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.level,
-    });
+  NextLevelQuizInfo({
+    required this.id,
+    required this.typeId,
+    required this.categoryId,
+    required this.subCategoryId,
+    required this.title,
+    required this.image,
+    required this.startDate,
+    required this.endDate,
+    required this.prize,
+    required this.point,
+    required this.description,
+    required this.levelId,
+    required this.examStartTime,
+    required this.examEndTime,
+    required this.examDuration,
+    required this.examKey,
+    required this.winningMark,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.category,
+    required this.subcategory,
+    required this.level,
+  });
 
-    factory NextLevelQuizInfo.fromJson(Map<String, dynamic> json) => NextLevelQuizInfo(
+  factory NextLevelQuizInfo.fromJson(Map<String, dynamic> json) => NextLevelQuizInfo(
         id: json["id"],
         typeId: json["type_id"],
         categoryId: json["category_id"],
@@ -138,14 +143,16 @@ class NextLevelQuizInfo {
         examEndTime: json["exam_end_time"],
         examDuration: json["exam_duration"],
         examKey: json["exam_key"],
-        winningMark: json["winning_mark"].toString(),
+        winningMark: double.parse(json["winning_mark"].toString()),
         status: json["status"],
-        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        category: json["category"] == null ? null : Category.fromJson(json["category"]),
+        subcategory: json["subcategory"] == null ? null : Category.fromJson(json["subcategory"]),
         level: json["level"] == null ? null : Level.fromJson(json["level"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "type_id": typeId,
         "category_id": categoryId,
@@ -164,46 +171,86 @@ class NextLevelQuizInfo {
         "exam_key": examKey,
         "winning_mark": winningMark,
         "status": status,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-        "level": level?.toJson(),
-    };
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "category": category!.toJson(),
+        "subcategory": subcategory!.toJson(),
+        "level": level!.toJson(),
+      };
+}
+
+class Category {
+  int id;
+  String name;
+  String image;
+  String status;
+  DateTime createdAt;
+  DateTime updatedAt;
+  String? categoryId;
+
+  Category({
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+    this.categoryId,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        id: json["id"],
+        name: json["name"],
+        image: json["image"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        categoryId: json["category_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "image": image,
+        "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "category_id": categoryId,
+      };
 }
 
 class Level {
-    int? id;
-    String? title;
-    String? level;
-    String? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+  int id;
+  String title;
+  String level;
+  String status;
+  DateTime createdAt;
+  DateTime updatedAt;
 
-    Level({
-        this.id,
-        this.title,
-        this.level,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-    });
+  Level({
+    required this.id,
+    required this.title,
+    required this.level,
+    required this.status,
+    required this.createdAt,
+    required this.updatedAt,
+  });
 
-    factory Level.fromJson(Map<String, dynamic> json) => Level(
+  factory Level.fromJson(Map<String, dynamic> json) => Level(
         id: json["id"],
         title: json["title"],
         level: json["level"],
         status: json["status"],
-        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    );
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
         "level": level,
         "status": status,
-        "created_at": createdAt?.toIso8601String(),
-        "updated_at": updatedAt?.toIso8601String(),
-    };
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }
-
-

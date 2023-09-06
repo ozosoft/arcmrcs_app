@@ -17,6 +17,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../components/bottom-sheet/custom_bottom_sheet.dart';
+import '../../components/image_widget/my_image_widget.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
@@ -32,15 +33,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LogoutRepo(apiClient: Get.find()));
-    Get.put(LogoutController( logoutRepo:Get.find()));
+    Get.put(LogoutController(logoutRepo: Get.find()));
 
-   
     super.initState();
-
-    
   }
-  
-   
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -51,43 +48,43 @@ class _DrawerScreenState extends State<DrawerScreen> {
             builder: (controller) => Container(
               padding: const EdgeInsets.only(top: Dimensions.space25),
               width: double.infinity,
-              child: Row(children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: Dimensions.space30, left: Dimensions.space15),
-                  child: FittedBox(
-                    fit: BoxFit.cover,
-                    child:controller.userImage.toString()!="null"? Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: DecorationImage(image: NetworkImage(UrlContainer.dashboardUserProfileImage + controller.userImage.toString() ), fit: BoxFit.cover)),
-                      height: Dimensions.space45,
-                      width: Dimensions.space45,
-                    ):Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image:const DecorationImage(image: AssetImage(MyImages.defaultAvatar ), fit: BoxFit.cover)),
-                      height: Dimensions.space45,
-                      width: Dimensions.space45,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: Dimensions.space20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: Dimensions.space30),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        controller.dashRepo.apiClient.getUserFullName(),
-                        style: semiBoldMediumLarge,
+              child: Padding(
+                padding: const EdgeInsets.only(top: Dimensions.space30, left: Dimensions.space20),
+                child: Row(children: [
+                  if (controller.userImage.toString() != "null")
+                    SizedBox(
+                      child: CircleAvatar(
+                        backgroundColor: MyColor.primaryColor.withOpacity(0.2),
+                        child: MyImageWidget(
+                          radius: Dimensions.space100,
+                          imageUrl: UrlContainer.dashboardUserProfileImage + controller.userImage.toString(),
+                        ),
                       ),
-                      const SizedBox(height: Dimensions.space7),
-                      Text(controller.coins,
-                          style: semiBoldLarge.copyWith(
-                            color: MyColor.primaryColor,
-                          ))
-                    ],
-                  ),
-                )
-              ]),
+                    )
+                  else
+                    CircleAvatar(
+                      radius: Dimensions.space22,
+                      backgroundColor: MyColor.primaryColor.withOpacity(0.2),
+                      child: Image.asset(MyImages.defaultAvatar),
+                    ),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: Dimensions.space20),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            controller.dashRepo.apiClient.getUserFullName(),
+                            style: semiBoldMediumLarge,
+                          ),
+                          const SizedBox(height: Dimensions.space7),
+                          Text("${MyStrings.totalCoin.tr} - ${controller.coins}", style: semiBoldLarge.copyWith(color: MyColor.primaryColor, fontSize: Dimensions.fontDefault12))
+                        ],
+                      ),
+                    ),
+                  )
+                ]),
+              ),
             ),
           ),
           Expanded(
@@ -210,7 +207,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 //     style: regularMediumLarge,
                 //   ),
                 //   onTap: (){
-                    
+
                 //   },
                 //   minLeadingWidth: Dimensions.space1,
                 // ),

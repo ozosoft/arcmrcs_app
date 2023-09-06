@@ -100,6 +100,7 @@ class MyStrings {
   static const String examStartTime = "Exam Start Time:";
 
   static const String noExamFound = "Sorry! No exam is currently running.";
+  static const String noCoinHistoryFound = "Sorry! No Coin History Found!";
   static const String examNotStartYet = "Exam Will Be Start Soon!";
   static const String examAlreadyGiven = "Exam Already Given!";
   static const String examFinished = "Exam Time Finished!";
@@ -432,6 +433,7 @@ class MyStrings {
   static const String quantity = '15';
   static const String leaderBoard = 'Leaderboard';
   static const String totalCoins = "Total Coins";
+  static const String totalCoin = "Total Coin";
   static const String fivehundredCoin = '500.00';
   static const String weekly = 'Weekly';
   static const String reedemRequest = "Reedem Request";

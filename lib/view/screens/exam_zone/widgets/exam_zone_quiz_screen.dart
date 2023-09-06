@@ -128,7 +128,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                           TextButton(
                                             style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
                                             onPressed: () async {
-                                              Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
+                                              Get.offAllNamed(RouteHelper.bottomNavBarScreen);
                                             },
                                             child: Text(
                                               MyStrings.yes,

@@ -6,13 +6,14 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
+import '../../repo/auth/logout/logout_repo.dart';
 import '../../repo/exam_zone/exam_zone_repo.dart';
 
 class DashBoardController extends GetxController {
   DashBoardRepo dashRepo;
-    ExamZoneRepo examZoneRepo;
-
-  DashBoardController({required this.dashRepo,required this.examZoneRepo});
+  ExamZoneRepo examZoneRepo;
+  LogoutRepo logoutRepo;
+  DashBoardController({required this.dashRepo, required this.examZoneRepo, required this.logoutRepo});
 
   String rank = "";
   String coins = "";
@@ -47,45 +48,50 @@ class DashBoardController extends GetxController {
       differentQuizlist.clear();
       contestlist.clear();
       examZonelist.clear();
-      DashBoardModel dashBoard = DashBoardModel.fromJson(jsonDecode(model.responseJson));
 
-      if (dashBoard.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
-        userdetails.add(dashBoard.data!.user!);
-        rank = dashBoard.data?.rank?.userRank ?? "";
-        coins = dashBoard.data?.user?.coins ?? "";
-        score = dashBoard.data?.user?.score ?? "";
-
-        //save User Data
-        dashRepo.apiClient.setUserData(dashBoard.data!.user!.toJson());
-
-        List<Category>? categories = dashBoard.data?.categories;
-
-        if (categories != null && categories.isNotEmpty) {
-          categorylist.addAll(categories);
-        }
-
-        List<Contest>? contest = dashBoard.data?.contest;
-
-        if (contest != null && contest.isNotEmpty) {
-          contestlist.addAll(contest);
-        }
-
-        List<Exams>? exams = dashBoard.data?.exams;
-
-        if (exams != null && exams.isNotEmpty) {
-          examZonelist.addAll(exams);
-        }
-
-        List<QuizType>? quizType = dashBoard.data?.quizType;
-
-        if (quizType != null && quizType.isNotEmpty) {
-          differentQuizlist.addAll(quizType);
-        }
-
-        username = dashBoard.data?.user!.username;
-        userImage = dashBoard.data?.user!.avatar;
+      if (model.responseJson.isEmpty) {
+        logoutRepo.logout();
       } else {
-        CustomSnackBar.error(errorList: [dashBoard.status ?? ""]);
+        DashBoardModel dashBoard = DashBoardModel.fromJson(jsonDecode(model.responseJson));
+
+        if (dashBoard.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+          userdetails.add(dashBoard.data!.user!);
+          rank = dashBoard.data?.rank?.userRank ?? "";
+          coins = dashBoard.data?.user?.coins ?? "";
+          score = dashBoard.data?.user?.score ?? "";
+
+          //save User Data
+          dashRepo.apiClient.setUserData(dashBoard.data!.user!.toJson());
+
+          List<Category>? categories = dashBoard.data?.categories;
+
+          if (categories != null && categories.isNotEmpty) {
+            categorylist.addAll(categories);
+          }
+
+          List<Contest>? contest = dashBoard.data?.contest;
+
+          if (contest != null && contest.isNotEmpty) {
+            contestlist.addAll(contest);
+          }
+
+          List<Exams>? exams = dashBoard.data?.exams;
+
+          if (exams != null && exams.isNotEmpty) {
+            examZonelist.addAll(exams);
+          }
+
+          List<QuizType>? quizType = dashBoard.data?.quizType;
+
+          if (quizType != null && quizType.isNotEmpty) {
+            differentQuizlist.addAll(quizType);
+          }
+
+          username = dashBoard.data?.user!.username;
+          userImage = dashBoard.data?.user!.avatar;
+        } else {
+          CustomSnackBar.error(errorList: [dashBoard.status ?? ""]);
+        }
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

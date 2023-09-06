@@ -237,17 +237,22 @@ class QuizQuestionsController extends GetxController {
 
     if (submitModel.statusCode == 200) {
       SubmitAnswerModel model = SubmitAnswerModel.fromJson(jsonDecode(submitModel.responseJson));
-      if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        appreciation = model.message!.success!.first;
-        totalQuestions = model.data!.totalQuestion.toString();
-        correctAnswer = model.data!.correctAnswer.toString();
-        wrongAnswer = model.data!.wrongAnswer.toString();
-        totalCoin = model.data!.totalScore.toString();
-        winningCoin = model.data!.winingScore.toString();
+      if (model.status.toLowerCase() == MyStrings.success.toLowerCase()) {
+        appreciation = model.message.success!.first;
+        totalQuestions = model.data.totalQuestion.toString();
+        correctAnswer = model.data.correctAnswer.toString();
+        wrongAnswer = model.data.wrongAnswer.toString();
+        totalCoin = model.data.totalScore.toString();
+        winningCoin = model.data.winingScore.toString();
 
-        if (model.data?.nextLevelQuizInfo != null) {
-          nextlevelQuizInfoId = model.data!.nextLevelQuizInfo?.id! ?? 0;
-          nextlevelQuizInfoTitle = model.data!.nextLevelQuizInfo!.title ?? "";
+        if (model.data.nextLevelQuizInfo != null) {
+          nextlevelQuizInfoId = model.data.nextLevelQuizInfo!.id;
+          if (model.data.nextLevelQuizInfo!.categoryId != null) {
+            nextlevelQuizInfoTitle = model.data.nextLevelQuizInfo!.category!.name;
+          }
+          if (model.data.nextLevelQuizInfo!.subCategoryId != null) {
+            nextlevelQuizInfoTitle = model.data.nextLevelQuizInfo!.subcategory!.name;
+          }
         }
         countDownController.pause();
         Get.toNamed(RouteHelper.quizResultScreen)!.whenComplete(() {
@@ -256,15 +261,14 @@ class QuizQuestionsController extends GetxController {
 
         // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
-        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: model.message.success ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }
     } else {
       CustomSnackBar.error(errorList: [submitModel.message]);
     }
-    print("this is " + submitModel.message);
-    print("this is " + params.toString());
+
     submitLoading = false;
     update();
   }

@@ -6,7 +6,8 @@ import '../../../core/utils/style.dart';
 
 class CustomCategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
-  const CustomCategoryAppBar({super.key, required this.title});
+  final List<Widget>? children;
+  const CustomCategoryAppBar({super.key, required this.title,  this.children});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,7 @@ class CustomCategoryAppBar extends StatelessWidget implements PreferredSizeWidge
           borderRadius: BorderRadius.vertical(
         bottom: Radius.circular(Dimensions.space25),
       )),
+      actions: children,
     );
   }
 

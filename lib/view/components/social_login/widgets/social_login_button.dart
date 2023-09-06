@@ -11,30 +11,32 @@ class SocialLoginButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(Dimensions.space5),
-      decoration: BoxDecoration(
-        border: Border.all(color: MyColor.getTextFieldDisableBorder()),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space7, vertical: Dimensions.space12),
-      child: Row(children: [
-        SvgPicture.asset(
-          image,
-          height: Dimensions.space20,
-          width: Dimensions.space50,
+    return Expanded(
+      child: Container(
+        margin: const EdgeInsets.all(Dimensions.space5),
+        decoration: BoxDecoration(
+          border: Border.all(color: MyColor.getTextFieldDisableBorder()),
+          borderRadius: BorderRadius.circular(6),
         ),
-        const SizedBox(
-          width: Dimensions.space5,
-        ),
-        FittedBox(
-          child: Text(
-            title,
-            overflow: TextOverflow.ellipsis,
-            style: regularLarge.copyWith(fontSize: Dimensions.fontSmall),
+        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space7, vertical: Dimensions.space12),
+        child: Row(children: [
+          Padding(
+            padding: const EdgeInsets.only(right: Dimensions.space10),
+            child: SvgPicture.asset(
+              image,
+              height: Dimensions.space20,
+              width: Dimensions.space50,
+            ),
           ),
-        )
-      ]),
+          Expanded(
+            child: Text(
+              title,
+              overflow: TextOverflow.ellipsis,
+              style: regularLarge.copyWith(fontSize: Dimensions.fontSmall),
+            ),
+          )
+        ]),
+      ),
     );
   }
 }

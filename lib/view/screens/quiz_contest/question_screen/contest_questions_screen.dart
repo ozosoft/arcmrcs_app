@@ -58,7 +58,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                         )
                       : PageView(onPageChanged: (value) {}, children: [
                           PageView.builder(
-                            // physics: const NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             controller: controller.pageController,
                             onPageChanged: (int page) {
                               controller.changePage(page);
