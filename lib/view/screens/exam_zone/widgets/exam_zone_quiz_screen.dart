@@ -181,7 +181,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                                   child: MyImageWidget(
                                                     boxFit: BoxFit.contain,
                                                     height: Get.width / 2,
-                                                    imageUrl: "${UrlContainer.battleQuestionImagePath}/${controller.examQuestionsList[questionsIndex].image}",
+                                                    imageUrl: "${UrlContainer.questionImagePath}/${controller.examQuestionsList[questionsIndex].image}",
                                                   ),
                                                 ),
                                               ],

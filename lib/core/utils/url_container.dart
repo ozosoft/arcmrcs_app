@@ -110,5 +110,4 @@ class UrlContainer {
   static const String battleCategoryLIst = 'single-battle';
   static const String battleQuestionList = 'single-battle/question-list';
   static const String battleAnswerSubmit = 'single-battle/answer-submit';
-  static const String battleQuestionImagePath = '$domainUrl/assets/admin/images/question';
 }

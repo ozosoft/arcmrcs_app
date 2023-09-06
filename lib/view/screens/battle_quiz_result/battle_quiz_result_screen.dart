@@ -22,6 +22,8 @@ class _BattleQuizResultScreenState extends State<BattleQuizResultScreen> {
     return Scaffold(
       backgroundColor: MyColor.primaryColor,
       appBar: const CustomCategoryAppBar(title: MyStrings.battleResult),
+
+      
       body: Stack(
         children: [
           Positioned.fill(

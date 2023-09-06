@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/helper/date_converter.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/my_color.dart';
 import '../../../../core/utils/my_images.dart';
+import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/style.dart';
 import '../../../../core/utils/url_container.dart';
 import '../../../../data/model/exam_zone/completed_exam_zone_model.dart';
@@ -86,7 +88,7 @@ class CompletedExamListTileCard extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               //Title here
-                              Text(title, style: semiBoldMediumLarge),
+                              Text(title.tr, style: semiBoldMediumLarge),
 
                               const SizedBox(height: Dimensions.space15),
                               //Chips Here
@@ -102,7 +104,7 @@ class CompletedExamListTileCard extends StatelessWidget {
                                         padding: Dimensions.space5,
                                         child: Center(
                                           child: Text(
-                                            DateConverter.estimatedDate(exam.startDate),
+                                            DateConverter.estimatedDate(exam.startDate).tr,
                                             style: regularDefault.copyWith(color: MyColor.colorGrey),
                                           ),
                                         ),
@@ -113,7 +115,7 @@ class CompletedExamListTileCard extends StatelessWidget {
                                           right: Dimensions.space10,
                                           padding: Dimensions.space5,
                                           child: Text(
-                                            "WIN",
+                                            MyStrings.win.tr,
                                             style: regularDefault.copyWith(color: MyColor.colorGreen),
                                           ),
                                         ),
@@ -123,7 +125,7 @@ class CompletedExamListTileCard extends StatelessWidget {
                                           right: Dimensions.space10,
                                           padding: Dimensions.space5,
                                           child: Text(
-                                            "Lost",
+                                            MyStrings.loss.tr,
                                             style: regularDefault.copyWith(color: MyColor.colorRed),
                                           ),
                                         ),

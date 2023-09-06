@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:flutter_prime/data/repo/gess_the_word/gessThewordRepo.dart';
@@ -34,7 +35,6 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColor.colorWhite,
       appBar: const CustomCategoryAppBar(title: MyStrings.allCategory),
       body: GetBuilder<GuessThewordController>(builder: (controller) {
         return controller.isLoading
@@ -43,16 +43,19 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
                 ? const NoDataWidget(
                     messages: MyStrings.sorryNoCategory,
                   )
-                : ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: controller.categoryList.length,
-                    itemBuilder: (context, i) {
-                      return GuessCategoryCard(
-                        categories: controller.categoryList[i],
-                        image: '${controller.imgPath}/${controller.categoryList[i].image}',
-                      );
-                    },
-                  );
+                : Padding(
+                  padding: const EdgeInsets.only(top: Dimensions.space20),
+                  child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: controller.categoryList.length,
+                      itemBuilder: (context, i) {
+                        return GuessCategoryCard(
+                          categories: controller.categoryList[i],
+                          image: '${controller.imgPath}/${controller.categoryList[i].image}',
+                        );
+                      },
+                    ),
+                );
       }),
     );
   }

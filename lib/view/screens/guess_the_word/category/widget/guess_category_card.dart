@@ -13,6 +13,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../data/model/guess_the_word/guess_category_model.dart';
+import '../../../../components/chips/custom_chips_widget.dart';
+import '../../../../components/image_widget/my_image_widget.dart';
 
 class GuessCategoryCard extends StatefulWidget {
   final GuessCategories categories;
@@ -50,11 +52,11 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
           decoration: BoxDecoration(
             color: MyColor.colorWhite,
             borderRadius: BorderRadius.circular(5.0),
-            border: Border.all(color: MyColor.colorBlack.withOpacity(0.08), width: 0.5),
-            boxShadow: [
+            border: Border.all(color: MyColor.cardShaddowColor2, width: 0.5),
+            boxShadow: const [
               BoxShadow(
-                color: MyColor.colorBlack.withOpacity(0.08),
-                offset: const Offset(0, 0),
+                color: MyColor.cardShaddowColor2,
+                offset: Offset(0, 0),
                 blurRadius: 10,
                 spreadRadius: 0,
               ),
@@ -79,15 +81,14 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(width: Dimensions.space20),
-                      widget.image != null
-                          ? Padding(
-                              padding: const EdgeInsets.only(top: Dimensions.space20, bottom: Dimensions.space20),
-                              child: Image.network(
-                                widget.image,
-                                height: Dimensions.space40,
-                              ),
-                            )
-                          : const SizedBox.shrink(),
+                      Container(
+                        margin: const EdgeInsets.only(top: Dimensions.space20, bottom: Dimensions.space20),
+                        width: Dimensions.space40,
+                        height: Dimensions.space40,
+                        child: MyImageWidget(
+                          imageUrl: widget.image,
+                        ),
+                      ),
                       const SizedBox(width: Dimensions.space30),
                       Padding(
                         padding: const EdgeInsets.only(top: Dimensions.space15),
@@ -99,20 +100,22 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Container(
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space3), color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
-                                  padding: const EdgeInsets.symmetric(vertical: Dimensions.space2, horizontal: Dimensions.space5),
-                                  child: Center(child: Text(widget.categories.questionsCount.toString() + MyStrings.questionse, style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                CustomChipsWidget(
+                                  padding: Dimensions.space5,
+                                  child: Center(child: Text(widget.categories.questionsCount.toString() + MyStrings.questionse.tr, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                 ),
                               ],
                             ),
+                            const SizedBox(
+                              height: Dimensions.space20,
+                            )
                           ],
                         ),
                       ),
                       const Spacer(),
                       Padding(
                         padding: const EdgeInsets.only(top: Dimensions.space20),
-                        child: SvgPicture.asset(MyImages.playSVG, height: Dimensions.space35),
+                        child: SvgPicture.asset(isExpande ? MyImages.arrowDownSVG : MyImages.playSVG, height: Dimensions.space35),
                       ),
                       const SizedBox(width: Dimensions.space20),
                     ],
@@ -123,7 +126,9 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                           expand: isExpande,
                           child: Column(
                             children: [
-                              const CustomHorizontalDivider(),
+                              const CustomHorizontalDivider(
+                                height: 0.3,
+                              ),
                               Container(
                                 color: MyColor.colorWhite,
                                 padding: const EdgeInsets.all(Dimensions.space10),

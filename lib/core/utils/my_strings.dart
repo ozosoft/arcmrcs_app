@@ -76,6 +76,9 @@ class MyStrings {
   static const String iAgreewithrules = "I agree with all exam rules";
   static const String forgotPassword = "Forgot Password?";
   static const String signIn = "Sign In";
+  static const String win = "WIN";
+  static const String loss = "LOSS";
+  static const String lifeLineAlreadyUsed = "This Life Line Already Used!";
 
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
@@ -114,6 +117,7 @@ class MyStrings {
   static const String seeAll = "See All";
   static const String goHome = "Go Home";
   static const String home = "Home";
+  static const String back = "Back";
   static const String transaction = "Transaction";
   static const String transactionId = "Transaction ID";
   static const String withdrawHistory = "Withdraw History";
@@ -249,6 +253,7 @@ class MyStrings {
   static const String quizQuestions2 = "The Great Wall is a world-famous ?";
   static const String percent = "%";
   static const String levels = "6 Level";
+  static const String level = "Level";
   static const String level1 = "Level 01";
   static const String allCategory = "All categories";
   static const String music = "Music";
@@ -521,6 +526,7 @@ class MyStrings {
   static const String guessTheWord = "Guess The Word";
   static const String sorryNoCategory = "Sorry No Category Found";
   static const String sorryNoQuizFound = "Sorry No Quiz Available Right Now!";
+  static const String sorryAlreadyPlayedQuiz = "Sorry! You have already played daily quiz";
 
   static const String category = "Category";
   static const String subcategory = "Sub Category";

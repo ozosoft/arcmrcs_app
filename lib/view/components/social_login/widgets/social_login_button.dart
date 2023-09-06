@@ -31,7 +31,7 @@ class SocialLoginButton extends StatelessWidget {
           child: Text(
             title,
             overflow: TextOverflow.ellipsis,
-            style: regularLarge,
+            style: regularLarge.copyWith(fontSize: Dimensions.fontSmall),
           ),
         )
       ]),

@@ -8,8 +8,10 @@ import 'package:flutter_prime/data/model/all_cartegories/all_categories_model.da
 import 'package:flutter_prime/data/repo/allcategories/all_categories_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
+import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
-import '../../components/category-card/categories_card.dart';
+
+import 'widgets/all_category_list_card_widget.dart';
 
 class AllCategoriesScreen extends StatefulWidget {
   const AllCategoriesScreen({super.key});
@@ -40,44 +42,44 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
     return Scaffold(
       appBar: const CustomCategoryAppBar(title: MyStrings.allCategory),
       body: GetBuilder<AllCategoriesController>(
-        builder: (controller) => SingleChildScrollView(
-          physics: const ScrollPhysics(),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ListView.builder(
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.only(top: Dimensions.space25),
-                  shrinkWrap: true,
-                  itemCount: controller.allCategoriesList.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    List<QuizInfo>? levelList = controller.allCategoriesList[index].quizInfos;
-                    String subCategoryId = levelList != null && levelList.isNotEmpty && levelList[0].subCategoryId.toString() != 'null'
-                        ? levelList[0].subCategoryId.toString()
-                        : '-1';
-                    String title = controller.allCategoriesList[index].name.toString();
-                    return InkWell(
-                      onTap: () {
-                        if (subCategoryId != "") {
-                          Get.toNamed(RouteHelper.subCategories, arguments: [title, controller.allCategoriesList[index].id.toString()]);
-                        }
-                        controller.changeExpandIndex(index);
-                      },
-                      child: CategoriesCard(
-                        title: title,
-                        questions: controller.allCategoriesList[index].questionsCount.toString(),
-                        image: UrlContainer.allCategoriesImage + controller.allCategoriesList[index].image.toString(),
-                        fromViewAll: true,
-                        subCategoryId: subCategoryId,
-                        isExpand: subCategoryId == "" ? index == controller.expandIndex : false,
-                        index: index,
-                        fromAllCategory: true,
-                      ),
-                    );
-                  }),
-            ],
-          ),
-        ),
+        builder: (controller) => controller.loader
+            ? const CustomLoader()
+            : SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.only(top: Dimensions.space25),
+                        shrinkWrap: true,
+                        itemCount: controller.allCategoriesList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var categoryItem = controller.allCategoriesList[index];
+
+                          List<QuizInfo>? levelList = categoryItem.quizInfos;
+                          String subCategoryId = levelList != null && levelList.isNotEmpty && levelList[0].subCategoryId.toString() != 'null' ? levelList[0].subCategoryId.toString() : '-1';
+
+                          return AllCategoryListTileCardWidget(
+                            controller: controller,
+                            categoryData: categoryItem,
+                            onTap: () {
+                              if (subCategoryId != "") {
+                                Get.toNamed(RouteHelper.subCategories, arguments: [categoryItem.name, categoryItem.id.toString()]);
+                              }
+                              controller.changeExpandIndex(index);
+                            },
+                            title: categoryItem.name.toString(),
+                            image: UrlContainer.allCategoriesImage + categoryItem.image.toString(),
+                            fromViewAll: true,
+                            subCategoryId: subCategoryId,
+                            isExpand: subCategoryId == "" ? index == controller.expandIndex : false,
+                            index: index,
+                          );
+                        }),
+                  ],
+                ),
+              ),
       ),
     );
   }

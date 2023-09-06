@@ -1,47 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
+import 'package:flutter_prime/data/controller/all_categories/all_categories_controller.dart';
+import 'package:flutter_prime/data/model/all_cartegories/all_categories_model.dart';
 import 'package:flutter_prime/view/components/chips/custom_chips_widget.dart';
 import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
 import 'package:flutter_prime/view/screens/all-categories/widgets/allCategories_expanded_section.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../core/utils/dimensions.dart';
-import '../../../core/utils/my_color.dart';
-import '../../../core/utils/my_images.dart';
-import '../../../core/utils/style.dart';
+import '../../../../core/utils/dimensions.dart';
+import '../../../../core/utils/my_color.dart';
+import '../../../../core/utils/my_images.dart';
+import '../../../../core/utils/style.dart';
+import '../../../components/divider/custom_horizontal_divider.dart';
 
-class CategoriesCard extends StatefulWidget {
-  final String title, questions, image, imageMainPath, levels, minute, marks, date, subCategoryId;
-  final bool expansionVisible, fromViewAll, fromExam, fromFunNlearn, fromAllCategory;
+class AllCategoryListTileCardWidget extends StatefulWidget {
+  final String title, image, subCategoryId;
+  final bool fromViewAll;
   final bool isExpand;
   final bool showLevel;
   final int index;
+  final Category categoryData;
   final VoidCallback? onTap;
-
-  const CategoriesCard(
-      {super.key,
-      required this.title,
-      this.showLevel = true,
-      this.questions = "",
-      this.image = "",
-      this.subCategoryId = "",
-      this.expansionVisible = false,
-      this.fromFunNlearn = false,
-      this.fromAllCategory = false,
-      required this.fromViewAll,
-      this.levels = "1",
-      this.fromExam = false,
-      this.minute = "",
-      this.marks = "",
-      this.isExpand = false,
-      required this.index,
-      this.date = "",
-      this.onTap,
-      this.imageMainPath = ""});
+  final AllCategoriesController? controller;
+  const AllCategoryListTileCardWidget({super.key, required this.title, this.showLevel = true, this.image = "", this.subCategoryId = "", required this.fromViewAll, this.isExpand = false, required this.index, this.onTap, required this.categoryData, required this.controller});
   @override
-  State<CategoriesCard> createState() => _CategoriesCardState();
+  State<AllCategoryListTileCardWidget> createState() => _AllCategoryListTileCardWidgetState();
 }
 
-class _CategoriesCardState extends State<CategoriesCard> {
+class _AllCategoryListTileCardWidgetState extends State<AllCategoryListTileCardWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -89,45 +74,51 @@ class _CategoriesCardState extends State<CategoriesCard> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(widget.title, style: semiBoldMediumLarge),
-                              const SizedBox(height: Dimensions.space12),
+                              const SizedBox(height: Dimensions.space15),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  widget.fromViewAll == false && widget.showLevel == true
-                                      ? CustomChipsWidget(
-                                          padding: Dimensions.space5,
-                                          child: Center(child: Text(widget.fromExam ? widget.marks : widget.levels, style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                        )
-                                      : const SizedBox(),
+                                  if (widget.categoryData.subcategoriesCount == "0") ...[
+                                    CustomChipsWidget(
+                                      padding: Dimensions.space5,
+                                      right: Dimensions.space5,
+                                      child: Center(child: Text("${widget.categoryData.questionsCount}${MyStrings.questionse}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    ),
+                                  ] else ...[
+                                    CustomChipsWidget(
+                                      padding: Dimensions.space5,
+                                      right: Dimensions.space5,
+                                      child: Center(child: Text("${widget.categoryData.subcategoriesCount} ${MyStrings.subcategory}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    ),
+                                  ],
                                   CustomChipsWidget(
                                     padding: Dimensions.space5,
-                                    child: Center(child: Text(widget.fromExam ? widget.date : widget.questions + (widget.fromFunNlearn == true ? " ${MyStrings.quiz}" : MyStrings.questionse), style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    right: Dimensions.space5,
+                                    child: Center(child: Text("${widget.categoryData.quizInfos!.length} ${MyStrings.level}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                   ),
-                                  const SizedBox(width: Dimensions.space10),
-                                  widget.fromExam
-                                      ? CustomChipsWidget(
-                                          padding: Dimensions.space5,
-                                          child: Center(child: Text(widget.fromExam ? widget.minute : widget.questions, style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                        )
-                                      : const SizedBox(),
                                 ],
                               ),
                             ],
                           ),
                         ),
                       ),
-                      widget.fromExam
-                          ? const SizedBox()
-                          : Padding(
-                              padding: const EdgeInsets.only(top: Dimensions.space20),
-                              child: SvgPicture.asset(widget.isExpand ? MyImages.arrowDownSVG : MyImages.playSVG, height: Dimensions.space35),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: Dimensions.space20),
+                        child: SvgPicture.asset(widget.isExpand ? MyImages.arrowDownSVG : MyImages.playSVG, height: Dimensions.space35),
+                      ),
                       const SizedBox(width: Dimensions.space20),
                     ],
                   ),
-                  SizedBox(height: widget.expansionVisible ? Dimensions.space3 : Dimensions.space10),
+                  const SizedBox(
+                    height: Dimensions.space10,
+                  ),
+                  if (widget.isExpand)
+                    const CustomHorizontalDivider(
+                      height: 0.3,
+                    ),
                   widget.fromViewAll
                       ? AllCategoriesExpandedSection(
+                          controller: widget.controller!,
                           categoryindex: widget.index,
                           isExpand: widget.isExpand,
                           title: widget.title,

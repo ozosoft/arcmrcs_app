@@ -11,13 +11,10 @@ class QuizQuestionsScreen extends StatefulWidget {
 }
 
 class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
-  final title = Get.arguments [0]as String;
-  final id = Get.arguments [1] ;
+  final title = Get.arguments[0] as String;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: CustomCategoryAppBar(title: title.toString()),
-        body:  QuizBodySection(id: id));
+    return Scaffold(appBar: CustomCategoryAppBar(title: title.toString()), body: const QuizBodySection());
   }
 }

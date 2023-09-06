@@ -3,9 +3,10 @@ import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controll
 import 'package:flutter_prime/data/repo/gess_the_word/gessThewordRepo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
-import 'package:flutter_prime/view/screens/guess_the_word/subCategory/widget/guess_word_sub_cat_card.dart';
+import 'package:flutter_prime/view/screens/guess_the_word/sub_category/widget/guess_word_sub_cat_card.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/utils/my_strings.dart';
 import '../../../components/app-bar/custom_category_appBar.dart';
 
 class GuessWordSubCategoryScreen extends StatefulWidget {
@@ -34,7 +35,7 @@ class _GuessWordSubCategoryScreenState extends State<GuessWordSubCategoryScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const CustomCategoryAppBar(
-        title: 'Sub Categories',
+        title: MyStrings.subcategory,
       ),
       body: GetBuilder<GuessThewordController>(builder: (controller) {
         return controller.isLoading

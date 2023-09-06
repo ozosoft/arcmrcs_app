@@ -55,7 +55,7 @@ class _AllContestScreenState extends State<AllContestScreen> {
                       var contestItem = controller.examcategoryList[index];
                       return ContestListTileCard(
                         onTap: () {
-                          Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.examcategoryList[index].id.toString(), controller.examcategoryList[index].title.toString()]);
+                          Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.examcategoryList[index].id.toString(), controller.examcategoryList[index].title.toString()])!.whenComplete(() {});
                         },
                         contest: contestItem,
                         index: index,

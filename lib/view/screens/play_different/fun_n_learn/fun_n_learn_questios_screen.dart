@@ -14,7 +14,6 @@ import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dar
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/components/no_data.dart';
-import 'package:flutter_prime/view/screens/general_quiz/quiz-questions/quiz-screen-widgets/life_line_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -87,14 +86,7 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
                                                 LevelCardButton(text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
                                               ],
                                             ),
-                                            // Container(
-                                            //   width: double.infinity,
-                                            //   padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                                            //   child: Image.asset(
-                                            //     MyImages.greatWallPNG,
-                                            //     fit: BoxFit.cover,
-                                            //   ),
-                                            // ),
+
                                             if (controller.examQuestionsList[questionsIndex].image != null) ...[
                                               Container(
                                                 width: double.infinity,
@@ -102,7 +94,7 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
                                                 child: MyImageWidget(
                                                   boxFit: BoxFit.contain,
                                                   height: Get.width / 2,
-                                                  imageUrl: "${UrlContainer.battleQuestionImagePath}/${controller.examQuestionsList[questionsIndex].image}",
+                                                  imageUrl: "${UrlContainer.questionImagePath}/${controller.examQuestionsList[questionsIndex].image}",
                                                 ),
                                               ),
                                             ],
@@ -117,78 +109,78 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
                                                     children: [
                                                       Row(
                                                         children: [
-                                                          InkWell(
-                                                            onTap: () async {
-                                                              if (controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
-                                                                return;
-                                                              }
+                                                          Expanded(
+                                                            child: InkWell(
+                                                              onTap: () async {
+                                                                if (controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
+                                                                  return;
+                                                                }
 
-                                                              controller.selectAnswer(optionIndex, questionsIndex);
+                                                                controller.selectAnswer(optionIndex, questionsIndex);
 
-                                                              controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                  ? null
-                                                                  : controller.selectedOptionIndex == optionIndex
-                                                                      ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                          ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
-                                                                          : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
-                                                                      : null;
+                                                                controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                    ? null
+                                                                    : controller.selectedOptionIndex == optionIndex
+                                                                        ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                            ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                            : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                                        : null;
 
-                                                              await Future.delayed(const Duration(milliseconds: 1300));
+                                                                await Future.delayed(const Duration(milliseconds: 1300));
 
-                                                              if (controller.pageController.page! < controller.examQuestionsList.length - 1) {
-                                                                controller.pageController.nextPage(
-                                                                  duration: const Duration(milliseconds: 500),
-                                                                  curve: Curves.easeInOut,
-                                                                );
-                                                              }
-                                                              if (controller.selectedOptionIndex.toString() == "0" && controller.selectedOptionIndex.toString() == "1") {
-                                                                controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
-                                                              }
-                                                              controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
+                                                                if (controller.pageController.page! < controller.examQuestionsList.length - 1) {
+                                                                  controller.pageController.nextPage(
+                                                                    duration: const Duration(milliseconds: 500),
+                                                                    curve: Curves.easeInOut,
+                                                                  );
+                                                                }
+                                                                if (controller.selectedOptionIndex.toString() == "0" && controller.selectedOptionIndex.toString() == "1") {
+                                                                  controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
+                                                                }
+                                                                controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
 
-                                                              if (questionsIndex == controller.examQuestionsList.length - 1) {
-                                                                controller.submitAnswer();
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              margin: const EdgeInsets.all(Dimensions.space8),
-                                                              padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
-                                                              height: Dimensions.space55,
-                                                              width: controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? MediaQuery.of(context).size.width * .65 : MediaQuery.of(context).size.width * .75,
-                                                              decoration: BoxDecoration(
-                                                                  color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                      ? MyColor.transparentColor
-                                                                      : controller.selectedOptionIndex == optionIndex
-                                                                          ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                              ? MyColor.rightAnswerbgColor
-                                                                              : MyColor.wrongAnsColor
-                                                                          : MyColor.transparentColor,
-                                                                  borderRadius: BorderRadius.circular(Dimensions.space8),
-                                                                  border: Border.all(color: MyColor.colorLightGrey)),
-                                                              child: Row(
-                                                                children: [
-                                                                  const SizedBox(width: Dimensions.space8),
-                                                                  Text(
-                                                                    controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString(),
-                                                                    style: regularMediumLarge.copyWith(
-                                                                        color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                            ? MyColor.textColor
-                                                                            : controller.selectedOptionIndex == optionIndex
-                                                                                ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                                    ? MyColor.colorWhite
-                                                                                    : MyColor.colorWhite
-                                                                                : MyColor.textColor),
-                                                                  ),
-                                                                  const Spacer(),
-                                                                  SizedBox(
-                                                                    height: Dimensions.space10,
-                                                                    child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox.shrink() : SvgPicture.asset(controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG, fit: BoxFit.cover),
-                                                                  )
-                                                                ],
+                                                                if (questionsIndex == controller.examQuestionsList.length - 1) {
+                                                                  controller.submitAnswer();
+                                                                }
+                                                              },
+                                                              child: Container(
+                                                                margin: const EdgeInsets.all(Dimensions.space8),
+                                                                padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
+                                                                decoration: BoxDecoration(
+                                                                    color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                        ? MyColor.transparentColor
+                                                                        : controller.selectedOptionIndex == optionIndex
+                                                                            ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                                ? MyColor.rightAnswerbgColor
+                                                                                : MyColor.wrongAnsColor
+                                                                            : MyColor.transparentColor,
+                                                                    borderRadius: BorderRadius.circular(Dimensions.space8),
+                                                                    border: Border.all(color: MyColor.colorLightGrey)),
+                                                                child: Row(
+                                                                  children: [
+                                                                    const SizedBox(width: Dimensions.space8),
+                                                                    Expanded(
+                                                                      child: Text(
+                                                                        controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString(),
+                                                                        style: regularMediumLarge.copyWith(
+                                                                            color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                                ? MyColor.textColor
+                                                                                : controller.selectedOptionIndex == optionIndex
+                                                                                    ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                                        ? MyColor.colorWhite
+                                                                                        : MyColor.colorWhite
+                                                                                    : MyColor.textColor),
+                                                                      ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height: Dimensions.space10,
+                                                                      child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox.shrink() : SvgPicture.asset(controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG, fit: BoxFit.cover),
+                                                                    )
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
-                                                          const Spacer(),
                                                           controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
                                                         ],
                                                       ),

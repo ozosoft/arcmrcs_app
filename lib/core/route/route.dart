@@ -14,7 +14,7 @@ import 'package:flutter_prime/view/screens/coin_history/coin_history_screen.dart
 import 'package:flutter_prime/view/screens/guess_the_word/category/guess_word_catagory_screen.dart';
 import 'package:flutter_prime/view/screens/guess_the_word/main_screen/guess_the_word_screen.dart';
 import 'package:flutter_prime/view/screens/guess_the_word/result/review/review_screen.dart';
-import 'package:flutter_prime/view/screens/guess_the_word/subCategory/guess_word_sub_categories_screen.dart';
+import 'package:flutter_prime/view/screens/guess_the_word/sub_category/guess_word_sub_categories_screen.dart';
 
 import 'package:flutter_prime/view/screens/coin_store/coin_store_webview/coin_store_webview_screen.dart';
 import 'package:flutter_prime/view/screens/coin_store/deposit_widget/deposit_screen.dart';
@@ -56,7 +56,7 @@ import '../../view/screens/bottom_nav_bar/bottom_navigation_bar_screen.dart';
 import '../../view/screens/exam_zone/exam_zone_screen.dart';
 import '../../view/screens/home_page/homepage-widgets/home-body-sections/exam_zone_section/exam_zone_homepage_category_screen.dart';
 import '../../view/screens/guess_the_word/result/guess_word_result_screen.dart';
-import '../../view/screens/home_page/homepage-widgets/home-body-sections/home_top_category_section/sub-categories/sub_categories_card_screen.dart';
+import '../../view/screens/all-categories/sub-categories/sub_categories_screen.dart';
 import '../../view/screens/intro_section/onboard_intro_screen.dart';
 import '../../view/screens/leader_board/leader_board_screen.dart';
 import '../../view/screens/general_quiz/quiz-result/quiz_result_screen.dart';
@@ -74,7 +74,7 @@ class RouteHelper {
   static const String resetPassword = '/reset_password_screen';
   static const String bottomNavBarScreen = '/bottom_navigation_screen';
   static const String allCategories = '/all_categories_screen';
-  static const String subCategories = '/top_categories_screen';
+  static const String subCategories = '/sub_categories_screen';
   static const String quizQuestionsScreen = '/quiz_questions_screen';
   static const String quizResultScreen = '/quiz_result_screen';
   static const String profileCompleteScreen = "/profile_complete_screen";

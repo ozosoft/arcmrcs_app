@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:get/get.dart';
 
 class MensFashionController extends GetxController{

@@ -14,7 +14,7 @@ import 'package:flutter_prime/view/components/app-bar/custom_appbar.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/components/no_data.dart';
-import 'package:flutter_prime/view/screens/quiz_contest/quiz_contest_life_lines.dart';
+import 'package:flutter_prime/view/screens/quiz_contest/question_screen/quiz_contest_life_lines.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 

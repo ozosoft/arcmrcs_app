@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/data/model/quiz_questions_model/quiz_questions_model.dart';
 import 'package:flutter_prime/data/model/submit_answer/submit_answer_model.dart';
 import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
@@ -17,6 +18,7 @@ class QuizQuestionsController extends GetxController {
 
   bool showQuestions = false;
   bool audienceVote = false;
+  bool showaudienceVote = false;
   bool tapAnswer = false;
   bool flipQuistions = false;
   bool restartTimer = false;
@@ -44,6 +46,7 @@ class QuizQuestionsController extends GetxController {
 
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
+  PageController reviewController = PageController();
   int currentPage = 0;
 
   changePage(int page) {
@@ -78,7 +81,7 @@ class QuizQuestionsController extends GetxController {
         timerDuration = int.parse(quizquestions.data!.perQuestionAnswerDuration.toString());
         update();
 
-        successmessage = quizquestions.message!.success.toString()??"";
+        successmessage = quizquestions.message!.success.toString() ?? "";
 
         List<Option>? optionslist = quizquestions.data!.questions![0].options;
 
@@ -92,8 +95,6 @@ class QuizQuestionsController extends GetxController {
     } else {
       CustomSnackBar.error(errorList: [model.message]);
     }
-
-    print('---------------------${model.statusCode}');
 
     loading = false;
     update();
@@ -126,9 +127,9 @@ class QuizQuestionsController extends GetxController {
     questionId = questionsList[index].selectedOptionId.toString();
     thisQuestionId = optionsList[optionIndex].id.toString();
 
-    print('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
+    // print('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
 
-    print('questionId=========================================================================: ${questionId}');
+    // print('questionId=========================================================================: ${questionId}');
 
     if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
       return true;
@@ -141,6 +142,10 @@ class QuizQuestionsController extends GetxController {
   audienceVotes(int questionIndex) {
     audienceVoteIndex = questionIndex;
     audienceVote = !audienceVote;
+    showaudienceVote = !showaudienceVote;
+    if (audienceVote == true) {
+      audiencevotes = "1";
+    }
     update();
   }
 
@@ -148,6 +153,9 @@ class QuizQuestionsController extends GetxController {
   flipQuiston(int questionIndex) {
     flipQuestionsIndex = flipQuestionsIndex;
     flipQuistions = !flipQuistions;
+    if (flipQuistions == true) {
+      flipQuistion = "1";
+    }
     update();
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
@@ -156,31 +164,36 @@ class QuizQuestionsController extends GetxController {
   restartCountDownTimer(int questionIndex) {
     countDownTimerIndex = countDownTimerIndex;
     restartTimer = !restartTimer;
+    if (restartTimer == true) {
+      reset_timer = "1";
+    }
     update();
   }
 
   bool fiftyFifty = false;
   int fiftyFiftyIndex = -1;
+
   makeFiftyFifty(int index) {
     List<Option> allOptions = questionsList[index].options!;
     var random = Random();
-    Option correctAnswers = allOptions!.firstWhere((element) => element.isAnswer == '1');
+    Option correctAnswers = allOptions.firstWhere((element) => element.isAnswer == '1');
     allOptions.remove(correctAnswers);
     Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
     List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);
-    print('come here: ${optionsList.length}');
-    print(optionsList.length);
+
     questionsList[index].options!.clear();
     questionsList[index].options!.addAll(optionsToDisplay);
     update();
 
     fiftyFiftyIndex = fiftyFiftyIndex;
     fiftyFifty = !fiftyFifty;
+    if (fiftyFifty == true) {
+      fifty_fifty = "1";
+    }
     update();
   }
 
   void setCurrentOption(int questionsIndex) {
-    // optionsList.clear();
     if (questionsList[questionsIndex].options != null) {
       optionsList = questionsList[questionsIndex].options!;
     }
@@ -202,8 +215,6 @@ class QuizQuestionsController extends GetxController {
     submitLoading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
-
     Map<String, dynamic> params = {};
 
     for (int i = 0; i < questionsList.length; i++) {
@@ -214,7 +225,6 @@ class QuizQuestionsController extends GetxController {
       print('quize id: ${quizeId}');
       params['option_$quizeId'] = selectedOptionId;
       print("option_$quizeId");
-
     }
     print(params['option_']);
     params['quizInfo_id'] = quizInfoID.toString();
@@ -228,7 +238,7 @@ class QuizQuestionsController extends GetxController {
     if (submitModel.statusCode == 200) {
       SubmitAnswerModel model = SubmitAnswerModel.fromJson(jsonDecode(submitModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        appreciation = model.message!.success.toString();
+        appreciation = model.message!.success!.first;
         totalQuestions = model.data!.totalQuestion.toString();
         correctAnswer = model.data!.correctAnswer.toString();
         wrongAnswer = model.data!.wrongAnswer.toString();
@@ -238,9 +248,11 @@ class QuizQuestionsController extends GetxController {
         if (model.data?.nextLevelQuizInfo != null) {
           nextlevelQuizInfoId = model.data!.nextLevelQuizInfo?.id! ?? 0;
           nextlevelQuizInfoTitle = model.data!.nextLevelQuizInfo!.title ?? "";
-        } else {
-          return;
         }
+        countDownController.pause();
+        Get.toNamed(RouteHelper.quizResultScreen)!.whenComplete(() {
+          Get.back();
+        });
 
         // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
@@ -257,11 +269,39 @@ class QuizQuestionsController extends GetxController {
     update();
   }
 
-  resetallLifelines() {
-    showQuestions = false;
+  Future<void> resetAllDataController() async {
+    // Clear data and reset controllers
+    questionsList.clear();
+    optionsList.clear();
+    selectedQuestionsId.clear();
+    selectedAnswerId.clear();
+    currentPage = 0;
+    selectedOptionIndex = -1;
+    audienceVoteIndex = -1;
+    flipQuestionsIndex = -1;
+    countDownTimerIndex = -1;
+    fiftyFiftyIndex = -1;
     audienceVote = false;
-    tapAnswer = false;
+    showQuestions = false;
     flipQuistions = false;
+    restartTimer = false;
+    successmessage = "";
+    nextlevelQuizInfoId = 0;
+    nextlevelQuizInfoTitle = "";
+    quizInfoID = 0;
+
+    // Reset timers or controllers if needed
+    countDownController.restart();
+    if (pageController.initialPage != 0) {
+      pageController.jumpToPage(0);
+    }
+
     update();
+  }
+
+  @override
+  void onClose() {
+    print("called onclose qc");
+    super.onClose();
   }
 }

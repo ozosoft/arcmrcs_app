@@ -157,7 +157,6 @@ class QuizInfo {
 
     factory QuizInfo.fromJson(Map<String, dynamic> json)  {
       
-      print("this is sub id"+"${json["sub_category_id"]}");
         return   QuizInfo(
         id: json["id"],
         typeId: json["type_id"],

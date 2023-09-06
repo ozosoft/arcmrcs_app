@@ -36,6 +36,7 @@ class DailyQuizQuestionsController extends GetxController {
   int currentQuestionIndex = 0;
 
   bool loading = true;
+  bool alreadyPlayed = false;
 
   String? quizInfoID;
   String? title;
@@ -55,7 +56,7 @@ class DailyQuizQuestionsController extends GetxController {
 
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
-  PageController reviewPageController = PageController();
+   PageController reviewPageController = PageController();
   int currentPage = 0;
 
   changePage(int page) {
@@ -90,14 +91,11 @@ class DailyQuizQuestionsController extends GetxController {
           examQuestionsList.addAll(examQuestion);
         }
 
-        //   List<Option>? optionslist = model.data!.questions![1].options;
-
-        // if (optionslist != null && optionslist.isNotEmpty) {
-        //   optionsList.addAll(optionslist);
-        // }
-
         // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
+        if (model.message!.error!.first.contains("already played")) {
+          alreadyPlayed = true;
+        }
         CustomSnackBar.error(errorList: model.message!.error!);
 
         //need to cheak error msg
@@ -151,10 +149,6 @@ class DailyQuizQuestionsController extends GetxController {
   isValidAnswer(int index, int optionIndex) {
     questionId = examQuestionsList[index].selectedOptionId.toString();
     thisQuestionId = optionsList[optionIndex].id.toString();
-
-    print('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
-
-    print('questionId=========================================================================: ${questionId}');
 
     if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
       return true;
@@ -219,8 +213,6 @@ class DailyQuizQuestionsController extends GetxController {
     submitLoading = true;
     update();
 
-    print("submiteeddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd" + selectedQuestionsId.toString());
-
     Map<String, dynamic> params = {};
 
     for (int i = 0; i < examQuestionsList.length; i++) {
@@ -249,8 +241,12 @@ class DailyQuizQuestionsController extends GetxController {
         wrongAnswer = model.data!.wrongAnswer.toString();
         totalCoin = model.data!.user!.coins.toString();
         winningCoin = model.data!.winingCoin.toString();
-        Get.toNamed(RouteHelper.dailyQuizresultScreen, arguments: MyStrings.quizResult);
-        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        countDownController.pause();
+        Get.toNamed(RouteHelper.dailyQuizresultScreen, arguments: MyStrings.quizResult)!.whenComplete(() {
+          Get.back();
+        });
+
+    
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 

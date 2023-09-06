@@ -333,7 +333,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                               child: MyImageWidget(
                                                 boxFit: BoxFit.contain,
                                                 height: Get.width / 2,
-                                                imageUrl: "${UrlContainer.battleQuestionImagePath}/${currentQuestion.image}",
+                                                imageUrl: "${UrlContainer.questionImagePath}/${currentQuestion.image}",
                                               ),
                                             ),
                                           ],

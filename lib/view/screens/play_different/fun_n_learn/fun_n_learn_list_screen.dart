@@ -42,7 +42,7 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getFunAndLearnDescriprion(subCategoryId,mainCategoryId);
+      controller.getFunAndLearnDescriprion(subCategoryId, mainCategoryId);
     });
   }
 
@@ -56,7 +56,7 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
           title: title,
         ),
         body: controller.loader
-            ? CustomLoader()
+            ? const CustomLoader()
             : SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(

@@ -16,6 +16,7 @@ import 'package:flutter_prime/view/screens/guess_the_word/widget/question_button
 import 'package:get/get.dart';
 
 import '../../../components/app-bar/custom_category_appBar.dart';
+import '../../../components/image_widget/my_image_widget.dart';
 import '../widget/answer_field.dart';
 
 class GuessThewordScreen extends StatefulWidget {
@@ -47,7 +48,6 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<GuessThewordController>(builder: (controller) {
       return Scaffold(
-          backgroundColor: MyColor.scaffoldBackgroundColor,
           appBar: const CustomCategoryAppBar(
             title: MyStrings.guessTheWord,
           ),
@@ -65,7 +65,8 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                         });
                       },
                       itemBuilder: (context, questionsIndex) {
-                        return SingleChildScrollView(   physics: const BouncingScrollPhysics(),
+                        return SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
                           padding: const EdgeInsets.all(Dimensions.space20),
                           child: Stack(
                             children: [
@@ -78,48 +79,24 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        LevelCardButton(
-                                            text: ' ${controller.gessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins}',
-                                            hasIcon: false,
-                                            hasImage: false),
-                                        LevelCardButton(
-                                            text: " ${questionsIndex + 1}/${controller.gessThewordQuesstionList.length}",
-                                            hasIcon: false,
-                                            hasImage: false),
+                                        LevelCardButton(text: ' ${controller.gessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins}', hasIcon: false, hasImage: false),
+                                        LevelCardButton(text: " ${questionsIndex + 1}/${controller.gessThewordQuesstionList.length}", hasIcon: false, hasImage: false),
                                       ],
                                     ),
                                     const SizedBox(height: Dimensions.space20),
                                     // note: use  preloader or something like this
                                     controller.gessThewordQuesstionList[questionsIndex].image != null
                                         ? Container(
+                                            margin: const EdgeInsets.only(top: Dimensions.space20, bottom: Dimensions.space20),
                                             width: double.infinity,
-                                            padding:
-                                                const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(16),
-                                            ),
-                                            child: CachedNetworkImage(
-                                              imageUrl: '${controller.questionImgPath}/${controller.gessThewordQuesstionList[questionsIndex].image}',
-                                              fit: BoxFit.cover,
-                                              height: 220,
-                                              placeholder: (context, url) => const CustomLoader(isPagination: true),
-                                              imageBuilder: (context, imageProvider) {
-                                                return Container(
-                                                    decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(14),
-                                                  image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ));
-                                              },
+                                            height: context.width / 2.5,
+                                            child: MyImageWidget(
+                                              boxFit: BoxFit.contain,
+                                              imageUrl: "${controller.questionImgPath}/${controller.gessThewordQuesstionList[questionsIndex].image}",
                                             ),
                                           )
                                         : const SizedBox(height: Dimensions.space20),
-                                    Container(
-                                        padding: const EdgeInsets.only(top: Dimensions.space20),
-                                        child: Text(controller.gessThewordQuesstionList[questionsIndex].question.toString(),
-                                            style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                                    Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.gessThewordQuesstionList[questionsIndex].question.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                     const SizedBox(height: Dimensions.space40),
                                     AnswerField(length: controller.gessThewordQuesstionList[questionsIndex].options![0].option!.length),
 
@@ -181,9 +158,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                   autoStart: true,
                                   onComplete: () {
                                     controller.addAns(questionsIndex, controller.tempAns.join().toLowerCase().toString());
-                                    questionsIndex == controller.gessThewordQuesstionList.length - 1
-                                        ? controller.submitGuessTheWordAnswers()
-                                        : controller.nextPage();
+                                    questionsIndex == controller.gessThewordQuesstionList.length - 1 ? controller.submitGuessTheWordAnswers() : controller.nextPage();
                                   },
                                 ),
                               ),

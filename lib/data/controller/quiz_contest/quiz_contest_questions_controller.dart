@@ -257,7 +257,7 @@ class QuizContestQuestionsController extends GetxController {
           winningCoin,
         ])!
             .whenComplete(() {
-          // Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+          Get.offAllNamed(RouteHelper.bottomNavBarScreen);
         });
 
         // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);

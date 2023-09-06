@@ -12,8 +12,9 @@ class NoDataWidget extends StatelessWidget {
   final String? messages;
   final Widget? child;
   final bool showHomeButton;
+  final bool showBack;
 
-  const NoDataWidget({Key? key, this.margin = 4, this.messages, this.child, this.showHomeButton = true}) : super(key: key);
+  const NoDataWidget({Key? key, this.margin = 4, this.messages, this.child, this.showHomeButton = true, this.showBack = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,11 @@ class NoDataWidget extends StatelessWidget {
           if (showHomeButton == true)
             TextButton(
               onPressed: () {
-               Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+                if (showBack == true) {
+                  Get.back();
+                } else {
+                  Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+                }
               },
               style: TextButton.styleFrom(
                 splashFactory: InkSplash.splashFactory, // Use the default splash factory
@@ -43,7 +48,7 @@ class NoDataWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  " ${MyStrings.home} ",
+                  " ${showBack == true ? MyStrings.back : MyStrings.home} ",
                   style: regularLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.bold),
                 ),
               ),

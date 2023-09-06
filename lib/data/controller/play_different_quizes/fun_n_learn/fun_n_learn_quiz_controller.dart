@@ -148,10 +148,6 @@ class FunNlearnQuizController extends GetxController {
     questionId = examQuestionsList[index].selectedOptionId.toString();
     thisQuestionId = optionsList[optionIndex].id.toString();
 
-    print('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
-
-    print('questionId=========================================================================: ${questionId}');
-
     if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
       return true;
     } else {

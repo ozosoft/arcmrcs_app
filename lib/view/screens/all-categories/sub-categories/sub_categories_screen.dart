@@ -7,15 +7,17 @@ import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/category-card/categories_card.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
-import '../../../../../../components/app-bar/custom_category_appBar.dart';
+import '../../../../core/route/route.dart';
+import '../../../components/app-bar/custom_category_appBar.dart';
+import '../widgets/all_category_list_card_widget.dart';
+import 'widgets/sub_category_list_card_widget.dart';
 
 class SubCategoriesCardScreen extends StatefulWidget {
   final String title;
   const SubCategoriesCardScreen({super.key, required this.title});
 
   @override
-  State<SubCategoriesCardScreen> createState() =>
-      _SubCategoriesCardScreenState();
+  State<SubCategoriesCardScreen> createState() => _SubCategoriesCardScreenState();
 }
 
 class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
@@ -27,8 +29,7 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(SubCategoriesRepo(apiClient: Get.find()));
     Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
-    SubCategoriesController controller =
-        Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
+    SubCategoriesController controller = Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
 
     title = Get.arguments[0] as String;
     subCategoryId = Get.arguments[1];
@@ -46,12 +47,12 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<SubCategoriesController>(
       builder: (controller) => Scaffold(
-              appBar: CustomCategoryAppBar(
-                title: title,
-              ),
-              body: controller.loader
-          ? const CustomLoader()
-          :  SingleChildScrollView(
+        appBar: CustomCategoryAppBar(
+          title: title,
+        ),
+        body: controller.loader
+            ? const CustomLoader()
+            : SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,36 +63,28 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
                         shrinkWrap: true,
                         itemCount: controller.subCategoriesList.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
+                          var categoryItem = controller.subCategoriesList[index];
+                          return SubCategoryListTileCardWidget(
+                            controller: controller,
+                            categoryData: categoryItem,
                             onTap: () {
-                              String title = controller
-                                  .subCategoriesList[index].name
-                                  .toString();
-
+                              
                               controller.changeExpandIndex(index);
+
+                            
                             },
-                            child: CategoriesCard(
-                              index: index,
-                              image: UrlContainer.subCategoriesImage +
-                                  controller.subCategoriesList[index].image
-                                      .toString(),
-                              title: controller.subCategoriesList[index].name
-                                  .toString(),
-                              questions: controller
-                                  .subCategoriesList[index].questionsCount
-                                  .toString(),
-                              expansionVisible: true,
-                              fromViewAll: false,
-                              isExpand: index == controller.expandIndex,
-                              levels: controller.itemCount.toString(),
-                            ),
+                            title: categoryItem.name.toString(),
+                            image: UrlContainer.subCategoriesImage + categoryItem.image.toString(),
+                            fromViewAll: true,
+                            subCategoryId: subCategoryId,
+                            isExpand: index == controller.expandIndex,
+                            index: index,
                           );
-                          
                         }),
                   ],
                 ),
               ),
-            ),
+      ),
     );
   }
 }

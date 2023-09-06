@@ -2,25 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/controller/quiz_questions/quiz_questions_controller.dart';
-import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_questions_controller.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
-class LifeLinesWidget extends StatefulWidget {
+import '../../../components/snack_bar/show_custom_snackbar.dart';
+
+class QuizContestLifeLinesWidget extends StatefulWidget {
   final int questionIndex;
-  const LifeLinesWidget({super.key, required this.questionIndex});
+  const QuizContestLifeLinesWidget({super.key, required this.questionIndex});
 
   @override
-  State<LifeLinesWidget> createState() => _LifeLinesWidgetState();
+  State<QuizContestLifeLinesWidget> createState() => _QuizContestLifeLinesWidgetState();
 }
 
-class _LifeLinesWidgetState extends State<LifeLinesWidget> {
+class _QuizContestLifeLinesWidgetState extends State<QuizContestLifeLinesWidget> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<QuizQuestionsController>(
+    return GetBuilder<QuizContestQuestionsController>(
       builder: (controller) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
