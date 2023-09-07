@@ -47,7 +47,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "dev.vlab.quiz"
+        applicationId "dev.vlab.flutter_prime"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
@@ -67,4 +67,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
 }

@@ -10,39 +10,32 @@ import 'package:flutter_prime/data/model/global/response_model/response_model.da
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
-
 class LoginRepo {
-
   ApiClient apiClient;
 
-  LoginRepo({ required this.apiClient});
+  LoginRepo({required this.apiClient});
 
-  Future<ResponseModel> loginUser(String email,String password) async{
-
+  Future<ResponseModel> loginUser(String email, String password) async {
     Map<String, String> map = {'username': email, 'password': password};
     String url = '${UrlContainer.baseUrl}${UrlContainer.loginEndPoint}';
 
-    ResponseModel model=await apiClient.request(url, Method.postMethod, map,passHeader: false);
+    ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: false);
 
     return model;
   }
 
-
   Future<String> forgetPassword(String type, String value) async {
+    final map = modelToMap(value, type);
+    String url = '${UrlContainer.baseUrl}${UrlContainer.forgetPasswordEndPoint}';
+    final response = await apiClient.request(url, Method.postMethod, map, isOnlyAcceptType: true, passHeader: true);
 
-    final map        =  modelToMap(value, type);
-    String url       =  '${UrlContainer.baseUrl}${UrlContainer.forgetPasswordEndPoint}';
-    final response   =  await apiClient.request(url, Method.postMethod,map,isOnlyAcceptType: true,passHeader: true);
-
-    EmailVerificationModel model  =   EmailVerificationModel.fromJson(jsonDecode(response.responseJson));
+    EmailVerificationModel model = EmailVerificationModel.fromJson(jsonDecode(response.responseJson));
 
     if (model.status.toLowerCase() == "success") {
-
       apiClient.sharedPreferences.setString(SharedPreferenceHelper.userEmailKey, model.data?.email ?? '');
-      CustomSnackBar.success(successList:['${MyStrings.passwordResetEmailSentTo} ${model.data?.email ?? MyStrings.yourEmail}']);
-      return model.data?.email??'';
-    }
-    else {
+      CustomSnackBar.success(successList: ['${MyStrings.passwordResetEmailSentTo} ${model.data?.email ?? MyStrings.yourEmail}']);
+      return model.data?.email ?? '';
+    } else {
       CustomSnackBar.error(errorList: model.message!.error ?? [MyStrings.requestFail]);
       return '';
     }
@@ -54,13 +47,12 @@ class LoginRepo {
   }
 
   Future<EmailVerificationModel> verifyForgetPassCode(String code) async {
-
     String? email = apiClient.sharedPreferences.getString(SharedPreferenceHelper.userEmailKey) ?? '';
-    Map<String, String> map  = {'code': code, 'email': email};
+    Map<String, String> map = {'code': code, 'email': email};
 
-    String url  = '${UrlContainer.baseUrl}${UrlContainer.passwordVerifyEndPoint}';
+    String url = '${UrlContainer.baseUrl}${UrlContainer.passwordVerifyEndPoint}';
 
-    final response = await apiClient.request(url, Method.postMethod, map,passHeader: true,isOnlyAcceptType: true);
+    final response = await apiClient.request(url, Method.postMethod, map, passHeader: true, isOnlyAcceptType: true);
 
     EmailVerificationModel model = EmailVerificationModel.fromJson(jsonDecode(response.responseJson));
     if (model.status == 'success') {
@@ -72,9 +64,7 @@ class LoginRepo {
     }
   }
 
-  Future<ResponseModel> resetPassword(
-      String email, String password,String code) async {
-
+  Future<ResponseModel> resetPassword(String email, String password, String code) async {
     Map<String, String> map = {
       'token': code,
       'email': email,
@@ -84,18 +74,14 @@ class LoginRepo {
 
     String url = '${UrlContainer.baseUrl}${UrlContainer.resetPasswordEndPoint}';
 
-    ResponseModel responseModel = await apiClient.request(url, Method.postMethod, map,isOnlyAcceptType: true);
+    ResponseModel responseModel = await apiClient.request(url, Method.postMethod, map, isOnlyAcceptType: true);
 
     return responseModel;
 
     //final response = await http.post(url, body: map, headers: {"Accept": "application/json",});
-
-
   }
 
-
   Future<bool> sendUserToken() async {
-
     String deviceToken;
     if (apiClient.sharedPreferences.containsKey(SharedPreferenceHelper.fcmDeviceKey)) {
       deviceToken = apiClient.sharedPreferences.getString(SharedPreferenceHelper.fcmDeviceKey) ?? '';
@@ -107,11 +93,9 @@ class LoginRepo {
     bool success = false;
 
     if (deviceToken.isEmpty) {
-
       firebaseMessaging.getToken().then((fcmDeviceToken) async {
         success = await sendUpdatedToken(fcmDeviceToken ?? '');
       });
-
     } else {
       firebaseMessaging.onTokenRefresh.listen((fcmDeviceToken) async {
         if (deviceToken == fcmDeviceToken) {
@@ -128,9 +112,9 @@ class LoginRepo {
   Future<bool> sendUpdatedToken(String deviceToken) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.deviceTokenEndPoint}';
     Map<String, String> map = deviceTokenMap(deviceToken);
- var  data  =  await apiClient.request(url, Method.postMethod, map, passHeader: true);
+    var data = await apiClient.request(url, Method.postMethod, map, passHeader: true);
 
- print("FCCM KEY ${data.responseJson}");
+    print("FCCM KEY ${data.responseJson}");
     return true;
   }
 
@@ -139,4 +123,13 @@ class LoginRepo {
     return map;
   }
 
+  //MOBILE AUTH
+
+  //GET Countrry data
+
+  Future<dynamic> getCountryList() async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.countryEndPoint}';
+    ResponseModel model = await apiClient.request(url, Method.getMethod, null);
+    return model;
+  }
 }

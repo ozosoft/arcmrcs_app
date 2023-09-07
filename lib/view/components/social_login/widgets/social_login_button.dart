@@ -7,35 +7,42 @@ import 'package:flutter_svg/svg.dart';
 class SocialLoginButton extends StatelessWidget {
   final String title;
   final String image;
-  const SocialLoginButton({super.key, required this.title, required this.image});
+  final VoidCallback? ontap;
+  const SocialLoginButton({super.key, required this.title, required this.image, this.ontap});
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        margin: const EdgeInsets.all(Dimensions.space5),
-        decoration: BoxDecoration(
-          border: Border.all(color: MyColor.getTextFieldDisableBorder()),
-          borderRadius: BorderRadius.circular(6),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space7, vertical: Dimensions.space12),
-        child: Row(children: [
-          Padding(
-            padding: const EdgeInsets.only(right: Dimensions.space10),
-            child: SvgPicture.asset(
-              image,
-              height: Dimensions.space20,
-              width: Dimensions.space50,
+      child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
+        child: InkWell(
+          onTap: ontap,  borderRadius: BorderRadius.circular(6),
+          child: Container(
+          
+            decoration: BoxDecoration(
+              border: Border.all(color: MyColor.getTextFieldDisableBorder()),
+              borderRadius: BorderRadius.circular(6),
             ),
+            padding: const EdgeInsets.symmetric(horizontal: Dimensions.space7, vertical: Dimensions.space12),
+            child: Row(children: [
+              Padding(
+                padding: const EdgeInsets.only(right: Dimensions.space10),
+                child: SvgPicture.asset(
+                  image,
+                  height: Dimensions.space20,
+                  width: Dimensions.space50,
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  style: regularLarge.copyWith(fontSize: Dimensions.fontSmall),
+                ),
+              )
+            ]),
           ),
-          Expanded(
-            child: Text(
-              title,
-              overflow: TextOverflow.ellipsis,
-              style: regularLarge.copyWith(fontSize: Dimensions.fontSmall),
-            ),
-          )
-        ]),
+        ),
       ),
     );
   }

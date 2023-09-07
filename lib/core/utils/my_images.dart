@@ -28,6 +28,7 @@ class MyImages {
   static const String appLogoSVG = "assets/images/applogoSVG.svg";
   static const String onboard1SVG = "assets/images/onboard_1.svg";
   static const String personSVG = "assets/images/person.svg";
+  static const String phoneSVG = "assets/images/phoneSvg.svg";
   static const String lockSVG = "assets/images/lock.svg";
   static const String greenTik = "assets/images/green_Tik.svg";
   static const String loading = "assets/images/loading.svg";

@@ -2,6 +2,7 @@ import 'package:flutter_prime/view/screens/authentication/email_verification_pag
 import 'package:flutter_prime/view/screens/authentication/forget_password/resetPassword/reset_Password_Screen.dart';
 import 'package:flutter_prime/view/screens/authentication/forget_password/verification/verification_screen.dart';
 import 'package:flutter_prime/view/screens/authentication/login/login_screen.dart';
+import 'package:flutter_prime/view/screens/authentication/login/mobile_login_screen.dart';
 import 'package:flutter_prime/view/screens/authentication/profile_complete/profile_complete_screen.dart';
 
 import 'package:flutter_prime/view/screens/authentication/signUp/signUp_screen.dart';
@@ -68,6 +69,7 @@ class RouteHelper {
   static const String splashScreen = "/splash_screen";
   static const String onboardScreen = '/onboard_screen';
   static const String loginScreen = '/login_screen';
+  static const String mobileLoginScreen = '/mobile_login_screen';
   static const String signupScreen = '/signUp_screen';
   static const String forgetpasswordScreen = '/forget_password_screen';
   static const String verificationScreen = '/verification_screen';
@@ -135,6 +137,7 @@ class RouteHelper {
     GetPage(name: splashScreen, page: () => const SplashScreen()),
     GetPage(name: onboardScreen, page: () => const OnBoardIntroScreen()),
     GetPage(name: loginScreen, page: () => const LoginScreen()),
+    GetPage(name: mobileLoginScreen, page: () => const MobileLoginScreen()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
     GetPage(name: forgetpasswordScreen, page: () => const ForgetPasswordScreen()),
     GetPage(name: verificationScreen, page: () => const VerificationScreen()),

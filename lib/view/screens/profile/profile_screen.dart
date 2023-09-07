@@ -15,6 +15,7 @@ class ProfileScreen extends StatelessWidget {
         title: MyStrings.profile,
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Column(
           children: [
             ProfileTopSection(),

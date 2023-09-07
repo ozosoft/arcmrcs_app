@@ -69,7 +69,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                 ],
               ),
             ),
-            const SocialLoginSection(),
+            SocialLoginSection(loginController: controller,),
             const CustomDivider(space: Dimensions.space10),
             Form(
               key: formKey,

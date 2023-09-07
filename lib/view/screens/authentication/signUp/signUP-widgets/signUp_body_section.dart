@@ -66,7 +66,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
               MyStrings.pleaseEnterDetailstoSignUp.tr,
               style: regularLarge.copyWith(color: MyColor.authScreenTextColor, fontSize: Dimensions.space15),
             ),
-            const SocialLoginSection(),
+             SocialLoginSection(),
             const CustomDivider(
               space: Dimensions.space10,
             ),

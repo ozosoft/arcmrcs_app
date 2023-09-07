@@ -36,7 +36,7 @@ class MyStrings {
   static const String yourGameWillStartSoon = "The Game Will Begin In";
   static const String sorryRoomISFull = "Sorry! Room Is Full";
   static const String youNeedtoScoreLong = "You need to score {point}% marks to win.";
-  static const String  youNeedtoScoreSort = "Need {point}% marks to win";
+  static const String youNeedtoScoreSort = "Need {point}% marks to win";
   static const String thisContestIsNotAvailableRightNow = 'This Contest Is Not Available Right Now';
   static const String reviewAnswer = "Review Answer";
   static const String currectAnswer = "Currect Answer";
@@ -76,9 +76,12 @@ class MyStrings {
   static const String iAgreewithrules = "I agree with all exam rules";
   static const String forgotPassword = "Forgot Password?";
   static const String signIn = "Sign In";
+  static const String sendOTP = "Send OTP";
+  static const String signInByOtp = "Sign In by OTP";
   static const String win = "WIN";
   static const String loss = "LOSS";
   static const String lifeLineAlreadyUsed = "This Life Line Already Used!";
+  static const String plusText = "+";
 
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
@@ -337,7 +340,10 @@ class MyStrings {
   static const String somethingWentWrong = 'Something went wrong';
   static const String invalidAmount = 'Invalid amount';
   static const String welcomeBack = 'Welcome back';
+  static const String hiThere = 'Hi! There';
   static const String pleaseEnterDetails = 'Please enter your details to sign in.';
+  static const String pleaseEnterPhone = 'Please enter your phone number to sign in';
+  static const String pleaseEnterOTP = 'Please enter your OTP to sign in';
   static const String pleaseEnterDetailstoSignUp = 'Please enter your details to Create Account.';
   static const String enterEmailAndPassword = 'Enter your email account to reset password';
 
@@ -345,7 +351,10 @@ class MyStrings {
   static const String enterYourUsername = 'Enter your username';
   static const String enterYourEmail = 'Enter your email';
   static const String enterYourPhoneNumber = "Enter your phone number";
+  static const String enterPhoneNumber = "Enter phone number";
+  static const String enterPhoneNumber000 = "000-000-000";
   static const String confirmYourPassword = 'Confirm your password';
+  static const String confirm = 'Confirm';
   static const String noCodeReceive = "Didn't receive the code?";
   static const String smsVerificationMsg = "We've sent you an access code to your phone number for SMS verification";
   static const String selectACountry = "Select a country";

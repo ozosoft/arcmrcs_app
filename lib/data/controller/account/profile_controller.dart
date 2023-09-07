@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
+import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -51,6 +52,8 @@ class ProfileController extends GetxController {
   String avatar = "";
   String email = "";
 
+  ApiClient get apiClient => profileRepo.apiClient;
+  
   loadProfileInfo() async {
     isLoading = true;
     update();
@@ -65,6 +68,9 @@ class ProfileController extends GetxController {
         score = model.data!.user!.score!;
         avatar = model.data!.user!.avatar!;
         email = model.data!.user!.email!;
+
+        //save User Data
+        profileRepo.apiClient.setUserData(model.data!.user!.toJson());
       } else {
         isLoading = false;
         update();

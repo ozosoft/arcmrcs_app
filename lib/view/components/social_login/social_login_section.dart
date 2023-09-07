@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
+import 'package:flutter_prime/data/controller/auth/login_controller.dart';
 import 'package:flutter_prime/view/components/social_login/widgets/social_login_button.dart';
 
 import 'package:get/get.dart';
 
 class SocialLoginSection extends StatelessWidget {
-  const SocialLoginSection({super.key});
+  final LoginController? loginController;
+  const SocialLoginSection({super.key, this.loginController});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class SocialLoginSection extends StatelessWidget {
         const SizedBox(
           height: Dimensions.space20,
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(Dimensions.space1),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -26,10 +29,16 @@ class SocialLoginSection extends StatelessWidget {
               SocialLoginButton(
                 title: MyStrings.continueWithGmail,
                 image: MyImages.google,
+                ontap: () async {
+                  await loginController!.signInWithGoogle();
+                },
               ),
               SocialLoginButton(
                 title: MyStrings.continueWithPhone,
                 image: MyImages.telephone,
+                ontap: () {
+                  Get.toNamed(RouteHelper.mobileLoginScreen);
+                },
               ),
             ],
           ),

@@ -26,7 +26,8 @@ dependencies:
   dotted_border: ^2.0.0+2
   file_picker: ^5.2.4
   firebase_analytics: ^10.4.4
-  firebase_core: ^2.15.0
+  firebase_auth: ^4.9.0
+  firebase_core: ^2.15.1
   firebase_core_platform_interface: ^4.8.0
   firebase_messaging: ^14.6.5
   flutter:
@@ -39,6 +40,7 @@ dependencies:
   flutter_widget_from_html: ^0.10.0
   gallery_saver: ^2.3.2
   get: ^4.6.5
+  google_sign_in: ^6.1.5
   http: ^0.13.4
   image_gallery_saver: ^2.0.3
   image_picker: ^0.8.6+1

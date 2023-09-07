@@ -92,6 +92,7 @@ class UrlContainer {
 
   static const String changePasswordEndPoint = 'change-password';
   static const String countryEndPoint = 'get-countries';
+  static const String countryFlagImageLink = 'https://flagpedia.net/data/flags/h24/{countryCode}.webp';
 
   static const String deviceTokenEndPoint = 'get/device/token';
   static const String languageUrl = 'language/';

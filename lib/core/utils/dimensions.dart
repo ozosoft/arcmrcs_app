@@ -43,6 +43,7 @@ class Dimensions {
   static const double space20  = 20;
   static const double space18  = 18;
   static const double space11  = 11;
+  static const double space24  = 24;
   static const double space25  = 25;
   static const double space27  = 27;
   static const double space30  = 30;
