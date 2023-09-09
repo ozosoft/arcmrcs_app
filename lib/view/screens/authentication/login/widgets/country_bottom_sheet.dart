@@ -25,12 +25,11 @@ class CountryBottomSheet {
               if (query.isEmpty) {
                 controller.filteredCountries = controller.countryList;
               } else {
-                controller.filteredCountries = controller.filteredCountries.where((country) => country.country!.toLowerCase().contains(query.toLowerCase())).toList();
+                setState(() {
+                  controller.filteredCountries = controller.countryList.where((country) => country.country!.toLowerCase().contains(query.toLowerCase())).toList();
+                });
+                // controller.filteredCountries = controller.filteredCountries.where((country) => country.country!.toLowerCase().contains(query.toLowerCase())).toList();
               }
-
-              setState(() {
-                controller.filteredCountries = controller.countryList.where((country) => country.country!.toLowerCase().contains(query.toLowerCase())).toList();
-              });
             }
 
             return Container(

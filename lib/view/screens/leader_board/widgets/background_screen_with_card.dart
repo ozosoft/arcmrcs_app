@@ -11,6 +11,7 @@ import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../core/utils/my_color.dart';
+import '../../../components/image_widget/my_image_widget.dart';
 import 'ranking_tabs.dart';
 
 class BackGroundWithRankCard extends StatefulWidget {
@@ -21,11 +22,8 @@ class BackGroundWithRankCard extends StatefulWidget {
 }
 
 class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with SingleTickerProviderStateMixin {
-
-
   @override
   void initState() {
-
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LeaderBoardRepo(apiClient: Get.find()));
     LeaderBoardController controller = Get.put(LeaderBoardController(leaderBoardRepo: Get.find()));
@@ -39,99 +37,138 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
   @override
   Widget build(BuildContext context) {
     Orientation orientation = MediaQuery.of(context).orientation;
-    Size size = MediaQuery.of(context).size;
+
     return GetBuilder<LeaderBoardController>(
       builder: (controller) => Column(
         children: [
-
           const Padding(
             padding: EdgeInsets.all(Dimensions.space10),
-            child: SizedBox(
-              child: RankingTabBar(),
-            ),
+            child: RankingTabBar(),
           ),
 
-          const SizedBox(height: Dimensions.space15),
+          // const SizedBox(height: Dimensions.space15),
 
-          SvgPicture.asset(
-            MyImages.leaderBoardRankSVG,
-            width: orientation != Orientation.portrait ? size.width * .5 : size.width * .7,
-          ),
-          const SizedBox(height: Dimensions.space20),
-          controller.isLoading
-              ? const CustomLoader(isPagination: true)
-              : Container(
-                  margin: const EdgeInsets.only(left: Dimensions.space20, right: Dimensions.space20),
-            padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),
-            decoration: const BoxDecoration(borderRadius: BorderRadius.only(topLeft: Radius.circular(Dimensions.space20), topRight: Radius.circular(Dimensions.space20)), color: MyColor.colorWhite),
-                  child: ListView.separated(
-                      separatorBuilder: (context, index) {
-                      return  const Divider(color:MyColor.greyTextColor,);
-                      },
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: controller.leaderBoardlist.length - 3 >= 0 ? controller.leaderBoardlist.length - 3 : 0,
-                itemBuilder: (BuildContext context, int index) {
-                  final item = controller.leaderBoardlist[index + 3];
-                        int ranking = index + 4;
-                        return Padding(
-                        padding: const EdgeInsets.all(Dimensions.space12),
-                        child: Row(
-                          children: [
-                            item.avatar.toString() != "null"
-                                ? Container(
-                                    
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: MyColor.leaderBoardTabBar,
-                                    ),
-                                    child: Container(
-                                      margin: EdgeInsets.all(orientation != Orientation.portrait ? Dimensions.space5 : Dimensions.space5),
-                                      decoration: BoxDecoration(color: MyColor.leaderBoardTabBar, borderRadius: BorderRadius.circular(Dimensions.space30), image: DecorationImage(image: NetworkImage(UrlContainer.leaderboardProfileImage + item.avatar.toString()), fit: BoxFit.cover)),
-                                      height: orientation != Orientation.portrait ? Dimensions.space30 : Dimensions.space50,
-                                      width: orientation != Orientation.portrait ? Dimensions.space30 : Dimensions.space50,
-                                    ),
-                                  )
-                                : Image.asset(
-                                    MyImages.defaultAvatar,
-                                    height: Dimensions.space30,
+          Stack(
+            children: [
+              Container(
+                alignment: Alignment.topCenter,
+                child: SvgPicture.asset(
+                  MyImages.leaderBoardRankSVG,
+                  // width: context.width / 1.3,
+                  height: context.width / 3.5,
+                  // width: orientation != Orientation.portrait ? size.width * .5 : size.width * .7,
+                ),
+              ),
+              controller.isLoading
+                  ? Padding(
+                      padding: EdgeInsets.only(
+                        top: context.width / 4.05,
+                      ),
+                      child: const CustomLoader(isPagination: true),
+                    )
+                  : Container(
+                      alignment: Alignment.topCenter,
+                      margin: EdgeInsets.only(
+                        left: Dimensions.space20,
+                        right: Dimensions.space20,
+                        top: context.width / 4.05,
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space20),
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(Dimensions.space20),
+                          topRight: Radius.circular(Dimensions.space20),
+                        ),
+                        color: MyColor.colorWhite,
+                      ),
+                      child: ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return const Divider(
+                              color: MyColor.transparentColor,
+                            );
+                          },
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: controller.leaderBoardlist.length - 3 >= 0 ? controller.leaderBoardlist.length - 3 : 0,
+                          itemBuilder: (BuildContext context, int index) {
+                            final item = controller.leaderBoardlist[index + 3];
+                            int ranking = index + 4;
+                            return Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8.0),
+                                color: MyColor.colorWhite,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: MyColor.colorBlack.withOpacity(0.10),
+                                    offset: const Offset(0.0, 8.0),
+                                    blurRadius: 60.0,
                                   ),
-                            const SizedBox(
-                              width: Dimensions.space10,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  item.username.toString(),
-                                  style: semiBoldMediumLarge,
-                                ),
-                                const SizedBox(height: Dimensions.space5),
-                                Row(
+                                ],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(Dimensions.space12),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    // SvgPicture.asset(MyImages().flagImages[index]),
-                                     
+                                    item.avatar.toString() != "null"
+                                        ? Container(
+                                            margin: EdgeInsets.all(
+                                              orientation != Orientation.portrait ? Dimensions.space10 : Dimensions.space8,
+                                            ),
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                                            width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                                            child: MyImageWidget(radius: Dimensions.space100, imageUrl: UrlContainer.leaderboardProfileImage + item.avatar.toString()),
+                                          )
+                                        : Container(
+                                            margin: EdgeInsets.all(
+                                              orientation != Orientation.portrait ? Dimensions.space10 : Dimensions.space8,
+                                            ),
+                                            decoration: const BoxDecoration(
+                                              shape: BoxShape.circle,
+                                            ),
+                                            height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                                            width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                                            child: Image.asset(MyImages.defaultAvatar),
+                                          ),
                                     const SizedBox(
-                                      width: Dimensions.space8,
+                                      width: Dimensions.space10,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            item.fullName.toString().isEmpty ? item.username : item.fullName.toString(),
+                                            style: semiBoldMediumLarge,
+                                          ),
+                                          const SizedBox(height: Dimensions.space5),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                "${item.score} ${MyStrings.points}",
+                                                style: semiBoldLarge.copyWith(color: MyColor.textColor),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                     Text(
-                                      item.score.toString() + MyStrings.points,
-                                      style: semiBoldLarge.copyWith(color: MyColor.textColor),
-                                    ),
-                                    
-
-                                     
+                                      ' $ranking',
+                                      style: semiBoldOverLarge.copyWith(color: MyColor.greyTextColor.withOpacity(0.6), fontSize: Dimensions.fontOverLarge30),
+                                    )
                                   ],
-
                                 ),
-                              ],
                               ),
-                             const Spacer(),
-                               Text(' $ranking',style: semiBoldOverLarge.copyWith(color: MyColor.greyTextColor,),)
-                          ],
-                        ),
-                        );
-                }),
+                            );
+                          }),
+                    ),
+            ],
           ),
         ],
       ),

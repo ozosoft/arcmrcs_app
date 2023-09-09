@@ -38,8 +38,6 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    Orientation orientation = MediaQuery.of(context).orientation;
 
     return GetBuilder<ProfileController>(
       builder: (controller) {
@@ -56,29 +54,15 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
                     Stack(
                       children: [
                         if (controller.apiClient.getUserImagePath() != "null")
-                          // FittedBox(
-                          //   fit: BoxFit.cover,
-                          //   child: Container(
-                          //     margin: const EdgeInsets.only(top: Dimensions.space20),
-                          //     decoration: BoxDecoration(
-                          //         borderRadius: BorderRadius.circular(Dimensions.space40),
-                          //         image: DecorationImage(
-                          //             image: NetworkImage(
-                          //               UrlContainer.dashboardUserProfileImage + controller.avatar,
-                          //             ),
-                          //             fit: BoxFit.cover)),
-                          //     height: Dimensions.space70,
-                          //     width: Dimensions.space70,
-                          //   ),
-                          // )
                           Container(
                             margin: const EdgeInsets.only(top: Dimensions.space20),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(Dimensions.space40),
                             ),
-                            height: Dimensions.space70,
-                            width: Dimensions.space70,
+                            height: Dimensions.space80,
+                            width: Dimensions.space80,
                             child: MyImageWidget(
+                              radius: 40,
                               imageUrl: UrlContainer.dashboardUserProfileImage + controller.avatar,
                             ),
                           )
@@ -88,27 +72,29 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
                             child: Container(
                               margin: const EdgeInsets.only(top: Dimensions.space20),
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: const DecorationImage(image: AssetImage(MyImages.defaultAvatar), fit: BoxFit.cover)),
-                              height: Dimensions.space70,
-                              width: Dimensions.space70,
+                              height: Dimensions.space80,
+                              width: Dimensions.space80,
                             ),
                           ),
-                        Container(
-                          margin: const EdgeInsets.only(top: Dimensions.space70, right: 0, bottom: 0, left: Dimensions.space45),
-                          child: InkWell(
-                            onTap: () {
-                              Get.toNamed(RouteHelper.profileEditScreen);
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space50)),
+                        Positioned.fill(
+                          child: Align(
+                            alignment: Alignment.bottomRight,
+                            child: InkWell(
+                              onTap: () {
+                                Get.toNamed(RouteHelper.profileEditScreen);
+                              },
                               child: Container(
-                                  margin: EdgeInsets.all(Dimensions.space2),
-                                  padding: const EdgeInsets.all(Dimensions.space4),
-                                  decoration: BoxDecoration(color: MyColor.primaryColor, borderRadius: BorderRadius.circular(Dimensions.space50)),
-                                  child: const Icon(
-                                    Icons.edit,
-                                    size: Dimensions.space15,
-                                    color: MyColor.colorWhite,
-                                  )),
+                                decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space50)),
+                                child: Container(
+                                    margin: EdgeInsets.all(Dimensions.space2),
+                                    padding: const EdgeInsets.all(Dimensions.space4),
+                                    decoration: BoxDecoration(color: MyColor.primaryColor, borderRadius: BorderRadius.circular(Dimensions.space50)),
+                                    child: const Icon(
+                                      Icons.edit,
+                                      size: Dimensions.space15,
+                                      color: MyColor.colorWhite,
+                                    )),
+                              ),
                             ),
                           ),
                         ),

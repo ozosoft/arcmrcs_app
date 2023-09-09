@@ -56,7 +56,7 @@ class ProfileCompleteController extends GetxController {
     submitLoading = true;
     update();
 
-    UserPostModel model = UserPostModel(image: null, firstname: firstName, lastName: lastName, mobile: '', email: '', username: '', countryCode: '', country: '', mobileCode: '8', address: address, state: state, zip: zip, city: city);
+    UserPostModel model = UserPostModel(avatar: null, firstname: firstName, lastName: lastName, mobile: '', email: '', username: '', countryCode: '', country: '', mobileCode: '8', address: address, state: state, zip: zip, city: city);
 
     bool b = await profileRepo.updateProfile(model, false);
 

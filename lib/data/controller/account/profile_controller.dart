@@ -53,7 +53,7 @@ class ProfileController extends GetxController {
   String email = "";
 
   ApiClient get apiClient => profileRepo.apiClient;
-  
+
   loadProfileInfo() async {
     isLoading = true;
     update();
@@ -61,6 +61,8 @@ class ProfileController extends GetxController {
     if (responseModel.statusCode == 200) {
       model = ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (model.data != null && model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
+        //save User Data
+        profileRepo.apiClient.setUserData(model.data!.user!.toJson());
         loadData(model);
         username = model.data!.user!.username!;
         rank = model.data!.rank!.userRank!;
@@ -97,7 +99,21 @@ class ProfileController extends GetxController {
       isLoading = true;
       update();
 
-      UserPostModel model = UserPostModel(firstname: firstName, lastName: lastName, mobile: user?.mobile ?? '', email: user?.email ?? '', username: user?.username ?? '', countryCode: user?.countryCode ?? '', country: user?.address?.country ?? '', mobileCode: '880', image: imageFile, address: address, state: state, zip: zip, city: city);
+      UserPostModel model = UserPostModel(
+        firstname: firstName,
+        lastName: lastName,
+        mobile: user?.mobile ?? '',
+        email: user?.email ?? '',
+        username: user?.username ?? '',
+        countryCode: user?.countryCode ?? '',
+        country: user?.address?.country ?? '',
+        mobileCode: '880',
+        avatar: imageFile,
+        address: address,
+        state: state,
+        zip: zip,
+        city: city,
+      );
 
       bool b = await profileRepo.updateProfile(model, true);
 

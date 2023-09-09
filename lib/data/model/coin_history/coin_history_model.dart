@@ -96,7 +96,7 @@ class CoinLog {
         "coin_plan_id": coinPlanId,
         "coins": coins,
         "status": status,
-        "created_at": createdAt?.toIso8601String(),
+        "created_at": createdAt,
         "updated_at": updatedAt,
         "coin_plan": coinPlan?.toJson(),
     };

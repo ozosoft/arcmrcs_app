@@ -29,4 +29,16 @@ class GeneralSettingRepo {
       return ResponseModel(false, MyStrings.somethingWentWrong, 300, '');
     }
   }
+  Future<dynamic> changeLanguage(String languageCode) async {
+    try {
+      String url =
+          '${UrlContainer.baseUrl}${UrlContainer.changeLanguageUrl}$languageCode';
+      ResponseModel response = await apiClient
+          .request(url, Method.getMethod, null, passHeader: false);
+
+      return response;
+    } catch (e) {
+      return ResponseModel(false, MyStrings.somethingWentWrong, 300, '');
+    }
+  }
 }

@@ -29,85 +29,87 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
     return SizedBox(
       height: widget.appbarSize < kToolbarHeight ? kToolbarHeight : widget.appbarSize,
       child: GetBuilder<DashBoardController>(
-        builder: (controller) => AppBar(
-          leadingWidth: Dimensions.space30,
-          leading: IconButton(
-              onPressed: () {
-                widget.scaffoldKey.currentState!.openDrawer();
-              },
-              icon: const Icon(Icons.menu)),
-          flexibleSpace: Container(
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(image: AssetImage(MyImages.appBarBGimage), fit: BoxFit.fitWidth),
+        builder: (controller) {
+          return AppBar(
+            leadingWidth: Dimensions.space30,
+            leading: IconButton(
+                onPressed: () {
+                  widget.scaffoldKey.currentState!.openDrawer();
+                },
+                icon: const Icon(Icons.menu)),
+            flexibleSpace: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(image: AssetImage(MyImages.appBarBGimage), fit: BoxFit.fitWidth),
+              ),
             ),
-          ),
-          backgroundColor: MyColor.primaryColor,
-          automaticallyImplyLeading: false,
-          elevation: 0.0,
-          title: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              if (controller.userImage.toString() != "null")
-                SizedBox(
-                  child: CircleAvatar(
-                    backgroundColor: MyColor.colorWhite.withOpacity(0.2),
-                    child: Padding(
-                      padding: const EdgeInsets.all(Dimensions.space5),
-                      child: MyImageWidget(
-                        radius: Dimensions.space100,
-                        imageUrl: UrlContainer.dashboardUserProfileImage + controller.userImage.toString(),
+            backgroundColor: MyColor.primaryColor,
+            automaticallyImplyLeading: false,
+            elevation: 0.0,
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                if (controller.userImage.toString() != "null" && controller.userImage.toString() != "")
+                  SizedBox(
+                    child: CircleAvatar(
+                      backgroundColor: MyColor.colorWhite.withOpacity(0.2),
+                      child: Padding(
+                        padding: const EdgeInsets.all(Dimensions.space5),
+                        child: MyImageWidget(
+                          radius: Dimensions.space100,
+                          imageUrl: UrlContainer.dashboardUserProfileImage + controller.userImage.toString(),
+                        ),
                       ),
                     ),
+                  )
+                else
+                  CircleAvatar(
+                    radius: Dimensions.space22,
+                    backgroundColor: MyColor.colorWhite.withOpacity(0.2),
+                    child: Padding(padding: const EdgeInsets.all(Dimensions.space5), child: Image.asset(MyImages.defaultAvatar)),
                   ),
-                )
-              else
-                CircleAvatar(
-                  radius: Dimensions.space22,
-                  backgroundColor: MyColor.colorWhite.withOpacity(0.2),
-                  child: Padding(padding: const EdgeInsets.all(Dimensions.space5), child: Image.asset(MyImages.defaultAvatar)),
+                const SizedBox(width: Dimensions.space10),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${MyStrings.hi} ${controller.dashRepo.apiClient.getUserFullName()}",
+                        style: semiBoldLarge.copyWith(fontSize: Dimensions.fontMediumLarge, color: MyColor.colorWhite),
+                      ),
+                      const SizedBox(height: Dimensions.space5),
+                      Text(
+                        MyStrings.letsPlayQuiz,
+                        style: regularDefault.copyWith(color: MyColor.colorWhite),
+                      ),
+                    ],
+                  ),
                 ),
-              const SizedBox(width: Dimensions.space10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "${MyStrings.hi} ${controller.dashRepo.apiClient.getUserFullName()}",
-                      style: semiBoldLarge.copyWith(fontSize: Dimensions.fontMediumLarge, color: MyColor.colorWhite),
-                    ),
-                    const SizedBox(height: Dimensions.space5),
-                    Text(
-                      MyStrings.letsPlayQuiz,
-                      style: regularDefault.copyWith(color: MyColor.colorWhite),
-                    ),
-                  ],
+              ],
+            ),
+            actions: [
+              InkWell(
+                onTap: () {
+                  Get.toNamed(RouteHelper.leaderBoardScreen);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimensions.space8),
+                  child: SvgPicture.asset(MyImages.reward),
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  CustomBottomSheet(child: const LanguageBottomSheetScreen()).customBottomSheet(context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimensions.space8),
+                  child: SvgPicture.asset(MyImages.languagesSVG),
                 ),
               ),
             ],
-          ),
-          actions: [
-            InkWell(
-              onTap: () {
-                Get.toNamed(RouteHelper.leaderBoardScreen);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(Dimensions.space8),
-                child: SvgPicture.asset(MyImages.reward),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                CustomBottomSheet(child: const LanguageBottomSheetScreen()).customBottomSheet(context);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(Dimensions.space8),
-                child: SvgPicture.asset(MyImages.languagesSVG),
-              ),
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

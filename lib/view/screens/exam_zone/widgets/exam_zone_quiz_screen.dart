@@ -207,14 +207,15 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
 
                                                                   controller.selectAnswer(optionIndex, questionsIndex);
 
-                                                                  controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                      ? null
-                                                                      : controller.selectedOptionIndex == optionIndex
-                                                                          ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                              ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
-                                                                              : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
-                                                                          : null;
-
+                                                                  if (controller.examZoneRepo.apiClient.getSoundStatus()) {
+                                                                    controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                        ? null
+                                                                        : controller.selectedOptionIndex == optionIndex
+                                                                            ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                                ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                                : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                                            : null;
+                                                                  }
                                                                   await Future.delayed(const Duration(seconds: 2));
 
                                                                   if (controller.pageController.page! < controller.examQuestionsList.length - 1) {

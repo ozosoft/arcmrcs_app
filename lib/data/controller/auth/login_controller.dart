@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -128,10 +129,6 @@ class LoginController extends GetxController {
     update();
   }
 
-
-
-
-
   //MOBILE AUTH START HERE
 
   initMobileAuthData() async {
@@ -146,9 +143,10 @@ class LoginController extends GetxController {
   int resendDelayInSeconds = 60; // Set the delay to 60 seconds
   Timer? _resendTimer;
   //to manage the search input.
-  final TextEditingController searchController = TextEditingController();
-  final TextEditingController otpFiledController = TextEditingController();
+  TextEditingController searchController = TextEditingController();
+  TextEditingController otpFiledController = TextEditingController();
   //mian Counntry list
+
   List<Countries> countryList = [];
   //to hold the countries matching the search.
   List<Countries> filteredCountries = [];
@@ -202,6 +200,8 @@ class LoginController extends GetxController {
     phoneNumberValidate = true;
     isInOTPpage = false;
     sendOtpButtonLoading = false;
+    otpFiledController = TextEditingController();
+    mobileNumberController = TextEditingController();
     update();
   }
 
@@ -252,10 +252,15 @@ class LoginController extends GetxController {
       print(firebaseUser.value!.email);
       print(firebaseUser.value!.phoneNumber);
       print(firebaseUser.value!.photoURL);
+      
       changeOtpSendButtonLoading(false);
     } catch (e) {
       changeOtpSendButtonLoading(false);
-      Get.snackbar('Error', e.toString());
+      if (e.toString().contains("invalid-verification-code]")) {
+        CustomSnackBar.error(errorList: [MyStrings.pleaseEnterValidOtpCode]);
+      }
+
+      // Get.snackbar('Error', e.toString());
     }
   }
 
@@ -313,7 +318,7 @@ class LoginController extends GetxController {
       print(firebaseUser.value!.phoneNumber);
       print(firebaseUser.value!.photoURL);
     } catch (e) {
-      print( e.toString());
+      print(e.toString());
       Get.snackbar('Error', e.toString());
     }
   }

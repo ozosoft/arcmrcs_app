@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
@@ -59,7 +60,7 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
           body: GetBuilder<ProfileCompleteController>(
             builder: (controller) => SingleChildScrollView(
               padding: Dimensions.screenPaddingHV,
-              child: Form(
+              child: controller.isLoading ? const CustomLoader() : Form(
                 key: formKey,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

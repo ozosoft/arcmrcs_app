@@ -1,3 +1,4 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
@@ -368,6 +369,10 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                                       questionsList: quizController.questionsList,
                                                     );
                                                     quizController.selectOptionForQuestion(currentQuestion.id, option);
+
+                                                    if (quizController.battleRepo.apiClient.getSoundStatus()) {
+                                                      quizController.isOptionSelectedForQuestion(currentQuestion.id, option) ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3')) : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'));
+                                                    }
                                                   }
                                                 },
                                                 isSelected: quizController.isOptionSelectedForQuestion(currentQuestion.id, option),

@@ -49,8 +49,9 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
                     messages: MyStrings.noCoinHistoryFound.tr,
                   )
                 : ListView.builder(
+                    physics: BouncingScrollPhysics(),
                     padding: const EdgeInsets.only(top: Dimensions.space25),
-                    shrinkWrap: true,
+                    // shrinkWrap: true,
                     itemCount: controller.coinHistoryList.length,
                     itemBuilder: (BuildContext context, int index) {
                       final coinHistoryItem = controller.coinHistoryList[index];
@@ -83,7 +84,7 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
                                             height: Dimensions.space8,
                                           ),
                                           Text(
-                                            DateConverter.convertIsoToString(controller.coinHistoryList[index].coinPlan!.createdAt.toString()),
+                                            DateConverter.formatDateTime(controller.coinHistoryList[index].createdAt.toString(), 'd MMM, yyyy h:mm a'),
                                             style: regularLarge.copyWith(color: MyColor.textColor),
                                           ),
                                         ],

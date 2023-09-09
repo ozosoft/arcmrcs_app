@@ -31,6 +31,7 @@ class MyStrings {
   static const String collectCoins = "Collect Coins";
   static const String copied = "Copied!";
   static const String ok = "Ok";
+  static const String totalScore = "Total Score";
   static const String youHaveNoCoins = "You Have Not Enough Coins!";
   static const String roomCodeIsWrong = "Room Code May be Wrong!";
   static const String yourGameWillStartSoon = "The Game Will Begin In";
@@ -81,6 +82,7 @@ class MyStrings {
   static const String win = "WIN";
   static const String loss = "LOSS";
   static const String lifeLineAlreadyUsed = "This Life Line Already Used!";
+  static const String pleaseEnterValidOtpCode = "Please Enter Valid OTP Code";
   static const String plusText = "+";
 
   static const String firstName = "First Name";
@@ -129,10 +131,10 @@ class MyStrings {
   static const String amount = "Amount";
   static const String date = "Date";
   static const String dates = "2023 - 09 - 12";
-  static const String character = " 8 character,";
-  static const String upperCase = " Uppercase,";
-  static const String lowerCase = " Lowercase,";
-  static const String symbol = " Symbol";
+  static const String character = "character,";
+  static const String upperCase = " Uppercase, ";
+  static const String lowerCase = " Lowercase, ";
+  static const String symbol = " Symbol ";
   static const String charge = "Charge";
   static const String payableAmount = "Payable Amount";
   static const String paymentSystem = "Payment : Paytm";
@@ -354,6 +356,7 @@ class MyStrings {
   static const String enterPhoneNumber = "Enter phone number";
   static const String enterPhoneNumber000 = "000-000-000";
   static const String confirmYourPassword = 'Confirm your password';
+  static const String confirmYourPasswordNotMatch = 'Confirm Passwords do not match.';
   static const String confirm = 'Confirm';
   static const String noCodeReceive = "Didn't receive the code?";
   static const String smsVerificationMsg = "We've sent you an access code to your phone number for SMS verification";
@@ -437,7 +440,7 @@ class MyStrings {
   static const String examZone = "Exam Zone";
   static const String twoHundredFortyDollar = "\$240.00";
   static const String jkobos = "@jkobos";
-  static const String qP = " QP";
+  static const String qP = "QP";
   static const String points = "Points";
   static const String quantity = '15';
   static const String leaderBoard = 'Leaderboard';

@@ -1,26 +1,22 @@
-import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/controller/account/profile_controller.dart';
 import 'package:flutter_prime/data/controller/account/profile_update_controller.dart';
 import 'package:flutter_prime/data/repo/account/profile_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/components/divider/custom_divider.dart';
-import 'package:flutter_prime/view/components/divider/or_divider.dart';
 import 'package:flutter_prime/view/components/text-form-field/custom_text_field.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../components/buttons/rounded_loading_button.dart';
 import 'profile_image.dart';
 
 class ProfileEditScreen extends StatefulWidget {
@@ -34,19 +30,17 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   String selectedAvatar = '';
   XFile? imageFile;
 
-  
-   @override
+  @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ProfileRepo(apiClient: Get.find()));
 
-    Get.put(ProfileUpdateController(profileRepo: Get.find()));
-
+    var controller = Get.put(ProfileUpdateController(profileRepo: Get.find()));
     super.initState();
-
-  
-  } 
-
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      controller.loadProfileInfo();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +48,8 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       appBar: const CustomCategoryAppBar(
         title: MyStrings.editProfile,
       ),
-      body: GetBuilder<ProfileUpdateController>(
-        builder: (controller) => SingleChildScrollView(
+      body:  GetBuilder<ProfileUpdateController>(
+        builder: (controller) => controller.isLoading ? const CustomLoader() : SingleChildScrollView(
           padding: const EdgeInsets.only(top: Dimensions.space40, right: Dimensions.space18, left: Dimensions.space18),
           child: Container(
             padding: const EdgeInsets.all(Dimensions.space16),
@@ -66,53 +60,20 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
               children: [
                 Stack(
                   children: [
-                    FittedBox(fit: BoxFit.cover, child: ProfileWidget(isEdit: true, imagePath: UrlContainer.dashboardUserProfileImage + controller.avatar, onClicked: () async {})),
-                    // InkWell(
-                    //   onTap: () {
-                    //     _openGallery(context);
-                    //   },
-                    //   child: Container(
-                    //     margin: const EdgeInsets.only(top: Dimensions.space70, right: 0, bottom: 0, left: Dimensions.space45),
-                    //     child: InkWell(
-                    //       child: SvgPicture.asset(
-                    //         MyImages.cameraSVG,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
+                    FittedBox(
+                      fit: BoxFit.cover,
+                      child: ProfileWidget(
+                        isEdit: true,
+                        imagePath: controller.imageUrl,
+                        onClicked: () async {},
+                      ),
+                    ),
+
+                  
                   ],
                 ),
                 const SizedBox(
                   height: Dimensions.space10,
-                ),
-                const OrDivider(),
-                const SizedBox(
-                  height: Dimensions.space10,
-                ),
-                const Text(MyStrings.chooseAvatar, style: semiBoldExtraLarge),
-                GridView.builder(
-                    scrollDirection: Axis.vertical,
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 5,
-                    ),
-                    itemCount: MyImages().avatars.length,
-                    itemBuilder: (BuildContext context, index) {
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Row(
-                              children: [SvgPicture.asset(MyImages().avatars[index])],
-                            ),
-                          )
-                        ],
-                      );
-                    }),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: Dimensions.space14),
-                  child: Divider(color: MyColor.colorLightGrey),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(Dimensions.space8),
@@ -123,7 +84,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         child: Text(MyStrings.profileDetails, style: semiBoldExtraLarge),
                       ),
                       const CustomDivider(
-                        space: Dimensions.space4,
+                        space: Dimensions.space10,
                       ),
                       CustomTextField(
                         controller: controller.userNameController,
@@ -139,10 +100,36 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       ),
                       const CustomDivider(space: Dimensions.space10),
                       CustomTextField(
+                        controller: controller.firstNameController,
+                        onChanged: () {},
+                        needOutlineBorder: true,
+                        hintText: MyStrings.firstName,
+                        readOnly: false,
+                        prefixicon: MyImages.personSVG,
+                        hasIcon: true,
+                        animatedLabel: true,
+                        hastextcolor: false,
+                        fontColor: MyColor.colorBlack,
+                      ),
+                      const CustomDivider(space: Dimensions.space10),
+                      CustomTextField(
+                        controller: controller.lastNameController,
+                        onChanged: () {},
+                        needOutlineBorder: true,
+                        hintText: MyStrings.lastName,
+                        readOnly: false,
+                        prefixicon: MyImages.personSVG,
+                        hasIcon: true,
+                        animatedLabel: true,
+                        hastextcolor: false,
+                        fontColor: MyColor.colorBlack,
+                      ),
+                      const CustomDivider(space: Dimensions.space10),
+                      CustomTextField(
                         controller: controller.emailController,
                         onChanged: () {},
                         needOutlineBorder: true,
-                        hintText: MyStrings.username,
+                        hintText: MyStrings.email,
                         readOnly: true,
                         prefixicon: MyImages.mailSVG,
                         hasIcon: true,
@@ -150,15 +137,70 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                         hastextcolor: false,
                         fontColor: MyColor.colorBlack,
                       ),
-                      const CustomDivider(),
-                      RoundedButton(
-                        text: MyStrings.updateProfile,
-                        press: () {
-                          controller.updateProfilePic();
-                        },
-                        textSize: Dimensions.space17,
-                        verticalPadding: Dimensions.space16,
-                      )
+                      const CustomDivider(space: Dimensions.space10),
+                      CustomTextField(
+                        controller: controller.addressController,
+                        onChanged: () {},
+                        needOutlineBorder: true,
+                        hintText: MyStrings.address,
+                        readOnly: false,
+                        prefixicon: MyImages.addressSVG,
+                        hasIcon: true,
+                        animatedLabel: true,
+                        hastextcolor: false,
+                        fontColor: MyColor.colorBlack,
+                      ),
+                      const CustomDivider(space: Dimensions.space10),
+                      CustomTextField(
+                        controller: controller.stateController,
+                        onChanged: () {},
+                        needOutlineBorder: true,
+                        hintText: MyStrings.state,
+                        readOnly: false,
+                        prefixicon: MyImages.addressSVG,
+                        hasIcon: true,
+                        animatedLabel: true,
+                        hastextcolor: false,
+                        fontColor: MyColor.colorBlack,
+                      ),
+                      const CustomDivider(space: Dimensions.space10),
+                      CustomTextField(
+                        controller: controller.zipCodeController,
+                        onChanged: () {},
+                        needOutlineBorder: true,
+                        hintText: MyStrings.zipCode,
+                        readOnly: false,
+                        prefixicon: MyImages.addressSVG,
+                        hasIcon: true,
+                        animatedLabel: true,
+                        hastextcolor: false,
+                        fontColor: MyColor.colorBlack,
+                      ),
+                      const CustomDivider(space: Dimensions.space10),
+                      CustomTextField(
+                        controller: controller.cityController,
+                        onChanged: () {},
+                        needOutlineBorder: true,
+                        hintText: MyStrings.city,
+                        readOnly: false,
+                        prefixicon: MyImages.addressSVG,
+                        hasIcon: true,
+                        animatedLabel: true,
+                        hastextcolor: false,
+                        fontColor: MyColor.colorBlack,
+                      ),
+                      const CustomDivider(space: Dimensions.space10),
+                      if (controller.isSubmitLoading)
+                        const RoundedLoadingBtn()
+                      else
+                        RoundedButton(
+                          text: MyStrings.updateProfile,
+                          press: () {
+                            controller.updateProfileData();
+                          },
+                          textSize: Dimensions.space17,
+                          verticalPadding: Dimensions.space16,
+                        )
                     ],
                   ),
                 ),
@@ -168,21 +210,5 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         ),
       ),
     );
-  }
-
-  void _openGallery(BuildContext context) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
-
-    if (result != null && result.files.isNotEmpty) {
-      final pickedFile = result.files.single;
-      final imagePath = pickedFile.path;
-
-      if (imagePath != null) {
-        setState(() {
-          Get.find<ProfileController>().imageFile = File(result!.files.single.path!);
-          imageFile = XFile(result.files.single.path!);
-        });
-      }
-    }
   }
 }

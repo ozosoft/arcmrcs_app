@@ -137,16 +137,23 @@ class RegistrationController extends GetxController {
     await registrationRepo.sendUserToken();
 
     bool isProfileCompleteEnable = true;
-  
 
     if (needEmailVerification == false && needSmsVerification == false) {
       Get.offAndToNamed(RouteHelper.profileCompleteScreen);
     } else if (needEmailVerification == true && needSmsVerification == true) {
-      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [true, isProfileCompleteEnable,]);
+      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [
+        true,
+        isProfileCompleteEnable,
+      ]);
     } else if (needEmailVerification) {
-      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [false, isProfileCompleteEnable, ]);
+      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [
+        false,
+        isProfileCompleteEnable,
+      ]);
     } else if (needSmsVerification) {
-      Get.offAndToNamed(RouteHelper.smsVerificationScreen, arguments: [isProfileCompleteEnable,]);
+      Get.offAndToNamed(RouteHelper.smsVerificationScreen, arguments: [
+        isProfileCompleteEnable,
+      ]);
     }
   }
 

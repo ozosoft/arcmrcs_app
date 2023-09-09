@@ -31,6 +31,7 @@ class GuessThewordController extends GetxController {
   int ansDuration = 30;
   String? quizInfoId;
   // result
+  String appreciation = "";
   String totalQuestion = '';
   String correctAnswer = '';
   String wrongAnswer = '';
@@ -79,6 +80,8 @@ class GuessThewordController extends GetxController {
     if (response.statusCode == 200) {
       GuesswordQuestionSubmitResponse model = GuesswordQuestionSubmitResponse.fromJson(jsonDecode(response.responseJson));
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+        print( model.message!.success!.first);
+        appreciation = model.message!.success!.first;
         totalQuestion = model.data?.totalQuestion.toString() ?? '';
         correctAnswer = model.data?.correctAnswer.toString() ?? '';
         wrongAnswer = model.data?.wrongAnswer.toString() ?? '';

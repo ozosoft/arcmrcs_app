@@ -163,4 +163,20 @@ class DateConverter {
 
     return durationInMinutes;
   }
+
+static  String formatDateTime(String inputString, String format) {
+  try {
+    // Parse the input date and time string
+    final inputDateTime = DateTime.parse(inputString);
+
+    // Create a date and time format
+    final formatter = DateFormat(format);
+
+    // Format the date and time and return the formatted string
+    return formatter.format(inputDateTime);
+  } catch (e) {
+    // Handle any parsing errors here
+    return "Invalid Date/Time";
+  }
+}
 }

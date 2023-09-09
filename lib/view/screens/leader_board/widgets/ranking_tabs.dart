@@ -5,6 +5,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/leader_board/leader_board_controller.dart';
+import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/my_images.dart';
@@ -32,7 +33,6 @@ class _RankingTabBarState extends State<RankingTabBar> {
         builder: (controller) => Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-           
             _buildRankingItem(
               controller.rank2PlayerAvatar,
               controller.rank2PlayerName,
@@ -40,7 +40,8 @@ class _RankingTabBarState extends State<RankingTabBar> {
               size,
               orientation,
               2, // Player 2
-            ), _buildRankingItem(
+            ),
+            _buildRankingItem(
               controller.rank1PlayerAvatar,
               controller.rank1PlayerName,
               controller.rank1PlayerScore,
@@ -71,20 +72,18 @@ class _RankingTabBarState extends State<RankingTabBar> {
     int rank,
   ) {
     double topPadding = 0.0;
-    double leftPadding = 0.0;
 
     if (rank == 1) {
-      topPadding = orientation != Orientation.portrait ? size.width * 0.14 : size.width * 0;
+      topPadding = size.width * 0;
     } else if (rank == 2) {
-      topPadding = orientation != Orientation.portrait ? size.width * 0.28 : size.width * 0.1;
-      leftPadding = orientation != Orientation.portrait ? size.width * 0.1 : size.width * 0.02;
+      topPadding = size.width * 0.1;
     } else if (rank == 3) {
-      topPadding = orientation != Orientation.portrait ? size.width * 0.42 : size.width * 0.11;
+       topPadding = size.width * 0.1;
     }
 
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(top: topPadding, left: leftPadding),
+        padding: EdgeInsets.only(top: topPadding, left: Dimensions.space10, right: Dimensions.space10),
         child: Column(
           children: [
             Container(
@@ -99,37 +98,50 @@ class _RankingTabBarState extends State<RankingTabBar> {
                         margin: EdgeInsets.all(
                           orientation != Orientation.portrait ? Dimensions.space10 : Dimensions.space8,
                         ),
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: MyColor.leaderBoardTabBar,
                           shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(UrlContainer.leaderboardProfileImage + playerAvatar),
-                            fit: BoxFit.cover,
-                          ),
                         ),
                         height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
                         width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                        child: MyImageWidget(radius: Dimensions.space100, imageUrl: UrlContainer.leaderboardProfileImage + playerAvatar),
                       )
-                    : Image.asset(MyImages.defaultAvatar, height: Dimensions.space70),
-              ),
-            ),
-            Text(
-              MyStrings.at + playerName,
-              style: regularMediumLarge.copyWith(
-                color: MyColor.colorWhite,
+                    : Container(
+                        margin: EdgeInsets.all(
+                          orientation != Orientation.portrait ? Dimensions.space10 : Dimensions.space8,
+                        ),
+                        decoration: const BoxDecoration(
+                          color: MyColor.leaderBoardTabBar,
+                          shape: BoxShape.circle,
+                        ),
+                        height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                        width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                        child: Image.asset(MyImages.defaultAvatar),
+                      ),
               ),
             ),
             const SizedBox(
-              height: Dimensions.space5,
+              height: Dimensions.space10,
+            ),
+            FittedBox(
+              child: Text(
+                MyStrings.at + playerName,
+                style: regularMediumLarge.copyWith(
+                  color: MyColor.colorWhite,
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: Dimensions.space10,
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: MyColor.leaderBoardContainer,
                 borderRadius: BorderRadius.all(Radius.circular(Dimensions.space30)),
               ),
-              padding: EdgeInsets.all(Dimensions.space7),
+              padding: const EdgeInsets.all(Dimensions.space7),
               child: Text(
-                MyStrings.qP + playerScore,
+                "$playerScore ${MyStrings.qP.tr}",
                 style: semiBoldDefault.copyWith(
                   color: MyColor.colorWhite,
                 ),

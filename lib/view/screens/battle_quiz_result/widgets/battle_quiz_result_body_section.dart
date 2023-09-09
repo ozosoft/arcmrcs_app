@@ -16,7 +16,6 @@ import '../../../../data/services/api_service.dart';
 import '../../../components/divider/custom_dashed_divider.dart';
 import 'bottom_section_buttons.dart';
 import 'player_profile_details.dart';
-import 'player_profile_picture.dart';
 import 'rewards_section.dart';
 import 'right_and_wrong_ans_section.dart';
 

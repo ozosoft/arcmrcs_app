@@ -12,6 +12,8 @@ import 'package:flutter_prime/data/model/profile/profile_response_model.dart';
 import 'package:flutter_prime/data/repo/account/profile_repo.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
+import '../../model/user_post_model/user_post_model.dart';
+
 class ProfileUpdateController extends GetxController {
   ProfileRepo profileRepo;
   ProfileResponseModel model = ProfileResponseModel();
@@ -23,8 +25,8 @@ class ProfileUpdateController extends GetxController {
   bool isLoading = false;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  late TextEditingController userNameController = TextEditingController(text: username.toString());
-  late TextEditingController emailController = TextEditingController(text: email.toString());
+  late TextEditingController userNameController = TextEditingController();
+  late TextEditingController emailController = TextEditingController();
   TextEditingController mobileNoController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController stateController = TextEditingController();
@@ -57,6 +59,8 @@ class ProfileUpdateController extends GetxController {
     if (responseModel.statusCode == 200) {
       model = ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (model.data != null && model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
+        //save User Data
+        profileRepo.apiClient.setUserData(model.data!.user!.toJson());
         loadData(model);
         username = model.data!.user!.username!;
         rank = model.data!.rank!.userRank!;
@@ -78,15 +82,35 @@ class ProfileUpdateController extends GetxController {
     isSubmitLoading = true;
     update();
 
-  
+    bool b = await profileRepo.updateProfilePicture(imageFile!);
 
+    if (b) {
+      await loadProfileInfo();
+    }
 
-      bool b = await profileRepo.updateProfilePicture(imageFile!);
+    isSubmitLoading = false;
+    update();
+  }
 
-      if (b) {
-        await loadProfileInfo();
-      }
+  updateProfileData() async {
+    isSubmitLoading = true;
+    update();
 
+    var userData = UserPostModel(
+      firstname: firstNameController.text,
+      lastName: lastNameController.text,
+      address: addressController.text,
+      state: stateController.text,
+      zip: zipCodeController.text,
+      city: cityController.text,
+      avatar: imageFile,
+    );
+
+    bool b = await profileRepo.updateProfile(userData, true);
+
+    if (b) {
+      await loadProfileInfo();
+    }
     isSubmitLoading = false;
     update();
   }
@@ -96,6 +120,8 @@ class ProfileUpdateController extends GetxController {
 
     firstNameController.text = model?.data?.user?.firstname ?? '';
     lastNameController.text = model?.data?.user?.lastname ?? '';
+
+    userNameController.text = model?.data?.user?.username ?? '';
     emailController.text = model?.data?.user?.email ?? '';
     mobileNoController.text = model?.data?.user?.mobile ?? '';
     addressController.text = model?.data?.user?.address?.address ?? '';
@@ -105,7 +131,7 @@ class ProfileUpdateController extends GetxController {
     imageUrl = model?.data?.user?.avatar == null ? '' : '${model?.data?.user?.avatar}';
 
     if (imageUrl.isNotEmpty && imageUrl != 'null') {
-      imageUrl = '${UrlContainer.domainUrl}/assets/images/user/profile/$imageUrl';
+      imageUrl = '${UrlContainer.dashboardUserProfileImage}$imageUrl';
     }
 
     isLoading = false;

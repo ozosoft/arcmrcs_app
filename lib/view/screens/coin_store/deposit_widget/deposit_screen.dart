@@ -51,7 +51,7 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("this is coin id from deposit screen" + widget.id);
+
     return GetBuilder<AddNewDepositController>(
       builder: (controller) => SafeArea(
           child: Scaffold(
@@ -62,11 +62,13 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
             : SingleChildScrollView(
                 padding: Dimensions.screenPaddingHV,
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
+ 
                   decoration: BoxDecoration(
-                    color: MyColor.getScreenBgColor(),
+                    color: MyColor.colorWhite,
                     borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
                   ),
+                  padding: const EdgeInsets.all(Dimensions.space20),
+
                   child: Form(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

@@ -97,7 +97,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   prefixIcon: widget.hasIcon
                       ? Padding(
                           padding: const EdgeInsets.all(Dimensions.space15),
-                          child: SvgPicture.asset(widget.prefixicon ?? ""),
+                          child: SvgPicture.asset(widget.prefixicon ?? "",width: 15,),
                         )
                       : null,
                   contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),

@@ -118,14 +118,15 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
 
                                                                 controller.selectAnswer(optionIndex, questionsIndex);
 
-                                                                controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                    ? null
-                                                                    : controller.selectedOptionIndex == optionIndex
-                                                                        ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                            ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
-                                                                            : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
-                                                                        : null;
-
+                                                                if (controller.funNLearnRepo.apiClient.getSoundStatus()) {
+                                                                  controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                      ? null
+                                                                      : controller.selectedOptionIndex == optionIndex
+                                                                          ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                              ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                              : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                                          : null;
+                                                                }
                                                                 await Future.delayed(const Duration(milliseconds: 1300));
 
                                                                 if (controller.pageController.page! < controller.examQuestionsList.length - 1) {

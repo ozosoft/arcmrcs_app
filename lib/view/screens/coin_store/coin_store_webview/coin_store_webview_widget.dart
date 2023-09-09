@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -10,9 +9,8 @@ import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/url_container.dart';
 import '../../../components/snack_bar/show_custom_snackbar.dart';
 
-
 class CoinStroreWebViewWidget extends StatefulWidget {
-  const CoinStroreWebViewWidget({Key? key,required this.url}) : super(key: key);
+  const CoinStroreWebViewWidget({Key? key, required this.url}) : super(key: key);
 
   final String url;
 
@@ -21,7 +19,6 @@ class CoinStroreWebViewWidget extends StatefulWidget {
 }
 
 class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
-
   @override
   void initState() {
     url = widget.url;
@@ -50,13 +47,11 @@ class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
-       AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
+      AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
     }
     return Stack(
       children: [
-        isLoading
-            ? const Center(child: CircularProgressIndicator())
-            : const SizedBox(),
+        isLoading ? const Center(child: CircularProgressIndicator()) : const SizedBox(),
         InAppWebView(
           key: webViewKey,
           initialUrlRequest: URLRequest(url: Uri.parse(url)),
@@ -65,10 +60,11 @@ class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
           },
           initialOptions: options,
           onLoadStart: (controller, url) {
-            if(url.toString()=='${UrlContainer.domainUrl}user/deposit/history'){
-              Get.offAndToNamed(RouteHelper.depositsScreen);
+            print(url);
+            if (url.toString() == '${UrlContainer.domainUrl}/user/deposit/history') {
+              Get.offAndToNamed(RouteHelper.coinHistoryScreen);
               CustomSnackBar.success(successList: [MyStrings.requestSuccess]);
-            } else if(url.toString()=='${UrlContainer.baseUrl}user/deposit'){
+            } else if (url.toString() == '${UrlContainer.baseUrl}user/deposit') {
               Get.back();
               CustomSnackBar.error(errorList: [MyStrings.requestFail]);
             }
@@ -77,15 +73,12 @@ class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
             });
           },
           androidOnPermissionRequest: (controller, origin, resources) async {
-            return PermissionRequestResponse(
-              resources: resources,
-              action: PermissionRequestResponseAction.GRANT);
+            return PermissionRequestResponse(resources: resources, action: PermissionRequestResponseAction.GRANT);
           },
           shouldOverrideUrlLoading: (controller, navigationAction) async {
             var uri = navigationAction.request.url!;
 
-            if (![ "http", "https", "file", "chrome",
-              "data", "javascript", "about"].contains(uri.scheme)) {
+            if (!["http", "https", "file", "chrome", "data", "javascript", "about"].contains(uri.scheme)) {
               if (await canLaunchUrl(Uri.parse(url))) {
                 await launchUrl(
                   Uri.parse(url),
@@ -108,8 +101,7 @@ class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
               this.url = url.toString();
             });
           },
-          onConsoleMessage: (controller, consoleMessage) {
-          },
+          onConsoleMessage: (controller, consoleMessage) {},
         )
       ],
     );

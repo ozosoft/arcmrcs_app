@@ -66,7 +66,8 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
               MyStrings.pleaseEnterDetailstoSignUp.tr,
               style: regularLarge.copyWith(color: MyColor.authScreenTextColor, fontSize: Dimensions.space15),
             ),
-             SocialLoginSection(),
+            const SizedBox(height: Dimensions.space10),
+            // const SocialLoginSection(),
             const CustomDivider(
               space: Dimensions.space10,
             ),
@@ -125,21 +126,33 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     labelText: MyStrings.password,
                     onChanged: (value) {
                       print(value);
+                      //  controller.updateValidationList(value);
+                      formKey.currentState!.validate();
                     },
                     isShowSuffixIcon: true,
                     isPassword: true,
                     textInputType: TextInputType.text,
                     inputAction: TextInputAction.done,
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return MyStrings.fieldErrorMsg.tr;
+                      controller.updateValidationList(value);
+                      if (controller.passwordValidationRules.where((element) => element.hasError == true).toList().isNotEmpty) {
+                        return "";
                       } else {
                         return null;
                       }
+                      // Password is valid if it passes all checks
                     },
                   ),
-                  const SizedBox(height: Dimensions.space2),
-                  const StrongPassWordCheakSection(),
+                  if (controller.passwordValidationRules.where((element) => element.hasError == true).toList().isEmpty) ...[
+                    const SizedBox(
+                      height: Dimensions.space10,
+                    )
+                  ],
+                  if (controller.passwordController.text != '') ...[
+                    StrongPassWordCheakSection(
+                      passwordValidationRules: controller.passwordValidationRules,
+                    ),
+                  ],
                   const SizedBox(height: Dimensions.space15),
                   CustomTextField(
                     controller: controller.cPasswordController,
@@ -149,7 +162,9 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     animatedLabel: true,
                     needOutlineBorder: true,
                     labelText: MyStrings.confirmPassword.tr,
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      formKey.currentState!.validate();
+                    },
                     isShowSuffixIcon: true,
                     isPassword: true,
                     textInputType: TextInputType.text,
@@ -157,20 +172,25 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return MyStrings.fieldErrorMsg.tr;
+                      }
+                      if (value != controller.passwordController.text) {
+                        return MyStrings.confirmYourPasswordNotMatch;
                       } else {
                         return null;
                       }
                     },
                   ),
                   const SizedBox(height: Dimensions.space25),
-                controller.submitLoading?const RoundedLoadingBtn():  RoundedButton(
-                    text: MyStrings.signUp,
-                    press: () {
-                      if (formKey.currentState!.validate()) {
-                        controller.signUpUser();
-                      }
-                    },
-                  ),
+                  controller.submitLoading
+                      ? const RoundedLoadingBtn()
+                      : RoundedButton(
+                          text: MyStrings.signUp,
+                          press: () {
+                            if (formKey.currentState!.validate()) {
+                              controller.signUpUser();
+                            }
+                          },
+                        ),
                   const SizedBox(height: Dimensions.space10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -48,17 +48,17 @@ class LeaderBoardController extends GetxController {
         for (int i = 0; i < leaderBoardlist.length && i < 3; i++) {
           switch (i) {
             case 0:
-              rank1PlayerName = leaderBoardList?[i].username ?? '';
+              rank1PlayerName = leaderBoardList?[i].fullName ?? leaderBoardList![i].username.toString();
               rank1PlayerScore = leaderBoardList?[i].score ?? '';
               rank1PlayerAvatar = leaderBoardList?[i].avatar ?? '';
               break;
             case 1:
-              rank2PlayerName = leaderBoardList?[i].username ?? '';
+              rank2PlayerName = leaderBoardList?[i].fullName ?? leaderBoardList![i].username.toString();
               rank2PlayerScore = leaderBoardList?[i].score ?? '';
               rank2PlayerAvatar = leaderBoardList?[i].avatar ?? '';
               break;
             case 2:
-              rank3PlayerName = leaderBoardList?[i].username ?? '';
+              rank3PlayerName = leaderBoardList?[i].fullName ?? leaderBoardList![i].username.toString();
               rank3PlayerScore = leaderBoardList?[i].score ?? '';
               rank3PlayerAvatar = leaderBoardList?[i].avatar ?? '';
               break;
@@ -66,8 +66,6 @@ class LeaderBoardController extends GetxController {
               break;
           }
         }
-
-
       } else {
         CustomSnackBar.error(errorList: [leaderBoardModel.status ?? ""]);
       }
@@ -80,5 +78,4 @@ class LeaderBoardController extends GetxController {
     isLoading = false;
     update();
   }
-
 }

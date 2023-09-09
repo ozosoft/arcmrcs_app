@@ -28,6 +28,7 @@ class MyImages {
   static const String appLogoSVG = "assets/images/applogoSVG.svg";
   static const String onboard1SVG = "assets/images/onboard_1.svg";
   static const String personSVG = "assets/images/person.svg";
+  static const String addressSVG = "assets/images/address.svg";
   static const String phoneSVG = "assets/images/phoneSvg.svg";
   static const String lockSVG = "assets/images/lock.svg";
   static const String greenTik = "assets/images/green_Tik.svg";
@@ -67,8 +68,6 @@ class MyImages {
   static const String appBarBGimage = "assets/images/appBar_bg.png";
   static const String profileimage = "assets/images/profile.svg";
   static const String profileimagePng = "assets/images/profile_home.png";
-  static const String profileimageWomenPng = "assets/images/profile_women.jpg";
-  static const String profileimageWomen2Png = "assets/images/women2.jpg";
   static const String reward = "assets/images/rewords.svg";
   static const String bell = "assets/images/Settings.svg";
   static const String avatar1 = "assets/images/avatar1.svg";

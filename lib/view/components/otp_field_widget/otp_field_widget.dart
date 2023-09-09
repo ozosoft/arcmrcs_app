@@ -46,7 +46,7 @@ class OTPFieldWidget extends StatelessWidget {
             fieldHeight: Dimensions.space45,
             fieldWidth: Dimensions.space45,
             inactiveColor: MyColor.cardBorderColors,
-            inactiveFillColor: inActiveColor,
+            inactiveFillColor: MyColor.colorWhite,
             activeFillColor: activeColor,
             activeColor: MyColor.getPrimaryColor(),
             selectedFillColor: MyColor.getScreenBgColor(),

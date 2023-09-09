@@ -17,30 +17,30 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(
-       builder: (controller) => Padding(
+      builder: (controller) => Padding(
         padding: const EdgeInsets.all(Dimensions.space18),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             const SizedBox(height: Dimensions.space10),
+            const SizedBox(height: Dimensions.space10),
             const Text(
               MyStrings.profileDetails,
               style: boldMediumLarge,
             ),
-             const SizedBox(height: Dimensions.space10),
+            const SizedBox(height: Dimensions.space10),
             Container(
                 decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space10)),
-              child: Column(
-                children: [
-                  ListTile(
+                child: Column(
+                  children: [
+                    ListTile(
                       title: Text(
                         MyStrings.fullname,
                         style: regularDefault.copyWith(color: MyColor.textColor),
-                  ),
+                      ),
                       subtitle: Text(controller.profileRepo.apiClient.getUserFullName(), style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
                     ),
                     const Divider(height: Dimensions.space3),
-                  ListTile(
+                    ListTile(
                       title: Text(
                         MyStrings.emailAddress,
                         style: regularDefault.copyWith(color: MyColor.textColor),
@@ -63,8 +63,7 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
                       ),
                       subtitle: Text(controller.cityController.text, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
                     ),
-                    
-                ],
+                  ],
                 )),
           ],
         ),

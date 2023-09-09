@@ -17,86 +17,39 @@ class ProfileRepo {
 
   ProfileRepo({required this.apiClient});
 
-  Future<bool> updateProfile(UserPostModel m,bool isProfile) async {
-
-    try{
+  Future<bool> updateProfile(UserPostModel m, bool isProfile) async {
+    try {
       apiClient.initToken();
 
-      String url = '${UrlContainer.baseUrl}${isProfile?UrlContainer.updateProfileEndPoint:UrlContainer.profileCompleteEndPoint}';
+      String url = '${UrlContainer.baseUrl}${isProfile ? UrlContainer.updateProfileEndPoint : UrlContainer.profileCompleteEndPoint}';
 
-
-      var request=http.MultipartRequest('POST',Uri.parse(url));
-       Map<String,String>finalMap={
-        'firstname': m.firstname,
-        'lastname': m.lastName,
-        'address': m.address??'',
-        'zip': m.zip??'',
-        'state': m.state??"",
-        'city': m.city??'',
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+      Map<String, String> finalMap = {
+        'firstname': m.firstname!,
+        'lastname': m.lastName!,
+        'address': m.address ?? '',
+        'zip': m.zip ?? '',
+        'state': m.state ?? "",
+        'city': m.city ?? '',
       };
 
-      request.headers.addAll(<String,String>{'Authorization' : 'Bearer ${apiClient.token}'});
-      if(m.image!=null){
-        request.files.add( http.MultipartFile('image', m.image!.readAsBytes().asStream(), m.image!.lengthSync(), filename: m.image!.path.split('/').last));
+      request.headers.addAll(<String, String>{'Authorization': 'Bearer ${apiClient.token}'});
+
+      if (m.avatar != null) {
+        request.files.add(http.MultipartFile('avatar', m.avatar!.readAsBytes().asStream(), m.avatar!.lengthSync(), filename: m.avatar!.path.split('/').last));
       }
       request.fields.addAll(finalMap);
 
       http.StreamedResponse response = await request.send();
 
-      String jsonResponse=await response.stream.bytesToString();
+      String jsonResponse = await response.stream.bytesToString();
       AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
 
-      if(model.status?.toLowerCase()==MyStrings.success.toLowerCase()){
-        CustomSnackBar.success(successList: model.message?.success??[MyStrings.success]);
-        return true;
-      }else{
-        CustomSnackBar.error(errorList: model.message?.error??[MyStrings.requestFail.tr]);
-        return false;
-      }
-
-    }catch(e){
-      return false;
-    }
-
-  }
-
-  Future<ResponseModel> loadProfileInfo() async {
-
-    String url = '${UrlContainer.baseUrl}${UrlContainer.getProfileEndPoint}';
-    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
-    return responseModel;
-
-  }
-
-
-
-    Future<bool> updateProfilePicture(File profilePic) async {
-    try {
-      apiClient.initToken();
-
-      String url = '${UrlContainer.baseUrl}${UrlContainer.updateProfileAvatarEndPoint }';
-
-      var request = http.MultipartRequest('POST', Uri.parse(url));
-  
-      if (profilePic != null) {
-        request.files.add(http.MultipartFile(
-            'avatar', profilePic!.readAsBytes().asStream(), profilePic!.lengthSync(),
-            filename: profilePic!.path.split('/').last));
-      }
-      
-      http.StreamedResponse response = await request.send();
-
-      String jsonResponse = await response.stream.bytesToString();
-      AuthorizationResponseModel model =
-          AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
-
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        CustomSnackBar.success(
-            successList: model.message?.success ?? [MyStrings.success]);
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
         return true;
       } else {
-        CustomSnackBar.error(
-            errorList: model.message?.error ?? [MyStrings.requestFail.tr]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.requestFail.tr]);
         return false;
       }
     } catch (e) {
@@ -104,4 +57,38 @@ class ProfileRepo {
     }
   }
 
+  Future<ResponseModel> loadProfileInfo() async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.getProfileEndPoint}';
+    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+    return responseModel;
+  }
+
+  Future<bool> updateProfilePicture(File profilePic) async {
+    try {
+      apiClient.initToken();
+
+      String url = '${UrlContainer.baseUrl}${UrlContainer.updateProfileAvatarEndPoint}';
+
+      var request = http.MultipartRequest('POST', Uri.parse(url));
+
+      if (profilePic != null) {
+        request.files.add(http.MultipartFile('avatar', profilePic.readAsBytes().asStream(), profilePic.lengthSync(), filename: profilePic.path.split('/').last));
+      }
+
+      http.StreamedResponse response = await request.send();
+
+      String jsonResponse = await response.stream.bytesToString();
+      AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
+
+      if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
+        return true;
+      } else {
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.requestFail.tr]);
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
 }

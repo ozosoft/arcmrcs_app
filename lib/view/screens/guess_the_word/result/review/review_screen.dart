@@ -71,8 +71,7 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                           ),
                           InkWell(
                               onTap: () {
-                                if ((controller.reviewPageController.page!.toInt() + 1) != controller.guessThewordQuestionList.length) {
-                                  
+                                if (controller.reviewPageController.page!.toInt() < controller.guessThewordQuestionList.length) {
                                   controller.reviewPageController.nextPage(
                                     duration: const Duration(milliseconds: 500),
                                     curve: Curves.easeInOut,
@@ -136,8 +135,7 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                         children: [
                           const Text('${MyStrings.currectAnswer}:'),
                           const SizedBox(width: Dimensions.space5),
-                          Text(controller.guessThewordQuestionList[index].options![0].currectAns.toString(),
-                              style: mediumLarge, textAlign: TextAlign.center),
+                          Text(controller.guessThewordQuestionList[index].options![0].currectAns.toString(), style: mediumLarge, textAlign: TextAlign.center),
                         ],
                       ),
                     ],

@@ -10,6 +10,7 @@ import 'package:flutter_prime/view/components/circle_image_button.dart';
 import '../../../../../../../../core/utils/my_color.dart';
 import '../../../../../../../core/utils/my_images.dart';
 import '../../../../../data/controller/account/profile_controller.dart';
+import '../../../../core/utils/dimensions.dart';
 import 'widgets/build_circle_widget.dart';
 
 class ProfileWidget extends StatefulWidget {
@@ -29,22 +30,16 @@ class ProfileWidget extends StatefulWidget {
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
-
-
-
-   @override
+  @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ProfileRepo(apiClient: Get.find()));
 
-   Get.put(ProfileUpdateController(profileRepo: Get.find()));
+    Get.put(ProfileUpdateController(profileRepo: Get.find()));
 
     super.initState();
+  }
 
-  
-  } 
-
-  
   XFile? imageFile;
   @override
   Widget build(BuildContext context) {
@@ -59,9 +54,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                       child: Material(
                           color: MyColor.transparentColor,
                           child: CircleImageWidget(
-                            imagePath: MyImages.profile,
-                            width: 90,
-                            height: 90,
+                            imagePath: MyImages.defaultAvatar,
+                            height: Dimensions.space80,
+                            width: Dimensions.space80,
                             isAsset: true,
                           )),
                     )
@@ -81,9 +76,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   padding: 8,
                                   color: MyColor.primaryColor,
                                   child: Icon(
-                                    widget.isEdit
-                                        ? Icons.add_a_photo
-                                        : Icons.edit,
+                                    widget.isEdit ? Icons.add_a_photo : Icons.edit,
                                     color: Colors.white,
                                     size: 20,
                                   )))),
@@ -94,7 +87,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         ),
       ),
     );
-    
   }
 
   Widget buildImage() {
@@ -122,8 +114,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ? Ink.image(
                   image: image as ImageProvider,
                   fit: BoxFit.cover,
-                  width: 90,
-                  height: 90,
+                  height: Dimensions.space80,
+                  width: Dimensions.space80,
                   child: InkWell(
                     onTap: widget.onClicked,
                   ),
@@ -132,8 +124,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   press: () {},
                   isAsset: isAsset,
                   imagePath: isAsset ? MyImages.profile : widget.imagePath,
-                  height: 100,
-                  width: 100,
+                  height: Dimensions.space80,
+                  width: Dimensions.space80,
                 ),
         ),
       ),
@@ -141,13 +133,9 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   }
 
   void _openGallery(BuildContext context) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        type: FileType.custom,
-        allowedExtensions: ['png', 'jpg', 'jpeg']);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
     setState(() {
-      Get.find<ProfileController>().imageFile =
-          File(result!.files.single.path!);
+      Get.find<ProfileUpdateController>().imageFile = File(result!.files.single.path!);
       imageFile = XFile(result.files.single.path!);
     });
   }
