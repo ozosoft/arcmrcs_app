@@ -45,13 +45,13 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<DailyQuizQuestionsController>(
         builder: (controller) => Scaffold(
-              appBar: const CustomCategoryAppBar(title: MyStrings.dailyQuiz),
+              appBar: CustomCategoryAppBar(title: MyStrings.dailyQuiz.tr),
               body: controller.loading
                   ? const CustomLoader()
                   : controller.examQuestionsList.isEmpty
                       ? NoDataWidget(
                           showBack: true,
-                          messages: "${controller.alreadyPlayed == true ? MyStrings.sorryAlreadyPlayedQuiz : MyStrings.sorryNoQuizFound} ",
+                          messages: "${controller.alreadyPlayed == true ? MyStrings.sorryAlreadyPlayedQuiz.tr : MyStrings.sorryNoQuizFound.tr} ",
                         )
                       : PageView(onPageChanged: (value) {}, children: [
                           PageView.builder(
@@ -136,7 +136,6 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
 
                                                               if (questionsIndex == controller.examQuestionsList.length - 1) {
                                                                 controller.submitAnswer();
-                                                                
                                                               }
                                                             },
                                                             child: Container(
@@ -178,7 +177,7 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                                                             ),
                                                           ),
                                                         ),
-                                                        controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
+                                                        controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent.tr, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
                                                       ],
                                                     ),
                                                   ],

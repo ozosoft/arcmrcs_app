@@ -51,8 +51,6 @@ class DailyQuizQuestionsController extends GetxController {
   late final TabController tabController;
   int selectedIndex = 1;
 
-  TextEditingController _textEditingController = TextEditingController();
-  String _inputText = "";
 
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
@@ -177,7 +175,7 @@ class DailyQuizQuestionsController extends GetxController {
   makeFiftyFifty(int index) {
     List<Option> allOptions = examQuestionsList[index].options!;
     var random = Random();
-    Option correctAnswers = allOptions!.firstWhere((element) => element.isAnswer == '1');
+    Option correctAnswers = allOptions.firstWhere((element) => element.isAnswer == '1');
     allOptions.remove(correctAnswers);
     Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
     List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);
@@ -242,7 +240,7 @@ class DailyQuizQuestionsController extends GetxController {
         totalCoin = model.data!.user!.coins.toString();
         winningCoin = model.data!.winingCoin.toString();
         countDownController.pause();
-        Get.toNamed(RouteHelper.dailyQuizresultScreen, arguments: MyStrings.quizResult)!.whenComplete(() {
+        Get.toNamed(RouteHelper.dailyQuizresultScreen, arguments: MyStrings.quizResult.tr)!.whenComplete(() {
           Get.back();
         });
 

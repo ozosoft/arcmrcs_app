@@ -35,8 +35,8 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: const CustomCategoryAppBar(
-          title: MyStrings.reviewAnswer,
+        appBar:  CustomCategoryAppBar(
+          title: MyStrings.reviewAnswer.tr,
         ),
         body: GetBuilder<GuessThewordReviewResultController>(builder: (controller) {
           return Padding(
@@ -78,8 +78,8 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                                   );
                                 }
                               },
-                              child: const LevelCardButton(
-                                text: MyStrings.next,
+                              child:  LevelCardButton(
+                                text: MyStrings.next.tr,
                                 hasIcon: false,
                                 hasImage: false,
                                 bgColor: MyColor.primaryColor,
@@ -125,7 +125,7 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                       const SizedBox(height: Dimensions.space20),
                       Row(
                         children: [
-                          const Text('${MyStrings.yourAnswer}:'),
+                           Text('${MyStrings.yourAnswer.tr}:'),
                           const SizedBox(width: Dimensions.space5),
                           Text(controller.guessThewordQuestionList[index].selectedAnswer.toString(), style: mediumLarge, textAlign: TextAlign.center),
                         ],
@@ -133,7 +133,7 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                       const SizedBox(height: Dimensions.space5),
                       Row(
                         children: [
-                          const Text('${MyStrings.currectAnswer}:'),
+                           Text('${MyStrings.currectAnswer.tr}:'),
                           const SizedBox(width: Dimensions.space5),
                           Text(controller.guessThewordQuestionList[index].options![0].currectAns.toString(), style: mediumLarge, textAlign: TextAlign.center),
                         ],

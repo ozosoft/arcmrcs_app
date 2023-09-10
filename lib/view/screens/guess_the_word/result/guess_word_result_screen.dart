@@ -19,8 +19,8 @@ class _GuessWordResultScreenState extends State<GuessWordResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomCategoryAppBar(
-          title: MyStrings.quizResult,
+        appBar:  CustomCategoryAppBar(
+          title: MyStrings.quizResult.tr,
        
         ),
         body: SingleChildScrollView(

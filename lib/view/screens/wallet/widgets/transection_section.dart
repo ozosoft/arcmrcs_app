@@ -4,6 +4,7 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/view/components/divider/custom_dashed_divider.dart';
+import 'package:get/get.dart';
 
 import 'reedem_request_card.dart';
 
@@ -23,13 +24,13 @@ class _TransectionSectionState extends State<TransectionSection> {
         children: [
           const SizedBox(height: Dimensions.space20),
           Text(
-            MyStrings.totalCoins,
+            MyStrings.totalCoins.tr,
             style: regularExtraLarge.copyWith(color: MyColor.textColor),
           ),
           const SizedBox(
             height: Dimensions.space10,
           ),
-          const Text(MyStrings.fivehundredCoin, style: semiBoldOverLarge),
+           Text(MyStrings.fivehundredCoin.tr, style: semiBoldOverLarge),
           const SizedBox(height: Dimensions.space20),
           const CustomDashedDivider(height: .2, width: double.infinity),
           const SizedBox(height: Dimensions.space10),
@@ -38,10 +39,10 @@ class _TransectionSectionState extends State<TransectionSection> {
             child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  return const ReedemRequestCard(
-                    amount: MyStrings.twoHundredFortyDollar,
-                    paymentType: MyStrings.paymentSystem,
-                    date: MyStrings.dates,
+                  return  ReedemRequestCard(
+                    amount: MyStrings.twoHundredFortyDollar.tr,
+                    paymentType: MyStrings.paymentSystem.tr,
+                    date: MyStrings.dates.tr,
                     pending: true,
                   );
                 },

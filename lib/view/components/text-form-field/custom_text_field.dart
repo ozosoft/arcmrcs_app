@@ -94,10 +94,14 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 keyboardType: widget.textInputType,
                 obscureText: widget.isPassword ? obscureText : false,
                 decoration: InputDecoration(
+                  hintText: widget.hintText != null ? widget.hintText!.tr : '',
                   prefixIcon: widget.hasIcon
                       ? Padding(
                           padding: const EdgeInsets.all(Dimensions.space15),
-                          child: SvgPicture.asset(widget.prefixicon ?? "",width: 15,),
+                          child: SvgPicture.asset(
+                            widget.prefixicon ?? "",
+                            width: 15,
+                          ),
                         )
                       : null,
                   contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),

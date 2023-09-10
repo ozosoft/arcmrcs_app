@@ -51,8 +51,8 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            MyStrings.topCategory,
+                           Text(
+                            MyStrings.topCategory.tr,
                             style: semiBoldMediumLarge,
                           ),
                           InkWell(
@@ -62,7 +62,7 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                             child: Padding(
                               padding: const EdgeInsets.all(Dimensions.space5),
                               child: Text(
-                                MyStrings.viewAll,
+                                MyStrings.viewAll.tr,
                                 style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
                               ),
                             ),

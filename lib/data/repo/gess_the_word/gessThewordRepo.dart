@@ -5,6 +5,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:get/get.dart';
 
 class GuessTheWordRepo {
   ApiClient apiClient;
@@ -16,7 +17,7 @@ class GuessTheWordRepo {
       ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
       return responseModel;
     } catch (e) {
-      return ResponseModel(false, MyStrings.somethingWentWrong, 300, '');
+      return ResponseModel(false, MyStrings.somethingWentWrong.tr, 300, '');
     }
   }
 
@@ -26,7 +27,7 @@ class GuessTheWordRepo {
       ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
       return responseModel;
     } catch (e) {
-      return ResponseModel(false, MyStrings.somethingWentWrong, 300, '');
+      return ResponseModel(false, MyStrings.somethingWentWrong.tr, 300, '');
     }
   }
 
@@ -36,7 +37,7 @@ class GuessTheWordRepo {
       ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
       return responseModel;
     } catch (e) {
-      return ResponseModel(false, MyStrings.somethingWentWrong, 300, '');
+      return ResponseModel(false, MyStrings.somethingWentWrong.tr, 300, '');
     }
   }
 

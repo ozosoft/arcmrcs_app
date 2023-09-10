@@ -61,17 +61,17 @@ class _TabBarWithButtonsState extends State<TabBarWithButtons>
                     selectedIndex = tabController.index;
                   });
                 },
-                tabs: const [
+                tabs:  [
                   Tab(
                     child: Align(
                       alignment: Alignment.center,
-                      child: Text(MyStrings.request),
+                      child: Text(MyStrings.request.tr),
                     ),
                   ),
                   // Tab(
                   //   child: Align(
                   //     alignment: Alignment.center,
-                  //     child: Text(MyStrings.transaction),
+                  //     child: Text(MyStrings.transaction.tr),
                   //   ),
                   // ),
                 ]),

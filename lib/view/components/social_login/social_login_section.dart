@@ -27,14 +27,14 @@ class SocialLoginSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SocialLoginButton(
-                title: MyStrings.continueWithGmail,
+                title: MyStrings.continueWithGmail.tr,
                 image: MyImages.google,
                 ontap: () async {
                   await loginController!.signInWithGoogle();
                 },
               ),
               SocialLoginButton(
-                title: MyStrings.continueWithPhone,
+                title: MyStrings.continueWithPhone.tr,
                 image: MyImages.telephone,
                 ontap: () {
                   Get.toNamed(RouteHelper.mobileLoginScreen);

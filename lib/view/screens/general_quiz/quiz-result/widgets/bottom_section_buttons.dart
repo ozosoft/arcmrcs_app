@@ -21,14 +21,14 @@ class BottomSectionButtons extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: Dimensions.space15, left: Dimensions.space15, right: Dimensions.space15),
             child: RoundedButton(
-                text: id != 0 ? MyStrings.nextLevel : MyStrings.home,
+                text: id != 0 ? MyStrings.nextLevel.tr : MyStrings.home.tr,
                 press: () {
                   var idData = id;
                   var titleData = title;
                   idData != 0
                       ? Get.offAllNamed(RouteHelper.quizQuestionsScreen, arguments: [titleData, idData])
                       : Future.delayed(const Duration(milliseconds: 800), () {
-                          CustomSnackBar.error(errorList: [MyStrings.completeTheLevelFirst]);
+                          CustomSnackBar.error(errorList: [MyStrings.completeTheLevelFirst.tr]);
                         }).then((value) => Get.offAllNamed(
                             RouteHelper.bottomNavBarScreen,
                           ));
@@ -38,7 +38,7 @@ class BottomSectionButtons extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(Dimensions.space15),
             child: RoundedButton(
-              text: MyStrings.reviewAnswer,
+              text: MyStrings.reviewAnswer.tr,
               press: () {
                 Get.toNamed(RouteHelper.reviewAnswerScreen);
               },

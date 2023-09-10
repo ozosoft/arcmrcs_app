@@ -31,8 +31,8 @@ class _QuizContestSectionState extends State<QuizContestSection> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  MyStrings.quizContest,
+                 Text(
+                  MyStrings.quizContest.tr,
                   style: semiBoldMediumLarge,
                 ),
                 InkWell(
@@ -40,7 +40,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                     Get.toNamed(RouteHelper.quizContestListscreen);
                   },
                   child: Text(
-                    MyStrings.viewAll,
+                    MyStrings.viewAll.tr,
                     style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
                   ),
                 ),
@@ -148,7 +148,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                               padding: const EdgeInsets.all(Dimensions.space7),
                                               child: Center(
                                                   child: Text(
-                                                MyStrings.feeCoins + controller.contestlist[index].point.toString(),
+                                                MyStrings.feeCoins.tr + controller.contestlist[index].point.toString(),
                                                 style: regularDefault.copyWith(color: MyColor.colorGrey),
                                               )),
                                             ),
@@ -158,7 +158,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                             child: Container(
                                               decoration: BoxDecoration(color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
                                               padding: const EdgeInsets.all(Dimensions.space7),
-                                              child: Center(child: Text(MyStrings.end + '${controller.contestlist[index].endDate.toString()}', style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                              child: Center(child: Text(MyStrings.end.tr + controller.contestlist[index].endDate.toString(), style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                             ),
                                           ),
                                           const Spacer(),

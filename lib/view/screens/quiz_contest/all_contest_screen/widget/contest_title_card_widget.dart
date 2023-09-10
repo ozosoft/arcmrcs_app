@@ -119,7 +119,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                                           right: Dimensions.space7,
                                           child: Center(
                                               child: Text(
-                                            "${MyStrings.entryFee} - ${widget.contest.point}",
+                                            "${MyStrings.entryFee.tr} - ${widget.contest.point}",
                                             style: regularDefault.copyWith(color: MyColor.colorGrey),
                                           )),
                                         ),
@@ -127,7 +127,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                                           right: Dimensions.space7,
                                           child: Center(
                                             child: Text(
-                                              '${MyStrings.end}${DateConverter.stringDateToDate(widget.contest.endDate.toString())}',
+                                              '${MyStrings.end.tr}${DateConverter.stringDateToDate(widget.contest.endDate.toString())}',
                                               style: regularDefault.copyWith(color: MyColor.colorGrey),
                                             ),
                                           ),

@@ -42,8 +42,8 @@ class _GuessResultBodyState extends State<GuessResultBody> {
                 const SizedBox(
                   height: Dimensions.space2,
                 ),
-                const Text(
-                  MyStrings.totalScore,
+                 Text(
+                  MyStrings.totalScore.tr,
                   style: lightDefault,
                 ),
               ],
@@ -146,7 +146,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
               height: Dimensions.space40,
             ),
             RoundedButton(
-                text: MyStrings.playAgain,
+                text: MyStrings.playAgain.tr,
                 press: () {
                   Get.offAndToNamed(RouteHelper.guessTheword, arguments: int.parse(controller.quizInfoId.toString()));
                 },
@@ -155,7 +155,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
               height: Dimensions.space20,
             ),
             RoundedButton(
-              text: MyStrings.reviewAnswer,
+              text: MyStrings.reviewAnswer.tr,
               press: () {
                 Get.offAndToNamed(RouteHelper.gessThewordResultReview, arguments: [controller.gessThewordQuesstionList.isNotEmpty ? controller.gessThewordQuesstionList : <GuessQuestion>[]]);
               },
@@ -166,7 +166,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
               height: Dimensions.space20,
             ),
             RoundedButton(
-              text: MyStrings.home,
+              text: MyStrings.home.tr,
               press: () {
                 Get.offAllNamed(RouteHelper.bottomNavBarScreen);
               },

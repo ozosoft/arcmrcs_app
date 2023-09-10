@@ -20,7 +20,7 @@ class _FunNlearnResultScreenState extends State<FunNlearnResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColor.primaryColor,
-      appBar: const CustomCategoryAppBar(title: MyStrings.quizResult),
+      appBar:  CustomCategoryAppBar(title: MyStrings.quizResult.tr),
       body: Stack(
         children: [
           Positioned.fill(

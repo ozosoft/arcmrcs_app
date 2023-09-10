@@ -34,8 +34,8 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  MyStrings.examZone,
+                Text(
+                  MyStrings.examZone.tr,
                   style: semiBoldMediumLarge,
                 ),
                 InkWell(
@@ -45,7 +45,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(Dimensions.space5),
                     child: Text(
-                      MyStrings.viewAll,
+                      MyStrings.viewAll.tr,
                       style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
                     ),
                   ),
@@ -128,19 +128,19 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 Text(
-                                                  item.title.toString(),
+                                                  item.title.toString().tr,
                                                   style: semiBoldMediumLarge,
                                                 ),
                                                 const SizedBox(height: Dimensions.space8),
                                                 Text(
-                                                  "${item.description.toString()} ",
+                                                  "${item.description.toString().tr} ",
                                                   maxLines: 3,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: regularDefault.copyWith(color: MyColor.textSecondColor),
                                                 ),
                                                 const SizedBox(height: Dimensions.space10),
                                                 Text(
-                                                  "${MyStrings.examStartTime.tr} ${item.examStartTime.toString()}",
+                                                  "${MyStrings.examStartTime.tr} ${item.examStartTime.toString().tr}",
                                                   maxLines: 2,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: regularDefault.copyWith(
@@ -152,7 +152,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                                   height: Dimensions.space3,
                                                 ),
                                                 Text(
-                                                  "${MyStrings.total.tr} ${item.examDuration.toString()} ${MyStrings.min} ",
+                                                  "${MyStrings.total.tr} ${item.examDuration.toString()} ${MyStrings.min.tr} ",
                                                   maxLines: 2,
                                                   overflow: TextOverflow.ellipsis,
                                                   style: regularDefault.copyWith(
@@ -230,7 +230,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      MyStrings.noExamFound,
+                      MyStrings.noExamFound.tr,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: regularDefault.copyWith(color: MyColor.spinLoadColor),

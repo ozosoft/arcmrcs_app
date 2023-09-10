@@ -74,13 +74,13 @@ class AddNewDepositController extends GetxController {
   bool submitLoading = false;
   Future<void> submitDeposit(String coinId) async {
     if (paymentMethod?.id.toString() == '-1') {
-      CustomSnackBar.error(errorList: [MyStrings.selectPaymentMethod]);
+      CustomSnackBar.error(errorList: [MyStrings.selectPaymentMethod.tr]);
       return;
     }
 
     String amount = amountController.text.toString();
     if (amount.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.enterAmount]);
+      CustomSnackBar.error(errorList: [MyStrings.enterAmount.tr]);
       return;
     }
 
@@ -96,7 +96,7 @@ class AddNewDepositController extends GetxController {
       if (insertResponseModel.status.toString().toLowerCase() == "success") {
         showWebView(insertResponseModel.data?.redirectUrl ?? "");
       } else {
-        CustomSnackBar.error(errorList: insertResponseModel.message?.error ?? [MyStrings.somethingWentWrong]);
+        CustomSnackBar.error(errorList: insertResponseModel.message?.error ?? [MyStrings.somethingWentWrong.tr]);
       }
     } else {
       CustomSnackBar.error(

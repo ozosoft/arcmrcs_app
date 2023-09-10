@@ -8,13 +8,13 @@ import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/divider/or_divider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 class PaymentBottomSheetScreen extends StatefulWidget {
   const PaymentBottomSheetScreen({super.key});
 
   @override
-  State<PaymentBottomSheetScreen> createState() =>
-      _PaymentBottomSheetScreenState();
+  State<PaymentBottomSheetScreen> createState() => _PaymentBottomSheetScreenState();
 }
 
 class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
@@ -29,10 +29,10 @@ class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
         const SizedBox(
           height: Dimensions.space20,
         ),
-        const Align(
+        Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              MyStrings.payment,
+              MyStrings.payment.tr,
               style: semiBoldExtraLarge,
             )),
         const SizedBox(
@@ -41,9 +41,7 @@ class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
         Container(
             padding: const EdgeInsets.all(Dimensions.space12),
             width: double.infinity,
-            decoration: BoxDecoration(
-                border: Border.all(color: MyColor.colorBlack),
-                borderRadius: BorderRadius.circular(3)),
+            decoration: BoxDecoration(border: Border.all(color: MyColor.colorBlack), borderRadius: BorderRadius.circular(3)),
             child: Row(
               children: [
                 const SizedBox(
@@ -54,8 +52,8 @@ class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
                   width: Dimensions.space20,
                 ),
                 Text(
-                  MyStrings.paymentwithGooglePay,
-                  style:regularExtraLarge.copyWith(fontWeight: FontWeight.w500),
+                  MyStrings.paymentwithGooglePay.tr,
+                  style: regularExtraLarge.copyWith(fontWeight: FontWeight.w500),
                 ),
               ],
             )),
@@ -63,10 +61,10 @@ class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
           padding: EdgeInsets.symmetric(vertical: Dimensions.space27),
           child: OrDivider(),
         ),
-        const Align(
+        Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              MyStrings.paymentMethod,
+              MyStrings.paymentMethod.tr,
               style: regularMediumLarge,
             )),
         Padding(
@@ -82,25 +80,19 @@ class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
                 });
               },
               decoration: InputDecoration(
-                  hintText: MyStrings.twoForty,
+                  hintText: MyStrings.twoForty.tr,
                   filled: true,
                   fillColor: MyColor.cardColor,
-                  labelStyle:
-                      regularMediumLarge.copyWith(color: MyColor.textColor),
-                  focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: MyColor.cardBorderColors, width: .5)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                          color: MyColor.cardBorderColors, width: .8),
-                      borderRadius: BorderRadius.circular(Dimensions.space8))),
+                  labelStyle: regularMediumLarge.copyWith(color: MyColor.textColor),
+                  focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: MyColor.cardBorderColors, width: .5)),
+                  enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.cardBorderColors, width: .8), borderRadius: BorderRadius.circular(Dimensions.space8))),
             ),
           ),
         ),
-        const Align(
+        Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              MyStrings.selectGateway,
+              MyStrings.selectGateway.tr,
               style: regularMediumLarge,
             )),
         Padding(
@@ -116,17 +108,12 @@ class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
                 });
               },
               decoration: InputDecoration(
-                  hintText: MyStrings.twoForty,
+                  hintText: MyStrings.twoForty.tr,
                   filled: true,
                   fillColor: MyColor.cardColor,
-                  labelStyle:
-                      regularMediumLarge.copyWith(color: MyColor.textColor),
-                  focusedBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(
-                          color: MyColor.cardBorderColors, width: .5)),
-                  enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(color: MyColor.cardBorderColors, width: .8),
-                      borderRadius: BorderRadius.circular(Dimensions.space8))),
+                  labelStyle: regularMediumLarge.copyWith(color: MyColor.textColor),
+                  focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: MyColor.cardBorderColors, width: .5)),
+                  enabledBorder: OutlineInputBorder(borderSide: const BorderSide(color: MyColor.cardBorderColors, width: .8), borderRadius: BorderRadius.circular(Dimensions.space8))),
             ),
           ),
         ),
@@ -134,7 +121,7 @@ class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
           height: Dimensions.space20,
         ),
         RoundedButton(
-          text: MyStrings.submit,
+          text: MyStrings.submit.tr,
           press: () {},
           cornerRadius: Dimensions.space8,
           textSize: Dimensions.space20,

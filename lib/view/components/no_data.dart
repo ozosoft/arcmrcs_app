@@ -48,7 +48,7 @@ class NoDataWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  " ${showBack == true ? MyStrings.back : MyStrings.home} ",
+                  " ${showBack == true ? MyStrings.back.tr : MyStrings.home.tr} ",
                   style: regularLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.bold),
                 ),
               ),

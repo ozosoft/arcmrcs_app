@@ -27,7 +27,7 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
           InkWell(
             onTap: () {
               if (controller.fiftyFifty == true) {
-                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed]);
+                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
               } else {
                 controller.makeFiftyFifty(widget.questionIndex);
               }
@@ -45,7 +45,7 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
           InkWell(
             onTap: () {
               if (controller.audienceVote == true) {
-                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed]);
+                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
               } else {
                 controller.audienceVotes(widget.questionIndex);
               }
@@ -55,7 +55,7 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
           InkWell(
             onTap: () {
               if (controller.restartTimer) {
-                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed]);
+                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
               } else {
                 controller.countDownController.restart();
                 controller.restartCountDownTimer(widget.questionIndex);
@@ -66,7 +66,7 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
           InkWell(
             onTap: () async {
               if (controller.flipQuistions) {
-                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed]);
+                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
               } else {
                 controller.flipQuiston(widget.questionIndex);
                 print(controller.flipQuistion);

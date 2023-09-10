@@ -72,14 +72,14 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                           child: Column(
                             children: [
                               Text(
-                                MyStrings.youLeftTheGame,
+                                MyStrings.youLeftTheGame.tr,
                                 style: regularLarge.copyWith(color: MyColor.textSecondColor),
                               ),
                               const SizedBox(
                                 height: Dimensions.space15,
                               ),
                               Text(
-                                MyStrings.lose,
+                                MyStrings.lose.tr,
                                 style: boldLarge.copyWith(color: MyColor.textSecondColor, fontSize: Dimensions.fontMediumLarge),
                               ),
                             ],
@@ -111,7 +111,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                   Get.offAllNamed(RouteHelper.bottomNavBarScreen);
                                 },
                                 child: Text(
-                                  MyStrings.ok,
+                                  MyStrings.ok.tr,
                                   style: regularLarge.copyWith(color: MyColor.colorWhite),
                                 ),
                               ),
@@ -144,14 +144,14 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                           child: Column(
                             children: [
                               Text(
-                                MyStrings.oponentLeftTheGame,
+                                MyStrings.oponentLeftTheGame.tr,
                                 style: regularLarge.copyWith(color: MyColor.textSecondColor),
                               ),
                               const SizedBox(
                                 height: Dimensions.space15,
                               ),
                               Text(
-                                MyStrings.youWon,
+                                MyStrings.youWon.tr,
                                 style: boldLarge.copyWith(color: MyColor.textSecondColor, fontSize: Dimensions.fontMediumLarge),
                               ),
                             ],
@@ -182,7 +182,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                   }
                                 },
                                 child: Text(
-                                  MyStrings.collectCoins,
+                                  MyStrings.collectCoins.tr,
                                   style: regularLarge.copyWith(color: MyColor.colorWhite),
                                 ),
                               ),
@@ -222,7 +222,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                           Padding(
                             padding: const EdgeInsets.all(Dimensions.space10),
                             child: Text(
-                              MyStrings.areYouSureYouWantToLeaveThisRoom,
+                              MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
                               style: regularLarge.copyWith(color: MyColor.textSecondColor),
                             ),
                           ),
@@ -243,8 +243,8 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                   onPressed: () {
                                     Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                                   },
-                                  child: const Text(
-                                    MyStrings.cancel,
+                                  child:  Text(
+                                    MyStrings.cancel.tr,
                                     style: regularLarge,
                                   ),
                                 ),
@@ -271,7 +271,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                     }
                                   },
                                   child: Text(
-                                    MyStrings.yes,
+                                    MyStrings.yes.tr,
                                     style: regularLarge.copyWith(color: MyColor.colorWhite),
                                   ),
                                 ),
@@ -303,7 +303,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   LevelCardButton(
-                                    text: "${quizController.battleRoomController.battleRoomData.value!.entryFee} ${MyStrings.coins}",
+                                    text: "${quizController.battleRoomController.battleRoomData.value!.entryFee} ${MyStrings.coins.tr}",
                                     hasIcon: false,
                                     hasImage: false,
                                   ),
@@ -445,20 +445,20 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                             alignment: Alignment.center,
                             child: Container(
                               color: MyColor.colorWhite.withOpacity(0.9),
-                              child: const Padding(
-                                padding: EdgeInsets.all(8.0),
+                              child:  Padding(
+                                padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    SpinKitPouringHourGlass(
+                                    const SpinKitPouringHourGlass(
                                       color: MyColor.spinLoadColor,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: Dimensions.space20,
                                     ),
                                     Text(
-                                      MyStrings.pleaseWaitForYourBattleResultText,
+                                      MyStrings.pleaseWaitForYourBattleResultText.tr,
                                     )
                                   ],
                                 ),

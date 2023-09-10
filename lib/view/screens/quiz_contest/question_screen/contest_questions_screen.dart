@@ -53,8 +53,8 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
               body: controller.loading
                   ? const CustomLoader()
                   : controller.examQuestionsList.isEmpty
-                      ? const NoDataWidget(
-                          messages: MyStrings.thisContestIsNotAvailableRightNow,
+                      ?  NoDataWidget(
+                          messages: MyStrings.thisContestIsNotAvailableRightNow.tr,
                         )
                       : PageView(onPageChanged: (value) {}, children: [
                           PageView.builder(
@@ -185,7 +185,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                                         ),
                                                         controller.showaudienceVote == true
                                                             ? Text(
-                                                                controller.examQuestionsList[questionsIndex].options![optionIndex].audience.toString() + MyStrings.percent,
+                                                                controller.examQuestionsList[questionsIndex].options![optionIndex].audience.toString() + MyStrings.percent.tr,
                                                                 style: regularMediumLarge.copyWith(color: MyColor.textColor),
                                                               )
                                                             : const SizedBox(),

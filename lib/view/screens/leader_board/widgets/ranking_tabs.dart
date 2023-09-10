@@ -125,7 +125,7 @@ class _RankingTabBarState extends State<RankingTabBar> {
             ),
             FittedBox(
               child: Text(
-                MyStrings.at + playerName,
+                MyStrings.at.tr + playerName.tr,
                 style: regularMediumLarge.copyWith(
                   color: MyColor.colorWhite,
                 ),

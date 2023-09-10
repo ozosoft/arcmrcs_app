@@ -173,10 +173,10 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                           labelCount = widget.categories.quizInfos!.length;
                                         });
                                       },
-                                      child: const Padding(
-                                        padding: EdgeInsets.only(bottom: Dimensions.space20),
+                                      child:  Padding(
+                                        padding: const EdgeInsets.only(bottom: Dimensions.space20),
                                         child: CustomTextWithUndeline(
-                                          text: MyStrings.viewMore,
+                                          text: MyStrings.viewMore.tr,
                                         ),
                                       ),
                                     )

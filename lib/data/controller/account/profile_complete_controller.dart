@@ -38,23 +38,30 @@ class ProfileCompleteController extends GetxController {
   bool submitLoading = false;
 
   updateProfile() async {
-    String firstName = firstNameController.text;
+    submitLoading = true;
+    update();
+
+    String firstName = firstNameController.text.toString();
     String lastName = lastNameController.text.toString();
     String address = addressController.text.toString();
     String city = cityController.text.toString();
     String zip = zipCodeController.text.toString();
     String state = stateController.text.toString();
 
-    if (firstName.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.kFirstNameNullError]);
-      return;
-    } else if (lastName.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.kLastNameNullError]);
-      return;
-    }
+    // if (firstName.isEmpty) {
+    //   CustomSnackBar.error(errorList: [MyStrings.kFirstNameNullError.tr]);
+    //   submitLoading = true;
+    //   update();
 
-    submitLoading = true;
-    update();
+    //   return;
+    // } 
+    // else if (lastName.isEmpty) {
+    //   CustomSnackBar.error(errorList: [MyStrings.kLastNameNullError.tr]);
+    //   submitLoading = true;
+    //   update();
+
+    //   return;
+    // }
 
     UserPostModel model = UserPostModel(avatar: null, firstname: firstName, lastName: lastName, mobile: '', email: '', username: '', countryCode: '', country: '', mobileCode: '8', address: address, state: state, zip: zip, city: city);
 

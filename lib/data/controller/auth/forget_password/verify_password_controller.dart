@@ -48,7 +48,7 @@ class VerifyPasswordController extends GetxController {
       } else {
         verifyLoading = false;
         update();
-        List<String> errorList = [MyStrings.verificationFailed];
+        List<String> errorList = [MyStrings.verificationFailed.tr];
         CustomSnackBar.error(errorList: model.message?.error ?? errorList);
       }
     }

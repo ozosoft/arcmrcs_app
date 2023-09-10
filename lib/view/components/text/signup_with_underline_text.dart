@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
+import 'package:get/get.dart';
 
 import '../../../core/utils/my_strings.dart';
 import '../../../core/utils/style.dart';
@@ -16,7 +17,7 @@ class CustomSignUPText extends StatelessWidget {
                 bottom: BorderSide(color: MyColor.primaryColor, ))
               ),
               child:  Text(
-              MyStrings.signUp,
+              MyStrings.signUp.tr,
               style: regularMediumLarge.copyWith(color:MyColor.primaryColor,
               fontSize: Dimensions.space14  
               ),

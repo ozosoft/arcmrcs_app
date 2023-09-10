@@ -40,7 +40,7 @@ class CustomHeadSection extends StatelessWidget {
                       icon: const Icon(Icons.arrow_back),
                     ),
                     Text(
-                      appbarTitle,
+                      appbarTitle.tr,
                       style: regularMediumLarge.copyWith(fontWeight: FontWeight.w500),
                     )
                   ],

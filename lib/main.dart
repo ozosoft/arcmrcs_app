@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
           systemOverlayStyle: SystemUiOverlayStyle(statusBarBrightness: Brightness.light)
            )
         ),
-        title: MyStrings.appName,
+        title: MyStrings.appName.tr,
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.noTransition,
         transitionDuration: const Duration(milliseconds: 200),

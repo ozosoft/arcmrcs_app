@@ -123,7 +123,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     prefixicon: MyImages.lockSVG,
                     animatedLabel: true,
                     needOutlineBorder: true,
-                    labelText: MyStrings.password,
+                    labelText: MyStrings.password.tr,
                     onChanged: (value) {
                       print(value);
                       //  controller.updateValidationList(value);
@@ -174,7 +174,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                         return MyStrings.fieldErrorMsg.tr;
                       }
                       if (value != controller.passwordController.text) {
-                        return MyStrings.confirmYourPasswordNotMatch;
+                        return MyStrings.confirmYourPasswordNotMatch.tr;
                       } else {
                         return null;
                       }
@@ -184,7 +184,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                   controller.submitLoading
                       ? const RoundedLoadingBtn()
                       : RoundedButton(
-                          text: MyStrings.signUp,
+                          text: MyStrings.signUp.tr,
                           press: () {
                             if (formKey.currentState!.validate()) {
                               controller.signUpUser();

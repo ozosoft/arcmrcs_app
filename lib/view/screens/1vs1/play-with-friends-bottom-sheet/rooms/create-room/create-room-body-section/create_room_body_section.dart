@@ -52,8 +52,8 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                MyStrings.selectCategory,
+               Text(
+                MyStrings.selectCategory.tr,
                 style: semiBoldMediumLarge,
               ),
               const SizedBox(height: Dimensions.space15),
@@ -79,7 +79,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                     ),
                   );
                 }).toList(),
-                hintText: MyStrings.selectACategoryText,
+                hintText: MyStrings.selectACategoryText.tr,
               ),
               const SizedBox(height: Dimensions.space25),
               Container(
@@ -92,10 +92,10 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: Dimensions.space15, left: Dimensions.space15),
+                       Padding(
+                        padding: const EdgeInsets.only(top: Dimensions.space15, left: Dimensions.space15),
                         child: Text(
-                          MyStrings.entryCoinsForBattele,
+                          MyStrings.entryCoinsForBattele.tr,
                           style: semiBoldMediumLarge,
                         ),
                       ),
@@ -124,7 +124,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                           controller: _textEditingController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            labelText: MyStrings.enterCoins,
+                            labelText: MyStrings.enterCoins.tr,
                             filled: true,
                             fillColor: MyColor.cardColor,
                             labelStyle: regularExtraLarge.copyWith(color: MyColor.textColor),
@@ -158,7 +158,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          MyStrings.yourCoins,
+                          MyStrings.yourCoins.tr,
                           style: regularMediumLarge.copyWith(color: MyColor.textColor),
                         ),
                         const SizedBox(
@@ -206,13 +206,13 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                       : RoundedButton(
                           text: MyStrings.createRoom,
                           press: () {
-                            print(battleRoomController.slectedCategoryID.value);
-                            print(battleRoomController.entryFeeCustomRoom.value);
+                            // print(battleRoomController.slectedCategoryID.value);
+                            // print(battleRoomController.entryFeeCustomRoom.value);
 
                             if (battleRoomController.slectedCategoryID.value == 0) {
-                              CustomSnackBar.error(errorList: [MyStrings.selectACategoryText]);
+                              CustomSnackBar.error(errorList: [MyStrings.selectACategoryText.tr]);
                             } else if (battleRoomController.entryFeeCustomRoom.value == "0") {
-                              CustomSnackBar.error(errorList: [MyStrings.selectEntryCoinText]);
+                              CustomSnackBar.error(errorList: [MyStrings.selectEntryCoinText.tr]);
                             } else {
                               battleRoomController.createNewRoom(
                                   categoryId: "${battleRoomController.slectedCategoryID.value}",

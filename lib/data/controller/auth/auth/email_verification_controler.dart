@@ -30,7 +30,7 @@ class EmailVerificationController extends GetxController {
     if (responseModel.statusCode == 200) {
       AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (model.status == 'error') {
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
       }
     } else {
       CustomSnackBar.error(errorList: [responseModel.message]);
@@ -42,7 +42,7 @@ class EmailVerificationController extends GetxController {
 
   Future<void> verifyEmail(String text) async {
     if (text.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.otpFieldEmptyMsg]);
+      CustomSnackBar.error(errorList: [MyStrings.otpFieldEmptyMsg.tr]);
       return;
     }
 
@@ -55,7 +55,7 @@ class EmailVerificationController extends GetxController {
       AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(responseModel.responseJson));
      print("this is========model");
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        CustomSnackBar.success(successList: model.message?.success ?? [(MyStrings.emailVerificationSuccess)]);
+        CustomSnackBar.success(successList: model.message?.success ?? [(MyStrings.emailVerificationSuccess.tr)]);
 
 
           print("this is==$needSmsVerification");
@@ -71,7 +71,7 @@ class EmailVerificationController extends GetxController {
            
         }
       } else {
-        CustomSnackBar.error(errorList: model.message?.error ?? [(MyStrings.emailVerificationFailed)]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [(MyStrings.emailVerificationFailed.tr)]);
       }
     } else {
       CustomSnackBar.error(errorList: [responseModel.message]);

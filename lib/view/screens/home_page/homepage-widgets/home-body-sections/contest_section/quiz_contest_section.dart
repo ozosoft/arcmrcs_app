@@ -34,8 +34,8 @@ class _QuizContestSectionState extends State<QuizContestSection> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
-                  MyStrings.quizContest,
+                 Text(
+                  MyStrings.quizContest.tr,
                   style: semiBoldMediumLarge,
                 ),
                 InkWell(
@@ -45,7 +45,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                   child: Padding(
                     padding: const EdgeInsets.all(Dimensions.space5),
                     child: Text(
-                      MyStrings.viewAll,
+                      MyStrings.viewAll.tr,
                       style: semiBoldLarge.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space15),
                     ),
                   ),
@@ -128,12 +128,12 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                                       mainAxisSize: MainAxisSize.min,
                                                       children: [
                                                         Text(
-                                                          controller.contestlist[index].title.toString(),
+                                                          controller.contestlist[index].title.toString().tr,
                                                           style: semiBoldMediumLarge,
                                                         ),
                                                         const SizedBox(height: Dimensions.space8),
                                                         Text(
-                                                          "${controller.contestlist[index].description.toString()} ",
+                                                          "${controller.contestlist[index].description.toString().tr} ",
                                                           maxLines: 3,
                                                           overflow: TextOverflow.ellipsis,
                                                           style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
@@ -161,7 +161,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                                   right: Dimensions.space7,
                                                   child: Center(
                                                       child: Text(
-                                                    "${MyStrings.entryFee} - ${controller.contestlist[index].point}",
+                                                    "${MyStrings.entryFee.tr} - ${controller.contestlist[index].point!.tr}",
                                                     style: regularDefault.copyWith(color: MyColor.colorGrey),
                                                   )),
                                                 ),
@@ -169,7 +169,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                                   right: Dimensions.space7,
                                                   child: Center(
                                                     child: Text(
-                                                      '${MyStrings.end}${DateConverter.stringDateToDate(controller.contestlist[index].endDate.toString())}',
+                                                      '${MyStrings.end.tr}${DateConverter.stringDateToDate(controller.contestlist[index].endDate.toString()).tr}',
                                                       style: regularDefault.copyWith(color: MyColor.colorGrey),
                                                     ),
                                                   ),
@@ -206,7 +206,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                   ),
                   child: Center(
                     child: Text(
-                      MyStrings.noContestFound,
+                      MyStrings.noContestFound.tr,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                       style: regularDefault.copyWith(color: MyColor.spinLoadColor),

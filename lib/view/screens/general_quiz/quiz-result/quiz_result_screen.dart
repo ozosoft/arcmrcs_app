@@ -5,6 +5,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/screens/general_quiz/quiz-result/widgets/quiz_result_body_section.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/utils/my_images.dart';
 
@@ -20,7 +21,7 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColor.primaryColor,
-      appBar: const CustomCategoryAppBar(title: MyStrings.quizResult),
+      appBar:  CustomCategoryAppBar(title: MyStrings.quizResult.tr),
       body: Stack(
         children: [
           Positioned.fill(

@@ -28,7 +28,7 @@ class ChooseFileItem extends StatelessWidget {
             padding: const EdgeInsets.all(Dimensions.space5),
             decoration: BoxDecoration(color: MyColor.colorBlack.withOpacity(0.04), borderRadius: BorderRadius.circular(5)),
             alignment: Alignment.center,
-            child: Text(MyStrings.chooseFile, textAlign: TextAlign.center, style: regularDefault.copyWith(color: MyColor.primaryColor), )
+            child: Text(MyStrings.chooseFile.tr, textAlign: TextAlign.center, style: regularDefault.copyWith(color: MyColor.primaryColor), )
           ),
           const SizedBox(width: Dimensions.space15,),
           Expanded(

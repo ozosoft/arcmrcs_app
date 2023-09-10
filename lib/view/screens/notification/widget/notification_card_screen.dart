@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/screens/notification/widget/notification_card.dart';
 
 class NotificationCardScreen extends StatefulWidget {
@@ -14,28 +13,34 @@ class NotificationCardScreen extends StatefulWidget {
 class _NotificationCardScreenState extends State<NotificationCardScreen> {
   @override
   Widget build(BuildContext context) {
+    final List<Map<String, String>> notifications = [
+      {'title': "rewardNotification", 'short_Notification': "shortDesc1", 'detail_Notification': "detailnotifucation1", 'date': "detailnotifucationdate1"},
+      {'title': "joinwithnewroom", 'short_Notification': "shortDesc2", 'detail_Notification': "detailnotifucation1", 'date': "detailnotifucationdate2"},
+      {'title': "eventNotification", 'short_Notification': "shortDesc3", 'detail_Notification': "detailnotifucation1", 'date': "detailnotifucationdate3"},
+    ];
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-            ListView.builder(
-              physics:const NeverScrollableScrollPhysics(),
-              padding:const EdgeInsets.only(top: Dimensions.space25),
+          ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              padding: const EdgeInsets.only(top: Dimensions.space25),
               shrinkWrap: true,
-              itemCount: MyStrings().notifications.length,
+              itemCount: notifications.length,
               itemBuilder: (BuildContext context, int index) {
                 return NotificationCard(
-                  title: MyStrings().notifications[index]["title"].toString(),
+                  title: notifications[index]["title"].toString(),
                   image: MyImages().notificatioImages[index],
                   expansionVisible: true,
                   fromViewAll: false,
-                  shortDesc: MyStrings().notifications[index]["short_Notification"].toString(),
+                  shortDesc: notifications[index]["short_Notification"].toString(),
                   fromBookmark: true,
-                  details: MyStrings().notifications[index]["detail_Notification"].toString() ,
-                  date: MyStrings().notifications[index]["date"].toString() ,
+                  details: notifications[index]["detail_Notification"].toString(),
+                  date: notifications[index]["date"].toString(),
                 );
               }),
-       ],
+        ],
       ),
     );
   }

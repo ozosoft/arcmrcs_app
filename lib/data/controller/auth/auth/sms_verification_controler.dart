@@ -52,7 +52,7 @@ class SmsVerificationController extends GetxController {
         // Get.offAndToNamed(isProfileCompleteEnable? RouteHelper.profileCompleteScreen:RouteHelper.bottomNavBar);
 
       } else {
-        CustomSnackBar.error(errorList: model.message?.error??['${MyStrings.sms.tr} ${MyStrings.verificationFailed}']);
+        CustomSnackBar.error(errorList: model.message?.error??['${MyStrings.sms.tr} ${MyStrings.verificationFailed.tr}']);
       }
     } else {
       CustomSnackBar.error(errorList: [responseModel.message]);

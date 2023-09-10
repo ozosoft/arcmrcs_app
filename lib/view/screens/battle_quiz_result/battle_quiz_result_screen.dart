@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
 import '../../../core/utils/my_images.dart';
 import '../../../core/utils/my_strings.dart';
@@ -21,7 +19,7 @@ class _BattleQuizResultScreenState extends State<BattleQuizResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColor.primaryColor,
-      appBar: const CustomCategoryAppBar(title: MyStrings.battleResult),
+      appBar:  CustomCategoryAppBar(title: MyStrings.battleResult.tr),
 
       
       body: Stack(
@@ -29,7 +27,7 @@ class _BattleQuizResultScreenState extends State<BattleQuizResultScreen> {
           Positioned.fill(
             child: SvgPicture.asset(
               MyImages.reviewBgImage,
-              fit: BoxFit.cover, // Fit the SVG to cover the whole container
+              fit: BoxFit.cover, 
             ),
           ),
           const BattleQuizResultBodySection(),

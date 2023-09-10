@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_prime/environment.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -104,7 +104,7 @@ class LoginController extends GetxController {
       if (loginModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         checkAndGotoNextStep(loginModel);
       } else {
-        CustomSnackBar.error(errorList: loginModel.message?.error ?? [MyStrings.loginFailedTryAgain]);
+        CustomSnackBar.error(errorList: loginModel.message?.error ?? [MyStrings.loginFailedTryAgain.tr]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);
@@ -140,8 +140,10 @@ class LoginController extends GetxController {
   bool sendOtpButtonLoading = false;
   bool isInOTPpage = false;
   bool isResendingOTP = false;
-  int resendDelayInSeconds = 60; // Set the delay to 60 seconds
+  final secondLeft = 0.obs;
+
   Timer? _resendTimer;
+  Timer? get resendTimer => _resendTimer;
   //to manage the search input.
   TextEditingController searchController = TextEditingController();
   TextEditingController otpFiledController = TextEditingController();
@@ -151,7 +153,7 @@ class LoginController extends GetxController {
   //to hold the countries matching the search.
   List<Countries> filteredCountries = [];
 
-  Countries selectedCountryData = Countries(country: "Bangladesh", countryCode: "BD", dialCode: "880");
+  Countries selectedCountryData = Countries();
 
   bool countryLoading = true;
   bool phoneNumberValidate = true;
@@ -167,6 +169,12 @@ class LoginController extends GetxController {
 
       if (tempList != null && tempList.isNotEmpty) {
         countryList.addAll(tempList);
+      }
+
+      var selectDefCountry = tempList!.firstWhere((country) => country.countryCode!.toLowerCase() == Environment.defaultCountryCode.toLowerCase(), orElse: () => Countries());
+
+      if (selectDefCountry.dialCode != null) {
+        selectCountryData(selectDefCountry);
       }
     } else {
       CustomSnackBar.error(errorList: [mainResponse.message]);
@@ -200,16 +208,18 @@ class LoginController extends GetxController {
     phoneNumberValidate = true;
     isInOTPpage = false;
     sendOtpButtonLoading = false;
+    isResendingOTP = false;
+    secondLeft.value = 0;
     otpFiledController = TextEditingController();
     mobileNumberController = TextEditingController();
     update();
   }
 
-  Future<void> verifyPhoneNumber() async {
+  Future<void> verifyPhoneNumber({bool laoder = true}) async {
     try {
-      changeOtpSendButtonLoading(true);
-      String phoneNumber = "${MyStrings.plusText.tr}${selectedCountryData.dialCode}${mobileNumberController.text}";
-      print(phoneNumber);
+      changeOtpSendButtonLoading(laoder);
+      String phoneNumber = "${MyStrings.plusText.tr}${selectedCountryData.dialCode!.tr}${mobileNumberController.text.tr}";
+
       await firebaseAuth.verifyPhoneNumber(
         phoneNumber: phoneNumber,
         verificationCompleted: (PhoneAuthCredential credential) async {
@@ -225,7 +235,9 @@ class LoginController extends GetxController {
           // Get.toNamed('/otp'); // Navigate to the OTP screen
           print("Go To OTP PAGE");
           changeOtpPageStatus(true);
+
           changeOtpSendButtonLoading(false);
+          CustomSnackBar.error(errorList: [MyStrings.otpSentToYourMobile.tr]);
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           this.verificationId.value = verificationId;
@@ -247,31 +259,31 @@ class LoginController extends GetxController {
       );
       await firebaseAuth.signInWithCredential(credential);
 
-      print(firebaseUser.value!.uid);
-      print(firebaseUser.value!.displayName);
-      print(firebaseUser.value!.email);
-      print(firebaseUser.value!.phoneNumber);
-      print(firebaseUser.value!.photoURL);
-      
+      await socialLoginUser(mobile: firebaseUser.value!.phoneNumber, uid: firebaseUser.value!.uid, provider: 'mobile');
+
       changeOtpSendButtonLoading(false);
     } catch (e) {
       changeOtpSendButtonLoading(false);
       if (e.toString().contains("invalid-verification-code]")) {
-        CustomSnackBar.error(errorList: [MyStrings.pleaseEnterValidOtpCode]);
+        CustomSnackBar.error(errorList: [MyStrings.pleaseEnterValidOtpCode.tr]);
       }
 
       // Get.snackbar('Error', e.toString());
     }
   }
 
-  Future<void> resendOTP(String phoneNumber) async {
+  Future<void> resendOTP() async {
     try {
-      if (!isResendingOTP) {
+      if (isResendingOTP == false) {
+        if (_resendTimer != null && _resendTimer!.isActive) {
+          print("cancle timmer");
+          _resendTimer!.cancel();
+        }
+        await verifyPhoneNumber(laoder: false);
         isResendingOTP = true;
-        await verifyPhoneNumber();
         _startResendTimer();
       } else {
-        Get.snackbar('Error', 'Resend is in progress');
+        CustomSnackBar.error(errorList: [(MyStrings.tryAfterSec.replaceAll("{sec}", secondLeft.value.toString()).tr)]);
       }
     } catch (e) {
       Get.snackbar('Error', e.toString());
@@ -280,10 +292,18 @@ class LoginController extends GetxController {
   }
 
   void _startResendTimer() {
-    _resendTimer = Timer(Duration(seconds: resendDelayInSeconds), () {
-      isResendingOTP = false;
-      _resendTimer?.cancel();
+    secondLeft.value = Environment.otpResendSecond;
+    update();
+    _resendTimer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
+      isResendingOTP = true;
+      secondLeft.value--;
+
+      if (secondLeft.value <= 0) {
+        isResendingOTP = false;
+        _resendTimer?.cancel();
+      }
     });
+    update();
   }
 
   Future<void> signOut() async {
@@ -298,6 +318,7 @@ class LoginController extends GetxController {
       Get.snackbar('Error', e.toString());
     }
   }
+  //SIGN IN With Google
 
   Future<void> signInWithGoogle() async {
     try {
@@ -312,16 +333,50 @@ class LoginController extends GetxController {
       );
       await firebaseAuth.signInWithCredential(credential);
 
-      print(firebaseUser.value!.uid);
-      print(firebaseUser.value!.displayName);
-      print(firebaseUser.value!.email);
-      print(firebaseUser.value!.phoneNumber);
-      print(firebaseUser.value!.photoURL);
+      await socialLoginUser(email: firebaseUser.value!.email, uid: firebaseUser.value!.uid, provider: 'email');
     } catch (e) {
       print(e.toString());
       Get.snackbar('Error', e.toString());
     }
   }
 
+  //Social Login API PART
+
+  Future socialLoginUser({String? email, String? mobile, String? provider, String? uid}) async {
+    isSubmitLoading = true;
+
+    update();
+
+    late ResponseModel responseModel;
+
+    if (provider == "email") {
+      responseModel = await loginRepo.socialLoginUser(
+        email: email,
+        provider: provider,
+        uid: uid,
+      );
+    }
+    if (provider == "mobile") {
+      responseModel = await loginRepo.socialLoginUser(
+        mobile: mobile,
+        provider: provider,
+        uid: uid,
+      );
+    }
+
+    if (responseModel.statusCode == 200) {
+      LoginResponseModel loginModel = LoginResponseModel.fromJson(jsonDecode(responseModel.responseJson));
+      if (loginModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+        checkAndGotoNextStep(loginModel);
+      } else {
+        CustomSnackBar.error(errorList: loginModel.message?.error ?? [MyStrings.loginFailedTryAgain.tr]);
+      }
+    } else {
+      CustomSnackBar.error(errorList: [responseModel.message]);
+    }
+
+    isSubmitLoading = false;
+    update();
+  }
   //Firebase Login part
 }

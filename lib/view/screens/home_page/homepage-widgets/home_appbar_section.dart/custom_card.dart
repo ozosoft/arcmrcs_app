@@ -49,12 +49,12 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        MyStrings.rank,
+                        MyStrings.rank.tr,
                         style: regularMediumLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w500),
                       ),
                       const CustomDivider(space: Dimensions.space5),
                       Text(
-                        MyUtils().formatNumberWithLeadingZero(controller.rank),
+                        MyUtils().formatNumberWithLeadingZero(controller.rank).tr,
                         style: regularMediumLarge.copyWith(color: MyColor.lightGreyTextColor, fontWeight: FontWeight.w400),
                       ),
                     ],
@@ -80,12 +80,12 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        MyStrings.coins,
+                        MyStrings.coins.tr,
                         style: regularMediumLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w500),
                       ),
                       const CustomDivider(space: Dimensions.space5),
                       Text(
-                        MyUtils().formatNumberWithLeadingZero(controller.coins),
+                        MyUtils().formatNumberWithLeadingZero(controller.coins).tr,
                         style: regularMediumLarge.copyWith(color: MyColor.lightGreyTextColor, fontWeight: FontWeight.w400),
                       )
                     ],
@@ -111,12 +111,12 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        MyStrings.score,
+                        MyStrings.score.tr,
                         style: regularMediumLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w500),
                       ),
                       const CustomDivider(space: Dimensions.space5),
                       Text(
-                        MyUtils().formatNumberWithLeadingZero(controller.score),
+                        MyUtils().formatNumberWithLeadingZero(controller.score).tr,
                         style: regularMediumLarge.copyWith(color: MyColor.lightGreyTextColor, fontWeight: FontWeight.w400),
                       )
                     ],

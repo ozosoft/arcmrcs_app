@@ -45,18 +45,13 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
             padding: EdgeInsets.all(Dimensions.space10),
             child: RankingTabBar(),
           ),
-
-          // const SizedBox(height: Dimensions.space15),
-
           Stack(
             children: [
               Container(
                 alignment: Alignment.topCenter,
                 child: SvgPicture.asset(
                   MyImages.leaderBoardRankSVG,
-                  // width: context.width / 1.3,
                   height: context.width / 3.5,
-                  // width: orientation != Orientation.portrait ? size.width * .5 : size.width * .7,
                 ),
               ),
               controller.isLoading
@@ -69,8 +64,8 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                   : Container(
                       alignment: Alignment.topCenter,
                       margin: EdgeInsets.only(
-                        left: Dimensions.space20,
-                        right: Dimensions.space20,
+                        left: Dimensions.space10,
+                        right: Dimensions.space10,
                         top: context.width / 4.05,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space20),
@@ -106,7 +101,7 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                                 ],
                               ),
                               child: Padding(
-                                padding: const EdgeInsets.all(Dimensions.space12),
+                                padding: const EdgeInsets.all(Dimensions.space10),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -143,14 +138,14 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            item.fullName.toString().isEmpty ? item.username : item.fullName.toString(),
+                                            (item.fullName.toString().isEmpty ? item.username : item.fullName.toString()).tr,
                                             style: semiBoldMediumLarge,
                                           ),
                                           const SizedBox(height: Dimensions.space5),
                                           Row(
                                             children: [
                                               Text(
-                                                "${item.score} ${MyStrings.points}",
+                                                "${item.score.tr} ${MyStrings.points.tr}",
                                                 style: semiBoldLarge.copyWith(color: MyColor.textColor),
                                               ),
                                             ],
@@ -159,7 +154,7 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                                       ),
                                     ),
                                     Text(
-                                      ' $ranking',
+                                      '$ranking'.tr,
                                       style: semiBoldOverLarge.copyWith(color: MyColor.greyTextColor.withOpacity(0.6), fontSize: Dimensions.fontOverLarge30),
                                     )
                                   ],

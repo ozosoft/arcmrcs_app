@@ -71,7 +71,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
   Widget build(BuildContext context) {
     return GetBuilder<ExamZoneQuizController>(
         builder: (controller) => Scaffold(
-              appBar: const CustomCategoryAppBar(title: MyStrings.examZone),
+              appBar:  CustomCategoryAppBar(title: MyStrings.examZone.tr),
               body: controller.loading == true
                   ? const CustomLoader()
                   : controller.examQuestionsList.isEmpty
@@ -99,7 +99,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                     Padding(
                                       padding: const EdgeInsets.all(Dimensions.space10),
                                       child: Text(
-                                        MyStrings.areYouSureYouWantToLeaveExamRoom,
+                                        MyStrings.areYouSureYouWantToLeaveExamRoom.tr,
                                         style: regularLarge.copyWith(color: MyColor.textSecondColor),
                                       ),
                                     ),
@@ -120,8 +120,8 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                             onPressed: () {
                                               Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                                             },
-                                            child: const Text(
-                                              MyStrings.cancel,
+                                            child:  Text(
+                                              MyStrings.cancel.tr,
                                               style: regularLarge,
                                             ),
                                           ),
@@ -131,7 +131,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                               Get.offAllNamed(RouteHelper.bottomNavBarScreen);
                                             },
                                             child: Text(
-                                              MyStrings.yes,
+                                              MyStrings.yes.tr,
                                               style: regularLarge.copyWith(color: MyColor.colorWhite),
                                             ),
                                           ),
@@ -274,7 +274,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                                                 ),
                                                               ),
                                                             ),
-                                                            controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
+                                                            controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent.tr, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
                                                           ],
                                                         ),
                                                       ],
@@ -355,14 +355,14 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      "${controller.selectedAnswerId.length} ${MyStrings.attempted}",
+                                                      "${controller.selectedAnswerId.length} ${MyStrings.attempted.tr}",
                                                       style: regularMediumLarge.copyWith(color: MyColor.colorDarkGrey),
                                                     ),
                                                     const SizedBox(
                                                       height: Dimensions.space6,
                                                     ),
                                                     Text(
-                                                      "${controller.examQuestionsList.length - controller.selectedAnswerId.length} ${MyStrings.unAttempted}",
+                                                      "${controller.examQuestionsList.length - controller.selectedAnswerId.length} ${MyStrings.unAttempted.tr}",
                                                       style: regularMediumLarge.copyWith(color: MyColor.colorDarkGrey),
                                                     )
                                                   ],
@@ -374,7 +374,7 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                         Expanded(
                                           flex: 1,
                                           child: RoundedButton(
-                                              text: MyStrings.submit,
+                                              text: MyStrings.submit.tr,
                                               color: MyColor.primaryColor,
                                               press: () {
                                                 print("Exam Finished button");
@@ -395,20 +395,20 @@ class _Exam_zone_quiz_screenState extends State<Exam_zone_quiz_screen> {
                                     alignment: Alignment.center,
                                     child: Container(
                                       color: MyColor.colorWhite.withOpacity(0.9),
-                                      child: const Padding(
-                                        padding: EdgeInsets.all(8.0),
+                                      child:  Padding(
+                                        padding: const EdgeInsets.all(8.0),
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.center,
                                           mainAxisAlignment: MainAxisAlignment.center,
                                           children: [
-                                            SpinKitPouringHourGlass(
+                                            const SpinKitPouringHourGlass(
                                               color: MyColor.spinLoadColor,
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: Dimensions.space20,
                                             ),
                                             Text(
-                                              MyStrings.pleaseWaitForYourResultText,
+                                              MyStrings.pleaseWaitForYourResultText.tr,
                                             )
                                           ],
                                         ),

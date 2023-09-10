@@ -53,7 +53,7 @@ class _KycScreenState extends State<KycScreen> {
             },
             child: Scaffold(
               backgroundColor: MyColor.getScreenBgColor(),
-              appBar: const CustomAppBar(title: MyStrings.kyc,bgColor:MyColor.primaryColor,),
+              appBar:  CustomAppBar(title: MyStrings.kyc.tr,bgColor:MyColor.primaryColor,),
               body: SizedBox(
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
@@ -89,7 +89,7 @@ class _KycScreenState extends State<KycScreen> {
                                             labelText: model.name??'',
                                             validator: (value){
                                               if(model.isRequired != 'optional ' && value.toString().isEmpty){
-                                                return '${model.name.toString().capitalizeFirst} ${MyStrings.isRequired}';
+                                                return '${model.name.toString().capitalizeFirst} ${MyStrings.isRequired.tr}';
                                               }else{
                                                 return null;
                                               }
@@ -110,7 +110,7 @@ class _KycScreenState extends State<KycScreen> {
                                             hintText: (model.name??'').capitalizeFirst,
                                             validator: (value){
                                               if(model.isRequired != 'optional ' && value.toString().isEmpty){
-                                                return '${model.name.toString().capitalizeFirst} ${MyStrings.isRequired}';
+                                                return '${model.name.toString().capitalizeFirst} ${MyStrings.isRequired.tr}';
                                               }else{
                                                 return null;
                                               }
@@ -176,7 +176,7 @@ class _KycScreenState extends State<KycScreen> {
                                   controller.submitKycData();
                                 }
                               },
-                              text: MyStrings.submit,
+                              text: MyStrings.submit.tr,
                               ),
                             ),
                           ],

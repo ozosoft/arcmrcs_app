@@ -37,7 +37,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                   Padding(
                     padding: const EdgeInsets.all(Dimensions.space10),
                     child: Text(
-                      MyStrings.areYouSureYouWantToLeaveThisRoom,
+                      MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
                       style: regularLarge.copyWith(color: MyColor.textSecondColor),
                     ),
                   ),
@@ -58,8 +58,8 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                           onPressed: () {
                             Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                           },
-                          child: const Text(
-                            MyStrings.cancel,
+                          child:  Text(
+                            MyStrings.cancel.tr,
                             style: regularLarge,
                           ),
                         ),
@@ -71,7 +71,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                             });
                           },
                           child: Text(
-                            MyStrings.yes,
+                            MyStrings.yes.tr,
                             style: regularLarge.copyWith(color: MyColor.colorWhite),
                           ),
                         ),
@@ -125,7 +125,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                       width: Dimensions.space260,
                       child: Center(
                         child: Text(
-                          MyStrings.pleaseWaitRoomText,
+                          MyStrings.pleaseWaitRoomText.tr,
                           textAlign: TextAlign.center,
                           style: regularLarge.copyWith(color: MyColor.textColor),
                         ),
@@ -192,7 +192,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                             ),
                           ),
                           Text(
-                            MyStrings.creator,
+                            MyStrings.creator.tr,
                             textAlign: TextAlign.center,
                             style: regularLarge.copyWith(color: MyColor.textColor),
                           ),
@@ -255,7 +255,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                             ),
                           ),
                           Text(
-                            MyStrings.player,
+                            MyStrings.player.tr,
                             textAlign: TextAlign.center,
                             style: regularLarge.copyWith(color: MyColor.textColor),
                           ),

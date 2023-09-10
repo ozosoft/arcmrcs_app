@@ -53,7 +53,7 @@ class DownloadingDialogState extends State<DownloadingDialog> {
       File savedFile = await file.writeAsBytes(_bytes);
       Get.back();
       CustomSnackBar.success(successList: [
-        '${MyStrings.fileDownloadedSuccess}: ${savedFile.path.toString()}'
+        '${MyStrings.fileDownloadedSuccess.tr}: ${savedFile.path.toString()}'
       ]);
       setState(() {
         _image = file;
@@ -74,7 +74,7 @@ class DownloadingDialogState extends State<DownloadingDialog> {
       if (value.toString() == 'true') {
         Get.back();
         CustomSnackBar.success(
-            successList: [(MyStrings.fileDownloadedSuccess)]);
+            successList: [(MyStrings.fileDownloadedSuccess.tr)]);
       } else {
         Get.back();
         dynamic errorMessage = result['errorMessage'];
@@ -85,7 +85,7 @@ class DownloadingDialogState extends State<DownloadingDialog> {
         print(e.toString());
       }
       Get.back();
-      CustomSnackBar.error(errorList: [MyStrings.requestFail]);
+      CustomSnackBar.error(errorList: [MyStrings.requestFail.tr]);
     }
   }
 

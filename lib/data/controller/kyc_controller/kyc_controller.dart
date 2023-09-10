@@ -124,17 +124,17 @@ class KycController extends GetxController {
       if (element.isRequired == 'required') {
         if(element.type=='checkbox'){
           if (element.cbSelected == null ) {
-            errorList.add('${element.name} ${MyStrings.isRequired}');
+            errorList.add('${element.name} ${MyStrings.isRequired.tr}');
           }
         }
         else if(element.type=='file'){
           if (element.imageFile==null) {
-            errorList.add('${element.name} ${MyStrings.isRequired}');
+            errorList.add('${element.name} ${MyStrings.isRequired.tr}');
           }
         }
         else{
           if (element.selectedValue == '' || element.selectedValue == selectOne) {
-            errorList.add('${element.name} ${MyStrings.isRequired}');
+            errorList.add('${element.name} ${MyStrings.isRequired.tr}');
           }
         }
       }

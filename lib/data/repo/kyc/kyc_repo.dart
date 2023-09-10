@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_prime/core/utils/method.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -28,7 +29,7 @@ class KycRepo {
       } else {
 
         if(model.remark?.toLowerCase() != 'already_verified' && model.remark?.toLowerCase() != 'under_review') {
-          CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+          CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
         }
 
         return model;

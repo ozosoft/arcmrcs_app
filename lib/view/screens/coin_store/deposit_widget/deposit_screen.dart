@@ -56,7 +56,7 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
       builder: (controller) => SafeArea(
           child: Scaffold(
         backgroundColor: MyColor.getScreenBgColor(),
-        appBar: const CustomCategoryAppBar(title: MyStrings.deposit),
+        appBar:  CustomCategoryAppBar(title: MyStrings.deposit.tr),
         body: controller.isLoading
             ? const CustomLoader()
             : SingleChildScrollView(
@@ -108,7 +108,7 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
                         controller.submitLoading
                             ? const RoundedLoadingBtn()
                             : RoundedButton(
-                                text: MyStrings.submit,
+                                text: MyStrings.submit.tr,
                                 textColor: MyColor.colorWhite,
                                 textSize: Dimensions.space17,
                                 width: double.infinity,

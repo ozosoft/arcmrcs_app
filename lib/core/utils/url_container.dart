@@ -21,6 +21,7 @@ class UrlContainer {
 
   static const String registrationEndPoint = 'register';
   static const String loginEndPoint = 'login';
+  static const String socialLogin = 'social-login';
   static const String logoutUrl = 'logout';
   static const String submitAnswerUrl = 'general-quiz/answer-submit';
 

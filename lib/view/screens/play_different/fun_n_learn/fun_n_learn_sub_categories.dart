@@ -48,10 +48,10 @@ class _FunNLearnSubCategoriesCardScreenState extends State<FunNLearnSubCategorie
     return GetBuilder<FunNLearnSubCategoriesController>(
       builder: (controller) => Scaffold(
         appBar: CustomCategoryAppBar(
-          title: title,
+          title: title.tr,
         ),
         body: controller.loader
-            ? CustomLoader()
+            ? const CustomLoader()
             : SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(

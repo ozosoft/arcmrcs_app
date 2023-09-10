@@ -4,6 +4,7 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_prime/view/components/category-card/categories_card.dart';
+import 'package:get/get.dart';
 
 class BookmarkScreen extends StatefulWidget {
   const BookmarkScreen({super.key});
@@ -13,11 +14,19 @@ class BookmarkScreen extends StatefulWidget {
 }
 
 class _BookmarkScreenState extends State<BookmarkScreen> {
+  final List<Map<String, String>> allCategoryies = [
+    {'title': "generalKnowledge", 'questions': "questions", 'level': "sixlevel"},
+    {'title': "gameandSports", 'questions': "questions2", 'level': "sevenlevel"},
+    {'title': "historyAndCulture", 'questions': "questions3", 'level': "tenlevel"},
+    {'title': "music", 'questions': "questions4", 'level': "twelvelevel"},
+    {'title': "scienceAndTech", 'questions': "questions5", 'level': "eightlevel"},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomCategoryAppBar(
-        title: MyStrings.bookmarks,
+      appBar: CustomCategoryAppBar(
+        title: MyStrings.bookmarks.tr,
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -28,16 +37,16 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                 physics: const NeverScrollableScrollPhysics(),
                 padding: const EdgeInsets.only(top: Dimensions.space25),
                 shrinkWrap: true,
-                itemCount: MyStrings().allCategoryies.length,
+                itemCount: allCategoryies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CategoriesCard(
                     index: index,
-                    title: MyStrings().allCategoryies[index]["title"].toString(),
-                    questions: MyStrings().allCategoryies[index]["questions"].toString(),
+                    title: allCategoryies[index]["title"].toString(),
+                    questions: allCategoryies[index]["questions"].toString(),
                     image: MyImages().categoryImages[index],
                     expansionVisible: true,
                     fromViewAll: false,
-                    levels: MyStrings().allCategoryies[index]["level"].toString(),
+                    levels: allCategoryies[index]["level"].toString(),
                   );
                 }),
           ],

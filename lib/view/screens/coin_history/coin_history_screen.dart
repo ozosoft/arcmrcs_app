@@ -39,8 +39,8 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<CoinHistoryController>(
       builder: (controller) => Scaffold(
-        appBar: const CustomCategoryAppBar(
-          title: MyStrings.coinHistory,
+        appBar: CustomCategoryAppBar(
+          title: MyStrings.coinHistory.tr,
         ),
         body: controller.loader == true
             ? const CustomLoader()
@@ -49,7 +49,7 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
                     messages: MyStrings.noCoinHistoryFound.tr,
                   )
                 : ListView.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.only(top: Dimensions.space25),
                     // shrinkWrap: true,
                     itemCount: controller.coinHistoryList.length,
@@ -79,12 +79,12 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
                                       Column(
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
-                                          Text(coinHistoryItem.coinPlan!.title.toString(), style: semiBoldMediumLarge),
+                                          Text(coinHistoryItem.coinPlan!.title.toString().tr, style: semiBoldMediumLarge),
                                           const SizedBox(
                                             height: Dimensions.space8,
                                           ),
                                           Text(
-                                            DateConverter.formatDateTime(controller.coinHistoryList[index].createdAt.toString(), 'd MMM, yyyy h:mm a'),
+                                            DateConverter.formatDateTime(controller.coinHistoryList[index].createdAt.toString(), 'd MMM, yyyy h:mm a').tr,
                                             style: regularLarge.copyWith(color: MyColor.textColor),
                                           ),
                                         ],
@@ -97,7 +97,7 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
                                 ),
                                 const Spacer(),
                                 SizedBox(
-                                    child: Text(MyStrings.dollarSign + controller.coinHistoryList[index].coinPlan!.price.toString() + MyStrings.usd,
+                                    child: Text(MyStrings.dollarSign.tr + controller.coinHistoryList[index].coinPlan!.price.toString() + MyStrings.usd.tr,
                                         style: semiBoldLarge.copyWith(
                                             color: coinHistoryItem.status == "+"
                                                 ? MyColor.colorGreen

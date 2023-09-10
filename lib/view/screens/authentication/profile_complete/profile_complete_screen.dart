@@ -14,7 +14,6 @@ import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dar
 import 'package:flutter_prime/view/components/text-form-field/custom_text_field.dart';
 import 'package:flutter_prime/view/components/will_pop_widget.dart';
 
-
 class ProfileCompleteScreen extends StatefulWidget {
   const ProfileCompleteScreen({Key? key}) : super(key: key);
 
@@ -23,27 +22,23 @@ class ProfileCompleteScreen extends StatefulWidget {
 }
 
 class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
-
   @override
   void initState() {
-
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ProfileRepo(apiClient: Get.find()));
     Get.put(ProfileCompleteController(profileRepo: Get.find()));
     super.initState();
-
   }
 
   @override
   void dispose() {
     super.dispose();
   }
-  
+
   final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-
     return WillPopWidget(
       nextRoute: '',
       child: SafeArea(
@@ -56,123 +51,130 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
             isProfileCompleted: true,
             bgColor: MyColor.getAppBarColor(),
           ),
-
           body: GetBuilder<ProfileCompleteController>(
             builder: (controller) => SingleChildScrollView(
               padding: Dimensions.screenPaddingHV,
-              child: controller.isLoading ? const CustomLoader() : Form(
-                key: formKey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: Dimensions.space15),
-                    //CustomImageWidget(imagePath:  '', onClicked: (){}),
-                    Center(child:Image.asset(MyImages.applogo, height: 50, width: 225,color: MyColor.primaryColor,),),
-                    const SizedBox(height: Dimensions.space30),
-                    CustomTextField(
-                      animatedLabel: true,
-                      needOutlineBorder: true,
-                      labelText: MyStrings.firstName.tr,
-                      hintText: "${MyStrings.enterYour.tr} ${MyStrings.firstName.toLowerCase().tr}",
-                      textInputType: TextInputType.text,
-                      inputAction: TextInputAction.next,
-                      focusNode: controller.firstNameFocusNode,
-                      controller: controller.firstNameController,
-                      nextFocus: controller.lastNameFocusNode,
-                      onChanged: (value){
-                        return;
-                      },
-                    ),
-                    const SizedBox(height: Dimensions.space25),
+              child: controller.isLoading
+                  ? CustomLoader()
+                  : Container(
+                    padding: EdgeInsets.all(Dimensions.space20),
+                      decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space10)),
+                      child: Form(
+                        key: formKey,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: Dimensions.space15),
+                          
+                            Center(child:Image.asset(MyImages.applogo, height: 50, width: 225,color: MyColor.primaryColor,),),
+                            const SizedBox(height: Dimensions.space30),
+                            CustomTextField(
+                              animatedLabel: true,
+                              needOutlineBorder: true,
+                              labelText: MyStrings.firstName.tr,
+                              hintText: "${MyStrings.enterYour.tr} ${MyStrings.firstName.toLowerCase().tr}",
+                              textInputType: TextInputType.text,
+                              inputAction: TextInputAction.next,
+                              focusNode: controller.firstNameFocusNode,
+                              controller: controller.firstNameController,
+                              nextFocus: controller.lastNameFocusNode,
+                              onChanged: (value) {
+                                return;
+                              },
+                            ),
+                            const SizedBox(height: Dimensions.space25),
 
-                    CustomTextField(
-                      animatedLabel: true,
-                      needOutlineBorder: true,
-                      labelText: MyStrings.lastName.tr,
-                      hintText: "${MyStrings.enterYour.tr} ${MyStrings.lastName.toLowerCase().tr}",
-                      textInputType: TextInputType.text,
-                      inputAction: TextInputAction.next,
-                      focusNode: controller.lastNameFocusNode,
-                      controller: controller.lastNameController,
-                      nextFocus: controller.addressFocusNode,
-                      onChanged: (value){
-                        return;
-                      },
-                    ),
-                    const SizedBox(height: Dimensions.space25),
+                            CustomTextField(
+                              animatedLabel: true,
+                              needOutlineBorder: true,
+                              labelText: MyStrings.lastName.tr,
+                              hintText: "${MyStrings.enterYour.tr} ${MyStrings.lastName.toLowerCase().tr}",
+                              textInputType: TextInputType.text,
+                              inputAction: TextInputAction.next,
+                              focusNode: controller.lastNameFocusNode,
+                              controller: controller.lastNameController,
+                              nextFocus: controller.addressFocusNode,
+                              onChanged: (value) {
+                                return;
+                              },
+                            ),
+                            const SizedBox(height: Dimensions.space25),
 
-                    CustomTextField(
-                      animatedLabel: true,
-                      needOutlineBorder: true,
-                      labelText: MyStrings.address,
-                      hintText: "${MyStrings.enterYour.tr} ${MyStrings.address.toLowerCase().tr}",
-                      textInputType: TextInputType.text,
-                      inputAction: TextInputAction.next,
-                      focusNode: controller.addressFocusNode,
-                      controller: controller.addressController,
-                      nextFocus: controller.stateFocusNode,
-                      onChanged: (value){
-                        return;
-                      },
-                    ),
-                    const SizedBox(height: Dimensions.space25),
+                            CustomTextField(
+                              animatedLabel: true,
+                              needOutlineBorder: true,
+                              labelText: MyStrings.address,
+                              hintText: "${MyStrings.enterYour.tr} ${MyStrings.address.toLowerCase().tr}",
+                              textInputType: TextInputType.text,
+                              inputAction: TextInputAction.next,
+                              focusNode: controller.addressFocusNode,
+                              controller: controller.addressController,
+                              nextFocus: controller.stateFocusNode,
+                              onChanged: (value) {
+                                return;
+                              },
+                            ),
+                            const SizedBox(height: Dimensions.space25),
 
-                    CustomTextField(
-                      animatedLabel: true,
-                      needOutlineBorder: true,
-                      labelText: MyStrings.state,
-                      hintText: "${MyStrings.enterYour.tr} ${MyStrings.state.toLowerCase().tr}",
-                      textInputType: TextInputType.text,
-                      inputAction: TextInputAction.next,
-                      focusNode: controller.stateFocusNode,
-                      controller: controller.stateController,
-                      nextFocus: controller.cityFocusNode,
-                      onChanged: (value){
-                        return ;
-                      },
-                    ),
-                    const SizedBox(height: Dimensions.space25),
+                            CustomTextField(
+                              animatedLabel: true,
+                              needOutlineBorder: true,
+                              labelText: MyStrings.state,
+                              hintText: "${MyStrings.enterYour.tr} ${MyStrings.state.toLowerCase().tr}",
+                              textInputType: TextInputType.text,
+                              inputAction: TextInputAction.next,
+                              focusNode: controller.stateFocusNode,
+                              controller: controller.stateController,
+                              nextFocus: controller.cityFocusNode,
+                              onChanged: (value) {
+                                return;
+                              },
+                            ),
+                            const SizedBox(height: Dimensions.space25),
 
-                    CustomTextField(
-                      animatedLabel: true,
-                      needOutlineBorder: true,
-                      labelText: MyStrings.city.tr,
-                      hintText: "${MyStrings.enterYour.tr} ${MyStrings.city.toLowerCase().tr}",
-                      textInputType: TextInputType.text,
-                      inputAction: TextInputAction.next,
-                      focusNode: controller.cityFocusNode,
-                      controller: controller.cityController,
-                      nextFocus: controller.zipCodeFocusNode,
-                      onChanged: (value){
-                        return ;
-                      },
-                    ),
-                    const SizedBox(height: Dimensions.space25),
+                            CustomTextField(
+                              animatedLabel: true,
+                              needOutlineBorder: true,
+                              labelText: MyStrings.city.tr,
+                              hintText: "${MyStrings.enterYour.tr} ${MyStrings.city.toLowerCase().tr}",
+                              textInputType: TextInputType.text,
+                              inputAction: TextInputAction.next,
+                              focusNode: controller.cityFocusNode,
+                              controller: controller.cityController,
+                              nextFocus: controller.zipCodeFocusNode,
+                              onChanged: (value) {
+                                return;
+                              },
+                            ),
+                            const SizedBox(height: Dimensions.space25),
 
-                    CustomTextField(
-                      animatedLabel: true,
-                      needOutlineBorder: true,
-                      labelText: MyStrings.zipCode.tr,
-                      hintText: "${MyStrings.enterYour.tr} ${MyStrings.zipCode.toLowerCase().tr}",
-                      textInputType: TextInputType.text,
-                      inputAction: TextInputAction.done,
-                      focusNode: controller.zipCodeFocusNode,
-                      controller: controller.zipCodeController,
-                      onChanged: (value){
-                        return;
-                      },
-                    ),
-                    const SizedBox(height: Dimensions.space35),
+                            CustomTextField(
+                              animatedLabel: true,
+                              needOutlineBorder: true,
+                              labelText: MyStrings.zipCode.tr,
+                              hintText: "${MyStrings.enterYour.tr} ${MyStrings.zipCode.toLowerCase().tr}",
+                              textInputType: TextInputType.text,
+                              inputAction: TextInputAction.done,
+                              focusNode: controller.zipCodeFocusNode,
+                              controller: controller.zipCodeController,
+                              onChanged: (value) {
+                                return;
+                              },
+                            ),
+                            const SizedBox(height: Dimensions.space35),
 
-                    controller.submitLoading ? const RoundedLoadingBtn() : RoundedButton(
-                      text: MyStrings.updateProfile.tr,
-                      press: (){
-                        controller.updateProfile();
-                      },
-                    )
-                  ],
-                ),
-              ),
+                            controller.submitLoading
+                                ? const RoundedLoadingBtn()
+                                : RoundedButton(
+                                    text: MyStrings.updateProfile.tr,
+                                    press: () {
+                                      controller.updateProfile();
+                                    },
+                                  )
+                          ],
+                        ),
+                      ),
+                    ),
             ),
           ),
         ),

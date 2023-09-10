@@ -40,7 +40,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomCategoryAppBar(title: MyStrings.allCategory),
+      appBar:  CustomCategoryAppBar(title: MyStrings.allCategory.tr),
       body: GetBuilder<AllCategoriesController>(
         builder: (controller) => controller.loader
             ? const CustomLoader()

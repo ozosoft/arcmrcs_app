@@ -194,7 +194,7 @@ class BattleRoomController extends GetxController {
             if (battleQuestionsList.isEmpty) {
               Get.back();
 
-              CustomSnackBar.error(errorList: [MyStrings.questionNotFoundMsg]);
+              CustomSnackBar.error(errorList: [MyStrings.questionNotFoundMsg.tr]);
             } else {
               print("called from here to quiz page");
               Get.back();
@@ -256,13 +256,13 @@ class BattleRoomController extends GetxController {
       toogleBattleJoinedState(JoinRoomState.failed);
       if (e.toString() == "roomIsFullCode") {
         toogleBattleJoinedState(JoinRoomState.full);
-        CustomSnackBar.error(errorList: [(MyStrings.sorryRoomISFull)]);
+        CustomSnackBar.error(errorList: [(MyStrings.sorryRoomISFull.tr)]);
       } else if (e.toString() == "notEnoughCoinsCode") {
         toogleBattleJoinedState(JoinRoomState.failed);
-        CustomSnackBar.error(errorList: [(MyStrings.youHaveNoCoins)]);
+        CustomSnackBar.error(errorList: [(MyStrings.youHaveNoCoins.tr)]);
       } else if (e.toString() == "roomCodeInvalidCode") {
         toogleBattleJoinedState(JoinRoomState.failed);
-        CustomSnackBar.error(errorList: [(MyStrings.roomCodeIsWrong)]);
+        CustomSnackBar.error(errorList: [(MyStrings.roomCodeIsWrong.tr)]);
       } else {
         CustomSnackBar.error(errorList: [(e.toString())]);
       }

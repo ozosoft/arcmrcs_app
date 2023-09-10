@@ -64,7 +64,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                             Padding(
                               padding: const EdgeInsets.all(Dimensions.space10),
                               child: Text(
-                                MyStrings.areYouSureYouWantToLeaveExamRoom,
+                                MyStrings.areYouSureYouWantToLeaveExamRoom.tr,
                                 style: regularLarge.copyWith(color: MyColor.textSecondColor),
                               ),
                             ),
@@ -85,8 +85,8 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                     onPressed: () {
                                       Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                                     },
-                                    child: const Text(
-                                      MyStrings.cancel,
+                                    child:  Text(
+                                      MyStrings.cancel.tr,
                                       style: regularLarge,
                                     ),
                                   ),
@@ -96,7 +96,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                       Get.offAllNamed(RouteHelper.bottomNavBarScreen);
                                     },
                                     child: Text(
-                                      MyStrings.yes,
+                                      MyStrings.yes.tr,
                                       style: regularLarge.copyWith(color: MyColor.colorWhite),
                                     ),
                                   ),
@@ -226,7 +226,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                                 // const Spacer(),
                                                 controller.showaudienceVote == true
                                                     ? Text(
-                                                        controller.questionsList[questionsIndex].options![optionIndex].audience.toString() + MyStrings.percent,
+                                                        controller.questionsList[questionsIndex].options![optionIndex].audience.toString() + MyStrings.percent.tr,
                                                         style: regularMediumLarge.copyWith(color: MyColor.textColor),
                                                       )
                                                     : SizedBox(),

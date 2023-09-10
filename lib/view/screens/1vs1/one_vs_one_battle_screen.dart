@@ -52,8 +52,8 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            MyStrings.selectCategory,
+                           Text(
+                            MyStrings.selectCategory.tr,
                             style: semiBoldExtraLarge,
                           ),
                           const SizedBox(
@@ -81,19 +81,19 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                                 ),
                               );
                             }).toList(),
-                            hintText: MyStrings.selectACategoryText,
+                            hintText: MyStrings.selectACategoryText.tr,
                           ),
                           const SizedBox(
                             height: Dimensions.space40,
                           ),
                           RoundedButton(
-                              text: widget.isGroupBattle ? MyStrings.groupBattle : MyStrings.letsPlay,
+                              text: widget.isGroupBattle ? MyStrings.groupBattle.tr : MyStrings.letsPlay.tr,
                               press: () async {
                                 if (controller.slectedCategoryID.value == 0) {
-                                  CustomSnackBar.error(errorList: [MyStrings.selectACategoryMsg]);
+                                  CustomSnackBar.error(errorList: [MyStrings.selectACategoryMsg.tr]);
                                 } else if (int.parse(controller.battleRepo.apiClient.getUserCurrentCoin()) <
                                     int.parse(controller.entryFeeRandomGame.value)) {
-                                  CustomSnackBar.error(errorList: [MyStrings.youHaveNoCoins]);
+                                  CustomSnackBar.error(errorList: [MyStrings.youHaveNoCoins.tr]);
                                 } else {
                                   Get.toNamed(RouteHelper.findOpponentScreen, arguments: [
                                     controller.slectedCategoryID.value,
@@ -112,7 +112,7 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                             height: Dimensions.space25,
                           ),
                           RoundedButton(
-                              text: MyStrings.playWithFriend,
+                              text: MyStrings.playWithFriend.tr,
                               press: () {
                                 CustomBottomSheet(child: const PlayWithFriendsBottomSheetWidget()).customBottomSheet(context);
                               },

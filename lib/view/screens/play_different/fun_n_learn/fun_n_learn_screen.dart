@@ -37,7 +37,7 @@ class _FunNLearnScreenState extends State<FunNLearnScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomCategoryAppBar(title: MyStrings.funAndLearn),
+      appBar:  CustomCategoryAppBar(title: MyStrings.funAndLearn.tr),
       body: GetBuilder<FunNLearnCategoriesController>(
         builder: (controller) => (controller.loader != false)
             ? const Center(child: CustomLoader())

@@ -18,11 +18,11 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
   final title = Get.arguments as String;
   @override
   Widget build(BuildContext context) {
-    return const RepaintBoundary(
+    return  RepaintBoundary(
       child: Scaffold(
         backgroundColor: MyColor.primaryColor,
-         appBar: CustomCategoryAppBar(title: MyStrings.examResult),
-          body: SingleChildScrollView(
+         appBar: CustomCategoryAppBar(title: MyStrings.examResult.tr),
+          body: const SingleChildScrollView(
             child:  Padding(
               padding: EdgeInsets.symmetric(horizontal:Dimensions.space15,vertical: Dimensions.space50),
               child: ExamResultBodySection(),

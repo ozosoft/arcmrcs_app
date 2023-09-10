@@ -42,7 +42,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                   Padding(
                     padding: const EdgeInsets.all(Dimensions.space10),
                     child: Text(
-                      MyStrings.areYouSureYouWantToLeaveThisRoom,
+                      MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
                       style: regularLarge.copyWith(color: MyColor.textSecondColor),
                     ),
                   ),
@@ -63,8 +63,8 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                           onPressed: () {
                             Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                           },
-                          child: const Text(
-                            MyStrings.cancel,
+                          child:  Text(
+                            MyStrings.cancel.tr,
                             style: regularLarge,
                           ),
                         ),
@@ -76,7 +76,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                             });
                           },
                           child: Text(
-                            MyStrings.yes,
+                            MyStrings.yes.tr,
                             style: regularLarge.copyWith(color: MyColor.colorWhite),
                           ),
                         ),
@@ -105,8 +105,8 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: controller.battleRoomData.value!.roomCode!)).then((value) {
                          
-                         print("copiedx");
-                          CustomSnackBar.success(successList: [(MyStrings.copied)]);
+                         print("copied");
+                          CustomSnackBar.success(successList: [(MyStrings.copied.tr)]);
                         });
                       },
                       child: Container(
@@ -139,7 +139,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                       width: Dimensions.space260,
                       child: Center(
                         child: Text(
-                          MyStrings.sharecodeText,
+                          MyStrings.sharecodeText.tr,
                           textAlign: TextAlign.center,
                           style: regularLarge.copyWith(color: MyColor.textColor),
                         ),
@@ -206,7 +206,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                             ),
                           ),
                           Text(
-                            MyStrings.creator,
+                            MyStrings.creator.tr,
                             textAlign: TextAlign.center,
                             style: regularLarge.copyWith(color: MyColor.textColor),
                           ),
@@ -269,7 +269,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                             ),
                           ),
                           Text(
-                            MyStrings.player,
+                            MyStrings.player.tr,
                             textAlign: TextAlign.center,
                             style: regularLarge.copyWith(color: MyColor.textColor),
                           ),
@@ -282,7 +282,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
               const SizedBox(height: Dimensions.space100),
               controller.userFoundState.value == UserFoundState.found
                   ? RoundedButton(
-                      text: MyStrings.start,
+                      text: MyStrings.start.tr,
                       press: () {
                         setState(() {
                           start = true;
@@ -304,7 +304,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                       textSize: Dimensions.space20,
                     )
                   : RoundedButton(
-                      text: MyStrings.start,
+                      text: MyStrings.start.tr,
                       press: () {
                         setState(() {
                           start = true;

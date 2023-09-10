@@ -51,7 +51,7 @@ class _WalletRequestSectionState extends State<WalletRequestSection> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                MyStrings.yourCoins,
+                                MyStrings.yourCoins.tr,
                                 style: regularMediumLarge.copyWith(
                                     color: MyColor.textColor),
                               ),
@@ -77,7 +77,7 @@ class _WalletRequestSectionState extends State<WalletRequestSection> {
                     //       horizontal: Dimensions.space12,
                     //     ),
                     //     child: Text(
-                    //       MyStrings.reedemableAmount,
+                    //       MyStrings.reedemableAmount.tr,
                     //       style: regularLarge,
                     //     ),
                     //   ),
@@ -97,7 +97,7 @@ class _WalletRequestSectionState extends State<WalletRequestSection> {
                     //         });
                     //       },
                     //       decoration: InputDecoration(
-                    //           hintText: MyStrings.twoForty,
+                    //           hintText: MyStrings.twoForty.tr,
                     //           filled: true,
                     //           fillColor: MyColor.cardColor,
                     //           labelStyle: regularMediumLarge.copyWith(
@@ -121,7 +121,7 @@ class _WalletRequestSectionState extends State<WalletRequestSection> {
                         child: ListView.builder(
                           physics:const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: MyStrings().rulesOfReedem.length,
+                            itemCount: 5,
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -140,9 +140,7 @@ class _WalletRequestSectionState extends State<WalletRequestSection> {
                                     SizedBox(
                                         width: Dimensions.space220,
                                         child: Text(
-                                          MyStrings()
-                                              .rulesOfReedem[index]["title"]
-                                              .toString(),
+                                          "Demo title",
                                           style: regularDefault.copyWith(
                                               color: MyColor.textColor),
                                         ))
@@ -153,7 +151,7 @@ class _WalletRequestSectionState extends State<WalletRequestSection> {
                     // Padding(
                     //   padding: const EdgeInsets.all(Dimensions.space14),
                     //   child: RoundedButton(
-                    //     text: MyStrings.reedemNow,
+                    //     text: MyStrings.reedemNow.tr,
                     //     press: () {
                     //        CustomBottomSheet(child: const PaymentBottomSheetScreen())
                     //       .customBottomSheet(context);

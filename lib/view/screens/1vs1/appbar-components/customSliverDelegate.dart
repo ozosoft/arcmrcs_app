@@ -7,6 +7,7 @@ import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/view/screens/1vs1/appbar-components/one_vs_one_card.dart';
 import 'package:flutter_prime/view/screens/1vs1/appbar-components/custom_one_vs_one_battele_appBar.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class CustomSliverDelegates extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
@@ -52,7 +53,7 @@ class CustomSliverDelegates extends SliverPersistentHeaderDelegate {
                   margin: const EdgeInsets.only(top: Dimensions.space55),
                   padding: const EdgeInsets.all(Dimensions.space10),
                   child: Text(
-                    MyStrings.versus,
+                    MyStrings.versus.tr,
                     style:
                         semiBoldExtraLarge.copyWith(color: MyColor.colorWhite),
                   ),

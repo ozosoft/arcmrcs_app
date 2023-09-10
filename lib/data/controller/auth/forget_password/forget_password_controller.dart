@@ -16,7 +16,7 @@ class ForgetPasswordController extends GetxController {
     String input = emailOrUsernameController.text;
 
     if (input.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.enterYourEmail]);
+      CustomSnackBar.error(errorList: [MyStrings.enterYourEmail.tr]);
       return;
     }
 

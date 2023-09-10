@@ -23,8 +23,8 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: Dimensions.space10),
-            const Text(
-              MyStrings.profileDetails,
+             Text(
+              MyStrings.profileDetails.tr,
               style: boldMediumLarge,
             ),
             const SizedBox(height: Dimensions.space10),
@@ -34,34 +34,34 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
                   children: [
                     ListTile(
                       title: Text(
-                        MyStrings.fullname,
+                        MyStrings.fullname.tr,
                         style: regularDefault.copyWith(color: MyColor.textColor),
                       ),
-                      subtitle: Text(controller.profileRepo.apiClient.getUserFullName(), style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                      subtitle: Text(controller.profileRepo.apiClient.getUserFullName().tr, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
                     ),
                     const Divider(height: Dimensions.space3),
                     ListTile(
                       title: Text(
-                        MyStrings.emailAddress,
+                        MyStrings.emailAddress.tr,
                         style: regularDefault.copyWith(color: MyColor.textColor),
                       ),
-                      subtitle: Text(controller.email, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                      subtitle: Text(controller.email.tr, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
                     ),
                     const Divider(height: Dimensions.space3),
                     ListTile(
                       title: Text(
-                        MyStrings.address,
+                        MyStrings.address.tr,
                         style: regularDefault.copyWith(color: MyColor.textColor),
                       ),
-                      subtitle: Text(controller.addressController.text, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                      subtitle: Text(controller.addressController.text.tr, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
                     ),
                     const Divider(height: Dimensions.space3),
                     ListTile(
                       title: Text(
-                        MyStrings.city,
+                        MyStrings.city.tr,
                         style: regularDefault.copyWith(color: MyColor.textColor),
                       ),
-                      subtitle: Text(controller.cityController.text, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                      subtitle: Text(controller.cityController.text.tr, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
                     ),
                   ],
                 )),

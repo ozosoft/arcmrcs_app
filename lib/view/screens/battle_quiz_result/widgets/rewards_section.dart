@@ -4,6 +4,7 @@ import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../core/utils/my_color.dart';
 
@@ -34,7 +35,7 @@ class RewardsSection extends StatelessWidget {
                       SvgPicture.asset(MyImages.point),
                       const SizedBox(width: Dimensions.space6),
                       Text(
-                        MyStrings.zeroEight,
+                        MyStrings.zeroEight.tr,
                         style:
                             regularDefault.copyWith(color: MyColor.textColor),
                       ),
@@ -58,7 +59,7 @@ class RewardsSection extends StatelessWidget {
                       SvgPicture.asset(MyImages.totalReward),
                       const SizedBox(width: Dimensions.space6),
                       Text(
-                        MyStrings.threehundredfifty,
+                        MyStrings.threehundredfifty.tr,
                         style:
                             regularDefault.copyWith(color: MyColor.textColor),
                       ),

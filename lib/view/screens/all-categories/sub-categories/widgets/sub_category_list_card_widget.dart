@@ -5,6 +5,7 @@ import 'package:flutter_prime/view/components/chips/custom_chips_widget.dart';
 import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
 import 'package:flutter_prime/view/screens/all-categories/widgets/allCategories_expanded_section.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 import '../../../../../core/utils/dimensions.dart';
 import '../../../../../core/utils/my_color.dart';
@@ -85,13 +86,13 @@ class _SubCategoryListTileCardWidgetState extends State<SubCategoryListTileCardW
                                     CustomChipsWidget(
                                       padding: Dimensions.space5,
                                       right: Dimensions.space5,
-                                      child: Center(child: Text("${widget.categoryData.questionsCount} ${MyStrings.questionse}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                      child: Center(child: Text("${widget.categoryData.questionsCount} ${MyStrings.questionse.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                     ),
                                   ],
                                   CustomChipsWidget(
                                     padding: Dimensions.space5,
                                     right: Dimensions.space5,
-                                    child: Center(child: Text("${widget.categoryData.quizInfos!.length} ${MyStrings.level}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    child: Center(child: Text("${widget.categoryData.quizInfos!.length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                   ),
                                 ],
                               ),

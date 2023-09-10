@@ -23,7 +23,7 @@ class PlayWithFriendsBottomSheetWidget extends StatelessWidget {
             const BottomSheetBar(),
             const SizedBox(height: Dimensions.space20),
             RoundedButton(
-              text: MyStrings.createRoom,
+              text: MyStrings.createRoom.tr,
               press: () {
                 Get.back();
                 Get.toNamed(RouteHelper.createRoomScreen,
@@ -36,7 +36,7 @@ class PlayWithFriendsBottomSheetWidget extends StatelessWidget {
               height: Dimensions.space20,
             ),
             RoundedButton(
-              text: MyStrings.joinRoom,
+              text: MyStrings.joinRoom.tr,
               press: () {
                 Get.back();
                 Get.toNamed(RouteHelper.joinRoomScreen, arguments: [null, null, controller.categoryList]);

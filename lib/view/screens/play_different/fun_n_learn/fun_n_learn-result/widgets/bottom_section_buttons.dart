@@ -17,7 +17,7 @@ class BottomSectionButtons extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(top: Dimensions.space15, left: Dimensions.space15, right: Dimensions.space15),
           child: RoundedButton(
-              text: MyStrings.reviewAnswer,
+              text: MyStrings.reviewAnswer.tr,
               press: () {
                 Get.toNamed(RouteHelper.funNlearnResultReviewScreen, arguments: [Get.arguments[0] as List<Question>, Get.arguments[1]]);
               },
@@ -26,7 +26,7 @@ class BottomSectionButtons extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(Dimensions.space15),
           child: RoundedButton(
-            text: MyStrings.home,
+            text: MyStrings.home.tr,
             press: () {
               Get.offAllNamed(RouteHelper.bottomNavBarScreen);
             },

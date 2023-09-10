@@ -66,7 +66,7 @@ class RegistrationController extends GetxController {
 
   signUpUser() async {
     if (emailController.text.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.enterYourEmail]);
+      CustomSnackBar.error(errorList: [MyStrings.enterYourEmail.tr]);
       return;
     }
 

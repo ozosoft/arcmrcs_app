@@ -174,7 +174,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(MyStrings.doNotHaveAccount,
+                      Text(MyStrings.doNotHaveAccount.tr,
                           overflow: TextOverflow.ellipsis,
                           style: mediumOverSmall.copyWith(
                             fontSize: Dimensions.space14,
@@ -184,7 +184,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                         onPressed: () {
                           Get.toNamed(RouteHelper.signupScreen);
                         },
-                        child: const CustomUndelineText(text: MyStrings.signUp),
+                        child:  CustomUndelineText(text: MyStrings.signUp.tr),
                       )
                     ],
                   ),

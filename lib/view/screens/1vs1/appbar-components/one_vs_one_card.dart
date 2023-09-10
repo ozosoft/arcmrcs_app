@@ -36,13 +36,13 @@ class _OneVSOneCustomCardWidgetState extends State<OneVSOneCustomCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        MyStrings.entryFees,
+                        MyStrings.entryFees.tr,
                         style: regularMediumLarge.copyWith(color: MyColor.battleTextColor),
                       ),
                       const CustomDivider(
                         space: Dimensions.space3,
                       ),
-                      Text("${controller.entryFeeRandomGame.value} ${MyStrings.coins}", style: semiBoldExtraLarge)
+                      Text("${controller.entryFeeRandomGame.value.tr} ${MyStrings.coins.tr}", style: semiBoldExtraLarge)
                     ],
                   )
                 ],

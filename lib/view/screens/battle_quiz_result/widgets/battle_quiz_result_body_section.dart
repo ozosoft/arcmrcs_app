@@ -80,38 +80,38 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                             children: [
                               if (controller.messageStatus.contains('Congratulations') == true) ...[
                                 Text(
-                                  MyStrings.victory,
+                                  MyStrings.victory.tr,
                                   style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                                 ),
                                 const SizedBox(
                                   height: Dimensions.space10,
                                 ),
                                 Text(
-                                  MyStrings.congratulation,
+                                  MyStrings.congratulation.tr,
                                   style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText, fontSize: Dimensions.fontLarge),
                                 )
                               ] else if (controller.messageStatus.contains('Draw') == true) ...[
                                 Text(
-                                  MyStrings.drawn,
+                                  MyStrings.drawn.tr,
                                   style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                                 ),
                                 const SizedBox(
                                   height: Dimensions.space10,
                                 ),
                                 Text(
-                                  MyStrings.congratulation,
+                                  MyStrings.congratulation.tr,
                                   style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText, fontSize: Dimensions.fontLarge),
                                 )
                               ] else ...[
                                 Text(
-                                  MyStrings.defeat,
+                                  MyStrings.defeat.tr,
                                   style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                                 ),
                                 const SizedBox(
                                   height: Dimensions.space10,
                                 ),
                                 Text(
-                                  MyStrings.betterLuckNextTime,
+                                  MyStrings.betterLuckNextTime.tr,
                                   style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText, fontSize: Dimensions.fontLarge),
                                 )
                               ],

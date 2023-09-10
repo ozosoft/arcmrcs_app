@@ -46,7 +46,7 @@ class ProfileRepo {
       AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
 
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
         return true;
       } else {
         CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.requestFail.tr]);
@@ -81,7 +81,7 @@ class ProfileRepo {
       AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
 
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
         return true;
       } else {
         CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.requestFail.tr]);

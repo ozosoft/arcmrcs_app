@@ -39,7 +39,7 @@ class _FunNLearnDescriptionState extends State<FunNLearnDescription> {
   Widget build(BuildContext context) {
     return GetBuilder<FunNLearnListController>(
       builder: (controller) => Scaffold(
-        appBar: CustomCategoryAppBar(title: controller.title),
+        appBar: CustomCategoryAppBar(title: controller.title.tr),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -52,7 +52,7 @@ class _FunNLearnDescriptionState extends State<FunNLearnDescription> {
                       Text(controller.description),
                       const SizedBox(height: Dimensions.space20),
                       RoundedButton(
-                          text: MyStrings.letsPlay,
+                          text: MyStrings.letsPlay.tr,
                           press: () {
                             Get.offAndToNamed(RouteHelper.funNlearnQuizScreen, arguments: [controller.title, controller.subCategoryId]);
                           })

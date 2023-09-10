@@ -50,7 +50,7 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                     Padding(
                       padding: const EdgeInsets.only(top: Dimensions.space12, left: Dimensions.space15),
                       child: Text(
-                        MyStrings.entryRoomCode,
+                        MyStrings.entryRoomCode.tr,
                         style: regularMediumLarge.copyWith(color: MyColor.textColor, fontSize: Dimensions.space18),
                       ),
                     ),
@@ -78,9 +78,9 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                         padding: const EdgeInsets.only(
                             left: Dimensions.space15, top: Dimensions.space10, bottom: Dimensions.space25, right: Dimensions.space15),
                         child: battleRoomController.joinRoomState.value == JoinRoomState.joining
-                            ? RoundedLoadingBtn()
+                            ? const RoundedLoadingBtn()
                             : RoundedButton(
-                                text: MyStrings.start,
+                                text: MyStrings.start.tr,
                                 press: () async {
                                   await battleRoomController.joinRoom(
                                       name: battleRoomController.battleRepo.apiClient.getUserFullName(),

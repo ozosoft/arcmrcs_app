@@ -91,7 +91,7 @@ class GuessThewordController extends GetxController {
         );
         CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
       } else {
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
         Get.offAndToNamed(RouteHelper.guessTheWordCategory);
       }
     } else {
@@ -157,7 +157,7 @@ class GuessThewordController extends GetxController {
           categoryList.addAll(tempcategorylist);
         }
       } else {
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
       }
     } else {
       CustomSnackBar.error(errorList: [response.message]);
@@ -182,7 +182,7 @@ class GuessThewordController extends GetxController {
           subImgPath = model.data?.imgPath;
         }
       } else {
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
       }
     } else {
       CustomSnackBar.error(errorList: [response.message]);

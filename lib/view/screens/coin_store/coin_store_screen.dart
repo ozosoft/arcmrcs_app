@@ -43,11 +43,11 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomCategoryAppBar(
-        title: MyStrings.coinStore,
+        title: MyStrings.coinStore.tr,
         children: [
           Center(
             child: Padding(
-              padding: EdgeInsets.only(right: 20),
+              padding: const EdgeInsetsDirectional.only(end: 20),
               child: InkWell(
                 onTap: () {
                   Get.toNamed(RouteHelper.coinHistoryScreen);
@@ -60,7 +60,7 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
                     children: [
                       SvgPicture.asset(MyImages.coinStoreDrawer),
                       Text(
-                        "History",
+                        MyStrings.history.tr,
                         style: regularLarge.copyWith(
                           fontSize: Dimensions.fontMediumLarge,
                         ),
@@ -79,7 +79,7 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
             : controller.coinPlanList.isEmpty
                 ? const NoDataWidget()
                 : ListView.builder(
-                  physics: const BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.only(top: Dimensions.space25),
                     shrinkWrap: true,
                     itemCount: controller.coinPlanList.length,
@@ -136,7 +136,7 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
                                                     height: Dimensions.space5,
                                                   ),
                                                   Text(
-                                                    Converter.roundDoubleAndRemoveTrailingZero(controller.coinPlanList[index].coinsAmount ?? '0'),
+                                                    Converter.roundDoubleAndRemoveTrailingZero(controller.coinPlanList[index].coinsAmount ?? '0').tr,
                                                     style: semiBoldMediumLarge.copyWith(fontWeight: FontWeight.w500),
                                                   )
                                                 ],
@@ -158,7 +158,7 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
                                           const SizedBox(
                                             width: Dimensions.space20,
                                           ),
-                                          SizedBox(child: Text("${Converter.formatNumber(controller.coinPlanList[index].price ?? '00')} ${controller.currency}", style: semiBoldExtraLarge))
+                                          SizedBox(child: Text("${Converter.formatNumber(controller.coinPlanList[index].price ?? '00').tr} ${controller.currency.tr}", style: semiBoldExtraLarge))
                                         ],
                                       ))
                                 ],

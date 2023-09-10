@@ -6,13 +6,9 @@ import 'package:flutter_prime/data/controller/kyc_controller/kyc_controller.dart
 import 'package:flutter_prime/data/model/kyc/kyc_response_model.dart';
 
 class ConfirmWithdrawFileItem extends StatefulWidget {
-
   final int index;
 
-  const ConfirmWithdrawFileItem({
-    Key? key,
-    required this.index
-  }) : super(key: key);
+  const ConfirmWithdrawFileItem({Key? key, required this.index}) : super(key: key);
 
   @override
   State<ConfirmWithdrawFileItem> createState() => _ConfirmWithdrawFileItemState();
@@ -21,13 +17,13 @@ class ConfirmWithdrawFileItem extends StatefulWidget {
 class _ConfirmWithdrawFileItemState extends State<ConfirmWithdrawFileItem> {
   @override
   Widget build(BuildContext context) {
-
-    return GetBuilder<KycController>(builder: (controller){
-      FormModel? model=controller.formList[widget.index];
+    return GetBuilder<KycController>(builder: (controller) {
+      FormModel? model = controller.formList[widget.index];
       return InkWell(
-        onTap: (){
-          controller.pickFile(widget.index);
-        }, child: ChooseFileItem(fileName: model.selectedValue??MyStrings.chooseFile));
+          onTap: () {
+            controller.pickFile(widget.index);
+          },
+          child: ChooseFileItem(fileName: model.selectedValue ?? MyStrings.chooseFile.tr));
     });
   }
 }

@@ -82,7 +82,7 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(
-                          controller.appreciation == "Failed" ? MyStrings.betterLuckNextTime : MyStrings.victory,
+                          controller.appreciation == "Failed" ? MyStrings.betterLuckNextTime.tr : MyStrings.victory.tr,
                           style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
                         ),
                       )),

@@ -15,6 +15,9 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: CustomCategoryAppBar(title: title.toString()), body: const QuizBodySection());
+    return Scaffold(
+      appBar: CustomCategoryAppBar(title: title.toString().tr),
+      body: const QuizBodySection(),
+    );
   }
 }

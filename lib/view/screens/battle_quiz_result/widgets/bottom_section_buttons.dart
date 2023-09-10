@@ -18,7 +18,7 @@ class BottomSectionButtons extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(Dimensions.space15),
           child: RoundedButton(
-            text: MyStrings.home,
+            text: MyStrings.home.tr,
             press: () {
               Get.offAllNamed(RouteHelper.bottomNavBarScreen);
             },

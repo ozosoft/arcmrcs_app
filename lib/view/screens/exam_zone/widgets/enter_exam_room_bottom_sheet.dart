@@ -52,11 +52,11 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
             const BottomSheetBar(),
             const SizedBox(height: Dimensions.space20),
             Text(
-              "${widget.quizInfo != null ? widget.quizInfo!.title : widget.quizInfoDashBoard != null ? widget.quizInfoDashBoard!.title : MyStrings.enterExam}",
+              "${widget.quizInfo != null ? widget.quizInfo!.title : widget.quizInfoDashBoard != null ? widget.quizInfoDashBoard!.title : MyStrings.enterExam.tr}",
               style: semiBoldExtraLarge,
             ),
             const SizedBox(height: Dimensions.space15),
-            Text(MyStrings.examKey,
+            Text(MyStrings.examKey.tr,
                 style: regularLarge.copyWith(
                   color: MyColor.textColor,
                 )),
@@ -81,8 +81,8 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    MyStrings.examRules,
+                   Text(
+                    MyStrings.examRules.tr,
                     textAlign: TextAlign.center,
                     style: semiBoldMediumLarge,
                   ),
@@ -117,7 +117,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                       viewAll = !viewAll;
                     },
                     child: Text(
-                      MyStrings.viewAllRules,
+                      MyStrings.viewAllRules.tr,
                       style: regularLarge.copyWith(color: MyColor.textColor),
                     ),
                   ),
@@ -145,7 +145,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                   ),
                   const SizedBox(width: Dimensions.space8),
                   DefaultText(
-                    text: MyStrings.iAgreewithrules,
+                    text: MyStrings.iAgreewithrules.tr,
                     textColor: MyColor.getAuthTextColor(),
                   )
                 ],
@@ -155,10 +155,10 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
             controller.submitLoading == true
                 ? const RoundedLoadingBtn()
                 : RoundedButton(
-                    text: MyStrings.submit,
+                    text: MyStrings.submit.tr,
                     press: () {
                       if (controller.enterExamKey == "") {
-                        CustomSnackBar.error(errorList: [(MyStrings.examKeyMsg)]);
+                        CustomSnackBar.error(errorList: [(MyStrings.examKeyMsg.tr)]);
                       } else {
                         if (controller.agreeExamRules == true) {
                           if (widget.quizInfo != null) {
@@ -168,7 +168,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                             controller.enterExamZone(widget.quizInfoDashBoard!.id.toString(), controller.enterExamKey);
                           }
                         } else {
-                          CustomSnackBar.error(errorList: [(MyStrings.agreeExamRules)]);
+                          CustomSnackBar.error(errorList: [(MyStrings.agreeExamRules.tr)]);
                         }
                       }
                     },

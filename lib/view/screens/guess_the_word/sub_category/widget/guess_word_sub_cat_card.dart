@@ -169,10 +169,10 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
                                           labelCount = widget.subcategory.quizInfos!.length;
                                         });
                                       },
-                                      child: const Padding(
-                                        padding: EdgeInsets.only(bottom: Dimensions.space20),
+                                      child:  Padding(
+                                        padding: const EdgeInsets.only(bottom: Dimensions.space20),
                                         child: CustomTextWithUndeline(
-                                          text: MyStrings.viewMore,
+                                          text: MyStrings.viewMore.tr,
                                         ),
                                       ),
                                     )

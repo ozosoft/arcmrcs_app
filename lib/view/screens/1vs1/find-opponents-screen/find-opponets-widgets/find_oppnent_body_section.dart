@@ -45,11 +45,11 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Padding(
-                    padding: EdgeInsets.all(Dimensions.space10),
+                  Padding(
+                    padding: const EdgeInsets.all(Dimensions.space10),
                     child: Column(
                       children: [
-                        Text(MyStrings.areYouSureYouWantToCloseSearching),
+                        Text(MyStrings.areYouSureYouWantToCloseSearching.tr),
                       ],
                     ),
                   ),
@@ -70,8 +70,8 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                           onPressed: () {
                             Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                           },
-                          child: const Text(
-                            MyStrings.cancel,
+                          child: Text(
+                            MyStrings.cancel.tr,
                             style: regularLarge,
                           ),
                         ),
@@ -91,7 +91,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                             }
                           },
                           child: Text(
-                            MyStrings.yes,
+                            MyStrings.yes.tr,
                             style: regularLarge.copyWith(color: MyColor.colorWhite),
                           ),
                         ),
@@ -146,7 +146,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                 Padding(
                   padding: const EdgeInsets.all(Dimensions.space20),
                   child: Text(
-                    MyStrings.vs,
+                    MyStrings.vs.tr,
                     style: semiBoldOverLarge.copyWith(color: MyColor.colorBlack),
                   ),
                 ),
@@ -215,8 +215,8 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               const SizedBox(
                                 height: Dimensions.space10,
                               ),
-                              const Text(
-                                "${MyStrings.searching}...",
+                              Text(
+                                "${MyStrings.searching.tr}...",
                                 style: semiBoldLarge,
                               )
                             ],
@@ -261,7 +261,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               Container(
                                 margin: const EdgeInsets.all(Dimensions.space14),
                                 child: DefaultText(
-                                  text: MyStrings.yourGameWillStartSoon,
+                                  text: MyStrings.yourGameWillStartSoon.tr,
                                   fontSize: Dimensions.fontExtraLarge,
                                   textStyle: boldLarge.copyWith(fontStyle: FontStyle.italic),
                                 ),
@@ -269,7 +269,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               Container(
                                 margin: const EdgeInsets.all(Dimensions.space14),
                                 child: DefaultText(
-                                  text: "${controller.countdownSeconds == 0 ? MyStrings.started : controller.countdownSeconds}",
+                                  text: "${controller.countdownSeconds == 0 ? MyStrings.started.tr : controller.countdownSeconds.tr}",
                                   fontSize: Dimensions.fontExtraLarge * 3,
                                   textStyle: boldLarge.copyWith(color: MyColor.primaryColor, fontStyle: FontStyle.italic),
                                 ),
@@ -288,7 +288,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RoundedButton(
-                              text: MyStrings.start,
+                              text: MyStrings.start.tr,
                               press: () {
                                 print("go");
 
@@ -309,7 +309,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                           ],
                         )
                       : RoundedButton(
-                          text: MyStrings.start,
+                          text: MyStrings.start.tr,
                           press: () {},
                           color: MyColor.colorWhite,
                           textColor: MyColor.textColor,

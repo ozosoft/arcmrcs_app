@@ -48,8 +48,8 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<GuessThewordController>(builder: (controller) {
       return Scaffold(
-          appBar: const CustomCategoryAppBar(
-            title: MyStrings.guessTheWord,
+          appBar: CustomCategoryAppBar(
+            title: MyStrings.guessTheWord.tr,
           ),
           body: controller.isLoading
               ? const CustomLoader()
@@ -79,7 +79,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        LevelCardButton(text: ' ${controller.gessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins}', hasIcon: false, hasImage: false),
+                                        LevelCardButton(text: ' ${controller.gessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins.tr}', hasIcon: false, hasImage: false),
                                         LevelCardButton(text: " ${questionsIndex + 1}/${controller.gessThewordQuesstionList.length}", hasIcon: false, hasImage: false),
                                       ],
                                     ),
@@ -175,7 +175,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),
                         child: Center(
                           child: RoundedButton(
-                            text: MyStrings.submit,
+                            text: MyStrings.submit.tr,
                             press: () {
                               controller.addAns(currentQuestionIndex, controller.tempAns.join().toLowerCase().toString());
                               if (currentQuestionIndex == controller.gessThewordQuesstionList.length - 1) {

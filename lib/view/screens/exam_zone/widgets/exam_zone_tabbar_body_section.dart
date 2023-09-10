@@ -8,6 +8,7 @@ import 'package:flutter_prime/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:flutter_prime/view/components/no_data.dart';
 import 'package:get/get.dart';
 
 import 'completed_exam_list_card_widget.dart';
@@ -66,17 +67,17 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                       onTap: (value) {
                         controller.selectTab();
                       },
-                      tabs: const [
+                      tabs:  [
                         Tab(
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text(MyStrings.today),
+                            child: Text(MyStrings.today.tr),
                           ),
                         ),
                         Tab(
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text(MyStrings.completed),
+                            child: Text(MyStrings.completed.tr),
                           ),
                         ),
                       ]),
@@ -90,31 +91,33 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                         onRefresh: () async {
                           controller.examZoneListData(fromLoad: true);
                         },
-                        child: ListView.builder(
-                            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                            shrinkWrap: true,
-                            itemCount: controller.examcategoryList.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              var item = controller.examcategoryList[index];
-                              return ExamListTileCard(
-                                exam: item,
-                                index: index,
-                                marks: "${item.prize.toString()} ${MyStrings.points.tr}",
-                                date: "${item.examStartTime.toString()} ",
-                                minute: "${item.examDuration.toString()} ${MyStrings.min}",
-                                image: item.image.toString(),
-                                title: item.title.toString(),
-                                onTap: () async {
-                                  // controller.enterExamKey = item.examKey!;
-                                  CustomBottomSheet(
-                                    child: EnterRoomBottomSheetWidget(
-                                      quizInfo: item,
-                                    ),
-                                  ).customBottomSheet(context);
-                                  await controller.examZoneRepo.getExamCode(item.id.toString());
-                                },
-                              );
-                            }),
+                        child: controller.examcategoryList.isEmpty
+                            ?  NoDataWidget(messages: MyStrings.noExamFound.tr,)
+                            : ListView.builder(
+                                physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                                shrinkWrap: true,
+                                itemCount: controller.examcategoryList.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  var item = controller.examcategoryList[index];
+                                  return ExamListTileCard(
+                                    exam: item,
+                                    index: index,
+                                    marks: "${item.prize.toString()} ${MyStrings.points.tr}",
+                                    date: "${item.examStartTime.toString()} ",
+                                    minute: "${item.examDuration.toString()} ${MyStrings.min.tr}",
+                                    image: item.image.toString(),
+                                    title: item.title.toString(),
+                                    onTap: () async {
+                                      // controller.enterExamKey = item.examKey!;
+                                      CustomBottomSheet(
+                                        child: EnterRoomBottomSheetWidget(
+                                          quizInfo: item,
+                                        ),
+                                      ).customBottomSheet(context);
+                                      await controller.examZoneRepo.getExamCode(item.id.toString());
+                                    },
+                                  );
+                                }),
                       ),
                       RefreshIndicator(
                         color: MyColor.primaryColor,

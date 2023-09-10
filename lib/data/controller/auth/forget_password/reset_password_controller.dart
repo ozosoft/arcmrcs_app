@@ -41,12 +41,12 @@ class ResetPasswordController extends GetxController{
     if(responseModel.statusCode == 200){
       EmailVerificationModel model = EmailVerificationModel.fromJson(jsonDecode(responseModel.responseJson));
       if(model.status == 'success'){
-        CustomSnackBar.success(successList: model.message?.success??[MyStrings.requestSuccess]);
+        CustomSnackBar.success(successList: model.message?.success??[MyStrings.requestSuccess.tr]);
         loginRepo.apiClient.sharedPreferences.remove(SharedPreferenceHelper.resetPassTokenKey);
        Get.toNamed(RouteHelper.loginScreen);
        
       } else{
-        CustomSnackBar.success(successList: model.message?.error??[MyStrings.requestFail]);
+        CustomSnackBar.success(successList: model.message?.error??[MyStrings.requestFail.tr]);
       }
     } else{
       CustomSnackBar.success(successList: [responseModel.message]);

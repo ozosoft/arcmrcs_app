@@ -1,4 +1,3 @@
-import 'package:flutter_prime/data/model/language/language_model.dart';
 import 'package:flutter_prime/data/model/model/profile_achivement_model.dart';
 import 'package:flutter_prime/data/model/model/questionsList_model.dart';
 
@@ -84,6 +83,7 @@ class MyStrings {
   static const String lifeLineAlreadyUsed = "This Life Line Already Used!";
   static const String pleaseEnterValidOtpCode = "Please Enter Valid OTP Code";
   static const String plusText = "+";
+  static const String tryAfterSec = "Try After {sec} Second";
 
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
@@ -193,8 +193,8 @@ class MyStrings {
   static const String passwordResetEmailSentTo = 'Password reset email sent to';
   static const String emailVerification = "Email Verification";
   static const String viaEmailVerify = "We've sent you an access code via email for email verification";
-  static const String didNotReceiveCode = "Didn't receive code?";
-  static const String resend = "Resend Code";
+  static const String didNotReceiveCode = "Don`t get OTP?";
+  static const String resend = "Resend";
   static const String resendCode = "Resend Code";
   static const String smsVerification = "Sms Verification";
   static const String profileComplete = "Profile Complete";
@@ -303,6 +303,7 @@ class MyStrings {
   static const String coinStore = "Coin Store";
   static const String badges = "Badges";
   static const String coinHistory = "Coin History";
+  static const String history = "History";
   static const String logout = "Logout";
   static const String hiMariya = "Hi! Mariya Ons";
   static const String hi = "Hi! ";
@@ -374,6 +375,7 @@ class MyStrings {
   static const String retry = "Retry";
 
   static const String otpFieldEmptyMsg = "Otp field can't be empty";
+  static const String otpSentToYourMobile = "An OTP has been sent to your mobile number";
   static const String goBackLogMsg = 'Sorry something went wrong here, go back and retry after sometimes';
 
   static const String secondAgo = 'second ago';
@@ -438,6 +440,7 @@ class MyStrings {
   static const String roomID = "874541";
   static const String marton = "@marton";
   static const String examZone = "Exam Zone";
+  static const String exam = "Exam";
   static const String twoHundredFortyDollar = "\$240.00";
   static const String jkobos = "@jkobos";
   static const String qP = "QP";
@@ -565,11 +568,6 @@ class MyStrings {
   static const String agreePolicyMessage = "You must agree with our privacy & policies";
   static const String agreeExamRules = "You must agree with Exam rules";
 
-  static RegExp emailValidatorRegExp = RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-  static List<MyLanguageModel> myLanguages = [
-    MyLanguageModel(languageName: 'English', countryCode: 'US', languageCode: 'en'),
-    MyLanguageModel(languageName: 'Arabic', countryCode: 'SA', languageCode: 'ar'),
-  ];
 
   List<MyQuestionsModel> quizquestions = [MyQuestionsModel(rank: MyStrings.A, questions: MyStrings.japan), MyQuestionsModel(rank: MyStrings.b, questions: MyStrings.apple), MyQuestionsModel(rank: MyStrings.c, questions: MyStrings.ibm), MyQuestionsModel(rank: MyStrings.d, questions: MyStrings.google)];
 
@@ -587,75 +585,9 @@ class MyStrings {
     {'title': MyStrings.silver, 'description': MyStrings.battleMan},
     {'title': MyStrings.golden, 'description': MyStrings.player},
   ];
-  final List<Map<String, String>> badgeLists = [
-    {
-      'title': MyStrings.supperbattleMan,
-    },
-    {
-      'title': MyStrings.quizerMaster,
-    },
-    {
-      'title': MyStrings.goldenquizMan,
-    },
-    {
-      'title': MyStrings.battleMaster,
-    },
-    {
-      'title': MyStrings.perfectQuizMan,
-    },
-    {
-      'title': MyStrings.ultimatePlayer,
-    },
-  ];
-  final List<Map<String, String>> rulesOfReedem = [
-    {'title': minimumReedemAmount},
-    {'title': payoutTime},
-  ];
-  final List<Map<String, String>> coinsReedemdetails = [
-    {'pack_name': goldenPack, 'price': twofifty, 'total_coins': fivehundredCoins},
-    {'pack_name': noAdsPack, 'price': oneTwenty, 'total_coins': fourhundredCoins},
-    {'pack_name': silverPack, 'price': eighty, 'total_coins': onehundredTwentyCoins},
-    {'pack_name': proPack, 'price': threeforty, 'total_coins': sixhundredCoins},
-    {'pack_name': smallPack, 'price': hundred, 'total_coins': tenCoins},
-  ];
 
-  final List<Map<String, String>> allCategoryies = [
-    {'title': generalKnowledge, 'questions': questions, 'level': sixlevel},
-    {'title': gameandSports, 'questions': questions2, 'level': sevenlevel},
-    {'title': historyAndCulture, 'questions': questions3, 'level': tenlevel},
-    {'title': music, 'questions': questions4, 'level': twelvelevel},
-    {'title': scienceAndTech, 'questions': questions5, 'level': eightlevel},
-  ];
-  final List<Map<String, String>> subCategoryies = [
-    {'title': movies, 'questions': questions, 'level': sixlevel},
-    {'title': novel, 'questions': questions2, 'level': sevenlevel},
-    {'title': geographical, 'questions': questions3, 'level': tenlevel},
-    {'title': nation, 'questions': questions4, 'level': twelvelevel},
-    {'title': international, 'questions': questions5, 'level': eightlevel},
-  ];
-  final List<Map<String, String>> notifications = [
-    {'title': rewardNotification, 'short_Notification': shortDesc1, 'detail_Notification': detailnotifucation1, 'date': detailnotifucationdate1},
-    {'title': joinwithnewroom, 'short_Notification': shortDesc2, 'detail_Notification': detailnotifucation1, 'date': detailnotifucationdate2},
-    {'title': eventNotification, 'short_Notification': shortDesc3, 'detail_Notification': detailnotifucation1, 'date': detailnotifucationdate3},
-  ];
 
-  final List<Map<String, String>> playDifrentGames = [
-    {'title': dailyQuiz, 'sub_title': dailynewquiz},
-    {'title': funAndLearn, 'sub_title': gamequizwithfun},
-    {'title': guessTheWord, 'sub_title': funvocabulary},
-  ];
 
-  final List<Map<String, String>> coinHistoryies = [
-    {'title': wonWorldQuizContest, 'date': twelveMay2023, 'reward': twoFiftyUSD},
-    {'title': worldQuiz2023, 'date': twenrtyEightMay2023, 'reward': hundredAndTwentyUSD},
-    {'title': quizChallenge, 'date': twoJune2023, 'reward': hundredAndTwentyUSD},
-    {'title': battelQuizEvent, 'date': twelveMay2023, 'reward': twoFiftyUSD},
-    {'title': quizGameChallenge, 'date': twoJune2023, 'reward': twoFiftyUSD},
-  ];
-
-  List<String> rewardsList = [twoFiftyUSD, twoFiftyUSD, hundredAndTwentyUSD, twoFiftyUSD, hundredAndTwentyUSD];
-  final List<String> languages = [english, bangla, hindi, spanish];
-  final List<String> questionsList = [quizQuestions, quizQuestions2, questions2, questions, rules1, rules2, rules3];
   final List<String> rules = [rules1, rules2, rules3];
   final List<String> settingsList = [sound, vibration, themes];
 }

@@ -21,13 +21,13 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Padding(
-          padding: EdgeInsets.only(bottom: Dimensions.space5, left: Dimensions.space5, right: Dimensions.space4, top: Dimensions.space20),
+        Padding(
+          padding: const EdgeInsets.only(bottom: Dimensions.space5, left: Dimensions.space5, right: Dimensions.space4, top: Dimensions.space20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                MyStrings.battleOfTheDay,
+                MyStrings.battleOfTheDay.tr,
                 style: semiBoldMediumLarge,
               ),
             ],
@@ -71,13 +71,13 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                MyStrings.oneVSone,
+                              Text(
+                                MyStrings.oneVSone.tr,
                                 style: semiBoldMediumLarge,
                               ),
                               const SizedBox(height: Dimensions.space8),
                               Text(
-                                MyStrings.battleQuiz,
+                                MyStrings.battleQuiz.tr,
                                 style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
                               )
                             ],
@@ -105,113 +105,6 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
         const SizedBox(
           height: Dimensions.space15,
         ),
-        // InkWell(
-        //   onTap: () {
-        //     Get.to(() => const OneVSOneBattleScreen(isGroupBattle: true));
-        //   },
-        //   child: Container(
-        //     margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
-        //     decoration: BoxDecoration(
-        //       color: MyColor.colorWhite,
-        //       borderRadius: BorderRadius.circular(Dimensions.space10),
-        //       boxShadow: const [
-        //         BoxShadow(
-        //           color: MyColor.cardShaddowColor2,
-        //           offset: Offset(0, 8),
-        //           blurRadius: 60,
-        //           spreadRadius: 0,
-        //         ),
-        //       ],
-        //     ),
-        //     child: Column(
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: [
-        //         Padding(
-        //           padding: const EdgeInsets.all(Dimensions.space12),
-        //           child: Row(
-        //             mainAxisAlignment: MainAxisAlignment.start,
-        //             children: [
-        //               const SizedBox(
-        //                 width: Dimensions.space10,
-        //               ),
-        //               InkWell(
-        //                 onTap: () {
-        //                   Get.to(() => const OneVSOneBattleScreen(
-        //                         isGroupBattle: true,
-        //                       ));
-        //                 },
-        //                 child: Container(
-        //                   height: Dimensions.space50,
-        //                   width: Dimensions.space220,
-        //                   padding: const EdgeInsets.only(top: Dimensions.space7),
-        //                   child: Column(
-        //                     crossAxisAlignment: CrossAxisAlignment.start,
-        //                     children: [
-        //                       const Text(
-        //                         MyStrings.groupBattle,
-        //                         style: semiBoldMediumLarge,
-        //                       ),
-        //                       const SizedBox(height: Dimensions.space8),
-        //                       Text(
-        //                         MyStrings.groupbattleQuiz,
-        //                         style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
-        //                       )
-        //                     ],
-        //                   ),
-        //                 ),
-        //               ),
-        //               const Spacer(),
-        //               InkWell(
-        //                 onTap: () {
-        //                   Get.toNamed(RouteHelper.oneVSoneBattleScreen);
-        //                 },
-        //                 child: Container(
-        //                   padding: const EdgeInsets.only(top: Dimensions.space7),
-        //                   height: Dimensions.space50,
-        //                   width: Dimensions.space50,
-        //                   child: Align(
-        //                     alignment: Alignment.topCenter,
-        //                     child: SvgPicture.asset(
-        //                       MyImages.playNowSVG,
-        //                       height: Dimensions.space27,
-        //                     ),
-        //                   ),
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //         Padding(
-        //           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space5),
-        //           child: Row(
-        //             children: [
-        //               Padding(
-        //                 padding: const EdgeInsets.all(Dimensions.space8),
-        //                 child: Container(
-        //                   decoration: BoxDecoration(color: MyColor.cardColor, border: Border.all(color: MyColor.colorlighterGrey, width: 0.3)),
-        //                   padding: const EdgeInsets.all(Dimensions.space7),
-        //                   child: Center(
-        //                       child: Text(
-        //                     MyStrings.fee50Coins,
-        //                     style: regularDefault.copyWith(color: MyColor.colorGrey),
-        //                   )),
-        //                 ),
-        //               ),
-        //               Padding(
-        //                 padding: const EdgeInsets.all(Dimensions.space8),
-        //                 child: Container(
-        //                   decoration: BoxDecoration(color: MyColor.cardColor, border: Border.all(color: MyColor.colorDarkGrey, width: 0.3)),
-        //                   padding: const EdgeInsets.all(Dimensions.space7),
-        //                   child: Center(child: Text(MyStrings.currentCoin, style: regularDefault.copyWith(color: MyColor.colorGrey))),
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // )
       ],
     );
   }

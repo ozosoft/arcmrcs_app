@@ -6,8 +6,6 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
-import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
@@ -27,13 +25,15 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(bottom: Dimensions.space10, left: Dimensions.space5, right: Dimensions.space5, top: Dimensions.space20),
-            child: Text(
-              MyStrings.playDiffrentQuizs,
-              style: boldMediumLarge,
+          const SizedBox(height: Dimensions.space10,),
+          if (controller.differentQuizlist.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.only(bottom: Dimensions.space10, left: Dimensions.space5, right: Dimensions.space5, top: Dimensions.space20),
+              child: Text(
+                MyStrings.playDiffrentQuizs.tr,
+                style: boldMediumLarge,
+              ),
             ),
-          ),
           const SizedBox(height: Dimensions.space10),
           GridView.builder(
             shrinkWrap: true,
@@ -53,7 +53,7 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                   } else if (item.act == "single_battle") {
                     Get.toNamed(RouteHelper.oneVSoneBattleScreen);
                   } else {
-                    CustomSnackBar.error(errorList: [(MyStrings.serverError)]);
+                    CustomSnackBar.error(errorList: [(MyStrings.serverError.tr)]);
                   }
                 },
                 child: Container(
@@ -86,11 +86,11 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                         height: Dimensions.space10,
                       ),
                       Text(
-                        controller.differentQuizlist[index].name.toString(),
+                        controller.differentQuizlist[index].name.toString().tr,
                         style: semiBoldExtraLarge,
                       ),
                       const SizedBox(height: Dimensions.space10),
-                      Text("${controller.differentQuizlist[index].shortDescription.toString()} ", maxLines: 3, overflow: TextOverflow.ellipsis, style: regularDefault.copyWith(color: MyColor.textColor, fontSize: Dimensions.fontDefault12), textAlign: TextAlign.center),
+                      Text("${controller.differentQuizlist[index].shortDescription.toString().tr} ", maxLines: 3, overflow: TextOverflow.ellipsis, style: regularDefault.copyWith(color: MyColor.textColor, fontSize: Dimensions.fontDefault12), textAlign: TextAlign.center),
                     ],
                   ),
                 ),

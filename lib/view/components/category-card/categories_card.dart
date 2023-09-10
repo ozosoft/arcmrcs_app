@@ -4,6 +4,7 @@ import 'package:flutter_prime/view/components/chips/custom_chips_widget.dart';
 import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
 import 'package:flutter_prime/view/screens/all-categories/widgets/allCategories_expanded_section.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get_utils/get_utils.dart';
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
 import '../../../core/utils/my_images.dart';
@@ -101,7 +102,7 @@ class _CategoriesCardState extends State<CategoriesCard> {
                                       : const SizedBox(),
                                   CustomChipsWidget(
                                     padding: Dimensions.space5,
-                                    child: Center(child: Text(widget.fromExam ? widget.date : widget.questions + (widget.fromFunNlearn == true ? " ${MyStrings.quiz}" : MyStrings.questionse), style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    child: Center(child: Text(widget.fromExam ? widget.date : widget.questions + (widget.fromFunNlearn == true ? " ${MyStrings.quiz.tr}" : MyStrings.questionse.tr), style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                   ),
                                   const SizedBox(width: Dimensions.space10),
                                   widget.fromExam

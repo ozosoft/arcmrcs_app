@@ -35,13 +35,13 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomCategoryAppBar(title: MyStrings.allCategory),
+      appBar:  CustomCategoryAppBar(title: MyStrings.allCategory.tr),
       body: GetBuilder<GuessThewordController>(builder: (controller) {
         return controller.isLoading
             ? const CustomLoader()
             : controller.categoryList.isEmpty
-                ? const NoDataWidget(
-                    messages: MyStrings.sorryNoCategory,
+                ?  NoDataWidget(
+                    messages: MyStrings.sorryNoCategory.tr,
                   )
                 : Padding(
                   padding: const EdgeInsets.only(top: Dimensions.space20),

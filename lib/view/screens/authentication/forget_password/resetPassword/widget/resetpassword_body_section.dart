@@ -78,7 +78,7 @@ class _ResetPasswordBodySectionState extends State<ResetPasswordBodySection> {
                     needOutlineBorder: true,
                     isShowSuffixIcon: true,
                     isPassword: true,
-                    labelText: MyStrings.newPassword,
+                    labelText: MyStrings.newPassword.tr,
                     onChanged: (value) {
                       if (controller.checkPasswordStrength) {
                         controller.updateValidationList(value);

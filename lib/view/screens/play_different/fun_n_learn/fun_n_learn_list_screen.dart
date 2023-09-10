@@ -53,7 +53,7 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
     return GetBuilder<FunNLearnListController>(
       builder: (controller) => Scaffold(
         appBar: CustomCategoryAppBar(
-          title: title,
+          title: title.tr,
         ),
         body: controller.loader
             ? const CustomLoader()
@@ -71,7 +71,7 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
                           return CategoriesCard(
                             onTap: () {
                               if (controller.fun_N_Learn_descriptionList[index].questionsCount.toString() == "0") {
-                                CustomSnackBar.error(errorList: [MyStrings.noQuestionFoundMsg]);
+                                CustomSnackBar.error(errorList: [MyStrings.noQuestionFoundMsg.tr]);
                               } else {
                                 Get.toNamed(RouteHelper.funNlearnDescriptionScreen, arguments: [controller.fun_N_Learn_descriptionList[index].title.toString(), controller.fun_N_Learn_descriptionList[index].id.toString(), controller.fun_N_Learn_descriptionList[index].description.toString()]);
                                 // controller.changeExpandIndex(index);

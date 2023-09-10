@@ -258,7 +258,7 @@ class ExamZoneQuizController extends GetxController {
         totalCoin = model.data!.totalCoin.toString();
         winningCoin = model.data!.winingCoin.toString();
 
-        Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult)!.whenComplete(() {
+        Get.toNamed(RouteHelper.examZoneResultScreen, arguments: MyStrings.quizResult.tr)!.whenComplete(() {
           Get.offAllNamed(RouteHelper.bottomNavBarScreen);
         });
         // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);

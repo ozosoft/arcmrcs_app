@@ -55,7 +55,7 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
       },
       child: GetBuilder<FunNlearnQuizController>(
           builder: (controller) => Scaffold(
-                appBar: const CustomCategoryAppBar(title: "${MyStrings.letsPlay}"),
+                appBar: CustomCategoryAppBar(title: MyStrings.letsPlay.tr),
                 body: controller.loading
                     ? const CustomLoader()
                     : controller.examQuestionsList.isEmpty
@@ -182,7 +182,7 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
                                                               ),
                                                             ),
                                                           ),
-                                                          controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
+                                                          controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent.tr, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
                                                         ],
                                                       ),
                                                     ],
@@ -219,7 +219,7 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
                                             if (controller.selectedOptionIndex.toString() == "-1") {
                                               controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
                                             }
-                                            controller.selectedOptionIndex.toString().isNotEmpty ? print("this is selectedoption index" + controller.selectedOptionIndex.toString()) : print;
+                                        
                                             if (questionsIndex == controller.examQuestionsList.length - 1) {
                                               controller.submitAnswer();
 

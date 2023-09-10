@@ -4,6 +4,7 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
+import 'package:get/get.dart';
 
 class CustomTopCategoryCard extends StatelessWidget {
   final String title, questionsQuantaty, image;
@@ -49,7 +50,7 @@ class CustomTopCategoryCard extends StatelessWidget {
               ),
             ),
             Text(
-              questionsQuantaty + MyStrings.questionse,
+              questionsQuantaty + MyStrings.questionse.tr,
               textAlign: TextAlign.center,
               style: regularDefault.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space12),
             )

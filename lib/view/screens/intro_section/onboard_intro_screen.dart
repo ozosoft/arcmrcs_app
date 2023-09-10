@@ -57,7 +57,7 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: Dimensions.space25),
             child: RoundedButton(
-                text: MyStrings.getStarted,
+                text: MyStrings.getStarted.tr,
                 cornerRadius: Dimensions.space10,
                 press: () {
                   Get.toNamed(RouteHelper.loginScreen);
@@ -68,7 +68,7 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                MyStrings.dontHaveAnaccount,
+                MyStrings.dontHaveAnaccount.tr,
                 style: regularLarge.copyWith(color: MyColor.colorDarkGrey),
               ),
               const SizedBox(width: Dimensions.space5),
@@ -76,7 +76,7 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
                 onTap: () {
                   Get.toNamed(RouteHelper.signupScreen);
                 },
-                child: const CustomUndelineText(text: MyStrings.signUp),
+                child:  CustomUndelineText(text: MyStrings.signUp.tr),
               )
             ],
           ),
@@ -85,7 +85,7 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
       ),
       pages: [
         PageViewModel(
-          title: MyStrings.onboardTitle,
+          title: MyStrings.onboardTitle.tr,
           body: MyStrings.onboardDescription,
           image: SvgPicture.asset(
             MyImages.onboard1SVG,
@@ -101,7 +101,7 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
           ),
         ),
         PageViewModel(
-          title: MyStrings.realMoney,
+          title: MyStrings.realMoney.tr,
           body: MyStrings.pickTheCorrectAnswer,
           image: SvgPicture.asset(MyImages.onBoard2SVG),
           decoration: PageDecoration(
@@ -115,8 +115,8 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
           ),
         ),
         PageViewModel(
-          title: MyStrings.completeWIthFriends,
-          body: MyStrings.whoIsSmartest,
+          title: MyStrings.completeWIthFriends.tr,
+          body: MyStrings.whoIsSmartest.tr,
           image: SvgPicture.asset(MyImages.onBoard3SVG),
           decoration: PageDecoration(
             titlePadding: const EdgeInsets.symmetric(

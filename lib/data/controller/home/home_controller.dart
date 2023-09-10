@@ -31,4 +31,10 @@ class HomeController extends GetxController{
     update();
   }
 
+  //Language 
+
+  changeLanguage(String langCode){
+
+  }
+
 }

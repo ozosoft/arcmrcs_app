@@ -3,6 +3,7 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
+import 'package:get/get.dart';
 
 class ReedemRequestCard extends StatefulWidget {
   final String paymentType, date, amount;
@@ -26,8 +27,8 @@ class _ReedemRequestCardState extends State<ReedemRequestCard> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                MyStrings.reedemRequest,
+               Text(
+                MyStrings.reedemRequest.tr,
                 style: semiBoldMediumLarge,
               ),
               const SizedBox(
@@ -59,7 +60,7 @@ class _ReedemRequestCardState extends State<ReedemRequestCard> {
                     color: MyColor.pendingContainerColor,
                     border: Border.all(color: MyColor.pendingBorderColor),
                     borderRadius: BorderRadius.circular(Dimensions.space5)),
-                child: Text(MyStrings.pending,
+                child: Text(MyStrings.pending.tr,
                     style: regularDefault.copyWith(
                         color: MyColor.pendingBorderColor,
                         fontSize: Dimensions.space10)),
@@ -70,7 +71,7 @@ class _ReedemRequestCardState extends State<ReedemRequestCard> {
                     color: MyColor.completedContainerColor,
                     border: Border.all(color: MyColor.completedBorderColor),
                     borderRadius: BorderRadius.circular(Dimensions.space5)),
-                child: Text(MyStrings.complete,
+                child: Text(MyStrings.complete.tr,
                     style: regularDefault.copyWith(
                         color: MyColor.completedBorderColor,
                         fontSize: Dimensions.space10)),

@@ -12,10 +12,13 @@ import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dar
 import 'package:flutter_prime/data/repo/auth/logout/logout_repo.dart';
 
 import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/screens/home_page/homepage-widgets/language-bottom-sheet/language_bottom_sheet_screen.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../core/utils/util.dart';
 import '../../components/bottom-sheet/custom_bottom_sheet.dart';
 import '../../components/image_widget/my_image_widget.dart';
 
@@ -74,11 +77,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            controller.dashRepo.apiClient.getUserFullName(),
+                            controller.dashRepo.apiClient.getUserFullName().tr,
                             style: semiBoldMediumLarge,
                           ),
                           const SizedBox(height: Dimensions.space7),
-                          Text("${MyStrings.totalCoin.tr} - ${controller.coins}", style: semiBoldLarge.copyWith(color: MyColor.primaryColor, fontSize: Dimensions.fontDefault12))
+                          Text("${MyStrings.totalCoin.tr} - ${MyUtils().formatNumberWithLeadingZero(controller.coins.tr)}", style: semiBoldLarge.copyWith(color: MyColor.primaryColor, fontSize: Dimensions.fontDefault12))
                         ],
                       ),
                     ),
@@ -93,8 +96,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
               children: [
                 ListTile(
                   leading: SvgPicture.asset(MyImages.profileDrawer),
-                  title: const Text(
-                    MyStrings.profile,
+                  title: Text(
+                    MyStrings.profile.tr,
                     style: regularMediumLarge,
                   ),
                   minLeadingWidth: Dimensions.space1,
@@ -140,8 +143,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 // ),
                 ListTile(
                   leading: SvgPicture.asset(MyImages.coinStoreDrawer),
-                  title: const Text(
-                    MyStrings.coinStore,
+                  title: Text(
+                    MyStrings.coinStore.tr,
                     style: regularMediumLarge,
                   ),
                   minLeadingWidth: Dimensions.space1,
@@ -165,8 +168,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 // ),
                 ListTile(
                   leading: SvgPicture.asset(MyImages.coinStoreDrawer),
-                  title: const Text(
-                    MyStrings.coinHistory,
+                  title: Text(
+                    MyStrings.coinHistory.tr,
                     style: regularMediumLarge,
                   ),
                   onTap: () {
@@ -179,22 +182,36 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 ),
                 ListTile(
                     leading: SvgPicture.asset(MyImages.languageDrawer),
-                    title: const Text(
-                      MyStrings.language,
+                    title: Text(
+                      MyStrings.language.tr,
                       style: regularMediumLarge,
                     ),
                     minLeadingWidth: Dimensions.space1,
                     onTap: () {
                       CustomBottomSheet(child: const LanguageBottomSheetScreen()).customBottomSheet(context);
                     }),
+
                 GetBuilder<LogoutController>(
                   builder: (logoutController) => ListTile(
                     onTap: () {
                       logoutController.logout();
                     },
-                    leading: SvgPicture.asset(MyImages.logOutDrawer),
-                    title: const Text(
-                      MyStrings.logout,
+                    leading: logoutController.loaderStarted
+                        ? const SizedBox(
+                            width: Dimensions.space25,
+                            height: Dimensions.space25,
+                            child: SpinKitPouringHourGlass(
+                              strokeWidth: 0.2,
+                              color: MyColor.primaryColor,
+                              size: Dimensions.space40,
+                            ),
+                          )
+                        : SvgPicture.asset(
+                            MyImages.logOutDrawer,
+                            width: 25,
+                          ),
+                    title: Text(
+                      MyStrings.logout.tr,
                       style: regularMediumLarge,
                     ),
                     minLeadingWidth: Dimensions.space1,

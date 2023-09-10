@@ -21,7 +21,7 @@ class TwoFactorController extends GetxController {
   verifyYourSms(String currentText) async {
 
     if (currentText.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.otpFieldEmptyMsg]);
+      CustomSnackBar.error(errorList: [MyStrings.otpFieldEmptyMsg.tr]);
       return;
     }
 

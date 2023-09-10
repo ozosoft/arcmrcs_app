@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
 import 'package:flutter_prime/core/utils/method.dart';
@@ -24,6 +25,24 @@ class LoginRepo {
     return model;
   }
 
+  Future<ResponseModel> socialLoginUser({String? email, String? mobile, String? provider, String? uid}) async {
+    late Map<String, String> map;
+
+    if (provider == 'mobile') {
+      map = {'id': uid!, 'mobile': mobile!, 'provider': "mobile"};
+    }
+
+    if (provider == 'email') {
+      map = {'id': uid!, 'email': email!, 'provider': "email"};
+    }
+
+    String url = '${UrlContainer.baseUrl}${UrlContainer.socialLogin}';
+
+    ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: false);
+
+    return model;
+  }
+
   Future<String> forgetPassword(String type, String value) async {
     final map = modelToMap(value, type);
     String url = '${UrlContainer.baseUrl}${UrlContainer.forgetPasswordEndPoint}';
@@ -33,10 +52,10 @@ class LoginRepo {
 
     if (model.status.toLowerCase() == "success") {
       apiClient.sharedPreferences.setString(SharedPreferenceHelper.userEmailKey, model.data?.email ?? '');
-      CustomSnackBar.success(successList: ['${MyStrings.passwordResetEmailSentTo} ${model.data?.email ?? MyStrings.yourEmail}']);
+      CustomSnackBar.success(successList: ['${MyStrings.passwordResetEmailSentTo.tr} ${model.data?.email ?? MyStrings.yourEmail.tr}']);
       return model.data?.email ?? '';
     } else {
-      CustomSnackBar.error(errorList: model.message!.error ?? [MyStrings.requestFail]);
+      CustomSnackBar.error(errorList: model.message!.error ?? [MyStrings.requestFail.tr]);
       return '';
     }
   }

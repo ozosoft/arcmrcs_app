@@ -5,11 +5,8 @@ import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_list_con
 import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/components/category-card/categories_card.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/utils/url_container.dart';
 import 'widget/contest_title_card_widget.dart';
 
 class AllContestScreen extends StatefulWidget {
@@ -41,8 +38,8 @@ class _AllContestScreenState extends State<AllContestScreen> {
     Size size = MediaQuery.of(context).size;
     return GetBuilder<QuizQuestionsListController>(
       builder: (controller) => Scaffold(
-        appBar: const CustomCategoryAppBar(
-          title: MyStrings.quizContest,
+        appBar:  CustomCategoryAppBar(
+          title: MyStrings.quizContest.tr,
         ),
         body: controller.loading == true
             ? const CustomLoader()

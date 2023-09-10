@@ -18,9 +18,7 @@ class SplashController extends GetxController {
   bool isLoading = true;
   gotoNextPage() async {
     await loadLanguage();
-    bool isRemember = repo.apiClient.sharedPreferences
-            .getBool(SharedPreferenceHelper.rememberMeKey) ??
-        false;
+    bool isRemember = repo.apiClient.sharedPreferences.getBool(SharedPreferenceHelper.rememberMeKey) ?? false;
     noInternet = false;
     update();
 
@@ -33,12 +31,11 @@ class SplashController extends GetxController {
     ResponseModel response = await repo.getGeneralSetting();
 
     if (response.statusCode == 200) {
-      GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(
-          jsonDecode(response.responseJson));
+      GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(jsonDecode(response.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success) {
         repo.apiClient.storeGeneralSetting(model);
       } else {
-        List<String> message = [MyStrings.somethingWentWrong];
+        List<String> message = [MyStrings.somethingWentWrong.tr];
         CustomSnackBar.error(errorList: model.message?.error ?? message);
       }
     } else {
@@ -59,23 +56,16 @@ class SplashController extends GetxController {
     } else {
       Future.delayed(const Duration(seconds: 1), () {
         Get.offAndToNamed(RouteHelper.loginScreen);
-      
       });
     }
   }
 
   Future<bool> initSharedData() {
-    if (!repo.apiClient.sharedPreferences
-        .containsKey(SharedPreferenceHelper.countryCode)) {
-      return repo.apiClient.sharedPreferences.setString(
-          SharedPreferenceHelper.countryCode,
-          MyStrings.myLanguages[0].countryCode);
+    if (!repo.apiClient.sharedPreferences.containsKey(SharedPreferenceHelper.countryCode)) {
+      return repo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.countryCode, localizationController.myLanguages[0].countryCode);
     }
-    if (!repo.apiClient.sharedPreferences
-        .containsKey(SharedPreferenceHelper.languageCode)) {
-      return repo.apiClient.sharedPreferences.setString(
-          SharedPreferenceHelper.languageCode,
-          MyStrings.myLanguages[0].languageCode);
+    if (!repo.apiClient.sharedPreferences.containsKey(SharedPreferenceHelper.languageCode)) {
+      return repo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.languageCode, localizationController.myLanguages[0].languageCode);
     }
     return Future.value(true);
   }
@@ -90,17 +80,12 @@ class SplashController extends GetxController {
         Map<String, Map<String, String>> language = {};
         var resJson = jsonDecode(response.responseJson);
         saveLanguageList(response.responseJson);
-        var value = resJson['data']['data']['file'].toString() == '[]'
-            ? {}
-            : jsonDecode(resJson['data']['data']['file'])
-                as Map<String, dynamic>;
+        var value = resJson['data']['language_data'] == [] ? {} : resJson['data']['language_data'];
         Map<String, String> json = {};
         value.forEach((key, value) {
           json[key] = value.toString();
         });
-        language[
-                '${localizationController.locale.languageCode}_${localizationController.locale.countryCode}'] =
-            json;
+        language['${localizationController.locale.languageCode}_${localizationController.locale.countryCode}'] = json;
         Get.addTranslations(Messages(languages: language).keys);
       } catch (e) {
         CustomSnackBar.error(errorList: [e.toString()]);
@@ -111,8 +96,7 @@ class SplashController extends GetxController {
   }
 
   void saveLanguageList(String languageJson) async {
-    await repo.apiClient.sharedPreferences
-        .setString(SharedPreferenceHelper.languageListKey, languageJson);
+    await repo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.languageListKey, languageJson);
     return;
   }
 }

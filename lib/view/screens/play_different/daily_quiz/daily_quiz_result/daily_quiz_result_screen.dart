@@ -20,7 +20,7 @@ class _DailyQuizResultScreenState extends State<DailyQuizResultScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColor.primaryColor,
-      appBar: const CustomCategoryAppBar(title: MyStrings.quizResult),
+      appBar:  CustomCategoryAppBar(title: MyStrings.quizResult.tr),
       body: Stack(
         children: [
           Positioned.fill(

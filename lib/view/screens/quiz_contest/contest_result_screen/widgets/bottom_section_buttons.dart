@@ -17,7 +17,7 @@ class BottomSectionButtons extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(Dimensions.space15),
           child: RoundedButton(
-            text: MyStrings.reviewAnswer,
+            text: MyStrings.reviewAnswer.tr,
             press: () {
               Get.toNamed(RouteHelper.quizContestreviewScreen);
             },
@@ -31,7 +31,7 @@ class BottomSectionButtons extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(Dimensions.space15),
           child: RoundedButton(
-            text: MyStrings.home,
+            text: MyStrings.home.tr,
             press: () {
               Get.offAllNamed(RouteHelper.bottomNavBarScreen);
             },

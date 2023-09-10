@@ -14,10 +14,10 @@ class LogoutController extends GetxController {
 
   LogoutController({required this.logoutRepo});
 
-  bool loader = true;
+  bool loaderStarted = false;
 
   void logout() async {
-    loader = true;
+    loaderStarted = true;
     update();
 
     // getsavedData();
@@ -28,7 +28,7 @@ class LogoutController extends GetxController {
       LogoutModel plan = LogoutModel.fromJson(jsonDecode(logout.responseJson));
       if (plan.status.toString().toLowerCase() == MyStrings.ok.toLowerCase()) {
         Get.offAllNamed(RouteHelper.loginScreen);
-        print("this is logout");
+        print("LoggedM OUT!");
         update();
       } else {
         CustomSnackBar.error(errorList: [plan.status ?? ""]);
@@ -37,7 +37,7 @@ class LogoutController extends GetxController {
       CustomSnackBar.error(errorList: [logout.message]);
     }
 
-    loader = false;
+    loaderStarted = false;
     update();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
+import 'package:get/get.dart';
 
 import 'widgets/profile_details_section.dart';
 import 'widgets/profile_overall_achivements_section.dart';
@@ -10,11 +11,11 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       appBar: CustomCategoryAppBar(
-        title: MyStrings.profile,
+        title: MyStrings.profile.tr,
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [

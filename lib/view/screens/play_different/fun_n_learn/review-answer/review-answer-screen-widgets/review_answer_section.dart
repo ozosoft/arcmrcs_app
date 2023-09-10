@@ -72,8 +72,8 @@ class _FunNLearnReviewAnswerSectionState extends State<FunNLearnReviewAnswerSect
                                         }
                                         controller.update();
                                       },
-                                      child: const LevelCardButton(
-                                        text: MyStrings.next,
+                                      child:  LevelCardButton(
+                                        text: MyStrings.next.tr,
                                         hasIcon: false,
                                         hasImage: false,
                                         bgColor: MyColor.primaryColor,
