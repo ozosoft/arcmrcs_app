@@ -6,6 +6,8 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
+import '../../../core/route/route.dart';
+import '../../model/auth/logout/logout_model.dart';
 import '../../repo/auth/logout/logout_repo.dart';
 import '../../repo/exam_zone/exam_zone_repo.dart';
 
@@ -50,7 +52,7 @@ class DashBoardController extends GetxController {
       examZonelist.clear();
 
       if (model.responseJson.isEmpty) {
-        logoutRepo.logout();
+        logoutFromApp();
       } else {
         DashBoardModel dashBoard = DashBoardModel.fromJson(jsonDecode(model.responseJson));
 
@@ -59,6 +61,8 @@ class DashBoardController extends GetxController {
           rank = dashBoard.data?.rank?.userRank ?? "";
           coins = dashBoard.data?.user?.coins ?? "";
           score = dashBoard.data?.user?.score ?? "";
+
+          print(dashBoard.data!.user);
 
           //save User Data
           dashRepo.apiClient.setUserData(dashBoard.data!.user!.toJson());
@@ -105,6 +109,25 @@ class DashBoardController extends GetxController {
 
   changeactivestatus() {
     isActive = !isActive;
+    update();
+  }
+
+  void logoutFromApp() async {
+    ResponseModel logout = await logoutRepo.logout();
+
+    if (logout.statusCode == 200) {
+      LogoutModel plan = LogoutModel.fromJson(jsonDecode(logout.responseJson));
+      if (plan.status.toString().toLowerCase() == MyStrings.ok.toLowerCase()) {
+        Get.offAllNamed(RouteHelper.loginScreen);
+        print("LoggedM OUT!");
+        update();
+      } else {
+        CustomSnackBar.error(errorList: [plan.status ?? ""]);
+      }
+    } else {
+      CustomSnackBar.error(errorList: [logout.message]);
+    }
+
     update();
   }
 }

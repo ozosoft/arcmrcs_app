@@ -7,7 +7,6 @@ import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dar
 import 'package:flutter_prime/view/screens/wallet/widgets/wallet_request_section.dart';
 import 'package:get/get.dart';
 
-import 'transection_section.dart';
 
 class TabBarWithButtons extends StatefulWidget {
   const TabBarWithButtons({super.key});
@@ -23,6 +22,7 @@ class _TabBarWithButtonsState extends State<TabBarWithButtons>
 
 
   void initState() {
+    super.initState();
     tabController = TabController(vsync: this, length: 1);
     setState(() {
       selectedIndex = tabController.index;
@@ -31,7 +31,6 @@ class _TabBarWithButtonsState extends State<TabBarWithButtons>
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return  DefaultTabController(
         length: 1,
         child:  GetBuilder<DashBoardController>(

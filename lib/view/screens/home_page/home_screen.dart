@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DashBoardRepo(apiClient: Get.find()));
-    Get.put(DashBoardRepo(apiClient: Get.find()));
     Get.put(ExamZoneRepo(apiClient: Get.find()));
     Get.put(SubCategoriesRepo(apiClient: Get.find()));
     Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
@@ -86,6 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           : const Column(
                               children: [
                                 TopCategorySection(),
+                              
+
                                 BattleOfTheDaySection(),
                                 QuizContestSection(),
                                 ExamZoneCategoryScreen(),

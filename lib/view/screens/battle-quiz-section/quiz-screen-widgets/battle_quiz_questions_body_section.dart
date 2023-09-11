@@ -16,6 +16,7 @@ import '../../../../core/route/route.dart';
 import '../../../../core/utils/url_container.dart';
 import '../../../../data/model/battle/battle_question_list.dart';
 import '../../../../data/services/api_service.dart';
+import '../../../../environment.dart';
 import '../../../components/alert-dialog/custom_alert_dialog.dart';
 
 import '../../../components/image_widget/my_image_widget.dart';
@@ -402,7 +403,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                           height: size.width / 7,
                           child: CircularCountDownTimer(
                             controller: quizController.countDownController,
-                            duration: quizController.duration,
+                            duration: Environment.battleQuizPerQuestionSecond,
                             onComplete: () async {
                               print("From Counter Next Querstion");
                               if (quizController.hasMoreQuestions()) {

@@ -28,7 +28,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DailyQuizRepo(apiClient: Get.find()));
 
-    DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController(
+    Get.put(DailyQuizQuestionsController(
       dailyQuizRepo: Get.find(),
     ));
 
@@ -42,7 +42,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
         builder: (controller) => controller.examQuestionsList.isEmpty
             ? const CustomLoader()
             : PageView.builder(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 controller: controller.reviewPageController,
                 itemCount: controller.examQuestionsList.length,
                 itemBuilder: (context, questionsIndex) {
@@ -71,7 +71,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                           );
                                         }
                                       },
-                                      child:  LevelCardButton(
+                                      child: LevelCardButton(
                                         text: MyStrings.next.tr,
                                         hasIcon: false,
                                         hasImage: false,

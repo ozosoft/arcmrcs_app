@@ -6,5 +6,11 @@ class Environment {
 
   // LOGIN AND REG PART
   static const int otpResendSecond = 120; //OTP RESEND second
-  static const String defaultCountryCode = 'IN'; //Default RESEND second
+  static const String defaultCountryCode = 'BD'; //Default Country Code
+
+  // QUIZ SECTION
+  static const int battleQuizPerQuestionSecond = 60; //Change Battle question sec
+
+  //APP ADS SETTINGS
+  static const int interstitialAdsShowAfter = 5; // show ads after 5th time click
 }

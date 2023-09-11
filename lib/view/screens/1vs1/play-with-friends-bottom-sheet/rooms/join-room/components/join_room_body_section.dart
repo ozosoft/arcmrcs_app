@@ -66,29 +66,27 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                         if (battleRoomController.joinRoomState.value == JoinRoomState.joined) {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
 // Navigator.pop(context);
-                            CustomBottomSheet(
-                              enableDrag: false,
-                              child: const JoinedLobbyBottomSheet(),
-                            ).customBottomSheet(context);
+                            if (battleRoomController.alreadyJoined == false) {
+                              CustomBottomSheet(
+                                enableDrag: false,
+                                child: const JoinedLobbyBottomSheet(),
+                              ).customBottomSheet(context);
+                            }
+                            battleRoomController.toogleAlreadyJoined(true);
+
                             battleRoomController.toogleBattleJoinedState(JoinRoomState.none);
                           });
                         }
                       }
                       return Padding(
-                        padding: const EdgeInsets.only(
-                            left: Dimensions.space15, top: Dimensions.space10, bottom: Dimensions.space25, right: Dimensions.space15),
+                        padding: const EdgeInsets.only(left: Dimensions.space15, top: Dimensions.space10, bottom: Dimensions.space25, right: Dimensions.space15),
                         child: battleRoomController.joinRoomState.value == JoinRoomState.joining
                             ? const RoundedLoadingBtn()
                             : RoundedButton(
                                 text: MyStrings.start.tr,
                                 press: () async {
                                   await battleRoomController.joinRoom(
-                                      name: battleRoomController.battleRepo.apiClient.getUserFullName(),
-                                      roomCode: joinRoomCodeController.text,
-                                      profileUrl: battleRoomController.battleRepo.apiClient.getUserImagePath(),
-                                      uid: battleRoomController.battleRepo.apiClient.getUserID(),
-                                      currentCoin: battleRoomController.battleRepo.apiClient.getUserCurrentCoin(),
-                                      joinroom: true);
+                                      name: battleRoomController.battleRepo.apiClient.getUserFullName(), roomCode: joinRoomCodeController.text, profileUrl: battleRoomController.battleRepo.apiClient.getUserImagePath(), uid: battleRoomController.battleRepo.apiClient.getUserID(), currentCoin: battleRoomController.battleRepo.apiClient.getUserCurrentCoin(), joinroom: true);
                                 },
                                 color: MyColor.primaryColor,
                                 textColor: MyColor.colorWhite,

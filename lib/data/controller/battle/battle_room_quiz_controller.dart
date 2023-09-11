@@ -288,6 +288,8 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       toogleSubmitAns(false);
     } else {
       CustomSnackBar.error(errorList: [submitModel.message]);
+      toogleSubmitAns(false);
+      return;
     }
 
     // update();
@@ -337,9 +339,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
         } else {
           countDownController.pause();
           // left User
-          await battleRoomController
-              .leftBattleRoomFirebase(battleRoomController.battleRoomData.value!.roomId, false, currentUserId: battleRepo.apiClient.getUserID())
-              .whenComplete(() {
+          await battleRoomController.leftBattleRoomFirebase(battleRoomController.battleRoomData.value!.roomId, false, currentUserId: battleRepo.apiClient.getUserID()).whenComplete(() {
             // Get.offAll(RouteHelper.bottomNavBarScreen);
           });
         }
@@ -348,7 +348,6 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
         print('App detached');
         // Handle when the app is detached (not available on all platforms)
         break;
-      
 
       default:
         // Handle any other cases that might be added in the future

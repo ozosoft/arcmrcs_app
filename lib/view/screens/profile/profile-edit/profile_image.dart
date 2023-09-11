@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:flutter_prime/view/components/circle_image_button.dart';
 import '../../../../../../../../core/utils/my_color.dart';
 import '../../../../../../../core/utils/my_images.dart';
-import '../../../../../data/controller/account/profile_controller.dart';
 import '../../../../core/utils/dimensions.dart';
 import 'widgets/build_circle_widget.dart';
 

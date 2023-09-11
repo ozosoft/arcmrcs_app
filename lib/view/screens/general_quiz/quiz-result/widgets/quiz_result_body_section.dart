@@ -41,7 +41,7 @@ class _QuizResultBodySectionState extends State<QuizResultBodySection> {
           if (int.parse(controller.nextlevelQuizInfoId.toString()) == 0) {
             Get.offAllNamed(RouteHelper.bottomNavBarScreen);
           }
-          return false;
+          return true;
         },
         child: Container(
           margin: const EdgeInsets.only(top: Dimensions.space20),

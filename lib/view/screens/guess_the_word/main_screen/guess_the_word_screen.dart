@@ -15,6 +15,7 @@ import 'package:flutter_prime/view/screens/guess_the_word/widget/question_button
 
 import 'package:get/get.dart';
 
+import '../../../../core/helper/ads/admob_helper.dart';
 import '../../../components/app-bar/custom_category_appBar.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../widget/answer_field.dart';
@@ -40,6 +41,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.clearAllData();
       controller.getQuestion(id.toString());
+    
     });
     super.initState();
   }

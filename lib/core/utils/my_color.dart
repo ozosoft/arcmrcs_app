@@ -205,15 +205,15 @@ class MyColor {
   ];
   static List<Color> quizquestionsTextColor = [MyColor.colorWhite, MyColor.colorWhite, MyColor.colorQuizBodyText, MyColor.colorQuizBodyText];
 
-  final List<Color> containerBorderColors = [Color(0xFFCCF1CC), Color(0xFFEEEEEE), Color(0xFFF8F8F8), MyColor.appBarColor];
+  final List<Color> containerBorderColors = [const Color(0xFFCCF1CC), const Color(0xFFEEEEEE), const Color(0xFFF8F8F8), MyColor.appBarColor];
 
   final List<Color> containerBodyColors = [
     MyColor.categoryCardBodyColor,
     MyColor.cardColor,
-    Color(0xFFDFDFDF),
+    const Color(0xFFDFDFDF),
   ];
 
-  final List<Color> containertextColors = [Color(0xFF00BA00), MyColor.colorBlack, Color(0xFF8A8281)];
+  final List<Color> containertextColors = [const Color(0xFF00BA00), MyColor.colorBlack, const Color(0xFF8A8281)];
 
   static getSymbolColor(int index) {
     int colorIndex = index > 10 ? index % 10 : index;

@@ -7,6 +7,7 @@ import 'package:flutter_prime/view/screens/general_quiz/quiz-result/widgets/quiz
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/helper/ads/admob_helper.dart';
 import '../../../../core/utils/my_images.dart';
 
 class QuizResultScreen extends StatefulWidget {
@@ -18,10 +19,19 @@ class QuizResultScreen extends StatefulWidget {
 
 class _QuizResultScreenState extends State<QuizResultScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AdmobHelper().loadInterstitialAdAlways();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColor.primaryColor,
-      appBar:  CustomCategoryAppBar(title: MyStrings.quizResult.tr),
+      appBar: CustomCategoryAppBar(title: MyStrings.quizResult.tr),
       body: Stack(
         children: [
           Positioned.fill(

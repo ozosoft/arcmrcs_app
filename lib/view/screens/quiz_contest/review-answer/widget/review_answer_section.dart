@@ -23,13 +23,12 @@ class QuizContestReviewAnswerSection extends StatefulWidget {
 class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswerSection> {
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<QuizContestQuestionsController>(
         builder: (controller) => controller.examQuestionsList.isEmpty
             ? const CustomLoader()
             : PageView.builder(
-                // physics: NeverScrollableScrollPhysics(),
-                controller: controller.pageController,
+                physics: const BouncingScrollPhysics(),
+                controller: controller.reviewPageController,
                 itemCount: controller.examQuestionsList.length,
                 itemBuilder: (context, questionsIndex) {
                   var reviewItem = controller.examQuestionsList[questionsIndex];
@@ -51,14 +50,14 @@ class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswer
                                 children: [
                                   InkWell(
                                       onTap: () {
-                                        if (controller.pageController.page! < 1) {
-                                          controller.pageController.nextPage(
+                                        if (controller.reviewPageController.page!.toInt() < controller.examQuestionsList.length) {
+                                          controller.reviewPageController.nextPage(
                                             duration: const Duration(milliseconds: 500),
                                             curve: Curves.easeInOut,
                                           );
                                         }
                                       },
-                                      child:  LevelCardButton(
+                                      child: LevelCardButton(
                                         text: MyStrings.next.tr,
                                         hasIcon: false,
                                         hasImage: false,

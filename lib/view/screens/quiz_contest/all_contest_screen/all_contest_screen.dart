@@ -35,7 +35,6 @@ class _AllContestScreenState extends State<AllContestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<QuizQuestionsListController>(
       builder: (controller) => Scaffold(
         appBar:  CustomCategoryAppBar(

@@ -15,7 +15,6 @@ import 'package:get/get.dart';
 
 import '../../../../data/model/dashboard/dashboard_model.dart';
 import '../../../../data/model/exam_zone/exam_zone_model.dart';
-import '../../../components/buttons/circle_animated_button_with_text.dart';
 import '../../../components/buttons/rounded_loading_button.dart';
 
 class EnterRoomBottomSheetWidget extends StatefulWidget {

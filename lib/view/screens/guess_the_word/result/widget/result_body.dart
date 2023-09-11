@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -25,6 +24,7 @@ class GuessResultBody extends StatefulWidget {
 }
 
 class _GuessResultBodyState extends State<GuessResultBody> {
+
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GuessThewordController>(builder: (controller) {
@@ -42,7 +42,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
                 const SizedBox(
                   height: Dimensions.space2,
                 ),
-                 Text(
+                Text(
                   MyStrings.totalScore.tr,
                   style: lightDefault,
                 ),

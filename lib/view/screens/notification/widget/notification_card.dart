@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/view/components/animated_widget/expanded_widget.dart';
-import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
-import 'package:flutter_prime/view/components/text/custom_text_with_underline.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 
 class NotificationCard extends StatefulWidget {
   final String title, image, shortDesc, details, date;

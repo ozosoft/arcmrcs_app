@@ -66,6 +66,7 @@ class BattleRoomController extends GetxController {
   final Random _randomRoomID = Random.secure();
   Rx<BattleRoom?> battleRoomData = Rx<BattleRoom?>(null);
   final battleQuestionsList = <BattleQuestion>[].obs;
+  final alreadyJoined = false.obs;
 
   //Custom Room Setup
   final categoryList = <BattleCategory>[].obs;
@@ -89,6 +90,11 @@ class BattleRoomController extends GetxController {
 
   toogleUserFoundState(UserFoundState value) {
     userFoundState.value = value;
+    update();
+  }
+
+  toogleAlreadyJoined(bool value) {
+    alreadyJoined.value = true;
     update();
   }
 
@@ -573,19 +579,23 @@ class BattleRoomController extends GetxController {
         await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollectionMulti).doc(documentId).delete();
       } else {
         if (currentUserId == battleRoomData.value!.user1?.uid) {
-          await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(documentId).set(
-            {
-              "user1": {"status": false},
-            },
-            SetOptions(merge: true),
-          );
+          if (battleRoomData.value!.user1 != null) {
+            await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(documentId).set(
+              {
+                "user1": {"status": false},
+              },
+              SetOptions(merge: true),
+            );
+          }
         } else {
-          await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(documentId).set(
-            {
-              "user2": {"status": false},
-            },
-            SetOptions(merge: true),
-          );
+          if (battleRoomData.value!.user2 != null) {
+            await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(documentId).set(
+              {
+                "user2": {"status": false},
+              },
+              SetOptions(merge: true),
+            );
+          }
         }
       }
     } on SocketException catch (_) {

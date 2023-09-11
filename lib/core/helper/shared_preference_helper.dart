@@ -6,6 +6,7 @@ class SharedPreferenceHelper {
   static const String userNameKey = 'user_name';
   static const String userPhoneNumberKey = 'user_phone_number';
   static const String rememberMeKey = 'remember me';
+  static const String onboardKey = 'onboardKey';
   static const String generalSettingKey = 'general-setting-key';
   static const String moduleSettingKey = 'module-setting-key';
   static const String fcmDeviceKey = 'device-key';

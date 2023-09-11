@@ -58,7 +58,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                           onPressed: () {
                             Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                           },
-                          child:  Text(
+                          child: Text(
                             MyStrings.cancel.tr,
                             style: regularLarge,
                           ),

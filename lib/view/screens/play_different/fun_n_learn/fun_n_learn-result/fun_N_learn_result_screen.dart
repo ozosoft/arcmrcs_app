@@ -5,6 +5,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../../../../core/helper/ads/admob_helper.dart';
 import '../../../../../core/utils/my_images.dart';
 import 'widgets/fun_n_learn_result_body_section.dart';
 
@@ -17,10 +18,19 @@ class FunNlearnResultScreen extends StatefulWidget {
 
 class _FunNlearnResultScreenState extends State<FunNlearnResultScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AdmobHelper().loadInterstitialAdAlways();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: MyColor.primaryColor,
-      appBar:  CustomCategoryAppBar(title: MyStrings.quizResult.tr),
+      appBar: CustomCategoryAppBar(title: MyStrings.quizResult.tr),
       body: Stack(
         children: [
           Positioned.fill(

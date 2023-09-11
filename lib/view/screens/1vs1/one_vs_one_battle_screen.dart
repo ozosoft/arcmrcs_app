@@ -14,7 +14,6 @@ import '../../../data/controller/battle/one_vs_multi_controller.dart';
 import '../../../data/model/battle/battle_category_list.dart';
 import '../../components/bottom-sheet/custom_bottom_sheet.dart';
 import '../../components/text-form-field/custom_drop_down_field.dart';
-import '../../components/text-form-field/custom_drop_down_text_field.dart';
 import 'appbar-components/customSliverDelegate.dart';
 import 'play-with-friends-bottom-sheet/play_with_friends_bottom_sheet.dart';
 

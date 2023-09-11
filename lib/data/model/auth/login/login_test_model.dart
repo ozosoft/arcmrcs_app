@@ -12,16 +12,16 @@ class login_model {
     remark = json['remark'];
     status = json['status'];
     message =
-        json['message'] != null ? new Message.fromJson(json['message']) : null;
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+        json['message'] != null ? Message.fromJson(json['message']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['remark'] = this.remark;
-    data['status'] = this.status;
-    if (this.message != null) {
-      data['message'] = this.message!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['remark'] = remark;
+    data['status'] = status;
+    if (message != null) {
+      data['message'] = message!.toJson();
     }
     if (this.data != null) {
       data['data'] = this.data!.toJson();
@@ -37,14 +37,14 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     generalSetting = json['general_setting'] != null
-        ? new GeneralSetting.fromJson(json['general_setting'])
+        ? GeneralSetting.fromJson(json['general_setting'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.generalSetting != null) {
-      data['general_setting'] = this.generalSetting!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (generalSetting != null) {
+      data['general_setting'] = generalSetting!.toJson();
     }
     return data;
   }
@@ -73,7 +73,7 @@ class GeneralSetting {
   int? multiLanguage;
   int? registration;
   String? activeTemplate;
-  Null? createdAt;
+  Null createdAt;
   String? updatedAt;
 
   GeneralSetting(
@@ -113,7 +113,7 @@ class GeneralSetting {
     baseColor = json['base_color'];
     secondaryColor = json['secondary_color'];
     globalShortcodes = json['global_shortcodes'] != null
-        ? new GlobalShortcodes.fromJson(json['global_shortcodes'])
+        ? GlobalShortcodes.fromJson(json['global_shortcodes'])
         : null;
     kv = json['kv'];
     ev = json['ev'];
@@ -132,33 +132,33 @@ class GeneralSetting {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['site_name'] = this.siteName;
-    data['cur_text'] = this.curText;
-    data['cur_sym'] = this.curSym;
-    data['email_from'] = this.emailFrom;
-    data['sms_body'] = this.smsBody;
-    data['sms_from'] = this.smsFrom;
-    data['base_color'] = this.baseColor;
-    data['secondary_color'] = this.secondaryColor;
-    if (this.globalShortcodes != null) {
-      data['global_shortcodes'] = this.globalShortcodes!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['site_name'] = siteName;
+    data['cur_text'] = curText;
+    data['cur_sym'] = curSym;
+    data['email_from'] = emailFrom;
+    data['sms_body'] = smsBody;
+    data['sms_from'] = smsFrom;
+    data['base_color'] = baseColor;
+    data['secondary_color'] = secondaryColor;
+    if (globalShortcodes != null) {
+      data['global_shortcodes'] = globalShortcodes!.toJson();
     }
-    data['kv'] = this.kv;
-    data['ev'] = this.ev;
-    data['en'] = this.en;
-    data['sv'] = this.sv;
-    data['sn'] = this.sn;
-    data['force_ssl'] = this.forceSsl;
-    data['maintenance_mode'] = this.maintenanceMode;
-    data['secure_password'] = this.securePassword;
-    data['agree'] = this.agree;
-    data['multi_language'] = this.multiLanguage;
-    data['registration'] = this.registration;
-    data['active_template'] = this.activeTemplate;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    data['kv'] = kv;
+    data['ev'] = ev;
+    data['en'] = en;
+    data['sv'] = sv;
+    data['sn'] = sn;
+    data['force_ssl'] = forceSsl;
+    data['maintenance_mode'] = maintenanceMode;
+    data['secure_password'] = securePassword;
+    data['agree'] = agree;
+    data['multi_language'] = multiLanguage;
+    data['registration'] = registration;
+    data['active_template'] = activeTemplate;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -177,10 +177,10 @@ class GlobalShortcodes {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['site_name'] = this.siteName;
-    data['site_currency'] = this.siteCurrency;
-    data['currency_symbol'] = this.currencySymbol;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['site_name'] = siteName;
+    data['site_currency'] = siteCurrency;
+    data['currency_symbol'] = currencySymbol;
     return data;
   }
 }

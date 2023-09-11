@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -11,6 +12,8 @@ import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dar
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
+import '../../../core/utils/my_color.dart';
+import '../../../core/utils/util.dart';
 import 'widgets/all_category_list_card_widget.dart';
 
 class AllCategoriesScreen extends StatefulWidget {
@@ -38,9 +41,18 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
   }
 
   @override
+  void dispose() {
+    MyUtils.allScreen();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  CustomCategoryAppBar(title: MyStrings.allCategory.tr),
+      appBar: CustomCategoryAppBar(
+        title: MyStrings.allCategory.tr,
+        // systemUiOverlayStyle: SystemUiOverlayStyle(statusBarColor: MyColor.colorWhite, statusBarIconBrightness: Brightness.dark, systemNavigationBarColor: MyColor.getPrimaryColor(), systemNavigationBarIconBrightness: Brightness.light),
+      ),
       body: GetBuilder<AllCategoriesController>(
         builder: (controller) => controller.loader
             ? const CustomLoader()

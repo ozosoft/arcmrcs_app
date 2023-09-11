@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/model/exam_zone/exam_result_model.dart';
 import 'package:flutter_prime/data/model/exam_zone/exam_zone_model.dart';
 import 'package:flutter_prime/data/model/play_different_quizes/fun_n_learn/fun_n_learn_result_model.dart';
 import 'package:flutter_prime/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
@@ -50,9 +49,6 @@ class FunNlearnQuizController extends GetxController {
   late final TabController tabController;
   int selectedIndex = 1;
 
-  TextEditingController _textEditingController = TextEditingController();
-  String _inputText = "";
-
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
   PageController reviewPageController = PageController();
@@ -80,9 +76,9 @@ class FunNlearnQuizController extends GetxController {
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
         print("get answer done");
         // print(model.data);
-        List<Question>? examQuestion = model.data!.questions! as List<Question>?;
+        List<Question>? examQuestion = model.data!.questions!;
 
-        if (examQuestion != null && examQuestion.isNotEmpty) {
+        if (examQuestion.isNotEmpty) {
           examQuestionsList.addAll(examQuestion);
         }
 
@@ -175,7 +171,7 @@ class FunNlearnQuizController extends GetxController {
   makeFiftyFifty(int index) {
     List<Option> allOptions = examQuestionsList[index].options!;
     var random = Random();
-    Option correctAnswers = allOptions!.firstWhere((element) => element.isAnswer == '1');
+    Option correctAnswers = allOptions.firstWhere((element) => element.isAnswer == '1');
     allOptions.remove(correctAnswers);
     Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
     List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);
@@ -239,7 +235,7 @@ class FunNlearnQuizController extends GetxController {
         wrongAnswer = model.data!.wrongAnswer.toString();
         totalCoin = model.data!.totalScore.toString();
         winningCoin = model.data!.winingScore.toString();
-        
+
         countDownController.pause();
         Get.toNamed(RouteHelper.funNlearnResultScreen, arguments: [examQuestionsList, optionsList])!.whenComplete(() {
           Get.back();
@@ -266,4 +262,3 @@ class FunNlearnQuizController extends GetxController {
     update();
   }
 }
- 

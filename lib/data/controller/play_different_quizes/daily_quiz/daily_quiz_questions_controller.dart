@@ -51,10 +51,9 @@ class DailyQuizQuestionsController extends GetxController {
   late final TabController tabController;
   int selectedIndex = 1;
 
-
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
-   PageController reviewPageController = PageController();
+  PageController reviewPageController = PageController();
   int currentPage = 0;
 
   changePage(int page) {
@@ -243,8 +242,6 @@ class DailyQuizQuestionsController extends GetxController {
         Get.toNamed(RouteHelper.dailyQuizresultScreen, arguments: MyStrings.quizResult.tr)!.whenComplete(() {
           Get.back();
         });
-
-    
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 

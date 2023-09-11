@@ -50,11 +50,10 @@ class QuizContestQuestionsController extends GetxController {
   late final TabController tabController;
   int selectedIndex = 1;
 
-  TextEditingController _textEditingController = TextEditingController();
-  String _inputText = "";
 
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
+  PageController reviewPageController = PageController();
   int currentPage = 0;
 
   changePage(int page) {
@@ -178,7 +177,7 @@ class QuizContestQuestionsController extends GetxController {
   makeFiftyFifty(int index) {
     List<Option> allOptions = examQuestionsList[index].options!;
     var random = Random();
-    Option correctAnswers = allOptions!.firstWhere((element) => element.isAnswer == '1');
+    Option correctAnswers = allOptions.firstWhere((element) => element.isAnswer == '1');
     allOptions.remove(correctAnswers);
     Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
     List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);

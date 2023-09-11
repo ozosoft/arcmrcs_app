@@ -5,6 +5,7 @@ import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../../../core/helper/ads/admob_helper.dart';
 import '../../../../core/utils/my_images.dart';
 import 'widgets/quiz_contest_result_body_section.dart';
 
@@ -16,6 +17,15 @@ class QuizContestResultScreen extends StatefulWidget {
 }
 
 class _QuizContestResultScreenState extends State<QuizContestResultScreen> {
+  @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AdmobHelper().loadInterstitialAdAlways();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

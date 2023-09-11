@@ -21,13 +21,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    MyUtils.splashScreen();
+    MyUtils.allScreen();
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GeneralSettingRepo(apiClient: Get.find()));
     Get.put(LocalizationController(sharedPreferences: Get.find()));
-    final controller = Get.put(
-        SplashController(repo: Get.find(), localizationController: Get.find()));
+    final controller = Get.put(SplashController(repo: Get.find(), localizationController: Get.find()));
 
     super.initState();
 

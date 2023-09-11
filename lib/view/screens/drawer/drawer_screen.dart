@@ -12,7 +12,6 @@ import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dar
 import 'package:flutter_prime/data/repo/auth/logout/logout_repo.dart';
 
 import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/screens/home_page/homepage-widgets/language-bottom-sheet/language_bottom_sheet_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -208,7 +207,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           )
                         : SvgPicture.asset(
                             MyImages.logOutDrawer,
-                            width: 25,
+                            width: Dimensions.space20,
                           ),
                     title: Text(
                       MyStrings.logout.tr,

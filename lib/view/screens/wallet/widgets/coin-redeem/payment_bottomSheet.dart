@@ -18,8 +18,7 @@ class PaymentBottomSheetScreen extends StatefulWidget {
 }
 
 class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
-  TextEditingController _textEditingController = TextEditingController();
-  String _inputText = "";
+  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +75,6 @@ class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 setState(() {
-                  _inputText = value;
                 });
               },
               decoration: InputDecoration(
@@ -104,7 +102,6 @@ class _PaymentBottomSheetScreenState extends State<PaymentBottomSheetScreen> {
               keyboardType: TextInputType.number,
               onChanged: (value) {
                 setState(() {
-                  _inputText = value;
                 });
               },
               decoration: InputDecoration(

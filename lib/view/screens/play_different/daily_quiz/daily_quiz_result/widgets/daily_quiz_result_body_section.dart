@@ -32,7 +32,7 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(DailyQuizRepo(apiClient: Get.find()));
 
-    DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController(
+    Get.put(DailyQuizQuestionsController(
       dailyQuizRepo: Get.find(),
     ));
 
@@ -41,7 +41,6 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<DailyQuizQuestionsController>(
       builder: (controller) {
         return Container(
@@ -96,7 +95,9 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   RightOrWrongAnsSection(correctAnswer: controller.correctAnswer, wrongAnswer: controller.wrongAnswer, totalQuestions: controller.totalQuestions),
-                  PlayerProfilePicture(imagePath: controller.dailyQuizRepo.apiClient.getUserImagePath(),),
+                  PlayerProfilePicture(
+                    imagePath: controller.dailyQuizRepo.apiClient.getUserImagePath(),
+                  ),
                   ExamRewardsSection(
                     totalCoin: controller.totalCoin,
                     winningCoin: controller.winningCoin,

@@ -19,15 +19,17 @@ class SplashController extends GetxController {
   gotoNextPage() async {
     await loadLanguage();
     bool isRemember = repo.apiClient.sharedPreferences.getBool(SharedPreferenceHelper.rememberMeKey) ?? false;
+    bool isOnBoard = repo.apiClient.sharedPreferences.getBool(SharedPreferenceHelper.onboardKey) ?? false;
+print("from onboard check ------ $isOnBoard");
     noInternet = false;
     update();
 
     initSharedData();
-    getGSData(isRemember);
+    getGSData(isRemember, isOnBoard);
   }
 
   bool noInternet = false;
-  void getGSData(bool isRemember) async {
+  void getGSData(bool isRemember, bool isOnBoard) async {
     ResponseModel response = await repo.getGeneralSetting();
 
     if (response.statusCode == 200) {
@@ -49,14 +51,20 @@ class SplashController extends GetxController {
     isLoading = false;
     update();
 
-    if (isRemember) {
+    if (isOnBoard == false) {
       Future.delayed(const Duration(seconds: 1), () {
-        Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
+        Get.offAndToNamed(RouteHelper.onboardScreen);
       });
     } else {
-      Future.delayed(const Duration(seconds: 1), () {
-        Get.offAndToNamed(RouteHelper.loginScreen);
-      });
+      if (isRemember) {
+        Future.delayed(const Duration(seconds: 1), () {
+          Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
+        });
+      } else {
+        Future.delayed(const Duration(seconds: 1), () {
+          Get.offAndToNamed(RouteHelper.loginScreen);
+        });
+      }
     }
   }
 

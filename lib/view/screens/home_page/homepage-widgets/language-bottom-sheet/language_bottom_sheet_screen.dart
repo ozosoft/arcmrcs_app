@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/controller/home/home_controller.dart';
 import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart';
 import 'package:get/get.dart';
 
-import '../../../../../data/controller/localization/localization_controller.dart';
 import '../../../../../data/controller/my_language_controller/my_language_controller.dart';
-import '../../../../../data/model/language/language_model.dart';
 import '../../../../../data/repo/auth/general_setting_repo.dart';
 
 class LanguageBottomSheetScreen extends StatefulWidget {

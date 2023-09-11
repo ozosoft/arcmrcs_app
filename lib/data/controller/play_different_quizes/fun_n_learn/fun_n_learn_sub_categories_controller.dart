@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter_prime/data/model/play_different_quizes/fun_n_learn/fun_n_learn_category_model.dart';
 import 'package:flutter_prime/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
@@ -42,11 +41,11 @@ class FunNLearnSubCategoriesController extends GetxController {
 
         List<Subcategory>? subcategorylist = subcategories.data.subcategories;
 
-        if (subcategorylist != null && subcategorylist.isNotEmpty) {
+        if (subcategorylist.isNotEmpty) {
           subCategoriesList.addAll(subcategorylist);
         }
 
-        itemCount = subcategorylist.length ?? 0;
+        itemCount = subcategorylist.length;
       } else {
         CustomSnackBar.error(errorList: [subcategories.status ?? ""]);
       }

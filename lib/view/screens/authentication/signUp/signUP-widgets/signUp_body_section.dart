@@ -12,7 +12,6 @@ import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
 import 'package:flutter_prime/view/components/divider/custom_divider.dart';
-import 'package:flutter_prime/view/components/social_login/social_login_section.dart';
 import 'package:flutter_prime/view/components/text-form-field/custom_text_field.dart';
 import 'package:flutter_prime/view/components/text/custom_underline_text.dart';
 import 'package:flutter_prime/view/screens/authentication/signUp/signUP-widgets/strong_password_section.dart';

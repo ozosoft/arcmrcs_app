@@ -6,6 +6,7 @@ import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dar
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/helper/ads/admob_helper.dart';
 import '../../guess_the_word/result/widget/result_body.dart';
 
 class GuessWordResultScreen extends StatefulWidget {
@@ -17,11 +18,19 @@ class GuessWordResultScreen extends StatefulWidget {
 
 class _GuessWordResultScreenState extends State<GuessWordResultScreen> {
   @override
+  void initState() {
+    super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      AdmobHelper().loadInterstitialAdAlways();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar:  CustomCategoryAppBar(
+        appBar: CustomCategoryAppBar(
           title: MyStrings.quizResult.tr,
-       
         ),
         body: SingleChildScrollView(
           child: Padding(

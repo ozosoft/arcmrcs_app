@@ -60,7 +60,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                       (index) => GetBuilder<QuizContestQuestionsController>(
                             builder: (quizQuestionscontrollers) => InkWell(
                               onTap: () {
-                                print(quizQuestionscontrollers.examQuestionsList!);
+                                print(quizQuestionscontrollers.examQuestionsList);
                                 if (quizQuestionscontrollers.examQuestionsList != "") {
                                   Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [
                                     controller.contestlist[index].id.toString(),

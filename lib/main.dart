@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
 import 'package:flutter_prime/core/route/route.dart';
@@ -17,6 +18,7 @@ import 'core/utils/util.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
+  MobileAds.instance.initialize();
   final sharedPreferences = await SharedPreferences.getInstance();
   Get.lazyPut(() => sharedPreferences);
   sharedPreferences.setBool(SharedPreferenceHelper.hasNewNotificationKey, true);
@@ -56,12 +58,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return GetBuilder<LocalizationController>(
       builder: (localizeController) => GetMaterialApp(
-        theme: ThemeData(
-          scaffoldBackgroundColor: MyColor.scaffoldBackgroundColor,
-           appBarTheme: const AppBarTheme(
-          systemOverlayStyle: SystemUiOverlayStyle(statusBarBrightness: Brightness.light)
-           )
-        ),
+        theme: ThemeData(scaffoldBackgroundColor: MyColor.scaffoldBackgroundColor, appBarTheme: const AppBarTheme(systemOverlayStyle: SystemUiOverlayStyle(statusBarBrightness: Brightness.light))),
         title: MyStrings.appName.tr,
         debugShowCheckedModeBanner: false,
         defaultTransition: Transition.noTransition,

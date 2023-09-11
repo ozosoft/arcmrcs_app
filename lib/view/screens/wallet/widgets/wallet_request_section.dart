@@ -3,14 +3,11 @@ import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/my_color.dart';
 import '../../../../core/utils/style.dart';
-import '../../../components/bottom-sheet/custom_bottom_sheet.dart';
-import 'coin-redeem/payment_bottomSheet.dart';
 
 
 class WalletRequestSection extends StatefulWidget {
@@ -22,8 +19,6 @@ class WalletRequestSection extends StatefulWidget {
 
 class _WalletRequestSectionState extends State<WalletRequestSection> {
 
-  TextEditingController _textEditingController = TextEditingController();
-  String _inputText = "";
 
   @override
   Widget build(BuildContext context) {

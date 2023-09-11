@@ -72,8 +72,8 @@ class ExamZoneQuizController extends GetxController {
   TextEditingController enterExamKeys = TextEditingController();
 
 //Get Exam Questions
- 
- Future getExamZoneQuestions(String quizInfoId, enterExamKey) async {
+
+  Future getExamZoneQuestions(String quizInfoId, enterExamKey) async {
     loading = true;
     update();
 
@@ -265,10 +265,13 @@ class ExamZoneQuizController extends GetxController {
       } else {
         CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
 
-        //need to cheak error msg
+        submitLoading = false;
+        update();
       }
     } else {
       CustomSnackBar.error(errorList: [submitModel.message]);
+      submitLoading = false;
+      update();
     }
 
     submitLoading = false;

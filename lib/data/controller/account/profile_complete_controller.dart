@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/profile/profile_response_model.dart';
 import 'package:flutter_prime/data/model/user_post_model/user_post_model.dart';
 import 'package:flutter_prime/data/repo/account/profile_repo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 
 import '../../../core/route/route.dart';
 
@@ -54,7 +52,7 @@ class ProfileCompleteController extends GetxController {
     //   update();
 
     //   return;
-    // } 
+    // }
     // else if (lastName.isEmpty) {
     //   CustomSnackBar.error(errorList: [MyStrings.kLastNameNullError.tr]);
     //   submitLoading = true;

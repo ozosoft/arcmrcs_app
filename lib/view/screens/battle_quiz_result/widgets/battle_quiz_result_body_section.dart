@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
@@ -16,8 +15,6 @@ import '../../../../data/services/api_service.dart';
 import '../../../components/divider/custom_dashed_divider.dart';
 import 'bottom_section_buttons.dart';
 import 'player_profile_details.dart';
-import 'rewards_section.dart';
-import 'right_and_wrong_ans_section.dart';
 
 class BattleQuizResultBodySection extends StatefulWidget {
   const BattleQuizResultBodySection({super.key});
