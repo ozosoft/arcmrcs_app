@@ -22,19 +22,19 @@ class SocialLoginSection extends StatelessWidget {
           height: Dimensions.space20,
         ),
         Padding(
-          padding: EdgeInsets.all(Dimensions.space1),
+          padding: const EdgeInsets.all(Dimensions.space1),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SocialLoginButton(
-                title: MyStrings.continueWithGmail.tr,
+                title: MyStrings.google.tr,
                 image: MyImages.google,
                 ontap: () async {
                   await loginController!.signInWithGoogle();
                 },
               ),
               SocialLoginButton(
-                title: MyStrings.continueWithPhone.tr,
+                title: MyStrings.phone.tr,
                 image: MyImages.telephone,
                 ontap: () {
                   Get.toNamed(RouteHelper.mobileLoginScreen);

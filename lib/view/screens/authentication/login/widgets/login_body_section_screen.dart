@@ -69,7 +69,9 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                 ],
               ),
             ),
-            SocialLoginSection(loginController: controller,),
+            SocialLoginSection(
+              loginController: controller,
+            ),
             const CustomDivider(space: Dimensions.space10),
             Form(
               key: formKey,
@@ -184,7 +186,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                         onPressed: () {
                           Get.toNamed(RouteHelper.signupScreen);
                         },
-                        child:  CustomUndelineText(text: MyStrings.signUp.tr),
+                        child: CustomUndelineText(text: MyStrings.signUp.tr),
                       )
                     ],
                   ),

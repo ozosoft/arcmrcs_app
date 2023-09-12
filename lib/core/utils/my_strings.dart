@@ -44,6 +44,7 @@ class MyStrings {
   static const String yourAnswer = "Your Answer";
   static const String continueWithGmail = "Continue with Gmail";
   static const String continueWithPhone = "Continue with Phone";
+  static const String google = "Google";
   static const String selectCategory = "Select Category";
   static const String entryCoinsForBattele = "Entry Coins For Battle";
   static const String entryRoomCode = "Entry Room Code to Join Room";
@@ -401,7 +402,6 @@ class MyStrings {
   static const String japan = ' Japan';
   static const String apple = ' Apple Inc. ';
   static const String ibm = 'IBM ';
-  static const String google = ' Google ';
   static const String maria = 'Mariya Ons';
   static const String player2 = 'Player 2';
   static const String player = 'Player';

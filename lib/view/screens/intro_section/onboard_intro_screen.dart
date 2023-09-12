@@ -133,23 +133,7 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
                   }
                 }),
           ),
-          const SizedBox(height: Dimensions.space15),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                MyStrings.dontHaveAnaccount.tr,
-                style: regularLarge.copyWith(color: MyColor.colorDarkGrey),
-              ),
-              const SizedBox(width: Dimensions.space5),
-              InkWell(
-                onTap: () {
-                  Get.toNamed(RouteHelper.signupScreen);
-                },
-                child: CustomUndelineText(text: MyStrings.signUp.tr),
-              )
-            ],
-          ),
+          const SizedBox(height: Dimensions.space5),
           const CustomDivider(hascolor: false)
         ],
       ),
