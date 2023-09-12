@@ -18,7 +18,7 @@ class LevelCardButton extends StatelessWidget {
     return Container(
       height: height,
       padding: EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: hasbgColor ? Dimensions.space1 : Dimensions.space15),
-      decoration: BoxDecoration(color: hasbgColor ? bgColor : MyColor.cardColor, borderRadius: BorderRadius.circular(Dimensions.space5), border: Border.all(color: MyColor.cardBorderColor)),
+      decoration: BoxDecoration(color: hasbgColor ? bgColor : lifelineUsed == true ? MyColor.colorLightGrey : MyColor.cardColor, borderRadius: BorderRadius.circular(Dimensions.space5), border: Border.all(color: MyColor.cardBorderColor),),
       child: Center(
           child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -44,7 +44,7 @@ class LevelCardButton extends StatelessWidget {
               : lifelineUsed == true
                   ? SvgPicture.asset(
                       image!,
-                      color: Colors.red,
+                      color: MyColor.colorRed,
                       fit: BoxFit.cover,
                     )
                   : SvgPicture.asset(

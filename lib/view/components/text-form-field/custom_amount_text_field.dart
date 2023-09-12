@@ -81,7 +81,7 @@ class _CustomAmountTextFieldState extends State<CustomAmountTextField> {
                       textInputAction: widget.inputAction,
                       onChanged: widget.onChanged,
                       decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(bottom: 16),
+                          contentPadding: const EdgeInsetsDirectional.only(bottom: 16),
                           hintText: widget.hintText,
                           hintStyle: regularSmall.copyWith(
                               color: MyColor.hintTextColor.withOpacity(0.7),

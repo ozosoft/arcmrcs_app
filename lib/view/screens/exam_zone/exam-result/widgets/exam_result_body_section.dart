@@ -28,7 +28,7 @@ class _ExamResultBodySectionState extends State<ExamResultBodySection> {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ExamZoneRepo(apiClient: Get.find()));
 
-    ExamZoneQuizController controller = Get.put(ExamZoneQuizController(examZoneRepo: Get.find()));
+    Get.put(ExamZoneQuizController(examZoneRepo: Get.find()));
 
     super.initState();
   }
@@ -38,7 +38,7 @@ class _ExamResultBodySectionState extends State<ExamResultBodySection> {
     return GetBuilder<ExamZoneQuizController>(
       builder: (controller) {
         return Container(
-          margin: const EdgeInsets.only(top: Dimensions.space20),
+          margin: const EdgeInsetsDirectional.only(top: Dimensions.space20),
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space20), color: MyColor.colorWhite),
           child: Column(
@@ -49,7 +49,7 @@ class _ExamResultBodySectionState extends State<ExamResultBodySection> {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
                     child: controller.appreciation == "Failed"
                         ? SvgPicture.asset(
                             MyImages.victory,
@@ -64,7 +64,7 @@ class _ExamResultBodySectionState extends State<ExamResultBodySection> {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                        padding: const EdgeInsets.only(top: Dimensions.space100),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space100),
                         child: Text(
                           controller.appreciation,
                           style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
@@ -72,7 +72,7 @@ class _ExamResultBodySectionState extends State<ExamResultBodySection> {
                   ),
                   Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.only(top: Dimensions.space180),
+                      padding: const EdgeInsetsDirectional.only(top: Dimensions.space180),
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(

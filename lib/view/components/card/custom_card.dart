@@ -38,9 +38,9 @@ class _CustomCardState extends State<CustomCard> {
             onTap: widget.onPressed,
             child: Container(
               width: widget.width,
-              padding: EdgeInsets.only(
-                  left: widget.paddingLeft,
-                  right: widget.paddingRight,
+              padding: EdgeInsetsDirectional.only(
+                  start: widget.paddingLeft,
+                  end: widget.paddingRight,
                   top: widget.paddingTop,
                   bottom: widget.paddingBottom),
               decoration: BoxDecoration(
@@ -53,9 +53,9 @@ class _CustomCardState extends State<CustomCard> {
           )
         : Container(
             width: widget.width,
-            padding: EdgeInsets.only(
-                left: widget.paddingLeft,
-                right: widget.paddingRight,
+            padding: EdgeInsetsDirectional.only(
+                start: widget.paddingLeft,
+                end: widget.paddingRight,
                 top: widget.paddingTop,
                 bottom: widget.paddingBottom),
             decoration: BoxDecoration(

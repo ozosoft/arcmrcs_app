@@ -45,7 +45,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
   Widget build(BuildContext context) {
     return GetBuilder<ExamZoneController>(
       builder: (controller) => Padding(
-        padding: const EdgeInsets.only(top: Dimensions.space10, left: Dimensions.space10, right: Dimensions.space10),
+        padding: const EdgeInsetsDirectional.only(top: Dimensions.space10, start: Dimensions.space10, end: Dimensions.space10),
         child: Column(
           children: [
             const BottomSheetBar(),
@@ -60,7 +60,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                   color: MyColor.textColor,
                 )),
             Padding(
-              // padding: const EdgeInsets.only(right: Dimensions.space10,),
+              // padding: const EdgeInsetsDirectional.only(right: Dimensions.space10,),
               padding: const EdgeInsets.symmetric(
                 vertical: Dimensions.space10,
               ),
@@ -112,8 +112,9 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                       }),
                   InkWell(
                     onTap: () {
-                      print(viewAll);
+                      debugPrint(viewAll.toString());
                       viewAll = !viewAll;
+                      controller.update();
                     },
                     child: Text(
                       MyStrings.viewAllRules.tr,

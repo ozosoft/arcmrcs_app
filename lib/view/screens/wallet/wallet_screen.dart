@@ -15,7 +15,7 @@ class WalletScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomCategoryAppBar(title: MyStrings.wallet.tr),
       body: Padding(
-        padding: const EdgeInsets.only(top: Dimensions.space40, right: Dimensions.space18, left: Dimensions.space18),
+        padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, end: Dimensions.space18, start: Dimensions.space18),
         child: Container(width: double.infinity, decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space10)), child: const TabBarWithButtons()),
       ),
     );

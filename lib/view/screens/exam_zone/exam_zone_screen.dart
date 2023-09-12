@@ -10,7 +10,7 @@ class ExamZoneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: CustomCategoryAppBar(title: MyStrings.exam.tr),
       body: const ExamZoneTabBarBodySection(),
     );

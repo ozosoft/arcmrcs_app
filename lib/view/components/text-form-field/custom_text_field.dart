@@ -104,7 +104,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                           ),
                         )
                       : null,
-                  contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
+                  contentPadding: const EdgeInsetsDirectional.only(top: 5, start: 15, end: 15, bottom: 5),
                   labelText: widget.labelText?.tr ?? '',
                   labelStyle: regularLarge.copyWith(color: widget.hastextcolor ? MyColor.textColor : MyColor.getLabelTextColor()),
                   fillColor: widget.fillColor,
@@ -154,7 +154,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     keyboardType: widget.textInputType,
                     obscureText: widget.isPassword ? obscureText : false,
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
+                      contentPadding: const EdgeInsetsDirectional.only(top: 5, start: 15, end: 15, bottom: 5),
                       hintText: widget.hintText != null ? widget.hintText!.tr : '',
                       hintStyle: regularMediumLarge.copyWith(color: widget.hastextcolor ? MyColor.textColor : MyColor.getHintTextColor().withOpacity(0.7)),
                       fillColor: MyColor.transparentColor,
@@ -201,7 +201,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             keyboardType: widget.textInputType,
             obscureText: widget.isPassword ? obscureText : false,
             decoration: InputDecoration(
-              contentPadding: const EdgeInsets.only(top: 5, left: 0, right: 0, bottom: 5),
+              contentPadding: const EdgeInsetsDirectional.only(top: 5, start: 0, end: 0, bottom: 5),
               labelText: widget.labelText?.tr,
               labelStyle: regularLarge.copyWith(color: widget.hastextcolor ? MyColor.textColor : MyColor.getLabelTextColor()),
               fillColor: MyColor.transparentColor,

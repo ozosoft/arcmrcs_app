@@ -31,7 +31,7 @@ class ForgetPasswordController extends GetxController {
       Get.toNamed(RouteHelper.verificationScreen, arguments: responseEmail);
       
     }
-    print("this is email from forget password"+responseEmail);
+    debugPrint("this is email from forget password $responseEmail");
     submitLoading = false;
     update();
   }

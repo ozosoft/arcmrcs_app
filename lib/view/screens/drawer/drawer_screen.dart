@@ -48,10 +48,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
         children: [
           GetBuilder<DashBoardController>(
             builder: (controller) => Container(
-              padding: const EdgeInsets.only(top: Dimensions.space25),
+              padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
               width: double.infinity,
               child: Padding(
-                padding: const EdgeInsets.only(top: Dimensions.space30, left: Dimensions.space20),
+                padding: const EdgeInsetsDirectional.only(top: Dimensions.space30, start: Dimensions.space20),
                 child: Row(children: [
                   if (controller.userImage.toString() != "null")
                     SizedBox(
@@ -71,7 +71,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     ),
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.only(left: Dimensions.space20),
+                      padding: const EdgeInsetsDirectional.only(start: Dimensions.space20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [

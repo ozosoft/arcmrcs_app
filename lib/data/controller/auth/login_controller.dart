@@ -141,6 +141,7 @@ class LoginController extends GetxController {
   bool isInOTPpage = false;
   bool isResendingOTP = false;
   final secondLeft = 0.obs;
+  bool isSocailSubmitLoading = false;
 
   Timer? _resendTimer;
   Timer? get resendTimer => _resendTimer;
@@ -233,7 +234,7 @@ class LoginController extends GetxController {
         codeSent: (String verificationId, int? resendToken) {
           this.verificationId.value = verificationId;
           // Get.toNamed('/otp'); // Navigate to the OTP screen
-          print("Go To OTP PAGE");
+          debugPrint("Go To OTP PAGE");
           changeOtpPageStatus(true);
 
           changeOtpSendButtonLoading(false);
@@ -276,7 +277,7 @@ class LoginController extends GetxController {
     try {
       if (isResendingOTP == false) {
         if (_resendTimer != null && _resendTimer!.isActive) {
-          print("cancle timmer");
+          debugPrint("cancle timmer");
           _resendTimer!.cancel();
         }
         await verifyPhoneNumber(laoder: false);
@@ -318,6 +319,7 @@ class LoginController extends GetxController {
       Get.snackbar('Error', e.toString());
     }
   }
+
   //SIGN IN With Google
 
   Future<void> signInWithGoogle() async {
@@ -335,15 +337,17 @@ class LoginController extends GetxController {
 
       await socialLoginUser(email: firebaseUser.value!.email, uid: firebaseUser.value!.uid, provider: 'email');
     } catch (e) {
-      print(e.toString());
-      Get.snackbar('Error', e.toString());
+      // debugPrint(e.toString());
+      // Get.snackbar('Error', e.toString());
+
+      CustomSnackBar.error(errorList: [e.toString()]);
     }
   }
 
   //Social Login API PART
 
   Future socialLoginUser({String? email, String? mobile, String? provider, String? uid}) async {
-    isSubmitLoading = true;
+    isSocailSubmitLoading = true;
 
     update();
 
@@ -369,13 +373,17 @@ class LoginController extends GetxController {
       if (loginModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         checkAndGotoNextStep(loginModel);
       } else {
+        isSocailSubmitLoading = false;
+        update();
         CustomSnackBar.error(errorList: loginModel.message?.error ?? [MyStrings.loginFailedTryAgain.tr]);
       }
     } else {
+      isSocailSubmitLoading = false;
+      update();
       CustomSnackBar.error(errorList: [responseModel.message]);
     }
 
-    isSubmitLoading = false;
+    isSocailSubmitLoading = false;
     update();
   }
   //Firebase Login part

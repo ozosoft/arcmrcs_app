@@ -30,7 +30,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: Dimensions.space5, left: Dimensions.space5, right: Dimensions.space5, top: Dimensions.space10),
+            padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space5, start: Dimensions.space5, end: Dimensions.space5, top: Dimensions.space10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -71,7 +71,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                   builder: (quizQuestionscontrollers) => GestureDetector(
                                     onTap: () {
                                       if (quizQuestionscontrollers.examQuestionsList != "[]") {
-                                        Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.contestlist[index].id.toString(), controller.contestlist[index].title.toString(), print("this is quiz id" + controller.contestlist[index].id.toString()), print("this is quiz title" + controller.contestlist[index].title.toString())]);
+                                        Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.contestlist[index].id.toString(), controller.contestlist[index].title.toString(), debugPrint("this is quiz id" + controller.contestlist[index].id.toString()), debugPrint("this is quiz title" + controller.contestlist[index].title.toString())]);
                                       } else {
                                         CustomSnackBar.error(errorList: ["Sorry this contest is not available right now"]);
                                       }
@@ -94,7 +94,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                         crossAxisAlignment: CrossAxisAlignment.start,
                                         children: [
                                           Container(
-                                            margin: const EdgeInsets.only(top: Dimensions.space3),
+                                            margin: const EdgeInsetsDirectional.only(top: Dimensions.space3),
                                             padding: const EdgeInsets.all(Dimensions.space12),
                                             child: Row(
                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,7 +102,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                                 //Image
                                                 if (controller.contestlist[index].image.toString() == "null") ...[
                                                   Container(
-                                                    margin: const EdgeInsets.only(right: Dimensions.space10),
+                                                    margin: const EdgeInsetsDirectional.only(end: Dimensions.space10),
                                                     child: SvgPicture.asset(
                                                       MyImages.examzoneSVG,
                                                       height: context.width * 0.15,
@@ -111,7 +111,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                                   ),
                                                 ] else ...[
                                                   Container(
-                                                    margin: const EdgeInsets.only(right: Dimensions.space10),
+                                                    margin: const EdgeInsetsDirectional.only(end: Dimensions.space10),
                                                     child: MyImageWidget(
                                                       height: context.width * 0.15,
                                                       width: context.width * 0.15,
@@ -122,7 +122,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                                 //Contents
                                                 Expanded(
                                                   child: Container(
-                                                    padding: const EdgeInsets.only(bottom: Dimensions.space20),
+                                                    padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
                                                     child: Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
                                                       mainAxisSize: MainAxisSize.min,

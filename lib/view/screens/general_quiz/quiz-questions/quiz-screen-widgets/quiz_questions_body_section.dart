@@ -37,7 +37,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
 
     QuizQuestionsController controller = Get.put(QuizQuestionsController(quizquestionsRepo: Get.find()));
     controller.quizInfoID = Get.arguments[1];
-    print("From INITSTSTE");
+    debugPrint("From INITSTATE");
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata(controller.quizInfoID.toString());
     });
@@ -64,7 +64,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                             Padding(
                               padding: const EdgeInsets.all(Dimensions.space10),
                               child: Text(
-                                MyStrings.areYouSureYouWantToLeaveExamRoom.tr,
+                                MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
                                 style: regularLarge.copyWith(color: MyColor.textSecondColor),
                               ),
                             ),
@@ -85,7 +85,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                     onPressed: () {
                                       Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                                     },
-                                    child:  Text(
+                                    child: Text(
                                       MyStrings.cancel.tr,
                                       style: regularLarge,
                                     ),
@@ -134,7 +134,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                   if (controller.questionsList[questionsIndex].image != null) ...[
                                     Container(
                                       width: double.infinity,
-                                      padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                                      padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
                                       child: MyImageWidget(
                                         boxFit: BoxFit.contain,
                                         height: Get.width / 2,
@@ -142,7 +142,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                       ),
                                     ),
                                   ],
-                                  Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.questionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                                  Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.questionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                   const SizedBox(height: Dimensions.space25),
                                   ListView.builder(
                                       physics: const NeverScrollableScrollPhysics(),
@@ -229,7 +229,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                                         controller.questionsList[questionsIndex].options![optionIndex].audience.toString() + MyStrings.percent.tr,
                                                         style: regularMediumLarge.copyWith(color: MyColor.textColor),
                                                       )
-                                                    : SizedBox(),
+                                                    : const SizedBox(),
                                               ],
                                             ),
                                           ],
@@ -242,7 +242,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .4),
+                              padding: EdgeInsetsDirectional.only(start: MediaQuery.of(context).size.width * .4),
                               child: CircularCountDownTimer(
                                 duration: controller.timerDuration,
                                 initialDuration: 0,
@@ -266,7 +266,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                   if (controller.selectedOptionIndex.toString() == "-1") {
                                     controller.selectedQuestionsId.add(controller.questionsList[questionsIndex].id);
                                   }
-                                  // controller.selectedOptionIndex.toString().isNotEmpty ? print("this is selectedoption index" + controller.selectedOptionIndex.toString()) : print;
+                                  // controller.selectedOptionIndex.toString().isNotEmpty ? debugPrint("this is selectedoption index" + controller.selectedOptionIndex.toString()) : print;
                                   if (questionsIndex == controller.questionsList.length - 1) {
                                     controller.submitAnswer();
                                   } else {

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
 import 'package:flutter_prime/core/utils/method.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -133,7 +133,7 @@ class LoginRepo {
     Map<String, String> map = deviceTokenMap(deviceToken);
     var data = await apiClient.request(url, Method.postMethod, map, passHeader: true);
 
-    print("FCCM KEY ${data.responseJson}");
+    debugPrint("FCCM KEY ${data.responseJson}");
     return true;
   }
 

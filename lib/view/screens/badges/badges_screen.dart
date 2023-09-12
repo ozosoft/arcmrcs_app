@@ -54,8 +54,8 @@ class _BadgesScreenState extends State<BadgesScreen> {
                   Container(
                     width: double.infinity,
                     margin:
-                        EdgeInsets.only(top: orientation != Orientation.portrait ? MediaQuery.of(context).size.height * .05 : MediaQuery.of(context).size.height * .028, right: MediaQuery.of(context).size.height * .01, left: orientation != Orientation.portrait ? MediaQuery.of(context).size.height * .025 : MediaQuery.of(context).size.height * .01, bottom: MediaQuery.of(context).size.height * .03),
-                    padding: EdgeInsets.only(top: orientation != Orientation.portrait ? size.height * .1 : size.height * .04, left: Dimensions.space10, right: Dimensions.space10),
+                        EdgeInsetsDirectional.only(top: orientation != Orientation.portrait ? MediaQuery.of(context).size.height * .05 : MediaQuery.of(context).size.height * .028, end: MediaQuery.of(context).size.height * .01, start: orientation != Orientation.portrait ? MediaQuery.of(context).size.height * .025 : MediaQuery.of(context).size.height * .01, bottom: MediaQuery.of(context).size.height * .03),
+                    padding: EdgeInsetsDirectional.only(top: orientation != Orientation.portrait ? size.height * .1 : size.height * .04, start: Dimensions.space10, end: Dimensions.space10),
                     decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space8)),
                     child: Column(
                       children: [
@@ -68,12 +68,12 @@ class _BadgesScreenState extends State<BadgesScreen> {
                     ),
                   ),
                   Padding(
-                      padding: EdgeInsets.only(left: orientation != Orientation.portrait ? MediaQuery.of(context).size.width * .106 : MediaQuery.of(context).size.width * .110),
+                      padding: EdgeInsetsDirectional.only(start: orientation != Orientation.portrait ? MediaQuery.of(context).size.width * .106 : MediaQuery.of(context).size.width * .110),
                       child: SvgPicture.asset(
                         MyImages().badgesList[index],
                         height: Dimensions.space45,
                       )),
-                  Container(padding: EdgeInsets.only(top: orientation != Orientation.portrait ? Dimensions.space20 : Dimensions.space30), height: Dimensions.space100, width: size.width, color: badgeLists[index]['title'] != MyStrings.supperbattleMan ? MyColor.notActivatedFadeColor : MyColor.transparentColor)
+                  Container(padding: EdgeInsetsDirectional.only(top: orientation != Orientation.portrait ? Dimensions.space20 : Dimensions.space30), height: Dimensions.space100, width: size.width, color: badgeLists[index]['title'] != MyStrings.supperbattleMan ? MyColor.notActivatedFadeColor : MyColor.transparentColor)
                 ],
               );
             }),

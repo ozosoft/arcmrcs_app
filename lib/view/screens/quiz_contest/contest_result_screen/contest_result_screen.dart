@@ -22,7 +22,8 @@ class _QuizContestResultScreenState extends State<QuizContestResultScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AdmobHelper().loadInterstitialAdAlways();
+      // AdmobHelper().loadInterstitialAdAlways();
+      AdmobHelper().loadRewardAdAlways();
     });
   }
 

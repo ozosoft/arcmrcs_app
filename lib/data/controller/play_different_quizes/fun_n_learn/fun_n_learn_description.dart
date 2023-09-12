@@ -1,4 +1,7 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/data/model/play_different_quizes/fun_n_learn/fun_n_learn_description_model.dart';
 import 'package:flutter_prime/data/model/sub_categories/sub_categories_model.dart';
 import 'package:flutter_prime/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
@@ -52,7 +55,7 @@ class FunNLearnListController extends GetxController {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     loader = false;
     update();

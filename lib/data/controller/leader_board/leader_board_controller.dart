@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/data/model/leaderBoard/leaderBoard_model.dart';
 import 'package:flutter_prime/data/repo/leaderBoard/leaderBoard_repo.dart';
 import 'package:get/get.dart';
@@ -73,7 +74,7 @@ class LeaderBoardController extends GetxController {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     isLoading = false;
     update();

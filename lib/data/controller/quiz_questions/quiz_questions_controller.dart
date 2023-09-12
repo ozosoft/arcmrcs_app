@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -64,7 +66,7 @@ class QuizQuestionsController extends GetxController {
 
     ResponseModel model = await quizquestionsRepo.getData(quizInfoID!);
 
-    print("object" + quizInfoID.toString());
+    debugPrint("object$quizInfoID");
 
     if (model.statusCode == 200) {
       questionsList.clear();
@@ -81,14 +83,14 @@ class QuizQuestionsController extends GetxController {
         timerDuration = int.parse(quizquestions.data!.perQuestionAnswerDuration.toString());
         update();
 
-        successmessage = quizquestions.message!.success.toString() ?? "";
+        successmessage = quizquestions.message!.success.toString();
 
         List<Option>? optionslist = quizquestions.data!.questions![0].options;
 
         if (optionslist != null && optionslist.isNotEmpty) {
           optionsList.addAll(optionslist);
         }
-        print(optionslist);
+  
       } else {
         CustomSnackBar.error(errorList: [quizquestions.status ?? ""]);
       }
@@ -110,13 +112,13 @@ class QuizQuestionsController extends GetxController {
     int questionIndex,
   ) {
     selectedOptionIndex = optionIndex;
-    print('work here');
+    debugPrint('work here');
     String optionId = optionsList[optionIndex].id.toString();
 
-    print('not work here');
+    debugPrint('not work here');
     questionsList[questionIndex].setSelectedOptionId(optionId);
 
-    print('done');
+    debugPrint('done');
 
     update();
   }
@@ -127,9 +129,9 @@ class QuizQuestionsController extends GetxController {
     questionId = questionsList[index].selectedOptionId.toString();
     thisQuestionId = optionsList[optionIndex].id.toString();
 
-    // print('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
+    // debugPrint('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
 
-    // print('questionId=========================================================================: ${questionId}');
+    // debugPrint('questionId=========================================================================: ${questionId}');
 
     if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
       return true;
@@ -221,12 +223,12 @@ class QuizQuestionsController extends GetxController {
       String quizeId = questionsList[i].id.toString();
       String selectedOptionId = questionsList[i].selectedOptionId.toString();
 
-      params['question_id[${i}]'] = quizeId;
-      print('quize id: ${quizeId}');
+      params['question_id[$i]'] = quizeId;
+      debugPrint('quize id: $quizeId');
       params['option_$quizeId'] = selectedOptionId;
-      print("option_$quizeId");
+      debugPrint("option_$quizeId");
     }
-    print(params['option_']);
+    debugPrint(params['option_']);
     params['quizInfo_id'] = quizInfoID.toString();
     params['fifty_fifty'] = fifty_fifty;
     params['audience_poll'] = audiencevotes;
@@ -305,7 +307,7 @@ class QuizQuestionsController extends GetxController {
 
   @override
   void onClose() {
-    print("called onclose qc");
+    debugPrint("called onclose qc");
     super.onClose();
   }
 }

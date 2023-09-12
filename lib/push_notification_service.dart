@@ -26,7 +26,7 @@ class PushNotificationService {
     FirebaseMessaging.onMessage.listen((RemoteMessage event) {});
     messaging.getToken().then((value) {
       String? token = value;
-      print("FCM ---" + token!);
+      debugPrint("FCM ---" + token!);
     });
     await enableIOSNotifications();
     await registerNotificationListeners();
@@ -58,7 +58,7 @@ class PushNotificationService {
         }
       } catch (e) {
         if (kDebugMode) {
-          print(e.toString());
+          debugPrint(e.toString());
         }
       }
     });

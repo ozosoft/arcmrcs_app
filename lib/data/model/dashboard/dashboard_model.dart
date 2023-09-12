@@ -11,92 +11,91 @@ DashBoardModel dashBoardModelFromJson(String str) => DashBoardModel.fromJson(jso
 String dashBoardModelToJson(DashBoardModel data) => json.encode(data.toJson());
 
 class DashBoardModel {
-    String? remark;
-    String? status;
-    Message? message;
-    Data? data;
+  String? remark;
+  String? status;
+  Message? message;
+  Data? data;
 
-    DashBoardModel({
-        this.remark,
-        this.status,
-        this.message,
-        this.data,
-    });
+  DashBoardModel({
+    this.remark,
+    this.status,
+    this.message,
+    this.data,
+  });
 
-    factory DashBoardModel.fromJson(Map<String, dynamic> json) => DashBoardModel(
+  factory DashBoardModel.fromJson(Map<String, dynamic> json) => DashBoardModel(
         remark: json["remark"],
         status: json["status"],
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "remark": remark,
         "status": status,
         "message": message?.toJson(),
         "data": data?.toJson(),
-    };
+      };
 }
 
 class Data {
-    User? user;
-    Rank? rank;
-    List<QuizType>? quizType;
-    List<Category>? categories;
-    List<Contest>? contest;
-    List<Exams>? exams;
+  User? user;
+  Rank? rank;
+  List<QuizType>? quizType;
+  List<Category>? categories;
+  List<Contest>? contest;
+  List<Exams>? exams;
 
-    Data({
-        this.user,
-        this.rank,
-        this.quizType,
-        this.categories,
-        this.contest,
-        this.exams,
-    });
+  Data({
+    this.user,
+    this.rank,
+    this.quizType,
+    this.categories,
+    this.contest,
+    this.exams,
+  });
 
-    factory Data.fromJson(Map<String, dynamic> json) {
-      print("this is exam"+json["exams"].toString());
-      return Data(
-        user: json["user"] == null ? null : User.fromJson(json["user"]),
-        rank: json["rank"] == null ? null : Rank.fromJson(json["rank"]),
-        quizType: json["quiz_type"] == null ? [] : List<QuizType>.from(json["quiz_type"]!.map((x) => QuizType.fromJson(x))),
-        categories: json["categories"] == null ? [] : List<Category>.from(json["categories"]!.map((x) => Category.fromJson(x))),
-        contest: json["contest"] == null ? [] : List<Contest>.from(json["contest"]!.map((x) => Contest.fromJson(x))),
-        exams: json["exams"] == null ? [] : List<Exams>.from(json["exams"]!.map((x) => Exams.fromJson(x))),
+  factory Data.fromJson(Map<String, dynamic> json) {
+    return Data(
+      user: json["user"] == null ? null : User.fromJson(json["user"]),
+      rank: json["rank"] == null ? null : Rank.fromJson(json["rank"]),
+      quizType: json["quiz_type"] == null ? [] : List<QuizType>.from(json["quiz_type"]!.map((x) => QuizType.fromJson(x))),
+      categories: json["categories"] == null ? [] : List<Category>.from(json["categories"]!.map((x) => Category.fromJson(x))),
+      contest: json["contest"] == null ? [] : List<Contest>.from(json["contest"]!.map((x) => Contest.fromJson(x))),
+      exams: json["exams"] == null ? [] : List<Exams>.from(json["exams"]!.map((x) => Exams.fromJson(x))),
     );
-    }
+  }
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "user": user?.toJson(),
         "rank": rank?.toJson(),
         "quiz_type": quizType == null ? [] : List<dynamic>.from(quizType!.map((x) => x.toJson())),
         "categories": categories == null ? [] : List<dynamic>.from(categories!.map((x) => x.toJson())),
         "contest": contest == null ? [] : List<dynamic>.from(contest!.map((x) => x.toJson())),
         "exams": exams == null ? [] : List<dynamic>.from(exams!.map((x) => x.toJson())),
-    };
+      };
 }
 
 class Category {
-    int? id;
-    String? name;
-    String? image;
-    String? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
-    String? questionsCount;
+  int? id;
+  String? name;
+  String? image;
+  String? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? questionsCount;
 
-    Category({
-        this.id,
-        this.name,
-        this.image,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.questionsCount,
-    });
+  Category({
+    this.id,
+    this.name,
+    this.image,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.questionsCount,
+  });
 
-    factory Category.fromJson(Map<String, dynamic> json) => Category(
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
         name: json["name"],
         image: json["image"],
@@ -104,9 +103,9 @@ class Category {
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         questionsCount: json["questions_count"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "image": image,
@@ -114,55 +113,55 @@ class Category {
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
         "questions_count": questionsCount,
-    };
+      };
 }
 
 class Contest {
-    int? id;
-    String? typeId;
-    dynamic categoryId;
-    dynamic subCategoryId;
-    String? title;
-    String? image;
-    DateTime? startDate;
-    String? endDate;
-    String? prize;
-    String? point;
-    dynamic description;
-    dynamic levelId;
-    String? examStartTime;
-    String? examEndTime;
-    String? examDuration;
-    String? examKey;
-    dynamic enrolledPlayer;
-    String? status;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+  int? id;
+  String? typeId;
+  dynamic categoryId;
+  dynamic subCategoryId;
+  String? title;
+  String? image;
+  DateTime? startDate;
+  String? endDate;
+  String? prize;
+  String? point;
+  dynamic description;
+  dynamic levelId;
+  String? examStartTime;
+  String? examEndTime;
+  String? examDuration;
+  String? examKey;
+  dynamic enrolledPlayer;
+  String? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-    Contest({
-        this.id,
-        this.typeId,
-        this.categoryId,
-        this.subCategoryId,
-        this.title,
-        this.image,
-        this.startDate,
-        this.endDate,
-        this.prize,
-        this.point,
-        this.description,
-        this.levelId,
-        this.examStartTime,
-        this.examEndTime,
-        this.examDuration,
-        this.examKey,
-        this.enrolledPlayer,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-    });
+  Contest({
+    this.id,
+    this.typeId,
+    this.categoryId,
+    this.subCategoryId,
+    this.title,
+    this.image,
+    this.startDate,
+    this.endDate,
+    this.prize,
+    this.point,
+    this.description,
+    this.levelId,
+    this.examStartTime,
+    this.examEndTime,
+    this.examDuration,
+    this.examKey,
+    this.enrolledPlayer,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-    factory Contest.fromJson(Map<String, dynamic> json) => Contest(
+  factory Contest.fromJson(Map<String, dynamic> json) => Contest(
         id: json["id"],
         typeId: json["type_id"],
         categoryId: json["category_id"],
@@ -173,7 +172,7 @@ class Contest {
         endDate: json["end_date"] == null ? null : json["end_date"].toString(),
         prize: json["prize"],
         point: json["point"],
-        description: json["description"]!=null?json["description"]:"",
+        description: json["description"] ?? "",
         levelId: json["level_id"],
         examStartTime: json["exam_start_time"],
         examEndTime: json["exam_end_time"],
@@ -183,9 +182,9 @@ class Contest {
         status: json["status"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "type_id": typeId,
         "category_id": categoryId,
@@ -206,58 +205,57 @@ class Contest {
         "status": status,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-    };
+      };
 }
 
-
 class Exams {
-    int? id;
-    String? typeId;
-    dynamic categoryId;
-    dynamic subCategoryId;
-    String? title;
-    String? image;
-    DateTime? startDate;
-    DateTime? endDate;
-    String? prize;
-    String? point;
-    dynamic description;
-    dynamic levelId;
-    String? examStartTime;
-    String? examEndTime;
-    String? examDuration;
-    String? examKey;
-    dynamic enrolledPlayer;
-    String? status;
-    String? winningmark;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+  int? id;
+  String? typeId;
+  dynamic categoryId;
+  dynamic subCategoryId;
+  String? title;
+  String? image;
+  DateTime? startDate;
+  DateTime? endDate;
+  String? prize;
+  String? point;
+  dynamic description;
+  dynamic levelId;
+  String? examStartTime;
+  String? examEndTime;
+  String? examDuration;
+  String? examKey;
+  dynamic enrolledPlayer;
+  String? status;
+  String? winningmark;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-    Exams({
-        this.id,
-        this.typeId,
-        this.categoryId,
-        this.subCategoryId,
-        this.title,
-        this.image,
-        this.startDate,
-        this.endDate,
-        this.prize,
-        this.point,
-        this.description,
-        this.levelId,
-        this.examStartTime,
-        this.examEndTime,
-        this.examDuration,
-        this.examKey,
-        this.enrolledPlayer,
-        this.status,
-        this.winningmark,
-        this.createdAt,
-        this.updatedAt,
-    });
+  Exams({
+    this.id,
+    this.typeId,
+    this.categoryId,
+    this.subCategoryId,
+    this.title,
+    this.image,
+    this.startDate,
+    this.endDate,
+    this.prize,
+    this.point,
+    this.description,
+    this.levelId,
+    this.examStartTime,
+    this.examEndTime,
+    this.examDuration,
+    this.examKey,
+    this.enrolledPlayer,
+    this.status,
+    this.winningmark,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-    factory Exams.fromJson(Map<String, dynamic> json) => Exams(
+  factory Exams.fromJson(Map<String, dynamic> json) => Exams(
         id: json["id"],
         typeId: json["type_id"],
         categoryId: json["category_id"],
@@ -268,7 +266,7 @@ class Exams {
         endDate: json["end_date"] == null ? null : DateTime.parse(json["end_date"]),
         prize: json["prize"],
         point: json["point"],
-        description: json["description"]!=null?json["description"]:"",
+        description: json["description"] ?? "",
         levelId: json["level_id"],
         examStartTime: json["exam_start_time"],
         examEndTime: json["exam_end_time"],
@@ -279,9 +277,9 @@ class Exams {
         winningmark: json["winning_mark"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "type_id": typeId,
         "category_id": categoryId,
@@ -303,46 +301,45 @@ class Exams {
         "winning_mark": winningmark,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-    };
+      };
 }
 
-
 class QuizType {
-    int? id;
-    String? name;
-    String? act;
-    String? image;
-    String? isCategorise;
-    String? status;
-    String? shortDescription;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+  int? id;
+  String? name;
+  String? act;
+  String? image;
+  String? isCategorise;
+  String? status;
+  String? shortDescription;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-    QuizType({
-        this.id,
-        this.name,
-        this.act,
-        this.image,
-        this.isCategorise,
-        this.status,
-        this.shortDescription,
-        this.createdAt,
-        this.updatedAt,
-    });
+  QuizType({
+    this.id,
+    this.name,
+    this.act,
+    this.image,
+    this.isCategorise,
+    this.status,
+    this.shortDescription,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-    factory QuizType.fromJson(Map<String, dynamic> json) => QuizType(
+  factory QuizType.fromJson(Map<String, dynamic> json) => QuizType(
         id: json["id"],
         name: json["name"],
         act: json["act"],
-        image: json["image"]!=null?json["image"]:"",
+        image: json["image"] ?? "",
         isCategorise: json["is_categorise"],
         status: json["status"],
-        shortDescription: json["short_description"]!=null?json["short_description"]:"",
+        shortDescription: json["short_description"] ?? "",
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "act": act,
@@ -352,81 +349,81 @@ class QuizType {
         "short_description": shortDescription,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-    };
+      };
 }
 
 class Rank {
-    String? userRank;
+  String? userRank;
 
-    Rank({
-        this.userRank,
-    });
+  Rank({
+    this.userRank,
+  });
 
-    factory Rank.fromJson(Map<String, dynamic> json) => Rank(
+  factory Rank.fromJson(Map<String, dynamic> json) => Rank(
         userRank: json["user_rank"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "user_rank": userRank,
-    };
+      };
 }
 
 class User {
-    int? id;
-    String? firstname;
-    String? lastname;
-    String? username;
-    String? avatar;
-    String? email;
-    String? countryCode;
-    String? mobile;
-    String? refBy;
-    dynamic referralCode;
-    Address? address;
-    String? status;
-    String? kv;
-    String? ev;
-    String? sv;
-    String? profileComplete;
-    DateTime? verCodeSendAt;
-    String? ts;
-    String? tv;
-    dynamic tsc;
-    dynamic banReason;
-    String? coins;
-    String? score;
-    DateTime? createdAt;
-    DateTime? updatedAt;
+  int? id;
+  String? firstname;
+  String? lastname;
+  String? username;
+  String? avatar;
+  String? email;
+  String? countryCode;
+  String? mobile;
+  String? refBy;
+  dynamic referralCode;
+  Address? address;
+  String? status;
+  String? kv;
+  String? ev;
+  String? sv;
+  String? profileComplete;
+  DateTime? verCodeSendAt;
+  String? ts;
+  String? tv;
+  dynamic tsc;
+  dynamic banReason;
+  String? coins;
+  String? score;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
-    User({
-        this.id,
-        this.firstname,
-        this.lastname,
-        this.username,
-        this.avatar,
-        this.email,
-        this.countryCode,
-        this.mobile,
-        this.refBy,
-        this.referralCode,
-        this.address,
-        this.status,
-        this.kv,
-        this.ev,
-        this.sv,
-        this.profileComplete,
-        this.verCodeSendAt,
-        this.ts,
-        this.tv,
-        this.tsc,
-        this.banReason,
-        this.coins,
-        this.score,
-        this.createdAt,
-        this.updatedAt,
-    });
+  User({
+    this.id,
+    this.firstname,
+    this.lastname,
+    this.username,
+    this.avatar,
+    this.email,
+    this.countryCode,
+    this.mobile,
+    this.refBy,
+    this.referralCode,
+    this.address,
+    this.status,
+    this.kv,
+    this.ev,
+    this.sv,
+    this.profileComplete,
+    this.verCodeSendAt,
+    this.ts,
+    this.tv,
+    this.tsc,
+    this.banReason,
+    this.coins,
+    this.score,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-    factory User.fromJson(Map<String, dynamic> json) => User(
+  factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         firstname: json["firstname"],
         lastname: json["lastname"],
@@ -452,9 +449,9 @@ class User {
         score: json["score"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "firstname": firstname,
         "lastname": lastname,
@@ -480,39 +477,37 @@ class User {
         "score": score,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
-    };
+      };
 }
 
 class Address {
-    String? address;
-    String? city;
-    String? state;
-    String? zip;
-    String? country;
+  String? address;
+  String? city;
+  String? state;
+  String? zip;
+  String? country;
 
-    Address({
-        this.address,
-        this.city,
-        this.state,
-        this.zip,
-        this.country,
-    });
+  Address({
+    this.address,
+    this.city,
+    this.state,
+    this.zip,
+    this.country,
+  });
 
-    factory Address.fromJson(Map<String, dynamic> json) => Address(
+  factory Address.fromJson(Map<String, dynamic> json) => Address(
         address: json["address"],
         city: json["city"],
         state: json["state"],
         zip: json["zip"],
         country: json["country"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "address": address,
         "city": city,
         "state": state,
         "zip": zip,
         "country": country,
-    };
+      };
 }
-
-

@@ -24,7 +24,7 @@ class _FunNLearnLifeLinesWidgetState extends State<FunNLearnLifeLinesWidget> {
 
     controller.quizInfoID = Get.arguments[1];
 
-    // print("++++++++++===============this is id"+quizinfoID.toString());
+    // debugPrint("++++++++++===============this is id"+quizinfoID.toString());
     super.initState();
   }
 
@@ -37,7 +37,7 @@ class _FunNLearnLifeLinesWidgetState extends State<FunNLearnLifeLinesWidget> {
           InkWell(
             onTap: () {
               controller.showQuestion();
-              print("object");
+              debugPrint("object");
             },
             child: const LevelCardButton(
               // lifelineUsed: controller.showQuestions,
@@ -70,7 +70,7 @@ class _FunNLearnLifeLinesWidgetState extends State<FunNLearnLifeLinesWidget> {
             child: InkWell(
               onTap: () async {
                 controller.flipQuiston(widget.questionIndex);
-                print(controller.flipQuistion);
+                debugPrint(controller.flipQuistion);
                 controller.flipQuistion = "1";
               
               },

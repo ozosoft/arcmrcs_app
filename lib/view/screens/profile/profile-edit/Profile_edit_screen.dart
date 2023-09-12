@@ -51,7 +51,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         builder: (controller) => controller.isLoading
             ? const CustomLoader()
             : SingleChildScrollView(
-                padding: const EdgeInsets.only(top: Dimensions.space40, right: Dimensions.space18, left: Dimensions.space18),
+                padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, end: Dimensions.space18, start: Dimensions.space18),
                 child: Container(
                   padding: const EdgeInsets.all(Dimensions.space16),
                   width: double.infinity,

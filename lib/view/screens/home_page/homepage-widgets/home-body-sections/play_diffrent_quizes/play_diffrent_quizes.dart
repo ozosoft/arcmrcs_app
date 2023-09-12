@@ -28,7 +28,7 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
           const SizedBox(height: Dimensions.space10,),
           if (controller.differentQuizlist.isNotEmpty)
             Padding(
-              padding: const EdgeInsets.only(bottom: Dimensions.space10, left: Dimensions.space5, right: Dimensions.space5, top: Dimensions.space20),
+              padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space10, start: Dimensions.space5, end: Dimensions.space5, top: Dimensions.space20),
               child: Text(
                 MyStrings.playDiffrentQuizs.tr,
                 style: boldMediumLarge,
@@ -75,7 +75,7 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        margin: const EdgeInsets.only(right: Dimensions.space10),
+                        margin: const EdgeInsetsDirectional.only(end: Dimensions.space10),
                         child: MyImageWidget(
                           height: context.width * 0.14,
                           width: context.width * 0.14,

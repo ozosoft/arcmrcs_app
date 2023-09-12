@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/data/model/auth/logout/logout_model.dart';
 
@@ -28,7 +29,7 @@ class LogoutController extends GetxController {
       LogoutModel plan = LogoutModel.fromJson(jsonDecode(logout.responseJson));
       if (plan.status.toString().toLowerCase() == MyStrings.ok.toLowerCase()) {
         Get.offAllNamed(RouteHelper.loginScreen);
-        print("LoggedM OUT!");
+        debugPrint("LoggedM OUT!");
         update();
       } else {
         CustomSnackBar.error(errorList: [plan.status ?? ""]);

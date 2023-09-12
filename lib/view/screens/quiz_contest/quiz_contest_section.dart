@@ -27,7 +27,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: Dimensions.space3, left: Dimensions.space4, right: Dimensions.space4, top: Dimensions.space17),
+            padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space3, start: Dimensions.space4, end: Dimensions.space4, top: Dimensions.space17),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -60,7 +60,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                       (index) => GetBuilder<QuizContestQuestionsController>(
                             builder: (quizQuestionscontrollers) => InkWell(
                               onTap: () {
-                                print(quizQuestionscontrollers.examQuestionsList);
+                                debugPrint(quizQuestionscontrollers.examQuestionsList as String?);
                                 if (quizQuestionscontrollers.examQuestionsList != "") {
                                   Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [
                                     controller.contestlist[index].id.toString(),
@@ -95,7 +95,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
                                         Container(
-                                          padding: const EdgeInsets.only(top: Dimensions.space7, right: Dimensions.space12),
+                                          padding: const EdgeInsetsDirectional.only(top: Dimensions.space7, end: Dimensions.space12),
                                           height: Dimensions.space70,
                                           width: Dimensions.space50,
                                           child: Align(
@@ -106,7 +106,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                         Container(
                                           // height: Dimensions.space70,
                                           // width: Dimensions.space220,
-                                          padding: const EdgeInsets.only(bottom: Dimensions.space20),
+                                          padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
                                           child: Column(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             mainAxisSize: MainAxisSize.min,
@@ -125,7 +125,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.only(right: 0, top: 0, bottom: MediaQuery.of(context).size.height * .05, left: MediaQuery.of(context).size.width * .25),
+                                          padding: EdgeInsetsDirectional.only(end: 0, top: 0, bottom: MediaQuery.of(context).size.height * .05, start: MediaQuery.of(context).size.width * .25),
                                           child: SvgPicture.asset(
                                             MyImages.bookmarkSVG,
                                           ),
@@ -137,7 +137,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                       color: MyColor.colorlighterGrey,
                                     ),
                                     Container(
-                                      padding: const EdgeInsets.only(top: Dimensions.space10, left: Dimensions.space10),
+                                      padding: const EdgeInsetsDirectional.only(top: Dimensions.space10, start: Dimensions.space10),
                                       width: Dimensions.space330,
                                       child: Row(
                                         children: [

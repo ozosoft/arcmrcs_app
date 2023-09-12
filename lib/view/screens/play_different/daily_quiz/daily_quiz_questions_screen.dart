@@ -32,7 +32,7 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
 
     DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController(dailyQuizRepo: Get.find()));
 
-    // print("++++++++++===============this is id"+quizinfoID.toString());
+    // debugPrint("++++++++++===============this is id"+quizinfoID.toString());
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -63,7 +63,7 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                             itemBuilder: (context, questionsIndex) {
                               controller.setCurrentOption(questionsIndex);
 
-                              print('current question index: ${questionsIndex}');
+                              debugPrint('current question index: $questionsIndex');
 
                               return SingleChildScrollView(
                                 padding: const EdgeInsets.all(Dimensions.space20),
@@ -84,7 +84,7 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                                           ),
                                           Container(
                                             width: double.infinity,
-                                            padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                                            padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
                                             child: controller.examQuestionsList[questionsIndex].image != null
                                                 ? Image.network(
                                                     UrlContainer.dailyQuizQuestionsImage + controller.examQuestionsList[questionsIndex].image,
@@ -92,7 +92,7 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                                                   )
                                                 : const SizedBox(),
                                           ),
-                                          Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                                          Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                           const SizedBox(height: Dimensions.space25),
                                           ListView.builder(
                                               physics: const NeverScrollableScrollPhysics(),
@@ -189,7 +189,7 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .4),
+                                      padding: EdgeInsetsDirectional.only(start: MediaQuery.of(context).size.width * .4),
                                       child: CircularCountDownTimer(
                                         duration: Dimensions.space70.toInt(),
                                         initialDuration: 0,
@@ -213,7 +213,7 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                                           if (controller.selectedOptionIndex.toString() == "-1") {
                                             controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
                                           }
-                                          controller.selectedOptionIndex.toString().isNotEmpty ? print("this is selectedoption index" + controller.selectedOptionIndex.toString()) : print;
+                                          controller.selectedOptionIndex.toString().isNotEmpty ? debugPrint("this is selectedoption index${controller.selectedOptionIndex}") : print;
                                           if (questionsIndex == controller.examQuestionsList.length - 1) {
                                             controller.submitAnswer();
                                           } else {

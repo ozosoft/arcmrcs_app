@@ -23,7 +23,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
     final cardTopPosition = expandedHeight / 2 - shrinkOffset;
     final proportion = 2 - (expandedHeight / appBarSize);
     final percent = proportion < 0 || proportion > 1 ? 0.0 : proportion;
-    // print(percent);
+    // debugPrint(percent);
     return SizedBox(
       height: expandedHeight + expandedHeight / 3,
       child: Stack(

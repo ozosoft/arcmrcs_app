@@ -56,16 +56,16 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
               ),
               controller.isLoading
                   ? Padding(
-                      padding: EdgeInsets.only(
+                      padding: EdgeInsetsDirectional.only(
                         top: context.width / 4.05,
                       ),
                       child: const CustomLoader(isPagination: true),
                     )
                   : Container(
                       alignment: Alignment.topCenter,
-                      margin: EdgeInsets.only(
-                        left: Dimensions.space10,
-                        right: Dimensions.space10,
+                      margin: EdgeInsetsDirectional.only(
+                        start: Dimensions.space10,
+                        end: Dimensions.space10,
                         top: context.width / 4.05,
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space20),

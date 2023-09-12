@@ -24,7 +24,8 @@ class _BattleQuizResultScreenState extends State<BattleQuizResultScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AdmobHelper().loadInterstitialAdAlways();
+      // AdmobHelper().loadInterstitialAdAlways();
+      AdmobHelper().loadRewardAdAlways();
     });
   }
 

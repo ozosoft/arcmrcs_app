@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/core/utils/messages.dart';
 import 'package:flutter_prime/data/controller/localization/localization_controller.dart';
 import 'package:get/get.dart';
@@ -20,7 +21,7 @@ class SplashController extends GetxController {
     await loadLanguage();
     bool isRemember = repo.apiClient.sharedPreferences.getBool(SharedPreferenceHelper.rememberMeKey) ?? false;
     bool isOnBoard = repo.apiClient.sharedPreferences.getBool(SharedPreferenceHelper.onboardKey) ?? false;
-print("from onboard check ------ $isOnBoard");
+    debugPrint("from onboard check ------ $isOnBoard");
     noInternet = false;
     update();
 

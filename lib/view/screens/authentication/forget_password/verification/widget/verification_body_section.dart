@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/data/controller/auth/forget_password/verify_password_controller.dart';
 import 'package:flutter_prime/data/repo/auth/login_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
-import 'package:flutter_prime/view/components/otp_field_widget/otp_field_widget.dart';
 import 'package:flutter_prime/view/components/text/custom_underline_text.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';

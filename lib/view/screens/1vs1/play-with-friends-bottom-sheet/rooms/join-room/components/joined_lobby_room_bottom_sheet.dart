@@ -87,7 +87,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
           child: Column(
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: Dimensions.space8, bottom: Dimensions.space30),
+                padding: EdgeInsetsDirectional.only(top: Dimensions.space8, bottom: Dimensions.space30),
                 child: BottomSheetBar(),
               ),
               Container(

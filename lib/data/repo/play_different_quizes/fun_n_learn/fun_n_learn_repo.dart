@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/core/utils/method.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
@@ -9,7 +10,7 @@ class FunNLearnRepo {
 
   Future<ResponseModel> getFunAndLearnCategories() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.funNLearnallCategoryUrl}";
-    print('all categories=====>: ${url}');
+    debugPrint('all categories=====>: ${url}');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
@@ -17,7 +18,7 @@ class FunNLearnRepo {
 
   Future<ResponseModel> getFunAndLearnSubCategories(String subcategoryId) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.funNLearnsubCategoryUrl + subcategoryId}";
-    print('all categories=====>: ${subcategoryId}');
+    debugPrint('all categories=====>: ${subcategoryId}');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
@@ -38,7 +39,7 @@ class FunNLearnRepo {
 
   Future<ResponseModel> getFunNlearnQuestions(String id) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.funNlearnQuestionsUrl + id.toString()}";
-    print('come here: ${url}');
+    debugPrint('come here: ${url}');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
@@ -46,12 +47,12 @@ class FunNLearnRepo {
 
   Future<ResponseModel> submitAnswer(Map<String, dynamic> map) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.funNlearnsubmitAnswerUrl}';
-    print(url.toString());
+    debugPrint(url.toString());
 
     ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
 
-    print(model.responseJson.toLowerCase());
-    print(model.statusCode);
+    debugPrint(model.responseJson.toLowerCase());
+
 
     return model;
   }

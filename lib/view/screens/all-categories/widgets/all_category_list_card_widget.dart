@@ -61,7 +61,7 @@ class _AllCategoryListTileCardWidgetState extends State<AllCategoryListTileCardW
                     children: [
                       const SizedBox(width: Dimensions.space20),
                       Container(
-                        margin: const EdgeInsets.only(right: Dimensions.space14, top: Dimensions.space10),
+                        margin: const EdgeInsetsDirectional.only(end: Dimensions.space14, top: Dimensions.space10),
                         width: Dimensions.space40,
                         height: Dimensions.space40,
                         child: MyImageWidget(
@@ -70,7 +70,7 @@ class _AllCategoryListTileCardWidgetState extends State<AllCategoryListTileCardW
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: Dimensions.space15),
+                          padding: const EdgeInsetsDirectional.only(top: Dimensions.space15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -104,7 +104,7 @@ class _AllCategoryListTileCardWidgetState extends State<AllCategoryListTileCardW
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: Dimensions.space20),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                         child: SvgPicture.asset(widget.isExpand ? MyImages.arrowDownSVG : MyImages.playSVG, height: Dimensions.space35),
                       ),
                       const SizedBox(width: Dimensions.space20),

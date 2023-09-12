@@ -5,7 +5,6 @@ import '../../../../../core/utils/my_color.dart';
 import '../../../../../core/utils/style.dart';
 import '../../../../../core/utils/url_container.dart';
 import '../../../../../data/controller/auth/login_controller.dart';
-import '../../../../../data/model/country_model/country_model.dart';
 import '../../../../components/image_widget/my_image_widget.dart';
 
 class CountryBottomSheet {
@@ -110,7 +109,7 @@ class CountryBottomSheet {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(right: Dimensions.space10),
+                                  padding: const EdgeInsetsDirectional.only(end: Dimensions.space10),
                                   child: MyImageWidget(
                                     imageUrl: UrlContainer.countryFlagImageLink.replaceAll("{countryCode}", countryItem.countryCode.toString().toLowerCase()),
                                     height: Dimensions.space25,
@@ -118,7 +117,7 @@ class CountryBottomSheet {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(right: Dimensions.space10),
+                                  padding: const EdgeInsetsDirectional.only(end: Dimensions.space10),
                                   child: Text(
                                     '+${countryItem.dialCode}',
                                     style: regularDefault.copyWith(color: MyColor.getTextColor()),

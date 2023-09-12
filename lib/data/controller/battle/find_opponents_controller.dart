@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../model/quiz_questions_model/quiz_questions_model.dart';
@@ -59,7 +58,7 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
 
   @override
   void onClose() {
-    print("FindOpponentsController Closed");
+    debugPrint("FindOpponentsController Closed");
     _imageScrollController.dispose();
     super.onClose();
   }

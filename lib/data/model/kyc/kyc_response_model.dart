@@ -77,7 +77,7 @@ class Form {
       _list;
     } catch (e) {
       if (kDebugMode) {
-        print(e.toString());
+        debugPrint(e.toString());
       }
     }
   }

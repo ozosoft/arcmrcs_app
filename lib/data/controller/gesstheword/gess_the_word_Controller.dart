@@ -1,6 +1,6 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: file_names
+
 import 'dart:convert';
-import 'dart:developer' as dev;
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
@@ -67,8 +67,6 @@ class GuessThewordController extends GetxController {
     Map<String, dynamic> params = {};
     params['quizInfo_id'] = quizInfoId;
     for (int i = 0; i < gessThewordQuesstionList.length; i++) {
-      dev.log(gessThewordQuesstionList[i].id.toString(), name: "submit");
-
       String questionId = gessThewordQuesstionList[i].id.toString();
       // String optionId = gessThewordQuesstionList[i].options![0].id.toString();
       String selectedOptionId = gessThewordQuesstionList[i].selectedAnswer.toString();
@@ -80,7 +78,7 @@ class GuessThewordController extends GetxController {
     if (response.statusCode == 200) {
       GuesswordQuestionSubmitResponse model = GuesswordQuestionSubmitResponse.fromJson(jsonDecode(response.responseJson));
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
-        print( model.message!.success!.first);
+        debugPrint(model.message!.success!.first);
         appreciation = model.message!.success!.first;
         totalQuestion = model.data?.totalQuestion.toString() ?? '';
         correctAnswer = model.data?.correctAnswer.toString() ?? '';
@@ -208,7 +206,6 @@ class GuessThewordController extends GetxController {
           ansDuration = int.parse(model.data?.perQuestionAnswerDuration.toString() ?? "30");
           quizInfoId = id;
           gessThewordQuesstionList.addAll(templist);
-          dev.log(gessThewordQuesstionList.length.toString());
         }
       } else {
         // CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);

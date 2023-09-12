@@ -22,7 +22,8 @@ class _GuessWordResultScreenState extends State<GuessWordResultScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AdmobHelper().loadInterstitialAdAlways();
+      // AdmobHelper().loadInterstitialAdAlways();
+      AdmobHelper().loadRewardAdAlways();
     });
   }
 

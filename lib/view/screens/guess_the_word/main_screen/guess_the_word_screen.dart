@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
@@ -15,7 +14,6 @@ import 'package:flutter_prime/view/screens/guess_the_word/widget/question_button
 
 import 'package:get/get.dart';
 
-import '../../../../core/helper/ads/admob_helper.dart';
 import '../../../components/app-bar/custom_category_appBar.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../widget/answer_field.dart';
@@ -89,7 +87,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                     // note: use  preloader or something like this
                                     controller.gessThewordQuesstionList[questionsIndex].image != null
                                         ? Container(
-                                            margin: const EdgeInsets.only(top: Dimensions.space20, bottom: Dimensions.space20),
+                                            margin: const EdgeInsetsDirectional.only(top: Dimensions.space20, bottom: Dimensions.space20),
                                             width: double.infinity,
                                             height: context.width / 2.5,
                                             child: MyImageWidget(
@@ -98,7 +96,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                             ),
                                           )
                                         : const SizedBox(height: Dimensions.space20),
-                                    Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.gessThewordQuesstionList[questionsIndex].question.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                                    Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.gessThewordQuesstionList[questionsIndex].question.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                     const SizedBox(height: Dimensions.space40),
                                     AnswerField(length: controller.gessThewordQuesstionList[questionsIndex].options![0].option!.length),
 
@@ -139,7 +137,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .4),
+                                padding: EdgeInsetsDirectional.only(start: MediaQuery.of(context).size.width * .4),
                                 child: CircularCountDownTimer(
                                   initialDuration: 0,
                                   duration: controller.ansDuration,

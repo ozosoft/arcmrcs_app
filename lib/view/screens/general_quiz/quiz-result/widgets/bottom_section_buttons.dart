@@ -19,7 +19,7 @@ class BottomSectionButtons extends StatelessWidget {
       builder: (controller) => Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: Dimensions.space15, left: Dimensions.space15, right: Dimensions.space15),
+            padding: const EdgeInsetsDirectional.only(top: Dimensions.space15, start: Dimensions.space15, end: Dimensions.space15),
             child: RoundedButton(
                 text: id != 0 ? MyStrings.nextLevel.tr : MyStrings.home.tr,
                 press: () {

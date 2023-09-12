@@ -80,7 +80,7 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
                 ? const NoDataWidget()
                 : ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsets.only(top: Dimensions.space25),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
                     shrinkWrap: true,
                     itemCount: controller.coinPlanList.length,
                     itemBuilder: (BuildContext context, int index) {

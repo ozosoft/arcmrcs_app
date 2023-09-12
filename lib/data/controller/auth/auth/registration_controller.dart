@@ -190,7 +190,7 @@ class RegistrationController extends GetxController {
 
     ResponseModel response = await generalSettingRepo.getGeneralSetting();
     if (response.statusCode == 200) {
-      print("I am from reg cont");
+      debugPrint("I am from reg cont");
       GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(jsonDecode(response.responseJson));
       if (model.status?.toLowerCase() == 'success') {
         generalSettingMainModel = model;

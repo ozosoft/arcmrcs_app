@@ -42,7 +42,7 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
     return GetBuilder<ProfileController>(
       builder: (controller) {
         return Padding(
-          padding: const EdgeInsets.only(top: Dimensions.space40, right: Dimensions.space18, left: Dimensions.space18),
+          padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space18, end: Dimensions.space18),
           child: Container(
             padding: const EdgeInsets.all(Dimensions.space15),
             decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space10)),
@@ -55,7 +55,7 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
                       children: [
                         if (controller.apiClient.getUserImagePath() != "null")
                           Container(
-                            margin: const EdgeInsets.only(top: Dimensions.space20),
+                            margin: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(Dimensions.space40),
                             ),
@@ -70,7 +70,7 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
                           FittedBox(
                             fit: BoxFit.cover,
                             child: Container(
-                              margin: const EdgeInsets.only(top: Dimensions.space20),
+                              margin: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                               decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space40), image: const DecorationImage(image: AssetImage(MyImages.defaultAvatar), fit: BoxFit.cover)),
                               height: Dimensions.space80,
                               width: Dimensions.space80,

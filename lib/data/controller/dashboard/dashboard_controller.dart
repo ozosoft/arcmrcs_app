@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/data/model/dashboard/dashboard_model.dart';
 import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
 import 'package:get/get.dart';
@@ -62,7 +63,7 @@ class DashBoardController extends GetxController {
           coins = dashBoard.data?.user?.coins ?? "";
           score = dashBoard.data?.user?.score ?? "";
 
-          print(dashBoard.data!.user);
+          debugPrint(dashBoard.data!.user.toString());
 
           //save User Data
           dashRepo.apiClient.setUserData(dashBoard.data!.user!.toJson());
@@ -101,7 +102,7 @@ class DashBoardController extends GetxController {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     loader = false;
     update();
@@ -119,7 +120,7 @@ class DashBoardController extends GetxController {
       LogoutModel plan = LogoutModel.fromJson(jsonDecode(logout.responseJson));
       if (plan.status.toString().toLowerCase() == MyStrings.ok.toLowerCase()) {
         Get.offAllNamed(RouteHelper.loginScreen);
-        print("LoggedM OUT!");
+        debugPrint("LoggedM OUT!");
         update();
       } else {
         CustomSnackBar.error(errorList: [plan.status ?? ""]);

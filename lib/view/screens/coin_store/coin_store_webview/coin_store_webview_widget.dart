@@ -60,7 +60,7 @@ class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
           },
           initialOptions: options,
           onLoadStart: (controller, url) {
-            print(url);
+
             if (url.toString() == '${UrlContainer.domainUrl}/user/deposit/history') {
               Get.offAndToNamed(RouteHelper.coinHistoryScreen);
               CustomSnackBar.success(successList: [MyStrings.requestSuccess.tr]);

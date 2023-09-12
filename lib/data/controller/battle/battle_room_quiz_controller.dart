@@ -4,7 +4,6 @@ import 'dart:async';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../core/helper/battle_room_helper.dart';
@@ -151,25 +150,25 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
 
 //Listen Firebase Data
   void setupBattleRoomSubmitListener() {
-    print("From Quiz Stream");
+    debugPrint("From Quiz Stream");
     battleRoomStreamSubscription = listenToBattleRoomDocument(battleRoomController.battleRoomData.value!.roomId!).listen((event) {
       if (event.exists) {
         checkUserAnswer(battleRoomController.battleRoomData.value!);
       } else {
-        print("Room Deleted");
+        debugPrint("Room Deleted");
       }
     });
   }
 
   showLeftPopup({bool isUpdate = false}) {
     if (showLeftPopupValue.isFalse) {
-      // print("Checking If User Left The match");
+      // debugPrint("Checking If User Left The match");
       var battleData = battleRoomController.battleRoomData.value!;
 
       // im am user 1
       if (battleRepo.apiClient.getUserID() == battleData.user1!.uid) {
         if (battleData.user2!.status == false) {
-          print("${battleData.user2!.name} Left The game");
+          debugPrint("${battleData.user2!.name} Left The game");
           opponentLeftTheGame.value = true;
           if (isUpdate) {
             update();
@@ -179,7 +178,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       // im am user 2
       if (battleRepo.apiClient.getUserID() == battleData.user2!.uid) {
         if (battleData.user1!.status == false) {
-          print("${battleData.user1!.name} Left The game");
+          debugPrint("${battleData.user1!.name} Left The game");
           opponentLeftTheGame.value = true;
           if (isUpdate) {
             update();
@@ -195,16 +194,16 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     String currentQuestionId = questionsList[currentQuestionIndex].id.toString();
     if (user1Answers.isEmpty || user2Answers.isEmpty) {
       if (user1Answers.isNotEmpty && user2Answers.isEmpty) {
-        print("User 2 hasn't answered yet, while User 1 has answered.");
+        debugPrint("User 2 hasn't answered yet, while User 1 has answered.");
       } else if (user1Answers.isEmpty && user2Answers.isNotEmpty) {
-        print("User 1 hasn't answered yet, while User 2 has answered.");
+        debugPrint("User 1 hasn't answered yet, while User 2 has answered.");
       }
     } else {
       bool user1AnsweredCurrent = user1Answers.any((answer) => answer["qid"].toString() == currentQuestionId);
       bool user2AnsweredCurrent = user2Answers.any((answer) => answer["qid"].toString() == currentQuestionId);
 
       if (user1AnsweredCurrent && user2AnsweredCurrent) {
-        print("Both users have answered the current and next questions, and timer completed");
+        debugPrint("Both users have answered the current and next questions, and timer completed");
 
         if (hasMoreQuestions()) {
           goToNextQuestion();
@@ -258,7 +257,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
 
         params['my_option_$quizeId'] = "${optionID.first.id}";
 
-        // print(optionID.first.id);
+        // debugPrint(optionID.first.id);
       }
 
       if (fromYouWon == false) {
@@ -271,10 +270,10 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       }
     }
 
-    // print(params);
+    // debugPrint(params);
 
     ResponseModel submitModel = await battleRepo.finishBattleAndSubmitAnswer(params);
-    print(submitModel.statusCode);
+    debugPrint(submitModel.statusCode.toString());
     if (submitModel.statusCode == 200) {
       BattleAnswerSubmitModel submitAnswerModel = battleAnswerSubmitModelFromJson(submitModel.responseJson);
       var battleRoomData = battleRoomController.battleRoomData.value;
@@ -312,20 +311,20 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     // Handle the app lifecycle changes here
     switch (state) {
       case AppLifecycleState.resumed:
-        print('App resumed');
+        debugPrint('App resumed');
         // Reactivate any necessary functionality
-        print(battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true).status);
+        // debugPrint(battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true).status);
         if (battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true).status == false) {
           showMeLeftPopupUpdate(true);
         }
 
         break;
       case AppLifecycleState.inactive:
-        print('App inactive');
+        debugPrint('App inactive');
         // Handle when the app is in an inactive state (e.g., during a phone call)
         break;
       case AppLifecycleState.paused:
-        print('App paused');
+        debugPrint('App paused');
         if (opponentLeftTheGame.isTrue) {
           // left User
           await battleRoomController
@@ -345,7 +344,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
         }
         break;
       case AppLifecycleState.detached:
-        print('App detached');
+        debugPrint('App detached');
         // Handle when the app is detached (not available on all platforms)
         break;
 

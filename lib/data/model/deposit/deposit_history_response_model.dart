@@ -281,7 +281,7 @@ class Gateway {
         });
       } catch (e) {
         if (kDebugMode) {
-          print(e.toString());
+          debugPrint(e.toString());
         }
       }
     }

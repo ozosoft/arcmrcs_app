@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -74,8 +76,8 @@ class FunNlearnQuizController extends GetxController {
       examQuestionsList.clear();
       FunNLearnQuestionsModel model = FunNLearnQuestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-        print("get answer done");
-        // print(model.data);
+        debugPrint("get answer done");
+        // debugPrint(model.data);
         List<Question>? examQuestion = model.data!.questions!;
 
         if (examQuestion.isNotEmpty) {
@@ -97,7 +99,7 @@ class FunNlearnQuizController extends GetxController {
     } else {
       CustomSnackBar.error(errorList: [getQuestionsModel.message]);
     }
-    print("this is " + getQuestionsModel.message);
+    debugPrint("this is ${getQuestionsModel.message}");
 
     loading = false;
     update();
@@ -122,13 +124,13 @@ class FunNlearnQuizController extends GetxController {
     int questionIndex,
   ) {
     selectedOptionIndex = optionIndex;
-    print('work here');
+    debugPrint('work here');
     String optionId = optionsList[optionIndex].id.toString();
 
-    print('not work here');
+    debugPrint('not work here');
     examQuestionsList[questionIndex].setSelectedOptionId(optionId);
 
-    print('done');
+    debugPrint('done');
 
     update();
   }
@@ -180,7 +182,7 @@ class FunNlearnQuizController extends GetxController {
     examQuestionsList[index].options!.addAll(optionsToDisplay);
     update();
 
-    print("object is here");
+    debugPrint("object is here");
     fiftyFiftyIndex = fiftyFiftyIndex;
     fiftyFifty = !fiftyFifty;
     update();
@@ -212,12 +214,12 @@ class FunNlearnQuizController extends GetxController {
     for (int i = 0; i < examQuestionsList.length; i++) {
       String quizeId = examQuestionsList[i].id.toString();
       String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
-      params['question_id[${i}]'] = quizeId;
-      // print('quize id: ${quizeId}');
+      params['question_id[$i]'] = quizeId;
+      // debugPrint('quize id: ${quizeId}');
       params['option_$quizeId[]'] = selectedOptionId;
-      // print("option_$quizeId");
+      // debugPrint("option_$quizeId");
     }
-    // print(params['option_']);
+    // debugPrint(params['option_']);
     params['quizInfo_id'] = quizInfoID.toString();
     params['fifty_fifty'] = fifty_fifty;
     params['audience_poll'] = audiencevotes;
@@ -248,8 +250,8 @@ class FunNlearnQuizController extends GetxController {
     } else {
       CustomSnackBar.error(errorList: [submitModel.message]);
     }
-    print("this is " + submitModel.message);
-    print("this is " + params.toString());
+    debugPrint("this is ${submitModel.message}");
+    debugPrint("this is $params");
     submitLoading = false;
     update();
   }

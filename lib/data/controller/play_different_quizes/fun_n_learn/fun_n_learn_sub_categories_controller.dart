@@ -1,4 +1,5 @@
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/data/model/play_different_quizes/fun_n_learn/fun_n_learn_category_model.dart';
 import 'package:flutter_prime/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:get/get.dart';
@@ -47,13 +48,13 @@ class FunNLearnSubCategoriesController extends GetxController {
 
         itemCount = subcategorylist.length;
       } else {
-        CustomSnackBar.error(errorList: [subcategories.status ?? ""]);
+        CustomSnackBar.error(errorList: [subcategories.status]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     loader = false;
     update();

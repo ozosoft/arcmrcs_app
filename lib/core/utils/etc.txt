@@ -1,0 +1,535 @@
+QuizLAB
+Withdraw Information
+Withdraw Limit
+Withdraw Confirm
+Authorization Method
+Please select an authorization mode
+Please Select A Category First
+Select A Category
+Select Entry Coin
+File download at
+Error downloading file
+Downloading
+File downloaded successfully
+Select PaymentMethod
+Are You sure You Want Close Searching!
+Searching
+Are You sure You Want to leave this room!
+Are You sure You Want to leave Exam room!
+Questions not found! Please try again after a few minutes.
+Sorry! No Questions!
+Oponent Left The game!
+You Left The game!
+You Won
+Sorry You Lose
+Collect Coins
+Copied!
+Ok
+Total Score
+You Have Not Enough Coins!
+Room Code May be Wrong!
+The Game Will Begin In
+Sorry! Room Is Full
+You need to score {point}% marks to win.
+Need {point}% marks to win
+This Contest Is Not Available Right Now
+Review Answer
+Currect Answer
+Wrong Answer
+Your Answer
+Continue with Gmail
+Continue with Phone
+Select Category
+Entry Coins For Battle
+Entry Room Code to Join Room
+Create Room
+Remark
+Any
+Sign up
+2/10
+Email
+Attachment
+Attempted
+Un Attempted
+Deposit Charge
+Final Amount
+Yes
+No
+Trx No
+Please
+Select Remarks
+Select Trx Type
+User Name
+Full Name
+Before Charge
+Remaining Balance
+Email Address
+Enter transaction no.
+Latest Transactions
+Password
+Remember Me
+I agree with all exam rules
+Forgot Password?
+Sign In
+Send OTP
+Sign In by OTP
+WIN
+LOSS
+This Life Line Already Used!
+Please Enter Valid OTP Code
++
+Try After {sec} Second
+First Name
+Last Name
+Last
+Country
+Confirm Password
+Already have an account?
+Address
+KYC
+is required
+View all rules
+Exam Rules
+Enter the exam key
+Please Enter the exam key
+Enter In Exam
+Exam Result
+Exam Start Time:
+Sorry! No exam is currently running.
+Sorry! No Coin History Found!
+Exam Will Be Start Soon!
+Exam Already Given!
+Exam Time Finished!
+Sorry! No contest is currently running.
+Choose File
+Choose Avatar
+Your KYC is under review
+You are already verified
+Verify
+Verify Now
+Withdrawals
+See All
+Go Home
+Home
+Back
+Transaction
+Transaction ID
+Withdraw History
+Amount
+Date
+2023 - 09 - 12
+character,
+ Uppercase, 
+ Lowercase, 
+ Symbol 
+Charge
+Payable Amount
+Payment : Paytm
+Payable
+Withdraw Money
+Reset Password
+Your new password must different form \nprevious used passwords
+New Password
+Enter new password
+Change Password
+Current Password
+Submit
+Submit Answers
+Name
+Phone
+Zip Code
+State
+Start
+Started!
+City
+English
+Bangla
+Hindi
+Spanish
+Sound
+Vibration
+Spanish
+Edit Profile
+Update Profile
+Select Language
+Two Factor Authentication
+Enter 6-digit code from your two factor authenticator APP.
+Are you sure you want to exit the app?
+Has uppercase letter
+Has lowercase letter
+Has digit
+Has special character
+Min of 6 characters
+Receivable
+Conversion Rate
+In
+Initiated
+Recover Account
+Username or Email
+Enter your username or email
+Create an account
+Please fill out this field
+To secure your account please provide a secure password
+Enter your email or username below to receive a password reset verification code
+A 6 digits verification code sent to your email address
+Phone No.
+Password reset email sent to
+Email Verification
+Weve sent you an access code via email for email verification
+Don`t get OTP?
+Resend
+Resend Code
+Sms Verification
+Profile Complete
+Enter your
+Deposit
+Deposit Info
+Transactions
+Deposit History
+Post Balance
+Details
+Wallet
+Type
+Profile
+Edit Profile
+Theme Light/Dark
+Language
+Transaction No.
+Privacy & Policy
+Forget Password
+Enter Verification Code
+We have sent a code to refatul.tsk@gmail.com
+Dont have an account?
+Enter username or email
+Policies
+Verification Failed
+Email Verification Failed
+Email Verification Success
+Enter your password
+Sorry! there are no data to show
+No data found
+Payment Method
+Payment
+Payment with google pay
+Select Gateway
+I agree with the
+Create new password
+Please provide a strong password to protect your account
+Enter current password
+Enter new password
+Enter confirm password
+Add Withdraw
+Enter Amount
+Please enter an amount
+0.0
+Withdraw Method
+Withdraw Method Edit
+Withdraw Preview
+Search by trx id
+No Transaction Found
+Trx Id
+Completed
+Continue
+Cancel
+Time
+Bank Name
+Account Name
+Quiz Result
+Battle Result
+15%
+The Great Wall is a world-famous historical landmark located in which country?
+The Great Wall is a world-famous ?
+%
+6 Level
+Level
+Level 01
+All categories
+Music
+Science & Technology
+Fee 50 Coins
+Fee Coins 
+End 12 jun 2023
+End 
+10 Marks
+ Marks
+25 min
+min
+Health Quiz Contest
+The health Quiz feature aims to bring the excitement
+Top Categories
+Quiz Contest
+Quiz
+Battles of the Day
+1 v/s 1 Battle Quiz
+Group Battle
+Battle with one vs one
+Battle quiz with group of players
+Current Coin
+Select Country
+Lets Play
+Play With Friend
+Play Again
+View All
+View More
+Rank
+Entry Fees
+Entry Fee
+Current Coins
+Coins
+Coin
+150 Coins
+01/10
+Score
+Notification
+Bookmark
+Coin Store
+Badges
+Coin History
+History
+Logout
+Hi! Mariya Ons
+Hi! 
+Total Coin 5000
+Total:
+Let`s Play Quiz
+Bookmarks
+Settings
+Or sign in with
+Account Number
+Routing Number
+Profile Details
+Play Different Quizs
+PAY NOW
+No Deposit Found
+No Withdraw Found
+OTP Verification
+Show More
+10 Coins
+500
+More
+success
+Email verified successfully
+version
+Sign Out Successfully
+Enter valid email
+Enter your current password
+Enter your new password
+Password must be contain 1 special character and number
+Password doesnt match
+Enter first name
+Enter last name
+Username must be 6 character
+Password Verification
+Resend the code successfully
+Failed to resend code
+Something went wrong
+Invalid amount
+Welcome back
+Hi! There
+Please enter your details to sign in.
+Please enter your phone number to sign in
+Please enter your OTP to sign in
+Please enter your details to Create Account.
+Enter your email account to reset password
+Verification Success
+Enter your username
+Enter your email
+Enter your phone number
+Enter phone number
+000-000-000
+Confirm your password
+Confirm Passwords do not match.
+Confirm
+Didnt receive the code?
+Weve sent you an access code to your phone number for SMS verification
+Select a country
+Request Failed
+Request Success
+Reset Your Password
+The password must be different than before
+The password must be different than before
+Select One
+SMS
+No internet connection
+Retry
+Otp field cant be empty
+An OTP has been sent to your mobile number
+Sorry something went wrong here, go back and retry after sometimes
+second ago
+minutes ago
+hour ago
+days ago
+just now
+Get Started
+Menu
+Bad Response Format!
+Server Error
+Unauthorized
+your email
+Password change successfully
+Deposit Limit
+Error
+Trx Type
+General Knowledge
+ Game & Sports 
+ Japan
+ Apple Inc. 
+IBM 
+ Google 
+Mariya Ons
+Player 2
+Player
+Creator
+Or
+Movies
+Novel
+Geographical
+National
+International
+Join Room
+00
+08
+2/10
+8/10
+Next Level
+Next
+6 Level
+8 Level
+7 Level
+10 Level
+12 Level
+350
+VS
+Request
+Transection
+Complete this level first
+ A) 
+ B) 
+ C) 
+ D) 
+@
+History & Culture
+874541
+@marton
+Exam Zone
+Exam
+\$240.00
+@jkobos
+QP
+Points
+15
+Leaderboard
+Total Coins
+Total Coin
+500.00
+Weekly
+Reedem Request
+All Times
+Today\s
+Completed
+15 Questions
+ Questions
+VS
+10 Questions
+8 Questions
+35 Questions
+10 Questions
+Victory
+Defeated
+Drawn
+Congratulation
+Better Luck Next Time
+Your Coins
+500.00
+\$240.00
+Buy Coins
+Redeemable Amount
+Redeem Now
+Share this room code to friend and ask them to join
+Please wait game will start soon
+Please Wait For You Battle Result!
+Please Wait For You Result!
+Approved
+Supper
+Supper Battle Man
+Silver
+Quizer Master
+Quizer Master
+Battle Master
+Perfect Quiz Man
+Ultimate Player
+Golden Pack
+No Ads Pack
+Silver Pack
+Pro Pack
+Small Pack
+\$250 USD
+\$ 
+ USD
+\$120 USD
+\$80 USD
+\$340 USD
+\$100 USD
+500 Coins
+400 Coins
+120 Coins
+600 Coins
+10 Coins
+Golden
+Golden Quiz Man
+Battle Man
+Your Badges
+Succeed
+Pending
+Rejected
+Won World Quiz Contest
+World Quiz 2023
+Quiz Challenge
+Battel Quiz Event
+Quiz Game Challenge
+12 May 2023
+28 May 2023
+02 Jun 2023
++ \$250 USD
+- \$120 USD
+Enter Custom coins
+Rewards Notification
+Join with new room
+Event Notification
+5h ago Rewards Notification
+6h ago Create New Quiz Room
+10h ago Quiz Event Page Launched
+You get 500 coins for 1vs 1 quiz
+Martin request for join quiz code 784541
+Start form 01 jun 2023 Quiz Challenge
+25/5/23 at 5:30
+25/5/23 at 7:45
+26/5/23 at 2:10
+Test Your Knowladge
+Win Real Money
+Compete With Friends
+Daily Quiz
+Fun & Learn
+Guess The Word
+Sorry No Category Found
+Sorry No Quiz Available Right Now!
+Sorry! You have already played daily quiz
+Category
+Sub Category
+Daily new quiz
+Game quiz with fun
+I Will not copy and give this exam with honesty
+If you lock your phone then exam will complete automatically
+You cant use browser
+Fun vocabulary
+Who is the smartest in your group of friends and family
+Pick the correct answer at the final question to win the prize money
+Don’t have an account?
+There are hundreds of different categories to choose from
+Transaction Type
+Minimum Redeemable amount is \$2 (10 coins).
+Payout will usd 7 - 10working days.
+Remark Type
+⚈
+You must agree with our privacy & policies
+You must agree with Exam rules

@@ -55,7 +55,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
               children: [
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
                   child: controller.appreciation == "[Failed]"
                       ? SvgPicture.asset(
                           MyImages.victory,

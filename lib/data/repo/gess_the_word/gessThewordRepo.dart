@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter_prime/core/utils/method.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -43,7 +42,6 @@ class GuessTheWordRepo {
 
   Future<dynamic> submitAnswar(Map<String, dynamic> map) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.guessTheword}${UrlContainer.gesswordSubmit}';
-    log(url, name: 'submit ans');
     ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
     return model;
   }

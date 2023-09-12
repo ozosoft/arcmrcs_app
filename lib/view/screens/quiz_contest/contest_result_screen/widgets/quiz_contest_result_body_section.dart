@@ -26,7 +26,7 @@ class _QuizContestResultSectionState extends State<QuizContestResultSection> {
     return GetBuilder<QuizContestQuestionsController>(
       builder: (controller) {
         return Container(
-          margin: const EdgeInsets.only(top: Dimensions.space20),
+          margin: const EdgeInsetsDirectional.only(top: Dimensions.space20),
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space20), color: MyColor.colorWhite),
           child: Column(
@@ -37,7 +37,7 @@ class _QuizContestResultSectionState extends State<QuizContestResultSection> {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
                     child: controller.appreciation == "Failed"
                         ? SvgPicture.asset(
                             MyImages.victory,
@@ -52,7 +52,7 @@ class _QuizContestResultSectionState extends State<QuizContestResultSection> {
                   Align(
                     alignment: Alignment.center,
                     child: Container(
-                        padding: const EdgeInsets.only(top: Dimensions.space100),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space100),
                         child: Text(
                           controller.appreciation,
                           style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
@@ -60,7 +60,7 @@ class _QuizContestResultSectionState extends State<QuizContestResultSection> {
                   ),
                   Container(
                       width: double.infinity,
-                      padding: const EdgeInsets.only(top: Dimensions.space180),
+                      padding: const EdgeInsetsDirectional.only(top: Dimensions.space180),
                       child: Align(
                         alignment: Alignment.center,
                         child: Text(

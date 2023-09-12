@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/controller/quiz_questions/quiz_questions_controller.dart';
 import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
 class LifeLinesWidget extends StatefulWidget {
@@ -25,7 +23,7 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
           InkWell(
             onTap: () {
               if (controller.fiftyFifty == true) {
-                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
+                // CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
               } else {
                 controller.makeFiftyFifty(widget.questionIndex);
               }
@@ -43,7 +41,7 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
           InkWell(
             onTap: () {
               if (controller.audienceVote == true) {
-                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
+                // CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
               } else {
                 controller.audienceVotes(widget.questionIndex);
               }
@@ -53,7 +51,7 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
           InkWell(
             onTap: () {
               if (controller.restartTimer) {
-                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
+                // CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
               } else {
                 controller.countDownController.restart();
                 controller.restartCountDownTimer(widget.questionIndex);
@@ -64,10 +62,10 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
           InkWell(
             onTap: () async {
               if (controller.flipQuistions) {
-                CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
+                // CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
               } else {
                 controller.flipQuiston(widget.questionIndex);
-                print(controller.flipQuistion);
+                debugPrint(controller.flipQuistion);
                 controller.flipQuistion = "1";
               }
             },

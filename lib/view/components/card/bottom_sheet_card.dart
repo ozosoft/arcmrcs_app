@@ -18,7 +18,7 @@ class BottomSheetCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(padding),
-        margin: EdgeInsets.only(top: bottomSpace),
+        margin: EdgeInsetsDirectional.only(top: bottomSpace),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
             color: MyColor.colorWhite,

@@ -10,7 +10,6 @@ import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/screens/guess_the_word/category/widget/guess_category_card.dart';
 import 'package:get/get.dart';
 
-import '../../../../core/utils/my_color.dart';
 import '../../../components/no_data.dart';
 
 class GestheWordCategoryScreen extends StatefulWidget {
@@ -44,7 +43,7 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
                     messages: MyStrings.sorryNoCategory.tr,
                   )
                 : Padding(
-                  padding: const EdgeInsets.only(top: Dimensions.space20),
+                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                   child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       itemCount: controller.categoryList.length,

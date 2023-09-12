@@ -26,7 +26,7 @@ class SocialLoginButton extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: Dimensions.space7, vertical: Dimensions.space12),
             child: Row(children: [
               Padding(
-                padding: const EdgeInsets.only(right: Dimensions.space10),
+                padding: const EdgeInsetsDirectional.only(start: Dimensions.space10),
                 child: SvgPicture.asset(
                   image,
                   height: Dimensions.space20,

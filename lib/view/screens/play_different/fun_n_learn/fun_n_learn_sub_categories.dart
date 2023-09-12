@@ -59,7 +59,7 @@ class _FunNLearnSubCategoriesCardScreenState extends State<FunNLearnSubCategorie
                   children: [
                     ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(top: Dimensions.space25),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
                         shrinkWrap: true,
                         itemCount: controller.subCategoriesList.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -75,7 +75,6 @@ class _FunNLearnSubCategoriesCardScreenState extends State<FunNLearnSubCategorie
                             levels: controller.itemCount.toString(),
                             fromFunNlearn: true,
                             onTap: () {
-                              String title = controller.subCategoriesList[index].name.toString();
                               controller.showExpandedSection = true;
                               controller.changeExpandIndex(index);
 

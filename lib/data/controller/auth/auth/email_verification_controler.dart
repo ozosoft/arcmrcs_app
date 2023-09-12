@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/authorization/authorization_response_model.dart';
@@ -53,20 +54,20 @@ class EmailVerificationController extends GetxController {
 
     if (responseModel.statusCode == 200) {
       AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(responseModel.responseJson));
-     print("this is========model");
+     debugPrint("this is========model");
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
         CustomSnackBar.success(successList: model.message?.success ?? [(MyStrings.emailVerificationSuccess.tr)]);
 
 
-          print("this is==$needSmsVerification");
+          debugPrint("this is==$needSmsVerification");
         
 
         if (needSmsVerification) {
-          print("this is============");
+          debugPrint("this is============");
           Get.offAndToNamed(RouteHelper.smsVerificationScreen, arguments: [isProfileCompleteEnable]);
           
         } else {
-           print("this is_-------------------------------$isProfileCompleteEnable");
+           debugPrint("this is_-------------------------------$isProfileCompleteEnable");
           Get.offAndToNamed(isProfileCompleteEnable ? RouteHelper.profileCompleteScreen : RouteHelper.bottomNavBarScreen);
            
         }

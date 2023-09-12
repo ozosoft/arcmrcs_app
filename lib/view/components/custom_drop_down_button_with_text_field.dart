@@ -38,7 +38,7 @@ class _CustomDropDownWithTextFieldState
               border: Border.all(color: MyColor.textFieldDisableBorderColor)),
           child: Padding(
             padding:
-                const EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
+                const EdgeInsetsDirectional.only(start: 10, end: 5, top: 5, bottom: 5),
             child: DropdownButton(
               isExpanded: true,
               underline: Container(),

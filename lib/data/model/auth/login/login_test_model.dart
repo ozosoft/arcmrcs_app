@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import '../../model/message_model/message_model.dart';
 
 class login_model {
@@ -11,8 +13,7 @@ class login_model {
   login_model.fromJson(Map<String, dynamic> json) {
     remark = json['remark'];
     status = json['status'];
-    message =
-        json['message'] != null ? Message.fromJson(json['message']) : null;
+    message = json['message'] != null ? Message.fromJson(json['message']) : null;
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
@@ -36,9 +37,7 @@ class Data {
   Data({this.generalSetting});
 
   Data.fromJson(Map<String, dynamic> json) {
-    generalSetting = json['general_setting'] != null
-        ? GeneralSetting.fromJson(json['general_setting'])
-        : null;
+    generalSetting = json['general_setting'] != null ? GeneralSetting.fromJson(json['general_setting']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -73,34 +72,10 @@ class GeneralSetting {
   int? multiLanguage;
   int? registration;
   String? activeTemplate;
-  Null createdAt;
+  dynamic createdAt;
   String? updatedAt;
 
-  GeneralSetting(
-      {this.id,
-      this.siteName,
-      this.curText,
-      this.curSym,
-      this.emailFrom,
-      this.smsBody,
-      this.smsFrom,
-      this.baseColor,
-      this.secondaryColor,
-      this.globalShortcodes,
-      this.kv,
-      this.ev,
-      this.en,
-      this.sv,
-      this.sn,
-      this.forceSsl,
-      this.maintenanceMode,
-      this.securePassword,
-      this.agree,
-      this.multiLanguage,
-      this.registration,
-      this.activeTemplate,
-      this.createdAt,
-      this.updatedAt});
+  GeneralSetting({this.id, this.siteName, this.curText, this.curSym, this.emailFrom, this.smsBody, this.smsFrom, this.baseColor, this.secondaryColor, this.globalShortcodes, this.kv, this.ev, this.en, this.sv, this.sn, this.forceSsl, this.maintenanceMode, this.securePassword, this.agree, this.multiLanguage, this.registration, this.activeTemplate, this.createdAt, this.updatedAt});
 
   GeneralSetting.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -112,9 +87,7 @@ class GeneralSetting {
     smsFrom = json['sms_from'];
     baseColor = json['base_color'];
     secondaryColor = json['secondary_color'];
-    globalShortcodes = json['global_shortcodes'] != null
-        ? GlobalShortcodes.fromJson(json['global_shortcodes'])
-        : null;
+    globalShortcodes = json['global_shortcodes'] != null ? GlobalShortcodes.fromJson(json['global_shortcodes']) : null;
     kv = json['kv'];
     ev = json['ev'];
     en = json['en'];

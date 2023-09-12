@@ -30,7 +30,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: Dimensions.space5, left: Dimensions.space5, right: Dimensions.space5, top: Dimensions.space20),
+            padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space5, start: Dimensions.space5, end: Dimensions.space5, top: Dimensions.space20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -93,7 +93,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    margin: const EdgeInsets.only(top: Dimensions.space3),
+                                    margin: const EdgeInsetsDirectional.only(top: Dimensions.space3),
                                     padding: const EdgeInsets.all(Dimensions.space12),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -102,7 +102,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                         //Image
                                         if (item.image.toString() == "null") ...[
                                           Container(
-                                            margin: const EdgeInsets.only(right: Dimensions.space10),
+                                            margin: const EdgeInsetsDirectional.only(start: Dimensions.space10),
                                             child: SvgPicture.asset(
                                               MyImages.examzoneSVG,
                                               height: context.width * 0.15,
@@ -111,7 +111,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                           ),
                                         ] else ...[
                                           Container(
-                                            margin: const EdgeInsets.only(right: Dimensions.space10),
+                                            margin: const EdgeInsetsDirectional.only(end: Dimensions.space10),
                                             child: MyImageWidget(
                                               height: context.width * 0.15,
                                               width: context.width * 0.15,
@@ -122,7 +122,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                         //Contents
                                         Expanded(
                                           child: Container(
-                                            padding: const EdgeInsets.only(bottom: Dimensions.space20),
+                                            padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
                                             child: Column(
                                               crossAxisAlignment: CrossAxisAlignment.start,
                                               mainAxisSize: MainAxisSize.min,

@@ -92,7 +92,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
           child: Column(
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: Dimensions.space8, bottom: Dimensions.space30),
+                padding: EdgeInsetsDirectional.only(top: Dimensions.space8, bottom: Dimensions.space30),
                 child: BottomSheetBar(),
               ),
               Container(
@@ -105,7 +105,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: controller.battleRoomData.value!.roomCode!)).then((value) {
                          
-                         print("copied");
+                         debugPrint("copied");
                           CustomSnackBar.success(successList: [(MyStrings.copied.tr)]);
                         });
                       },
@@ -287,7 +287,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                         setState(() {
                           start = true;
                         });
-                        print("go");
+                        debugPrint("go");
 
                         controller.startBattleQuiz(controller.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
                           // Get.back();

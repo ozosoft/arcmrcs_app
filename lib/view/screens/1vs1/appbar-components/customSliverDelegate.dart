@@ -35,12 +35,12 @@ class CustomSliverDelegates extends SliverPersistentHeaderDelegate {
         children: [
           CustomOneVSOneAppBar(appbarSize: appBarSize,isGroupBattle: isGroupBattle),
           Padding(
-            padding: const EdgeInsets.only(right: Dimensions.space30),
+            padding: const EdgeInsetsDirectional.only(end: Dimensions.space30),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  margin: const EdgeInsets.only(top: Dimensions.space55),
+                  margin: const EdgeInsetsDirectional.only(top: Dimensions.space55),
                   padding: const EdgeInsets.all(Dimensions.space5),
                   height: Dimensions.space60,
                   width: Dimensions.space60,
@@ -50,7 +50,7 @@ class CustomSliverDelegates extends SliverPersistentHeaderDelegate {
                   child: SvgPicture.asset(MyImages.avatar1),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimensions.space55),
+                  margin: const EdgeInsetsDirectional.only(top: Dimensions.space55),
                   padding: const EdgeInsets.all(Dimensions.space10),
                   child: Text(
                     MyStrings.versus.tr,
@@ -59,7 +59,7 @@ class CustomSliverDelegates extends SliverPersistentHeaderDelegate {
                   ),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: Dimensions.space55),
+                  margin: const EdgeInsetsDirectional.only(top: Dimensions.space55),
                   padding: const EdgeInsets.all(Dimensions.space5),
                   height: Dimensions.space60,
                   width: Dimensions.space60,

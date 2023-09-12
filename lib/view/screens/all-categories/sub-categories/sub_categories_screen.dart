@@ -4,12 +4,9 @@ import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/controller/sub_categories/sub_categories_controller.dart';
 import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart';
 import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/category-card/categories_card.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
-import '../../../../core/route/route.dart';
 import '../../../components/app-bar/custom_category_appBar.dart';
-import '../widgets/all_category_list_card_widget.dart';
 import 'widgets/sub_category_list_card_widget.dart';
 
 class SubCategoriesCardScreen extends StatefulWidget {
@@ -59,7 +56,7 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
                   children: [
                     ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(top: Dimensions.space25),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
                         shrinkWrap: true,
                         itemCount: controller.subCategoriesList.length,
                         itemBuilder: (BuildContext context, int index) {

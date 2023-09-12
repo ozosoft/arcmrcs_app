@@ -25,7 +25,7 @@ class _NotificationCardScreenState extends State<NotificationCardScreen> {
         children: [
           ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
-              padding: const EdgeInsets.only(top: Dimensions.space25),
+              padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
               shrinkWrap: true,
               itemCount: notifications.length,
               itemBuilder: (BuildContext context, int index) {

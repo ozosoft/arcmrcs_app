@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/data/model/play_different_quizes/fun_n_learn/fun_n_learn_category_model.dart';
 import 'package:flutter_prime/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:get/get.dart';
@@ -25,14 +26,11 @@ class FunNLearnCategoriesController extends GetxController {
     ResponseModel model = await funNLearnRepo.getFunAndLearnCategories();
 
     if (model.statusCode == 200) {
-
       allCategoriesList.clear();
 
-      FunNLearncategoryModel allcategories =
-          FunNLearncategoryModel.fromJson(jsonDecode(model.responseJson));
+      FunNLearncategoryModel allcategories = FunNLearncategoryModel.fromJson(jsonDecode(model.responseJson));
 
-      if (allcategories.status.toString().toLowerCase() ==
-          MyStrings.success.toLowerCase()) {
+      if (allcategories.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<Category>? categories = allcategories.data?.categories;
 
         if (categories != null && categories.isNotEmpty) {
@@ -45,24 +43,11 @@ class FunNLearnCategoriesController extends GetxController {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     loader = false;
     update();
-    int expandIndex = -1;
-  void changeExpandIndex(int index) {
-    if (expandIndex == index) {
-      expandIndex = -1;
-      update();
-      return;
-    }
-    expandIndex = index;
-    update();
   }
-  }
-
-
-  
 
   changeactivestatus() {
     isActive = !isActive;

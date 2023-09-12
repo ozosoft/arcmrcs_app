@@ -71,7 +71,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
             obscureText: widget.isPassword ? obscureText : false,
             decoration: InputDecoration(
               contentPadding:
-                  const EdgeInsets.only(top: 5, left: 15, right: 15, bottom: 5),
+                  const EdgeInsetsDirectional.only(top: 5, start: 15, end: 15, bottom: 5),
               hintText: widget.hintText,
               hintStyle:
                   regularSmall.copyWith(color: MyColor.getHintTextColor()),
@@ -138,7 +138,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
             obscureText: widget.isPassword ? obscureText : false,
             decoration: InputDecoration(
               contentPadding:
-                  const EdgeInsets.only(top: 5, left: 0, right: 0, bottom: 5),
+                  const EdgeInsetsDirectional.only(top: 5, start: 0, end: 0, bottom: 5),
               labelText: widget.labelText?.tr ?? '',
               labelStyle:
                   regularDefault.copyWith(color: MyColor.getLabelTextColor()),

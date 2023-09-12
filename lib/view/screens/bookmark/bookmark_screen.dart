@@ -35,7 +35,7 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
           children: [
             ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
-                padding: const EdgeInsets.only(top: Dimensions.space25),
+                padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
                 shrinkWrap: true,
                 itemCount: allCategoryies.length,
                 itemBuilder: (BuildContext context, int index) {

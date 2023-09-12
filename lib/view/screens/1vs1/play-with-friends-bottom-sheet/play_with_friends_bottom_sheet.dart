@@ -17,7 +17,7 @@ class PlayWithFriendsBottomSheetWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<OneVsMutiController>(builder: (controller) {
       return Padding(
-        padding: const EdgeInsets.only(top: Dimensions.space10, left: Dimensions.space15, right: Dimensions.space15),
+        padding: const EdgeInsetsDirectional.only(top: Dimensions.space10, start: Dimensions.space15, end: Dimensions.space15),
         child: Column(
           children: [
             const BottomSheetBar(),

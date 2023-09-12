@@ -124,7 +124,7 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     needOutlineBorder: true,
                     labelText: MyStrings.password.tr,
                     onChanged: (value) {
-                      print(value);
+                      debugPrint(value);
                       //  controller.updateValidationList(value);
                       formKey.currentState!.validate();
                     },

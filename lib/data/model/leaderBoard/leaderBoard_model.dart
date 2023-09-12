@@ -2,6 +2,8 @@
 //
 //     final leaderBoardModel = leaderBoardModelFromJson(jsonString);
 
+// ignore_for_file: file_names
+
 import 'dart:convert';
 
 import '../model/message_model/message_model.dart';

@@ -117,7 +117,7 @@ class _MobileLoginBodySectionState extends State<MobileLoginBodySection> {
                                         width: Dimensions.space42,
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.only(left: Dimensions.space10),
+                                        padding: const EdgeInsetsDirectional.only(start: Dimensions.space10),
                                         child: Text(
                                           "${MyStrings.plusText.tr}${controller.selectedCountryData.dialCode?.tr}",
                                           style: regularMediumLarge,
@@ -128,7 +128,7 @@ class _MobileLoginBodySectionState extends State<MobileLoginBodySection> {
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(left: Dimensions.space10),
+                                    padding: const EdgeInsetsDirectional.only(start: Dimensions.space10),
                                     child: TextFormField(
                                       controller: controller.mobileNumberController,
                                       focusNode: controller.mobileNumberFocusNode,
@@ -139,7 +139,7 @@ class _MobileLoginBodySectionState extends State<MobileLoginBodySection> {
                                           ),
                                           border: InputBorder.none, // Remove border
                                           filled: false, // Remove fill
-                                          contentPadding: const EdgeInsets.only(top: 14.5, left: 0, right: 15, bottom: 5),
+                                          contentPadding: const EdgeInsetsDirectional.only(top: 14.5, start: 0, end: 15, bottom: 5),
                                           hintStyle: regularMediumLarge.copyWith(color: MyColor.greyTextColor),
                                           hintText: MyStrings.enterPhoneNumber000.tr),
                                       keyboardType: TextInputType.phone, // Set keyboard type to phone
@@ -193,7 +193,7 @@ class _MobileLoginBodySectionState extends State<MobileLoginBodySection> {
                                         return;
                                       }
                                       if (controller.isInOTPpage == true && controller.otpFiledController.text.isNotEmpty) {
-                                        print("From Otp Button");
+                                        debugPrint("From Otp Button");
                                         controller.signInWithOTP(controller.otpFiledController.text);
                                       } else {
                                         if (formKey.currentState!.validate() && controller.phoneNumberValidate == true) {

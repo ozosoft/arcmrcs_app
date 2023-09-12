@@ -28,7 +28,7 @@ class _WalletRequestSectionState extends State<WalletRequestSection> {
         child: Column(
                   children: [
                     Container(
-                      padding: const EdgeInsets.only(
+                      padding: const EdgeInsetsDirectional.only(
                         top: Dimensions.space30,
                       ),
                       child: Row(

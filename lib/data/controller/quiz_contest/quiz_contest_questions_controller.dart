@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:math';
 
@@ -186,7 +188,7 @@ class QuizContestQuestionsController extends GetxController {
     examQuestionsList[index].options!.addAll(optionsToDisplay);
     update();
 
-    print("object is here");
+    debugPrint("object is here");
     fiftyFiftyIndex = fiftyFiftyIndex;
     fiftyFifty = !fiftyFifty;
 
@@ -222,12 +224,12 @@ class QuizContestQuestionsController extends GetxController {
     for (int i = 0; i < examQuestionsList.length; i++) {
       String quizeId = examQuestionsList[i].id.toString();
       String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
-      params['question_id[${i}]'] = quizeId;
-      print('quize id: ${quizeId}');
+      params['question_id[$i]'] = quizeId;
+      debugPrint('quize id: $quizeId');
       params['option_$quizeId[]'] = selectedOptionId;
-      print("option_$quizeId");
+      debugPrint("option_$quizeId");
     }
-    print(params['option_']);
+    debugPrint(params['option_']);
     params['quizInfo_id'] = quizInfoID.toString();
     params['fifty_fifty'] = fifty_fifty;
     params['audience_poll'] = audiencevotes;
@@ -268,8 +270,8 @@ class QuizContestQuestionsController extends GetxController {
     } else {
       CustomSnackBar.error(errorList: [submitModel.message]);
     }
-    print("this is " + submitModel.message);
-    print("this is " + params.toString());
+    debugPrint("this is ${submitModel.message}");
+    debugPrint("this is $params");
     submitLoading = false;
     update();
   }

@@ -19,7 +19,7 @@ class CustomColorChipsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: left, right: right, top: top, bottom: bottom),
+      margin: EdgeInsetsDirectional.only(start: left, end: right, top: top, bottom: bottom),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(Dimensions.space5),

@@ -28,7 +28,7 @@ import 'package:flutter_prime/view/screens/notification/notification_screen.dart
 import 'package:flutter_prime/view/screens/play_different/daily_quiz/daily_quiz_questions_screen.dart';
 import 'package:flutter_prime/view/screens/play_different/daily_quiz/daily_quiz_result/daily_quiz_result_screen.dart';
 import 'package:flutter_prime/view/screens/play_different/daily_quiz/review-answer/review_answer-screen.dart';
-import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn-result/fun_N_learn_result_screen.dart';
+import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn-result/fun_n_learn_result_screen.dart';
 import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn_description_screen.dart';
 import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn_list_screen.dart';
 import 'package:flutter_prime/view/screens/play_different/fun_n_learn/fun_n_learn_questios_screen.dart';
@@ -176,7 +176,7 @@ class RouteHelper {
     GetPage(name: gessThewordResult, page: () => const GuessWordResultScreen()),
     GetPage(name: gessThewordResultReview, page: () => const GuessWordReviewResult()),
 
-    GetPage(name: examZoneQuestionScreen, page: () => const Exam_zone_quiz_screen()),
+    GetPage(name: examZoneQuestionScreen, page: () => const ExamZoneQuizScreen()),
     GetPage(name: funNlearnQuizScreen, page: () => const FunNlearnQuizScreen()),
     GetPage(name: examZoneResultScreen, page: () => const ExamResultScreen()),
     GetPage(name: examZoneReviewAnswerScreen, page: () => const ExamReviewAnswerScreen()),

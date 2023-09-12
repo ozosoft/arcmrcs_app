@@ -22,7 +22,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.only(bottom: Dimensions.space5, left: Dimensions.space5, right: Dimensions.space4, top: Dimensions.space20),
+          padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space5, start: Dimensions.space5, end: Dimensions.space4, top: Dimensions.space20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -67,7 +67,7 @@ class _BattleOfTheDaySectionState extends State<BattleOfTheDaySection> {
                         child: Container(
                           height: Dimensions.space50,
                           width: Dimensions.space220,
-                          padding: const EdgeInsets.only(top: Dimensions.space7),
+                          padding: const EdgeInsetsDirectional.only(top: Dimensions.space7),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

@@ -106,7 +106,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                   //   // left User
 
                                   //   await quizController.finishBattleAndSubmitAnswer().then((value) {
-                                  //     print("Collected");
+                                  //     debugPrint("Collected");
                                   //   });
                                   // }
                                   Get.offAllNamed(RouteHelper.bottomNavBarScreen);
@@ -131,7 +131,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (quizController.showLeftPopupValue.isFalse) {
             quizController.countDownController.pause();
-            print("Show PopUp");
+            debugPrint("Show PopUp");
             CustomAlertDialog(
                     willPop: false,
                     borderRadius: 10,
@@ -178,7 +178,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                     // left User
 
                                     await quizController.finishBattleAndSubmitAnswer(fromYouWon: true).then((value) {
-                                      print("Collected");
+                                      debugPrint("Collected");
                                     });
                                   }
                                 },
@@ -331,7 +331,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                           if (currentQuestion.image != null) ...[
                                             Container(
                                               width: double.infinity,
-                                              padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                                              padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
                                               child: MyImageWidget(
                                                 boxFit: BoxFit.contain,
                                                 height: Get.width / 2,
@@ -340,7 +340,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                             ),
                                           ],
                                           Container(
-                                              padding: const EdgeInsets.only(top: Dimensions.space20),
+                                              padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                                               child: Text(
                                                 currentQuestion.question,
                                                 style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500),
@@ -358,7 +358,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                                 option: option,
                                                 onTap: () async {
                                                   if (!quizController.isOptionSelectedForQuestion(currentQuestion.id, option) && !quizController.hasSubmittedAnswerForQuestion(currentQuestion.id)) {
-                                                    print("From Ans Save ");
+                                                    debugPrint("From Ans Save ");
                                                     await quizController.battleRoomController.saveAnswer(
                                                       quizController.battleRepo.apiClient.getUserID(),
                                                       {
@@ -405,12 +405,12 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                             controller: quizController.countDownController,
                             duration: Environment.battleQuizPerQuestionSecond,
                             onComplete: () async {
-                              print("From Counter Next Querstion");
+                              debugPrint("From Counter Next Querstion");
                               if (quizController.hasMoreQuestions()) {
                                 quizController.goToNextQuestion();
                               } else {
                                 quizController.showLeftPopup(isUpdate: true);
-                                print("Show Result page");
+                                debugPrint("Show Result page");
 
                                 await quizController.finishBattleAndSubmitAnswer();
                               }

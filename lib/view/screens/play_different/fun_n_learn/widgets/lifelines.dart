@@ -68,7 +68,7 @@ class _FunNlearnLifeLinesWidgetState extends State<FunNlearnLifeLinesWidget> {
             child: InkWell(
               onTap: () async {
                 controller.flipQuiston(widget.questionIndex);
-                print(controller.flipQuistion);
+                debugPrint(controller.flipQuistion);
                 controller.flipQuistion = "1";
               },
               child: const LevelCardButton(

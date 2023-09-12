@@ -32,7 +32,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
       dailyQuizRepo: Get.find(),
     ));
 
-    // print("++++++++++===============this is id"+quizinfoID.toString());
+    // debugPrint("++++++++++===============this is id"+quizinfoID.toString());
     super.initState();
   }
 
@@ -88,7 +88,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                               if (controller.examQuestionsList[questionsIndex].image != null) ...[
                                 Container(
                                   width: double.infinity,
-                                  padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
+                                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
                                   child: MyImageWidget(
                                     boxFit: BoxFit.contain,
                                     height: Get.width / 2,
@@ -96,7 +96,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                   ),
                                 ),
                               ],
-                              Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                              Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                               const SizedBox(height: Dimensions.space25),
                               ListView.builder(
                                   physics: const NeverScrollableScrollPhysics(),

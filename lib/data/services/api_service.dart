@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -62,11 +63,11 @@ class ApiClient extends GetxService {
         }
       }
 
-      print('url--------------${uri.toString()}');
-      print('params-----------${params.toString()}');
-      print('status-----------${response.statusCode}');
-      print('body-------------${response.body.toString()}');
-      print('token------------${token}');
+      debugPrint('url--------------${uri.toString()}');
+      debugPrint('params-----------${params.toString()}');
+      debugPrint('status-----------${response.statusCode}');
+      debugPrint('body-------------${response.body.toString()}');
+      debugPrint('token------------${token}');
 
       if (response.statusCode == 200) {
         try {
@@ -144,7 +145,7 @@ class ApiClient extends GetxService {
 
   Future setUserData(value) async {
     await sharedPreferences.setString(SharedPreferenceHelper.userDataKey, jsonEncode(value)).whenComplete(() {
-      print("USer Data Saved");
+      debugPrint("USer Data Saved");
     });
   }
 

@@ -93,7 +93,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                        Padding(
-                        padding: const EdgeInsets.only(top: Dimensions.space15, left: Dimensions.space15),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space15, start: Dimensions.space15),
                         child: Text(
                           MyStrings.entryCoinsForBattele.tr,
                           style: semiBoldMediumLarge,
@@ -143,7 +143,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                     ],
                   )),
               Container(
-                padding: const EdgeInsets.only(top: Dimensions.space30, left: Dimensions.space15),
+                padding: const EdgeInsetsDirectional.only(top: Dimensions.space30, start: Dimensions.space15),
                 child: Row(
                   children: [
                     SvgPicture.asset(
@@ -200,14 +200,14 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                 }
 
                 return Padding(
-                  padding: const EdgeInsets.only(top: Dimensions.space40),
+                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40),
                   child: battleRoomController.roomCreateState.value == RoomCreateState.creatingRoom
                       ? const RoundedLoadingBtn()
                       : RoundedButton(
                           text: MyStrings.createRoom,
                           press: () {
-                            // print(battleRoomController.slectedCategoryID.value);
-                            // print(battleRoomController.entryFeeCustomRoom.value);
+                            // debugPrint(battleRoomController.slectedCategoryID.value);
+                            // debugPrint(battleRoomController.entryFeeCustomRoom.value);
 
                             if (battleRoomController.slectedCategoryID.value == 0) {
                               CustomSnackBar.error(errorList: [MyStrings.selectACategoryText.tr]);
@@ -224,7 +224,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                                   questionList: []);
                             }
 
-                            // print("${battleRoomController.roomCreateState.value}");
+                            // debugPrint("${battleRoomController.roomCreateState.value}");
                           },
                           textSize: Dimensions.space20),
                 );

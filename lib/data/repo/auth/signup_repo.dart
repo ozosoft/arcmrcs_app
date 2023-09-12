@@ -21,15 +21,13 @@ class RegistrationRepo {
 
   Map<String, dynamic> modelToMap(SignUpModel model) {
     Map<String, dynamic> bodyFields = {
-      
-       'username': model.username.toString(),
-      
+      'username': model.username.toString(),
       'password': model.password.toString(),
       'password_confirmation': model.password.toString(),
-     'email': model.email.toString(),
+      'email': model.email.toString(),
     };
 
-    print("++++++++++++++++++hey========================="+model.email);
+
 
     return bodyFields;
   }

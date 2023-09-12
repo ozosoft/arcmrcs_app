@@ -45,7 +45,7 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
         alignment: Alignment.topCenter,
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.only(top: Dimensions.space50),
+            padding: const EdgeInsetsDirectional.only(top: Dimensions.space50),
             child: SvgPicture.asset(
               MyImages.appLogoSVG,
               height: Dimensions.space60,
@@ -74,7 +74,7 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
         ),
       ),
       onChange: (v) {
-        print("Page Key $v");
+        debugPrint("Page Key $v");
         setState(() {
           currentPageID = v;
         });

@@ -40,7 +40,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: Dimensions.space3),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space3),
                     child: SvgPicture.asset(MyImages.rank),
                   ),
                   const SizedBox(width: Dimensions.space8),
@@ -71,7 +71,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: Dimensions.space3),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space3),
                     child: SvgPicture.asset(MyImages.coin),
                   ),
                   const SizedBox(width: Dimensions.space8),
@@ -102,7 +102,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: Dimensions.space3),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space3),
                     child: SvgPicture.asset(MyImages.score),
                   ),
                   const SizedBox(width: Dimensions.space8),

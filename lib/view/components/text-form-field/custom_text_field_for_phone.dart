@@ -125,7 +125,7 @@ class _CustomTextFieldForPhoneState extends State<CustomTextFieldForPhone> {
             filled: true,
             prefixIcon: widget.isShowPrefixIcon
                 ? Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 5),
+                    padding: const EdgeInsetsDirectional.only(end: 20, start: 5),
                     // child: Image.asset(widget.prefixIconUrl),
                     child: Image.asset(""),
                   )

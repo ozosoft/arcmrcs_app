@@ -164,7 +164,7 @@ class FormData {
       }
     } catch (e) {
       if (kDebugMode) {
-        print(e.toString());
+        debugPrint(e.toString());
       }
     }
   }

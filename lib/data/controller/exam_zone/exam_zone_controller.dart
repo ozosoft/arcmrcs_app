@@ -42,7 +42,7 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
   int currentPage = 0;
-  bool agreeExamRules = false;
+  bool agreeExamRules = true;
   String enterExamKey = "";
   String quizInfoId = "";
 

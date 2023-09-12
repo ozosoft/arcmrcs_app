@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
-import '../text/label_text.dart';
 
 class CustomDropDownTextField3 extends StatefulWidget {
   final dynamic selectedValue;

@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_prime/core/helper/ads/admob_helper.dart';
 import 'package:flutter_prime/data/model/all_cartegories/all_categories_model.dart';
 import 'package:flutter_prime/data/repo/allcategories/all_categories_repo.dart';
 import 'package:get/get.dart';
@@ -45,7 +47,7 @@ class AllCategoriesController extends GetxController {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     loader = false;
     update();

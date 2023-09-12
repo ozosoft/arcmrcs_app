@@ -68,7 +68,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                       //Image
                       if (widget.image.toString() == "null") ...[
                         Container(
-                          margin: const EdgeInsets.only(right: Dimensions.space10),
+                          margin: const EdgeInsetsDirectional.only(end: Dimensions.space10),
                           child: SvgPicture.asset(
                             MyImages.examzoneSVG,
                             height: MediaQuery.of(context).size.width * 0.15,
@@ -77,7 +77,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                         ),
                       ] else ...[
                         Container(
-                          margin: const EdgeInsets.only(right: Dimensions.space10),
+                          margin: const EdgeInsetsDirectional.only(start: Dimensions.space10),
                           child: MyImageWidget(
                             height: MediaQuery.of(context).size.width * 0.15,
                             width: MediaQuery.of(context).size.width * 0.15,
@@ -87,7 +87,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                       ],
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: Dimensions.space10, bottom: Dimensions.space10, right: Dimensions.space10),
+                          padding: const EdgeInsetsDirectional.only(top: Dimensions.space10, bottom: Dimensions.space10, end: Dimensions.space10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

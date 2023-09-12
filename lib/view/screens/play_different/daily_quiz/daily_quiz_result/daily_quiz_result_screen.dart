@@ -22,7 +22,8 @@ class _DailyQuizResultScreenState extends State<DailyQuizResultScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      AdmobHelper().loadInterstitialAdAlways();
+      // AdmobHelper().loadInterstitialAdAlways();
+      AdmobHelper().loadRewardAdAlways();
     });
   }
 

@@ -76,7 +76,7 @@ class _NoDataOrInternetScreenState extends State<NoDataOrInternetScreen> {
                 ),
                 Center(
                     child: Padding(
-                  padding: const EdgeInsets.only(top: 6, left: 30, right: 30),
+                  padding: const EdgeInsetsDirectional.only(top: 6, start: 30, end: 30),
                   child: Column(
                     children: [
                       Text(

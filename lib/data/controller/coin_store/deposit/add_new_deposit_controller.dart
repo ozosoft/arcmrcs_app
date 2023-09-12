@@ -89,7 +89,7 @@ class AddNewDepositController extends GetxController {
 
     ResponseModel responseModel = await depositRepo.insertDeposit(amount: amount, methodCode: paymentMethod?.methodCode ?? "", currency: paymentMethod?.currency ?? "", coinID: coinId);
 
-    print("this is cpon id from deposit" + coinId.toString());
+    debugPrint("this is cpon id from deposit $coinId");
     if (responseModel.statusCode == 200) {
       DepositInsertResponseModel insertResponseModel = DepositInsertResponseModel.fromJson(jsonDecode(responseModel.responseJson));
 

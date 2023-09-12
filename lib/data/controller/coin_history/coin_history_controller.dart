@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/data/model/coin_history/coin_history_model.dart';
 import 'package:flutter_prime/data/repo/coin_history/coin_history_repo.dart';
 import 'package:get/get.dart';
@@ -48,7 +49,7 @@ class CoinHistoryController extends GetxController {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     loader = false;
     update();

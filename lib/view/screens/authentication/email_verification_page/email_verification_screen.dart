@@ -121,7 +121,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                           Text(MyStrings.didNotReceiveCode.tr, style: regularDefault.copyWith(color: MyColor.getLabelTextColor())),
                           const SizedBox(width: Dimensions.space10),
                           controller.resendLoading?
-                          Container(margin:const EdgeInsets.only(left: 5,top: 5),height:20,width:20,child: CircularProgressIndicator(color: MyColor.getPrimaryColor())):
+                          Container(margin:const EdgeInsetsDirectional.only(start: 5,top: 5),height:20,width:20,child: CircularProgressIndicator(color: MyColor.getPrimaryColor())):
                           GestureDetector(
                             onTap: (){
                               controller.sendCodeAgain();

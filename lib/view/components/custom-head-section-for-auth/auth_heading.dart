@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -20,7 +19,7 @@ class CustomHeadSection extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-              padding: EdgeInsets.only(top: iconPosition),
+              padding: EdgeInsetsDirectional.only(top: iconPosition),
               child: SvgPicture.asset(
                 MyImages.appLogoSVG,
                 height: iconHasSize ? Dimensions.space81 : null,

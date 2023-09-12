@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
@@ -134,13 +136,13 @@ class ExamZoneQuizController extends GetxController {
     int questionIndex,
   ) {
     selectedOptionIndex = optionIndex;
-    print('work here');
+    debugPrint('work here');
     String optionId = optionsList[optionIndex].id.toString();
 
-    print('not work here');
+    debugPrint('not work here');
     examQuestionsList[questionIndex].setSelectedOptionId(optionId);
 
-    print('done');
+    debugPrint('done');
 
     update();
   }
@@ -202,7 +204,7 @@ class ExamZoneQuizController extends GetxController {
     examQuestionsList[index].options!.addAll(optionsToDisplay);
     update();
 
-    print("object is here");
+    debugPrint("object is here");
     fiftyFiftyIndex = fiftyFiftyIndex;
     fiftyFifty = !fiftyFifty;
     update();
@@ -234,12 +236,12 @@ class ExamZoneQuizController extends GetxController {
     for (int i = 0; i < examQuestionsList.length; i++) {
       String quizeId = examQuestionsList[i].id.toString();
       String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
-      params['question_id[${i}]'] = quizeId;
-      print('quize id: ${quizeId}');
+      params['question_id[$i]'] = quizeId;
+      debugPrint('quize id: $quizeId');
       params['option_$quizeId[]'] = selectedOptionId;
-      print("option_$quizeId");
+      debugPrint("option_$quizeId");
     }
-    print(params['option_']);
+    debugPrint(params['option_']);
     params['quizInfo_id'] = quizInfoID.toString();
     params['fifty_fifty'] = fifty_fifty;
     params['audience_poll'] = audiencevotes;

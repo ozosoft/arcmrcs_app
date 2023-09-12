@@ -64,7 +64,7 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
                   children: [
                     ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(top: Dimensions.space25),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
                         shrinkWrap: true,
                         itemCount: controller.fun_N_Learn_descriptionList.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -79,6 +79,7 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
                             },
                             showLevel: false,
                             index: index,
+                            imageMainPath: controller.fun_N_Learn_descriptionList[index].image.toString(),
                             image: UrlContainer.subCategoriesImage + controller.fun_N_Learn_descriptionList[index].image.toString(),
                             title: controller.fun_N_Learn_descriptionList[index].title.toString(),
                             questions: controller.fun_N_Learn_descriptionList[index].questionsCount.toString(),

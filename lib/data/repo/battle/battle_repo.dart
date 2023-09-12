@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/core/utils/method.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
@@ -9,7 +10,7 @@ class BattleRepo {
 
   Future<ResponseModel> getCategoryListData() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.battleCategoryLIst}";
-    print('come here: ${url}');
+    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
@@ -17,7 +18,7 @@ class BattleRepo {
 
   Future<ResponseModel> getBatttleQuestion(int id, int user1ID, int user2ID) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.battleQuestionList}/${user1ID.toString()}/${user2ID.toString()}/${id.toString()}";
-    print('come here: ${url}');
+    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
@@ -25,8 +26,8 @@ class BattleRepo {
 
   Future<ResponseModel> finishBattleAndSubmitAnswer(Map<String, dynamic> map) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.battleAnswerSubmit}';
-    print(url);
-    print(map);
+    debugPrint(url);
+
     ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
 
     return model;

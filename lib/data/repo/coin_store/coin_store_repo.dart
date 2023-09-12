@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/core/utils/method.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
 import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
@@ -9,7 +10,7 @@ class CoinStoreRepo {
 
   Future<ResponseModel> coinStoreData() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.coinStore}";
-    print('come here: ${url}');
+    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;

@@ -34,7 +34,6 @@ class DownloadingDialog extends StatefulWidget {
 class DownloadingDialogState extends State<DownloadingDialog> {
   int _total = 0, _received = 0;
   late http.StreamedResponse _response;
-  File? _image;
   final List<int> _bytes = [];
 
   Future<void> _downloadFile() async {
@@ -56,7 +55,6 @@ class DownloadingDialogState extends State<DownloadingDialog> {
         '${MyStrings.fileDownloadedSuccess.tr}: ${savedFile.path.toString()}'
       ]);
       setState(() {
-        _image = file;
       });
     });
   }
@@ -82,7 +80,7 @@ class DownloadingDialogState extends State<DownloadingDialog> {
       }
     } catch (e) {
       if (kDebugMode) {
-        print(e.toString());
+        debugPrint(e.toString());
       }
       Get.back();
       CustomSnackBar.error(errorList: [MyStrings.requestFail.tr]);

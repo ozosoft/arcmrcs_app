@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/data/model/sub_categories/sub_categories_model.dart';
 import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart';
 import 'package:get/get.dart';
@@ -52,7 +53,7 @@ class SubCategoriesController extends GetxController {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     loader = false;
     update();

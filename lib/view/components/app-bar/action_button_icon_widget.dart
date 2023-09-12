@@ -34,7 +34,7 @@ class ActionButtonIconWidget extends StatelessWidget {
         width: size,
         alignment: Alignment.center,
         padding: EdgeInsets.all(isLoading ? 5 : 0),
-        margin: EdgeInsets.only(right: spacing),
+        margin: EdgeInsetsDirectional.only(end: spacing),
         decoration:
             BoxDecoration(color: backgroundColor, shape: BoxShape.circle),
         child: isLoading

@@ -44,7 +44,7 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
       return SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Container(
-          margin: const EdgeInsets.only(top: Dimensions.space50, bottom: Dimensions.space50, left: Dimensions.space15, right: Dimensions.space15),
+          margin: const EdgeInsetsDirectional.only(top: Dimensions.space50, bottom: Dimensions.space50, start: Dimensions.space15, end: Dimensions.space15),
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(Dimensions.space20),
@@ -55,7 +55,7 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
               if (controller.messageStatus.contains('Congratulations') || controller.messageStatus.contains('Draw')) ...[
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.only(left: Dimensions.space8, right: Dimensions.space8),
+                  padding: const EdgeInsetsDirectional.only(start: Dimensions.space8, end: Dimensions.space8),
                   child: SvgPicture.asset(
                     MyImages.victory,
                     fit: BoxFit.cover,
@@ -69,8 +69,8 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                     children: [
                       Container(
                           width: double.infinity,
-                          padding: const EdgeInsets.only(top: Dimensions.space10),
-                          margin: const EdgeInsets.only(top: Dimensions.space30),
+                          padding: const EdgeInsetsDirectional.only(top: Dimensions.space10),
+                          margin: const EdgeInsetsDirectional.only(top: Dimensions.space30),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,

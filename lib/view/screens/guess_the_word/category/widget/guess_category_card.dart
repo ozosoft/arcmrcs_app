@@ -82,7 +82,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                     children: [
                       const SizedBox(width: Dimensions.space20),
                       Container(
-                        margin: const EdgeInsets.only(top: Dimensions.space20, bottom: Dimensions.space20),
+                        margin: const EdgeInsetsDirectional.only(top: Dimensions.space20, bottom: Dimensions.space20),
                         width: Dimensions.space40,
                         height: Dimensions.space40,
                         child: MyImageWidget(
@@ -91,7 +91,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                       ),
                       const SizedBox(width: Dimensions.space30),
                       Padding(
-                        padding: const EdgeInsets.only(top: Dimensions.space15),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space15),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -114,7 +114,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                       ),
                       const Spacer(),
                       Padding(
-                        padding: const EdgeInsets.only(top: Dimensions.space20),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                         child: SvgPicture.asset(isExpande ? MyImages.arrowDownSVG : MyImages.playSVG, height: Dimensions.space35),
                       ),
                       const SizedBox(width: Dimensions.space20),
@@ -174,7 +174,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                         });
                                       },
                                       child:  Padding(
-                                        padding: const EdgeInsets.only(bottom: Dimensions.space20),
+                                        padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
                                         child: CustomTextWithUndeline(
                                           text: MyStrings.viewMore.tr,
                                         ),

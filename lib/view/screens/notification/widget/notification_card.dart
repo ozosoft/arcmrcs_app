@@ -64,7 +64,7 @@ class _NotificationCardState extends State<NotificationCard> {
                   children: [
                     const SizedBox(width: Dimensions.space20),
                     Padding(
-                      padding: const EdgeInsets.only(
+                      padding: const EdgeInsetsDirectional.only(
                           top: Dimensions.space20, bottom: Dimensions.space20),
                       child: SvgPicture.asset(
                         widget.image,
@@ -75,7 +75,7 @@ class _NotificationCardState extends State<NotificationCard> {
                       width: Dimensions.space20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: Dimensions.space15),
+                      padding: const EdgeInsetsDirectional.only(top: Dimensions.space15),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -113,7 +113,7 @@ class _NotificationCardState extends State<NotificationCard> {
                         ? const SizedBox()
                         : Padding(
                             padding:
-                                const EdgeInsets.only(top: Dimensions.space20),
+                                const EdgeInsetsDirectional.only(top: Dimensions.space20),
                             child: SvgPicture.asset(
                               isExpanded
                                   ? MyImages.arrowDownSVG
@@ -133,7 +133,7 @@ class _NotificationCardState extends State<NotificationCard> {
                           children: [],
                         ),
                       )
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             )),
       ),

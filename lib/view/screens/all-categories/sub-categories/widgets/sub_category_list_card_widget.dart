@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/all_cartegories/all_categories_model.dart';
 import 'package:flutter_prime/view/components/chips/custom_chips_widget.dart';
 import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
-import 'package:flutter_prime/view/screens/all-categories/widgets/allCategories_expanded_section.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -64,7 +62,7 @@ class _SubCategoryListTileCardWidgetState extends State<SubCategoryListTileCardW
                     children: [
                       const SizedBox(width: Dimensions.space20),
                       Container(
-                        margin: const EdgeInsets.only(right: Dimensions.space14, top: Dimensions.space10),
+                        margin: const EdgeInsetsDirectional.only(end: Dimensions.space14, top: Dimensions.space10),
                         width: Dimensions.space40,
                         height: Dimensions.space40,
                         child: MyImageWidget(
@@ -73,7 +71,7 @@ class _SubCategoryListTileCardWidgetState extends State<SubCategoryListTileCardW
                       ),
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.only(top: Dimensions.space15),
+                          padding: const EdgeInsetsDirectional.only(top: Dimensions.space15),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -101,7 +99,7 @@ class _SubCategoryListTileCardWidgetState extends State<SubCategoryListTileCardW
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: Dimensions.space20),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                         child: SvgPicture.asset(widget.isExpand ? MyImages.arrowDownSVG : MyImages.playSVG, height: Dimensions.space35),
                       ),
                       const SizedBox(width: Dimensions.space20),

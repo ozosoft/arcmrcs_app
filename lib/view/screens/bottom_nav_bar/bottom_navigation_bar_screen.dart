@@ -10,8 +10,8 @@ import 'package:flutter_prime/view/screens/settings/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
+import '../../../environment.dart';
 import '../../components/mobile_ads/banner_ads_widget.dart';
-
 
 class BottomNavigationBarScreen extends StatefulWidget {
   const BottomNavigationBarScreen({super.key});
@@ -21,13 +21,12 @@ class BottomNavigationBarScreen extends StatefulWidget {
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
-  int _selectedIndex = 2;
+  int selectedIndex = 2;
 
   int _page = 2;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   static const List<Widget> _widgetOptions = <Widget>[CoinStoreScreen(), SettingsScreen(), HomeScreen(), LeaderBoardScreen(), ProfileScreen()];
-
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +36,12 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           Center(
             child: _widgetOptions.elementAt(_page),
           ),
-          const Positioned.fill(
-            bottom: 0,
-            child: Align(alignment: Alignment.bottomCenter, child: BannerAdsWidget()),
-          )
+          if (Environment.showBannerAds == true) ...[
+            const Positioned.fill(
+              bottom: 0,
+              child: Align(alignment: Alignment.bottomCenter, child: BannerAdsWidget()),
+            )
+          ]
         ],
       ),
       bottomNavigationBar: CurvedNavigationBar(
@@ -81,7 +82,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         animationDuration: const Duration(milliseconds: 400),
         onTap: (index) {
           setState(() {
-            _selectedIndex = index;
+            selectedIndex = index;
             _page = index;
           });
         },

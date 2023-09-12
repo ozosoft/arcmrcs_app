@@ -1,7 +1,7 @@
-import 'package:flutter_prime/data/model/model/profile_achivement_model.dart';
-import 'package:flutter_prime/data/model/model/questionsList_model.dart';
-
 class MyStrings {
+  final List<String> rules = [rules1, rules2, rules3];
+  final List<String> settingsList = [sound, vibration, themes];
+
   static const String appName = "QuizLAB";
 
   static const String withdrawInformation = "Withdraw Information";
@@ -567,27 +567,4 @@ class MyStrings {
   static const String dot = "⚈";
   static const String agreePolicyMessage = "You must agree with our privacy & policies";
   static const String agreeExamRules = "You must agree with Exam rules";
-
-
-  List<MyQuestionsModel> quizquestions = [MyQuestionsModel(rank: MyStrings.A, questions: MyStrings.japan), MyQuestionsModel(rank: MyStrings.b, questions: MyStrings.apple), MyQuestionsModel(rank: MyStrings.c, questions: MyStrings.ibm), MyQuestionsModel(rank: MyStrings.d, questions: MyStrings.google)];
-
-  List<AchivementModel> achivements = [
-    AchivementModel(title: MyStrings.rank, points: MyStrings.zeroEight),
-    AchivementModel(title: MyStrings.coins, points: MyStrings.fiveHundreds),
-    AchivementModel(title: MyStrings.score, points: MyStrings.zeroEight),
-  ];
-  final List<Map<String, String>> itemList = [
-    {'title': 'Username', 'description': 'mariyaonas'},
-    {'title': 'Email Address', 'description': 'mariyaonas478@gmail.com'},
-  ];
-  final List<Map<String, String>> badgeList = [
-    {'title': MyStrings.supper, 'description': MyStrings.battleMan},
-    {'title': MyStrings.silver, 'description': MyStrings.battleMan},
-    {'title': MyStrings.golden, 'description': MyStrings.player},
-  ];
-
-
-
-  final List<String> rules = [rules1, rules2, rules3];
-  final List<String> settingsList = [sound, vibration, themes];
 }

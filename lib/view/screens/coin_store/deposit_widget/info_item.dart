@@ -25,7 +25,7 @@ class InfoItem extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(
+          padding: const EdgeInsetsDirectional.only(
               bottom: Dimensions.space10, top: Dimensions.space10),
           child: Row(
             children: [

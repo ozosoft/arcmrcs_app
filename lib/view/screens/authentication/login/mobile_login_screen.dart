@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/view/components/custom-head-section-for-auth/auth_heading.dart';
-import 'package:flutter_prime/view/screens/authentication/login/widgets/login_body_section_screen.dart';
 
 import 'widgets/mobile_login_body_section_screen.dart';
 

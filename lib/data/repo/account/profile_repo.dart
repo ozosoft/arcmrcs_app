@@ -71,10 +71,8 @@ class ProfileRepo {
 
       var request = http.MultipartRequest('POST', Uri.parse(url));
 
-      if (profilePic != null) {
-        request.files.add(http.MultipartFile('avatar', profilePic.readAsBytes().asStream(), profilePic.lengthSync(), filename: profilePic.path.split('/').last));
-      }
-
+      request.files.add(http.MultipartFile('avatar', profilePic.readAsBytes().asStream(), profilePic.lengthSync(), filename: profilePic.path.split('/').last));
+    
       http.StreamedResponse response = await request.send();
 
       String jsonResponse = await response.stream.bytesToString();

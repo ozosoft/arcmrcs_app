@@ -36,9 +36,9 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
       return Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: Dimensions.space20, left: Dimensions.space10, right: Dimensions.space10),
+            padding: const EdgeInsetsDirectional.only(top: Dimensions.space20, start: Dimensions.space10, end: Dimensions.space10),
             child: Container(
-                padding: const EdgeInsets.only(top: Dimensions.space8),
+                padding: const EdgeInsetsDirectional.only(top: Dimensions.space8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(Dimensions.space10),
                   color: MyColor.colorWhite,
@@ -48,7 +48,7 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: Dimensions.space12, left: Dimensions.space15),
+                      padding: const EdgeInsetsDirectional.only(top: Dimensions.space12, start: Dimensions.space15),
                       child: Text(
                         MyStrings.entryRoomCode.tr,
                         style: regularMediumLarge.copyWith(color: MyColor.textColor, fontSize: Dimensions.space18),
@@ -79,7 +79,7 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                         }
                       }
                       return Padding(
-                        padding: const EdgeInsets.only(left: Dimensions.space15, top: Dimensions.space10, bottom: Dimensions.space25, right: Dimensions.space15),
+                        padding: const EdgeInsetsDirectional.only(start: Dimensions.space15, top: Dimensions.space10, bottom: Dimensions.space25, end: Dimensions.space15),
                         child: battleRoomController.joinRoomState.value == JoinRoomState.joining
                             ? const RoundedLoadingBtn()
                             : RoundedButton(

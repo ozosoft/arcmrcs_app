@@ -5,6 +5,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/data/model/battle/battle_question_list.dart';
 import '../../model/battle/battle_category_list.dart';
@@ -122,13 +123,13 @@ class BattleRoomController extends GetxController {
   void createNewRoom({required String categoryId, String? name, String? profileUrl, String? uid, int? entryFee, required bool shouldGenerateRoomCode, required List<Question> questionList}) async {
     try {
       toogleBattleCreatedState(RoomCreateState.creatingRoom);
-      print("From Create Room");
+      debugPrint("From Create Room");
 
       String roomCode = "";
       if (shouldGenerateRoomCode) {
         roomCode = generateRoomCode(6);
       }
-      print("Room Code $roomCode");
+      debugPrint("Room Code $roomCode");
 
       final DocumentSnapshot craeteNewRoomSnapshot = await createBattleRoomFirebase(categoryId: categoryId, name: name!, profileUrl: profileUrl!, uid: uid!, roomCode: roomCode, entryFee: entryFee, questionList: questionList);
 
@@ -141,7 +142,7 @@ class BattleRoomController extends GetxController {
       );
     } catch (e) {
       toogleBattleCreatedState(RoomCreateState.failed);
-      print(e.toString());
+      debugPrint(e.toString());
       throw BattleRoomException(errorMessageCode: e.toString());
     }
   }
@@ -160,14 +161,13 @@ class BattleRoomController extends GetxController {
 
         bool? userNotFound = battleRoom.user2?.uid.isEmpty;
 
-        print(battleRoom);
 
         //if opponent userId is empty menas we have not found any user
         if (userNotFound == true) {
-          print("User Not Found ${userFoundState.value}");
+          debugPrint("User Not Found ${userFoundState.value}");
 
           if (userFoundState.value == UserFoundState.found) {
-            print("One of the user left the room");
+            debugPrint("One of the user left the room");
           }
           //Room Created
           battleRoomData.value = battleRoom;
@@ -176,7 +176,7 @@ class BattleRoomController extends GetxController {
           }
         } else {
           battleRoomData.value = battleRoom;
-          print("User Found ${joinRoomState.value}");
+          debugPrint("User Found ${joinRoomState.value}");
 
           // if user found then get question list from api
 
@@ -202,7 +202,7 @@ class BattleRoomController extends GetxController {
 
               CustomSnackBar.error(errorList: [MyStrings.questionNotFoundMsg.tr]);
             } else {
-              print("called from here to quiz page");
+              debugPrint("called from here to quiz page");
               Get.back();
 
               Get.offAndToNamed(
@@ -216,8 +216,8 @@ class BattleRoomController extends GetxController {
         }
       } else {
         if (userFoundState.value == UserFoundState.found) {
-          print("Delete Room Close PopUp");
-          print("One of the user left the room");
+          debugPrint("Delete Room Close PopUp");
+          debugPrint("One of the user left the room");
           toogleUserFoundState(UserFoundState.left);
           toogleBattleCreatedState(RoomCreateState.deleted);
           Get.back();
@@ -240,7 +240,7 @@ class BattleRoomController extends GetxController {
     required bool joinroom,
   }) async {
     try {
-      print(roomCode);
+      debugPrint(roomCode);
       toogleBattleJoinedState(JoinRoomState.joining);
       final result = await joinBattleRoomFriendFirebase(
         name: name,
@@ -257,7 +257,7 @@ class BattleRoomController extends GetxController {
         false,
       );
     } catch (e) {
-      print("Join BattleFailureError ${e.toString()}");
+      debugPrint("Join BattleFailureError ${e.toString()}");
       // emit(BattleRoomFailure(e.toString()));
       toogleBattleJoinedState(JoinRoomState.failed);
       if (e.toString() == "roomIsFullCode") {
@@ -314,7 +314,7 @@ class BattleRoomController extends GetxController {
         throw BattleRoomException(errorMessageCode: "notEnoughCoinsCode");
       }
 
-      // print("GetSomeData ${questionsData.data.toJson()}");
+      // debugPrint("GetSomeData ${questionsData.data.toJson()}");
 
       //get roomRef
       DocumentReference documentReference = querySnapshot.docs.first.reference;
@@ -346,7 +346,9 @@ class BattleRoomController extends GetxController {
   Future<void> startBattleQuiz(String? battleRoomDocumentId, String battle, {bool readyToPlay = true}) async {
     try {
       updateMultiUserRoom(battleRoomDocumentId, {"readyToPlay": readyToPlay}, battle);
-    } catch (e) {}
+    } catch (e) {
+      
+    }
   }
 
 // Start Main Search Random Battle room
@@ -517,15 +519,15 @@ class BattleRoomController extends GetxController {
   Future<bool> joinBattleRoomFirebase({String? name, String? profileUrl, String? uid, String? battleRoomDocumentId, required String categoryId}) async {
     try {
       DocumentReference documentReference = (await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(battleRoomDocumentId).get()).reference;
-      print("Join user here ");
+      debugPrint("Join user here ");
       return FirebaseFirestore.instance.runTransaction((transaction) async {
         //get latest document
         DocumentSnapshot documentSnapshot = await documentReference.get();
         Map documentSnapshotDetails = Map.from(documentSnapshot.data() as Map<String, dynamic>);
         Map user2Details = Map.from(documentSnapshotDetails)['user2'];
-        print("User 2 : $user2Details");
+        debugPrint("User 2 : $user2Details");
         if (user2Details['uid'].toString().isEmpty && Map.from(documentSnapshotDetails)["categoryId"] == categoryId) {
-          //print("Join user");
+          //debugPrint("Join user");
           //join as user2
           transaction.update(documentReference, {
             "user2.name": name,
@@ -612,7 +614,7 @@ class BattleRoomController extends GetxController {
     try {
       QuerySnapshot querySnapshot;
       if (await InternetConnectivity.isUserOffline()) {
-        throw SocketException("");
+        throw const SocketException("");
       }
 
       querySnapshot = await _firebaseFirestore

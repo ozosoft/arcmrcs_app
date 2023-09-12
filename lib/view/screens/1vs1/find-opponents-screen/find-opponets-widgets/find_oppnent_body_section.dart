@@ -231,7 +231,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
             Stack(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space20),
+                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space15, end: Dimensions.space15, bottom: Dimensions.space20),
                   width: double.infinity,
                   child: Lottie.asset(
                     MyImages.userSearchLottie,
@@ -290,7 +290,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                             RoundedButton(
                               text: MyStrings.start.tr,
                               press: () {
-                                print("go");
+                                debugPrint("go");
 
                                 controller.battleRoomController.startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
                                   // Get.back();

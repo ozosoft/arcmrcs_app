@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
@@ -44,7 +45,7 @@ class VerifyPasswordController extends GetxController {
       if (model.code == 200) {
         verifyLoading = false;
         Get.offAndToNamed(RouteHelper.resetPassword, arguments: [email, value]);
-        print("this is email"+email);
+        debugPrint("this is email $email");
       } else {
         verifyLoading = false;
         update();

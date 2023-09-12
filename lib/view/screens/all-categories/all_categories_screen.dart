@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_prime/core/route/route.dart';
 import 'package:flutter_prime/core/utils/dimensions.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
@@ -12,7 +10,8 @@ import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dar
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/my_color.dart';
+import '../../../core/helper/ads/admob_helper.dart';
+import '../../../core/route/route.dart';
 import '../../../core/utils/util.dart';
 import 'widgets/all_category_list_card_widget.dart';
 
@@ -24,18 +23,18 @@ class AllCategoriesScreen extends StatefulWidget {
 }
 
 class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
+  AdmobHelper admobHelper = AdmobHelper();
   @override
   void initState() {
+    super.initState();
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(AllCategoriesRepo(apiClient: Get.find()));
     Get.put(AllCategoriesController(
       allCategoriesRepo: Get.find(),
     ));
     AllCategoriesController controller = Get.put(AllCategoriesController(allCategoriesRepo: Get.find()));
-
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    admobHelper.createInterstitialAd();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       controller.getdata();
     });
   }
@@ -63,7 +62,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                   children: [
                     ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsets.only(top: Dimensions.space25),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
                         shrinkWrap: true,
                         itemCount: controller.allCategoriesList.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -76,6 +75,7 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                             controller: controller,
                             categoryData: categoryItem,
                             onTap: () {
+                              admobHelper.showInterstitialAd();
                               if (subCategoryId != "") {
                                 Get.toNamed(RouteHelper.subCategories, arguments: [categoryItem.name, categoryItem.id.toString()]);
                               }

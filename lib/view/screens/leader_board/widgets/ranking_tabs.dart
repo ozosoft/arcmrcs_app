@@ -78,12 +78,12 @@ class _RankingTabBarState extends State<RankingTabBar> {
     } else if (rank == 2) {
       topPadding = size.width * 0.1;
     } else if (rank == 3) {
-       topPadding = size.width * 0.1;
+      topPadding = size.width * 0.1;
     }
 
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.only(top: topPadding, left: Dimensions.space10, right: Dimensions.space10),
+        padding: EdgeInsetsDirectional.only(top: topPadding, start: Dimensions.space10, end: Dimensions.space10),
         child: Column(
           children: [
             Container(
@@ -125,7 +125,7 @@ class _RankingTabBarState extends State<RankingTabBar> {
             ),
             FittedBox(
               child: Text(
-                MyStrings.at.tr + playerName.tr,
+                playerName.tr,
                 style: regularMediumLarge.copyWith(
                   color: MyColor.colorWhite,
                 ),
