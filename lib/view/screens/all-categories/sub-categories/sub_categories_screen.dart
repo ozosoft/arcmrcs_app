@@ -6,6 +6,7 @@ import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart'
 import 'package:flutter_prime/data/services/api_service.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
+import '../../../../core/helper/ads/admob_helper.dart';
 import '../../../components/app-bar/custom_category_appBar.dart';
 import 'widgets/sub_category_list_card_widget.dart';
 
@@ -20,9 +21,10 @@ class SubCategoriesCardScreen extends StatefulWidget {
 class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
   String title = "";
   String subCategoryId = "";
-
+  AdmobHelper admobHelper = AdmobHelper();
   @override
   void initState() {
+    super.initState();
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(SubCategoriesRepo(apiClient: Get.find()));
     Get.put(SubCategoriesController(subCategoriesRepo: Get.find()));
@@ -31,8 +33,7 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
     title = Get.arguments[0] as String;
     subCategoryId = Get.arguments[1];
 
-    super.initState();
-
+    admobHelper.createInterstitialAd();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata(subCategoryId);
     });
@@ -65,10 +66,8 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
                             controller: controller,
                             categoryData: categoryItem,
                             onTap: () {
-                              
+                              admobHelper.showInterstitialAd();
                               controller.changeExpandIndex(index);
-
-                            
                             },
                             title: categoryItem.name.toString(),
                             image: UrlContainer.subCategoriesImage + categoryItem.image.toString(),

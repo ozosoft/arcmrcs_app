@@ -14,6 +14,7 @@ import 'package:flutter_prime/view/components/text/custom_text_with_underline.da
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/helper/ads/admob_helper.dart';
 import '../../../../../data/model/guess_the_word/guess_subcategory_model.dart';
 import '../../../../components/chips/custom_chips_widget.dart';
 import '../../../../components/image_widget/my_image_widget.dart';
@@ -32,6 +33,7 @@ class GuessWordSubCategoryCard extends StatefulWidget {
 }
 
 class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
+  AdmobHelper admobHelper = AdmobHelper();
   bool isExpande = false;
   int labelCount = 0;
 
@@ -65,6 +67,7 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
             child: InkWell(
               borderRadius: BorderRadius.circular(5.0),
               onTap: () {
+                admobHelper.showInterstitialAd();
                 setState(() {
                   isExpande = !isExpande;
                 });
@@ -169,7 +172,7 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
                                           labelCount = widget.subcategory.quizInfos!.length;
                                         });
                                       },
-                                      child:  Padding(
+                                      child: Padding(
                                         padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
                                         child: CustomTextWithUndeline(
                                           text: MyStrings.viewMore.tr,
@@ -188,3 +191,4 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
     );
   }
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   

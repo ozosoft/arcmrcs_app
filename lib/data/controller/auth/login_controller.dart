@@ -229,7 +229,8 @@ class LoginController extends GetxController {
         },
         verificationFailed: (FirebaseAuthException e) {
           changeOtpSendButtonLoading(false);
-          Get.snackbar('Error', e.message!);
+
+          CustomSnackBar.error(errorList: [e.message!]);
         },
         codeSent: (String verificationId, int? resendToken) {
           this.verificationId.value = verificationId;
@@ -247,7 +248,7 @@ class LoginController extends GetxController {
       );
     } catch (e) {
       changeOtpSendButtonLoading(false);
-      Get.snackbar('Error', e.toString());
+      CustomSnackBar.error(errorList: [e.toString()]);
     }
   }
 
@@ -269,7 +270,7 @@ class LoginController extends GetxController {
         CustomSnackBar.error(errorList: [MyStrings.pleaseEnterValidOtpCode.tr]);
       }
 
-      // Get.snackbar('Error', e.toString());
+      CustomSnackBar.error(errorList: [e.toString()]);
     }
   }
 
@@ -287,7 +288,7 @@ class LoginController extends GetxController {
         CustomSnackBar.error(errorList: [(MyStrings.tryAfterSec.replaceAll("{sec}", secondLeft.value.toString()).tr)]);
       }
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      CustomSnackBar.error(errorList: [e.toString()]);
       isResendingOTP = false;
     }
   }
@@ -316,7 +317,7 @@ class LoginController extends GetxController {
       await firebaseAuth.signOut();
       await googleSignIn.signOut();
     } catch (e) {
-      Get.snackbar('Error', e.toString());
+      CustomSnackBar.error(errorList: [e.toString()]);
     }
   }
 
@@ -338,7 +339,6 @@ class LoginController extends GetxController {
       await socialLoginUser(email: firebaseUser.value!.email, uid: firebaseUser.value!.uid, provider: 'email');
     } catch (e) {
       // debugPrint(e.toString());
-      // Get.snackbar('Error', e.toString());
 
       CustomSnackBar.error(errorList: [e.toString()]);
     }

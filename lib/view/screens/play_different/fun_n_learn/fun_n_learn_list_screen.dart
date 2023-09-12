@@ -10,6 +10,7 @@ import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/helper/ads/admob_helper.dart';
 import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/url_container.dart';
 
@@ -25,9 +26,10 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
   String title = "";
   String subCategoryId = "";
   String mainCategoryId = "";
-
+  AdmobHelper admobHelper = AdmobHelper();
   @override
   void initState() {
+    super.initState();
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(FunNLearnRepo(apiClient: Get.find()));
     Get.put(FunNLearnListController(
@@ -38,9 +40,7 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
     title = Get.arguments[0] as String;
     subCategoryId = Get.arguments[1];
     mainCategoryId = Get.arguments[2];
-
-    super.initState();
-
+    // admobHelper.createInterstitialAd();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getFunAndLearnDescriprion(subCategoryId, mainCategoryId);
     });
@@ -70,6 +70,7 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
                         itemBuilder: (BuildContext context, int index) {
                           return CategoriesCard(
                             onTap: () {
+                              admobHelper.showInterstitialAd();
                               if (controller.fun_N_Learn_descriptionList[index].questionsCount.toString() == "0") {
                                 CustomSnackBar.error(errorList: [MyStrings.noQuestionFoundMsg.tr]);
                               } else {

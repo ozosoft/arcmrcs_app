@@ -4,14 +4,16 @@ import 'package:flutter_prime/core/utils/my_color.dart';
 import 'package:flutter_prime/core/utils/my_strings.dart';
 import 'package:flutter_prime/core/utils/style.dart';
 import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/controller/leader_board/leader_board_controller.dart';
 import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/my_images.dart';
+import '../../../../data/controller/leader_board/leader_board_controller.dart';
 
 class RankingTabBar extends StatefulWidget {
-  const RankingTabBar({Key? key}) : super(key: key);
+  final LeaderBoardController controller;
+
+  const RankingTabBar({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<RankingTabBar> createState() => _RankingTabBarState();
@@ -29,36 +31,34 @@ class _RankingTabBarState extends State<RankingTabBar> {
     Orientation orientation = MediaQuery.of(context).orientation;
 
     return SizedBox(
-      child: GetBuilder<LeaderBoardController>(
-        builder: (controller) => Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _buildRankingItem(
-              controller.rank2PlayerAvatar,
-              controller.rank2PlayerName,
-              controller.rank2PlayerScore,
-              size,
-              orientation,
-              2, // Player 2
-            ),
-            _buildRankingItem(
-              controller.rank1PlayerAvatar,
-              controller.rank1PlayerName,
-              controller.rank1PlayerScore,
-              size,
-              orientation,
-              1, // Player 1
-            ),
-            _buildRankingItem(
-              controller.rank3PlayerAvatar,
-              controller.rank3PlayerName,
-              controller.rank3PlayerScore,
-              size,
-              orientation,
-              3, // Player 3
-            ),
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          _buildRankingItem(
+            widget.controller.rank2PlayerAvatar,
+            widget.controller.rank2PlayerName,
+            widget.controller.rank2PlayerScore,
+            size,
+            orientation,
+            2, // Player 2
+          ),
+          _buildRankingItem(
+            widget.controller.rank1PlayerAvatar,
+            widget.controller.rank1PlayerName,
+            widget.controller.rank1PlayerScore,
+            size,
+            orientation,
+            1, // Player 1
+          ),
+          _buildRankingItem(
+            widget.controller.rank3PlayerAvatar,
+            widget.controller.rank3PlayerName,
+            widget.controller.rank3PlayerScore,
+            size,
+            orientation,
+            3, // Player 3
+          ),
+        ],
       ),
     );
   }

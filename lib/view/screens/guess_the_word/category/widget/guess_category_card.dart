@@ -12,6 +12,7 @@ import 'package:flutter_prime/view/components/text/custom_text_with_underline.da
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/helper/ads/admob_helper.dart';
 import '../../../../../data/model/guess_the_word/guess_category_model.dart';
 import '../../../../components/chips/custom_chips_widget.dart';
 import '../../../../components/image_widget/my_image_widget.dart';
@@ -30,6 +31,7 @@ class GuessCategoryCard extends StatefulWidget {
 }
 
 class _GuessCategoryCardState extends State<GuessCategoryCard> {
+  AdmobHelper admobHelper = AdmobHelper();
   bool isExpande = false;
   int labelCount = 0;
   void toggleExpande() {
@@ -67,6 +69,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
             child: InkWell(
               borderRadius: BorderRadius.circular(5.0),
               onTap: () {
+                admobHelper.showInterstitialAd();
                 if (widget.categories.subcategoriesCount == "0") {
                   toggleExpande();
                 } else {
@@ -173,7 +176,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                           labelCount = widget.categories.quizInfos!.length;
                                         });
                                       },
-                                      child:  Padding(
+                                      child: Padding(
                                         padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
                                         child: CustomTextWithUndeline(
                                           text: MyStrings.viewMore.tr,

@@ -20,6 +20,7 @@ class GestheWordCategoryScreen extends StatefulWidget {
 }
 
 class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
+
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
@@ -34,17 +35,17 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  CustomCategoryAppBar(title: MyStrings.allCategory.tr),
+      appBar: CustomCategoryAppBar(title: MyStrings.allCategory.tr),
       body: GetBuilder<GuessThewordController>(builder: (controller) {
         return controller.isLoading
             ? const CustomLoader()
             : controller.categoryList.isEmpty
-                ?  NoDataWidget(
+                ? NoDataWidget(
                     messages: MyStrings.sorryNoCategory.tr,
                   )
                 : Padding(
-                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),
-                  child: ListView.builder(
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),
+                    child: ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       itemCount: controller.categoryList.length,
                       itemBuilder: (context, i) {
@@ -54,7 +55,7 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
                         );
                       },
                     ),
-                );
+                  );
       }),
     );
   }

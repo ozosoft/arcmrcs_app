@@ -10,6 +10,8 @@ import 'package:flutter_prime/view/components/category-card/categories_card.dart
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/helper/ads/admob_helper.dart';
+
 class FunNLearnSubCategoriesCardScreen extends StatefulWidget {
   final String title;
   const FunNLearnSubCategoriesCardScreen({super.key, required this.title});
@@ -21,9 +23,10 @@ class FunNLearnSubCategoriesCardScreen extends StatefulWidget {
 class _FunNLearnSubCategoriesCardScreenState extends State<FunNLearnSubCategoriesCardScreen> {
   String title = "";
   String subCategoryId = "";
-
+  AdmobHelper admobHelper = AdmobHelper();
   @override
   void initState() {
+    super.initState();
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(FunNLearnRepo(apiClient: Get.find()));
     Get.put(FunNLearnSubCategoriesController(
@@ -34,8 +37,7 @@ class _FunNLearnSubCategoriesCardScreenState extends State<FunNLearnSubCategorie
     title = Get.arguments[0] as String;
     subCategoryId = Get.arguments[1];
 
-    super.initState();
-
+    admobHelper.createInterstitialAd();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata(subCategoryId);
     });
@@ -75,6 +77,7 @@ class _FunNLearnSubCategoriesCardScreenState extends State<FunNLearnSubCategorie
                             levels: controller.itemCount.toString(),
                             fromFunNlearn: true,
                             onTap: () {
+                              admobHelper.showInterstitialAd();
                               controller.showExpandedSection = true;
                               controller.changeExpandIndex(index);
 

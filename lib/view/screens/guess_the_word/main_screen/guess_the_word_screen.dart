@@ -11,9 +11,7 @@ import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
 import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
 import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_prime/view/screens/guess_the_word/widget/question_button.dart';
-
 import 'package:get/get.dart';
-
 import '../../../components/app-bar/custom_category_appBar.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../widget/answer_field.dart';
@@ -26,6 +24,7 @@ class GuessThewordScreen extends StatefulWidget {
 }
 
 class _GuessThewordScreenState extends State<GuessThewordScreen> {
+
   int id = 0;
   int currentQuestionIndex = 0;
 
@@ -39,7 +38,6 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.clearAllData();
       controller.getQuestion(id.toString());
-    
     });
     super.initState();
   }
