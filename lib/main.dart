@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:quiz_lab/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
 import 'package:quiz_lab/core/route/route.dart';
@@ -17,7 +18,9 @@ import 'core/di_service/di_services.dart' as di_service;
 import 'core/utils/util.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   MobileAds.instance.initialize();
   final sharedPreferences = await SharedPreferences.getInstance();
   Get.lazyPut(() => sharedPreferences);

@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../model/message_model/message_model.dart';
+
 BattleAnswerSubmitModel battleAnswerSubmitModelFromJson(String str) => BattleAnswerSubmitModel.fromJson(json.decode(str));
 
 String battleAnswerSubmitModelToJson(BattleAnswerSubmitModel data) => json.encode(data.toJson());
@@ -11,7 +13,7 @@ String battleAnswerSubmitModelToJson(BattleAnswerSubmitModel data) => json.encod
 class BattleAnswerSubmitModel {
   final String remark;
   final String status;
-  final Map<String, dynamic> message;
+  final Message message;
   final Map<String, dynamic> data;
 
   BattleAnswerSubmitModel({
@@ -25,8 +27,8 @@ class BattleAnswerSubmitModel {
     return BattleAnswerSubmitModel(
       remark: json['remark'],
       status: json['status'],
-      message: json['message'],
-      data: json['data'],
+      message: Message.fromJson(json["message"]),
+      data: json['data'] != null ? json['data'] : Map<String, dynamic>(),
     );
   }
   Map<String, dynamic> toJson() {

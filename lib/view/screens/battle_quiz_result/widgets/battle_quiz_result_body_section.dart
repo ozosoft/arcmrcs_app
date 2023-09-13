@@ -75,6 +75,7 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              // Text("${controller.messageStatus}"),
                               if (controller.messageStatus.contains('Congratulations') == true) ...[
                                 Text(
                                   MyStrings.victory.tr,
@@ -149,28 +150,30 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                       //opponents
                       Column(
                         children: [
-                          PlayerProfileDetails(
-                            userData: controller.argumentsResult.data["opponent"],
-                          ),
-                          const SizedBox(
-                            height: Dimensions.space20,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space6), color: MyColor.categoryCardBodyColor),
-                            padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space14),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(MyImages.greenTikSvg),
-                                const SizedBox(width: Dimensions.space6),
-                                Text(
-                                  "${controller.opponentCorrectAnswer}/${controller.totalQuestion}",
-                                  style: regularDefault.copyWith(
-                                    color: MyColor.rightAnswerbgColor,
-                                  ),
-                                ),
-                              ],
+                          if (controller.argumentsResult.data["opponent"] != null) ...[
+                            PlayerProfileDetails(
+                              userData: controller.argumentsResult.data["opponent"],
                             ),
-                          ),
+                            const SizedBox(
+                              height: Dimensions.space20,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space6), color: MyColor.categoryCardBodyColor),
+                              padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space14),
+                              child: Row(
+                                children: [
+                                  SvgPicture.asset(MyImages.greenTikSvg),
+                                  const SizedBox(width: Dimensions.space6),
+                                  Text(
+                                    "${controller.opponentCorrectAnswer}/${controller.totalQuestion}",
+                                    style: regularDefault.copyWith(
+                                      color: MyColor.rightAnswerbgColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ],
                       ),
                     ],

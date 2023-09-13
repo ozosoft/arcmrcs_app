@@ -266,10 +266,11 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                                   textStyle: boldLarge.copyWith(fontStyle: FontStyle.italic),
                                 ),
                               ),
+                              Text("${controller.countdownSeconds.value}"),
                               Container(
                                 margin: const EdgeInsets.all(Dimensions.space14),
                                 child: DefaultText(
-                                  text: "${controller.countdownSeconds == 0 ? MyStrings.started.tr : controller.countdownSeconds}",
+                                  text: "${controller.countdownSeconds.value == 1 ? MyStrings.started.tr :  controller.countdownSeconds.value}",
                                   fontSize: Dimensions.fontExtraLarge * 3,
                                   textStyle: boldLarge.copyWith(color: MyColor.primaryColor, fontStyle: FontStyle.italic),
                                 ),

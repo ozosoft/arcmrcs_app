@@ -1,4 +1,4 @@
-package dev.vlab.quiz_lab
+package dev.vlab.quizlab
 
 import io.flutter.embedding.android.FlutterActivity
 

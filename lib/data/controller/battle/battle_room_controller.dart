@@ -161,7 +161,6 @@ class BattleRoomController extends GetxController {
 
         bool? userNotFound = battleRoom.user2?.uid.isEmpty;
 
-
         //if opponent userId is empty menas we have not found any user
         if (userNotFound == true) {
           debugPrint("User Not Found ${userFoundState.value}");
@@ -184,11 +183,16 @@ class BattleRoomController extends GetxController {
             if (joinRoomState.value != JoinRoomState.joined) {
               toogleBattleJoinedState(JoinRoomState.joined);
               toogleUserFoundState(UserFoundState.found);
-              //Fetch Questions
+
+              //Fetch Questions if i creator
+
+              var ownData = getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true); // Current User Data
+              var opUserData = getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID()); // Opponent Data
+
               await getRandomBattleQuestions(
                 int.parse(battleRoom.categoryId!),
-                int.parse(battleRoom.user1!.uid),
-                int.parse(battleRoom.user2!.uid),
+                int.parse(ownData.uid),
+                int.parse(opUserData.uid),
               ).then((value) {
                 battleQuestionsList.value = value;
                 update();
@@ -346,9 +350,7 @@ class BattleRoomController extends GetxController {
   Future<void> startBattleQuiz(String? battleRoomDocumentId, String battle, {bool readyToPlay = true}) async {
     try {
       updateMultiUserRoom(battleRoomDocumentId, {"readyToPlay": readyToPlay}, battle);
-    } catch (e) {
-      
-    }
+    } catch (e) {}
   }
 
 // Start Main Search Random Battle room

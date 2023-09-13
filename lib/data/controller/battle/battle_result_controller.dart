@@ -15,7 +15,7 @@ class BattleResultController extends GetxController {
   // Variables
 
   final argumentsResult = Get.arguments[0] as BattleAnswerSubmitModel;
-  List get messageStatus => argumentsResult.message["success"];
+  List get messageStatus => [...argumentsResult.message.success!, ...argumentsResult.message.error!];
   String get totalQuestion => argumentsResult.data["totalQuestion"].toString();
   String get correctAnswer => argumentsResult.data["correctAnswer"].toString();
   String get opponentCorrectAnswer => argumentsResult.data["opponent_correct_ans"].toString();

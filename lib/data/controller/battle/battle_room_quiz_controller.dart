@@ -232,7 +232,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
 
     Map<String, dynamic> params = {};
 
-    params['opponentId'] = opUserData.uid.toString();
+    params['opponent_id'] = opUserData.uid.toString();
     params['coin_count'] = battleRoomController.battleRoomData.value!.entryFee.toString(); // coin_count value
 
     // Loop through the questionsList
@@ -277,9 +277,16 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     if (submitModel.statusCode == 200) {
       BattleAnswerSubmitModel submitAnswerModel = battleAnswerSubmitModelFromJson(submitModel.responseJson);
       var battleRoomData = battleRoomController.battleRoomData.value;
+
       await battleRoomController.deleteBattleRoom(battleRoomController.battleRoomData.value!.roomId, false).then((value) {
         if (fromYouWon == false) {
-          Get.offAndToNamed(RouteHelper.battleQuizResultScreen, arguments: [submitAnswerModel, battleRoomData]);
+          if (submitAnswerModel.message.error!.isEmpty) {
+            Get.back();
+            Get.offAndToNamed(RouteHelper.battleQuizResultScreen, arguments: [submitAnswerModel, battleRoomData]);
+          } else {
+            CustomSnackBar.error(errorList: [...submitAnswerModel.message.error!, ...submitAnswerModel.message.success!]);
+            Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
+          }
         } else {
           Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
         }
@@ -314,6 +321,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
         debugPrint('App resumed');
         // Reactivate any necessary functionality
         // debugPrint(battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true).status);
+
         if (battleRoomController.getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true).status == false) {
           showMeLeftPopupUpdate(true);
         }

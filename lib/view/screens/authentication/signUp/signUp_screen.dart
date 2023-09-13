@@ -10,15 +10,16 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-       onTap: () {
+      onTap: () {
         FocusScope.of(context).unfocus();
       },
       child: const Scaffold(
         backgroundColor: MyColor.colorWhite,
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: [
-              CustomHeadSection(height: Dimensions.space150,iconPosition: Dimensions.space60),
+              CustomHeadSection(height: Dimensions.space150, iconPosition: Dimensions.space60),
               SignUpBodySection(),
             ],
           ),

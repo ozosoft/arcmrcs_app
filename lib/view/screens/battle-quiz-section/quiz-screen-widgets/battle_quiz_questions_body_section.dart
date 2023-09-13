@@ -244,7 +244,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                   onPressed: () {
                                     Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                                   },
-                                  child:  Text(
+                                  child: Text(
                                     MyStrings.cancel.tr,
                                     style: regularLarge,
                                   ),
@@ -446,7 +446,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                             alignment: Alignment.center,
                             child: Container(
                               color: MyColor.colorWhite.withOpacity(0.9),
-                              child:  Padding(
+                              child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,

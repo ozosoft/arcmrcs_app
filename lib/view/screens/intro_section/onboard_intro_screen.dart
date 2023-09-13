@@ -13,7 +13,6 @@ import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import '../../../core/helper/shared_preference_helper.dart';
 import '../../../data/services/api_service.dart';
-import '../../components/text/custom_underline_text.dart';
 
 class OnBoardIntroScreen extends StatefulWidget {
   const OnBoardIntroScreen({super.key});
