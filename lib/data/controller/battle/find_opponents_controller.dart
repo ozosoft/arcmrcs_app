@@ -16,8 +16,8 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   late AnimationController _imageScrollController;
   AnimationController get imageScrollController => _imageScrollController;
   late Timer _startTimer;
-  final countdownSeconds = 10.obs;
-  // get countdownSeconds => _countdownSeconds.value;
+  final _countdownSeconds = 10.obs;
+  get countdownSeconds => _countdownSeconds.value;
   Timer get startTimer => _startTimer;
 
   var getQuestionList = <Question>[];
@@ -38,48 +38,22 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
       battleRoomController.userFoundState,
       (state) {
         if (state == UserFoundState.found) {
-          _startTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-            // Start the 5-second timer here
-            if (countdownSeconds.value > 0) {
-              if (countdownSeconds.value == 0) {
-                countdownSeconds.value = 0;
+          if (state == UserFoundState.found) {
+            _startTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+              // Start the 5-second timer here
+              if (_countdownSeconds.value > 0) {
+                _countdownSeconds.value--;
               } else {
-                countdownSeconds.value--;
+                _startTimer.cancel();
+                //Start Game
+                battleRoomController.startBattleQuiz(battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true);
               }
-
-              update();
-            } else {
-              _startTimer.cancel();
-              print("Form 1 cancle");
-              battleRoomController.startBattleQuiz(battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true);
-
-              // Start Game
-            }
-          });
-        } else {
-          if (_startTimer.isActive) {
-            print("Form 2 cancle 2");
-            _startTimer.cancel(); // Cancel the
-            countdownSeconds.value = 10;
-            update();
+            });
+          } else {
+            _countdownSeconds.value = 10;
+            _startTimer.cancel(); // Cancel the timer if user found state changes
           }
         }
-
-        // if (state == UserFoundState.found) {
-        //   _startTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
-        //     // Start the 5-second timer here
-        //     if (_countdownSeconds.value > 0) {
-        //       _countdownSeconds.value--;
-        //     } else {
-        //       _startTimer.cancel();
-        //       //Start Game
-        //       battleRoomController.startBattleQuiz(battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true);
-        //     }
-        //   });
-        // } else {
-        //   _countdownSeconds.value = 10;
-        //   _startTimer.cancel(); // Cancel the timer if user found state changes
-        // }
       },
     );
   }
