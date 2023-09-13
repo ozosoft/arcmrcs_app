@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/core/utils/util.dart';
-import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/util.dart';
+import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:get/get.dart';
 
 class GuessWordKeyBoard extends StatefulWidget {

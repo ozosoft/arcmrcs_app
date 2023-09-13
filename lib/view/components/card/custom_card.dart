@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/util.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/util.dart';
 
 class CustomCard extends StatefulWidget {
   final double paddingLeft, paddingRight, paddingTop, paddingBottom;

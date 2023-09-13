@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
-import 'package:flutter_prime/data/repo/gess_the_word/gessThewordRepo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_Controller.dart';
+import 'package:quiz_lab/data/repo/gess_the_word/gessThewordRepo.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
 
-import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
-import 'package:flutter_prime/view/screens/guess_the_word/category/widget/guess_category_card.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/screens/guess_the_word/category/widget/guess_category_card.dart';
 import 'package:get/get.dart';
 
 import '../../../components/no_data.dart';

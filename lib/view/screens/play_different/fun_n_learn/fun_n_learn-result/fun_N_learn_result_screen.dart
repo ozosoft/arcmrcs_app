@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../../core/helper/ads/admob_helper.dart';

@@ -4,14 +4,14 @@ import 'dart:convert';
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/guess_the_word/guess_question_model.dart';
-import 'package:flutter_prime/data/model/guess_the_word/guess_subcategory_model.dart';
-import 'package:flutter_prime/data/model/guess_the_word/guess_submit_response.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/repo/gess_the_word/gessThewordRepo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/guess_the_word/guess_question_model.dart';
+import 'package:quiz_lab/data/model/guess_the_word/guess_subcategory_model.dart';
+import 'package:quiz_lab/data/model/guess_the_word/guess_submit_response.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/repo/gess_the_word/gessThewordRepo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
 import '../../model/guess_the_word/guess_category_model.dart';

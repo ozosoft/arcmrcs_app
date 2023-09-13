@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/helper/ads/ads_unit_id_helper.dart';
+import 'package:quiz_lab/core/helper/ads/ads_unit_id_helper.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../../../environment.dart';

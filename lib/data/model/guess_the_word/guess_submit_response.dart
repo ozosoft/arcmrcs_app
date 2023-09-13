@@ -2,7 +2,7 @@
 //
 //     final gesswordQuestionSubmitResponse = gesswordQuestionSubmitResponseFromJson(jsonString);
 
-import 'package:flutter_prime/data/model/global/meassage.dart';
+import 'package:quiz_lab/data/model/global/meassage.dart';
 
 class GuesswordQuestionSubmitResponse {
   String? remark;

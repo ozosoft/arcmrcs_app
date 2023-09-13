@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/view/components/chips/custom_chips_widget.dart';
-import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/view/components/chips/custom_chips_widget.dart';
+import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 

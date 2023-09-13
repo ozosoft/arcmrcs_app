@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/app-bar/action_button_icon_widget.dart';
-import 'package:flutter_prime/view/components/dialog/exit_dialog.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/view/components/app-bar/action_button_icon_widget.dart';
+import 'package:quiz_lab/view/components/dialog/exit_dialog.dart';
 
 class CustomAppBar extends StatefulWidget implements PreferredSizeWidget{
 

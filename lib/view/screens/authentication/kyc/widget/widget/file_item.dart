@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/view/screens/authentication/kyc/widget/widget/choose_file_list_item.dart';
+import 'package:quiz_lab/view/screens/authentication/kyc/widget/widget/choose_file_list_item.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/controller/kyc_controller/kyc_controller.dart';
-import 'package:flutter_prime/data/model/kyc/kyc_response_model.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/controller/kyc_controller/kyc_controller.dart';
+import 'package:quiz_lab/data/model/kyc/kyc_response_model.dart';
 
 class ConfirmWithdrawFileItem extends StatefulWidget {
   final int index;

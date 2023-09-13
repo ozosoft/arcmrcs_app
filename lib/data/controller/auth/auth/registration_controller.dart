@@ -1,19 +1,19 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
-import 'package:flutter_prime/core/route/route.dart';
+import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/core/route/route.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/auth/sign_up_model/registration_response_model.dart';
-import 'package:flutter_prime/data/model/auth/sign_up_model/sign_up_model.dart';
-import 'package:flutter_prime/data/model/country_model/country_model.dart';
-import 'package:flutter_prime/data/model/general_setting/general_setting_response_model.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/model/model/error_model.dart';
-import 'package:flutter_prime/data/repo/auth/general_setting_repo.dart';
-import 'package:flutter_prime/data/repo/auth/signup_repo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/auth/sign_up_model/registration_response_model.dart';
+import 'package:quiz_lab/data/model/auth/sign_up_model/sign_up_model.dart';
+import 'package:quiz_lab/data/model/country_model/country_model.dart';
+import 'package:quiz_lab/data/model/general_setting/general_setting_response_model.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/model/model/error_model.dart';
+import 'package:quiz_lab/data/repo/auth/general_setting_repo.dart';
+import 'package:quiz_lab/data/repo/auth/signup_repo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class RegistrationController extends GetxController {
   RegistrationRepo registrationRepo;

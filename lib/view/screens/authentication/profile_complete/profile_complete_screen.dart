@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/controller/account/profile_complete_controller.dart';
-import 'package:flutter_prime/data/repo/account/profile_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_appbar.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
-import 'package:flutter_prime/view/components/text-form-field/custom_text_field.dart';
-import 'package:flutter_prime/view/components/will_pop_widget.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/controller/account/profile_complete_controller.dart';
+import 'package:quiz_lab/data/repo/account/profile_repo.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_appbar.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
+import 'package:quiz_lab/view/components/text-form-field/custom_text_field.dart';
+import 'package:quiz_lab/view/components/will_pop_widget.dart';
 
 class ProfileCompleteScreen extends StatefulWidget {
   const ProfileCompleteScreen({Key? key}) : super(key: key);

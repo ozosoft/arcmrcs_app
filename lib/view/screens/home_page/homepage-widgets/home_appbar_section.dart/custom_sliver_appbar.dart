@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/view/screens/home_page/homepage-widgets/home_appbar_section.dart/custom_appbar.dart';
-import 'package:flutter_prime/view/screens/home_page/homepage-widgets/home_appbar_section.dart/custom_card.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home_appbar_section.dart/custom_appbar.dart';
+import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home_appbar_section.dart/custom_card.dart';
 
 class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;

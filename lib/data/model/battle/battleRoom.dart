@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter_prime/data/model/battle/user_battle_room_details_model.dart';
+import 'package:quiz_lab/data/model/battle/user_battle_room_details_model.dart';
 
 class BattleRoom {
   final String? roomId;

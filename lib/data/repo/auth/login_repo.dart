@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
-import 'package:flutter_prime/core/utils/method.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/model/auth/verification/email_verification_model.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/core/utils/method.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/model/auth/verification/email_verification_model.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class LoginRepo {
   ApiClient apiClient;

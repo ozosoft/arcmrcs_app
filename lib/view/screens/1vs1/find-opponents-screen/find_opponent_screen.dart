@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:get/get.dart';
 
 import '../../../components/app-bar/custom_category_appBar.dart';

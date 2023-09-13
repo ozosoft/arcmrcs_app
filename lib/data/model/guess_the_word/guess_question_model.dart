@@ -6,7 +6,7 @@
 
 import 'dart:convert';
 
-import 'package:flutter_prime/core/utils/util.dart';
+import 'package:quiz_lab/core/utils/util.dart';
 
 import '../global/meassage.dart';
 

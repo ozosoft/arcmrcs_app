@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_prime/core/route/route.dart';
+import 'package:quiz_lab/core/route/route.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../core/helper/ads/admob_helper.dart';

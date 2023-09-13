@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/controller/account/profile_update_controller.dart';
-import 'package:flutter_prime/data/repo/account/profile_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:quiz_lab/data/controller/account/profile_update_controller.dart';
+import 'package:quiz_lab/data/repo/account/profile_repo.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_prime/view/components/circle_image_button.dart';
+import 'package:quiz_lab/view/components/circle_image_button.dart';
 import '../../../../../../../../core/utils/my_color.dart';
 import '../../../../../../../core/utils/my_images.dart';
 import '../../../../core/utils/dimensions.dart';

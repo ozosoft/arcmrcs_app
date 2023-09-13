@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
 
 import '../../../../../core/utils/my_color.dart';
 import '../../../../components/custom-head-section-for-auth/auth_heading.dart';

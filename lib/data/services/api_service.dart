@@ -4,13 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/method.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/authorization/authorization_response_model.dart';
-import 'package:flutter_prime/data/model/general_setting/general_setting_response_model.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/method.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/authorization/authorization_response_model.dart';
+import 'package:quiz_lab/data/model/general_setting/general_setting_response_model.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
 
 class ApiClient extends GetxService {
   SharedPreferences sharedPreferences;

@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
-// import 'package:flutter_prime/core/route/route.dart';
-// import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
-// import 'package:flutter_prime/view/screens/exam_zone/widgets/enter_exam_room_bottom_sheet.dart';
+// import 'package:quiz_lab/core/route/route.dart';
+// import 'package:quiz_lab/view/components/bottom-sheet/custom_bottom_sheet.dart';
+// import 'package:quiz_lab/view/screens/exam_zone/widgets/enter_exam_room_bottom_sheet.dart';
 // import 'package:get/get.dart';
 
 // class CardController extends GetxController {

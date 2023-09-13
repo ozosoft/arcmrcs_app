@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/otp_field_widget/otp_field_widget.dart';
-import 'package:flutter_prime/view/screens/1vs1/play-with-friends-bottom-sheet/rooms/join-room/components/joined_lobby_room_bottom_sheet.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/otp_field_widget/otp_field_widget.dart';
+import 'package:quiz_lab/view/screens/1vs1/play-with-friends-bottom-sheet/rooms/join-room/components/joined_lobby_room_bottom_sheet.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../core/utils/style.dart';

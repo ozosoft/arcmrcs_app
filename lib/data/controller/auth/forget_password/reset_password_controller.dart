@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/auth/verification/email_verification_model.dart';
-import 'package:flutter_prime/data/model/model/error_model.dart';
-import 'package:flutter_prime/data/repo/auth/login_repo.dart';
+import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/auth/verification/email_verification_model.dart';
+import 'package:quiz_lab/data/model/model/error_model.dart';
+import 'package:quiz_lab/data/repo/auth/login_repo.dart';
 
 class ResetPasswordController extends GetxController{
   

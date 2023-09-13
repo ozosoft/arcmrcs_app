@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/battle/battle_room_controller.dart';
-import 'package:flutter_prime/view/components/alert-dialog/custom_alert_dialog.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/battle/battle_room_controller.dart';
+import 'package:quiz_lab/view/components/alert-dialog/custom_alert_dialog.dart';
+import 'package:quiz_lab/view/components/bottom-sheet/bottom_sheet_bar.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 

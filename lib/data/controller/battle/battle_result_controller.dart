@@ -1,5 +1,5 @@
 import 'package:confetti/confetti.dart';
-import 'package:flutter_prime/data/repo/battle/battle_repo.dart';
+import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
 import 'package:get/get.dart';
 
 import '../../model/battle/battleRoom.dart';

@@ -28,7 +28,7 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
 
-    namespace "dev.vlab.flutter_prime"
+    namespace "dev.vlab.quiz_lab"
     compileSdkVersion 34
 
     ndkVersion flutter.ndkVersion
@@ -47,7 +47,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "dev.vlab.flutter_prime"
+        applicationId "dev.vlab.quiz_lab"
         minSdkVersion 21
         targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
 
 class BottomSheetBar extends StatelessWidget {
   const BottomSheetBar({Key? key}) : super(key: key);

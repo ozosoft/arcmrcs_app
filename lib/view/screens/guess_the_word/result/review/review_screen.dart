@@ -1,11 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_review_result.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_review_result.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/utils/url_container.dart';

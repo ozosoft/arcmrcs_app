@@ -6,7 +6,7 @@
 
 import 'dart:convert';
 
-import 'package:flutter_prime/data/model/global/meassage.dart';
+import 'package:quiz_lab/data/model/global/meassage.dart';
 
 GuesswordCategorysResponse gesswordCategorysResponseFromJson(String str) => GuesswordCategorysResponse.fromJson(json.decode(str));
 

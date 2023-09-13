@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/auth/two_factor_controller.dart';
-import 'package:flutter_prime/data/repo/auth/two_factor_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_appbar.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
-import 'package:flutter_prime/view/components/text/small_text.dart';
-import 'package:flutter_prime/view/components/will_pop_widget.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/auth/two_factor_controller.dart';
+import 'package:quiz_lab/data/repo/auth/two_factor_repo.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_appbar.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
+import 'package:quiz_lab/view/components/text/small_text.dart';
+import 'package:quiz_lab/view/components/will_pop_widget.dart';
 
 import '../../../components/image/custom_svg_picture.dart';
 

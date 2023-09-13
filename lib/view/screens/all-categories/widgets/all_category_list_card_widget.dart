@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/controller/all_categories/all_categories_controller.dart';
-import 'package:flutter_prime/data/model/all_cartegories/all_categories_model.dart';
-import 'package:flutter_prime/view/components/chips/custom_chips_widget.dart';
-import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
-import 'package:flutter_prime/view/screens/all-categories/widgets/allCategories_expanded_section.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/controller/all_categories/all_categories_controller.dart';
+import 'package:quiz_lab/data/model/all_cartegories/all_categories_model.dart';
+import 'package:quiz_lab/view/components/chips/custom_chips_widget.dart';
+import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
+import 'package:quiz_lab/view/screens/all-categories/widgets/allCategories_expanded_section.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../core/utils/dimensions.dart';

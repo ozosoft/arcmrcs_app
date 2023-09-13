@@ -1,16 +1,16 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
-import 'package:flutter_prime/view/components/divider/custom_vertical_divider.dart';
-import 'package:flutter_prime/view/components/image/custom_svg_picture.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_Controller.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/divider/custom_horizontal_divider.dart';
+import 'package:quiz_lab/view/components/divider/custom_vertical_divider.dart';
+import 'package:quiz_lab/view/components/image/custom_svg_picture.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 

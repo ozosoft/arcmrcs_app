@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/view/components/image_widget/my_image_widget.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/my_images.dart';

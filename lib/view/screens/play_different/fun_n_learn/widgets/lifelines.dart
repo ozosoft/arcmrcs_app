@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_quiz_controller.dart';
-import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_quiz_controller.dart';
+import 'package:quiz_lab/view/components/buttons/level_card_button.dart';
 import 'package:get/get.dart';
 
 class FunNlearnLifeLinesWidget extends StatefulWidget {

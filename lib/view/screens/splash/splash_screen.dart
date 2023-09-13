@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
 
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/util.dart';
-import 'package:flutter_prime/data/controller/localization/localization_controller.dart';
-import 'package:flutter_prime/data/controller/splash/splash_controller.dart';
-import 'package:flutter_prime/data/repo/auth/general_setting_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/util.dart';
+import 'package:quiz_lab/data/controller/localization/localization_controller.dart';
+import 'package:quiz_lab/data/controller/splash/splash_controller.dart';
+import 'package:quiz_lab/data/repo/auth/general_setting_repo.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 

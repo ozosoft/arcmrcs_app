@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
-import 'package:flutter_prime/data/model/language/language_model.dart';
+import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/data/model/language/language_model.dart';
 
 class LocalizationController extends GetxController {
   final SharedPreferences sharedPreferences;

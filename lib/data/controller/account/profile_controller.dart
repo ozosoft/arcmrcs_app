@@ -3,16 +3,16 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/model/profile/profile_response_model.dart';
-import 'package:flutter_prime/data/model/user_post_model/user_post_model.dart';
-import 'package:flutter_prime/data/repo/account/profile_repo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/model/profile/profile_response_model.dart';
+import 'package:quiz_lab/data/model/user_post_model/user_post_model.dart';
+import 'package:quiz_lab/data/repo/account/profile_repo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class ProfileController extends GetxController {
   ProfileRepo profileRepo;

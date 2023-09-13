@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/controller/coin_store/deposit/add_new_deposit_controller.dart';
+import 'package:quiz_lab/data/controller/coin_store/deposit/add_new_deposit_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/dimensions.dart';

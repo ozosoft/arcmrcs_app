@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:ui';
 
-import 'package:flutter_prime/data/model/language/app_language_response_model.dart';
+import 'package:quiz_lab/data/model/language/app_language_response_model.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

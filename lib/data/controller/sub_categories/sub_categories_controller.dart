@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_prime/data/model/sub_categories/sub_categories_model.dart';
-import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart';
+import 'package:quiz_lab/data/model/sub_categories/sub_categories_model.dart';
+import 'package:quiz_lab/data/repo/sub_categories/sub_categories_repo.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class SubCategoriesController extends GetxController {
   SubCategoriesRepo subCategoriesRepo;

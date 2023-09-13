@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/style.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/my_color.dart';

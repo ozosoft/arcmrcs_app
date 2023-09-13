@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/controller/all_categories/all_categories_controller.dart';
-import 'package:flutter_prime/data/model/all_cartegories/all_categories_model.dart';
-import 'package:flutter_prime/data/repo/allcategories/all_categories_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/controller/all_categories/all_categories_controller.dart';
+import 'package:quiz_lab/data/model/all_cartegories/all_categories_model.dart';
+import 'package:quiz_lab/data/repo/allcategories/all_categories_repo.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/ads/admob_helper.dart';

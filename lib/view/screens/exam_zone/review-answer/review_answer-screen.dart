@@ -1,8 +1,8 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
 import 'package:get/get.dart';
 import '../../../../core/utils/dimensions.dart';
 import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';

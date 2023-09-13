@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:756507339207:android:f7fe66f16e7c8c6c23d1e2",
         "android_client_info": {
-          "package_name": "dev.vlab.flutter_prime"
+          "package_name": "dev.vlab.quiz_lab"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "756507339207-al6uohh0khqteh1c1jlj4c12fem0voc7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "dev.vlab.flutter_prime",
+            "package_name": "dev.vlab.quiz_lab",
             "certificate_hash": "b136159e2d15ade4750b074c4cf45ea6f715b188"
           }
         },

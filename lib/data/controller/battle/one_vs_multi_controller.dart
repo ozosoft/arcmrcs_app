@@ -1,6 +1,6 @@
-import 'package:flutter_prime/data/repo/battle/battle_repo.dart';
+import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
 
 import '../../model/battle/battle_category_list.dart';
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/all_categories/all_categories_controller.dart';
-import 'package:flutter_prime/view/components/animated_widget/expanded_widget.dart';
-import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/all_categories/all_categories_controller.dart';
+import 'package:quiz_lab/view/components/animated_widget/expanded_widget.dart';
+import 'package:quiz_lab/view/components/divider/custom_horizontal_divider.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 

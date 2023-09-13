@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/coin_store/deposit/add_new_deposit_controller.dart';
-import 'package:flutter_prime/data/repo/coin_store/deposit/deposit_repo.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
-import 'package:flutter_prime/view/components/text-form-field/custom_amount_text_field.dart';
-import 'package:flutter_prime/view/components/text-form-field/custom_drop_down_text_field.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/coin_store/deposit/add_new_deposit_controller.dart';
+import 'package:quiz_lab/data/repo/coin_store/deposit/deposit_repo.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/components/text-form-field/custom_amount_text_field.dart';
+import 'package:quiz_lab/view/components/text-form-field/custom_drop_down_text_field.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/utils/dimensions.dart';

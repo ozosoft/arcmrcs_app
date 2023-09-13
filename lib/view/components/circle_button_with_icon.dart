@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_typedefs/rx_typedefs.dart';
-import 'package:flutter_prime/view/components/image/custom_svg_picture.dart';
+import 'package:quiz_lab/view/components/image/custom_svg_picture.dart';
 
 import '../../../../../core/utils/my_color.dart';
 import 'circle_image_button.dart';

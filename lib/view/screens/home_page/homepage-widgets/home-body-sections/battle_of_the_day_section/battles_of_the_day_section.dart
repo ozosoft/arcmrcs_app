@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/view/screens/1vs1/one_vs_one_battle_screen.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/view/screens/1vs1/one_vs_one_battle_screen.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/utils/dimensions.dart';
 import '../../../../../../core/utils/my_strings.dart';

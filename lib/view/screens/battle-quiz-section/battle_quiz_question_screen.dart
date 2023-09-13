@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/view/screens/battle-quiz-section/quiz-screen-widgets/battle_quiz_questions_body_section.dart';
+import 'package:quiz_lab/view/screens/battle-quiz-section/quiz-screen-widgets/battle_quiz_questions_body_section.dart';
 import 'package:get/get.dart';
 
 import '../../../data/model/battle/battle_question_list.dart';

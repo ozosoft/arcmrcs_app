@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_list_controller.dart';
-import 'package:flutter_prime/data/repo/quiz_contest/quiz_contest_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/controller/quiz_contest/quiz_contest_list_controller.dart';
+import 'package:quiz_lab/data/repo/quiz_contest/quiz_contest_repo.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 import 'widget/contest_title_card_widget.dart';
 

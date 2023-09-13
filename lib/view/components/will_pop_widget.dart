@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/view/components/dialog/exit_dialog.dart';
+import 'package:quiz_lab/view/components/dialog/exit_dialog.dart';
 
 class WillPopWidget extends StatelessWidget {
   final Widget child;

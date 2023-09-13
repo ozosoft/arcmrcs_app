@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import '../../../core/utils/my_strings.dart';
 
 class DownloadingDialog extends StatefulWidget {

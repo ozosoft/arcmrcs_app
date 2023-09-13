@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/view/components/text/label_text.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/view/components/text/label_text.dart';
 
 class CustomDropDownTextField extends StatefulWidget {
   final dynamic selectedValue;

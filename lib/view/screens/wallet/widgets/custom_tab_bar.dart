@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
-import 'package:flutter_prime/view/screens/wallet/widgets/wallet_request_section.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/dashboard/dashboard_controller.dart';
+import 'package:quiz_lab/view/screens/wallet/widgets/wallet_request_section.dart';
 import 'package:get/get.dart';
 
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
 
 class FormSizedBox extends StatelessWidget {
   const FormSizedBox({Key? key}) : super(key: key);

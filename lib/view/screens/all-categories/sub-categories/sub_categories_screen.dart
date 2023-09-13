@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/controller/sub_categories/sub_categories_controller.dart';
-import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/controller/sub_categories/sub_categories_controller.dart';
+import 'package:quiz_lab/data/repo/sub_categories/sub_categories_repo.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 import '../../../../core/helper/ads/admob_helper.dart';
 import '../../../components/app-bar/custom_category_appBar.dart';

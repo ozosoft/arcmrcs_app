@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/view/screens/coin_store/coin_store_screen.dart';
-import 'package:flutter_prime/view/screens/home_page/home_screen.dart';
-import 'package:flutter_prime/view/screens/leader_board/leader_board_screen.dart';
-import 'package:flutter_prime/view/screens/profile/profile_screen.dart';
-import 'package:flutter_prime/view/screens/settings/settings_screen.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/view/screens/coin_store/coin_store_screen.dart';
+import 'package:quiz_lab/view/screens/home_page/home_screen.dart';
+import 'package:quiz_lab/view/screens/leader_board/leader_board_screen.dart';
+import 'package:quiz_lab/view/screens/profile/profile_screen.dart';
+import 'package:quiz_lab/view/screens/settings/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/view/screens/notification/widget/notification_card.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/view/screens/notification/widget/notification_card.dart';
 
 class NotificationCardScreen extends StatefulWidget {
   const NotificationCardScreen({super.key});

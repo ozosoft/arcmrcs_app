@@ -4,14 +4,14 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/data/model/quiz_questions_model/quiz_questions_model.dart';
-import 'package:flutter_prime/data/model/submit_answer/submit_answer_model.dart';
-import 'package:flutter_prime/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/data/model/quiz_questions_model/quiz_questions_model.dart';
+import 'package:quiz_lab/data/model/submit_answer/submit_answer_model.dart';
+import 'package:quiz_lab/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class QuizQuestionsController extends GetxController {
   QuizquestionsRepo quizquestionsRepo;

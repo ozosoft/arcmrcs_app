@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_description.dart';
-import 'package:flutter_prime/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/components/category-card/categories_card.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_description.dart';
+import 'package:quiz_lab/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
+import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/category-card/categories_card.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/helper/ads/admob_helper.dart';

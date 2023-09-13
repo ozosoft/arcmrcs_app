@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/view/components/bottom-sheet/bottom_sheet_bar.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/controller/battle/one_vs_multi_controller.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/data/model/profile/profile_response_model.dart';
-import 'package:flutter_prime/data/model/user_post_model/user_post_model.dart';
-import 'package:flutter_prime/data/repo/account/profile_repo.dart';
+import 'package:quiz_lab/data/model/profile/profile_response_model.dart';
+import 'package:quiz_lab/data/model/user_post_model/user_post_model.dart';
+import 'package:quiz_lab/data/repo/account/profile_repo.dart';
 
 import '../../../core/route/route.dart';
 
