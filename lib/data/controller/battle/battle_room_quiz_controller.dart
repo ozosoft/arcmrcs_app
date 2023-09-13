@@ -278,17 +278,17 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
       BattleAnswerSubmitModel submitAnswerModel = battleAnswerSubmitModelFromJson(submitModel.responseJson);
       var battleRoomData = battleRoomController.battleRoomData.value;
 
-      await battleRoomController.deleteBattleRoom(battleRoomController.battleRoomData.value!.roomId, false).then((value) {
+      await battleRoomController.deleteBattleRoom(battleRoomController.battleRoomData.value!.roomId, false).whenComplete(() {
         if (fromYouWon == false) {
           if (submitAnswerModel.message.error!.isEmpty) {
-            Get.back();
+            // Get.back();
             Get.offAndToNamed(RouteHelper.battleQuizResultScreen, arguments: [submitAnswerModel, battleRoomData]);
           } else {
             CustomSnackBar.error(errorList: [...submitAnswerModel.message.error!, ...submitAnswerModel.message.success!]);
-            Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
+            Get.offAllNamed(RouteHelper.bottomNavBarScreen);
           }
         } else {
-          Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
+          Get.offAllNamed(RouteHelper.bottomNavBarScreen);
         }
       });
       toogleSubmitAns(false);

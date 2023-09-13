@@ -205,7 +205,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                                         children: [
                                                           Expanded(
                                                             child: Text(
-                                                              "${controller.questionsList[questionsIndex].options![optionIndex].option.toString()} - ${controller.questionsList[questionsIndex].options![optionIndex].isAnswer}",
+                                                              "${controller.questionsList[questionsIndex].options![optionIndex].option.toString()} ",
                                                               overflow: TextOverflow.visible,
                                                               style: regularMediumLarge.copyWith(
                                                                   color: controller.questionsList[questionsIndex].selectedOptionId!.isEmpty

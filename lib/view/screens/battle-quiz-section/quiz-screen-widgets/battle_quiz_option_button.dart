@@ -54,7 +54,7 @@ class OptionButton extends StatelessWidget {
             const SizedBox(width: Dimensions.space8),
             Expanded(
               child: Text(
-                "${option.option} - ${option.isAnswer}",
+                "${option.option} ",
                 style: regularMediumLarge.copyWith(
                   overflow: TextOverflow.visible,
                   color: isSelected ? MyColor.colorWhite : MyColor.textColor,
