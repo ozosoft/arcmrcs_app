@@ -26,8 +26,7 @@ class PlayWithFriendsBottomSheetWidget extends StatelessWidget {
               text: MyStrings.createRoom.tr,
               press: () {
                 Get.back();
-                Get.toNamed(RouteHelper.createRoomScreen,
-                    arguments: [null, null, controller.categoryList.isNotEmpty ? controller.categoryList : <BattleCategory>[]]);
+                Get.toNamed(RouteHelper.createRoomScreen, arguments: [null, null, controller.categoryList.isNotEmpty ? controller.categoryList : <BattleCategory>[]]);
               },
               textSize: Dimensions.space20,
               cornerRadius: Dimensions.space10,
@@ -39,7 +38,7 @@ class PlayWithFriendsBottomSheetWidget extends StatelessWidget {
               text: MyStrings.joinRoom.tr,
               press: () {
                 Get.back();
-                Get.toNamed(RouteHelper.joinRoomScreen, arguments: [null, null, controller.categoryList]);
+                Get.toNamed(RouteHelper.joinRoomScreen, arguments: [null, null, controller.categoryList.isNotEmpty ? controller.categoryList : <BattleCategory>[]]);
               },
               color: MyColor.colorBlack,
               textSize: Dimensions.space20,

@@ -17,7 +17,6 @@ import '../../../data/repo/sub_categories/sub_categories_repo.dart';
 import '../../../data/services/api_service.dart';
 import 'homepage-widgets/home-body-sections/play_diffrent_quizes/play_diffrent_quizes.dart';
 import 'homepage-widgets/home_appbar_section.dart/custom_sliver_appbar.dart';
-import 'homepage-widgets/home-body-sections/battle_of_the_day_section/battles_of_the_day_section.dart';
 
 import 'homepage-widgets/home-body-sections/contest_section/quiz_contest_section.dart';
 
@@ -85,9 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           : const Column(
                               children: [
                                 TopCategorySection(),
-                              
-
-                                BattleOfTheDaySection(),
+                                // BattleOfTheDaySection(),
                                 QuizContestSection(),
                                 ExamZoneCategoryScreen(),
                                 PlayDiffrentQuizes(),

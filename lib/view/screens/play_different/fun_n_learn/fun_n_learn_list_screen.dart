@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import '../../../../core/helper/ads/admob_helper.dart';
 import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/url_container.dart';
+import '../../../components/no_data.dart';
 
 class FunNlearnListScreen extends StatefulWidget {
   final String title;
@@ -57,42 +58,46 @@ class _FunNlearnListScreenState extends State<FunNlearnListScreen> {
         ),
         body: controller.loader
             ? const CustomLoader()
-            : SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
-                        shrinkWrap: true,
-                        itemCount: controller.fun_N_Learn_descriptionList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CategoriesCard(
-                            onTap: () {
-                              admobHelper.showInterstitialAd();
-                              if (controller.fun_N_Learn_descriptionList[index].questionsCount.toString() == "0") {
-                                CustomSnackBar.error(errorList: [MyStrings.noQuestionFoundMsg.tr]);
-                              } else {
-                                Get.toNamed(RouteHelper.funNlearnDescriptionScreen, arguments: [controller.fun_N_Learn_descriptionList[index].title.toString(), controller.fun_N_Learn_descriptionList[index].id.toString(), controller.fun_N_Learn_descriptionList[index].description.toString()]);
-                                // controller.changeExpandIndex(index);
-                              }
-                            },
-                            showLevel: false,
-                            index: index,
-                            imageMainPath: controller.fun_N_Learn_descriptionList[index].image.toString(),
-                            image: UrlContainer.subCategoriesImage + controller.fun_N_Learn_descriptionList[index].image.toString(),
-                            title: controller.fun_N_Learn_descriptionList[index].title.toString(),
-                            questions: controller.fun_N_Learn_descriptionList[index].questionsCount.toString(),
-                            expansionVisible: false,
-                            fromViewAll: false,
-                            isExpand: index == controller.expandIndex,
-                            // levels: controller.itemCount.toString(),
-                          );
-                        }),
-                  ],
-                ),
-              ),
+            : controller.fun_N_Learn_descriptionList.isEmpty
+                ? NoDataWidget(
+                    messages: MyStrings.noFunAndLearnFound.tr,
+                  )
+                : SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
+                            shrinkWrap: true,
+                            itemCount: controller.fun_N_Learn_descriptionList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CategoriesCard(
+                                onTap: () {
+                                  admobHelper.showInterstitialAd();
+                                  if (controller.fun_N_Learn_descriptionList[index].questionsCount.toString() == "0") {
+                                    CustomSnackBar.error(errorList: [MyStrings.noQuestionFoundMsg.tr]);
+                                  } else {
+                                    Get.toNamed(RouteHelper.funNlearnDescriptionScreen, arguments: [controller.fun_N_Learn_descriptionList[index].title.toString(), controller.fun_N_Learn_descriptionList[index].id.toString(), controller.fun_N_Learn_descriptionList[index].description.toString()]);
+                                    // controller.changeExpandIndex(index);
+                                  }
+                                },
+                                showLevel: false,
+                                index: index,
+                                imageMainPath: controller.fun_N_Learn_descriptionList[index].image.toString(),
+                                image: UrlContainer.subCategoriesImage + controller.fun_N_Learn_descriptionList[index].image.toString(),
+                                title: controller.fun_N_Learn_descriptionList[index].title.toString(),
+                                questions: controller.fun_N_Learn_descriptionList[index].questionsCount.toString(),
+                                expansionVisible: false,
+                                fromViewAll: false,
+                                isExpand: index == controller.expandIndex,
+                                // levels: controller.itemCount.toString(),
+                              );
+                            }),
+                      ],
+                    ),
+                  ),
       ),
     );
   }

@@ -43,7 +43,7 @@ class CoinHistoryController extends GetxController {
 
         
       } else {
-        CustomSnackBar.error(errorList: [coinPlanModel.status ?? ""]);
+        CustomSnackBar.error(errorList: [...coinPlanModel.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

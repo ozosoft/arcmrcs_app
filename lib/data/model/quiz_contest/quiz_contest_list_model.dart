@@ -75,7 +75,7 @@ class Contest {
     String? examEndTime;
     dynamic examDuration;
     dynamic examKey;
-    int? winningMark;
+    double? winningMark;
     String? status;
     DateTime? createdAt;
     DateTime? updatedAt;
@@ -122,7 +122,7 @@ class Contest {
         examEndTime: json["exam_end_time"],
         examDuration: json["exam_duration"],
         examKey: json["exam_key"],
-        winningMark: json["winning_mark"],
+         winningMark: double.parse(json["winning_mark"].toString()),
         status: json["status"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),

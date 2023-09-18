@@ -73,24 +73,40 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                                 ),
                                 child: Text('${index + 1}/${controller.guessThewordQuestionList.length}'),
                               ),
-                              InkWell(
-                                  onTap: () {
-                                    if (controller.reviewPageController.page!.toInt() < controller.guessThewordQuestionList.length) {
-                                      controller.reviewPageController.nextPage(
-                                        duration: const Duration(milliseconds: 500),
-                                        curve: Curves.easeInOut,
-                                      );
-                                    }
-                                  },
-                                  child: LevelCardButton(
-                                    text: MyStrings.next.tr,
-                                    hasIcon: false,
-                                    hasImage: false,
-                                    bgColor: MyColor.primaryColor,
-                                    hasbgColor: true,
-                                    height: Dimensions.space40,
-                                    hastextColor: true,
-                                  )),
+                              if (index < controller.guessThewordQuestionList.length - 1) // Check if not on the last page
+                                ...[
+                                InkWell(
+                                    onTap: () {
+                                      if (controller.reviewPageController.page!.toInt() < controller.guessThewordQuestionList.length) {
+                                        controller.reviewPageController.nextPage(
+                                          duration: const Duration(milliseconds: 500),
+                                          curve: Curves.easeInOut,
+                                        );
+                                      }
+                                    },
+                                    child: LevelCardButton(
+                                      text: "${MyStrings.next.tr}",
+                                      hasIcon: false,
+                                      hasImage: false,
+                                      bgColor: MyColor.primaryColor,
+                                      hasbgColor: true,
+                                      height: Dimensions.space40,
+                                      hastextColor: true,
+                                    )),
+                              ] else ...[
+                                // InkWell(
+                                //     onTap: () {},
+                                //     child: LevelCardButton(
+                                //       text: "${MyStrings.next.tr}",
+                                //       hasIcon: false,
+                                //       hasImage: false,
+                                //       bgColor: MyColor.battleTextColor,
+                                //       hasbgColor: true,
+                                //       height: Dimensions.space40,
+                                //       hastextColor: true,
+                                //     )),
+                              ]
+                              
                             ],
                           ),
                           const SizedBox(

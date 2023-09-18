@@ -41,7 +41,7 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
             ? const CustomLoader()
             : controller.categoryList.isEmpty
                 ? NoDataWidget(
-                    messages: MyStrings.sorryNoCategory.tr,
+                    messages: MyStrings.noCategoryFound.tr,
                   )
                 : Padding(
                     padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),

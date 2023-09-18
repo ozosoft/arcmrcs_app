@@ -68,7 +68,7 @@ class LeaderBoardController extends GetxController {
           }
         }
       } else {
-        CustomSnackBar.error(errorList: [leaderBoardModel.status ?? ""]);
+        CustomSnackBar.error(errorList: [...leaderBoardModel.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

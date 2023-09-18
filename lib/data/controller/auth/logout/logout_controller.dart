@@ -32,7 +32,7 @@ class LogoutController extends GetxController {
         debugPrint("LoggedM OUT!");
         update();
       } else {
-        CustomSnackBar.error(errorList: [plan.status ?? ""]);
+        CustomSnackBar.error(errorList: [...plan.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [logout.message]);

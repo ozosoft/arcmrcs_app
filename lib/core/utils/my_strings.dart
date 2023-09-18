@@ -98,6 +98,7 @@ class MyStrings {
   static const String isRequired = 'is required';
 
   static const String viewAllRules = "View all rules";
+  static const String viewLessRules = "View less rules";
   static const String examRules = "Exam Rules";
   static const String examKey = "Enter the exam key";
   static const String examKeyMsg = "Please Enter the exam key";
@@ -106,7 +107,10 @@ class MyStrings {
   static const String examStartTime = "Exam Start Time:";
 
   static const String noExamFound = "Sorry! No exam is currently running.";
+  static const String noCategoryFound = "Sorry! No Category Found.";
+  static const String noSubCategoryFound = "Sorry! No Subcategories Found.";
   static const String noCoinHistoryFound = "Sorry! No Coin History Found!";
+  static const String noFunAndLearnFound = "Sorry! No Fun And Learn Found.";
   static const String examNotStartYet = "Exam Will Be Start Soon!";
   static const String examAlreadyGiven = "Exam Already Given!";
   static const String examFinished = "Exam Time Finished!";
@@ -546,7 +550,8 @@ class MyStrings {
   static const String sorryAlreadyPlayedQuiz = "Sorry! You have already played daily quiz";
 
   static const String category = "Category";
-  static const String subcategory = "Sub Category";
+  static const String subcategory = "Subcategory";
+  static const String subcategory2 = "Sub Category";
 
   static const String dailynewquiz = "Daily new quiz";
   static const String gamequizwithfun = "Game quiz with fun";

@@ -97,7 +97,7 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
 
   
       } else {
-        CustomSnackBar.error(errorList: [examZoneModel.status ?? ""]);
+        CustomSnackBar.error(errorList: [...examZoneModel.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

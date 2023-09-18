@@ -19,8 +19,6 @@ class TopCategorySection extends StatefulWidget {
 
 class _TopCategorySectionState extends State<TopCategorySection> {
   @override
-
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(
@@ -51,7 +49,7 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                           Text(
+                          Text(
                             MyStrings.topCategory.tr,
                             style: semiBoldMediumLarge,
                           ),
@@ -74,30 +72,57 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                   const SizedBox(
                     height: Dimensions.space15,
                   ),
-                  GetBuilder<SubCategoriesController>(
-                    builder: (controllers) => GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: context.isLandscape ? 5 : 3, childAspectRatio: .7),
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: controller.categorylist.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            onTap: () {
-                              Get.toNamed(
-                                RouteHelper.subCategories,
-                                arguments: [controller.categorylist[index].name.toString(), controller.categorylist[index].id.toString()],
-                              );
-                              controllers.changeExpandIndex(index);
-                            },
-                            child: CustomTopCategoryCard(
-                              index: index,
-                              title: controller.categorylist[index].name.toString(),
-                              questionsQuantaty: controller.categorylist[index].questionsCount.toString(),
-                              image: UrlContainer.dashBoardCategoryImage + controller.categorylist[index].image.toString(),
-                            ),
-                          );
-                        }),
-                  )
+                  if (controller.categorylist.isEmpty) ...[
+                    Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
+                      padding: const EdgeInsets.all(Dimensions.space20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.space10),
+                        boxShadow: const [
+                          BoxShadow(
+                            color: MyColor.cardShaddowColor2,
+                            offset: Offset(0, 8),
+                            blurRadius: 60,
+                            spreadRadius: 0,
+                          ),
+                        ],
+                      ),
+                      child: Center(
+                        child: Text(
+                          MyStrings.noCategoryFound.tr,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          style: regularDefault.copyWith(color: MyColor.spinLoadColor),
+                        ),
+                      ),
+                    ),
+                  ] else ...[
+                    GetBuilder<SubCategoriesController>(
+                      builder: (controllers) => GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: context.isLandscape ? 5 : 3, childAspectRatio: .7),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: controller.categorylist.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return InkWell(
+                              onTap: () {
+                                Get.toNamed(
+                                  RouteHelper.subCategories,
+                                  arguments: [controller.categorylist[index].name.toString(), controller.categorylist[index].id.toString()],
+                                );
+                                controllers.changeExpandIndex(index);
+                              },
+                              child: CustomTopCategoryCard(
+                                index: index,
+                                title: controller.categorylist[index].name.toString(),
+                                questionsQuantaty: controller.categorylist[index].questionsCount.toString(),
+                                image: UrlContainer.dashBoardCategoryImage + controller.categorylist[index].image.toString(),
+                              ),
+                            );
+                          }),
+                    ),
+                  ],
                 ],
               ),
             ),

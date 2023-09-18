@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 

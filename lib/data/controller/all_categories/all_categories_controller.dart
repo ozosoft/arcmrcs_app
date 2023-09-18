@@ -26,21 +26,18 @@ class AllCategoriesController extends GetxController {
     ResponseModel model = await allCategoriesRepo.getData();
 
     if (model.statusCode == 200) {
-
       allCategoriesList.clear();
 
-      AllcategoriesModel allcategories =
-          AllcategoriesModel.fromJson(jsonDecode(model.responseJson));
+      AllcategoriesModel allcategories = AllcategoriesModel.fromJson(jsonDecode(model.responseJson));
 
-      if (allcategories.status.toString().toLowerCase() ==
-          MyStrings.success.toLowerCase()) {
+      if (allcategories.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<Category>? categories = allcategories.data?.categories;
 
         if (categories != null && categories.isNotEmpty) {
           allCategoriesList.addAll(categories);
         }
       } else {
-        CustomSnackBar.error(errorList: [allcategories.status ?? ""]);
+        CustomSnackBar.error(errorList: [...allcategories.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);
@@ -50,18 +47,14 @@ class AllCategoriesController extends GetxController {
 
     loader = false;
     update();
-   
- 
   }
-
-
-  
 
   changeactivestatus() {
     isActive = !isActive;
     update();
   }
- int expandIndex = -1;
+
+  int expandIndex = -1;
   void changeExpandIndex(int index) {
     if (expandIndex == index) {
       expandIndex = -1;

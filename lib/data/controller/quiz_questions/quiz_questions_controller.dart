@@ -92,7 +92,7 @@ class QuizQuestionsController extends GetxController {
         }
   
       } else {
-        CustomSnackBar.error(errorList: [quizquestions.status ?? ""]);
+        CustomSnackBar.error(errorList: [...quizquestions.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

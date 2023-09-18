@@ -42,7 +42,7 @@ class _OneVSOneCustomCardWidgetState extends State<OneVSOneCustomCardWidget> {
                       const CustomDivider(
                         space: Dimensions.space3,
                       ),
-                      Text("${controller.entryFeeRandomGame.value.tr} ${MyStrings.coins.tr}", style: semiBoldExtraLarge)
+                      Text("${controller.entryFeeRandomGame.value} ${MyStrings.coins.tr}", style: semiBoldExtraLarge)
                     ],
                   )
                 ],

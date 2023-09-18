@@ -62,24 +62,39 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
-                                  InkWell(
-                                      onTap: () {
-                                        if (controller.reviewPageController.page!.toInt() < controller.examQuestionsList.length) {
-                                          controller.reviewPageController.nextPage(
-                                            duration: const Duration(milliseconds: 500),
-                                            curve: Curves.easeInOut,
-                                          );
-                                        }
-                                      },
-                                      child: LevelCardButton(
-                                        text: MyStrings.next.tr,
-                                        hasIcon: false,
-                                        hasImage: false,
-                                        bgColor: MyColor.primaryColor,
-                                        hasbgColor: true,
-                                        height: Dimensions.space40,
-                                        hastextColor: true,
-                                      )),
+                                  if (questionsIndex < controller.examQuestionsList.length - 1) // Check if not on the last page
+                                    ...[
+                                    InkWell(
+                                        onTap: () {
+                                          if (controller.reviewPageController.page!.toInt() < controller.examQuestionsList.length) {
+                                            controller.reviewPageController.nextPage(
+                                              duration: const Duration(milliseconds: 500),
+                                              curve: Curves.easeInOut,
+                                            );
+                                          }
+                                        },
+                                        child: LevelCardButton(
+                                          text: "${MyStrings.next.tr}",
+                                          hasIcon: false,
+                                          hasImage: false,
+                                          bgColor: MyColor.primaryColor,
+                                          hasbgColor: true,
+                                          height: Dimensions.space40,
+                                          hastextColor: true,
+                                        )),
+                                  ] else ...[
+                                    // InkWell(
+                                    //     onTap: () {},
+                                    //     child: LevelCardButton(
+                                    //       text: "${MyStrings.next.tr}",
+                                    //       hasIcon: false,
+                                    //       hasImage: false,
+                                    //       bgColor: MyColor.battleTextColor,
+                                    //       hasbgColor: true,
+                                    //       height: Dimensions.space40,
+                                    //       hastextColor: true,
+                                    //     )),
+                                  ],
                                 ],
                               ),
                               const SizedBox(

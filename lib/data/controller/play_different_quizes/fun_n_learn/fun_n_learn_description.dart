@@ -49,7 +49,7 @@ class FunNLearnListController extends GetxController {
           fun_N_Learn_descriptionList.addAll(subcategorylist);
         }
       } else {
-        CustomSnackBar.error(errorList: [funandLearnDescription.status ?? ""]);
+        CustomSnackBar.error(errorList: [...funandLearnDescription.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

@@ -107,7 +107,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                       alignment: Alignment.centerRight,
                                       child: Container(
                                         decoration: BoxDecoration(
-                                          color: MyColor.primaryColor,
+                                          color: MyColor.colorRed.withOpacity(0.5),
                                           borderRadius: BorderRadius.circular(8),
                                         ),
                                         child: IconButton(

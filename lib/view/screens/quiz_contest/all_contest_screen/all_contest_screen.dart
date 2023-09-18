@@ -7,6 +7,7 @@ import 'package:quiz_lab/data/services/api_service.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
+import '../../../components/no_data.dart';
 import 'widget/contest_title_card_widget.dart';
 
 class AllContestScreen extends StatefulWidget {
@@ -37,28 +38,32 @@ class _AllContestScreenState extends State<AllContestScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<QuizQuestionsListController>(
       builder: (controller) => Scaffold(
-        appBar:  CustomCategoryAppBar(
+        appBar: CustomCategoryAppBar(
           title: MyStrings.quizContest.tr,
         ),
         body: controller.loading == true
             ? const CustomLoader()
-            : SingleChildScrollView(
-                child: ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: controller.examcategoryList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      var contestItem = controller.examcategoryList[index];
-                      return ContestListTileCard(
-                        onTap: () {
-                          Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.examcategoryList[index].id.toString(), controller.examcategoryList[index].title.toString()])!.whenComplete(() {});
-                        },
-                        contest: contestItem,
-                        index: index,
-                        image: contestItem.image.toString(),
-                      );
-                    }),
-              ),
+            : controller.examcategoryList.isEmpty
+                ? NoDataWidget(
+                    messages: MyStrings.noContestFound.tr,
+                  )
+                : SingleChildScrollView(
+                    child: ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: controller.examcategoryList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var contestItem = controller.examcategoryList[index];
+                          return ContestListTileCard(
+                            onTap: () {
+                              Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.examcategoryList[index].id.toString(), controller.examcategoryList[index].title.toString()])!.whenComplete(() {});
+                            },
+                            contest: contestItem,
+                            index: index,
+                            image: contestItem.image.toString(),
+                          );
+                        }),
+                  ),
       ),
     );
   }

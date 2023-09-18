@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
@@ -15,8 +16,8 @@ class MyImageWidget extends StatelessWidget {
     required this.imageUrl,
     this.height = 80,
     this.width = 100,
-    this.radius = 5,  this.boxFit = BoxFit.cover,
-    
+    this.radius = 5,
+    this.boxFit = BoxFit.cover,
   });
 
   @override
@@ -36,13 +37,25 @@ class MyImageWidget extends StatelessWidget {
         width: width,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(Dimensions.defaultRadius * 5),
-            child: Center(
-              child: Icon(
-                Icons.image,
-                color: MyColor.colorGrey.withOpacity(0.5),
+            child:  Center(
+              child: SpinKitFadingCube(
+                color: MyColor.primaryColor.withOpacity(0.3),
+                size: Dimensions.space20,
               ),
             )),
       ),
+      // placeholder: (context, url) => SizedBox(
+      //   height: height,
+      //   width: width,
+      //   child: ClipRRect(
+      //       borderRadius: BorderRadius.circular(Dimensions.defaultRadius * 5),
+      //       child: Center(
+      //         child: Icon(
+      //           Icons.image,
+      //           color: MyColor.colorGrey.withOpacity(0.5),
+      //         ),
+      //       )),
+      // ),
       errorWidget: (context, url, error) => SizedBox(
         height: height,
         width: width,

@@ -138,25 +138,45 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                 child: GridView.builder(
                                     shrinkWrap: true,
                                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 2.3, crossAxisCount: 3),
-                                    itemCount: labelCount,
+                                    itemCount: widget.categories.quizInfos!.length,
                                     itemBuilder: (BuildContext context, int index) {
                                       return Padding(
                                           padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
                                           child: InkWell(
                                             onTap: () {
-                                              if (widget.categories.quizInfos![index].playInfo != null) {
-                                                Get.toNamed(
-                                                  RouteHelper.guessTheword,
-                                                  arguments: widget.categories.quizInfos![index].id,
-                                                );
-                                              }
+                                              // if (widget.categories.quizInfos![index].playInfo != null) {
+                                              Get.toNamed(
+                                                RouteHelper.guessTheword,
+                                                arguments: widget.categories.quizInfos![index].id,
+                                              );
+                                              // }
                                             },
                                             child: Container(
                                               padding: const EdgeInsets.symmetric(horizontal: Dimensions.space8, vertical: Dimensions.space8),
-                                              decoration: BoxDecoration(color: widget.categories.quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel, borderRadius: BorderRadius.circular(Dimensions.space7), border: Border.all(color: widget.categories.quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
+                                              decoration: BoxDecoration(
+                                                  color: widget.categories.quizInfos![index].playInfo != null
+                                                      ? MyColor.completedlevel
+                                                      : index == 0
+                                                          ? MyColor.completedlevel
+                                                          : MyColor.lockedLevel,
+                                                  borderRadius: BorderRadius.circular(Dimensions.space7),
+                                                  border: Border.all(
+                                                      color: widget.categories.quizInfos![index].playInfo != null
+                                                          ? MyColor.completedlevel
+                                                          : index == 0
+                                                              ? MyColor.completedlevel
+                                                              : MyColor.lockedLevel)),
                                               child: Row(
                                                 children: [
-                                                  SvgPicture.asset(widget.categories.quizInfos![index].playInfo != null ? MyImages.levelGreenTikSVG : MyImages.lockLevelSVG),
+                                                  if (index == 0 && widget.categories.quizInfos![index].playInfo == null) ...[
+                                                    const Icon(
+                                                      Icons.remove_red_eye,
+                                                      size: Dimensions.space18,
+                                                      color: MyColor.greenP,
+                                                    )
+                                                  ] else ...[
+                                                    SvgPicture.asset(widget.categories.quizInfos![index].playInfo != null ? MyImages.levelGreenTikSVG : MyImages.lockLevelSVG),
+                                                  ],
                                                   const SizedBox(width: Dimensions.space4),
                                                   Text(
                                                     widget.categories.quizInfos![index].level!.title.toString(),
@@ -169,21 +189,21 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                     }),
                               ),
                               // attention: view more logic
-                              widget.categories.quizInfos!.length > 3
-                                  ? GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          labelCount = widget.categories.quizInfos!.length;
-                                        });
-                                      },
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
-                                        child: CustomTextWithUndeline(
-                                          text: MyStrings.viewMore.tr,
-                                        ),
-                                      ),
-                                    )
-                                  : const SizedBox.shrink(),
+                              // widget.categories.quizInfos!.length > 3
+                              //     ? GestureDetector(
+                              //         onTap: () {
+                              //           setState(() {
+                              //             labelCount = widget.categories.quizInfos!.length;
+                              //           });
+                              //         },
+                              //         child: Padding(
+                              //           padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
+                              //           child: CustomTextWithUndeline(
+                              //             text: MyStrings.viewMore.tr,
+                              //           ),
+                              //         ),
+                              //       )
+                              //     : const SizedBox.shrink(),
                             ],
                           ),
                         )

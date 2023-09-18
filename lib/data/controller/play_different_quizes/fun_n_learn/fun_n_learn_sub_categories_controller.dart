@@ -1,4 +1,3 @@
-
 import 'package:flutter/widgets.dart';
 import 'package:quiz_lab/data/model/play_different_quizes/fun_n_learn/fun_n_learn_category_model.dart';
 import 'package:quiz_lab/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
@@ -40,7 +39,7 @@ class FunNLearnSubCategoriesController extends GetxController {
       if (subcategories.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         // id =subcategories.data.subcategories.
 
-        List<Subcategory>? subcategorylist = subcategories.data.subcategories;
+        List<Subcategory>? subcategorylist = subcategories.data!.subcategories;
 
         if (subcategorylist.isNotEmpty) {
           subCategoriesList.addAll(subcategorylist);
@@ -48,7 +47,7 @@ class FunNLearnSubCategoriesController extends GetxController {
 
         itemCount = subcategorylist.length;
       } else {
-        CustomSnackBar.error(errorList: [subcategories.status]);
+        CustomSnackBar.error(errorList: [...subcategories.message.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

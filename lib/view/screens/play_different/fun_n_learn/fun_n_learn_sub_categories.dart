@@ -11,6 +11,8 @@ import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/helper/ads/admob_helper.dart';
+import '../../../../core/utils/my_strings.dart';
+import '../../../components/no_data.dart';
 
 class FunNLearnSubCategoriesCardScreen extends StatefulWidget {
   final String title;
@@ -54,40 +56,44 @@ class _FunNLearnSubCategoriesCardScreenState extends State<FunNLearnSubCategorie
         ),
         body: controller.loader
             ? const CustomLoader()
-            : SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
-                        shrinkWrap: true,
-                        itemCount: controller.subCategoriesList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return CategoriesCard(
-                            index: index,
-                            image: UrlContainer.subCategoriesImage + controller.subCategoriesList[index].image.toString(),
-                            title: controller.subCategoriesList[index].name.toString(),
-                            questions: controller.subCategoriesList[index].quizInfosCount.toString(),
-                            expansionVisible: false,
-                            fromViewAll: false,
-                            isExpand: false,
-                            showLevel: false,
-                            levels: controller.itemCount.toString(),
-                            fromFunNlearn: true,
-                            onTap: () {
-                              admobHelper.showInterstitialAd();
-                              controller.showExpandedSection = true;
-                              controller.changeExpandIndex(index);
+            : controller.subCategoriesList.isEmpty
+                ? NoDataWidget(
+                    messages: MyStrings.noSubCategoryFound.tr,
+                  )
+                : SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
+                            shrinkWrap: true,
+                            itemCount: controller.subCategoriesList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CategoriesCard(
+                                index: index,
+                                image: UrlContainer.subCategoriesImage + controller.subCategoriesList[index].image.toString(),
+                                title: controller.subCategoriesList[index].name.toString(),
+                                questions: controller.subCategoriesList[index].quizInfosCount.toString(),
+                                expansionVisible: false,
+                                fromViewAll: false,
+                                isExpand: false,
+                                showLevel: false,
+                                levels: controller.itemCount.toString(),
+                                fromFunNlearn: true,
+                                onTap: () {
+                                  admobHelper.showInterstitialAd();
+                                  controller.showExpandedSection = true;
+                                  controller.changeExpandIndex(index);
 
-                              Get.toNamed(RouteHelper.funNlearnListScreen, arguments: [controller.subCategoriesList[index].name.toString(), controller.subCategoriesList[index].id.toString(), controller.subCategoriesList[index].categoryId.toString()]);
-                            },
-                          );
-                        }),
-                  ],
-                ),
-              ),
+                                  Get.toNamed(RouteHelper.funNlearnListScreen, arguments: [controller.subCategoriesList[index].name.toString(), controller.subCategoriesList[index].id.toString(), controller.subCategoriesList[index].categoryId.toString()]);
+                                },
+                              );
+                            }),
+                      ],
+                    ),
+                  ),
       ),
     );
   }

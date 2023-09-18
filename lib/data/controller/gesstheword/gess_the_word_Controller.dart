@@ -87,7 +87,7 @@ class GuessThewordController extends GetxController {
         Get.offAndToNamed(
           RouteHelper.gessThewordResult,
         );
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
+        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
       } else {
         CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
         Get.offAndToNamed(RouteHelper.guessTheWordCategory);

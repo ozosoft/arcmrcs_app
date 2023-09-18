@@ -37,7 +37,7 @@ class QuizQuestionsListController extends GetxController {
           examcategoryList.addAll(examList);
         }
       } else {
-        CustomSnackBar.error(errorList: [examZoneModel.status ?? ""]);
+        CustomSnackBar.error(errorList: [...examZoneModel.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

@@ -30,11 +30,11 @@ class _QuizContestSectionState extends State<QuizContestSection> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space5, start: Dimensions.space5, end: Dimensions.space5, top: Dimensions.space10),
+            padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space5, start: Dimensions.space5, end: Dimensions.space5, top: Dimensions.space20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                 Text(
+                Text(
                   MyStrings.quizContest.tr,
                   style: semiBoldMediumLarge,
                 ),

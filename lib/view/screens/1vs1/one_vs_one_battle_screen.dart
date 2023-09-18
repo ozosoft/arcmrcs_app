@@ -7,6 +7,7 @@ import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
 import 'package:quiz_lab/data/services/api_service.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/divider/or_divider.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
@@ -48,78 +49,79 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                     hasScrollBody: false,
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: Dimensions.space30),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                           Text(
-                            MyStrings.selectCategory.tr,
-                            style: semiBoldExtraLarge,
-                          ),
-                          const SizedBox(
-                            height: Dimensions.space20,
-                          ),
-                          CustomDropDownTextField3(
-                            fillColor: MyColor.colorWhite,
-                            focusColor: MyColor.colorWhite,
-                            dropDownColor: MyColor.colorWhite,
-                            needLabel: false,
-                            selectedValue: null,
-                            onChanged: (value) {
-                              var valueData = value as BattleCategory;
-
-                              controller.slectACategory(valueData.id);
-                            },
-                            items: controller.categoryList.map<DropdownMenuItem<BattleCategory>>((BattleCategory value) {
-                              return DropdownMenuItem<BattleCategory>(
-                                value: value,
-                                child: Text(
-                                  value.name,
-                                  style: const TextStyle(
-                                    fontSize: Dimensions.fontDefault,
-                                  ),
+                      child: controller.isLoadingCategory.value == true
+                          ? const CustomLoader()
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  MyStrings.selectCategory.tr,
+                                  style: semiBoldExtraLarge,
                                 ),
-                              );
-                            }).toList(),
-                            hintText: MyStrings.selectACategoryText.tr,
-                          ),
-                          const SizedBox(
-                            height: Dimensions.space40,
-                          ),
-                          RoundedButton(
-                              text: widget.isGroupBattle ? MyStrings.groupBattle.tr : MyStrings.letsPlay.tr,
-                              press: () async {
-                                if (controller.slectedCategoryID.value == 0) {
-                                  CustomSnackBar.error(errorList: [MyStrings.selectACategoryMsg.tr]);
-                                } else if (int.parse(controller.battleRepo.apiClient.getUserCurrentCoin()) <
-                                    int.parse(controller.entryFeeRandomGame.value)) {
-                                  CustomSnackBar.error(errorList: [MyStrings.youHaveNoCoins.tr]);
-                                } else {
-                                  Get.toNamed(RouteHelper.findOpponentScreen, arguments: [
-                                    controller.slectedCategoryID.value,
-                                    controller.entryFeeRandomGame.value,
-                                    <BattleCategory>[]
-                                  ]); //Send Question List and ID to next page
-                                }
-                              },
-                              textSize: Dimensions.space20,
-                              cornerRadius: Dimensions.space10),
-                          const SizedBox(
-                            height: Dimensions.space20,
-                          ),
-                          const OrDivider(),
-                          const SizedBox(
-                            height: Dimensions.space25,
-                          ),
-                          RoundedButton(
-                              text: MyStrings.playWithFriend.tr,
-                              press: () {
-                                CustomBottomSheet(child: const PlayWithFriendsBottomSheetWidget()).customBottomSheet(context);
-                              },
-                              textSize: Dimensions.space20,
-                              color: MyColor.colorBlack,
-                              cornerRadius: Dimensions.space10),
-                        ],
-                      ),
+                                const SizedBox(
+                                  height: Dimensions.space20,
+                                ),
+                                CustomDropDownTextField3(
+                                  fillColor: MyColor.colorWhite,
+                                  focusColor: MyColor.colorWhite,
+                                  dropDownColor: MyColor.colorWhite,
+                                  needLabel: false,
+                                  selectedValue: null,
+                                  onChanged: (value) {
+                                    var valueData = value as BattleCategory;
+
+                                    controller.slectACategory(valueData.id);
+                                  },
+                                  items: controller.categoryList.map<DropdownMenuItem<BattleCategory>>((BattleCategory value) {
+                                    return DropdownMenuItem<BattleCategory>(
+                                      value: value,
+                                      child: Text(
+                                        value.name,
+                                        style: const TextStyle(
+                                          fontSize: Dimensions.fontDefault,
+                                        ),
+                                      ),
+                                    );
+                                  }).toList(),
+                                  hintText: MyStrings.selectACategoryText.tr,
+                                ),
+                                const SizedBox(
+                                  height: Dimensions.space40,
+                                ),
+                                RoundedButton(
+                                    text: widget.isGroupBattle ? MyStrings.groupBattle.tr : MyStrings.letsPlay.tr,
+                                    press: () async {
+                                      if (controller.slectedCategoryID.value == 0) {
+                                        CustomSnackBar.error(errorList: [MyStrings.selectACategoryMsg.tr]);
+                                      } else if (int.parse(controller.battleRepo.apiClient.getUserCurrentCoin()) < int.parse(controller.entryFeeRandomGame.value)) {
+                                        CustomSnackBar.error(errorList: [MyStrings.youHaveNoCoins.tr]);
+                                      } else {
+                                        Get.toNamed(RouteHelper.findOpponentScreen, arguments: [controller.slectedCategoryID.value, controller.entryFeeRandomGame.value, <BattleCategory>[]]); //Send Question List and ID to next page
+                                      }
+                                    },
+                                    textSize: Dimensions.space20,
+                                    cornerRadius: Dimensions.space10),
+                                const SizedBox(
+                                  height: Dimensions.space20,
+                                ),
+                                const OrDivider(),
+                                const SizedBox(
+                                  height: Dimensions.space25,
+                                ),
+                                RoundedButton(
+                                    text: MyStrings.playWithFriend.tr,
+                                    press: () {
+                                      if (controller.categoryList.isEmpty) {
+                                        CustomSnackBar.error(errorList: [MyStrings.noCategoryFound]);
+                                      } else {
+                                        CustomBottomSheet(child: const PlayWithFriendsBottomSheetWidget()).customBottomSheet(context);
+                                      }
+                                    },
+                                    textSize: Dimensions.space20,
+                                    color: MyColor.colorBlack,
+                                    cornerRadius: Dimensions.space10),
+                              ],
+                            ),
                     ),
                   ),
                 ],

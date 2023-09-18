@@ -80,36 +80,43 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   Text(
+                  Text(
                     MyStrings.examRules.tr,
                     textAlign: TextAlign.center,
                     style: semiBoldMediumLarge,
+                  ),
+                  const SizedBox(
+                    height: Dimensions.space10,
                   ),
                   ListView.builder(
                       physics: const BouncingScrollPhysics(),
                       itemCount: viewAll == true ? 3 : 2,
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
-                        return Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Text('\u2022',
-                                style: regularOverLarge.copyWith(
-                                  fontSize: 40,
-                                  color: MyColor.primaryColor,
-                                )),
-                            const SizedBox(
-                              width: Dimensions.space10,
-                            ),
-                            Expanded(
-                              child: Text(
-                                MyStrings().rules[index],
-                                style: regularLarge.copyWith(overflow: TextOverflow.visible, color: MyColor.textColor),
+                        return Container(
+                          margin: EdgeInsets.all(Dimensions.space5),
+                          color: Colors.transparent,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text('\u2022', style: regularLarge.copyWith(overflow: TextOverflow.visible, color: MyColor.redCancelTextColor, fontSize: 20)),
+                              const SizedBox(
+                                width: Dimensions.space10,
                               ),
-                            ),
-                          ],
+                              Expanded(
+                                child: Text(
+                                  MyStrings().rules[index],
+                                  style: regularLarge.copyWith(overflow: TextOverflow.visible, color: MyColor.textColor),
+                                ),
+                              ),
+                            ],
+                          ),
                         );
                       }),
+                  const SizedBox(
+                    height: Dimensions.space10,
+                  ),
                   InkWell(
                     onTap: () {
                       debugPrint(viewAll.toString());
@@ -117,8 +124,8 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                       controller.update();
                     },
                     child: Text(
-                      MyStrings.viewAllRules.tr,
-                      style: regularLarge.copyWith(color: MyColor.textColor),
+                      viewAll == false ? "${MyStrings.viewAllRules.tr} ↑ " : "${MyStrings.viewLessRules.tr} ↓ ",
+                      style: regularLarge.copyWith(color: MyColor.textColor, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

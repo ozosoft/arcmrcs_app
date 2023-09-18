@@ -95,7 +95,7 @@ class DashBoardController extends GetxController {
           username = dashBoard.data?.user!.username;
           userImage = dashBoard.data?.user!.avatar;
         } else {
-          CustomSnackBar.error(errorList: [dashBoard.status ?? ""]);
+          CustomSnackBar.error(errorList: [...dashBoard.message!.error!]);
         }
       }
     } else {
@@ -123,7 +123,7 @@ class DashBoardController extends GetxController {
         debugPrint("LoggedM OUT!");
         update();
       } else {
-        CustomSnackBar.error(errorList: [plan.status ?? ""]);
+        CustomSnackBar.error(errorList: [...plan.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [logout.message]);

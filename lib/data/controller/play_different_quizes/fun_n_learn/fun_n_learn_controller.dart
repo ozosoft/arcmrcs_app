@@ -37,7 +37,7 @@ class FunNLearnCategoriesController extends GetxController {
           allCategoriesList.addAll(categories);
         }
       } else {
-        CustomSnackBar.error(errorList: [allcategories.status ?? ""]);
+        CustomSnackBar.error(errorList: [...allcategories.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

@@ -47,7 +47,7 @@ class SubCategoriesController extends GetxController {
 
         itemCount = subcategorylist?.length ?? 0;
       } else {
-        CustomSnackBar.error(errorList: [subcategories.status ?? ""]);
+        CustomSnackBar.error(errorList: [...subcategories.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);
