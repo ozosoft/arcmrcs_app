@@ -1,8 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../model/quiz_questions_model/quiz_questions_model.dart';
+import '../../model/battle/battle_question_list.dart';
 import '../../repo/battle/battle_repo.dart';
 import 'battle_room_controller.dart';
 
@@ -20,7 +21,7 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   get countdownSeconds => _countdownSeconds.value;
   Timer get startTimer => _startTimer;
 
-  var getQuestionList = <Question>[];
+  var getQuestionList = <BattleQuestion>[];
   var getCategoryID = Get.arguments[0] as int;
   var getEntryCoin = Get.arguments[1] as String;
 
@@ -40,11 +41,19 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
         if (state == UserFoundState.found) {
           if (state == UserFoundState.found) {
             _startTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
+              //set questions
+              if (battleRoomController.battleQuestionsList.isEmpty) {
+                final List<dynamic> existingQuestionsData = json.decode(battleRoomController.battleRoomData.value!.questions_list!);
+                final List<BattleQuestion> existingQuestionsList = existingQuestionsData.map((item) => BattleQuestion.fromJson(item)).toList();
+
+                battleRoomController.battleQuestionsList.value = existingQuestionsList;
+              }
               // Start the 5-second timer here
               if (_countdownSeconds.value > 0) {
                 _countdownSeconds.value--;
               } else {
                 _startTimer.cancel();
+
                 //Start Game
                 battleRoomController.startBattleQuiz(battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true);
               }
@@ -81,7 +90,7 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
   }
 
   //Search Random Users
-  randomSearch(List<Question> questionList, {int? getCategoryID, required String entryCoin}) {
+  randomSearch(List<BattleQuestion> questionList, {int? getCategoryID, required String entryCoin}) {
     battleRoomController.randomSearchRoom(entryCoin: entryCoin, categoryId: getCategoryID.toString(), name: battleRepo.apiClient.getUserFullName(), profileUrl: battleRepo.apiClient.getUserImagePath(), uid: battleRepo.apiClient.getUserID(), questionList: questionList);
   }
 }

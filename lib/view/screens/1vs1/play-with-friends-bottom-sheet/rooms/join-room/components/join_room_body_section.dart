@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
@@ -9,6 +11,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../../core/utils/style.dart';
 import '../../../../../../../data/controller/battle/battle_room_controller.dart';
+import '../../../../../../../data/model/battle/battle_question_list.dart';
 import '../../../../../../../data/services/api_service.dart';
 import '../../../../../../components/bottom-sheet/custom_bottom_sheet.dart';
 import '../../../../../../components/buttons/rounded_loading_button.dart';
@@ -65,8 +68,15 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                       if (battleRoomController.joinRoomState.value != JoinRoomState.none) {
                         if (battleRoomController.joinRoomState.value == JoinRoomState.joined) {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
-// Navigator.pop(context);
-                            if (battleRoomController.alreadyJoined == false) {
+                            // Navigator.pop(context);
+                            if (battleRoomController.battleQuestionsList.isEmpty) {
+                              final List<dynamic> existingQuestionsData = json.decode(battleRoomController.battleRoomData.value!.questions_list!);
+                              final List<BattleQuestion> existingQuestionsList = existingQuestionsData.map((item) => BattleQuestion.fromJson(item)).toList();
+
+                              battleRoomController.battleQuestionsList.value = existingQuestionsList;
+                            }
+
+                            if (battleRoomController.alreadyJoined.value == false) {
                               CustomBottomSheet(
                                 enableDrag: false,
                                 child: const JoinedLobbyBottomSheet(),

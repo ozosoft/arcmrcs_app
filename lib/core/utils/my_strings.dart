@@ -65,7 +65,7 @@ class MyStrings {
   static const String please = "Please";
   static const String selectRemarks = "Select Remarks";
   static const String selectTrxType = "Select Trx Type";
-  static const String username = "User Name";
+  static const String username = "UserName";
   static const String fullname = "Full Name";
   static const String beforeCharge = "Before Charge";
   static const String remainingBalance = "Remaining Balance";

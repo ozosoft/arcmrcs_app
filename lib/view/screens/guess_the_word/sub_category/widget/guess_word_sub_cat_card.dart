@@ -89,29 +89,39 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
                         ),
                       ),
                       const SizedBox(width: Dimensions.space30),
-                      Padding(
-                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space15),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(widget.subcategory.name.toString(), style: semiBoldMediumLarge),
-                            const SizedBox(height: Dimensions.space12),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                CustomChipsWidget(
-                                  padding: Dimensions.space5,
-                                  child: Center(child: Text(widget.subcategory.questionsCount.toString() + MyStrings.questionse.tr, style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.only(top: Dimensions.space15),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(widget.subcategory.name.toString(), style: semiBoldMediumLarge),
+                              const SizedBox(height: Dimensions.space12),
+                              SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                physics: const BouncingScrollPhysics(),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    CustomChipsWidget(
+                                      padding: Dimensions.space5,
+                                      right: Dimensions.space10,
+                                      child: Center(child: Text(widget.subcategory.questionsCount.toString() + MyStrings.questionse.tr, style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    ),
+                                    CustomChipsWidget(
+                                      padding: Dimensions.space5,
+                                      child: Center(child: Text("${widget.subcategory.quizInfos!.length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: Dimensions.space20,
-                            )
-                          ],
+                              ),
+                              const SizedBox(
+                                height: Dimensions.space20,
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                      const Spacer(),
                       Padding(
                         padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                         child: SvgPicture.asset(isExpande ? MyImages.arrowDownSVG : MyImages.playSVG, height: Dimensions.space35),

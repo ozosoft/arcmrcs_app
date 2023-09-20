@@ -41,8 +41,11 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
     return GetBuilder<LeaderBoardController>(
       builder: (controller) => controller.isLoading
           ? SizedBox(
-              height: context.height,
-              child: const CustomLoader(isPagination: true),
+              height: context.height / 2,
+              child: const Center(
+                  child: CustomLoader(
+                isPagination: true,
+              )),
             )
           : Column(
               children: [

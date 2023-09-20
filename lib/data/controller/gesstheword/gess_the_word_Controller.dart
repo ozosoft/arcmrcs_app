@@ -200,6 +200,7 @@ class GuessThewordController extends GetxController {
 
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<GuessQuestion>? templist = model.data?.questions;
+        print(model.data?.questions.toString());
         if (templist != null) {
           gessThewordQuesstionList.clear();
           questionImgPath = model.data?.questionImagePath;
@@ -207,11 +208,17 @@ class GuessThewordController extends GetxController {
           quizInfoId = id;
           gessThewordQuesstionList.addAll(templist);
         }
+        if (model.data!.questions!.isEmpty) {
+          Get.back();
+          CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.sorryNoQuizFound]);
+        }
       } else {
-        // CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        Get.back();
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
       }
     } else {
-      // CustomSnackBar.error(errorList: [response.message]);
+      Get.back();
+      CustomSnackBar.error(errorList: [response.message]);
     }
     isLoading = false;
     update();
