@@ -63,7 +63,7 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
                 Padding(
                   padding: const EdgeInsets.all(Dimensions.space10),
                   child: Text(
-                    MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
+                    MyStrings.areYouSureYouWantToLeaveThisQuiz.tr,
                     style: regularLarge.copyWith(color: MyColor.textSecondColor),
                   ),
                 ),

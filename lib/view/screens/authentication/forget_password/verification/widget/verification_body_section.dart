@@ -54,7 +54,7 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                         height: Dimensions.space8,
                       ),
                       Text(
-                        MyStrings.wehaveSentaCode.tr,
+                        MyStrings.wehaveSentaCode.tr.replaceAll("{email}", controller.email.toString()),
                         style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
                       ),
                     ],
@@ -122,25 +122,40 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                               ),
                       ),
                       const SizedBox(height: Dimensions.space10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(MyStrings.didNotReceiveCode.tr, style: regularLarge.copyWith(color: MyColor.getAuthTextColor(), fontWeight: FontWeight.w500)),
-                          controller.isResendLoading
-                              ? const SizedBox(
-                                  height: 17,
-                                  width: 17,
-                                  child: CircularProgressIndicator(
-                                    color: MyColor.primaryColor,
-                                  ),
-                                )
-                              : TextButton(
-                                  onPressed: () {
-                                    controller.resendForgetPassCode();
-                                  },
-                                  child: CustomUndelineText(text: MyStrings.resendCode.tr))
-                        ],
-                      ),
+                      Obx(() => Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(Dimensions.space10),
+                                child: Text(MyStrings.didNotReceiveCode.tr, style: regularLarge.copyWith(color: MyColor.getAuthTextColor(), fontWeight: FontWeight.w500)),
+                              ),
+                              controller.isResendButtonLoading.value == true
+                                  ? const Padding(
+                                      padding: EdgeInsets.all(20.0),
+                                      child: SizedBox(
+                                        height: 17,
+                                        width: 17,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          color: MyColor.primaryColor,
+                                        ),
+                                      ),
+                                    )
+                                  : controller.isResendLoading.value
+                                      ? const SizedBox.shrink()
+                                      : TextButton(
+                                          onPressed: () {
+                                            controller.resendForgetPassCode();
+                                          },
+                                          child: CustomUndelineText(text: MyStrings.resendCode.tr)),
+                            ],
+                          )),
+                      const SizedBox(height: Dimensions.space10),
+                      Obx(() {
+                        final resendCountdown = controller.resendCountdown.value;
+
+                        return resendCountdown > 0 ? Text(MyStrings.emailResendAvilableIn.tr.replaceAll("{time}", resendCountdown.toString())) : const SizedBox.shrink();
+                      }),
                     ],
                   ),
                 )

@@ -64,6 +64,8 @@ class LoginController extends GetxController {
     await loginRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userEmailKey, responseModel.data?.user?.email ?? '');
     await loginRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userPhoneNumberKey, responseModel.data?.user?.mobile ?? '');
     await loginRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userNameKey, responseModel.data?.user?.username ?? '');
+    await loginRepo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.soundKey, true);
+    await loginRepo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.vibrationKey, true);
 
     // Get.toNamed(RouteHelper.bottomNavBarScreen);
 
@@ -327,7 +329,8 @@ class LoginController extends GetxController {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser == null) {
-        throw Exception('Google Sign-In canceled by user');
+        // throw Exception('Google Sign-In canceled by user');
+        return;
       }
       final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(

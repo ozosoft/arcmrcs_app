@@ -21,6 +21,8 @@ class ProfileScreen extends StatelessWidget {
           children: [
             ProfileTopSection(),
             ProfileDetailsSection(),
+
+            
           ],
         ),
       ),

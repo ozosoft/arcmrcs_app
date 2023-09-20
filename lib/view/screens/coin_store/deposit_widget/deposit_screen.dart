@@ -56,7 +56,7 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
       builder: (controller) => SafeArea(
           child: Scaffold(
         backgroundColor: MyColor.getScreenBgColor(),
-        appBar:  CustomCategoryAppBar(title: MyStrings.deposit.tr),
+        appBar:  CustomCategoryAppBar(title: MyStrings.payment.tr),
         body: controller.isLoading
             ? const CustomLoader()
             : SingleChildScrollView(

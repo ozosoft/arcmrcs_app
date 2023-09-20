@@ -44,7 +44,7 @@ class LevelCardButton extends StatelessWidget {
               : lifelineUsed == true
                   ? SvgPicture.asset(
                       image!,
-                      color: MyColor.colorRed,
+                      color: MyColor.greyTextColor,
                       fit: BoxFit.cover,
                     )
                   : SvgPicture.asset(

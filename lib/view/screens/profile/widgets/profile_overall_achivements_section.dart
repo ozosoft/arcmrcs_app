@@ -13,6 +13,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/util.dart';
+import '../../../../data/controller/auth/logout/logout_controller.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 
 class ProfileTopSection extends StatefulWidget {
@@ -27,7 +28,7 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ProfileRepo(apiClient: Get.find()));
-
+    Get.put(LogoutController(logoutRepo: Get.find()));
     ProfileController controller = Get.put(ProfileController(profileRepo: Get.find()));
 
     super.initState();

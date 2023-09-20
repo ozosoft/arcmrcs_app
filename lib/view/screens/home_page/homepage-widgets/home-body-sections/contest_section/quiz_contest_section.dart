@@ -73,7 +73,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                       if (quizQuestionscontrollers.examQuestionsList != "[]") {
                                         Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.contestlist[index].id.toString(), controller.contestlist[index].title.toString(), debugPrint("this is quiz id" + controller.contestlist[index].id.toString()), debugPrint("this is quiz title" + controller.contestlist[index].title.toString())]);
                                       } else {
-                                        CustomSnackBar.error(errorList: ["Sorry this contest is not available right now"]);
+                                        CustomSnackBar.error(errorList: [MyStrings.noContestFound.tr,]);
                                       }
                                     },
                                     child: Container(
@@ -146,7 +146,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                             ),
                                           ),
                                           const SizedBox(
-                                            height: Dimensions.space20,
+                                            height: Dimensions.space10,
                                           ),
                                           Container(
                                             height: 0.1,

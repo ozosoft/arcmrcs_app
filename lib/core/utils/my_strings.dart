@@ -20,6 +20,7 @@ class MyStrings {
   static const String areYouSureYouWantToCloseSearching = "Are You sure You Want Close Searching!";
   static const String searching = "Searching";
   static const String areYouSureYouWantToLeaveThisRoom = "Are You sure You Want to leave this room!";
+  static const String areYouSureYouWantToLeaveThisQuiz = "Are You sure You Want to leave this Quiz!";
   static const String areYouSureYouWantToLeaveExamRoom = "Are You sure You Want to leave Exam room!";
   static const String questionNotFoundMsg = "Questions not found! Please try again after a few minutes.";
   static const String noQuestionFoundMsg = "Sorry! No Questions!";
@@ -65,7 +66,7 @@ class MyStrings {
   static const String please = "Please";
   static const String selectRemarks = "Select Remarks";
   static const String selectTrxType = "Select Trx Type";
-  static const String username = "UserName";
+  static const String username = "Username";
   static const String fullname = "Full Name";
   static const String beforeCharge = "Before Charge";
   static const String remainingBalance = "Remaining Balance";
@@ -220,7 +221,8 @@ class MyStrings {
   static const String privacyPolicy = "Privacy & Policy";
   static const String forgetPassword = "Forget Password";
   static const String enterVerificationcode = "Enter Verification Code";
-  static const String wehaveSentaCode = "We have sent a code to refatul.tsk@gmail.com";
+  static const String wehaveSentaCode = "We have sent a code to {email}";
+  static const String emailResendAvilableIn = "Resend available in {time} seconds";
   static const String doNotHaveAccount = "Don't have an account?";
   static const String enterEmailOrUserName = 'Enter username or email';
   static const String policies = 'Policies';

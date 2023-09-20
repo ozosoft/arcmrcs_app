@@ -11,6 +11,7 @@ import 'package:quiz_lab/data/controller/quiz_contest/quiz_contest_questions_con
 import 'package:quiz_lab/data/repo/quiz_contest/quiz_contest_repo.dart';
 import 'package:quiz_lab/data/services/api_service.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_appbar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
 import 'package:quiz_lab/view/components/buttons/level_card_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/no_data.dart';
@@ -18,6 +19,8 @@ import 'package:quiz_lab/view/screens/quiz_contest/question_screen/quiz_contest_
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/route/route.dart';
+import '../../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';
 
@@ -53,15 +56,69 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
       children: [
         GetBuilder<QuizContestQuestionsController>(
           builder: (controller) => Scaffold(
-            appBar: CustomAppBar(title: controller.title.toString(), isShowBackBtn: true),
+            appBar: CustomCategoryAppBar(title: controller.title.toString(),),
             body: controller.loading
                 ? const CustomLoader()
                 : controller.examQuestionsList.isEmpty
                     ? NoDataWidget(
                         messages: MyStrings.thisContestIsNotAvailableRightNow.tr,
                       )
-                    : PageView(onPageChanged: (value) {}, children: [
-                        PageView.builder(
+                    : WillPopScope(
+                        onWillPop: () async {
+                          CustomAlertDialog(
+                              borderRadius: 100,
+                              child: Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(Dimensions.space10),
+                                    child: Text(
+                                      MyStrings.areYouSureYouWantToLeaveThisQuiz.tr,
+                                      style: regularLarge.copyWith(color: MyColor.textSecondColor),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 1,
+                                    color: MyColor.textSecondColor.withOpacity(0.3),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(Dimensions.space10),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
+                                          },
+                                          child: Text(
+                                            MyStrings.cancel.tr,
+                                            style: regularLarge,
+                                          ),
+                                        ),
+                                        TextButton(
+                                          style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
+                                          onPressed: () async {
+                                            Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+                                          },
+                                          child: Text(
+                                            MyStrings.yes.tr,
+                                            style: regularLarge.copyWith(color: MyColor.colorWhite),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              )).customAlertDialog(context);
+                          return false; // Disable back button if `start` is true
+                        },
+                        child: PageView.builder(
                           physics: const NeverScrollableScrollPhysics(),
                           controller: controller.pageController,
                           onPageChanged: (int page) {
@@ -164,7 +221,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                                               children: [
                                                                 Expanded(
                                                                   child: Text(
-                                                                    " ${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()} ${controller.examQuestionsList[questionsIndex].options![optionIndex].isAnswer.toString()}",
+                                                                    " ${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()}",
                                                                     style: regularMediumLarge.copyWith(
                                                                         color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
                                                                             ? MyColor.textColor
@@ -187,7 +244,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                                           ),
                                                         ),
                                                       ),
-                                                      controller.showaudienceVote == true
+                                                      controller.showaudienceVote == true && controller.audienceVoteIndex == questionsIndex
                                                           ? Text(
                                                               controller.examQuestionsList[questionsIndex].options![optionIndex].audience.toString() + MyStrings.percent.tr,
                                                               style: regularMediumLarge.copyWith(color: MyColor.textColor),
@@ -246,7 +303,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                             );
                           },
                         ),
-                      ]),
+                      ),
           ),
         ),
         //Ads Code

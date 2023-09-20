@@ -155,7 +155,7 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                                                 Row(
                                                   children: [
                                                     Text(
-                                                      "${item.score.tr} ${MyStrings.points.tr}",
+                                                      "${item.score} ${MyStrings.points.tr}",
                                                       style: semiBoldLarge.copyWith(color: MyColor.textColor),
                                                     ),
                                                   ],
@@ -164,7 +164,7 @@ class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with Si
                                             ),
                                           ),
                                           Text(
-                                            '$ranking'.tr,
+                                            '$ranking',
                                             style: semiBoldOverLarge.copyWith(color: MyColor.greyTextColor.withOpacity(0.6), fontSize: Dimensions.fontOverLarge30),
                                           )
                                         ],

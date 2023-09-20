@@ -77,7 +77,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                         ),
                       ] else ...[
                         Container(
-                          margin: const EdgeInsetsDirectional.only(start: Dimensions.space10),
+                          margin: const EdgeInsetsDirectional.only(end: Dimensions.space10),
                           child: MyImageWidget(
                             height: MediaQuery.of(context).size.width * 0.15,
                             width: MediaQuery.of(context).size.width * 0.15,

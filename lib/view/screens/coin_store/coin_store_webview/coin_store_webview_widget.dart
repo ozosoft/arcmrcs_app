@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/route/route.dart';
+import '../../../../core/utils/my_color.dart';
 import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/url_container.dart';
 import '../../../components/snack_bar/show_custom_snackbar.dart';
@@ -51,7 +52,7 @@ class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
     }
     return Stack(
       children: [
-        isLoading ? const Center(child: CircularProgressIndicator()) : const SizedBox(),
+        
         InAppWebView(
           key: webViewKey,
           initialUrlRequest: URLRequest(url: Uri.parse(url)),
@@ -60,7 +61,6 @@ class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
           },
           initialOptions: options,
           onLoadStart: (controller, url) {
-
             if (url.toString() == '${UrlContainer.domainUrl}/user/deposit/history') {
               Get.offAndToNamed(RouteHelper.coinHistoryScreen);
               CustomSnackBar.success(successList: [MyStrings.requestSuccess.tr]);
@@ -102,7 +102,13 @@ class _CoinStroreWebViewWidgetState extends State<CoinStroreWebViewWidget> {
             });
           },
           onConsoleMessage: (controller, consoleMessage) {},
-        )
+        ),
+        isLoading
+            ? const Center(
+                child: CircularProgressIndicator(
+                color: MyColor.primaryColor,
+              ))
+            : const SizedBox(),
       ],
     );
   }

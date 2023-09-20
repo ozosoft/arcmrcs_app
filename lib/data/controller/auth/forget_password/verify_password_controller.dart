@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/route/route.dart';
@@ -19,18 +21,53 @@ class VerifyPasswordController extends GetxController {
   List<String> errors = [];
   String currentText = "";
   String confirmPassword = '';
+  DateTime? lastResendTime;
+  Timer? resendTimer;
 
-  bool isResendLoading = false;
+  RxBool isResendLoading = false.obs;
+  RxBool isResendButtonLoading = false.obs;
+
+  int resendDelaySeconds = 30; // Set the resend delay time in seconds
+  RxInt resendCountdown = 0.obs; // Countdown timer in seconds
+
+  void startResendCountdown() {
+    isResendLoading.value = true;
+    resendCountdown.value = resendDelaySeconds;
+    update();
+
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      if (resendCountdown.value > 0) {
+        resendCountdown.value--;
+      } else {
+        isResendLoading.value = false;
+        timer.cancel();
+      }
+      update();
+    });
+  }
 
   void resendForgetPassCode() async {
-    isResendLoading = true;
-    update();
-    String value = email;
-    String type = 'email';
-    await loginRepo.forgetPassword(type, value);
-    isResendLoading = false;
-    update();
+    if (!isResendLoading.value) {
+      isResendButtonLoading.value = true;
+      // Trigger the resend code function
+      String value = email;
+      String type = 'email';
+      await loginRepo.forgetPassword(type, value);
+  isResendButtonLoading.value = false;
+      // Start the resend countdown
+      startResendCountdown();
+    }
   }
+
+  // void resendForgetPassCode() async {
+  //   isResendLoading = true;
+  //   update();
+  //   String value = email;
+  //   String type = 'email';
+  //   await loginRepo.forgetPassword(type, value);
+  //   isResendLoading = false;
+  //   update();
+  // }
 
   bool verifyLoading = false;
 
@@ -39,8 +76,7 @@ class VerifyPasswordController extends GetxController {
       verifyLoading = true;
       update();
 
-      EmailVerificationModel model =
-          await loginRepo.verifyForgetPassCode(value);
+      EmailVerificationModel model = await loginRepo.verifyForgetPassCode(value);
 
       if (model.code == 200) {
         verifyLoading = false;

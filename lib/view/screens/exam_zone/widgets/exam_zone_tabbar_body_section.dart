@@ -49,12 +49,18 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(size.height * .4),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space10),
+                  margin: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space10),
+                  height: Dimensions.space45,
                   decoration: BoxDecoration(
-                    // color: Colors.amber,
-                    borderRadius: BorderRadius.circular(Dimensions.space25),
-                  ), // Make it rounded),
+                    color: MyColor.greyTextColor.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(Dimensions.space50),
+                  ),
                   child: TabBar(
+                      splashFactory: NoSplash.splashFactory,
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                        // Use the default focused overlay color
+                        return states.contains(MaterialState.focused) ? null : Colors.transparent;
+                      }),
                       controller: controller.tabController,
                       unselectedLabelColor: MyColor.textColor,
                       labelColor: MyColor.colorWhite,
@@ -65,9 +71,9 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                         color: MyColor.primaryColor, // Change the color to green
                       ),
                       onTap: (value) {
-                        controller.selectTab();
+                        // controller.selectTab();
                       },
-                      tabs:  [
+                      tabs: [
                         Tab(
                           child: Align(
                             alignment: Alignment.center,
@@ -92,7 +98,9 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                           controller.examZoneListData(fromLoad: true);
                         },
                         child: controller.examcategoryList.isEmpty
-                            ?  NoDataWidget(messages: MyStrings.noExamFound.tr,)
+                            ? NoDataWidget(
+                                messages: MyStrings.noExamFound.tr,
+                              )
                             : ListView.builder(
                                 physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                                 shrinkWrap: true,

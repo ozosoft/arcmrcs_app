@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/account/profile_controller.dart';
 import 'package:get/get.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+
+import '../../../../core/utils/my_images.dart';
+import '../../../../data/controller/auth/logout/logout_controller.dart';
+import '../../../components/buttons/rounded_loading_button.dart';
 
 class ProfileDetailsSection extends StatefulWidget {
   const ProfileDetailsSection({super.key});
@@ -23,7 +30,7 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: Dimensions.space10),
-             Text(
+            Text(
               MyStrings.profileDetails.tr,
               style: boldMediumLarge,
             ),
@@ -65,6 +72,17 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
                     ),
                   ],
                 )),
+            const SizedBox(
+              height: Dimensions.space20,
+            ),
+            GetBuilder<LogoutController>(
+                builder: (logoutController) => logoutController.loaderStarted
+                    ? const RoundedLoadingBtn()
+                    : RoundedButton(
+                        text: MyStrings.logout,
+                        press: () {
+                          logoutController.logout();
+                        })),
           ],
         ),
       ),

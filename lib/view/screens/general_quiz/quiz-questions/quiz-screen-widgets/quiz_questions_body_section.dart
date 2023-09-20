@@ -64,7 +64,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                             Padding(
                               padding: const EdgeInsets.all(Dimensions.space10),
                               child: Text(
-                                MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
+                                MyStrings.areYouSureYouWantToLeaveThisQuiz.tr,
                                 style: regularLarge.copyWith(color: MyColor.textSecondColor),
                               ),
                             ),
@@ -224,7 +224,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                                   ),
                                                 ),
                                                 // const Spacer(),
-                                                controller.showaudienceVote == true
+                                                controller.showaudienceVote == true && controller.audienceVoteIndex == questionsIndex
                                                     ? Text(
                                                         controller.questionsList[questionsIndex].options![optionIndex].audience.toString() + MyStrings.percent.tr,
                                                         style: regularMediumLarge.copyWith(color: MyColor.textColor),
