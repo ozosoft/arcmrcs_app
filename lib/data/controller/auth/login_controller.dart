@@ -241,7 +241,7 @@ class LoginController extends GetxController {
           changeOtpPageStatus(true);
 
           changeOtpSendButtonLoading(false);
-          CustomSnackBar.error(errorList: [MyStrings.otpSentToYourMobile.tr]);
+          CustomSnackBar.success(successList: [MyStrings.otpSentToYourMobile.tr]);
         },
         codeAutoRetrievalTimeout: (String verificationId) {
           this.verificationId.value = verificationId;
