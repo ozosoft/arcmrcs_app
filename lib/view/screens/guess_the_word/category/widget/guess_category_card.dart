@@ -161,43 +161,44 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                           padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
                                           child: InkWell(
                                             onTap: () {
-                                              // if (widget.categories.quizInfos![index].playInfo != null) {
-                                              Get.toNamed(
-                                                RouteHelper.guessTheword,
-                                                arguments: widget.categories.quizInfos![index].id,
-                                              );
-                                              // }
+                                              if (widget.categories.quizInfos![index].levelStatus == MyStrings.unlock) {
+                                                Get.toNamed(
+                                                  RouteHelper.guessTheword,
+                                                  arguments: widget.categories.quizInfos![index].id,
+                                                );
+                                              }
                                             },
                                             child: Container(
                                               padding: const EdgeInsets.symmetric(horizontal: Dimensions.space8, vertical: Dimensions.space8),
                                               decoration: BoxDecoration(
-                                                  color: widget.categories.quizInfos![index].playInfo != null
-                                                      ? MyColor.completedlevel
-                                                      : index == 0
+                                                  color: widget.categories.quizInfos![index].levelStatus == MyStrings.lock
+                                                      ? MyColor.lockedLevel
+                                                      : widget.categories.quizInfos![index].playInfo != null
                                                           ? MyColor.completedlevel
-                                                          : MyColor.lockedLevel,
+                                                          : MyColor.unlockedLevel,
                                                   borderRadius: BorderRadius.circular(Dimensions.space7),
-                                                  border: Border.all(
-                                                      color: widget.categories.quizInfos![index].playInfo != null
-                                                          ? MyColor.completedlevel
-                                                          : index == 0
-                                                              ? MyColor.completedlevel
-                                                              : MyColor.lockedLevel)),
+                                                  border: Border.all(color: widget.categories.quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
                                               child: Row(
                                                 children: [
-                                                  if (index == 0 && widget.categories.quizInfos![index].playInfo == null) ...[
-                                                    const Icon(
-                                                      Icons.remove_red_eye,
-                                                      size: Dimensions.space18,
-                                                      color: MyColor.greenP,
-                                                    )
-                                                  ] else ...[
-                                                    SvgPicture.asset(widget.categories.quizInfos![index].playInfo != null ? MyImages.levelGreenTikSVG : MyImages.lockLevelSVG),
-                                                  ],
-                                                  const SizedBox(width: Dimensions.space4),
-                                                  Text(
-                                                    widget.categories.quizInfos![index].level!.title.toString(),
-                                                    style: regularLarge.copyWith(color: MyColor.textColor),
+                                                  SvgPicture.asset(widget.categories.quizInfos![index].levelStatus == MyStrings.lock
+                                                      ? MyImages.lockLevelSVG
+                                                      : widget.categories.quizInfos![index].playInfo != null
+                                                          ? MyImages.levelGreenTikSVG
+                                                          : MyImages.unlockSVG),
+                                                  const SizedBox(width: Dimensions.space8),
+                                                  Expanded(
+                                                    child: Text(
+                                                      "${widget.categories.quizInfos![index].level!.title}",
+                                                      maxLines: 1,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: regularLarge.copyWith(
+                                                        color: widget.categories.quizInfos![index].levelStatus == MyStrings.lock
+                                                            ? MyColor.textColor
+                                                            : widget.categories.quizInfos![index].playInfo != null
+                                                                ? MyColor.completedlevelTEXT
+                                                                : MyColor.colorBlack,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ),

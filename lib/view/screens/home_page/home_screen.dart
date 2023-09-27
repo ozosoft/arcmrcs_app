@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/components/no_data.dart';
 import 'package:quiz_lab/view/screens/drawer/drawer_screen.dart';
 import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home-body-sections/exam_zone_section/exam_zone_homepage_category_screen.dart';
 import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home-body-sections/home_top_category_section/top_category_section.dart';
@@ -81,18 +83,37 @@ class _HomeScreenState extends State<HomeScreen> {
                               height: context.height / 2,
                               child: const Center(child: CustomLoader()),
                             )
-                          : const Column(
-                              children: [
-                                TopCategorySection(),
-                                // BattleOfTheDaySection(),
-                                QuizContestSection(),
-                                ExamZoneCategoryScreen(),
-                                PlayDiffrentQuizes(),
-                                SizedBox(
-                                  height: Dimensions.space100,
+                          : controller.generalQuizStatus == '0' && controller.contestStatus == '0' && controller.examStatus == '0' && controller.differentQuizlist.isEmpty
+                              ? const NoDataWidget(
+                                  margin: 10,
+                                  hideButton: true,
                                 )
-                              ],
-                            ),
+                              : Column(
+                                  children: [
+                                    if (controller.generalQuizStatus == '1') ...[
+                                      const TopCategorySection(),
+                                    ],
+                                    // BattleOfTheDaySection(),
+                                    if (controller.contestStatus == '1') ...[
+                                      const QuizContestSection(),
+                                    ],
+
+                                    if (controller.examStatus == '1') ...[
+                                      const ExamZoneCategoryScreen(),
+                                    ],
+
+                                    const PlayDiffrentQuizes(),
+
+                                    // TopCategorySection(),
+                                    // BattleOfTheDaySection(),
+                                    // QuizContestSection(),
+                                    // ExamZoneCategoryScreen(),
+                                    // PlayDiffrentQuizes(),
+                                    const SizedBox(
+                                      height: Dimensions.space100,
+                                    )
+                                  ],
+                                ),
                     ),
                   ),
                 ],

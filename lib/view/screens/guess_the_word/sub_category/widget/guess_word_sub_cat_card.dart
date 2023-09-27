@@ -9,7 +9,6 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/view/components/animated_widget/expanded_widget.dart';
 import 'package:quiz_lab/view/components/divider/custom_horizontal_divider.dart';
-import 'package:quiz_lab/view/components/text/custom_text_with_underline.dart';
 
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -150,43 +149,44 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
                                           padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
                                           child: InkWell(
                                             onTap: () {
-                                              // if (widget.categories.quizInfos![index].playInfo != null) {
-                                              Get.toNamed(
-                                                RouteHelper.guessTheword,
-                                                arguments: widget.subcategory.quizInfos![index].id,
-                                              );
-                                              // }
+                                              if (widget.subcategory.quizInfos![index].levelStatus == MyStrings.unlock) {
+                                                Get.toNamed(
+                                                  RouteHelper.guessTheword,
+                                                  arguments: widget.subcategory.quizInfos![index].id,
+                                                );
+                                              }
                                             },
                                             child: Container(
                                               padding: const EdgeInsets.symmetric(horizontal: Dimensions.space8, vertical: Dimensions.space8),
                                               decoration: BoxDecoration(
-                                                  color: widget.subcategory.quizInfos![index].playInfo != null
-                                                      ? MyColor.completedlevel
-                                                      : index == 0
+                                                  color: widget.subcategory.quizInfos![index].levelStatus == MyStrings.lock
+                                                      ? MyColor.lockedLevel
+                                                      : widget.subcategory.quizInfos![index].playInfo != null
                                                           ? MyColor.completedlevel
-                                                          : MyColor.lockedLevel,
+                                                          : MyColor.unlockedLevel,
                                                   borderRadius: BorderRadius.circular(Dimensions.space7),
-                                                  border: Border.all(
-                                                      color: widget.subcategory.quizInfos![index].playInfo != null
-                                                          ? MyColor.completedlevel
-                                                          : index == 0
-                                                              ? MyColor.completedlevel
-                                                              : MyColor.lockedLevel)),
+                                                  border: Border.all(color: widget.subcategory.quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
                                               child: Row(
                                                 children: [
-                                                  if (index == 0 && widget.subcategory.quizInfos![index].playInfo == null) ...[
-                                                    const Icon(
-                                                      Icons.remove_red_eye,
-                                                      size: Dimensions.space18,
-                                                      color: MyColor.greenP,
-                                                    )
-                                                  ] else ...[
-                                                    SvgPicture.asset(widget.subcategory.quizInfos![index].playInfo != null ? MyImages.levelGreenTikSVG : MyImages.lockLevelSVG),
-                                                  ],
-                                                  const SizedBox(width: Dimensions.space4),
-                                                  Text(
-                                                    widget.subcategory.quizInfos![index].level!.title.toString(),
-                                                    style: regularLarge.copyWith(color: MyColor.textColor),
+                                                  SvgPicture.asset(widget.subcategory.quizInfos![index].levelStatus == MyStrings.lock
+                                                      ? MyImages.lockLevelSVG
+                                                      : widget.subcategory.quizInfos![index].playInfo != null
+                                                          ? MyImages.levelGreenTikSVG
+                                                          : MyImages.unlockSVG),
+                                                  const SizedBox(width: Dimensions.space8),
+                                                  Expanded(
+                                                    child: Text(
+                                                      "${widget.subcategory.quizInfos![index].level!.title}",
+                                                      maxLines: 1,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      style: regularLarge.copyWith(
+                                                        color: widget.subcategory.quizInfos![index].levelStatus == MyStrings.lock
+                                                            ? MyColor.textColor
+                                                            : widget.subcategory.quizInfos![index].playInfo != null
+                                                                ? MyColor.completedlevelTEXT
+                                                                : MyColor.colorBlack,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ],
                                               ),

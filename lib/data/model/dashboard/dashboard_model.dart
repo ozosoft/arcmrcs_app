@@ -45,7 +45,18 @@ class Data {
   List<Category>? categories;
   List<Contest>? contest;
   List<Exams>? exams;
-
+  String? categoryImagePath;
+  String? contestImagePath;
+  String? quizImagePath;
+  String? examImagePath;
+  String? userImagePath;
+  String? generalQuizStatus;
+  String? contestStatus;
+  String? funNLearnStatus;
+  String? guessTheWordStatus;
+  String? examStatus;
+  String? dailyQuizStatus;
+  String? singleBattleStatus;
   Data({
     this.user,
     this.rank,
@@ -53,6 +64,18 @@ class Data {
     this.categories,
     this.contest,
     this.exams,
+    this.categoryImagePath,
+    this.contestImagePath,
+    this.quizImagePath,
+    this.examImagePath,
+    this.userImagePath,
+    this.generalQuizStatus,
+    this.contestStatus,
+    this.funNLearnStatus,
+    this.guessTheWordStatus,
+    this.examStatus,
+    this.dailyQuizStatus,
+    this.singleBattleStatus,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) {
@@ -63,6 +86,18 @@ class Data {
       categories: json["categories"] == null ? [] : List<Category>.from(json["categories"]!.map((x) => Category.fromJson(x))),
       contest: json["contest"] == null ? [] : List<Contest>.from(json["contest"]!.map((x) => Contest.fromJson(x))),
       exams: json["exams"] == null ? [] : List<Exams>.from(json["exams"]!.map((x) => Exams.fromJson(x))),
+      categoryImagePath: json["category_image_path"],
+      contestImagePath: json["contest_image_path"],
+      quizImagePath: json["quiz_image_path"],
+      examImagePath: json["exam_image_path"],
+      userImagePath: json["user_image_path"],
+      generalQuizStatus: json["general_quiz_status"],
+      contestStatus: json["contest_status"],
+      funNLearnStatus: json["fun_n_learn_status"],
+      guessTheWordStatus: json["guess_the_word_status"],
+      examStatus: json["exam_status"],
+      dailyQuizStatus: json["daily_quiz_status"],
+      singleBattleStatus: json["single_battle_status"],
     );
   }
 
@@ -73,6 +108,18 @@ class Data {
         "categories": categories == null ? [] : List<dynamic>.from(categories!.map((x) => x.toJson())),
         "contest": contest == null ? [] : List<dynamic>.from(contest!.map((x) => x.toJson())),
         "exams": exams == null ? [] : List<dynamic>.from(exams!.map((x) => x.toJson())),
+        "category_image_path": categoryImagePath,
+        "contest_image_path": contestImagePath,
+        "quiz_image_path": quizImagePath,
+        "exam_image_path": examImagePath,
+        "user_image_path": userImagePath,
+        "general_quiz_status": generalQuizStatus,
+        "contest_status": contestStatus,
+        "fun_n_learn_status": funNLearnStatus,
+        "guess_the_word_status": guessTheWordStatus,
+        "exam_status": examStatus,
+        "daily_quiz_status": dailyQuizStatus,
+        "single_battle_status": singleBattleStatus,
       };
 }
 

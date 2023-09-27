@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
@@ -13,8 +14,9 @@ class NoDataWidget extends StatelessWidget {
   final Widget? child;
   final bool showHomeButton;
   final bool showBack;
+  final bool hideButton;
 
-  const NoDataWidget({Key? key, this.margin = 4, this.messages, this.child, this.showHomeButton = true, this.showBack = false}) : super(key: key);
+  const NoDataWidget({Key? key, this.margin = 4, this.messages, this.child, this.showHomeButton = true, this.showBack = false, this.hideButton = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,27 +34,29 @@ class NoDataWidget extends StatelessWidget {
             style: regularLarge.copyWith(color: MyColor.getTextColor()),
           ),
           const SizedBox(height: Dimensions.space30),
-          if (showHomeButton == true)
-            TextButton(
-              onPressed: () {
-                if (showBack == true) {
-                  Get.back();
-                } else {
-                  Get.offAllNamed(RouteHelper.bottomNavBarScreen);
-                }
-              },
-              style: TextButton.styleFrom(
-                splashFactory: InkSplash.splashFactory, // Use the default splash factory
-                backgroundColor: MyColor.primaryColor.withOpacity(0.2),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  " ${showBack == true ? MyStrings.back.tr : MyStrings.home.tr} ",
-                  style: regularLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.bold),
+          if (hideButton == false) ...[
+            if (showHomeButton == true)
+              TextButton(
+                onPressed: () {
+                  if (showBack == true) {
+                    Get.back();
+                  } else {
+                    Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+                  }
+                },
+                style: TextButton.styleFrom(
+                  splashFactory: InkSplash.splashFactory, // Use the default splash factory
+                  backgroundColor: MyColor.primaryColor.withOpacity(0.2),
                 ),
-              ),
-            )
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    " ${showBack == true ? MyStrings.back.tr : MyStrings.home.tr} ",
+                    style: regularLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
+          ],
         ],
       ),
     );

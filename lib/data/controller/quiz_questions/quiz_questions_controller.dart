@@ -85,11 +85,11 @@ class QuizQuestionsController extends GetxController {
 
         successmessage = quizquestions.message!.success.toString();
 
-        List<Option>? optionslist = quizquestions.data!.questions![0].options;
+        // List<Option>? optionslist = quizquestions.data!.questions![0].options;
 
-        if (optionslist != null && optionslist.isNotEmpty) {
-          optionsList.addAll(optionslist);
-        }
+        // if (optionslist != null && optionslist.isNotEmpty) {
+        //   optionsList.addAll(optionslist);
+        // }
   
       } else {
         CustomSnackBar.error(errorList: [...quizquestions.message!.error!]);

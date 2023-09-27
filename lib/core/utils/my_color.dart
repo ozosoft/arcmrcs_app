@@ -91,8 +91,9 @@ class MyColor {
   static const Color categoryCardBodyWrongColor = Color(0xFFFFD2DA);
   static const Color prifileBG = Color(0xDFFF795E);
   static const Color unlockedLevel = Color(0xFFF8F8F8);
-  static const Color lockedLevel = Color(0xFFDFDFDF);
+  static const Color lockedLevel = Color(0xFFEAE7E7);
   static const Color completedlevel = Color(0xFFE5F8E5);
+  static const Color completedlevelTEXT = Color(0xFF00BA00);
 
   static Color getPrimaryColor() {
     return primaryColor;

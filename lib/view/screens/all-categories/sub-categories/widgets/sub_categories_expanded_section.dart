@@ -9,6 +9,7 @@ import 'package:quiz_lab/view/components/divider/custom_horizontal_divider.dart'
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+import '../../../../../core/utils/my_strings.dart';
 import '../../../../../data/controller/sub_categories/sub_categories_controller.dart';
 
 class SubCategoriesExpandedSection extends StatelessWidget {
@@ -38,18 +39,41 @@ class SubCategoriesExpandedSection extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
                       child: InkWell(
                         onTap: () {
-                          Get.toNamed(RouteHelper.quizQuestionsScreen, arguments: [title, controller!.subCategoriesList[categoryindex].quizInfos![index].id]);
+                          if (controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.unlock) {
+                            Get.toNamed(RouteHelper.quizQuestionsScreen, arguments: [title, controller!.subCategoriesList[categoryindex].quizInfos![index].id]);
+                          }
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space8, vertical: Dimensions.space8),
-                          decoration: BoxDecoration(color: controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel, borderRadius: BorderRadius.circular(Dimensions.space7), border: Border.all(color: controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
+                          decoration: BoxDecoration(
+                              color: controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
+                                  ? MyColor.lockedLevel
+                                  : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                      ? MyColor.completedlevel
+                                      : MyColor.unlockedLevel,
+                              borderRadius: BorderRadius.circular(Dimensions.space7),
+                              border: Border.all(color: controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
                           child: Row(
                             children: [
-                              SvgPicture.asset(controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null ? MyImages.levelGreenTikSVG : MyImages.lockLevelSVG),
-                              const SizedBox(width: Dimensions.space4),
-                              Text(
-                                controller!.subCategoriesList[categoryindex].quizInfos![index].level!.title.toString(),
-                                style: regularLarge,
+                              SvgPicture.asset(controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
+                                  ? MyImages.lockLevelSVG
+                                  : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                      ? MyImages.levelGreenTikSVG
+                                      : MyImages.unlockSVG),
+                              const SizedBox(width: Dimensions.space8),
+                              Expanded(
+                                child: Text(
+                                  controller!.subCategoriesList[categoryindex].quizInfos![index].level!.title.toString(),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: regularLarge.copyWith(
+                                    color: controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
+                                        ? MyColor.textColor
+                                        : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                            ? MyColor.completedlevelTEXT
+                                            : MyColor.colorBlack,
+                                  ),
+                                ),
                               ),
                             ],
                           ),

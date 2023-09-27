@@ -30,6 +30,15 @@ class DashBoardController extends GetxController {
   List<QuizType> differentQuizlist = [];
   List<User> userdetails = [];
 
+  //Home page section status
+  String? generalQuizStatus = '0';
+  String? contestStatus = '0';
+  String? funNLearnStatus = '0';
+  String? guessTheWordStatus = '0';
+  String? examStatus = '0';
+  String? dailyQuizStatus = '0';
+  String? singleBattleStatus = '0';
+
   bool loader = false;
 
   bool isActive = false;
@@ -64,6 +73,14 @@ class DashBoardController extends GetxController {
           score = dashBoard.data?.user?.score ?? "";
 
           debugPrint(dashBoard.data!.user.toString());
+          //Status check
+          generalQuizStatus = dashBoard.data?.generalQuizStatus;
+          contestStatus = dashBoard.data?.contestStatus;
+          funNLearnStatus = dashBoard.data?.funNLearnStatus;
+          guessTheWordStatus = dashBoard.data?.guessTheWordStatus;
+          examStatus = dashBoard.data?.examStatus;
+          dailyQuizStatus = dashBoard.data?.dailyQuizStatus;
+          singleBattleStatus = dashBoard.data?.singleBattleStatus;
 
           //save User Data
           dashRepo.apiClient.setUserData(dashBoard.data!.user!.toJson());

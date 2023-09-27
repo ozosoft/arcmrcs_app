@@ -171,6 +171,7 @@ class QuizInfo {
   String? status;
   DateTime? createdAt;
   DateTime? updatedAt;
+  String? levelStatus;
   Level? level;
   PlayInfo? playInfo;
 
@@ -195,6 +196,7 @@ class QuizInfo {
     this.status,
     this.createdAt,
     this.updatedAt,
+    this.levelStatus,
     this.level,
     this.playInfo,
   });
@@ -220,6 +222,7 @@ class QuizInfo {
         status: json["status"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+        levelStatus: json["level_status"],
         level: json["level"] == null ? null : Level.fromJson(json["level"]),
         playInfo: json["play_info"] == null ? null : PlayInfo.fromJson(json["play_info"]),
       );
@@ -245,6 +248,7 @@ class QuizInfo {
         "status": status,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
+        "level_status": levelStatus,
         "level": level?.toJson(),
         "play_info": playInfo?.toJson(),
       };

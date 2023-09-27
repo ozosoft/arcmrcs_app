@@ -574,4 +574,6 @@ class MyStrings {
   static const String dot = "⚈";
   static const String agreePolicyMessage = "You must agree with our privacy & policies";
   static const String agreeExamRules = "You must agree with Exam rules";
+  static const String unlock = "unlock";
+  static const String lock = "lock";
 }

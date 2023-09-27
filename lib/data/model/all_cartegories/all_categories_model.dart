@@ -119,14 +119,15 @@ class QuizInfo {
   dynamic point;
   dynamic description;
   String? levelId;
-  ExamTime? examStartTime;
-  ExamTime? examEndTime;
+  String? examStartTime;
+  String? examEndTime;
   dynamic examDuration;
   dynamic examKey;
   double? winningMark;
   String? status;
   DateTime? createdAt;
   DateTime? updatedAt;
+  String? levelStatus;
   PlayInfo? playInfo;
   Level? level;
 
@@ -151,6 +152,7 @@ class QuizInfo {
     this.status,
     this.createdAt,
     this.updatedAt,
+    this.levelStatus,
     this.playInfo,
     this.level,
   });
@@ -169,14 +171,15 @@ class QuizInfo {
       point: json["point"],
       description: json["description"],
       levelId: json["level_id"],
-      examStartTime: examTimeValues.map[json["exam_start_time"]],
-      examEndTime: examTimeValues.map[json["exam_end_time"]],
+      examStartTime: json["exam_start_time"],
+      examEndTime: json["exam_end_time"],
       examDuration: json["exam_duration"],
       examKey: json["exam_key"],
       winningMark: double.parse(json["winning_mark"].toString()),
       status: json["status"],
       createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
       updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
+      levelStatus: json["level_status"],
       playInfo: json["play_info"] == null ? null : PlayInfo.fromJson(json["play_info"]),
       level: json["level"] == null ? null : Level.fromJson(json["level"]),
     );
@@ -195,22 +198,19 @@ class QuizInfo {
         "point": point,
         "description": description,
         "level_id": levelId,
-        "exam_start_time": examTimeValues.reverse[examStartTime],
-        "exam_end_time": examTimeValues.reverse[examEndTime],
+        "exam_start_time": examStartTime,
+        "exam_end_time": examEndTime,
         "exam_duration": examDuration,
         "exam_key": examKey,
         "winning_mark": winningMark,
         "status": status,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
+        "level_status": levelStatus,
         "play_info": playInfo?.toJson(),
         "level": level?.toJson(),
       };
 }
-
-enum ExamTime { THE_0918_AM }
-
-final examTimeValues = EnumValues({"09:18 am": ExamTime.THE_0918_AM});
 
 class Level {
   int? id;
@@ -306,16 +306,4 @@ class PlayInfo {
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
       };
-}
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }
