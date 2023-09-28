@@ -228,7 +228,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                                 // const Spacer(),
                                                 controller.showaudienceVote == true && controller.audienceVoteIndex == questionsIndex
                                                     ? Text(
-                                                        "${controller.questionsList[questionsIndex].playedAudience == null ? 0.00 : controller.calculateAudienceVotes(controller.questionsList[questionsIndex].options![optionIndex].audience.toString(), controller.questionsList[questionsIndex].playedAudience.toString())}${MyStrings.percent.tr}",
+                                                        "${controller.questionsList[questionsIndex].playedAudience == '0' ? "0.00" : controller.calculateAudienceVotes(controller.questionsList[questionsIndex].options![optionIndex].audience.toString(), controller.questionsList[questionsIndex].playedAudience.toString())}${MyStrings.percent.tr}",
                                                         style: regularMediumLarge.copyWith(color: MyColor.textColor),
                                                       )
                                                     : const SizedBox(),

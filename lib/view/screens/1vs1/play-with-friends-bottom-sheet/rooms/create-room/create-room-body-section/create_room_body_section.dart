@@ -96,9 +96,9 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                         padding: const EdgeInsetsDirectional.only(top: Dimensions.space15, start: Dimensions.space15),
                         child: Text(
                           MyStrings.entryCoinsForBattele.tr,
-                          style: semiBoldMediumLarge,
+                          style: semiBoldMediumLarge, 
                         ),
-                      ),
+                      ),  const SizedBox(height: Dimensions.space25),
                       GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,

@@ -167,10 +167,13 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                                                                     ),
                                                                   ),
                                                                   SizedBox(
-                                                                      height: Dimensions.space10,
-                                                                      child: SvgPicture.asset(
-                                                                          "${controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox() : controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
-                                                                          fit: BoxFit.cover))
+                                                                    height: Dimensions.space10,
+                                                                    child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                        ? const SizedBox()
+                                                                        : controller.selectedOptionIndex == optionIndex
+                                                                            ? SvgPicture.asset(controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG, fit: BoxFit.cover)
+                                                                            : const SizedBox(),
+                                                                  ),
                                                                 ],
                                                               ),
                                                             ),
