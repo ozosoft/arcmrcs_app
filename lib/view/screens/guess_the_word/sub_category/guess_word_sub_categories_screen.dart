@@ -34,13 +34,14 @@ class _GuessWordSubCategoryScreenState extends State<GuessWordSubCategoryScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:  CustomCategoryAppBar(
+      appBar: CustomCategoryAppBar(
         title: MyStrings.subcategory.tr,
       ),
       body: GetBuilder<GuessThewordController>(builder: (controller) {
         return controller.isLoading
             ? const CustomLoader()
             : ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 itemCount: controller.subCategories.length,
                 itemBuilder: (context, index) {
                   return GuessWordSubCategoryCard(

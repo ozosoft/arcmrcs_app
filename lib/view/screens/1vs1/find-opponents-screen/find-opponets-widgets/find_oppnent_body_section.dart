@@ -49,7 +49,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                     padding: const EdgeInsets.all(Dimensions.space10),
                     child: Column(
                       children: [
-                        Text(MyStrings.areYouSureYouWantToCloseSearching.tr),
+                        Text(MyStrings.areYouSureYouWantToCloseSearching.tr, textAlign: TextAlign.center, style: regularDefault.copyWith()),
                       ],
                     ),
                   ),
@@ -266,7 +266,6 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                                   textStyle: boldLarge.copyWith(fontStyle: FontStyle.italic),
                                 ),
                               ),
-                            
                               Container(
                                 margin: const EdgeInsets.all(Dimensions.space14),
                                 child: DefaultText(

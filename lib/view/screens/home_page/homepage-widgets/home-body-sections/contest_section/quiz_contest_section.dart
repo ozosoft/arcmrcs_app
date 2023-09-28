@@ -5,7 +5,6 @@ import 'package:quiz_lab/core/utils/my_images.dart';
 import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/controller/dashboard/dashboard_controller.dart';
 import 'package:quiz_lab/data/controller/quiz_contest/quiz_contest_questions_controller.dart';
-import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../../../core/helper/date_converter.dart';
@@ -70,11 +69,15 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                 child: GetBuilder<QuizContestQuestionsController>(
                                   builder: (quizQuestionscontrollers) => GestureDetector(
                                     onTap: () {
-                                      if (quizQuestionscontrollers.examQuestionsList != "[]") {
-                                        Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.contestlist[index].id.toString(), controller.contestlist[index].title.toString(), debugPrint("this is quiz id" + controller.contestlist[index].id.toString()), debugPrint("this is quiz title" + controller.contestlist[index].title.toString())]);
-                                      } else {
-                                        CustomSnackBar.error(errorList: [MyStrings.noContestFound.tr,]);
-                                      }
+                                      // if (quizQuestionscontrollers.examQuestionsList != "[]") {
+
+                                      Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.contestlist[index].id.toString(), controller.contestlist[index].title.toString(), debugPrint("this is quiz id" + controller.contestlist[index].id.toString()), debugPrint("this is quiz title" + controller.contestlist[index].title.toString())]);
+
+                                      // } else {
+                                      //   CustomSnackBar.error(errorList: [
+                                      //     MyStrings.noContestFound.tr,
+                                      //   ]);
+                                      // }
                                     },
                                     child: Container(
                                       margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),
@@ -152,31 +155,35 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                             height: 0.1,
                                             color: MyColor.colorlighterGrey,
                                           ),
-                                          Container(
-                                            padding: const EdgeInsets.all(Dimensions.space10),
-                                            width: Dimensions.space330,
-                                            child: Row(
-                                              children: [
-                                                CustomChipsWidget(
-                                                  right: Dimensions.space7,
-                                                  child: Center(
-                                                      child: Text(
-                                                    "${MyStrings.entryFee.tr} - ${controller.contestlist[index].point!.tr}",
-                                                    style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                                  )),
-                                                ),
-                                                CustomChipsWidget(
-                                                  right: Dimensions.space7,
-                                                  child: Center(
-                                                    child: Text(
-                                                      '${MyStrings.end.tr}${DateConverter.stringDateToDate(controller.contestlist[index].endDate.toString()).tr}',
+                                          SingleChildScrollView(
+                                            physics: const BouncingScrollPhysics(),
+                                            scrollDirection: Axis.horizontal,
+                                            child: Container(
+                                              padding: const EdgeInsets.all(Dimensions.space10),
+                                              width: Dimensions.space330,
+                                              child: Row(
+                                                children: [
+                                                  CustomChipsWidget(
+                                                    right: Dimensions.space7,
+                                                    child: Center(
+                                                        child: Text(
+                                                      "${MyStrings.entryFee.tr} - ${controller.contestlist[index].point!.tr}",
                                                       style: regularDefault.copyWith(color: MyColor.colorGrey),
+                                                    )),
+                                                  ),
+                                                  CustomChipsWidget(
+                                                    right: Dimensions.space7,
+                                                    child: Center(
+                                                      child: Text(
+                                                        '${MyStrings.end.tr}${DateConverter.stringDateToDate(controller.contestlist[index].endDate.toString()).tr}',
+                                                        style: regularDefault.copyWith(color: MyColor.colorGrey),
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                                const Spacer(),
-                                                Center(child: SvgPicture.asset(MyImages.playNowSVG))
-                                              ],
+                                                  const Spacer(),
+                                                  Center(child: SvgPicture.asset(MyImages.playNowSVG))
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],

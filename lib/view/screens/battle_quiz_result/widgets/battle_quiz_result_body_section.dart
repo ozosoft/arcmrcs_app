@@ -79,6 +79,7 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                               if (controller.messageStatus.contains('Congratulations') == true) ...[
                                 Text(
                                   MyStrings.victory.tr,
+                                  textAlign: TextAlign.center,
                                   style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                                 ),
                                 const SizedBox(
@@ -86,11 +87,13 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                                 ),
                                 Text(
                                   MyStrings.congratulation.tr,
+                                  textAlign: TextAlign.center,
                                   style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText, fontSize: Dimensions.fontLarge),
                                 )
                               ] else if (controller.messageStatus.contains('Draw') == true) ...[
                                 Text(
                                   MyStrings.drawn.tr,
+                                  textAlign: TextAlign.center,
                                   style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                                 ),
                                 const SizedBox(
@@ -98,11 +101,13 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                                 ),
                                 Text(
                                   MyStrings.congratulation.tr,
+                                  textAlign: TextAlign.center,
                                   style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText, fontSize: Dimensions.fontLarge),
                                 )
                               ] else ...[
                                 Text(
                                   MyStrings.defeat.tr,
+                                  textAlign: TextAlign.center,
                                   style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
                                 ),
                                 const SizedBox(
@@ -110,6 +115,7 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                                 ),
                                 Text(
                                   MyStrings.betterLuckNextTime.tr,
+                                  textAlign: TextAlign.center,
                                   style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText, fontSize: Dimensions.fontLarge),
                                 )
                               ],
@@ -118,63 +124,82 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                     ],
                   ),
                   const SizedBox(
-                    height: Dimensions.space20,
+                    height: Dimensions.space30,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Column(
-                        children: [
-                          PlayerProfileDetails(userData: controller.myUserInfoData),
-                          const SizedBox(
-                            height: Dimensions.space20,
-                          ),
-                          Container(
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space6), color: MyColor.categoryCardBodyColor),
-                            padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space14),
-                            child: Row(
-                              children: [
-                                SvgPicture.asset(MyImages.greenTikSvg),
-                                const SizedBox(width: Dimensions.space6),
-                                Text(
-                                  "${controller.correctAnswer}/${controller.totalQuestion}",
-                                  style: regularDefault.copyWith(
-                                    color: MyColor.rightAnswerbgColor,
-                                  ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(Dimensions.space10),
+                          child: Column(
+                            children: [
+                              PlayerProfileDetails(userData: controller.myUserInfoData),
+                              const SizedBox(
+                                height: Dimensions.space20,
+                              ),
+                              Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space6), color: MyColor.categoryCardBodyColor),
+                                padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space14),
+                                // margin: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space14),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(MyImages.greenTikSvg),
+                                    const SizedBox(width: Dimensions.space6),
+                                    Text(
+                                      "${controller.correctAnswer}/${controller.totalQuestion}",
+                                      style: regularDefault.copyWith(
+                                        color: MyColor.rightAnswerbgColor,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
                       //opponents
-                      Column(
-                        children: [
-                          if (controller.argumentsResult.data["opponent"] != null) ...[
-                            PlayerProfileDetails(
-                              userData: controller.argumentsResult.data["opponent"],
-                            ),
-                            const SizedBox(
-                              height: Dimensions.space20,
-                            ),
-                            Container(
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space6), color: MyColor.categoryCardBodyColor),
-                              padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space14),
-                              child: Row(
-                                children: [
-                                  SvgPicture.asset(MyImages.greenTikSvg),
-                                  const SizedBox(width: Dimensions.space6),
-                                  Text(
-                                    "${controller.opponentCorrectAnswer}/${controller.totalQuestion}",
-                                    style: regularDefault.copyWith(
-                                      color: MyColor.rightAnswerbgColor,
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.all(Dimensions.space10),
+                          child: IntrinsicHeight(
+                            child: Column(
+                              children: [
+                                if (controller.argumentsResult.data["opponent"] != null) ...[
+                                  PlayerProfileDetails(
+                                    userData: controller.argumentsResult.data["opponent"],
+                                  ),
+                                  const SizedBox(
+                                    height: Dimensions.space20,
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space6), color: MyColor.categoryCardBodyColor),
+                                    padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space14),
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        SvgPicture.asset(MyImages.greenTikSvg),
+                                        const SizedBox(width: Dimensions.space6),
+                                        Text(
+                                          "${controller.opponentCorrectAnswer}/${controller.totalQuestion}",
+                                          style: regularDefault.copyWith(
+                                            color: MyColor.rightAnswerbgColor,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
-                              ),
+                              ],
                             ),
-                          ],
-                        ],
+                          ),
+                        ),
                       ),
                     ],
                   ),

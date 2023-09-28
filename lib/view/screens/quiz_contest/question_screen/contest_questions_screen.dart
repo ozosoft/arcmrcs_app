@@ -14,7 +14,6 @@ import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
 import 'package:quiz_lab/view/components/buttons/level_card_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/no_data.dart';
-import 'package:quiz_lab/view/screens/quiz_contest/question_screen/quiz_contest_life_lines.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -55,7 +54,9 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
       children: [
         GetBuilder<QuizContestQuestionsController>(
           builder: (controller) => Scaffold(
-            appBar: CustomCategoryAppBar(title: controller.title.toString(),),
+            appBar: CustomCategoryAppBar(
+              title: controller.title.toString(),
+            ),
             body: controller.loading
                 ? const CustomLoader()
                 : controller.examQuestionsList.isEmpty
@@ -75,6 +76,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                     padding: const EdgeInsets.all(Dimensions.space10),
                                     child: Text(
                                       MyStrings.areYouSureYouWantToLeaveThisQuiz.tr,
+                                      textAlign: TextAlign.center,
                                       style: regularLarge.copyWith(color: MyColor.textSecondColor),
                                     ),
                                   ),
@@ -141,9 +143,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                             LevelCardButton(text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
                                           ],
                                         ),
-                                        const SizedBox(
-                                          height: Dimensions.space10,
-                                        ),
+                                        const SizedBox(height: Dimensions.space25),
                                         if (controller.examQuestionsList[questionsIndex].image != null) ...[
                                           Container(
                                             width: double.infinity,
@@ -285,7 +285,7 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                         if (controller.selectedOptionIndex.toString() == "-1") {
                                           controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
                                         }
-                                        controller.selectedOptionIndex.toString().isNotEmpty ? debugPrint("this is selectedoption index" + controller.selectedOptionIndex.toString()) : print;
+                                      
                                         if (questionsIndex == controller.examQuestionsList.length - 1) {
                                           controller.submitAnswer();
                                         } else {

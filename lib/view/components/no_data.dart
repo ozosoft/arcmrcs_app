@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';

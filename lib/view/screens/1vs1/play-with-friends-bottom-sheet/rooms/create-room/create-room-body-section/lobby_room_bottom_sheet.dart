@@ -43,6 +43,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                     padding: const EdgeInsets.all(Dimensions.space10),
                     child: Text(
                       MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
+                      textAlign: TextAlign.center,
                       style: regularLarge.copyWith(color: MyColor.textSecondColor),
                     ),
                   ),
@@ -63,7 +64,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                           onPressed: () {
                             Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
                           },
-                          child:  Text(
+                          child: Text(
                             MyStrings.cancel.tr,
                             style: regularLarge,
                           ),
@@ -104,8 +105,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                     GestureDetector(
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: controller.battleRoomData.value!.roomCode!)).then((value) {
-                         
-                         debugPrint("copied");
+                          debugPrint("copied");
                           CustomSnackBar.success(successList: [(MyStrings.copied.tr)]);
                         });
                       },

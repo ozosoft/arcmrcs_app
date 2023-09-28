@@ -74,14 +74,15 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                               var categoryItem = controller.allCategoriesList[index];
 
                               List<QuizInfo>? levelList = categoryItem.quizInfos;
-                              String subCategoryId = levelList != null && levelList.isNotEmpty && levelList[0].subCategoryId.toString() != 'null' ? levelList[0].subCategoryId.toString() : '-1';
+
+                              String subCategoryId = levelList != null && levelList.isNotEmpty && levelList[0].subCategoryId.toString() != '0' ? levelList[0].subCategoryId.toString() : '-1';
 
                               return AllCategoryListTileCardWidget(
                                 controller: controller,
                                 categoryData: categoryItem,
                                 onTap: () {
                                   admobHelper.showInterstitialAd();
-                                  if (subCategoryId != "") {
+                                  if (categoryItem.subcategoriesCount != '0') {
                                     Get.toNamed(RouteHelper.subCategories, arguments: [categoryItem.name, categoryItem.id.toString()]);
                                   }
                                   controller.changeExpandIndex(index);

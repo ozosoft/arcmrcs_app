@@ -9,7 +9,6 @@ import 'package:flutter/widgets.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/model/battle/battle_question_list.dart';
 import '../../model/battle/battle_category_list.dart';
-import '../../model/quiz_questions_model/quiz_questions_model.dart';
 import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
@@ -17,7 +16,7 @@ import 'package:get/get.dart';
 import '../../../core/helper/battle_room_helper.dart';
 import '../../../core/route/route.dart';
 import '../../../core/utils/internet_connectivity.dart';
-import '../../model/battle/battleRoom.dart';
+import '../../model/battle/battle_room.dart';
 import '../../model/battle/battle_room_exeption.dart';
 import '../../model/battle/user_battle_room_details_model.dart';
 
@@ -197,8 +196,6 @@ class BattleRoomController extends GetxController {
                   int.parse(ownData.uid),
                   int.parse(opUserData.uid),
                 ).then((value) async {
-                  print("sddddddddddddddddd " + battleRoomData.value!.questions_list!);
-
                   await updateQuestionsListInBattleRoomFirebase(battleRoom.roomId!, value).then((value) {
                     update();
                     final List<dynamic> existingQuestionsData = json.decode(battleRoomData.value!.questions_list!);
@@ -363,7 +360,9 @@ class BattleRoomController extends GetxController {
   Future<void> startBattleQuiz(String? battleRoomDocumentId, String battle, {bool readyToPlay = true}) async {
     try {
       updateMultiUserRoom(battleRoomDocumentId, {"readyToPlay": readyToPlay}, battle);
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+    }
   }
 
 // Start Main Search Random Battle room

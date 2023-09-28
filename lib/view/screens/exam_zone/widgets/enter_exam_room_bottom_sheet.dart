@@ -68,6 +68,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                 onChanged: (value) {
                   controller.enterExamKey = value;
                 },
+                length: 6,
                 fromExam: true,
                 inActiveColor: MyColor.colorWhite,
               ),

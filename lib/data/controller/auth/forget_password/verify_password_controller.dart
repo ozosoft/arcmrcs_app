@@ -35,7 +35,7 @@ class VerifyPasswordController extends GetxController {
     resendCountdown.value = resendDelaySeconds;
     update();
 
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       if (resendCountdown.value > 0) {
         resendCountdown.value--;
       } else {

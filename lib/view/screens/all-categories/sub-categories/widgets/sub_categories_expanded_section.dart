@@ -31,6 +31,7 @@ class SubCategoriesExpandedSection extends StatelessWidget {
             color: MyColor.colorWhite,
             padding: const EdgeInsets.all(Dimensions.space10),
             child: GridView.builder(
+                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 2.3, crossAxisCount: 3),
                 itemCount: controller!.subCategoriesList[categoryindex].quizInfos!.length,
@@ -54,13 +55,15 @@ class SubCategoriesExpandedSection extends StatelessWidget {
                               borderRadius: BorderRadius.circular(Dimensions.space7),
                               border: Border.all(color: controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               SvgPicture.asset(controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
                                   ? MyImages.lockLevelSVG
                                   : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
                                       ? MyImages.levelGreenTikSVG
                                       : MyImages.unlockSVG),
-                              const SizedBox(width: Dimensions.space8),
+                              const SizedBox(width: Dimensions.space5),
                               Expanded(
                                 child: Text(
                                   controller!.subCategoriesList[categoryindex].quizInfos![index].level!.title.toString(),

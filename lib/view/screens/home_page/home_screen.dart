@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
-import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/no_data.dart';

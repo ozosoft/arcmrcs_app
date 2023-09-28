@@ -53,7 +53,6 @@ class _MobileLoginBodySectionState extends State<MobileLoginBodySection> {
               horizontal: Dimensions.space25,
             ),
             child: SizedBox(
-              height: Dimensions.space70,
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

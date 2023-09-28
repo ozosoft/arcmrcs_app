@@ -7,7 +7,6 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/view/components/animated_widget/expanded_widget.dart';
 import 'package:quiz_lab/view/components/divider/custom_horizontal_divider.dart';
-import 'package:quiz_lab/view/components/text/custom_text_with_underline.dart';
 
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -92,7 +91,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                           imageUrl: widget.image,
                         ),
                       ),
-                      const SizedBox(width: Dimensions.space30),
+                      const SizedBox(width: Dimensions.space20),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsetsDirectional.only(top: Dimensions.space15),
@@ -153,6 +152,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                 color: MyColor.colorWhite,
                                 padding: const EdgeInsets.all(Dimensions.space10),
                                 child: GridView.builder(
+                                    physics: const NeverScrollableScrollPhysics(),
                                     shrinkWrap: true,
                                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 2.3, crossAxisCount: 3),
                                     itemCount: widget.categories.quizInfos!.length,

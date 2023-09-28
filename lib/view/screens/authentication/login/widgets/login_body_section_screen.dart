@@ -47,7 +47,6 @@ class _LoginBodySectionState extends State<LoginBodySection> {
         child: Column(
           children: [
             SizedBox(
-              height: Dimensions.space70,
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,6 +68,7 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                 ],
               ),
             ),
+            const SizedBox(height: Dimensions.space10,),
             SocialLoginSection(
               loginController: controller,
             ),

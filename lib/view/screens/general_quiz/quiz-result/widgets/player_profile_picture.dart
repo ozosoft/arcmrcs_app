@@ -13,8 +13,8 @@ class PlayerProfilePicture extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(Dimensions.space2),
-      height: Dimensions.space100,
-      width: Dimensions.space100,
+      height: MediaQuery.of(context).size.width / 5,
+      width: MediaQuery.of(context).size.width / 5,
       decoration: BoxDecoration(color: MyColor.colorLightGrey, borderRadius: BorderRadius.circular(Dimensions.space100)),
       child: FittedBox(
         fit: BoxFit.cover,
@@ -24,14 +24,14 @@ class PlayerProfilePicture extends StatelessWidget {
                 ? Image.asset(
                     MyImages.defaultAvatar,
                     fit: BoxFit.cover,
-                    height: Dimensions.space50,
-                    width: Dimensions.space50,
+                    height: MediaQuery.of(context).size.width / 5,
+                    width: MediaQuery.of(context).size.width / 5,
                   )
                 : Image.network(
                     "${UrlContainer.userImagePath}/$imagePath",
                     fit: BoxFit.cover,
-                    height: Dimensions.space50,
-                    width: Dimensions.space50,
+                    height: MediaQuery.of(context).size.width / 5,
+                    width: MediaQuery.of(context).size.width / 5,
                   )),
       ),
     );

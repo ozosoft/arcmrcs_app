@@ -87,7 +87,7 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
                           imageUrl: widget.image,
                         ),
                       ),
-                      const SizedBox(width: Dimensions.space30),
+                      const SizedBox(width: Dimensions.space20),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsetsDirectional.only(top: Dimensions.space15),
@@ -142,6 +142,7 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
                                 padding: const EdgeInsets.all(Dimensions.space10),
                                 child: GridView.builder(
                                     shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
                                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 2.3, crossAxisCount: 3),
                                     itemCount: widget.subcategory.quizInfos!.length,
                                     itemBuilder: (BuildContext context, int index) {

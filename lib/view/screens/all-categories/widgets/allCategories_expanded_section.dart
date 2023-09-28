@@ -31,6 +31,7 @@ class AllCategoriesExpandedSection extends StatelessWidget {
             padding: const EdgeInsets.all(Dimensions.space10),
             child: GridView.builder(
                 shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 2.3, crossAxisCount: 3),
                 itemCount: controller!.allCategoriesList[categoryindex].quizInfos!.length,
                 itemBuilder: (BuildContext context, int index) {

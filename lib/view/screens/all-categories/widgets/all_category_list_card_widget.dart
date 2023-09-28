@@ -68,6 +68,7 @@ class _AllCategoryListTileCardWidgetState extends State<AllCategoryListTileCardW
                           imageUrl: widget.image,
                         ),
                       ),
+                      const SizedBox(width: Dimensions.space10),
                       Expanded(
                         child: Padding(
                           padding: const EdgeInsetsDirectional.only(top: Dimensions.space15),
@@ -76,28 +77,32 @@ class _AllCategoryListTileCardWidgetState extends State<AllCategoryListTileCardW
                             children: [
                               Text(widget.title, style: semiBoldMediumLarge),
                               const SizedBox(height: Dimensions.space15),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  if (widget.categoryData.subcategoriesCount == "0") ...[
+                              SingleChildScrollView(
+                                physics: const BouncingScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    if (widget.categoryData.subcategoriesCount == "0") ...[
+                                      CustomChipsWidget(
+                                        padding: Dimensions.space5,
+                                        right: Dimensions.space5,
+                                        child: Center(child: Text("${widget.categoryData.questionsCount}${MyStrings.questionse.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                      ),
+                                    ] else ...[
+                                      CustomChipsWidget(
+                                        padding: Dimensions.space5,
+                                        right: Dimensions.space5,
+                                        child: Center(child: Text("${widget.categoryData.subcategoriesCount} ${MyStrings.subcategory.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                      ),
+                                    ],
                                     CustomChipsWidget(
                                       padding: Dimensions.space5,
                                       right: Dimensions.space5,
-                                      child: Center(child: Text("${widget.categoryData.questionsCount}${MyStrings.questionse.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                    ),
-                                  ] else ...[
-                                    CustomChipsWidget(
-                                      padding: Dimensions.space5,
-                                      right: Dimensions.space5,
-                                      child: Center(child: Text("${widget.categoryData.subcategoriesCount} ${MyStrings.subcategory.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                      child: Center(child: Text("${widget.categoryData.quizInfos!.length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                     ),
                                   ],
-                                  CustomChipsWidget(
-                                    padding: Dimensions.space5,
-                                    right: Dimensions.space5,
-                                    child: Center(child: Text("${widget.categoryData.quizInfos!.length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                  ),
-                                ],
+                                ),
                               ),
                             ],
                           ),

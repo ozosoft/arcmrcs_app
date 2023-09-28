@@ -33,8 +33,8 @@ class DashedDividerPainter extends CustomPainter {
       ..strokeWidth = strokeWidth // Adjust the thickness of the dashed line as needed
       ..strokeCap = StrokeCap.square;
 
-    final double dashWidth = 4;
-    final double dashSpace = 5;
+    const double dashWidth = 4;
+    const double dashSpace = 5;
     double startX = 0;
 
     while (startX < size.width) {

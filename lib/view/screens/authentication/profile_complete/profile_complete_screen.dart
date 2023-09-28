@@ -55,9 +55,9 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
             builder: (controller) => SingleChildScrollView(
               padding: Dimensions.screenPaddingHV,
               child: controller.isLoading
-                  ? CustomLoader()
+                  ? const CustomLoader()
                   : Container(
-                    padding: EdgeInsets.all(Dimensions.space20),
+                    padding: const EdgeInsets.all(Dimensions.space20),
                       decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space10)),
                       child: Form(
                         key: formKey,

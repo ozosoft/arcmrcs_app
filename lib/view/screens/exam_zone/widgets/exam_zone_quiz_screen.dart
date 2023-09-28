@@ -104,6 +104,7 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                           padding: const EdgeInsets.all(Dimensions.space10),
                                           child: Text(
                                             MyStrings.areYouSureYouWantToLeaveExamRoom.tr,
+                                            textAlign: TextAlign.center,
                                             style: regularLarge.copyWith(color: MyColor.textSecondColor),
                                           ),
                                         ),
@@ -379,12 +380,70 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                             Expanded(
                                               flex: 1,
                                               child: RoundedButton(
+                                                  horizontalPadding: Dimensions.space5,
                                                   text: MyStrings.submit.tr,
                                                   color: MyColor.primaryColor,
                                                   press: () {
                                                     debugPrint("Exam Finished button");
                                                     _streamDuration.pause();
-                                                    controller.submitAnswer();
+
+                                                    CustomAlertDialog(
+                                                        borderRadius: 10,
+                                                        child: Column(
+                                                          children: [
+                                                            const SizedBox(
+                                                              height: 20,
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(Dimensions.space10),
+                                                              child: Column(
+                                                                children: [
+                                                                  Text(
+                                                                    MyStrings.areYouSureYouWantToCloseSearching.tr,
+                                                                    textAlign: TextAlign.center,
+                                                                    style: regularDefault.copyWith(),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 20,
+                                                            ),
+                                                            Container(
+                                                              width: double.infinity,
+                                                              height: 1,
+                                                              color: MyColor.textSecondColor.withOpacity(0.3),
+                                                            ),
+                                                            Padding(
+                                                              padding: const EdgeInsets.all(Dimensions.space10),
+                                                              child: Row(
+                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                                children: [
+                                                                  TextButton(
+                                                                    onPressed: () {
+                                                                      Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
+                                                                    },
+                                                                    child: Text(
+                                                                      MyStrings.cancel.tr,
+                                                                      style: regularLarge,
+                                                                    ),
+                                                                  ),
+                                                                  TextButton(
+                                                                    style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
+                                                                    onPressed: () async {
+                                                                      Get.back();
+                                                                      controller.submitAnswer();
+                                                                    },
+                                                                    child: Text(
+                                                                      MyStrings.yes.tr,
+                                                                      style: regularLarge.copyWith(color: MyColor.colorWhite),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        )).customAlertDialog(context);
                                                   }),
                                             ),
                                           ],

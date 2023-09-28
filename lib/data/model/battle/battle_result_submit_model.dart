@@ -28,7 +28,7 @@ class BattleAnswerSubmitModel {
       remark: json['remark'],
       status: json['status'],
       message: Message.fromJson(json["message"]),
-      data: json['data'] != null ? json['data'] : Map<String, dynamic>(),
+      data: json['data'] != null ? json['data'] : <String, dynamic>{},
     );
   }
   Map<String, dynamic> toJson() {

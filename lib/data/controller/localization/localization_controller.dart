@@ -26,7 +26,7 @@ class LocalizationController extends GetxController {
   }
 
   bool _isLtr = true;
-  List<MyLanguageModel> _languages = [];
+  final List<MyLanguageModel> _languages = [];
 
   Locale get locale => _locale;
   bool get isLtr => _isLtr;

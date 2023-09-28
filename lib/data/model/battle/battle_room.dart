@@ -8,15 +8,13 @@ class BattleRoom {
   final String? languageId;
 
   final UserBattleRoomDetailsModel? user1;
-  //it will be in use for multiUserBattleRoom
-  //user1 will be the creator of this room
-  final UserBattleRoomDetailsModel? user2; //it will be in use for multiUserBattleRoom
-  final UserBattleRoomDetailsModel? user3; //it will be in use for multiUserBattleRoom
-  final UserBattleRoomDetailsModel? user4; //it will be in use for multiUserBattleRoom
-  final int? entryFee; //it will be in use for multiUserBattleRoom
-  final String? roomCode; //it will be in use for multiUserBattleRoom
-  final bool? readyToPlay; //it will be in use for multiUserBattleRoom
-  final String? questions_list; //it will be in use for multiUserBattleRoom
+  final UserBattleRoomDetailsModel? user2;
+  final UserBattleRoomDetailsModel? user3;
+  final UserBattleRoomDetailsModel? user4;
+  final int? entryFee;
+  final String? roomCode;
+  final bool? readyToPlay;
+  final String? questions_list;
 
   BattleRoom({this.roomId, this.categoryId, this.user1, this.user2, this.createdBy, this.readyToPlay, this.roomCode, this.user3, this.user4, this.entryFee, this.languageId, this.questions_list});
 

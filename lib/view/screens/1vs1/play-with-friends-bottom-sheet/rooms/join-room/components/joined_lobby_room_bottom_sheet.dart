@@ -38,6 +38,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                     padding: const EdgeInsets.all(Dimensions.space10),
                     child: Text(
                       MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
+                      textAlign: TextAlign.center,
                       style: regularLarge.copyWith(color: MyColor.textSecondColor),
                     ),
                   ),

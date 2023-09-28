@@ -48,7 +48,7 @@ class _CustomDropDownTextField3State extends State<CustomDropDownTextField3> {
         widget.needLabel ? const SizedBox(height: Dimensions.textToTextSpace) : const SizedBox(),
         widget.isUnderLined
             ? SizedBox(
-                height: 50,
+                   height: 55,
                 child: DropdownButtonFormField(
                   value: widget.selectedValue,
                   dropdownColor: widget.dropDownColor,
@@ -106,7 +106,7 @@ class _CustomDropDownTextField3State extends State<CustomDropDownTextField3> {
                       borderSide: const BorderSide(color: MyColor.borderColor, width: 1),
                     ),
                   ),
-                  isExpanded: false,
+                  isExpanded: true,
                   onChanged: widget.onChanged,
                   items: widget.items,
                   icon: Icon(

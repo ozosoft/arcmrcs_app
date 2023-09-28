@@ -73,7 +73,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                               }
                                             },
                                             child: LevelCardButton(
-                                              text: "${MyStrings.next.tr}",
+                                              text: MyStrings.next.tr,
                                               hasIcon: false,
                                               hasImage: false,
                                               bgColor: MyColor.primaryColor,
@@ -157,7 +157,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                                               ? reviewOptionItem.isAnswer == '1'
                                                                   ? SvgPicture.asset(
                                                                       MyImages.whiteTikSVG,
-                                                                      color: MyColor.rightAnswerbgColor,
+                                                                      colorFilter: const ColorFilter.mode(MyColor.rightAnswerbgColor, BlendMode.srcIn),
                                                                     )
                                                                   : const SizedBox()
                                                               : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)

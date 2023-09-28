@@ -31,6 +31,9 @@ class MyStrings {
   static const String collectCoins = "Collect Coins";
   static const String copied = "Copied!";
   static const String ok = "Ok";
+  static const String totalQuestion = "Total Question";
+  static const String correctAnswer= "Correct Answer";
+  static const String wrongAnswer = "Wrong Answer";
   static const String totalScore = "Total Score";
   static const String youHaveNoCoins = "You Have Not Enough Coins!";
   static const String roomCodeIsWrong = "Room Code May be Wrong!";
@@ -41,7 +44,6 @@ class MyStrings {
   static const String thisContestIsNotAvailableRightNow = 'This Contest Is Not Available Right Now';
   static const String reviewAnswer = "Review Answer";
   static const String currectAnswer = "Currect Answer";
-  static const String wrongAnswer = "Wrong Answer";
   static const String yourAnswer = "Your Answer";
   static const String continueWithGmail = "Continue with Gmail";
   static const String continueWithPhone = "Continue with Phone";
@@ -352,7 +354,7 @@ class MyStrings {
   static const String welcomeBack = 'Welcome back';
   static const String hiThere = 'Hi! There';
   static const String pleaseEnterDetails = 'Please enter your details to sign in.';
-  static const String pleaseEnterPhone = 'Please enter your phone number to sign in';
+  static const String pleaseEnterPhone = 'Please enter your phone number to signIn';
   static const String pleaseEnterOTP = 'Please enter your OTP to sign in';
   static const String pleaseEnterDetailstoSignUp = 'Please enter your details to Create Account.';
   static const String enterEmailAndPassword = 'Enter your email account to reset password';

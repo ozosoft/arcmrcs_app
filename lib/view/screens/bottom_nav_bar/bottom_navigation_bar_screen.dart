@@ -17,7 +17,7 @@ class BottomNavigationBarScreen extends StatefulWidget {
   const BottomNavigationBarScreen({super.key});
 
   @override
-  _BottomNavigationBarScreenState createState() => _BottomNavigationBarScreenState();
+  State<BottomNavigationBarScreen> createState() => _BottomNavigationBarScreenState();
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
@@ -51,11 +51,21 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         items: <Widget>[
           Padding(
             padding: const EdgeInsets.all(Dimensions.space2),
-            child: SvgPicture.asset(MyImages.coinStoreDrawer, height: Dimensions.space35, width: Dimensions.space50, color: _page == 0 ? MyColor.colorWhite : MyColor.bottomNavBarIconInActiveColor),
+            child: SvgPicture.asset(
+              MyImages.coinStoreDrawer,
+              height: Dimensions.space35,
+              width: Dimensions.space50,
+              colorFilter: _page == 0 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(Dimensions.space8),
-            child: SvgPicture.asset(MyImages.settingsFilledSVG, height: Dimensions.space25, width: Dimensions.space50, color: _page == 1 ? MyColor.colorWhite : MyColor.bottomNavBarIconInActiveColor),
+            child: SvgPicture.asset(
+              MyImages.settingsFilledSVG,
+              height: Dimensions.space25,
+              width: Dimensions.space50,
+              colorFilter: _page == 1 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(Dimensions.space8),
@@ -63,16 +73,27 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
               MyImages.homeFilledSVG,
               height: Dimensions.space25,
               width: Dimensions.space50,
-              color: _page == 2 ? null : MyColor.bottomNavBarIconInActiveColor,
+
+              colorFilter: _page == 2 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(Dimensions.space8),
-            child: SvgPicture.asset(MyImages.prizeFilledSVG, height: Dimensions.space25, width: Dimensions.space50, color: _page == 3 ? MyColor.colorWhite : MyColor.bottomNavBarIconInActiveColor),
+            child: SvgPicture.asset(
+              MyImages.prizeFilledSVG,
+              height: Dimensions.space25,
+              width: Dimensions.space50,
+              colorFilter: _page == 3 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(Dimensions.space8),
-            child: SvgPicture.asset(MyImages.profileFilledSVG, height: Dimensions.space25, width: Dimensions.space40, color: _page == 4 ? MyColor.colorWhite : MyColor.bottomNavBarIconInActiveColor),
+            child: SvgPicture.asset(
+              MyImages.profileFilledSVG,
+              height: Dimensions.space25,
+              width: Dimensions.space40,
+              colorFilter: _page == 4 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
+            ),
           ),
         ],
         color: Colors.white,

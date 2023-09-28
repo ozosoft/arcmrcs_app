@@ -60,7 +60,7 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
                         ? SvgPicture.asset(
                             MyImages.victory,
                             fit: BoxFit.cover,
-                            color: Colors.grey,
+                            colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
                           )
                         : SvgPicture.asset(
                             MyImages.victory,
@@ -71,21 +71,24 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
                     alignment: Alignment.center,
                     child: Container(
                         padding: const EdgeInsetsDirectional.only(top: Dimensions.space100),
-                        child: Text(
-                          controller.appreciation,
-                          style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
+                        child: Column(
+                          children: [
+                            Text(
+                              controller.appreciation,
+                              textAlign: TextAlign.center,
+                              style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
+                            ),
+                            const SizedBox(
+                              height: Dimensions.space10,
+                            ),
+                            Text(
+                              controller.appreciation == "Failed" ? MyStrings.betterLuckNextTime.tr : MyStrings.victory.tr,
+                              textAlign: TextAlign.center,
+                              style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
+                            ),
+                          ],
                         )),
                   ),
-                  Container(
-                      width: double.infinity,
-                      padding: const EdgeInsetsDirectional.only(top: Dimensions.space180),
-                      child: Align(
-                        alignment: Alignment.center,
-                        child: Text(
-                          controller.appreciation == "Failed" ? MyStrings.betterLuckNextTime.tr : MyStrings.victory.tr,
-                          style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
-                        ),
-                      )),
                 ],
               ),
               const SizedBox(
@@ -94,14 +97,19 @@ class _DailyQuizResultBodySectionState extends State<DailyQuizResultBodySection>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  RightOrWrongAnsSection(correctAnswer: controller.correctAnswer, wrongAnswer: controller.wrongAnswer, totalQuestions: controller.totalQuestions),
-                  PlayerProfilePicture(
-                    imagePath: controller.dailyQuizRepo.apiClient.getUserImagePath(),
+                  Expanded(child: RightOrWrongAnsSection(correctAnswer: controller.correctAnswer, wrongAnswer: controller.wrongAnswer, totalQuestions: controller.totalQuestions)),
+                  Container(
+                    margin: const EdgeInsets.all(Dimensions.space10),
+                    child: PlayerProfilePicture(
+                      imagePath: controller.dailyQuizRepo.apiClient.getUserImagePath(),
+                    ),
                   ),
-                  ExamRewardsSection(
-                    totalCoin: controller.totalCoin,
-                    winningCoin: controller.winningCoin,
-                  ),
+                  Expanded(
+                    child: ExamRewardsSection(
+                      totalCoin: controller.totalCoin,
+                      winningCoin: controller.winningCoin,
+                    ),
+                  )
                 ],
               ),
               const Padding(

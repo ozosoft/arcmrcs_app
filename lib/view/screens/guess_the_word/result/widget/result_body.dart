@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
@@ -24,7 +23,6 @@ class GuessResultBody extends StatefulWidget {
 }
 
 class _GuessResultBodyState extends State<GuessResultBody> {
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<GuessThewordController>(builder: (controller) {
@@ -60,7 +58,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
                       ? SvgPicture.asset(
                           MyImages.victory,
                           fit: BoxFit.cover,
-                          color: Colors.grey,
+                           colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
                         )
                       : SvgPicture.asset(
                           MyImages.victory,
@@ -89,56 +87,74 @@ class _GuessResultBodyState extends State<GuessResultBody> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Text(
-                      controller.totalQuestion,
-                      style: mediumLarge,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimensions.space5),
+                    child: Column(
+                      children: [
+                        Text(
+                          controller.totalQuestion,
+                          style: mediumLarge,
+                        ),
+                        const SizedBox(
+                          height: Dimensions.space5,
+                        ),
+                        Text(
+                          MyStrings.totalQuestion.tr,
+                          textAlign: TextAlign.center,
+                          style: lightDefault,
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: Dimensions.space5,
-                    ),
-                    const Text(
-                      'Total Question',
-                      style: lightDefault,
-                    ),
-                  ],
+                  ),
                 ),
                 const CustomVerticalDivider(
                   height: Dimensions.space20,
                 ),
-                Column(
-                  children: [
-                    Text(
-                      controller.correctAnswer,
-                      style: mediumLarge,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimensions.space5),
+                    child: Column(
+                      children: [
+                        Text(
+                          controller.correctAnswer,
+                          style: mediumLarge,
+                        ),
+                        const SizedBox(
+                          height: Dimensions.space5,
+                        ),
+                        Text(
+                          MyStrings.correctAnswer.tr,
+                          textAlign: TextAlign.center,
+                          style: lightDefault.copyWith(color: MyColor.greenSuccessColor),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: Dimensions.space5,
-                    ),
-                    Text(
-                      'Correct Answer',
-                      style: lightDefault.copyWith(color: MyColor.greenSuccessColor),
-                    ),
-                  ],
+                  ),
                 ),
                 const CustomVerticalDivider(
                   height: Dimensions.space20,
                 ),
-                Column(
-                  children: [
-                    Text(
-                      controller.wrongAnswer.toString(),
-                      style: mediumLarge,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimensions.space5),
+                    child: Column(
+                      children: [
+                        Text(
+                          controller.wrongAnswer.toString(),
+                          style: mediumLarge,
+                        ),
+                        const SizedBox(
+                          height: Dimensions.space5,
+                        ),
+                        Text(
+                          MyStrings.wrongAnswer.tr,
+                          textAlign: TextAlign.center,
+                          style: lightDefault.copyWith(color: MyColor.redCancelTextColor),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: Dimensions.space5,
-                    ),
-                    Text(
-                      'Wrong Answer',
-                      style: lightDefault.copyWith(color: MyColor.redCancelTextColor),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),

@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:quiz_lab/core/helper/string_format_helper.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/data/model/quiz_questions_model/quiz_questions_model.dart';
 import 'package:quiz_lab/data/model/submit_answer/submit_answer_model.dart';
@@ -90,7 +91,6 @@ class QuizQuestionsController extends GetxController {
         // if (optionslist != null && optionslist.isNotEmpty) {
         //   optionsList.addAll(optionslist);
         // }
-  
       } else {
         CustomSnackBar.error(errorList: [...quizquestions.message!.error!]);
       }
@@ -149,6 +149,11 @@ class QuizQuestionsController extends GetxController {
       audiencevotes = "1";
     }
     update();
+  }
+
+  String calculateAudienceVotes(String audience, String playedAudience) {
+    double data = ((double.parse(playedAudience) / double.parse(audience)) * 100);
+    return Converter.formatNumber(data.toString());
   }
 
   int flipQuestionsIndex = -1;

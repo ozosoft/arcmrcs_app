@@ -5,7 +5,7 @@ class CustomPage extends StatelessWidget {
   final String description;
   final String imagePath;
 
-  const CustomPage({required this.title, required this.description, required this.imagePath});
+  const CustomPage({super.key, required this.title, required this.description, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class CustomPage extends StatelessWidget {
         children: [
           Image.asset(
             imagePath,
-            height: 300,  // Adjust this height as needed.
+            height: 300, // Adjust this height as needed.
           ),
           const SizedBox(height: 24),
           Text(

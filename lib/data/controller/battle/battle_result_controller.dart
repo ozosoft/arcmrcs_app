@@ -2,7 +2,7 @@ import 'package:confetti/confetti.dart';
 import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
 import 'package:get/get.dart';
 
-import '../../model/battle/battleRoom.dart';
+import '../../model/battle/battle_room.dart';
 import '../../model/battle/battle_result_submit_model.dart';
 
 class BattleResultController extends GetxController {

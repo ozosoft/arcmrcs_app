@@ -59,18 +59,33 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
             },
             child: LevelCardButton(lifelineUsed: controller.restartTimer, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.timeSVG),
           ),
-          InkWell(
-            onTap: () async {
-              if (controller.flipQuistions) {
-                // CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
-              } else {
-                controller.flipQuiston(widget.questionIndex);
-                debugPrint(controller.flipQuistion);
-                controller.flipQuistion = "1";
-              }
-            },
-            child: LevelCardButton(lifelineUsed: controller.flipQuistions, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.nextSVG),
-          ),
+          if ((controller.currentPage + 1) == controller.questionsList.length) ...[
+            InkWell(
+              onTap: () async {
+                if (controller.flipQuistions) {
+                  // CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
+                } else {
+                  controller.flipQuiston(widget.questionIndex);
+                  debugPrint(controller.flipQuistion);
+                  controller.flipQuistion = "1";
+                }
+              },
+              child: LevelCardButton(lifelineUsed: true, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.nextSVG),
+            ),
+          ] else ...[
+            InkWell(
+              onTap: () async {
+                if (controller.flipQuistions) {
+                  // CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
+                } else {
+                  controller.flipQuiston(widget.questionIndex);
+                  debugPrint(controller.flipQuistion);
+                  controller.flipQuistion = "1";
+                }
+              },
+              child: LevelCardButton(lifelineUsed: controller.flipQuistions, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.nextSVG),
+            ),
+          ]
         ],
       ),
     );

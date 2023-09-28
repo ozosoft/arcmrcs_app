@@ -224,6 +224,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                             padding: const EdgeInsets.all(Dimensions.space10),
                             child: Text(
                               MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
+                              textAlign: TextAlign.center,
                               style: regularLarge.copyWith(color: MyColor.textSecondColor),
                             ),
                           ),

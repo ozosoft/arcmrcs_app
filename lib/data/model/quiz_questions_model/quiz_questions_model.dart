@@ -6,11 +6,9 @@ import 'dart:convert';
 
 import '../model/message_model/message_model.dart';
 
-QuizquestionsModel quizquestionsModelFromJson(String str) =>
-    QuizquestionsModel.fromJson(json.decode(str));
+QuizquestionsModel quizquestionsModelFromJson(String str) => QuizquestionsModel.fromJson(json.decode(str));
 
-String quizquestionsModelToJson(QuizquestionsModel data) =>
-    json.encode(data.toJson());
+String quizquestionsModelToJson(QuizquestionsModel data) => json.encode(data.toJson());
 
 class QuizquestionsModel {
   String? remark;
@@ -25,12 +23,10 @@ class QuizquestionsModel {
     this.data,
   });
 
-  factory QuizquestionsModel.fromJson(Map<String, dynamic> json) =>
-      QuizquestionsModel(
+  factory QuizquestionsModel.fromJson(Map<String, dynamic> json) => QuizquestionsModel(
         remark: json["remark"],
         status: json["status"],
-        message:
-            json["message"] == null ? null : Message.fromJson(json["message"]),
+        message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
 
@@ -56,22 +52,15 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        quizInfo: json["quizInfo"] == null
-            ? null
-            : QuizInfo.fromJson(json["quizInfo"]),
-        questions: json["questions"] == null
-            ? []
-            : List<Question>.from(
-                json["questions"]!.map((x) => Question.fromJson(x))),
+        quizInfo: json["quizInfo"] == null ? null : QuizInfo.fromJson(json["quizInfo"]),
+        questions: json["questions"] == null ? [] : List<Question>.from(json["questions"]!.map((x) => Question.fromJson(x))),
         perQuestionAnswerDuration: json["per_question_answer_duration"],
         questionImagePath: json["question_image_path"],
       );
 
   Map<String, dynamic> toJson() => {
         "quizInfo": quizInfo?.toJson(),
-        "questions": questions == null
-            ? []
-            : List<dynamic>.from(questions!.map((x) => x.toJson())),
+        "questions": questions == null ? [] : List<dynamic>.from(questions!.map((x) => x.toJson())),
         "per_question_answer_duration": perQuestionAnswerDuration,
         "question_image_path": questionImagePath,
       };
@@ -82,6 +71,7 @@ class Question {
   String? question;
   dynamic image;
   String? code;
+  String? playedAudience;
   String? status;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -89,37 +79,20 @@ class Question {
   String? selectedOptionId;
   List<Option>? options;
 
-  Question(
-      {this.id,
-      this.question,
-      this.image,
-      this.code,
-      this.status,
-      this.createdAt,
-      this.updatedAt,
-      this.pivot,
-      this.options,
-      this.selectedOptionId = ''});
+  Question({this.id, this.question, this.image, this.code, this.playedAudience, this.status, this.createdAt, this.updatedAt, this.pivot, this.options, this.selectedOptionId = ''});
 
   factory Question.fromJson(Map<String, dynamic> json) => Question(
         id: json["id"],
         question: json["question"],
         image: json["image"],
         code: json["code"],
+        playedAudience: json["played_audience"],
         status: json["status"],
-
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         pivot: json["pivot"] == null ? null : Pivot.fromJson(json["pivot"]),
         selectedOptionId: '',
-        options: json["options"] == null
-            ? []
-            : List<Option>.from(
-                json["options"]!.map((x) => Option.fromJson(x))),
+        options: json["options"] == null ? [] : List<Option>.from(json["options"]!.map((x) => Option.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -127,13 +100,12 @@ class Question {
         "question": question,
         "image": image,
         "code": code,
+        "played_audience": playedAudience,
         "status": status,
         "created_at": createdAt?.toIso8601String(),
         "updated_at": updatedAt?.toIso8601String(),
         "pivot": pivot?.toJson(),
-        "options": options == null
-            ? []
-            : List<dynamic>.from(options!.map((x) => x.toJson())),
+        "options": options == null ? [] : List<dynamic>.from(options!.map((x) => x.toJson())),
       };
 
   void setSelectedOptionId(String optionId) {
@@ -166,12 +138,8 @@ class Option {
         option: json["option"],
         isAnswer: json["is_answer"],
         audience: json["audience"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -271,14 +239,10 @@ class QuizInfo {
         examEndTime: json["exam_end_time"],
         examDuration: json["exam_duration"],
         examKey: json["exam_key"],
-         winningMark: double.parse(json["winning_mark"].toString()),
+        winningMark: double.parse(json["winning_mark"].toString()),
         status: json["status"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         playInfo: json["play_info"],
         level: json["level"] == null ? null : Level.fromJson(json["level"]),
       );
@@ -331,12 +295,8 @@ class Level {
         title: json["title"],
         level: json["level"],
         status: json["status"],
-        createdAt: json["created_at"] == null
-            ? null
-            : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null
-            ? null
-            : DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {

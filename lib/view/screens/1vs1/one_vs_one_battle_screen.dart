@@ -77,6 +77,7 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                                       value: value,
                                       child: Text(
                                         value.name,
+                                        overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
                                           fontSize: Dimensions.fontDefault,
                                         ),

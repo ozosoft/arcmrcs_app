@@ -47,7 +47,7 @@ class _AnswerFieldState extends State<AnswerField> {
                 controller.selectIndex(index);
               },
               child: AnimatedContainer(
-                duration: Duration(milliseconds: 500), // Adjust the duration as needed
+                duration: const Duration(milliseconds: 500), // Adjust the duration as needed
                 padding: const EdgeInsets.all(Dimensions.space3),
                 height: Dimensions.space40,
                 width: Dimensions.space40,

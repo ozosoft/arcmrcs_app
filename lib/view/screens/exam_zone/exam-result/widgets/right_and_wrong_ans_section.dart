@@ -15,14 +15,17 @@ class RightOrWrongAnsSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
+          alignment: Alignment.center,
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space6), color: MyColor.categoryCardBodyColor),
           padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space14),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(MyImages.greenTikSvg),
               const SizedBox(width: Dimensions.space6),
               Text(
-                 "$correctAnswer / $totalQuestions",
+                "$correctAnswer / $totalQuestions",
                 style: regularDefault.copyWith(
                   color: MyColor.rightAnswerbgColor,
                 ),
@@ -31,10 +34,13 @@ class RightOrWrongAnsSection extends StatelessWidget {
           ),
         ),
         Container(
+          alignment: Alignment.center,
           margin: const EdgeInsets.symmetric(vertical: Dimensions.space8, horizontal: Dimensions.space1),
           decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space6), color: MyColor.categoryCardBodyWrongColor),
           padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space14),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SvgPicture.asset(MyImages.wrongSvg),
               const SizedBox(

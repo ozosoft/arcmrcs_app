@@ -17,7 +17,7 @@ class BattleQuizUserInfoCard extends StatelessWidget {
     return Obx(() {
       return Container(
         // color: Colors.green,
-        margin: EdgeInsets.all(Dimensions.space10),
+        margin: const EdgeInsets.all(Dimensions.space10),
         height: Dimensions.space110,
         width: double.infinity,
         child: Column(

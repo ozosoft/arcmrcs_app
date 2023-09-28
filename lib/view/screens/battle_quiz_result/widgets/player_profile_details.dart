@@ -16,8 +16,8 @@ class PlayerProfileDetails extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(Dimensions.space2),
-          height: Dimensions.space100,
-          width: Dimensions.space100,
+          height: MediaQuery.of(context).size.width / 5,
+          width: MediaQuery.of(context).size.width / 5,
           decoration: BoxDecoration(color: MyColor.colorLightGrey, borderRadius: BorderRadius.circular(Dimensions.space100)),
           child: FittedBox(
             fit: BoxFit.cover,
@@ -39,12 +39,18 @@ class PlayerProfileDetails extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: Dimensions.space10,
+          height: Dimensions.space20,
         ),
-        Text("${userData["firstname"] ?? ""} ${userData["lastname"] ?? ""}",
-            style: regularLarge.copyWith(
-              fontSize: Dimensions.fontMediumLarge,
-            ))
+        SizedBox(
+          height: Dimensions.space40,
+          child: Text(
+            "${userData["firstname"] ?? ""} ${userData["lastname"] ?? ""}",
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+            textAlign: TextAlign.center,
+            style: regularLarge.copyWith(fontSize: Dimensions.fontMediumLarge, color: MyColor.colorGrey),
+          ),
+        )
       ],
     );
   }
