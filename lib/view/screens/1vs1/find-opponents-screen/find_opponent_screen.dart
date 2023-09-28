@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:get/get.dart';
 
-import '../../../components/app-bar/custom_category_appBar.dart';
+import '../../../components/app-bar/custom_category_appbar.dart';
 import 'find-opponets-widgets/find_oppnent_body_section.dart';
 
 class FindOpponenetScreen extends StatelessWidget {

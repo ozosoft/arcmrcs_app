@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
 import '../../../../core/helper/ads/admob_helper.dart';
 import 'widgets/exam_result_body_section.dart';

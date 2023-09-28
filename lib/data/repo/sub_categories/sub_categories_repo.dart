@@ -10,7 +10,7 @@ class SubCategoriesRepo {
 
   Future<ResponseModel> getData(String subcategoryId) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.subcategoriesUrl+subcategoryId}";
-    debugPrint('all categories=====>: ${subcategoryId}');
+    debugPrint('all categories=====>: $subcategoryId');
     ResponseModel model =
         await apiClient.request(url, Method.getMethod, null, passHeader: true);
 

@@ -10,17 +10,17 @@ class QuizContestRepo {
 
   Future<ResponseModel> quizListData() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.contest}";
-    debugPrint('come here: ${url}');
+    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
   }
 
-   Future<ResponseModel> getExamQuestionList(String quizInfo_ID) async {
+   Future<ResponseModel> getExamQuestionList(String quizInfoID) async {
 
     // final map = {'quizInfo_id': quizInfo_ID,'exam_key': exam_key};
 
-    String url = '${UrlContainer.baseUrl}${UrlContainer.quizContestQuestionsUrl +quizInfo_ID}';
+    String url = '${UrlContainer.baseUrl}${UrlContainer.quizContestQuestionsUrl +quizInfoID}';
     ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return responseModel;

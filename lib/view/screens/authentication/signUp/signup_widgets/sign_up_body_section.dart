@@ -14,7 +14,7 @@ import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
 import 'package:quiz_lab/view/components/divider/custom_divider.dart';
 import 'package:quiz_lab/view/components/text-form-field/custom_text_field.dart';
 import 'package:quiz_lab/view/components/text/custom_underline_text.dart';
-import 'package:quiz_lab/view/screens/authentication/signUp/signUP-widgets/strong_password_section.dart';
+import 'package:quiz_lab/view/screens/authentication/signUp/signup_widgets/strong_password_section.dart';
 import 'package:get/get.dart';
 
 class SignUpBodySection extends StatefulWidget {

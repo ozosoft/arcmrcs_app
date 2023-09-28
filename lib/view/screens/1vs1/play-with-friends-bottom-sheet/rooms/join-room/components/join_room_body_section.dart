@@ -70,7 +70,7 @@ class _JoinRoomBodySectionState extends State<JoinRoomBodySection> {
                           WidgetsBinding.instance.addPostFrameCallback((_) {
                             // Navigator.pop(context);
                             if (battleRoomController.battleQuestionsList.isEmpty) {
-                              final List<dynamic> existingQuestionsData = json.decode(battleRoomController.battleRoomData.value!.questions_list!);
+                              final List<dynamic> existingQuestionsData = json.decode(battleRoomController.battleRoomData.value!.questionsList!);
                               final List<BattleQuestion> existingQuestionsList = existingQuestionsData.map((item) => BattleQuestion.fromJson(item)).toList();
 
                               battleRoomController.battleQuestionsList.value = existingQuestionsList;

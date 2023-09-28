@@ -2,7 +2,7 @@ import 'package:confetti/confetti.dart';
 import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
 import 'package:get/get.dart';
 
-import '../../model/battle/battle_room.dart';
+import '../../model/battle/battle_room_data_model.dart';
 import '../../model/battle/battle_result_submit_model.dart';
 
 class BattleResultController extends GetxController {
@@ -22,7 +22,7 @@ class BattleResultController extends GetxController {
   String get wrongAnswer => argumentsResult.data["wrongAnswer"].toString();
   Map get opponentData => argumentsResult.data["opponent"];
   Map get myUserInfoData => battleRepo.apiClient.getUserData();
-  final battleRoomOldData = Get.arguments[1] as BattleRoom;
+  final battleRoomOldData = Get.arguments[1] as BattleRoomDataModel;
 
   //Methods
   @override

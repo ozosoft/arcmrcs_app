@@ -145,7 +145,7 @@ class _ExamReviewAnswerSectionState extends State<ExamReviewAnswerSection> {
                                                           ? reviewOptionItem.isAnswer == '1'
                                                               ? SvgPicture.asset(
                                                                   MyImages.whiteTikSVG,
-                                                                  colorFilter: ColorFilter.mode(MyColor.rightAnswerbgColor, BlendMode.srcIn),
+                                                                  colorFilter: const ColorFilter.mode(MyColor.rightAnswerbgColor, BlendMode.srcIn),
                                                                 )
                                                               : const SizedBox()
                                                           : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)

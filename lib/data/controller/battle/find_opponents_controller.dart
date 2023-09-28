@@ -43,7 +43,7 @@ class FindOpponentsController extends GetxController with GetTickerProviderState
             _startTimer = Timer.periodic(const Duration(seconds: 1), (timer) {
               //set questions
               if (battleRoomController.battleQuestionsList.isEmpty) {
-                final List<dynamic> existingQuestionsData = json.decode(battleRoomController.battleRoomData.value!.questions_list!);
+                final List<dynamic> existingQuestionsData = json.decode(battleRoomController.battleRoomData.value!.questionsList!);
                 final List<BattleQuestion> existingQuestionsList = existingQuestionsData.map((item) => BattleQuestion.fromJson(item)).toList();
 
                 battleRoomController.battleQuestionsList.value = existingQuestionsList;

@@ -152,7 +152,7 @@ class QuizQuestionsController extends GetxController {
   }
 
   String calculateAudienceVotes(String audience, String playedAudience) {
-    double data = ((double.parse(playedAudience) / double.parse(audience)) * 100);
+    double data = ((double.parse(audience) / double.parse(playedAudience)) * 100);
     return Converter.formatNumber(data.toString());
   }
 

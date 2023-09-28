@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/coin_store/deposit/add_new_deposit_controller.dart';
 import 'package:quiz_lab/data/repo/coin_store/deposit/deposit_repo.dart';
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';

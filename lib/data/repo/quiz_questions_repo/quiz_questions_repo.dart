@@ -10,7 +10,7 @@ class QuizquestionsRepo {
 
   Future<ResponseModel> getData(int id) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.quizQuestionsUrl + id.toString()}";
-    debugPrint('come here: ${url}');
+    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;

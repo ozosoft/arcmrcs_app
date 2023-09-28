@@ -1,11 +1,11 @@
 import 'package:quiz_lab/view/screens/authentication/email_verification_page/email_verification_screen.dart';
-import 'package:quiz_lab/view/screens/authentication/forget_password/resetPassword/reset_Password_Screen.dart';
+import 'package:quiz_lab/view/screens/authentication/forget_password/resetPassword/reset_password_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/forget_password/verification/verification_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/login/login_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/login/mobile_login_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/profile_complete/profile_complete_screen.dart';
 
-import 'package:quiz_lab/view/screens/authentication/signUp/signUp_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/signUp/signup_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/sms_verification_page/sms_verification_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/two_factor_screen/two_factor_verification_screen.dart';
 import 'package:quiz_lab/view/screens/badges/badges_screen.dart';
@@ -27,18 +27,17 @@ import 'package:quiz_lab/view/screens/exam_zone/widgets/exam_zone_quiz_screen.da
 import 'package:quiz_lab/view/screens/notification/notification_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/daily_quiz/daily_quiz_questions_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/daily_quiz/daily_quiz_result/daily_quiz_result_screen.dart';
-import 'package:quiz_lab/view/screens/play_different/daily_quiz/review-answer/review_answer-screen.dart';
 import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn-result/fun_n_learn_result_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_description_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_list_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_questios_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_sub_categories.dart';
-import 'package:quiz_lab/view/screens/play_different/fun_n_learn/review-answer/review_answer-screen.dart';
-import 'package:quiz_lab/view/screens/profile/profile-edit/Profile_edit_screen.dart';
+import 'package:quiz_lab/view/screens/play_different/fun_n_learn/review-answer/review_answer_screen.dart';
+import 'package:quiz_lab/view/screens/profile/profile-edit/profile_edit_screen.dart';
 import 'package:quiz_lab/view/screens/profile/profile_screen.dart';
 import 'package:quiz_lab/view/screens/general_quiz/quiz-questions/quiz_question_screen.dart';
-import 'package:quiz_lab/view/screens/quiz_contest/review-answer/review_answer-screen.dart';
+import 'package:quiz_lab/view/screens/quiz_contest/review-answer/review_answer_screen.dart';
 import 'package:quiz_lab/view/screens/splash/splash_screen.dart';
 import 'package:quiz_lab/view/screens/wallet/wallet_screen.dart';
 import 'package:quiz_lab/view/screens/coin_store/coin_store_screen.dart';
@@ -61,7 +60,8 @@ import '../../view/screens/all-categories/sub-categories/sub_categories_screen.d
 import '../../view/screens/intro_section/onboard_intro_screen.dart';
 import '../../view/screens/leader_board/leader_board_screen.dart';
 import '../../view/screens/general_quiz/quiz-result/quiz_result_screen.dart';
-import '../../view/screens/general_quiz/review-answer/review_answer-screen.dart';
+import '../../view/screens/general_quiz/review-answer/review_answer_screen.dart';
+import '../../view/screens/play_different/daily_quiz/review-answer/review_answer_screen.dart';
 import '../../view/screens/quiz_contest/contest_result_screen/contest_result_screen.dart';
 import '../../view/screens/quiz_contest/question_screen/contest_questions_screen.dart';
 

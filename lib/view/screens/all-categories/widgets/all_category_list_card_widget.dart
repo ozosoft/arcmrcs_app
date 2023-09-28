@@ -4,7 +4,7 @@ import 'package:quiz_lab/data/controller/all_categories/all_categories_controlle
 import 'package:quiz_lab/data/model/all_cartegories/all_categories_model.dart';
 import 'package:quiz_lab/view/components/chips/custom_chips_widget.dart';
 import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
-import 'package:quiz_lab/view/screens/all-categories/widgets/allCategories_expanded_section.dart';
+import 'package:quiz_lab/view/screens/all-categories/widgets/all_categories_expanded_section.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import '../../../../core/utils/dimensions.dart';

@@ -7,7 +7,7 @@ import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/coin_history/coin_history_controller.dart';
 import 'package:quiz_lab/data/repo/coin_history/coin_history_repo.dart';
 import 'package:quiz_lab/data/services/api_service.dart';
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
 
 import '../../components/custom_loader/custom_loader.dart';

@@ -10,7 +10,7 @@ import 'package:quiz_lab/data/model/guess_the_word/guess_question_model.dart';
 import 'package:quiz_lab/data/model/guess_the_word/guess_subcategory_model.dart';
 import 'package:quiz_lab/data/model/guess_the_word/guess_submit_response.dart';
 import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
-import 'package:quiz_lab/data/repo/gess_the_word/gessThewordRepo.dart';
+import 'package:quiz_lab/data/repo/guess_the_word/guess_the_word_repo.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
@@ -200,7 +200,6 @@ class GuessThewordController extends GetxController {
 
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<GuessQuestion>? templist = model.data?.questions;
-        print(model.data?.questions.toString());
         if (templist != null) {
           gessThewordQuesstionList.clear();
           questionImgPath = model.data?.questionImagePath;

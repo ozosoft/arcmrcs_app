@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
-
-import '../../../../core/utils/dimensions.dart';
-import '../../../../core/utils/my_strings.dart';
-import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';
+import '../../../../../core/utils/dimensions.dart';
+import '../../../../components/mobile_ads/quiz_banner_ads_widget.dart';
 import 'review-answer-screen-widgets/review_answer_section.dart';
 
-class ReviewAnswerScreen extends StatefulWidget {
-  const ReviewAnswerScreen({super.key});
+class DailyQuizReviewAnswerScreen extends StatefulWidget {
+  const DailyQuizReviewAnswerScreen({super.key});
 
   @override
-  State<ReviewAnswerScreen> createState() => _ReviewAnswerScreenState();
+  State<DailyQuizReviewAnswerScreen> createState() => _DailyQuizReviewAnswerScreenState();
 }
 
-class _ReviewAnswerScreenState extends State<ReviewAnswerScreen> {
+class _DailyQuizReviewAnswerScreenState extends State<DailyQuizReviewAnswerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

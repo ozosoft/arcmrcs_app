@@ -12,7 +12,7 @@ class DailyQuizRepo {
 
  Future<ResponseModel> getDailyQuestions() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.dailyQuizQuestionsUrl }";
-    debugPrint('come here: ${url}');
+    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;

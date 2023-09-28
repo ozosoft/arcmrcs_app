@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_Controller.dart';
-import 'package:quiz_lab/data/repo/gess_the_word/gessThewordRepo.dart';
+import 'package:quiz_lab/data/repo/guess_the_word/guess_the_word_repo.dart';
 import 'package:quiz_lab/data/services/api_service.dart';
 
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/screens/guess_the_word/category/widget/guess_category_card.dart';
 import 'package:get/get.dart';

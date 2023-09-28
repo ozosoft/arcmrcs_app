@@ -3,7 +3,7 @@ import 'package:quiz_lab/view/screens/battle-quiz-section/quiz-screen-widgets/ba
 import 'package:get/get.dart';
 
 import '../../../data/model/battle/battle_question_list.dart';
-import '../../components/app-bar/custom_category_appBar.dart';
+import '../../components/app-bar/custom_category_appbar.dart';
 
 class BattleQuizQuestionsScreen extends StatefulWidget {
   const BattleQuizQuestionsScreen({super.key});

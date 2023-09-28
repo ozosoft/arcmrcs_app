@@ -7,7 +7,7 @@ import 'package:quiz_lab/data/services/api_service.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 import '../../../../core/helper/ads/admob_helper.dart';
-import '../../../components/app-bar/custom_category_appBar.dart';
+import '../../../components/app-bar/custom_category_appbar.dart';
 import 'widgets/sub_category_list_card_widget.dart';
 
 class SubCategoriesCardScreen extends StatefulWidget {

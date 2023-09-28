@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/view/components/chips/custom_chips_widget.dart';
 import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
-import 'package:quiz_lab/view/screens/all-categories/widgets/allCategories_expanded_section.dart';
+import 'package:quiz_lab/view/screens/all-categories/widgets/all_categories_expanded_section.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_utils/get_utils.dart';
 import '../../../core/utils/dimensions.dart';

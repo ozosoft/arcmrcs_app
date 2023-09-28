@@ -10,7 +10,7 @@ class FunNLearnRepo {
 
   Future<ResponseModel> getFunAndLearnCategories() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.funNLearnallCategoryUrl}";
-    debugPrint('all categories=====>: ${url}');
+    debugPrint('all categories=====>: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
@@ -18,7 +18,7 @@ class FunNLearnRepo {
 
   Future<ResponseModel> getFunAndLearnSubCategories(String subcategoryId) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.funNLearnsubCategoryUrl + subcategoryId}";
-    debugPrint('all categories=====>: ${subcategoryId}');
+    debugPrint('all categories=====>: $subcategoryId');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
@@ -39,7 +39,7 @@ class FunNLearnRepo {
 
   Future<ResponseModel> getFunNlearnQuestions(String id) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.funNlearnQuestionsUrl + id.toString()}";
-    debugPrint('come here: ${url}');
+    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;

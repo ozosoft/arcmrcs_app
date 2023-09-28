@@ -4,8 +4,8 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/model/battle/battle_question_list.dart';
 import '../../model/battle/battle_category_list.dart';
@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 import '../../../core/helper/battle_room_helper.dart';
 import '../../../core/route/route.dart';
 import '../../../core/utils/internet_connectivity.dart';
-import '../../model/battle/battle_room.dart';
+import '../../model/battle/battle_room_data_model.dart';
 import '../../model/battle/battle_room_exeption.dart';
 import '../../model/battle/user_battle_room_details_model.dart';
 
@@ -64,7 +64,7 @@ class BattleRoomController extends GetxController {
   Rx<JoinRoomState> joinRoomState = JoinRoomState.none.obs;
   Rx<UserFoundState> userFoundState = UserFoundState.none.obs;
   final Random _randomRoomID = Random.secure();
-  Rx<BattleRoom?> battleRoomData = Rx<BattleRoom?>(null);
+  Rx<BattleRoomDataModel?> battleRoomData = Rx<BattleRoomDataModel?>(null);
   final battleQuestionsList = <BattleQuestion>[].obs;
   final alreadyJoined = false.obs;
 
@@ -132,7 +132,7 @@ class BattleRoomController extends GetxController {
 
       final DocumentSnapshot craeteNewRoomSnapshot = await createBattleRoomFirebase(categoryId: categoryId, name: name!, profileUrl: profileUrl!, uid: uid!, roomCode: roomCode, entryFee: entryFee, questionList: questionList);
 
-      BattleRoom.fromDocumentSnapshot(craeteNewRoomSnapshot);
+      BattleRoomDataModel.fromDocumentSnapshot(craeteNewRoomSnapshot);
 
       subscribeToBattleRoom(
         craeteNewRoomSnapshot.id,
@@ -156,7 +156,7 @@ class BattleRoomController extends GetxController {
     _battleRoomStreamSubscription = subscribeToBattleRoomFirebase(battleRoomDocumentId, forMultiUser).listen((event) async {
       if (event.exists) {
         //emit new state
-        BattleRoom battleRoom = BattleRoom.fromDocumentSnapshot(event);
+        BattleRoomDataModel battleRoom = BattleRoomDataModel.fromDocumentSnapshot(event);
 
         bool? userNotFound = battleRoom.user2?.uid.isEmpty;
 
@@ -198,7 +198,7 @@ class BattleRoomController extends GetxController {
                 ).then((value) async {
                   await updateQuestionsListInBattleRoomFirebase(battleRoom.roomId!, value).then((value) {
                     update();
-                    final List<dynamic> existingQuestionsData = json.decode(battleRoomData.value!.questions_list!);
+                    final List<dynamic> existingQuestionsData = json.decode(battleRoomData.value!.questionsList!);
                     final List<BattleQuestion> existingQuestionsList = existingQuestionsData.map((item) => BattleQuestion.fromJson(item)).toList();
 
                     battleQuestionsList.value = existingQuestionsList;
@@ -361,7 +361,9 @@ class BattleRoomController extends GetxController {
     try {
       updateMultiUserRoom(battleRoomDocumentId, {"readyToPlay": readyToPlay}, battle);
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
@@ -530,7 +532,9 @@ class BattleRoomController extends GetxController {
         await _firebaseFirestore.collection(BattleRoomHelper.battleroomCollection).doc(documentId).update({
           "questions_list": json.encode(questionList.map((question) => question.toJson()).toList()),
         });
-        print("update --------------------------------------update");
+        if (kDebugMode) {
+          print("update --------------------------------------update");
+        }
       }
     } on SocketException catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());
@@ -711,7 +715,7 @@ class BattleRoomController extends GetxController {
 //submit answer To Handler
 
   Future saveAnswer(String? currentUserId, Map submittedAnswer, bool isCorrectAnswer, {List<BattleQuestion>? questionsList}) async {
-    BattleRoom battleRoom = battleRoomData.value!;
+    BattleRoomDataModel battleRoom = battleRoomData.value!;
     List<BattleQuestion>? questions = questionsList;
 
     //need to check submitting answer for user1 or user2

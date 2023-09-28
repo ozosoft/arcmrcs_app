@@ -95,7 +95,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                       shrinkWrap: true,
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
-                          margin: EdgeInsets.all(Dimensions.space5),
+                          margin: const EdgeInsets.all(Dimensions.space5),
                           color: Colors.transparent,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,

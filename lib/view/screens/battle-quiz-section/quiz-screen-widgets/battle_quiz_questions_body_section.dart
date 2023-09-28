@@ -21,7 +21,7 @@ import '../../../components/alert-dialog/custom_alert_dialog.dart';
 
 import '../../../components/image_widget/my_image_widget.dart';
 import 'battle_quiz_option_button.dart';
-import 'battle_quiz_user_Info_card.dart';
+import 'battle_quiz_user_info_card.dart';
 
 class BattleQuizQuestionsBodySection extends StatefulWidget {
   final List<BattleQuestion> qustionsList;

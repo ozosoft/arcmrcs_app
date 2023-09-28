@@ -70,7 +70,7 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
                   controller.flipQuistion = "1";
                 }
               },
-              child: LevelCardButton(lifelineUsed: true, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.nextSVG),
+              child: const LevelCardButton(lifelineUsed: true, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.nextSVG),
             ),
           ] else ...[
             InkWell(

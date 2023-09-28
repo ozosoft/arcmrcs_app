@@ -6,7 +6,7 @@ import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_controller.dart';
 import 'package:quiz_lab/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:quiz_lab/data/services/api_service.dart';
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
 import '../../../../core/helper/ads/admob_helper.dart';
 import '../../../../data/model/play_different_quizes/fun_n_learn/fun_n_learn_category_model.dart';

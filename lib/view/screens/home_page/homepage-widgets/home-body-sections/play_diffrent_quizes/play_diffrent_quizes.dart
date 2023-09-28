@@ -25,7 +25,9 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: Dimensions.space10,),
+          const SizedBox(
+            height: Dimensions.space10,
+          ),
           if (controller.differentQuizlist.isNotEmpty)
             Padding(
               padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space10, start: Dimensions.space5, end: Dimensions.space5, top: Dimensions.space20),
@@ -87,7 +89,10 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
                       ),
                       Text(
                         controller.differentQuizlist[index].name.toString().tr,
-                        style: semiBoldExtraLarge,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: semiBoldMediumLarge,
                       ),
                       const SizedBox(height: Dimensions.space10),
                       Text("${controller.differentQuizlist[index].shortDescription.toString().tr} ", maxLines: 3, overflow: TextOverflow.ellipsis, style: regularDefault.copyWith(color: MyColor.textColor, fontSize: Dimensions.fontDefault12), textAlign: TextAlign.center),

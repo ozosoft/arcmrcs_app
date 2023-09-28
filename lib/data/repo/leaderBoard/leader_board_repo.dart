@@ -10,7 +10,7 @@ class LeaderBoardRepo {
 
   Future<ResponseModel> getLeaderBoardData() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.leaderBoardUrl}";
-    debugPrint('come here: ${url}');
+    debugPrint('come here: $url');
     ResponseModel model =
         await apiClient.request(url, Method.getMethod, null, passHeader: true);
 

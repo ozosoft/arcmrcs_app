@@ -4,7 +4,7 @@ import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_description.dart';
 import 'package:quiz_lab/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:quiz_lab/data/services/api_service.dart';
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:quiz_lab/view/components/category-card/categories_card.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';

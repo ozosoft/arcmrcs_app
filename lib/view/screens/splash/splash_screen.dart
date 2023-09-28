@@ -44,30 +44,27 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SplashController>(
-      builder: (conroller) => Stack(
-        children: [
-          SvgPicture.asset(
-            MyImages.splashBGimage,
-            fit: BoxFit.cover,
-          ),
-          Scaffold(
-            backgroundColor: MyColor.primaryColor,
-            body: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(Dimensions.space35),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: SvgPicture.asset(
-                      MyImages.splashLogoSVG,
-                    ),
-                  ),
-                ),
-                SvgPicture.asset(MyImages.splashBGimage)
-              ],
+      builder: (conroller) => Scaffold(
+        backgroundColor: MyColor.primaryColor,
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: SvgPicture.asset(
+                MyImages.splashBGimage,
+                fit: BoxFit.cover, // Make the image cover the full width
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.all(Dimensions.space35),
+              child: Align(
+                alignment: Alignment.center,
+                child: SvgPicture.asset(
+                  MyImages.splashLogoSVG,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -9,7 +9,7 @@ import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/utils/url_container.dart';
-import '../../../../components/app-bar/custom_category_appBar.dart';
+import '../../../../components/app-bar/custom_category_appbar.dart';
 import '../../../../components/buttons/level_card_button.dart';
 import '../../../../components/mobile_ads/quiz_banner_ads_widget.dart';
 
@@ -85,7 +85,7 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                                       }
                                     },
                                     child: LevelCardButton(
-                                      text: "${MyStrings.next.tr}",
+                                      text: MyStrings.next.tr,
                                       hasIcon: false,
                                       hasImage: false,
                                       bgColor: MyColor.primaryColor,

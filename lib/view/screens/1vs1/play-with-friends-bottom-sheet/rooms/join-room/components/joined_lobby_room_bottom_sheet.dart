@@ -186,7 +186,7 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                             padding: const EdgeInsets.all(Dimensions.space2),
                             child: Center(
                               child: Text(
-                                "${controller.battleRoomData.value!.user1!.name}",
+                                controller.battleRoomData.value!.user1!.name,
                                 textAlign: TextAlign.center,
                                 style: semiBoldMediumLarge.copyWith(color: MyColor.colorBlack),
                               ),

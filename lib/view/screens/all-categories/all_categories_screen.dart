@@ -6,7 +6,7 @@ import 'package:quiz_lab/data/controller/all_categories/all_categories_controlle
 import 'package:quiz_lab/data/model/all_cartegories/all_categories_model.dart';
 import 'package:quiz_lab/data/repo/allcategories/all_categories_repo.dart';
 import 'package:quiz_lab/data/services/api_service.dart';
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 

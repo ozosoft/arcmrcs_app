@@ -7,7 +7,7 @@ import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/account/profile_update_controller.dart';
 import 'package:quiz_lab/data/repo/account/profile_repo.dart';
 import 'package:quiz_lab/data/services/api_service.dart';
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/divider/custom_divider.dart';

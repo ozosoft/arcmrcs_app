@@ -8,7 +8,7 @@ import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
 import '../../../core/utils/my_images.dart';
 import '../../../core/utils/my_strings.dart';
-import '../../components/app-bar/custom_category_appBar.dart';
+import '../../components/app-bar/custom_category_appbar.dart';
 import 'widgets/battle_quiz_result_body_section.dart';
 
 class BattleQuizResultScreen extends StatefulWidget {

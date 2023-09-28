@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 import '../../../core/helper/battle_room_helper.dart';
 import '../../../core/route/route.dart';
 import '../../../view/components/snack_bar/show_custom_snackbar.dart';
-import '../../model/battle/battle_room.dart';
+import '../../model/battle/battle_room_data_model.dart';
 import '../../model/battle/battle_question_list.dart';
 import '../../model/battle/battle_result_submit_model.dart';
 import '../../model/global/response_model/response_model.dart';
@@ -187,7 +187,7 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
     }
   }
 
-  void checkUserAnswer(BattleRoom battleRoom) {
+  void checkUserAnswer(BattleRoomDataModel battleRoom) {
     List user1Answers = battleRoom.user1!.answers;
     List user2Answers = battleRoom.user2!.answers;
     String currentQuestionId = questionsList[currentQuestionIndex].id.toString();

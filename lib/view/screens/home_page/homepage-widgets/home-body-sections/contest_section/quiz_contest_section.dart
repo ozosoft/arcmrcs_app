@@ -71,7 +71,12 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                     onTap: () {
                                       // if (quizQuestionscontrollers.examQuestionsList != "[]") {
 
-                                      Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [controller.contestlist[index].id.toString(), controller.contestlist[index].title.toString(), debugPrint("this is quiz id" + controller.contestlist[index].id.toString()), debugPrint("this is quiz title" + controller.contestlist[index].title.toString())]);
+                                      Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [
+                                        controller.contestlist[index].id.toString(),
+                                        controller.contestlist[index].title.toString(),
+                                        null,
+                                        null,
+                                      ]);
 
                                       // } else {
                                       //   CustomSnackBar.error(errorList: [

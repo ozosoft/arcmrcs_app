@@ -72,7 +72,6 @@ class DashBoardController extends GetxController {
           coins = dashBoard.data?.user?.coins ?? "";
           score = dashBoard.data?.user?.score ?? "";
 
-          debugPrint(dashBoard.data!.user.toString());
           //Status check
           generalQuizStatus = dashBoard.data?.generalQuizStatus;
           contestStatus = dashBoard.data?.contestStatus;
@@ -136,9 +135,10 @@ class DashBoardController extends GetxController {
     if (logout.statusCode == 200) {
       LogoutModel plan = LogoutModel.fromJson(jsonDecode(logout.responseJson));
       if (plan.status.toString().toLowerCase() == MyStrings.ok.toLowerCase()) {
-        Get.offAllNamed(RouteHelper.loginScreen);
         debugPrint("LoggedM OUT!");
         update();
+        Get.offAllNamed(RouteHelper.loginScreen);
+        return;
       } else {
         CustomSnackBar.error(errorList: [...plan.message!.error!]);
       }

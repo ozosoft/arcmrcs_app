@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
-import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
 import '../../../../../core/utils/dimensions.dart';
 import '../../../../components/mobile_ads/quiz_banner_ads_widget.dart';
 import 'review-answer-screen-widgets/review_answer_section.dart';
 
-class DailyQuizReviewAnswerScreen extends StatefulWidget {
-  const DailyQuizReviewAnswerScreen({super.key});
+class FunNPlayReviewAnswerScreen extends StatefulWidget {
+  const FunNPlayReviewAnswerScreen({super.key});
 
   @override
-  State<DailyQuizReviewAnswerScreen> createState() => _DailyQuizReviewAnswerScreenState();
+  State<FunNPlayReviewAnswerScreen> createState() => _FunNPlayReviewAnswerScreenState();
 }
 
-class _DailyQuizReviewAnswerScreenState extends State<DailyQuizReviewAnswerScreen> {
+class _FunNPlayReviewAnswerScreenState extends State<FunNPlayReviewAnswerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _DailyQuizReviewAnswerScreenState extends State<DailyQuizReviewAnswerScree
       body: const Stack(
         fit: StackFit.expand,
         children: [
-          ReviewAnswerSection(),
+          FunNLearnReviewAnswerSection(),
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomCenter,

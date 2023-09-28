@@ -67,7 +67,7 @@ class ApiClient extends GetxService {
       debugPrint('params-----------${params.toString()}');
       debugPrint('status-----------${response.statusCode}');
       debugPrint('body-------------${response.body.toString()}');
-      debugPrint('token------------${token}');
+      debugPrint('token------------$token');
 
       if (response.statusCode == 200) {
         try {
