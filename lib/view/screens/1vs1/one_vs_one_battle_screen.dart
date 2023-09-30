@@ -5,7 +5,7 @@ import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/divider/or_divider.dart';
@@ -36,6 +36,7 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
           return Scaffold(
             body: SafeArea(
               child: CustomScrollView(
+                physics: const BouncingScrollPhysics(),
                 slivers: <Widget>[
                   SliverPersistentHeader(
                     pinned: true,

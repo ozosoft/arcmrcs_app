@@ -62,6 +62,7 @@ import '../../view/screens/leader_board/leader_board_screen.dart';
 import '../../view/screens/general_quiz/quiz-result/quiz_result_screen.dart';
 import '../../view/screens/general_quiz/review-answer/review_answer_screen.dart';
 import '../../view/screens/play_different/daily_quiz/review-answer/review_answer_screen.dart';
+import '../../view/screens/privacy_policy/privacy_policy_screen.dart';
 import '../../view/screens/quiz_contest/contest_result_screen/contest_result_screen.dart';
 import '../../view/screens/quiz_contest/question_screen/contest_questions_screen.dart';
 
@@ -80,6 +81,7 @@ class RouteHelper {
   static const String quizQuestionsScreen = '/quiz_questions_screen';
   static const String quizResultScreen = '/quiz_result_screen';
   static const String profileCompleteScreen = "/profile_complete_screen";
+  static const String privacyScreen = "/privacy-screen";
   //battle
   static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
   static const String battleQuizResultScreen = '/battle_quiz_result_screen';
@@ -205,7 +207,7 @@ class RouteHelper {
               price: '',
               id: '',
             )),
-
+    GetPage(name: privacyScreen, page: () => const PrivacyPolicyScreen()),
     GetPage(name: depositWebViewScreen, page: () => CoinStroreWebViewScreen(redirectUrl: Get.arguments)),
   ];
 }

@@ -5,7 +5,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/exam_zone/exam_zone_controller.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/bottom-sheet/bottom_sheet_bar.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/otp_field_widget/otp_field_widget.dart';

@@ -12,7 +12,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import '../../../core/helper/shared_preference_helper.dart';
-import '../../../data/services/api_service.dart';
+import '../../../data/services/api_client.dart';
 
 class OnBoardIntroScreen extends StatefulWidget {
   const OnBoardIntroScreen({super.key});

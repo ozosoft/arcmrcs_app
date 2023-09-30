@@ -374,6 +374,8 @@ class LoginController extends GetxController {
     if (responseModel.statusCode == 200) {
       LoginResponseModel loginModel = LoginResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (loginModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+        remember = true;
+        update();
         checkAndGotoNextStep(loginModel);
       } else {
         isSocailSubmitLoading = false;

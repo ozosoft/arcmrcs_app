@@ -9,7 +9,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/exam_zone/exam_zone_quiz_controller.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:quiz_lab/view/components/buttons/level_card_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
@@ -271,9 +271,9 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                                                               height: Dimensions.space10,
                                                                               child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
                                                                                   ? const SizedBox()
-                                                                                  : SvgPicture.asset(
-                                                                                      "${controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : const SizedBox()}",
-                                                                                      fit: BoxFit.cover))
+                                                                                  : controller.selectedOptionIndex == optionIndex
+                                                                                      ? SvgPicture.asset(controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG, fit: BoxFit.cover)
+                                                                                      : const SizedBox())
                                                                         ],
                                                                       ),
                                                                     ),
@@ -399,7 +399,7 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                                               child: Column(
                                                                 children: [
                                                                   Text(
-                                                                    MyStrings.areYouSureYouWantToCloseSearching.tr,
+                                                                    MyStrings.areYouSureYouWantToLeaveExamRoom.tr,
                                                                     textAlign: TextAlign.center,
                                                                     style: regularDefault.copyWith(),
                                                                   ),
@@ -484,15 +484,16 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                 ],
                               ),
                             ),
-                            const Positioned.fill(
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
-                                  child: QuizBannerAdsWidget(),
-                                ),
-                              ),
-                            ),
+                            // const Positioned.fill(
+                            //   bottom: 60,
+                            //   child: Align(
+                            //     alignment: Alignment.bottomCenter,
+                            //     child: Padding(
+                            //       padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
+                            //       child: QuizBannerAdsWidget(),
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
             ));

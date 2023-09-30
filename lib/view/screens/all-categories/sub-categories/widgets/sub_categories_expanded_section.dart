@@ -33,7 +33,7 @@ class SubCategoriesExpandedSection extends StatelessWidget {
             child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 2.3, crossAxisCount: 3),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: context.width > 600 ? 3 : 2.3, crossAxisCount: 3),
                 itemCount: controller!.subCategoriesList[categoryindex].quizInfos!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(

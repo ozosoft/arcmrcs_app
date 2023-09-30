@@ -8,7 +8,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/model/auth/verification/email_verification_model.dart';
 import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class LoginRepo {

@@ -3,11 +3,14 @@ import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/controller/sub_categories/sub_categories_controller.dart';
 import 'package:quiz_lab/data/repo/sub_categories/sub_categories_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 import '../../../../core/helper/ads/admob_helper.dart';
+import '../../../../core/utils/my_color.dart';
+import '../../../../core/utils/my_strings.dart';
 import '../../../components/app-bar/custom_category_appbar.dart';
+import '../../../components/no_data.dart';
 import 'widgets/sub_category_list_card_widget.dart';
 
 class SubCategoriesCardScreen extends StatefulWidget {
@@ -50,15 +53,18 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
         ),
         body: controller.loader
             ? const CustomLoader()
-            : SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ListView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
+            : controller.subCategoriesList.isEmpty
+                ? NoDataWidget(
+                    messages: MyStrings.noSubCategoryFound.tr,
+                  )
+                : RefreshIndicator(
+                    color: MyColor.primaryColor,
+                    onRefresh: () async {
+                      controller.getdata(subCategoryId);
+                    },
+                    child: ListView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                         padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
-                        shrinkWrap: true,
                         itemCount: controller.subCategoriesList.length,
                         itemBuilder: (BuildContext context, int index) {
                           var categoryItem = controller.subCategoriesList[index];
@@ -77,9 +83,7 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
                             index: index,
                           );
                         }),
-                  ],
-                ),
-              ),
+                  ),
       ),
     );
   }

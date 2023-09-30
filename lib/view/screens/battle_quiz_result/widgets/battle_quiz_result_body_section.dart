@@ -11,7 +11,7 @@ import '../../../../core/utils/my_color.dart';
 import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/style.dart';
 import '../../../../data/repo/battle/battle_repo.dart';
-import '../../../../data/services/api_service.dart';
+import '../../../../data/services/api_client.dart';
 import '../../../components/divider/custom_dashed_divider.dart';
 import 'bottom_section_buttons.dart';
 import 'player_profile_details.dart';

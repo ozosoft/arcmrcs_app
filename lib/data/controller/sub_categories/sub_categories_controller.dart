@@ -21,7 +21,7 @@ class SubCategoriesController extends GetxController {
   bool loader = true;
 
   bool isActive = false;
-  bool viewMore  = false;
+  bool viewMore = false;
 
   void getdata(String subcategoryId) async {
     loader = true;
@@ -32,11 +32,9 @@ class SubCategoriesController extends GetxController {
     if (model.statusCode == 200) {
       subCategoriesList.clear();
 
-      SubcategoriesModel subcategories =
-          SubcategoriesModel.fromJson(jsonDecode(model.responseJson));
+      SubcategoriesModel subcategories = SubcategoriesModel.fromJson(jsonDecode(model.responseJson));
 
-      if (subcategories.status.toString().toLowerCase() ==
-          MyStrings.success.toLowerCase()) {
+      if (subcategories.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         // id =subcategories.data.subcategories.
 
         List<Subcategory>? subcategorylist = subcategories.data?.subcategories;

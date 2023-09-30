@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import '../../../../../../../core/utils/style.dart';
 import '../../../../../../../data/controller/battle/battle_room_controller.dart';
 import '../../../../../../../data/model/battle/battle_question_list.dart';
-import '../../../../../../../data/services/api_service.dart';
+import '../../../../../../../data/services/api_client.dart';
 import '../../../../../../components/bottom-sheet/custom_bottom_sheet.dart';
 import '../../../../../../components/buttons/rounded_loading_button.dart';
 

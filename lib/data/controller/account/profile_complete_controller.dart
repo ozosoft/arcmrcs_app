@@ -46,21 +46,6 @@ class ProfileCompleteController extends GetxController {
     String zip = zipCodeController.text.toString();
     String state = stateController.text.toString();
 
-    // if (firstName.isEmpty) {
-    //   CustomSnackBar.error(errorList: [MyStrings.kFirstNameNullError.tr]);
-    //   submitLoading = true;
-    //   update();
-
-    //   return;
-    // }
-    // else if (lastName.isEmpty) {
-    //   CustomSnackBar.error(errorList: [MyStrings.kLastNameNullError.tr]);
-    //   submitLoading = true;
-    //   update();
-
-    //   return;
-    // }
-
     UserPostModel model = UserPostModel(avatar: null, firstname: firstName, lastName: lastName, mobile: '', email: '', username: '', countryCode: '', country: '', mobileCode: '8', address: address, state: state, zip: zip, city: city);
 
     bool b = await profileRepo.updateProfile(model, false);

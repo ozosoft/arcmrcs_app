@@ -5,7 +5,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_controller.dart';
 import 'package:quiz_lab/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
 import '../../../../core/helper/ads/admob_helper.dart';
@@ -32,7 +32,7 @@ class _FunNLearnScreenState extends State<FunNLearnScreen> {
     FunNLearnCategoriesController controller = Get.put(FunNLearnCategoriesController(funNLearnRepo: Get.find()));
 
     super.initState();
-    admobHelper.createInterstitialAd();
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getFunNLearndata();
     });
@@ -75,10 +75,10 @@ class _FunNLearnScreenState extends State<FunNLearnScreen> {
                                   fromFunNlearn: true,
                                   index: index,
                                   onTap: () {
+                                    admobHelper.showInterstitialAd();
                                     if (controller.allCategoriesList[index].subcategoriesCount.toString() == "0") {
                                       Get.toNamed(RouteHelper.funNlearnListScreen, arguments: [controller.allCategoriesList[index].name.toString(), controller.allCategoriesList[index].id.toString(), "null"]);
                                     } else {
-                                      admobHelper.showInterstitialAd();
                                       Get.toNamed(RouteHelper.funNlearnSubCategoryScreenScreen, arguments: [title, controller.allCategoriesList[index].id.toString()]);
                                     }
                                   });

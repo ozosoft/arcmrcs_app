@@ -10,9 +10,9 @@ class FindOpponenetScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: CustomCategoryAppBar(title: MyStrings.letsPlay.tr),
-      body: const SingleChildScrollView(child: FindOpponentsBodySection()),
+      body: const SingleChildScrollView(physics: BouncingScrollPhysics(), child: FindOpponentsBodySection()),
     );
   }
 }

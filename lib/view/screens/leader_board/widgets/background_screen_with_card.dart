@@ -6,7 +6,7 @@ import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/controller/leader_board/leader_board_controller.dart';
 import 'package:quiz_lab/data/repo/leaderBoard/leader_board_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

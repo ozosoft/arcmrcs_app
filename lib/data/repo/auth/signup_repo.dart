@@ -4,7 +4,7 @@ import 'package:quiz_lab/core/utils/method.dart';
 import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/model/auth/sign_up_model/sign_up_model.dart';
 import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 
 class RegistrationRepo {
   ApiClient apiClient;
@@ -27,16 +27,8 @@ class RegistrationRepo {
       'email': model.email.toString(),
     };
 
-
-
     return bodyFields;
   }
-
-  // Future<dynamic> getCountryList() async {
-  //   String url = '${UrlContainer.baseUrl}${UrlContainer.countryEndPoint}';
-  //   ResponseModel model = await apiClient.request(url, Method.getMethod, null);
-  //   return model;
-  // }
 
   Future<bool> sendUserToken() async {
     String deviceToken;

@@ -8,6 +8,8 @@ import 'package:quiz_lab/view/screens/drawer/drawer_screen.dart';
 import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home-body-sections/exam_zone_section/exam_zone_homepage_category_screen.dart';
 import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home-body-sections/home_top_category_section/top_category_section.dart';
 import 'package:get/get.dart';
+import '../../../core/helper/ads/admob_helper.dart';
+import '../../../core/helper/ads/ads_unit_id_helper.dart';
 import '../../../data/controller/dashboard/dashboard_controller.dart';
 import '../../../data/controller/quiz_contest/quiz_contest_questions_controller.dart';
 import '../../../data/controller/sub_categories/sub_categories_controller.dart';
@@ -15,7 +17,7 @@ import '../../../data/repo/auth/logout/logout_repo.dart';
 import '../../../data/repo/dashboard/dashboard_repo.dart';
 import '../../../data/repo/quiz_contest/quiz_contest_repo.dart';
 import '../../../data/repo/sub_categories/sub_categories_repo.dart';
-import '../../../data/services/api_service.dart';
+import '../../../data/services/api_client.dart';
 import 'homepage-widgets/home-body-sections/play_diffrent_quizes/play_diffrent_quizes.dart';
 import 'homepage-widgets/home_appbar_section.dart/custom_sliver_appbar.dart';
 
@@ -29,6 +31,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  AdmobHelper admobHelper = AdmobHelper();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
@@ -47,7 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
 
     DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find(), examZoneRepo: Get.find(), logoutRepo: Get.put(LogoutRepo(apiClient: Get.find()))));
-
+    admobHelper.createInterstitialAd();
+    AdUnitHelper.initializeAdUnits();
     controller.getHomePageData();
   }
 

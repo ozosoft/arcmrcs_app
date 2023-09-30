@@ -15,7 +15,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../../../core/route/route.dart';
 import '../../../../core/utils/url_container.dart';
 import '../../../../data/model/battle/battle_question_list.dart';
-import '../../../../data/services/api_service.dart';
+import '../../../../data/services/api_client.dart';
 import '../../../../environment.dart';
 import '../../../components/alert-dialog/custom_alert_dialog.dart';
 

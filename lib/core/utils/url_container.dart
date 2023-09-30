@@ -84,7 +84,7 @@ class UrlContainer {
   static const String generalSettingEndPoint = 'general-setting';
   //static const String moduleSettingEndPoint        = 'module-setting';
 
-  static const String privacyPolicyEndPoint = 'policy-pages';
+  static const String privacyPolicyEndPoint = 'privacy-policy';
 
   static const String getProfileEndPoint = 'user-info';
   static const String updateProfileEndPoint = 'profile-setting';

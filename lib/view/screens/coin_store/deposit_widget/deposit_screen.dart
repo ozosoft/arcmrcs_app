@@ -15,7 +15,7 @@ import '../../../../../core/utils/my_color.dart';
 import '../../../../../core/utils/my_strings.dart';
 import '../../../../../data/model/deposit/deposit_method_response_model.dart';
 
-import '../../../../../data/services/api_service.dart';
+import '../../../../data/services/api_client.dart';
 
 import 'info_widget.dart';
 

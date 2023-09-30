@@ -20,36 +20,39 @@ class _BannerAdsWidgetState extends State<BannerAdsWidget> {
   @override
   void initState() {
     super.initState();
-    _bannerAd = BannerAd(
-      adUnitId: AdUnitHelper.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (Ad ad) {
-          debugPrint('$BannerAd loaded.');
-        },
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          debugPrint('$BannerAd failedToLoad: $error');
-        },
-        onAdOpened: (Ad ad) => debugPrint('$BannerAd onAdOpened.'),
-        onAdClosed: (Ad ad) => debugPrint('$BannerAd onAdClosed.'),
-        onAdWillDismissScreen: (Ad ad) => debugPrint('$BannerAd onAdWillDismissScreen.'),
-      ),
-    );
 
-    // Load the banner ad initially if necessary
-    if (Environment.showBannerAds) {
-      _bannerAd!.load();
-    }
+    if (AdUnitHelper.bannerAdUnitId != null) {
+      _bannerAd = BannerAd(
+        adUnitId: AdUnitHelper.bannerAdUnitId!,
+        request: const AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (Ad ad) {
+            debugPrint('$BannerAd loaded.');
+          },
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            debugPrint('$BannerAd failedToLoad: $error');
+          },
+          onAdOpened: (Ad ad) => debugPrint('$BannerAd onAdOpened.'),
+          onAdClosed: (Ad ad) => debugPrint('$BannerAd onAdClosed.'),
+          onAdWillDismissScreen: (Ad ad) => debugPrint('$BannerAd onAdWillDismissScreen.'),
+        ),
+      );
 
-    // Set up a timer to hide banner ads after {given} minutes
-    _timer = Timer(const Duration(minutes: Environment.hideHomeBannerAdsAfteraMiniutes), () {
-      if (Environment.hideAfterShowBannerAds) {
-        setState(() {
-          _showBannerAds = false;
-        });
+      // Load the banner ad initially if necessary
+      if (Environment.showBannerAds && AdUnitHelper.bannerAdUnitShow! == '1') {
+        _bannerAd!.load();
       }
-    });
+
+      // Set up a timer to hide banner ads after {given} minutes
+      _timer = Timer(const Duration(minutes: Environment.hideHomeBannerAdsAfteraMiniutes), () {
+        if (Environment.hideAfterShowBannerAds) {
+          setState(() {
+            _showBannerAds = false;
+          });
+        }
+      });
+    }
   }
 
   @override

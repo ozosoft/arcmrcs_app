@@ -4,7 +4,6 @@ import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/data/controller/quiz_questions/quiz_questions_controller.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
-import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 import '../../../../../core/utils/my_strings.dart';
 
@@ -25,13 +24,7 @@ class BottomSectionButtons extends StatelessWidget {
                 press: () {
                   var idData = id;
                   var titleData = title;
-                  idData != 0
-                      ? Get.offAllNamed(RouteHelper.quizQuestionsScreen, arguments: [titleData, idData])
-                      : Future.delayed(const Duration(milliseconds: 800), () {
-                          CustomSnackBar.error(errorList: [MyStrings.completeTheLevelFirst.tr]);
-                        }).then((value) => Get.offAllNamed(
-                            RouteHelper.bottomNavBarScreen,
-                          ));
+                  idData != 0 ? Get.offAllNamed(RouteHelper.quizQuestionsScreen, arguments: [titleData, idData]) : Get.offAllNamed(RouteHelper.bottomNavBarScreen);
                 },
                 textSize: Dimensions.space21),
           ),

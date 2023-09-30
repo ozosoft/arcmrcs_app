@@ -9,7 +9,7 @@ import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/auth/auth/email_verification_controler.dart';
 import 'package:quiz_lab/data/repo/auth/general_setting_repo.dart';
 import 'package:quiz_lab/data/repo/auth/sms_email_verification_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_appbar.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';

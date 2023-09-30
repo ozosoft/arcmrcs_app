@@ -1,5 +1,4 @@
 class MyImages {
-  static const String appLogoCircle = "assets/images/app_logo_circle.png";
   static const String defaultAvatar = "assets/images/default-avatar.png";
   static const String deadImage = "assets/images/dead.png";
   static const String noContentFound = "assets/images/no-content.png";
@@ -64,26 +63,21 @@ class MyImages {
   static const String withdrawHistory = "assets/images/withdraw_history.png";
   static const String profileImage = "assets/images/avatar.png";
   static const String applogo = "assets/images/quizKabapplogo.png";
-  static const String splashBGimage = "assets/images/splash_BG.svg";
+  static const String splashBGimage = "assets/images/app_red_bg.svg";
   static const String appBarBGimage = "assets/images/appBar_bg.png";
   static const String profileimage = "assets/images/profile.svg";
   static const String profileimagePng = "assets/images/profile_home.png";
   static const String reward = "assets/images/rewords.svg";
   static const String bell = "assets/images/Settings.svg";
   static const String avatar1 = "assets/images/avatar1.svg";
-  static const String avatar2 = "assets/images/avatar2.svg";
-  static const String avatar3 = "assets/images/avatar3.svg";
-  static const String avatar4 = "assets/images/avatar4.svg";
-  static const String avatar5 = "assets/images/avatar5.svg";
   static const String rank = "assets/images/rank.svg";
   static const String coin = "assets/images/Coin.svg";
   static const String score = "assets/images/score.svg";
-  static const String reviewBgImage = "assets/images/review_answer_bg.svg";
+  static const String reviewBgImage = "assets/images/app_red_bg.svg";
   static const String cup = "assets/images/cup.svg";
   static const String greenTikSvg = "assets/images/green_tik_svg.svg";
   static const String wrongSvg = "assets/images/wrongFilled.svg";
   static const String totalReward = "assets/images/totalReward.svg";
-  static const String mapSVG = "assets/images/Map.svg";
   static const String copySVG = "assets/images/copy_svg.svg";
   static const String roomCreatorSVG = "assets/images/roomCreator.svg";
   static const String onBoard2SVG = "assets/images/intro2.svg";
@@ -132,7 +126,6 @@ class MyImages {
   static const String musicSVG = "assets/images/music_svg.svg";
   static const String scienceKitSVG = "assets/images/scienceKit.svg";
   static const String unlockSVG = "assets/images/unLock_Svg.svg";
-  static const String greatWallSVG = "assets/images/great_wallSVG.svg";
   static const String greatWallPNG = "assets/images/greatWall.png";
   static const String fiftyFiftySVG = "assets/images/fifty_fiftySvg.svg";
   static const String groupSVG = "assets/images/group_svg.svg";
@@ -180,10 +173,6 @@ class MyImages {
 
   List<String> avatars = [
     avatar1,
-    avatar2,
-    avatar3,
-    avatar4,
-    avatar5,
   ];
 
   final List containerimages = [

@@ -11,7 +11,7 @@ import '../../../model/play_different_quizes/fun_n_learn/fun_n_learn_sub_categor
 class FunNLearnSubCategoriesController extends GetxController {
   FunNLearnRepo funNLearnRepo;
 
-  FunNLearnSubCategoriesController({required this.funNLearnRepo});
+FunNLearnSubCategoriesController({required this.funNLearnRepo});
 
   String id = "";
   List<Subcategory> subCategoriesList = [];

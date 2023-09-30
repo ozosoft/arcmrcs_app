@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
 
 import '../../../../../core/utils/dimensions.dart';
 import '../../../../../core/utils/my_color.dart';
@@ -59,17 +61,17 @@ class CountryBottomSheet {
                   TextField(
                     controller: controller.searchController,
                     onChanged: filterCountries,
-                    decoration: const InputDecoration(
-                      hintText: 'Search Country',
-                      prefixIcon: Icon(
+                    decoration:  InputDecoration(
+                      hintText: MyStrings.selectACountry.tr,
+                      prefixIcon: const Icon(
                         Icons.search,
                         color: Colors.grey,
                       ),
-                      enabledBorder: UnderlineInputBorder(
+                      enabledBorder: const UnderlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide: BorderSide(color: Colors.grey), // Set the color for the normal border
                       ),
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: const UnderlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         borderSide: BorderSide(color: MyColor.primaryColor), // Set the color for the focused border
                       ),

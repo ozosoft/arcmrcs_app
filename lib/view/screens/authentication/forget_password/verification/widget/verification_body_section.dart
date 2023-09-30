@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/auth/forget_password/verify_password_controller.dart';
 import 'package:quiz_lab/data/repo/auth/login_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
 import 'package:quiz_lab/view/components/text/custom_underline_text.dart';
 import 'package:get/get.dart';

@@ -5,13 +5,14 @@ import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/controller/all_categories/all_categories_controller.dart';
 import 'package:quiz_lab/data/model/all_cartegories/all_categories_model.dart';
 import 'package:quiz_lab/data/repo/allcategories/all_categories_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 
 import '../../../core/helper/ads/admob_helper.dart';
 import '../../../core/route/route.dart';
+import '../../../core/utils/my_color.dart';
 import '../../../core/utils/util.dart';
 import '../../components/no_data.dart';
 import 'widgets/all_category_list_card_widget.dart';
@@ -60,43 +61,40 @@ class _AllCategoriesScreenState extends State<AllCategoriesScreen> {
                 ? NoDataWidget(
                     messages: MyStrings.noCategoryFound.tr,
                   )
-                : SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
-                            shrinkWrap: true,
-                            itemCount: controller.allCategoriesList.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              var categoryItem = controller.allCategoriesList[index];
+                : RefreshIndicator(
+                    color: MyColor.primaryColor,
+                    onRefresh: () async {
+                      controller.getdata();
+                    },
+                    child: ListView.builder(
+                        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
+                        itemCount: controller.allCategoriesList.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          var categoryItem = controller.allCategoriesList[index];
 
-                              List<QuizInfo>? levelList = categoryItem.quizInfos;
+                          List<QuizInfo>? levelList = categoryItem.quizInfos;
 
-                              String subCategoryId = levelList != null && levelList.isNotEmpty && levelList[0].subCategoryId.toString() != '0' ? levelList[0].subCategoryId.toString() : '-1';
+                          String subCategoryId = levelList != null && levelList.isNotEmpty && levelList[0].subCategoryId.toString() != '0' ? levelList[0].subCategoryId.toString() : '-1';
 
-                              return AllCategoryListTileCardWidget(
-                                controller: controller,
-                                categoryData: categoryItem,
-                                onTap: () {
-                                  admobHelper.showInterstitialAd();
-                                  if (categoryItem.subcategoriesCount != '0') {
-                                    Get.toNamed(RouteHelper.subCategories, arguments: [categoryItem.name, categoryItem.id.toString()]);
-                                  }
-                                  controller.changeExpandIndex(index);
-                                },
-                                title: categoryItem.name.toString(),
-                                image: UrlContainer.allCategoriesImage + categoryItem.image.toString(),
-                                fromViewAll: true,
-                                subCategoryId: subCategoryId,
-                                isExpand: subCategoryId == "" ? index == controller.expandIndex : false,
-                                index: index,
-                              );
-                            }),
-                      ],
-                    ),
+                          return AllCategoryListTileCardWidget(
+                            controller: controller,
+                            categoryData: categoryItem,
+                            onTap: () {
+                              admobHelper.showInterstitialAd();
+                              if (categoryItem.subcategoriesCount != '0') {
+                                Get.toNamed(RouteHelper.subCategories, arguments: [categoryItem.name, categoryItem.id.toString()]);
+                              }
+                              controller.changeExpandIndex(index);
+                            },
+                            title: categoryItem.name.toString(),
+                            image: UrlContainer.allCategoriesImage + categoryItem.image.toString(),
+                            fromViewAll: true,
+                            subCategoryId: subCategoryId,
+                            isExpand: subCategoryId == "" ? index == controller.expandIndex : false,
+                            index: index,
+                          );
+                        }),
                   ),
       ),
     );

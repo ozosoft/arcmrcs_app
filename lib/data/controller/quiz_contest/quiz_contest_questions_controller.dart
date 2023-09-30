@@ -37,7 +37,7 @@ class QuizContestQuestionsController extends GetxController {
 
   int currentQuestionIndex = 0;
 
-  bool loading = true;
+  bool loading = false;
   bool showaudienceVote = false;
 
   String quizInfoID = "";
@@ -51,7 +51,6 @@ class QuizContestQuestionsController extends GetxController {
 
   late final TabController tabController;
   int selectedIndex = 1;
-
 
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
@@ -88,13 +87,17 @@ class QuizContestQuestionsController extends GetxController {
         }
         timerDuration = int.parse(model.data!.contestAnsDuration.toString());
 
-        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]); loading = false;
+        update();
       } else {
         CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
-
+        loading = false;
+        update();
         //need to cheak error msg
       }
     } else {
+      loading = false;
+      update();
       CustomSnackBar.error(errorList: [getQuestionsModel.message]);
     }
 
@@ -226,7 +229,7 @@ class QuizContestQuestionsController extends GetxController {
       String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
       params['question_id[$i]'] = quizeId;
       debugPrint('quize id: $quizeId');
-      params['option_$quizeId[]'] = selectedOptionId;
+      params['option_$quizeId'] = selectedOptionId;
       debugPrint("option_$quizeId");
     }
     debugPrint(params['option_']);

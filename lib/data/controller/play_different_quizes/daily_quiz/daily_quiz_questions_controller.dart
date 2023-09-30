@@ -219,7 +219,7 @@ class DailyQuizQuestionsController extends GetxController {
       String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
       params['question_id[$i]'] = quizeId;
       debugPrint('quize id: $quizeId');
-      params['option_$quizeId[]'] = selectedOptionId;
+      params['option_$quizeId'] = selectedOptionId;
       debugPrint("option_$quizeId");
     }
     debugPrint(params['option_']);

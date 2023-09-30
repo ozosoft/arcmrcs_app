@@ -11,7 +11,7 @@ import '../../../../../core/utils/my_images.dart';
 import '../../../../../core/utils/style.dart';
 import '../../../../../core/utils/url_container.dart';
 import '../../../../../data/controller/battle/battle_room_controller.dart';
-import '../../../../../data/services/api_service.dart';
+import '../../../../../data/services/api_client.dart';
 import '../../../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../../../components/text/default_text.dart';
 import '../../../../../data/controller/battle/find_opponents_controller.dart';

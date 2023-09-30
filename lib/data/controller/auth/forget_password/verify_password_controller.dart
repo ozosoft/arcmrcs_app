@@ -59,16 +59,6 @@ class VerifyPasswordController extends GetxController {
     }
   }
 
-  // void resendForgetPassCode() async {
-  //   isResendLoading = true;
-  //   update();
-  //   String value = email;
-  //   String type = 'email';
-  //   await loginRepo.forgetPassword(type, value);
-  //   isResendLoading = false;
-  //   update();
-  // }
-
   bool verifyLoading = false;
 
   void verifyForgetPasswordCode(String value) async {

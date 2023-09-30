@@ -7,7 +7,7 @@ import 'package:quiz_lab/core/utils/util.dart';
 import 'package:quiz_lab/data/controller/localization/localization_controller.dart';
 import 'package:quiz_lab/data/controller/splash/splash_controller.dart';
 import 'package:quiz_lab/data/repo/auth/general_setting_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 

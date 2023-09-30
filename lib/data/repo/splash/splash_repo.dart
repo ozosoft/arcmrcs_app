@@ -1,4 +1,4 @@
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 
 
 class SplashRepo{

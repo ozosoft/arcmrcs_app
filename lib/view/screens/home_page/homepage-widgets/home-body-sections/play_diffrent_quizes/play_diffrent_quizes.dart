@@ -39,8 +39,8 @@ class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
           const SizedBox(height: Dimensions.space10),
           GridView.builder(
             shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: 0.9),
+            physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: context.width > 600 ? 1 : 0.9),
             itemCount: controller.differentQuizlist.length,
             itemBuilder: (context, index) {
               var item = controller.differentQuizlist[index];

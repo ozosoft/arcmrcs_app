@@ -8,7 +8,7 @@ import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/auth/auth/registration_controller.dart';
 import 'package:quiz_lab/data/repo/auth/general_setting_repo.dart';
 import 'package:quiz_lab/data/repo/auth/signup_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
 import 'package:quiz_lab/view/components/divider/custom_divider.dart';
@@ -132,22 +132,35 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     isPassword: true,
                     textInputType: TextInputType.text,
                     inputAction: TextInputAction.done,
+                    showErrorText: false,
                     validator: (value) {
-                      controller.updateValidationList(value);
-                      if (controller.passwordValidationRules.where((element) => element.hasError == true).toList().isNotEmpty) {
-                        return "";
+                      if (controller.checkPasswordStrength) {
+                        controller.updateValidationList(value);
+                        if (controller.passwordValidationRules.where((element) => element.hasError == true).toList().isNotEmpty) {
+                          return "";
+                        } else {
+                          return null;
+                        }
                       } else {
-                        return null;
+                        if (value!.isEmpty) {
+                          return MyStrings.fieldErrorMsg.tr;
+                        }
+                        if (value != controller.passwordController.text) {
+                          return MyStrings.confirmYourPasswordNotMatch.tr;
+                        } else {
+                          return null;
+                        }
                       }
+
                       // Password is valid if it passes all checks
                     },
                   ),
-                  if (controller.passwordValidationRules.where((element) => element.hasError == true).toList().isEmpty) ...[
+                  if (controller.checkPasswordStrength) ...[
                     const SizedBox(
-                      height: Dimensions.space10,
+                      height: Dimensions.space8,
                     )
                   ],
-                  if (controller.passwordController.text != '') ...[
+                  if (controller.checkPasswordStrength) ...[
                     StrongPassWordCheakSection(
                       passwordValidationRules: controller.passwordValidationRules,
                     ),
@@ -180,6 +193,43 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     },
                   ),
                   const SizedBox(height: Dimensions.space25),
+                  Visibility(
+                      visible: controller.needAgree,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: Checkbox(
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+                              activeColor: MyColor.primaryColor,
+                              checkColor: MyColor.colorWhite,
+                              value: controller.agreeTC,
+                              side: MaterialStateBorderSide.resolveWith(
+                                (states) => BorderSide(width: 1.0, color: controller.agreeTC ? MyColor.getTextFieldEnableBorder() : MyColor.getTextFieldDisableBorder()),
+                              ),
+                              onChanged: (bool? value) {
+                                controller.updateAgreeTC();
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: Dimensions.space8),
+                          Row(
+                            children: [
+                              Text(MyStrings.iAgreeWith.tr, style: regularDefault.copyWith(color: MyColor.getTextColor())),
+                              const SizedBox(width: Dimensions.space3),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(RouteHelper.privacyScreen);
+                                },
+                                child: Text(MyStrings.policies.tr.toLowerCase(), style: regularDefault.copyWith(color: MyColor.getPrimaryColor(), decoration: TextDecoration.underline, decorationColor: MyColor.getPrimaryColor())),
+                              ),
+                              const SizedBox(width: Dimensions.space3),
+                            ],
+                          ),
+                        ],
+                      )),
+                  const SizedBox(height: Dimensions.space30),
                   controller.submitLoading
                       ? const RoundedLoadingBtn()
                       : RoundedButton(

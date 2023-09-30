@@ -9,7 +9,7 @@ import '../../../../../core/utils/my_strings.dart';
 import '../../../../../core/utils/style.dart';
 import '../../../../../data/controller/quiz_questions/quiz_questions_controller.dart';
 import '../../../../../data/repo/quiz_questions_repo/quiz_questions_repo.dart';
-import '../../../../../data/services/api_service.dart';
+import '../../../../../data/services/api_client.dart';
 import '../../../../components/divider/custom_dashed_divider.dart';
 import 'bottom_section_buttons.dart';
 import 'player_profile_picture.dart';

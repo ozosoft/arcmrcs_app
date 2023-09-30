@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:quiz_lab/data/repo/guess_the_word/guess_the_word_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/screens/guess_the_word/sub_category/widget/guess_word_sub_cat_card.dart';
 import 'package:get/get.dart';
 
+import '../../../../core/utils/my_color.dart';
 import '../../../../core/utils/my_strings.dart';
 import '../../../components/app-bar/custom_category_appbar.dart';
+import '../../../components/no_data.dart';
 
 class GuessWordSubCategoryScreen extends StatefulWidget {
   const GuessWordSubCategoryScreen({super.key});
@@ -40,16 +42,26 @@ class _GuessWordSubCategoryScreenState extends State<GuessWordSubCategoryScreen>
       body: GetBuilder<GuessThewordController>(builder: (controller) {
         return controller.isLoading
             ? const CustomLoader()
-            : ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                itemCount: controller.subCategories.length,
-                itemBuilder: (context, index) {
-                  return GuessWordSubCategoryCard(
-                    subcategory: controller.subCategories[index],
-                    image: '${controller.subImgPath}/${controller.subCategories[index].image}',
+            : controller.subCategories.isEmpty
+                ? NoDataWidget(
+                    messages: MyStrings.noSubCategoryFound.tr,
+                  )
+                : RefreshIndicator(
+                    color: MyColor.primaryColor,
+                    onRefresh: () async {
+                      controller.getAllsubcategories(id.toString());
+                    },
+                    child: ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                      itemCount: controller.subCategories.length,
+                      itemBuilder: (context, index) {
+                        return GuessWordSubCategoryCard(
+                          subcategory: controller.subCategories[index],
+                          image: '${controller.subImgPath}/${controller.subCategories[index].image}',
+                        );
+                      },
+                    ),
                   );
-                },
-              );
       }),
     );
   }

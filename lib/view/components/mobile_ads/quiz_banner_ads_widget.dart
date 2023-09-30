@@ -17,26 +17,28 @@ class _QuizBannerAdsWidgetState extends State<QuizBannerAdsWidget> {
   @override
   void initState() {
     super.initState();
-    _bannerAd = BannerAd(
-      adUnitId: AdUnitHelper.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (Ad ad) {
-          debugPrint('$BannerAd loaded.');
-        },
-        onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          debugPrint('$BannerAd failedToLoad: $error');
-        },
-        onAdOpened: (Ad ad) => debugPrint('$BannerAd onAdOpened.'),
-        onAdClosed: (Ad ad) => debugPrint('$BannerAd onAdClosed.'),
-        onAdWillDismissScreen: (Ad ad) => debugPrint('$BannerAd onAdWillDismissScreen.'),
-      ),
-    );
-    if (Environment.showBannerAds) {
-      _bannerAd!.load();
-    } else {
-      _bannerAd!.dispose();
+    if (AdUnitHelper.bannerAdUnitId != null) {
+      _bannerAd = BannerAd(
+        adUnitId: AdUnitHelper.bannerAdUnitId!,
+        request: const AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (Ad ad) {
+            debugPrint('$BannerAd loaded.');
+          },
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            debugPrint('$BannerAd failedToLoad: $error');
+          },
+          onAdOpened: (Ad ad) => debugPrint('$BannerAd onAdOpened.'),
+          onAdClosed: (Ad ad) => debugPrint('$BannerAd onAdClosed.'),
+          onAdWillDismissScreen: (Ad ad) => debugPrint('$BannerAd onAdWillDismissScreen.'),
+        ),
+      );
+      if (Environment.showBannerAds && AdUnitHelper.bannerAdUnitShow! == '1') {
+        _bannerAd!.load();
+      } else {
+        _bannerAd!.dispose();
+      }
     }
   }
 

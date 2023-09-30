@@ -7,7 +7,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/model/auth/sign_up_model/registration_response_model.dart';
 import 'package:quiz_lab/data/model/auth/sign_up_model/sign_up_model.dart';
-import 'package:quiz_lab/data/model/country_model/country_model.dart';
 import 'package:quiz_lab/data/model/general_setting/general_setting_response_model.dart';
 import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
 import 'package:quiz_lab/data/model/model/error_model.dart';
@@ -70,10 +69,10 @@ class RegistrationController extends GetxController {
       return;
     }
 
-    // if(needAgree && !agreeTC) {
-    //   CustomSnackBar.error(errorList: [MyStrings.agreePolicyMessage],);
-    //   return;
-    // }
+    if(needAgree && !agreeTC) {
+      CustomSnackBar.error(errorList: [MyStrings.agreePolicyMessage],);
+      return;
+    }
 
     submitLoading = true;
     update();
@@ -209,35 +208,12 @@ class RegistrationController extends GetxController {
       return;
     }
 
-    // needAgree = generalSettingMainModel.data?.generalSetting?.agree.toString() == '0' ? false : true;
-    // checkPasswordStrength = generalSettingMainModel.data?.generalSetting?.securePassword.toString() == '0' ? false : true;
+    needAgree = generalSettingMainModel.data?.generalSetting?.agree.toString() == '0' ? false : true;
+    checkPasswordStrength = generalSettingMainModel.data?.generalSetting?.securePassword.toString() == '0' ? false : true;
 
     isLoading = false;
     update();
   }
-
-  bool countryLoading = true;
-  List<Countries> countryList = [];
-
-  // Future<dynamic> getCountryData() async {
-
-  //   ResponseModel mainResponse = await registrationRepo.getCountryList();
-
-  //   if (mainResponse.statusCode == 200) {
-  //     CountryModel model = CountryModel.fromJson(jsonDecode(mainResponse.responseJson));
-  //     List<Countries>? tempList = model.data?.countries;
-
-  //     if (tempList != null && tempList.isNotEmpty) {
-  //       countryList.addAll(tempList);
-  //     }
-  //   } else {
-  //     CustomSnackBar.error(errorList: [mainResponse.message]);
-  //   }
-
-  //   countryLoading = false;
-  //   update();
-
-  // }
 
   String? validatePassword(String value) {
     if (value.isEmpty) {

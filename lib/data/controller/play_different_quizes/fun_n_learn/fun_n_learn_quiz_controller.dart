@@ -84,13 +84,7 @@ class FunNlearnQuizController extends GetxController {
           examQuestionsList.addAll(examQuestion);
         }
 
-        //   List<Option>? optionslist = model.data!.questions![1].options;
-
-        // if (optionslist != null && optionslist.isNotEmpty) {
-        //   optionsList.addAll(optionslist);
-        // }
-
-        // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
+    
       } else {
         CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
 
@@ -216,7 +210,7 @@ class FunNlearnQuizController extends GetxController {
       String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
       params['question_id[$i]'] = quizeId;
       // debugPrint('quize id: ${quizeId}');
-      params['option_$quizeId[]'] = selectedOptionId;
+      params['option_$quizeId'] = selectedOptionId;
       // debugPrint("option_$quizeId");
     }
     // debugPrint(params['option_']);

@@ -10,6 +10,7 @@ import 'package:quiz_lab/view/screens/settings/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
+import '../../../core/helper/ads/ads_unit_id_helper.dart';
 import '../../../environment.dart';
 import '../../components/mobile_ads/banner_ads_widget.dart';
 
@@ -36,7 +37,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
           Center(
             child: _widgetOptions.elementAt(_page),
           ),
-          if (Environment.showBannerAds == true) ...[
+          if (Environment.showBannerAds && AdUnitHelper.bannerAdUnitShow == '1') ...[
             const Positioned.fill(
               bottom: 0,
               child: Align(alignment: Alignment.bottomCenter, child: BannerAdsWidget()),
@@ -73,7 +74,6 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
               MyImages.homeFilledSVG,
               height: Dimensions.space25,
               width: Dimensions.space50,
-
               colorFilter: _page == 2 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
             ),
           ),

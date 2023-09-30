@@ -28,7 +28,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
             Text(
               " 6 ${MyStrings.character.tr} ",
               style: TextStyle(
-                color: passwordValidationRules[4].hasError ? MyColor.colorBlack : MyColor.greenTik,
+                color: passwordValidationRules[4].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),
             ),
           ],
@@ -44,7 +44,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
             Text(
               " ${MyStrings.upperCase.tr} ",
               style: TextStyle(
-                color: passwordValidationRules[0].hasError ? MyColor.colorBlack : MyColor.greenTik,
+                color: passwordValidationRules[0].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),
             ),
           ],
@@ -60,7 +60,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
             Text(
               " ${MyStrings.lowerCase.tr} ",
               style: TextStyle(
-                color: passwordValidationRules[1].hasError ? MyColor.colorBlack : MyColor.greenTik,
+                color: passwordValidationRules[1].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),
             ),
           ],
@@ -76,7 +76,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
             Text(
               " ${MyStrings.symbol.tr} ",
               style: TextStyle(
-                color: passwordValidationRules[3].hasError ? MyColor.colorBlack : MyColor.greenTik,
+                color: passwordValidationRules[3].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),
             ),
           ],
@@ -92,7 +92,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
             Text(
               " ${MyStrings.hasDigit.tr} ",
               style: TextStyle(
-                color: passwordValidationRules[2].hasError ? MyColor.colorBlack : MyColor.greenTik,
+                color: passwordValidationRules[2].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),
             ),
           ],

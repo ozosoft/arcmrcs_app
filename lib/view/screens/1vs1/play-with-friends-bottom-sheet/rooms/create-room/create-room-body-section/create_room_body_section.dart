@@ -13,7 +13,7 @@ import '../../../../../../../core/utils/style.dart';
 import '../../../../../../../data/controller/battle/battle_room_controller.dart';
 import '../../../../../../../data/model/battle/battle_category_list.dart';
 import '../../../../../../../data/repo/battle/battle_repo.dart';
-import '../../../../../../../data/services/api_service.dart';
+import '../../../../../../../data/services/api_client.dart';
 import '../../../../../../components/buttons/rounded_loading_button.dart';
 import '../../../../../../components/category-card/custom_room_card.dart';
 import '../../../../../../components/text-form-field/custom_drop_down_field.dart';

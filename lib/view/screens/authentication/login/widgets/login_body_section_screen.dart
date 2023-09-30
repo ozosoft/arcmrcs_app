@@ -7,7 +7,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/auth/login_controller.dart';
 import 'package:quiz_lab/data/repo/auth/login_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
 import 'package:quiz_lab/view/components/divider/custom_divider.dart';
@@ -68,7 +68,9 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                 ],
               ),
             ),
-            const SizedBox(height: Dimensions.space10,),
+            const SizedBox(
+              height: Dimensions.space10,
+            ),
             SocialLoginSection(
               loginController: controller,
             ),

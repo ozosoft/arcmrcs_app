@@ -6,7 +6,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/exam_zone/exam_zone_quiz_controller.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/divider/custom_dashed_divider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';

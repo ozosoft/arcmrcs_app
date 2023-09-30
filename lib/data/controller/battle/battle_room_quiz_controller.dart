@@ -208,16 +208,6 @@ class BattleRoomQuizController extends GetxController with GetTickerProviderStat
           goToNextQuestion();
         } else {
           finishBattleAndSubmitAnswer();
-          // int user1CorrectAnswers = user1Answers.where((answer) => answer["ans"] == "1").length;
-          // int user2CorrectAnswers = user2Answers.where((answer) => answer["ans"] == "1").length;
-
-          // if (user1CorrectAnswers > user2CorrectAnswers) {
-          //   Get.snackbar("Winner Is", " ${battleRoom.user1!.name} ", backgroundColor: Colors.green);
-          // } else if (user2CorrectAnswers > user1CorrectAnswers) {
-          //   Get.snackbar("Winner Is", " ${battleRoom.user2!.name} ");
-          // } else {
-          //   Get.snackbar("Game Is", "Drawn!");
-          // }
         }
       }
     }

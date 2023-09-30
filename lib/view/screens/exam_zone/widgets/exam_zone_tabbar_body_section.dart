@@ -5,7 +5,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/exam_zone/exam_zone_controller.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/bottom-sheet/custom_bottom_sheet.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/no_data.dart';
@@ -103,7 +103,6 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                               )
                             : ListView.builder(
                                 physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                                shrinkWrap: true,
                                 itemCount: controller.examcategoryList.length,
                                 itemBuilder: (BuildContext context, int index) {
                                   var item = controller.examcategoryList[index];
@@ -134,7 +133,6 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                         },
                         child: ListView.builder(
                             physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                            shrinkWrap: true,
                             itemCount: controller.completedExamDataList.length,
                             itemBuilder: (BuildContext context, int index) {
                               var item = controller.completedExamDataList[index];

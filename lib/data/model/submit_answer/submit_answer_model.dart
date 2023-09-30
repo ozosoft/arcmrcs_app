@@ -220,12 +220,12 @@ class Category {
 }
 
 class Level {
-  int id;
-  String title;
-  String level;
-  String status;
-  DateTime createdAt;
-  DateTime updatedAt;
+  int? id;
+  String? title;
+  String? level;
+  String? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
 
   Level({
     required this.id,
@@ -241,8 +241,8 @@ class Level {
         title: json["title"],
         level: json["level"],
         status: json["status"],
-        createdAt: DateTime.parse(json["created_at"]),
-        updatedAt: DateTime.parse(json["updated_at"]),
+        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -250,7 +250,7 @@ class Level {
         "title": title,
         "level": level,
         "status": status,
-        "created_at": createdAt.toIso8601String(),
-        "updated_at": updatedAt.toIso8601String(),
+        "created_at": createdAt!.toIso8601String(),
+        "updated_at": updatedAt!.toIso8601String(),
       };
 }

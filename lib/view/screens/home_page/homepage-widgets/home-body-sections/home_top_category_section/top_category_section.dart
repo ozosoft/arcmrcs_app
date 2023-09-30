@@ -99,8 +99,9 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                     ),
                   ] else ...[
                     GetBuilder<SubCategoriesController>(
-                      builder: (controllers) => GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: context.isLandscape ? 5 : 3, childAspectRatio: .7),
+                      builder: (controllers) {
+                        return GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: context.width > 600 ? 1 : .7),
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemCount: controller.categorylist.length,
@@ -120,7 +121,9 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                                 image: UrlContainer.dashBoardCategoryImage + controller.categorylist[index].image.toString(),
                               ),
                             );
-                          }),
+                          },
+                        );
+                      },
                     ),
                   ],
                 ],

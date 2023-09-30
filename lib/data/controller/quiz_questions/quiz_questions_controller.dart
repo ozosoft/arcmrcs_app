@@ -85,12 +85,6 @@ class QuizQuestionsController extends GetxController {
         update();
 
         successmessage = quizquestions.message!.success.toString();
-
-        // List<Option>? optionslist = quizquestions.data!.questions![0].options;
-
-        // if (optionslist != null && optionslist.isNotEmpty) {
-        //   optionsList.addAll(optionslist);
-        // }
       } else {
         CustomSnackBar.error(errorList: [...quizquestions.message!.error!]);
       }
@@ -128,10 +122,6 @@ class QuizQuestionsController extends GetxController {
   isValidAnswer(int index, int optionIndex) {
     questionId = questionsList[index].selectedOptionId.toString();
     thisQuestionId = optionsList[optionIndex].id.toString();
-
-    // debugPrint('selectedQuestionId: ${questionId} ----this questionId ${thisQuestionId}');
-
-    // debugPrint('questionId=========================================================================: ${questionId}');
 
     if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
       return true;

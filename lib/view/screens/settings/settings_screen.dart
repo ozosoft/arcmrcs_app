@@ -7,7 +7,7 @@ import 'package:quiz_lab/data/controller/settings/settings_controller.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
 
-import '../../../data/services/api_service.dart';
+import '../../../data/services/api_client.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});

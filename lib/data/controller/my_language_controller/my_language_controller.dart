@@ -95,14 +95,20 @@ class MyLanguageController extends GetxController {
         } else {
           Get.back();
         }
+        isChangeLangLoading = false;
+        update();
       } catch (e) {
+        isChangeLangLoading = false;
+        update();
         CustomSnackBar.error(errorList: [e.toString()]);
       }
     } else {
+      isChangeLangLoading = false;
+      update();
       CustomSnackBar.error(errorList: [response.message]);
     }
 
-    isChangeLangLoading = true;
+    isChangeLangLoading = false;
     update();
   }
 

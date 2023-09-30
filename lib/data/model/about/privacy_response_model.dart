@@ -134,7 +134,7 @@ class DataValues {
 
   DataValues.fromJson(dynamic json) {
     _title = json['title'];
-    _details = json['details'];
+    _details = json['description'];
   }
 
   String? _title;
@@ -146,7 +146,7 @@ class DataValues {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['title'] = _title;
-    map['details'] = _details;
+    map['description'] = _details;
     return map;
   }
 }

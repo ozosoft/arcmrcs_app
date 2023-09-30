@@ -2,6 +2,7 @@ import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 
+import '../../../view/components/snack_bar/show_custom_snackbar.dart';
 import '../../model/battle/battle_category_list.dart';
 
 class OneVsMutiController extends GetxController {
@@ -43,12 +44,15 @@ class OneVsMutiController extends GetxController {
         entryFeeRandomGame.value = battleCategoryList.data.entryCoin;
         if (categoryListData.isNotEmpty) {
           categoryList.addAll(categoryListData);
-          
         }
       }
 
       isLoadingCategory.value = false;
       update();
+    } else {
+      isLoadingCategory.value = false;
+      update();
+      CustomSnackBar.error(errorList: [model.message]);
     }
   }
 

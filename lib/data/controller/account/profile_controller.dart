@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
-import 'package:quiz_lab/data/services/api_service.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
@@ -55,8 +55,11 @@ class ProfileController extends GetxController {
   ApiClient get apiClient => profileRepo.apiClient;
 
   loadProfileInfo() async {
-    isLoading = true;
-    update();
+    if (username == '') {
+      isLoading = true;
+      update();
+    }
+
     ResponseModel responseModel = await profileRepo.loadProfileInfo();
     if (responseModel.statusCode == 200) {
       model = ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
@@ -78,6 +81,8 @@ class ProfileController extends GetxController {
         update();
       }
     } else {
+      isLoading = false;
+      update();
       CustomSnackBar.error(errorList: [responseModel.message]);
     }
   }

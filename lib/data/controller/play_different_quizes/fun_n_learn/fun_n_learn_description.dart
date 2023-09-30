@@ -41,7 +41,7 @@ class FunNLearnListController extends GetxController {
       FunNLearnDescriptionModel funandLearnDescription = FunNLearnDescriptionModel.fromJson(jsonDecode(model.responseJson));
 
       if (funandLearnDescription.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
-        // id =subcategories.data.subcategories.
+
 
         List<FunList>? subcategorylist = funandLearnDescription.data?.funList;
 
