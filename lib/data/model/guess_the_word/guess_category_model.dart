@@ -130,6 +130,7 @@ class QuizInfo {
   String? createdAt;
   String? updatedAt;
   String? levelStatus;
+  Subcategory? subcategory;
   PlayInfo? playInfo;
   Level? level;
 
@@ -155,6 +156,7 @@ class QuizInfo {
     this.createdAt,
     this.updatedAt,
     this.levelStatus,
+    this.subcategory,
     this.playInfo,
     this.level,
   });
@@ -181,6 +183,7 @@ class QuizInfo {
         createdAt: json["created_at"] == null ? null : json["created_at"].toString(),
         updatedAt: json["updated_at"] == null ? null : json["updated_at"].toString(),
         levelStatus: json["level_status"],
+        subcategory: json["subcategory"] == null ? null : Subcategory.fromJson(json["subcategory"]),
         playInfo: json["play_info"] == null ? null : PlayInfo.fromJson(json["play_info"]),
         level: json["level"] == null ? null : Level.fromJson(json["level"]),
       );
@@ -207,6 +210,7 @@ class QuizInfo {
         "created_at": createdAt?.toString(),
         "updated_at": updatedAt?.toString(),
         "level_status": levelStatus,
+        "subcategory": subcategory?.toJson(),
         "play_info": playInfo?.toJson(),
         "level": level?.toJson(),
       };
@@ -305,5 +309,45 @@ class PlayInfo {
         "flip_question": flipQuestion,
         "created_at": createdAt?.toString(),
         "updated_at": updatedAt?.toString(),
+      };
+}
+
+class Subcategory {
+  int? id;
+  String? name;
+  String? categoryId;
+  String? image;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
+
+  Subcategory({
+    this.id,
+    this.name,
+    this.categoryId,
+    this.image,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+  });
+
+  factory Subcategory.fromJson(Map<String, dynamic> json) => Subcategory(
+        id: json["id"],
+        name: json["name"],
+        categoryId: json["category_id"],
+        image: json["image"],
+        status: json["status"],
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "category_id": categoryId,
+        "image": image,
+        "status": status,
+        "created_at": createdAt,
+        "updated_at": updatedAt,
       };
 }

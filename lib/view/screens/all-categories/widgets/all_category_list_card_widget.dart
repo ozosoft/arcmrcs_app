@@ -99,7 +99,7 @@ class _AllCategoryListTileCardWidgetState extends State<AllCategoryListTileCardW
                                     CustomChipsWidget(
                                       padding: Dimensions.space5,
                                       right: Dimensions.space5,
-                                      child: Center(child: Text("${widget.categoryData.quizInfos!.length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                      child: Center(child: Text("${widget.categoryData.subcategoriesCount! == '0' ? widget.categoryData.quizInfos!.length : widget.categoryData.quizInfos!.where((element) => element.subcategory != null).length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                     ),
                                   ],
                                 ),

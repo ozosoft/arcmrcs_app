@@ -50,8 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
     ));
 
     DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find(), examZoneRepo: Get.find(), logoutRepo: Get.put(LogoutRepo(apiClient: Get.find()))));
-    admobHelper.createInterstitialAd();
     AdUnitHelper.initializeAdUnits();
+    admobHelper.createInterstitialAd();
+
     controller.getHomePageData();
   }
 

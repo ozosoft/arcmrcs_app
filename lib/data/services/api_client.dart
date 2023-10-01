@@ -40,7 +40,7 @@ class ApiClient extends GetxService {
         } else {
           response = await http.post(url, body: params);
         }
-      } else if (method == Method.postMethod) {
+      } else if (method == Method.updateMethod) {
         if (passHeader) {
           initToken();
 
@@ -55,7 +55,11 @@ class ApiClient extends GetxService {
       } else {
         if (passHeader) {
           initToken();
+
           response = await http.get(url, headers: {"Accept": "application/json", "Authorization": "$tokenType $token"});
+          if (response.body.isEmpty) {
+            response = await http.get(url, headers: {"Authorization": "$tokenType $token"});
+          }
         } else {
           response = await http.get(
             url,
@@ -78,7 +82,7 @@ class ApiClient extends GetxService {
             Get.offAllNamed(RouteHelper.loginScreen);
           }
         } catch (e) {
-          e.toString();
+          return ResponseModel(false, 'error', 404, "{}");
         }
 
         return ResponseModel(true, 'success', 200, response.body);

@@ -86,6 +86,14 @@ class DateConverter {
     }
   }
 
+  static String isoStringToLocalFormattedDateAndTimeOnly(String dateTime) {
+    try {
+      return DateFormat('d MMM, yyyy h:mm a').format(isoStringToLocalDate(dateTime));
+    } catch (v) {
+      return "--";
+    }
+  }
+
   static String localDateTime(DateTime dateTime) {
     return DateFormat('dd-MM-yyyy').format(dateTime.toUtc());
   }
@@ -164,19 +172,19 @@ class DateConverter {
     return durationInMinutes;
   }
 
-static  String formatDateTime(String inputString, String format) {
-  try {
-    // Parse the input date and time string
-    final inputDateTime = DateTime.parse(inputString);
+  static String formatDateTime(String inputString, String format) {
+    try {
+      // Parse the input date and time string
+      final inputDateTime = DateTime.parse(inputString);
 
-    // Create a date and time format
-    final formatter = DateFormat(format);
+      // Create a date and time format
+      final formatter = DateFormat(format);
 
-    // Format the date and time and return the formatted string
-    return formatter.format(inputDateTime);
-  } catch (e) {
-    // Handle any parsing errors here
-    return "Invalid Date/Time";
+      // Format the date and time and return the formatted string
+      return formatter.format(inputDateTime);
+    } catch (e) {
+      // Handle any parsing errors here
+      return "Invalid Date/Time";
+    }
   }
-}
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
@@ -16,6 +17,7 @@ import 'package:get/get.dart';
 import '../../../../data/model/dashboard/dashboard_model.dart';
 import '../../../../data/model/exam_zone/exam_zone_model.dart';
 import '../../../components/buttons/rounded_loading_button.dart';
+import '../../../components/custom_loader/custom_loader.dart';
 
 class EnterRoomBottomSheetWidget extends StatefulWidget {
   final Exam? quizInfo;
@@ -89,46 +91,65 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                   const SizedBox(
                     height: Dimensions.space10,
                   ),
-                  ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: viewAll == true ? 3 : 2,
-                      shrinkWrap: true,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          margin: const EdgeInsets.all(Dimensions.space5),
+                  if (widget.quizInfo != null || widget.quizInfoDashBoard != null)
+                    SizedBox(
+                      height: Dimensions.space90 * 2.5,
+                      child: SingleChildScrollView(
+                        physics: const BouncingScrollPhysics(),
+                        child: Container(
+                          padding: const EdgeInsets.all(20),
+                          width: double.infinity,
                           color: Colors.transparent,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text('\u2022', style: regularLarge.copyWith(overflow: TextOverflow.visible, color: MyColor.redCancelTextColor, fontSize: 20)),
-                              const SizedBox(
-                                width: Dimensions.space10,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  MyStrings().rules[index],
-                                  style: regularLarge.copyWith(overflow: TextOverflow.visible, color: MyColor.textColor),
-                                ),
-                              ),
-                            ],
+                          child: HtmlWidget(
+                            """${widget.quizInfo != null ? widget.quizInfo!.examRule : widget.quizInfoDashBoard != null ? widget.quizInfoDashBoard!.examRule : ""}""",
+                            textStyle: regularDefault.copyWith(color: Colors.black),
+                            onLoadingBuilder: (context, element, loadingProgress) => const Center(
+                              child: CustomLoader(),
+                            ),
                           ),
-                        );
-                      }),
+                        ),
+                      ),
+                    ),
+                  // ListView.builder(
+                  //     physics: const BouncingScrollPhysics(),
+                  //     itemCount: viewAll == true ? 3 : 2,
+                  //     shrinkWrap: true,
+                  //     itemBuilder: (BuildContext context, int index) {
+                  //       return Container(
+                  //         margin: const EdgeInsets.all(Dimensions.space5),
+                  //         color: Colors.transparent,
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.start,
+                  //           crossAxisAlignment: CrossAxisAlignment.center,
+                  //           children: [
+                  //             Text('\u2022', style: regularLarge.copyWith(overflow: TextOverflow.visible, color: MyColor.redCancelTextColor, fontSize: 20)),
+                  //             const SizedBox(
+                  //               width: Dimensions.space10,
+                  //             ),
+                  //             Expanded(
+                  //               child: Text(
+                  //                 MyStrings().rules[index],
+                  //                 style: regularLarge.copyWith(overflow: TextOverflow.visible, color: MyColor.textColor),
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       );
+                  //     }),
                   const SizedBox(
                     height: Dimensions.space10,
                   ),
-                  InkWell(
-                    onTap: () {
-                      debugPrint(viewAll.toString());
-                      viewAll = !viewAll;
-                      controller.update();
-                    },
-                    child: Text(
-                      viewAll == false ? "${MyStrings.viewAllRules.tr} ↑ " : "${MyStrings.viewLessRules.tr} ↓ ",
-                      style: regularLarge.copyWith(color: MyColor.textColor, fontWeight: FontWeight.bold),
-                    ),
-                  ),
+                  // InkWell(
+                  //   onTap: () {
+                  //     debugPrint(viewAll.toString());
+                  //     viewAll = !viewAll;
+                  //     controller.update();
+                  //   },
+                  //   child: Text(
+                  //     viewAll == false ? "${MyStrings.viewAllRules.tr} ↑ " : "${MyStrings.viewLessRules.tr} ↓ ",
+                  //     style: regularLarge.copyWith(color: MyColor.textColor, fontWeight: FontWeight.bold),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

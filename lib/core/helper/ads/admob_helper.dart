@@ -78,7 +78,7 @@ class AdmobHelper {
   // create interstitial ads
   void createInterstitialAd() {
     if (Environment.showInterstitialAds == true) {
-      if (AdUnitHelper.interstitialAdUnitId != null) {
+      if (AdUnitHelper.interstitialAdUnitShow! == '1') {
         InterstitialAd.load(
             adUnitId: AdUnitHelper.interstitialAdUnitId!,
             request: const AdRequest(),
@@ -96,7 +96,7 @@ class AdmobHelper {
 
   void showInterstitialAd() {
     debugPrint(_interstitialLoadAttempts.toString());
-    if (Environment.showInterstitialAds == true) {
+    if (Environment.showInterstitialAds == true && AdUnitHelper.interstitialAdUnitId! == '1') {
       if (_interstitialAd != null) {
         _interstitialAd!.fullScreenContentCallback = FullScreenContentCallback(onAdDismissedFullScreenContent: (InterstitialAd ad) {
           debugPrint("from load");
@@ -125,7 +125,7 @@ class AdmobHelper {
 
   // create and load interstitial ads always
   void loadInterstitialAdAlways() {
-    if (Environment.showInterstitialAds == true) {
+    if (Environment.showInterstitialAds == true && AdUnitHelper.interstitialAdUnitId! == '1') {
       if (AdUnitHelper.interstitialAdUnitId != null) {
         InterstitialAd.load(
             adUnitId: AdUnitHelper.interstitialAdUnitId!,
@@ -169,7 +169,7 @@ class AdmobHelper {
 
   // create and load Reward ads Autromaticaly
   void loadRewardAdAlways() {
-    if (Environment.showRewardlAds == true) {
+    if (Environment.showRewardlAds == true && AdUnitHelper.rewardedAdUnitShow! == '1') {
       if (AdUnitHelper.rewardedAdUnitId != null) {
         RewardedAd.load(
             adUnitId: AdUnitHelper.rewardedAdUnitId!,

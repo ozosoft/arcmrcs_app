@@ -215,11 +215,6 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
                   const SizedBox(
                     height: Dimensions.space15,
                   )
-                  // TextButton(
-                  //     onPressed: () {
-                  //       controller.confettiControllerTopCenter.play();
-                  //     },
-                  //     child: const Text("show Crackers"))
                 ],
               ),
 

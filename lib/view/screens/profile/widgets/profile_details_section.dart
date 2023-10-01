@@ -77,13 +77,17 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
                     height: Dimensions.space20,
                   ),
                   GetBuilder<LogoutController>(
-                      builder: (logoutController) => logoutController.loaderStarted
-                          ? const RoundedLoadingBtn()
-                          : RoundedButton(
-                              text: MyStrings.logout,
-                              press: () {
-                                logoutController.logout();
-                              })),
+                    builder: (logoutController) => logoutController.loaderStarted
+                        ? const RoundedLoadingBtn()
+                        : RoundedButton(
+                            text: MyStrings.logout,
+                            press: () {
+                              logoutController.logout();
+                            },
+                          ),
+                  ),
+
+                  SizedBox(height: Dimensions.space100,)
                 ],
               ),
       ),

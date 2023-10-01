@@ -22,7 +22,6 @@ import '../../../../core/utils/url_container.dart';
 import '../../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../../components/buttons/rounded_button.dart';
 import '../../../components/image_widget/my_image_widget.dart';
-import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';
 import '../../../components/no_data.dart';
 
 class ExamZoneQuizScreen extends StatefulWidget {

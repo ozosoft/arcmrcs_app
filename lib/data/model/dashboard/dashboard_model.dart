@@ -272,6 +272,7 @@ class Exams {
   String? examEndTime;
   String? examDuration;
   String? examKey;
+  String? examRule;
   dynamic enrolledPlayer;
   String? status;
   String? winningmark;
@@ -295,6 +296,7 @@ class Exams {
     this.examEndTime,
     this.examDuration,
     this.examKey,
+    this.examRule,
     this.enrolledPlayer,
     this.status,
     this.winningmark,
@@ -319,6 +321,7 @@ class Exams {
         examEndTime: json["exam_end_time"],
         examDuration: json["exam_duration"],
         examKey: json["exam_key"],
+        examRule: json["exam_rule"],
         enrolledPlayer: json["enrolled_player"],
         status: json["status"],
         winningmark: json["winning_mark"].toString(),
@@ -343,6 +346,7 @@ class Exams {
         "exam_end_time": examEndTime,
         "exam_duration": examDuration,
         "exam_key": examKey,
+        "exam_rule": examRule,
         "enrolled_player": enrolledPlayer,
         "status": status,
         "winning_mark": winningmark,

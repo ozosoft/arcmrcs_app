@@ -201,12 +201,12 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                             width: 25,
                             height: 25,
                             child: Checkbox(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.space5)),
                               activeColor: MyColor.primaryColor,
                               checkColor: MyColor.colorWhite,
                               value: controller.agreeTC,
                               side: MaterialStateBorderSide.resolveWith(
-                                (states) => BorderSide(width: 1.0, color: controller.agreeTC ? MyColor.getTextFieldEnableBorder() : MyColor.getTextFieldDisableBorder()),
+                                (states) => BorderSide(width: Dimensions.space1, color: controller.agreeTC ? MyColor.getTextFieldEnableBorder() : MyColor.getTextFieldDisableBorder()),
                               ),
                               onChanged: (bool? value) {
                                 controller.updateAgreeTC();

@@ -120,7 +120,8 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                       ),
                                     CustomChipsWidget(
                                       padding: Dimensions.space5,
-                                      child: Center(child: Text("${widget.categories.quizInfos!.length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                      right: Dimensions.space5,
+                                      child: Center(child: Text("${widget.categories.subcategoriesCount! == '0' ? widget.categories.quizInfos!.length : widget.categories.quizInfos!.where((element) => element.subcategory != null).length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                     ),
                                   ],
                                 ),
@@ -206,22 +207,6 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                           ));
                                     }),
                               ),
-                              // attention: view more logic
-                              // widget.categories.quizInfos!.length > 3
-                              //     ? GestureDetector(
-                              //         onTap: () {
-                              //           setState(() {
-                              //             labelCount = widget.categories.quizInfos!.length;
-                              //           });
-                              //         },
-                              //         child: Padding(
-                              //           padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
-                              //           child: CustomTextWithUndeline(
-                              //             text: MyStrings.viewMore.tr,
-                              //           ),
-                              //         ),
-                              //       )
-                              //     : const SizedBox.shrink(),
                             ],
                           ),
                         )

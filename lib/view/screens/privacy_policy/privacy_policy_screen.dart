@@ -9,7 +9,6 @@ import '../../../core/utils/style.dart';
 import '../../../data/controller/privacy/privacy_controller.dart';
 import '../../../data/repo/privacy_repo/privacy_repo.dart';
 import '../../../data/services/api_client.dart';
-import '../../components/app-bar/custom_appbar.dart';
 import '../../components/app-bar/custom_category_appbar.dart';
 import '../../components/buttons/category_button.dart';
 import '../../components/custom_loader/custom_loader.dart';
@@ -82,9 +81,24 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                       ),
                       const SizedBox(height: Dimensions.space15),
                       Expanded(
-                          child: Center(
-                        child: SingleChildScrollView(physics: const BouncingScrollPhysics(), child: Container(padding: const EdgeInsets.all(20), width: double.infinity, color: Colors.transparent, child: HtmlWidget(controller.selectedHtml, textStyle: regularDefault.copyWith(color: Colors.black), onLoadingBuilder: (context, element, loadingProgress) => const Center(child: CustomLoader())))),
-                      ))
+                        child: Center(
+                          child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            child: Container(
+                              padding: const EdgeInsets.all(20),
+                              width: double.infinity,
+                              color: Colors.transparent,
+                              child: HtmlWidget(
+                                controller.selectedHtml,
+                                textStyle: regularDefault.copyWith(color: Colors.black),
+                                onLoadingBuilder: (context, element, loadingProgress) => const Center(
+                                  child: CustomLoader(),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
           ),

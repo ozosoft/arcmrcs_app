@@ -84,7 +84,7 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
                                             height: Dimensions.space8,
                                           ),
                                           Text(
-                                            DateConverter.formatDateTime(controller.coinHistoryList[index].createdAt.toString(), 'd MMM, yyyy h:mm a').tr,
+                                            DateConverter.isoStringToLocalFormattedDateAndTimeOnly(controller.coinHistoryList[index].createdAt!.toIso8601String()).tr,
                                             style: regularLarge.copyWith(color: MyColor.textColor),
                                           ),
                                         ],

@@ -61,7 +61,7 @@ class DashBoardController extends GetxController {
       contestlist.clear();
       examZonelist.clear();
 
-      if (model.responseJson.isEmpty) {
+      if (model.responseJson == "") {
         logoutFromApp();
       } else {
         DashBoardModel dashBoard = DashBoardModel.fromJson(jsonDecode(model.responseJson));
@@ -133,14 +133,19 @@ class DashBoardController extends GetxController {
     ResponseModel logout = await logoutRepo.logout();
 
     if (logout.statusCode == 200) {
-      LogoutModel plan = LogoutModel.fromJson(jsonDecode(logout.responseJson));
-      if (plan.status.toString().toLowerCase() == MyStrings.ok.toLowerCase()) {
-        debugPrint("LoggedM OUT!");
-        update();
+      if (logout.responseJson == '') {
         Get.offAllNamed(RouteHelper.loginScreen);
         return;
       } else {
-        CustomSnackBar.error(errorList: [...plan.message!.error!]);
+        LogoutModel plan = LogoutModel.fromJson(jsonDecode(logout.responseJson));
+        if (plan.status.toString().toLowerCase() == MyStrings.ok.toLowerCase()) {
+          debugPrint("LoggedM OUT!");
+          update();
+          Get.offAllNamed(RouteHelper.loginScreen);
+          return;
+        } else {
+          CustomSnackBar.error(errorList: [...plan.message!.error!]);
+        }
       }
     } else {
       CustomSnackBar.error(errorList: [logout.message]);
