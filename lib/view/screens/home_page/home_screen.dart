@@ -108,11 +108,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
                                     const PlayDiffrentQuizes(),
 
-                                    // TopCategorySection(),
-                                    // BattleOfTheDaySection(),
-                                    // QuizContestSection(),
-                                    // ExamZoneCategoryScreen(),
-                                    // PlayDiffrentQuizes(),
                                     const SizedBox(
                                       height: Dimensions.space100,
                                     )

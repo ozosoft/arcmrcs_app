@@ -769,11 +769,11 @@ class BattleRoomController extends GetxController {
     } catch (_) {
       throw BattleRoomException(errorMessageCode: _.toString());
     }
+  }
 
-    @override
-    void onClose() {
-      _battleRoomStreamSubscription?.cancel();
-      super.onClose();
-    }
+  @override
+  void onClose() {
+    _battleRoomStreamSubscription?.cancel();
+    super.onClose();
   }
 }

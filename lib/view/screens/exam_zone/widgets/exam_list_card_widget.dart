@@ -8,7 +8,7 @@ import '../../../../core/utils/my_images.dart';
 import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/style.dart';
 import '../../../../core/utils/url_container.dart';
-import '../../../../data/model/exam_zone/exam_zone_model.dart';
+import '../../../../data/model/dashboard/dashboard_model.dart';
 import '../../../components/chips/custom_chips_widget.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 
@@ -16,7 +16,7 @@ class ExamListTileCard extends StatefulWidget {
   final String title, image, minute, marks, date;
 
   final int index;
-  final Exam exam;
+  final Exams exam;
   final VoidCallback? onTap;
 
   const ExamListTileCard({
@@ -99,7 +99,7 @@ class _ExamListTileCardState extends State<ExamListTileCard> {
 
                               const SizedBox(height: Dimensions.space15),
                               //Title here
-                              Text("${MyStrings.youNeedtoScoreLong.replaceAll("{point}", widget.exam.winningMark.toString()).tr} ", style: regularSmall),
+                              Text("${MyStrings.youNeedtoScoreLong.replaceAll("{point}", widget.exam.winningmark.toString()).tr} ", style: regularSmall),
 
                               const SizedBox(height: Dimensions.space15),
                               // //Title here

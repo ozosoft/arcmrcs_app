@@ -51,7 +51,7 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: Dimensions.space10, top: Dimensions.space15),
+                        padding: const EdgeInsetsDirectional.only(start: Dimensions.space10, top: Dimensions.space15),
                         child: SizedBox(
                           height: 30,
                           child: SingleChildScrollView(

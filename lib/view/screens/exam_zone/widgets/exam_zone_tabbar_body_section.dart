@@ -6,11 +6,12 @@ import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/exam_zone/exam_zone_controller.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
-import 'package:quiz_lab/view/components/bottom-sheet/custom_bottom_sheet.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/no_data.dart';
 import 'package:get/get.dart';
 
+import '../../../../data/model/dashboard/dashboard_model.dart';
+import '../../../components/bottom-sheet/custom_bottom_sheet_2.dart';
 import 'completed_exam_list_card_widget.dart';
 import 'enter_exam_room_bottom_sheet.dart';
 import 'exam_list_card_widget.dart';
@@ -97,15 +98,15 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                         onRefresh: () async {
                           controller.examZoneListData(fromLoad: true);
                         },
-                        child: controller.examcategoryList.isEmpty
+                        child: controller.examcategoryList!.isEmpty
                             ? NoDataWidget(
                                 messages: MyStrings.noExamFound.tr,
                               )
                             : ListView.builder(
                                 physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                                itemCount: controller.examcategoryList.length,
+                                itemCount: controller.examcategoryList!.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  var item = controller.examcategoryList[index];
+                                  Exams item = controller.examcategoryList![index].createdAt as Exams;
                                   return ExamListTileCard(
                                     exam: item,
                                     index: index,
@@ -116,7 +117,8 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                                     title: item.title.toString(),
                                     onTap: () async {
                                       // controller.enterExamKey = item.examKey!;
-                                      CustomBottomSheet(
+                                      CustomBottomSheetPlus(
+                                        enableDrag: true,
                                         child: EnterRoomBottomSheetWidget(
                                           quizInfo: item,
                                         ),

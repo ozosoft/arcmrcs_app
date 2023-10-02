@@ -111,7 +111,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                   labelStyle: regularLarge.copyWith(color: widget.hastextcolor ? MyColor.textColor : MyColor.getLabelTextColor()),
                   fillColor: widget.fillColor,
                   filled: true,
-                  errorStyle: widget.showErrorText == false ? TextStyle(color: Colors.red, fontSize: 0) : null,
+                  errorStyle: widget.showErrorText == false ? const TextStyle(color: Colors.red, fontSize: 0) : null,
                   border: OutlineInputBorder(borderSide: BorderSide(width: 0.5, color: MyColor.getTextFieldDisableBorder()), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
                   focusedBorder: OutlineInputBorder(borderSide: BorderSide(width: 0.5, color: MyColor.getTextFieldEnableBorder()), borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
                   enabledBorder: OutlineInputBorder(borderSide: BorderSide(width: 0.5, color: MyColor.getTextFieldDisableBorder()), borderRadius: BorderRadius.circular(Dimensions.space8)),

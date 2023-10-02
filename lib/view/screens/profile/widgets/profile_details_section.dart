@@ -87,7 +87,7 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
                           ),
                   ),
 
-                  SizedBox(height: Dimensions.space100,)
+               const   SizedBox(height: Dimensions.space100,)
                 ],
               ),
       ),

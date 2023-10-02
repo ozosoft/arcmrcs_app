@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz_lab/data/model/exam_zone/exam_zone_model.dart';
 import 'package:quiz_lab/data/model/play_different_quizes/fun_n_learn/fun_n_learn_result_model.dart';
 import 'package:quiz_lab/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:get/get.dart';
@@ -41,7 +40,6 @@ class FunNlearnQuizController extends GetxController {
   String? quizInfoID;
   String? title;
   late int questionsIndex;
-  List<Exam> examcategoryList = [];
   List<Question> examQuestionsList = [];
   List<Option> optionsList = [];
 
@@ -86,7 +84,7 @@ class FunNlearnQuizController extends GetxController {
 
     
       } else {
-        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }
@@ -237,7 +235,7 @@ class FunNlearnQuizController extends GetxController {
           Get.back();
         });
       } else {
-        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }

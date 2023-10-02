@@ -258,7 +258,7 @@ class QuizQuestionsController extends GetxController {
 
         // CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success.tr]);
       } else {
-        CustomSnackBar.error(errorList: model.message.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: model.message.error ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }

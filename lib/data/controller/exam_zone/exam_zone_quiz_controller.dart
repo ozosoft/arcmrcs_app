@@ -5,7 +5,6 @@ import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/data/model/exam_zone/exam_result_model.dart';
-import 'package:quiz_lab/data/model/exam_zone/exam_zone_model.dart';
 
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:get/get.dart';
@@ -48,7 +47,7 @@ class ExamZoneQuizController extends GetxController {
   String? quizInfoID;
   late int questionsIndex;
   Exams examFullInfoData = Exams();
-  List<Exam> examcategoryList = [];
+  List<Exams> examcategoryList = [];
   List<Question> examQuestionsList = [];
   List<Option> optionsList = [];
 

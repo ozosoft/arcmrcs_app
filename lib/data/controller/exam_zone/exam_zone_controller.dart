@@ -28,7 +28,7 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
 
   String? quizInfoID;
   late int questionsIndex;
-  List<Exam> examcategoryList = [];
+  List<Exams>? examcategoryList = [];
   List<CompletedExam> completedExamDataList = [];
 
   List<Option> optionsList = [];
@@ -84,18 +84,16 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
     ResponseModel model = await examZoneRepo.examZoneData();
 
     if (model.statusCode == 200) {
-      examcategoryList.clear();
+      examcategoryList!.clear();
 
       ExamZoneModel examZoneModel = ExamZoneModel.fromJson(jsonDecode(model.responseJson));
 
       if (examZoneModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
-        List<Exam>? examList = examZoneModel.data?.exams;
+        List<Exams>? examList = examZoneModel.data!.exams;
 
         if (examList != null && examList.isNotEmpty) {
-          examcategoryList.addAll(examList);
+          examcategoryList!.addAll(examList);
         }
-
-  
       } else {
         CustomSnackBar.error(errorList: [...examZoneModel.message!.error!]);
       }
@@ -159,7 +157,7 @@ class ExamZoneController extends GetxController with GetSingleTickerProviderStat
           Get.toNamed(RouteHelper.examZoneQuestionScreen, arguments: [quizInfoId, enterExamKey]);
         }
       } else {
-        CustomSnackBar.error(errorList: modelData.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: modelData.message?.error ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }

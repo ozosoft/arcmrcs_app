@@ -6,12 +6,12 @@ import 'package:quiz_lab/core/utils/my_images.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/dashboard/dashboard_controller.dart';
-import 'package:quiz_lab/view/components/bottom-sheet/custom_bottom_sheet.dart';
 import 'package:quiz_lab/view/screens/exam_zone/widgets/enter_exam_room_bottom_sheet.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../core/utils/url_container.dart';
+import '../../../../../components/bottom-sheet/custom_bottom_sheet_2.dart';
 import '../../../../../components/chips/custom_chips_widget.dart';
 import '../../../../../components/image_widget/my_image_widget.dart';
 
@@ -69,8 +69,10 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                           width: context.width * 0.85,
                           child: GestureDetector(
                             onTap: () async {
-                              CustomBottomSheet(
-                                child: EnterRoomBottomSheetWidget(quizInfoDashBoard: item),
+                              CustomBottomSheetPlus(
+                                isScrollControlled: true,
+                                enableDrag: true,
+                                child: EnterRoomBottomSheetWidget(quizInfo: item),
                               ).customBottomSheet(context);
 
                               await controller.examZoneRepo.getExamCode(item.id.toString());

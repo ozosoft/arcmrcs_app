@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:quiz_lab/data/model/exam_zone/exam_zone_model.dart';
 import 'package:quiz_lab/data/model/play_different_quizes/daily_quiz/daily_quiz_questions_model.dart';
 
 import 'package:get/get.dart';
@@ -13,6 +12,7 @@ import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 import '../../../../core/route/route.dart';
+import '../../../model/dashboard/dashboard_model.dart';
 import '../../../model/play_different_quizes/daily_quiz/daily_quiz_submit_answer_model.dart';
 import '../../../repo/play_different_quizes/daily_quiz/daily_quiz_repo.dart';
 
@@ -43,7 +43,7 @@ class DailyQuizQuestionsController extends GetxController {
   String? quizInfoID;
   String? title;
   late int questionsIndex;
-  List<Exam> examcategoryList = [];
+  List<Exams> examcategoryList = [];
   List<Question> examQuestionsList = [];
   List<Option> optionsList = [];
 
@@ -245,7 +245,7 @@ class DailyQuizQuestionsController extends GetxController {
           Get.back();
         });
       } else {
-        CustomSnackBar.error(errorList: model.message?.success ?? [MyStrings.somethingWentWrong.tr]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
 
         //need to cheak error msg
       }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_images.dart';
-import 'package:quiz_lab/view/screens/coin_store/coin_store_screen.dart';
+import 'package:quiz_lab/view/components/will_pop_widget.dart';
 import 'package:quiz_lab/view/screens/home_page/home_screen.dart';
 import 'package:quiz_lab/view/screens/leader_board/leader_board_screen.dart';
 import 'package:quiz_lab/view/screens/profile/profile_screen.dart';
@@ -13,6 +13,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import '../../../core/helper/ads/ads_unit_id_helper.dart';
 import '../../../environment.dart';
 import '../../components/mobile_ads/banner_ads_widget.dart';
+import '../coin_store/coin_store_screen.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   const BottomNavigationBarScreen({super.key});
@@ -27,23 +28,32 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   int _page = 2;
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
-  static const List<Widget> _widgetOptions = <Widget>[CoinStoreScreen(), SettingsScreen(), HomeScreen(), LeaderBoardScreen(), ProfileScreen()];
+  static final List<Widget> _widgetOptions = <Widget>[
+    const CoinStoreScreen(),
+   
+    const SettingsScreen(),
+    const HomeScreen(),
+    const LeaderBoardScreen(),
+    const ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Center(
-            child: _widgetOptions.elementAt(_page),
-          ),
-          if (Environment.showBannerAds && AdUnitHelper.bannerAdUnitShow == '1') ...[
-            const Positioned.fill(
-              bottom: 0,
-              child: Align(alignment: Alignment.bottomCenter, child: BannerAdsWidget()),
-            )
-          ]
-        ],
+      body: WillPopWidget(
+        child: Stack(
+          children: [
+            Center(
+              child: _widgetOptions.elementAt(_page),
+            ),
+            if (Environment.showBannerAds && AdUnitHelper.bannerAdUnitShow == '1') ...[
+              const Positioned.fill(
+                bottom: 0,
+                child: Align(alignment: Alignment.bottomCenter, child: BannerAdsWidget()),
+              )
+            ]
+          ],
+        ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
