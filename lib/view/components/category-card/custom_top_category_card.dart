@@ -50,7 +50,7 @@ class CustomTopCategoryCard extends StatelessWidget {
               ),
             ),
             Text(
-              questionsQuantaty + MyStrings.questionse.tr,
+              "$questionsQuantaty ${MyStrings.questionse.tr}",
               textAlign: TextAlign.center,
               style: regularDefault.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space12),
             )

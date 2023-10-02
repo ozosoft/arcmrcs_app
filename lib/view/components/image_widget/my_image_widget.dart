@@ -37,36 +37,25 @@ class MyImageWidget extends StatelessWidget {
         width: width,
         child: ClipRRect(
             borderRadius: BorderRadius.circular(Dimensions.defaultRadius * 5),
-            child:  Center(
+            child: Center(
               child: SpinKitFadingCube(
                 color: MyColor.primaryColor.withOpacity(0.3),
                 size: Dimensions.space20,
               ),
             )),
       ),
-      // placeholder: (context, url) => SizedBox(
-      //   height: height,
-      //   width: width,
-      //   child: ClipRRect(
-      //       borderRadius: BorderRadius.circular(Dimensions.defaultRadius * 5),
-      //       child: Center(
-      //         child: Icon(
-      //           Icons.image,
-      //           color: MyColor.colorGrey.withOpacity(0.5),
-      //         ),
-      //       )),
-      // ),
       errorWidget: (context, url, error) => SizedBox(
         height: height,
         width: width,
         child: ClipRRect(
-            borderRadius: BorderRadius.circular(Dimensions.defaultRadius * 5),
-            child: Center(
-              child: Icon(
-                Icons.image,
-                color: MyColor.colorGrey.withOpacity(0.5),
-              ),
-            )),
+          borderRadius: BorderRadius.circular(Dimensions.defaultRadius * 5),
+          child: Center(
+            child: Icon(
+              Icons.image,
+              color: MyColor.colorGrey.withOpacity(0.5),
+            ),
+          ),
+        ),
       ),
     );
   }

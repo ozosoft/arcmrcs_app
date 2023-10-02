@@ -180,7 +180,7 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                                     right: Dimensions.space7,
                                                     child: Center(
                                                       child: Text(
-                                                        '${MyStrings.end.tr}${DateConverter.stringDateToDate(controller.contestlist[index].endDate.toString()).tr}',
+                                                        '${MyStrings.end.tr} ${DateConverter.stringDateToDate(controller.contestlist[index].endDate.toString()).tr}',
                                                         style: regularDefault.copyWith(color: MyColor.colorGrey),
                                                       ),
                                                     ),

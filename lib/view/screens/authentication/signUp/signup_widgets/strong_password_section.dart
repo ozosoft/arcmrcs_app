@@ -26,7 +26,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
               passwordValidationRules[4].hasError ? MyImages.loading : MyImages.greenTik,
             ),
             Text(
-              " 6 ${MyStrings.character.tr} ",
+              "  ${MyStrings.sixCharacter.tr}  ",
               style: TextStyle(
                 color: passwordValidationRules[4].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),
@@ -42,7 +42,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
               passwordValidationRules[0].hasError ? MyImages.loading : MyImages.greenTik,
             ),
             Text(
-              " ${MyStrings.upperCase.tr} ",
+              "  ${MyStrings.upperCase.tr}  ",
               style: TextStyle(
                 color: passwordValidationRules[0].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),
@@ -58,7 +58,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
               passwordValidationRules[1].hasError ? MyImages.loading : MyImages.greenTik,
             ),
             Text(
-              " ${MyStrings.lowerCase.tr} ",
+              "  ${MyStrings.lowerCase.tr}  ",
               style: TextStyle(
                 color: passwordValidationRules[1].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),
@@ -74,7 +74,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
               passwordValidationRules[3].hasError ? MyImages.loading : MyImages.greenTik,
             ),
             Text(
-              " ${MyStrings.symbol.tr} ",
+              "  ${MyStrings.symbol.tr}  ",
               style: TextStyle(
                 color: passwordValidationRules[3].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),
@@ -90,7 +90,7 @@ class StrongPassWordCheakSection extends StatelessWidget {
               passwordValidationRules[2].hasError ? MyImages.loading : MyImages.greenTik,
             ),
             Text(
-              " ${MyStrings.hasDigit.tr} ",
+              "  ${MyStrings.hasDigit.tr}  ",
               style: TextStyle(
                 color: passwordValidationRules[2].hasError ? MyColor.colorRed : MyColor.greenTik,
               ),

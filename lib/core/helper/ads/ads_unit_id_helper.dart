@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
 
@@ -33,13 +34,17 @@ class AdUnitHelper {
         throw UnsupportedError('Unsupported platform');
       }
     } catch (e) {
-      print('Error fetching ad unit IDs: $e');
+      if (kDebugMode) {
+        print('Error fetching ad unit IDs: $e');
+      }
     }
   }
 
   // Call this function to initialize ad unit IDs from the API.
   static Future<void> initializeAdUnits() async {
-    print("initializeAdUnits called");
+    if (kDebugMode) {
+      print("initializeAdUnits called");
+    }
     await fetchAdUnitIdsFromApi();
   }
 }

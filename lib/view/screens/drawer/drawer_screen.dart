@@ -104,42 +104,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     Get.toNamed(RouteHelper.profileScreen);
                   },
                 ),
-                // ListTile(
-                //   leading: SvgPicture.asset(MyImages.notificationSVG),
-                //   title: const Text(
-                //     MyStrings.notification,
-                //     style: regularMediumLarge,
-                //   ),
-                //   minLeadingWidth: Dimensions.space1,
-                //   onTap: () {
-                //     Get.toNamed(RouteHelper.notificationScreen);
-                //   },
-                // ),
-                // ListTile(
-                //   leading: SvgPicture.asset(MyImages.bookmarkDrawer),
-                //   title: const Text(
-                //     MyStrings.bookmark,
-                //     style: regularMediumLarge,
-                //   ),
-                //   minLeadingWidth: Dimensions.space1,
-                //   onTap: () {
-                //     Get.toNamed(RouteHelper.bookmarkScreen);
-                //   },
-                // ),
-                // const Divider(
-                //   endIndent: Dimensions.space70,
-                // ),
-                // ListTile(
-                //   leading: SvgPicture.asset(MyImages.walletDrawer),
-                //   title: const Text(
-                //     MyStrings.wallet,
-                //     style: regularMediumLarge,
-                //   ),
-                //   minLeadingWidth: Dimensions.space1,
-                //   onTap: () {
-                //     Get.toNamed(RouteHelper.walletScreen);
-                //   },
-                // ),
                 ListTile(
                   leading: SvgPicture.asset(MyImages.coinStoreDrawer),
                   title: Text(

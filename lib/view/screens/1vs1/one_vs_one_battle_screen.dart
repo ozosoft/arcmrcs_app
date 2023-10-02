@@ -14,7 +14,6 @@ import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 import '../../../data/controller/battle/one_vs_multi_controller.dart';
 import '../../../data/model/battle/battle_category_list.dart';
-import '../../components/bottom-sheet/custom_bottom_sheet.dart';
 import '../../components/text-form-field/custom_drop_down_field.dart';
 import 'appbar-components/custom_sliver_delegate.dart';
 import 'play-with-friends-bottom-sheet/play_with_friends_bottom_sheet.dart';

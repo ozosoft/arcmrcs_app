@@ -105,7 +105,7 @@ class _CategoriesCardState extends State<CategoriesCard> {
                                       : const SizedBox(),
                                   CustomChipsWidget(
                                     padding: Dimensions.space5,
-                                    child: Center(child: Text(widget.fromExam ? widget.date : widget.questions + (widget.fromFunNlearn == true ? " ${MyStrings.quiz.tr}" : MyStrings.questionse.tr), style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                    child: Center(child: Text(widget.fromExam ? widget.date : widget.questions + (widget.fromFunNlearn == true ? " ${MyStrings.quiz.tr}" : " ${MyStrings.questionse.tr}"), style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                   ),
                                   const SizedBox(width: Dimensions.space10),
                                   widget.fromExam

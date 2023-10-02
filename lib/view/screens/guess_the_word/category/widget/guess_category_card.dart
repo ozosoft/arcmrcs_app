@@ -116,7 +116,7 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                       CustomChipsWidget(
                                         padding: Dimensions.space5,
                                         right: Dimensions.space10,
-                                        child: Center(child: Text(widget.categories.questionsCount.toString() + MyStrings.questionse.tr, style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                        child: Center(child: Text("${widget.categories.questionsCount} ${MyStrings.questionse.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                       ),
                                     CustomChipsWidget(
                                       padding: Dimensions.space5,

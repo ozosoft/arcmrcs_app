@@ -105,7 +105,7 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
                                     CustomChipsWidget(
                                       padding: Dimensions.space5,
                                       right: Dimensions.space10,
-                                      child: Center(child: Text(widget.subcategory.questionsCount.toString() + MyStrings.questionse.tr, style: regularDefault.copyWith(color: MyColor.colorGrey))),
+                                      child: Center(child: Text("${widget.subcategory.questionsCount} ${MyStrings.questionse.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                     ),
                                     CustomChipsWidget(
                                       padding: Dimensions.space5,

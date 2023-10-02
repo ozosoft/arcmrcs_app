@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/url_container.dart';
@@ -189,12 +188,5 @@ class DepositController extends GetxController {
     }
   }
 
-  bool isGoHome() {
-    String previousRoute = Get.previousRoute;
-    if (previousRoute == RouteHelper.notificationScreen) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+ 
 }

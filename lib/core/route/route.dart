@@ -8,8 +8,6 @@ import 'package:quiz_lab/view/screens/authentication/profile_complete/profile_co
 import 'package:quiz_lab/view/screens/authentication/signUp/signup_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/sms_verification_page/sms_verification_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/two_factor_screen/two_factor_verification_screen.dart';
-import 'package:quiz_lab/view/screens/badges/badges_screen.dart';
-import 'package:quiz_lab/view/screens/bookmark/bookmark_screen.dart';
 import 'package:quiz_lab/view/screens/coin_history/coin_history_screen.dart';
 
 import 'package:quiz_lab/view/screens/guess_the_word/category/guess_word_catagory_screen.dart';
@@ -24,7 +22,6 @@ import 'package:quiz_lab/view/screens/quiz_contest/all_contest_screen/all_contes
 import 'package:quiz_lab/view/screens/exam_zone/exam-result/exam_result_screen.dart';
 import 'package:quiz_lab/view/screens/exam_zone/widgets/exam_zone_quiz_screen.dart';
 
-import 'package:quiz_lab/view/screens/notification/notification_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/daily_quiz/daily_quiz_questions_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/daily_quiz/daily_quiz_result/daily_quiz_result_screen.dart';
 import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn-result/fun_n_learn_result_screen.dart';
@@ -39,7 +36,6 @@ import 'package:quiz_lab/view/screens/profile/profile_screen.dart';
 import 'package:quiz_lab/view/screens/general_quiz/quiz-questions/quiz_question_screen.dart';
 import 'package:quiz_lab/view/screens/quiz_contest/review-answer/review_answer_screen.dart';
 import 'package:quiz_lab/view/screens/splash/splash_screen.dart';
-import 'package:quiz_lab/view/screens/wallet/wallet_screen.dart';
 import 'package:quiz_lab/view/screens/coin_store/coin_store_screen.dart';
 
 import 'package:get/get.dart';
@@ -95,8 +91,6 @@ class RouteHelper {
   static const String coinStroeScreen = '/coin_store_screen';
   static const String badgesScreen = '/badges_screen';
   static const String coinHistoryScreen = '/coin_history_screen';
-  static const String walletScreen = '/wallet_screen';
-  static const String bookmarkScreen = '/bookmark_screen';
   static const String notificationScreen = '/notification_screen';
   static const String examZoneScreen = '/exam_zone_screen';
   static const String examZoneCategoryScreen = '/exam_zone_category_screen';
@@ -162,11 +156,7 @@ class RouteHelper {
     GetPage(name: profileScreen, page: () => const ProfileScreen()),
     GetPage(name: profileEditScreen, page: () => const ProfileEditScreen()),
     GetPage(name: coinStroeScreen, page: () => const CoinStoreScreen()),
-    GetPage(name: badgesScreen, page: () => const BadgesScreen()),
     GetPage(name: coinHistoryScreen, page: () => const CoinHistoryScreen()),
-    GetPage(name: walletScreen, page: () => const WalletScreen()),
-    GetPage(name: bookmarkScreen, page: () => const BookmarkScreen()),
-    GetPage(name: notificationScreen, page: () => const NotificationScreen()),
     GetPage(name: examZoneScreen, page: () => const ExamZoneScreen()),
     GetPage(name: examZoneCategoryScreen, page: () => const ExamZoneCategoryScreen()),
     GetPage(name: leaderBoardScreen, page: () => const LeaderBoardScreen()),

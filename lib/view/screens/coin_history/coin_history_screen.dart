@@ -97,7 +97,7 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
                                 ),
                                 const Spacer(),
                                 SizedBox(
-                                    child: Text(MyStrings.dollarSign.tr + controller.coinHistoryList[index].coinPlan!.price.toString() + MyStrings.usd.tr,
+                                    child: Text("${controller.coinHistoryRepo.apiClient.getCurrencyOrUsername(isCurrency: true,isSymbol: true)}${controller.coinHistoryList[index].coinPlan!.price} ${controller.coinHistoryRepo.apiClient.getCurrencyOrUsername(isCurrency: true,isSymbol: false)}",
                                         style: semiBoldLarge.copyWith(
                                             color: coinHistoryItem.status == "+"
                                                 ? MyColor.colorGreen
