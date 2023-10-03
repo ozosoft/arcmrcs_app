@@ -33,7 +33,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(
-              height: Dimensions.space50,
+              height: Dimensions.space55,
               width: Dimensions.space100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +64,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
             ),
             const CustomVerticalDivider(height: Dimensions.space25),
             SizedBox(
-              height: Dimensions.space50,
+              height: Dimensions.space55,
               width: Dimensions.space100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -95,7 +95,7 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
             ),
             const CustomVerticalDivider(height: Dimensions.space25),
             SizedBox(
-              height: Dimensions.space50,
+              height: Dimensions.space55,
               width: Dimensions.space100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,

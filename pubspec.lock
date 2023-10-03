@@ -221,26 +221,26 @@ packages:
     dependency: "direct main"
     description:
       name: cloud_firestore
-      sha256: "21cffe06a212015950010ecb9adbf1eb9acaf294f2bd159bde7980aee37c997b"
+      sha256: "50e1ffa143fc5c49db1800392f8d9524fd015f9d26a9e4fc01b5ddb1e603e01b"
       url: "https://pub.dev"
     source: hosted
-    version: "4.9.0"
+    version: "4.9.2"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
-      sha256: "5749b81aea93afdce220e02d34369162010d210011054ac494b2c38c4e9ebeb7"
+      sha256: "150e603a40d52b3199e46b1e38d9f8ef8c2dee9e1fb2122d58d456c50015bf7c"
       url: "https://pub.dev"
     source: hosted
-    version: "5.16.0"
+    version: "5.16.1"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
-      sha256: fef99ad0599e983092adb1bb01f14a596dba601a7a8efaaffd7b2721d64e2c51
+      sha256: f033aef13b13f94b0f361898df39307d8710859c8912626cfb08e439e350bd66
       url: "https://pub.dev"
     source: hosted
-    version: "3.7.0"
+    version: "3.7.1"
   collection:
     dependency: transitive
     description:
@@ -373,10 +373,10 @@ packages:
     dependency: "direct main"
     description:
       name: dio
-      sha256: ce75a1b40947fea0a0e16ce73337122a86762e38b982e1ccb909daa3b9bc4197
+      sha256: "417e2a6f9d83ab396ec38ff4ea5da6c254da71e4db765ad737a42af6930140b7"
       url: "https://pub.dev"
     source: hosted
-    version: "5.3.2"
+    version: "5.3.3"
   dots_indicator:
     dependency: transitive
     description:
@@ -788,10 +788,10 @@ packages:
     dependency: "direct main"
     description:
       name: get
-      sha256: "2ba20a47c8f1f233bed775ba2dd0d3ac97b4cf32fc17731b3dfc672b06b0e92a"
+      sha256: e4e7335ede17452b391ed3b2ede016545706c01a02292a6c97619705e7d2a85e
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.5"
+    version: "4.6.6"
   google_identity_services_web:
     dependency: transitive
     description:
