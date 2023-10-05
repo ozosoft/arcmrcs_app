@@ -171,16 +171,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                       ],
                     ),
                     const Spacer(),
-                    // Container(
-                    //   height: Dimensions.space43,
-                    //   width: Dimensions.space110,
-                    //   decoration: BoxDecoration(color: MyColor.createRoomButtonBGcolor, borderRadius: BorderRadius.circular(Dimensions.space10)),
-                    //   child: Center(
-                    //       child: Text(
-                    //     MyStrings.buyCoins,
-                    //     style: semiBoldMediumLarge.copyWith(color: MyColor.textColor),
-                    //   )),
-                    // )
+                  
                   ],
                 ),
               ),
@@ -206,9 +197,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                       : RoundedButton(
                           text: MyStrings.createRoom,
                           press: () {
-                            // debugPrint(battleRoomController.slectedCategoryID.value);
-                            // debugPrint(battleRoomController.entryFeeCustomRoom.value);
-
+                          
                             if (battleRoomController.slectedCategoryID.value == 0) {
                               CustomSnackBar.error(errorList: [MyStrings.selectACategoryText.tr]);
                             } else if (battleRoomController.entryFeeCustomRoom.value == "0") {

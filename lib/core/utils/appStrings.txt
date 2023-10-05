@@ -15,6 +15,7 @@ Select PaymentMethod
 Are You sure You Want Close Searching!
 Searching
 Are You sure You Want to leave this room!
+Are You sure You Want to leave this Quiz!
 Are You sure You Want to leave Exam room!
 Questions not found! Please try again after a few minutes.
 Sorry! No Questions!
@@ -25,6 +26,9 @@ Sorry You Lose
 Collect Coins
 Copied!
 Ok
+Total Question
+Correct Answer
+Wrong Answer
 Total Score
 You Have Not Enough Coins!
 Room Code May be Wrong!
@@ -35,10 +39,10 @@ Need {point}% marks to win
 This Contest Is Not Available Right Now
 Review Answer
 Currect Answer
-Wrong Answer
 Your Answer
 Continue with Gmail
 Continue with Phone
+Google
 Select Category
 Entry Coins For Battle
 Entry Room Code to Join Room
@@ -46,7 +50,6 @@ Create Room
 Remark
 Any
 Sign up
-2/10
 Email
 Attachment
 Attempted
@@ -59,7 +62,7 @@ Trx No
 Please
 Select Remarks
 Select Trx Type
-User Name
+Username
 Full Name
 Before Charge
 Remaining Balance
@@ -89,6 +92,7 @@ Address
 KYC
 is required
 View all rules
+View less rules
 Exam Rules
 Enter the exam key
 Please Enter the exam key
@@ -96,7 +100,10 @@ Enter In Exam
 Exam Result
 Exam Start Time:
 Sorry! No exam is currently running.
+Sorry! No Category Found.
+Sorry! No Subcategories Found.
 Sorry! No Coin History Found!
+Sorry! No Fun And Learn Found.
 Exam Will Be Start Soon!
 Exam Already Given!
 Exam Time Finished!
@@ -117,18 +124,16 @@ Transaction ID
 Withdraw History
 Amount
 Date
-2023 - 09 - 12
-character,
- Uppercase, 
- Lowercase, 
- Symbol 
+6 character,
+Uppercase,
+Lowercase,
+Symbol
 Charge
 Payable Amount
 Payment : Paytm
 Payable
 Withdraw Money
 Reset Password
-Your new password must different form \nprevious used passwords
 New Password
 Enter new password
 Change Password
@@ -175,7 +180,7 @@ A 6 digits verification code sent to your email address
 Phone No.
 Password reset email sent to
 Email Verification
-Weve sent you an access code via email for email verification
+We've sent you an access code via email for email verification
 Don`t get OTP?
 Resend
 Resend Code
@@ -198,8 +203,9 @@ Transaction No.
 Privacy & Policy
 Forget Password
 Enter Verification Code
-We have sent a code to refatul.tsk@gmail.com
-Dont have an account?
+We have sent a code to {email}
+Resend available in {time} seconds
+Don't have an account?
 Enter username or email
 Policies
 Verification Failed
@@ -221,7 +227,6 @@ Enter confirm password
 Add Withdraw
 Enter Amount
 Please enter an amount
-0.0
 Withdraw Method
 Withdraw Method Edit
 Withdraw Preview
@@ -240,33 +245,27 @@ Battle Result
 The Great Wall is a world-famous historical landmark located in which country?
 The Great Wall is a world-famous ?
 %
-6 Level
 Level
-Level 01
 All categories
 Music
 Science & Technology
 Fee 50 Coins
 Fee Coins 
-End 12 jun 2023
 End 
-10 Marks
- Marks
-25 min
 min
 Health Quiz Contest
 The health Quiz feature aims to bring the excitement
 Top Categories
 Quiz Contest
 Quiz
-Battles of the Day
+Battle's of the Day
 1 v/s 1 Battle Quiz
 Group Battle
 Battle with one vs one
 Battle quiz with group of players
 Current Coin
 Select Country
-Lets Play
+Let's Play
 Play With Friend
 Play Again
 View All
@@ -277,8 +276,6 @@ Entry Fee
 Current Coins
 Coins
 Coin
-150 Coins
-01/10
 Score
 Notification
 Bookmark
@@ -304,8 +301,6 @@ No Deposit Found
 No Withdraw Found
 OTP Verification
 Show More
-10 Coins
-500
 More
 success
 Email verified successfully
@@ -315,7 +310,7 @@ Enter valid email
 Enter your current password
 Enter your new password
 Password must be contain 1 special character and number
-Password doesnt match
+Password doesn't match
 Enter first name
 Enter last name
 Username must be 6 character
@@ -327,7 +322,7 @@ Invalid amount
 Welcome back
 Hi! There
 Please enter your details to sign in.
-Please enter your phone number to sign in
+Please enter your phone number to signIn
 Please enter your OTP to sign in
 Please enter your details to Create Account.
 Enter your email account to reset password
@@ -340,8 +335,8 @@ Enter phone number
 Confirm your password
 Confirm Passwords do not match.
 Confirm
-Didnt receive the code?
-Weve sent you an access code to your phone number for SMS verification
+Didn't receive the code?
+We've sent you an access code to your phone number for SMS verification
 Select a country
 Request Failed
 Request Success
@@ -352,7 +347,7 @@ Select One
 SMS
 No internet connection
 Retry
-Otp field cant be empty
+Otp field can't be empty
 An OTP has been sent to your mobile number
 Sorry something went wrong here, go back and retry after sometimes
 second ago
@@ -368,16 +363,6 @@ Unauthorized
 your email
 Password change successfully
 Deposit Limit
-Error
-Trx Type
-General Knowledge
- Game & Sports 
- Japan
- Apple Inc. 
-IBM 
- Google 
-Mariya Ons
-Player 2
 Player
 Creator
 Or
@@ -387,61 +372,34 @@ Geographical
 National
 International
 Join Room
-00
-08
-2/10
-8/10
 Next Level
 Next
-6 Level
-8 Level
-7 Level
-10 Level
-12 Level
-350
 VS
 Request
 Transection
 Complete this level first
- A) 
- B) 
- C) 
- D) 
-@
 History & Culture
-874541
-@marton
 Exam Zone
 Exam
-\$240.00
 @jkobos
 QP
 Points
-15
 Leaderboard
 Total Coins
 Total Coin
-500.00
 Weekly
 Reedem Request
 All Times
-Today\s
+Today\"s
 Completed
-15 Questions
- Questions
+Questions
 VS
-10 Questions
-8 Questions
-35 Questions
-10 Questions
 Victory
 Defeated
 Drawn
 Congratulation
 Better Luck Next Time
 Your Coins
-500.00
-\$240.00
 Buy Coins
 Redeemable Amount
 Redeem Now
@@ -460,21 +418,6 @@ Perfect Quiz Man
 Ultimate Player
 Golden Pack
 No Ads Pack
-Silver Pack
-Pro Pack
-Small Pack
-\$250 USD
-\$ 
- USD
-\$120 USD
-\$80 USD
-\$340 USD
-\$100 USD
-500 Coins
-400 Coins
-120 Coins
-600 Coins
-10 Coins
 Golden
 Golden Quiz Man
 Battle Man
@@ -483,28 +426,13 @@ Succeed
 Pending
 Rejected
 Won World Quiz Contest
-World Quiz 2023
 Quiz Challenge
 Battel Quiz Event
 Quiz Game Challenge
-12 May 2023
-28 May 2023
-02 Jun 2023
-+ \$250 USD
-- \$120 USD
 Enter Custom coins
 Rewards Notification
 Join with new room
 Event Notification
-5h ago Rewards Notification
-6h ago Create New Quiz Room
-10h ago Quiz Event Page Launched
-You get 500 coins for 1vs 1 quiz
-Martin request for join quiz code 784541
-Start form 01 jun 2023 Quiz Challenge
-25/5/23 at 5:30
-25/5/23 at 7:45
-26/5/23 at 2:10
 Test Your Knowladge
 Win Real Money
 Compete With Friends
@@ -515,6 +443,7 @@ Sorry No Category Found
 Sorry No Quiz Available Right Now!
 Sorry! You have already played daily quiz
 Category
+Subcategory
 Sub Category
 Daily new quiz
 Game quiz with fun
@@ -533,3 +462,5 @@ Remark Type
 ⚈
 You must agree with our privacy & policies
 You must agree with Exam rules
+unlock
+lock

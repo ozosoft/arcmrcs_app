@@ -19,33 +19,7 @@ class CustomBottomSheetPlus {
   });
 
   void customBottomSheet(BuildContext context) {
-    // showModalBottomSheet(
-    //   enableDrag: enableDrag,
-    //   isDismissible: true,
-    //   isScrollControlled: isScrollControlled,
-    //   backgroundColor: MyColor.transparentColor,
-    //   context: context,
-    //   builder: (BuildContext context) {
-    //     return SingleChildScrollView(
-    //       child: Container(
-    //         decoration: BoxDecoration(
-    //           color: bgColor,
-    //           borderRadius: isNeedMargin ? BorderRadius.circular(15) : const BorderRadius.vertical(top: Radius.circular(15)),
-    //         ),
-    //         child: Column(
-    //           mainAxisSize: MainAxisSize.min,
-    //           children: [
-    //             if (isNeedMargin) SizedBox(height: 15),
-    //             Padding(
-    //               padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space12),
-    //               child: child,
-    //             ),
-    //           ],
-    //         ),
-    //       ),
-    //     );
-    //   },
-    // ).then((value) => voidCallback);
+   
     showModalBottomSheet(
       isScrollControlled: true,
       context: context,

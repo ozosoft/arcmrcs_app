@@ -71,7 +71,6 @@ class BattleRoomController extends GetxController {
   //Custom Room Setup
   final categoryList = <BattleCategory>[].obs;
   final categoryListArgs = Get.arguments == null ? <BattleCategory>[] : Get.arguments[2] as List<BattleCategory>;
-  // final categoryListArgs = Get.arguments == null ? <BattleCategory>[] : <BattleCategory>[];
   final slectedCategoryID = 0.obs;
   final entryFeeCustomRoom = "0".obs;
 
@@ -155,7 +154,6 @@ class BattleRoomController extends GetxController {
     //for realtimeness
     _battleRoomStreamSubscription = subscribeToBattleRoomFirebase(battleRoomDocumentId, forMultiUser).listen((event) async {
       if (event.exists) {
-        //emit new state
         BattleRoomDataModel battleRoom = BattleRoomDataModel.fromDocumentSnapshot(event);
 
         bool? userNotFound = battleRoom.user2?.uid.isEmpty;
@@ -272,7 +270,7 @@ class BattleRoomController extends GetxController {
       );
     } catch (e) {
       debugPrint("Join BattleFailureError ${e.toString()}");
-      // emit(BattleRoomFailure(e.toString()));
+
       toogleBattleJoinedState(JoinRoomState.failed);
       if (e.toString() == "roomIsFullCode") {
         toogleBattleJoinedState(JoinRoomState.full);
@@ -425,7 +423,7 @@ class BattleRoomController extends GetxController {
         );
       }
     } catch (e) {
-      // emit(BattleRoomFailure(e.toString()));
+      print(e.toString());
     }
   }
 

@@ -151,17 +151,7 @@ class _ExamListTileCardState extends State<ExamListTileCard> {
                                         ),
                                       ],
                                     ),
-                                    // CustomChipsWidget(
-                                    //   top: Dimensions.space10,
-                                    //   right: Dimensions.space10,
-                                    //   padding: Dimensions.space5,W
-                                    //   child: Center(
-                                    //     child: Text(
-                                    //       widget.date,
-                                    //       style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                    //     ),
-                                    //   ),
-                                    // ),
+                                    
                                   ],
                                 ),
                               ),

@@ -236,7 +236,6 @@ class LoginController extends GetxController {
         },
         codeSent: (String verificationId, int? resendToken) {
           this.verificationId.value = verificationId;
-          // Get.toNamed('/otp'); // Navigate to the OTP screen
           debugPrint("Go To OTP PAGE");
           changeOtpPageStatus(true);
 

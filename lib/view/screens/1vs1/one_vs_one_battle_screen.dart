@@ -6,7 +6,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
-import 'package:quiz_lab/view/components/bottom-sheet/custom_bottom_sheet_2.dart';
+import 'package:quiz_lab/view/components/bottom-sheet/custom_bottom_sheet_plus.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/divider/or_divider.dart';

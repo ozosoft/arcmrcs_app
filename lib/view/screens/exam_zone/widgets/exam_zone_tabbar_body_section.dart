@@ -11,7 +11,7 @@ import 'package:quiz_lab/view/components/no_data.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/model/dashboard/dashboard_model.dart';
-import '../../../components/bottom-sheet/custom_bottom_sheet_2.dart';
+import '../../../components/bottom-sheet/custom_bottom_sheet_plus.dart';
 import 'completed_exam_list_card_widget.dart';
 import 'enter_exam_room_bottom_sheet.dart';
 import 'exam_list_card_widget.dart';

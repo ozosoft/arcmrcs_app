@@ -67,19 +67,7 @@ class _ExamReviewAnswerSectionState extends State<ExamReviewAnswerSection> {
                                           height: Dimensions.space40,
                                           hastextColor: true,
                                         )),
-                                  ] else ...[
-                                    // InkWell(
-                                    //     onTap: () {},
-                                    //     child: LevelCardButton(
-                                    //       text: "${MyStrings.next.tr}",
-                                    //       hasIcon: false,
-                                    //       hasImage: false,
-                                    //       bgColor: MyColor.battleTextColor,
-                                    //       hasbgColor: true,
-                                    //       height: Dimensions.space40,
-                                    //       hastextColor: true,
-                                    //     )),
-                                  ]
+                                  ] 
                                 ],
                               ),
                               const SizedBox(

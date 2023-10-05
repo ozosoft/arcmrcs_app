@@ -132,50 +132,8 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                                             ),
                                           ),
                                         ),
-                                        // CustomChipsWidget(
-                                        //   right: Dimensions.space10,
-                                        //   padding: Dimensions.space5,
-                                        //   child: Center(
-                                        //     child: Text(
-                                        //       widget. contest.,
-                                        //       style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                        //     ),
-                                        //   ),
-                                        // ),
-                                        // CustomChipsWidget(
-                                        //   // top: Dimensions.space10,
-                                        //   right: Dimensions.space10,
-                                        //   padding: Dimensions.space5,
-                                        //   child: Center(
-                                        //     child: Text(
-                                        //       widget.date,
-                                        //       style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                        //     ),
-                                        //   ),
-                                        // ),
-                                        // CustomChipsWidget(
-                                        //   right: Dimensions.space10,
-                                        //   padding: Dimensions.space5,
-                                        //   child: Center(
-                                        //     child: Text(
-                                        //       widget.minute,
-                                        //       style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                        //     ),
-                                        //   ),
-                                        // ),
                                       ],
                                     ),
-                                    // CustomChipsWidget(
-                                    //   top: Dimensions.space10,
-                                    //   right: Dimensions.space10,
-                                    //   padding: Dimensions.space5,W
-                                    //   child: Center(
-                                    //     child: Text(
-                                    //       widget.date,
-                                    //       style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                    //     ),
-                                    //   ),
-                                    // ),
                                   ],
                                 ),
                               ),

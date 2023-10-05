@@ -69,20 +69,12 @@ class _QuizContestSectionState extends State<QuizContestSection> {
                                 child: GetBuilder<QuizContestQuestionsController>(
                                   builder: (quizQuestionscontrollers) => GestureDetector(
                                     onTap: () {
-                                      // if (quizQuestionscontrollers.examQuestionsList != "[]") {
-
                                       Get.toNamed(RouteHelper.quizContestQuestionscreen, arguments: [
                                         controller.contestlist[index].id.toString(),
                                         controller.contestlist[index].title.toString(),
                                         null,
                                         null,
                                       ]);
-
-                                      // } else {
-                                      //   CustomSnackBar.error(errorList: [
-                                      //     MyStrings.noContestFound.tr,
-                                      //   ]);
-                                      // }
                                     },
                                     child: Container(
                                       margin: const EdgeInsets.symmetric(horizontal: Dimensions.space5),

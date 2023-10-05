@@ -61,7 +61,6 @@ class Data {
         wrongAnswer: json["wrongAnswer"],
         winingScore: json["winingScore"],
         totalScore: json["totalScore"],
-        // nextLevelQuizInfo: NextLevelQuizInfo.fromJson(json["nextLevelQuizInfo"]),
         nextLevelQuizInfo: json["nextLevelQuizInfo"] == null ? null : NextLevelQuizInfo.fromJson(json["nextLevelQuizInfo"]),
       );
 

@@ -290,14 +290,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                         debugPrint("go");
 
                         controller.startBattleQuiz(controller.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
-                          // Get.back();
-                          // Get.toNamed(
-                          //   RouteHelper.battleQuizQuestionsScreen,
-                          //   arguments: [
-                          //     "Quiz DEmo",
-                          //     controller.questionsData.data.questions
-                          //   ],
-                          // );
+                      
                         });
                       },
                       cornerRadius: Dimensions.space10,

@@ -118,17 +118,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 const Divider(
                   endIndent: Dimensions.space70,
                 ),
-                // ListTile(
-                //   leading: SvgPicture.asset(MyImages.badgeDrawer),
-                //   title: const Text(
-                //     MyStrings.badges,
-                //     style: regularMediumLarge,
-                //   ),
-                //   minLeadingWidth: Dimensions.space1,
-                //   onTap: () {
-                //     Get.toNamed(RouteHelper.badgesScreen);
-                //   },
-                // ),
                 ListTile(
                   leading: SvgPicture.asset(MyImages.coinStoreDrawer),
                   title: Text(
@@ -153,7 +142,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     onTap: () {
                       CustomBottomSheet(child: const LanguageBottomSheetScreen()).customBottomSheet(context);
                     }),
-
                 GetBuilder<LogoutController>(
                   builder: (logoutController) => ListTile(
                     onTap: () {
@@ -180,17 +168,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     minLeadingWidth: Dimensions.space1,
                   ),
                 ),
-                // ListTile(
-                //   leading: SvgPicture.asset(MyImages.logOutDrawer),
-                //   title: const Text(
-                //     MyStrings.logout,
-                //     style: regularMediumLarge,
-                //   ),
-                //   onTap: (){
-
-                //   },
-                //   minLeadingWidth: Dimensions.space1,
-                // ),
               ],
             ),
           ),

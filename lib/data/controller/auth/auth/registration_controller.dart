@@ -111,7 +111,6 @@ class RegistrationController extends GetxController {
   SignUpModel getUserData() {
     SignUpModel model = SignUpModel(
 
-        // agree: agreeTC ? true : false,
         username: userNameController.text.toString(),
         email: emailController.text.toString(),
         password: passwordController.text.toString(),

@@ -11,7 +11,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../core/utils/url_container.dart';
-import '../../../../../components/bottom-sheet/custom_bottom_sheet_2.dart';
+import '../../../../../components/bottom-sheet/custom_bottom_sheet_plus.dart';
 import '../../../../../components/chips/custom_chips_widget.dart';
 import '../../../../../components/image_widget/my_image_widget.dart';
 
@@ -193,14 +193,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                             right: Dimensions.space7,
                                             child: Center(child: Text(MyStrings.youNeedtoScoreSort.replaceAll("{point}", item.point.toString()).tr, style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                           ),
-                                          // CustomChipsWidget(
-                                          //   right: Dimensions.space7,
-                                          //   child: Center(child: Text("${item.examStartTime}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                          // ),
-                                          // CustomChipsWidget(
-                                          //   right: Dimensions.space7,
-                                          //   child: Center(child: Text("${item.examDuration} ${MyStrings.min}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                          // ),
+                                         
                                         ],
                                       ),
                                     ),

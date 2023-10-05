@@ -3,7 +3,6 @@ class MyStrings {
   final List<String> settingsList = [sound, vibration, themes];
 
   static const String appName = "QuizLAB";
-
   static const String withdrawInformation = "Withdraw Information";
   static const String withdrawLimit = "Withdraw Limit";
   static const String withdrawConfirm = "Withdraw Confirm";
@@ -331,7 +330,6 @@ class MyStrings {
   static const String pleaseEnterOTP = "Please enter your OTP to sign in";
   static const String pleaseEnterDetailstoSignUp = "Please enter your details to Create Account.";
   static const String enterEmailAndPassword = "Enter your email account to reset password";
-
   static const String verificationSuccess = "Verification Success";
   static const String enterYourUsername = "Enter your username";
   static const String enterYourEmail = "Enter your email";
@@ -380,12 +378,10 @@ class MyStrings {
   static const String joinRoom = "Join Room";
   static const String nextLevel = "Next Level";
   static const String next = "Next";
-
   static const String vs = "VS";
   static const String request = "Request";
   static const String transection = "Transection";
   static const String completeTheLevelFirst = "Complete this level first";
-
   static const String historyAndCulture = "History & Culture";
   static const String examZone = "Exam Zone";
   static const String exam = "Exam";
@@ -412,11 +408,9 @@ class MyStrings {
   static const String reedemableAmount = "Redeemable Amount";
   static const String reedemNow = "Redeem Now";
   static const String sharecodeText = "Share this room code to friend and ask them to join";
-
   static const String pleaseWaitRoomText = "Please wait game will start soon";
   static const String pleaseWaitForYourBattleResultText = "Please Wait For You Battle Result!";
   static const String pleaseWaitForYourResultText = "Please Wait For You Result!";
-
   static const String approved = "Approved";
   static const String supper = "Supper";
   static const String supperbattleMan = "Supper Battle Man";
@@ -439,7 +433,6 @@ class MyStrings {
   static const String quizChallenge = "Quiz Challenge";
   static const String battelQuizEvent = "Battel Quiz Event";
   static const String quizGameChallenge = "Quiz Game Challenge";
-
   static const String enterCoins = "Enter Custom coins";
   static const String rewardNotification = "Rewards Notification";
   static const String joinwithnewroom = "Join with new room";
@@ -453,11 +446,9 @@ class MyStrings {
   static const String sorryNoCategory = "Sorry No Category Found";
   static const String sorryNoQuizFound = "Sorry No Quiz Available Right Now!";
   static const String sorryAlreadyPlayedQuiz = "Sorry! You have already played daily quiz";
-
   static const String category = "Category";
   static const String subcategory = "Subcategory";
   static const String subcategory2 = "Sub Category";
-
   static const String dailynewquiz = "Daily new quiz";
   static const String gamequizwithfun = "Game quiz with fun";
   static const String rules1 = "I Will not copy and give this exam with honesty";
@@ -466,10 +457,8 @@ class MyStrings {
   static const String funvocabulary = "Fun vocabulary";
   static const String whoIsSmartest = "Who is the smartest in your group of friends and family";
   static const String pickTheCorrectAnswer = "Pick the correct answer at the final question to win the prize money";
-
   static const String dontHaveAnaccount = "Don’t have an account?";
   static const String onboardDescription = "There are hundreds of different categories to choose from";
-
   static const String transactionType = "Transaction Type";
   static const String minimumReedemAmount = "Minimum Redeemable amount is \$2 (10 coins).";
   static const String payoutTime = "Payout will usd 7 - 10working days.";

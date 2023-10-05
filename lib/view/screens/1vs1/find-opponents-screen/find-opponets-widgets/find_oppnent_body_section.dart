@@ -292,16 +292,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               press: () {
                                 debugPrint("go");
 
-                                controller.battleRoomController.startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
-                                  // Get.back();
-                                  // Get.toNamed(
-                                  //   RouteHelper.battleQuizQuestionsScreen,
-                                  //   arguments: [
-                                  //     "Quiz DEmo",
-                                  //     controller.questionsData.data.questions
-                                  //   ],
-                                  // );
-                                });
+                                controller.battleRoomController.startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {});
                               },
                               cornerRadius: Dimensions.space10,
                               textSize: Dimensions.space20,

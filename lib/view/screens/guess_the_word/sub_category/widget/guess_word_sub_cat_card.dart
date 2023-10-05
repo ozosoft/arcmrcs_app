@@ -195,23 +195,6 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
                                           ));
                                     }),
                               ),
-
-                              // attention: view more logic
-                              // widget.subcategory.quizInfos!.length > 3
-                              //     ? GestureDetector(
-                              //         onTap: () {
-                              //           setState(() {
-                              //             labelCount = widget.subcategory.quizInfos!.length;
-                              //           });
-                              //         },
-                              //         child: Padding(
-                              //           padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
-                              //           child: CustomTextWithUndeline(
-                              //             text: MyStrings.viewMore.tr,
-                              //           ),
-                              //         ),
-                              //       )
-                              //     : const SizedBox.shrink(),
                             ],
                           ),
                         )

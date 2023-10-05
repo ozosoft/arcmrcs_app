@@ -483,16 +483,7 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                 ],
                               ),
                             ),
-                            // const Positioned.fill(
-                            //   bottom: 60,
-                            //   child: Align(
-                            //     alignment: Alignment.bottomCenter,
-                            //     child: Padding(
-                            //       padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
-                            //       child: QuizBannerAdsWidget(),
-                            //     ),
-                            //   ),
-                            // ),
+                           
                           ],
                         ),
             ));

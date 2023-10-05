@@ -121,15 +121,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                       ),
                                     ),
                                     const SizedBox(height: Dimensions.space40),
-                                    // RoundedButton(
-                                    //   text: MyStrings.submit,
-                                    //   press: () {
-                                    //     controller.addAns(questionsIndex, controller.tempAns.join().toLowerCase().toString());
-                                    //     questionsIndex == controller.gessThewordQuesstionList.length - 1
-                                    //         ? controller.submitGuessTheWordAnswers()
-                                    //         : controller.nextPage();
-                                    //   },
-                                    // ),
+                                   
                                     const SizedBox(height: Dimensions.space40),
                                   ],
                                 ),
