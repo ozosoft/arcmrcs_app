@@ -23,4 +23,8 @@ class Environment {
   static const int interstitialAdsShowAfter = 5; // show ads after 5th time click
 
   static const bool showRewardlAds = true; // show interstitial Ads
+
+  //Authentication
+  static const bool disablePhoneAuth = false; // Set to true => to disable it.
+  static const bool disableGoogle = false; // Set to true => to disable it.
 }

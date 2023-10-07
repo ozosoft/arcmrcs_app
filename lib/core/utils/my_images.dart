@@ -1,4 +1,18 @@
 class MyImages {
+  //App Logo
+  static const String appLogoSVG = "assets/images/logo/app_logo.svg"; // USE SVG IMAGE
+
+  //App Splash Logo White
+
+  static const String splashLogoSVG = "assets/images/logo/splash_logo.svg"; // USE SVG IMAGE
+
+  //Onboard Image
+  static const String onboard1SVG = "assets/images/onboard/onboard1.svg"; // USE SVG IMAGE
+  static const String onboard2SVG = "assets/images/onboard/onboard2.svg"; // USE SVG IMAGE
+  static const String onboard3SVG = "assets/images/onboard/onboard3.svg"; // USE SVG IMAGE
+
+  //Others
+
   static const String defaultAvatar = "assets/images/default-avatar.png";
   static const String deadImage = "assets/images/dead.png";
   static const String noContentFound = "assets/images/no-content.png";
@@ -24,8 +38,6 @@ class MyImages {
   static const String country = "assets/images/country.png";
   static const String withdrawMoney = "assets/images/wallet.png";
   static const String name = "assets/images/user.png";
-  static const String appLogoSVG = "assets/images/applogoSVG.svg";
-  static const String onboard1SVG = "assets/images/onboard_1.svg";
   static const String personSVG = "assets/images/person.svg";
   static const String addressSVG = "assets/images/address.svg";
   static const String phoneSVG = "assets/images/phoneSvg.svg";
@@ -62,7 +74,6 @@ class MyImages {
   static const String addMoneyHistory = "assets/images/add_money_history.png";
   static const String withdrawHistory = "assets/images/withdraw_history.png";
   static const String profileImage = "assets/images/avatar.png";
-  static const String applogo = "assets/images/quizKabapplogo.png";
   static const String splashBGimage = "assets/images/app_red_bg.svg";
   static const String appBarBGimage = "assets/images/appBar_bg.png";
   static const String profileimage = "assets/images/profile.svg";
@@ -80,12 +91,8 @@ class MyImages {
   static const String totalReward = "assets/images/totalReward.svg";
   static const String copySVG = "assets/images/copy_svg.svg";
   static const String roomCreatorSVG = "assets/images/roomCreator.svg";
-  static const String onBoard2SVG = "assets/images/intro2.svg";
-  static const String onBoard3SVG = "assets/images/intro3.svg";
   static const String cameraSVG = "assets/images/circular_red_camera.svg";
   static const String leaderBoardSVG = "assets/images/leaderboardSvg.svg";
-
-  static const String secondapplogo = "assets/images/QuizlabColoredLogo.png";
   static const String player = "assets/images/mariaOns.svg";
   static const String maria = "assets/images/mariaOnsSVG.svg";
   static const String mariaOns = "assets/images/mariaOnsSVG.svg";
@@ -135,7 +142,6 @@ class MyImages {
   static const String levelGreenTikSVG = "assets/images/level_green_tik.svg";
   static const String lockLevelSVG = "assets/images/lock_level.svg";
   static const String wrongAnswerSVG = "assets/images/wrong_answer.svg";
-  static const String splashLogoSVG = "assets/images/splash_Screen_logo.svg";
   static const String badge1SVG = "assets/images/badge1.svg";
   static const String badge2SVG = "assets/images/badge2.svg";
   static const String badge3SVG = "assets/images/badge3.svg";

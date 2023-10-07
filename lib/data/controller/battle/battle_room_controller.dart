@@ -423,7 +423,9 @@ class BattleRoomController extends GetxController {
         );
       }
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
   }
 
