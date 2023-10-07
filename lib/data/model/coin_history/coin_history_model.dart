@@ -11,73 +11,73 @@ CoinHistoryModel coinHistoryModelFromJson(String str) => CoinHistoryModel.fromJs
 String coinHistoryModelToJson(CoinHistoryModel data) => json.encode(data.toJson());
 
 class CoinHistoryModel {
-    String? remark;
-    String? status;
-    Message? message;
-    Data? data;
+  String? remark;
+  String? status;
+  Message? message;
+  Data? data;
 
-    CoinHistoryModel({
-        this.remark,
-        this.status,
-        this.message,
-        this.data,
-    });
+  CoinHistoryModel({
+    this.remark,
+    this.status,
+    this.message,
+    this.data,
+  });
 
-    factory CoinHistoryModel.fromJson(Map<String, dynamic> json) => CoinHistoryModel(
+  factory CoinHistoryModel.fromJson(Map<String, dynamic> json) => CoinHistoryModel(
         remark: json["remark"],
         status: json["status"],
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "remark": remark,
         "status": status,
         "message": message?.toJson(),
         "data": data?.toJson(),
-    };
+      };
 }
 
 class Data {
-    List<CoinLog>? coinLogs;
+  List<CoinLog>? coinLogs;
 
-    Data({
-        this.coinLogs,
-    });
+  Data({
+    this.coinLogs,
+  });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         coinLogs: json["coinLogs"] == null ? [] : List<CoinLog>.from(json["coinLogs"]!.map((x) => CoinLog.fromJson(x))),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "coinLogs": coinLogs == null ? [] : List<dynamic>.from(coinLogs!.map((x) => x.toJson())),
-    };
+      };
 }
 
 class CoinLog {
-    int? id;
-    String? userId;
-    String? quizInfoId;
-    String? coinPlanId;
-    String? coins;
-    String? status;
-    DateTime? createdAt;
-    String? updatedAt;
-    CoinPlan? coinPlan;
+  int? id;
+  String? userId;
+  String? quizInfoId;
+  String? coinPlanId;
+  String? coins;
+  String? status;
+  DateTime? createdAt;
+  String? updatedAt;
+  CoinPlan? coinPlan;
 
-    CoinLog({
-        this.id,
-        this.userId,
-        this.quizInfoId,
-        this.coinPlanId,
-        this.coins,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-        this.coinPlan,
-    });
+  CoinLog({
+    this.id,
+    this.userId,
+    this.quizInfoId,
+    this.coinPlanId,
+    this.coins,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.coinPlan,
+  });
 
-    factory CoinLog.fromJson(Map<String, dynamic> json) => CoinLog(
+  factory CoinLog.fromJson(Map<String, dynamic> json) => CoinLog(
         id: json["id"],
         userId: json["user_id"],
         quizInfoId: json["quiz_info_id"],
@@ -87,9 +87,9 @@ class CoinLog {
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"],
         coinPlan: json["coin_plan"] == null ? null : CoinPlan.fromJson(json["coin_plan"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
         "quiz_info_id": quizInfoId,
@@ -99,31 +99,31 @@ class CoinLog {
         "created_at": createdAt,
         "updated_at": updatedAt,
         "coin_plan": coinPlan?.toJson(),
-    };
+      };
 }
 
 class CoinPlan {
-    int? id;
-    String? title;
-    String? image;
-    String? coinsAmount;
-    String? price;
-    String? status;
-    String? createdAt;
-    String? updatedAt;
+  int? id;
+  String? title;
+  String? image;
+  String? coinsAmount;
+  String? price;
+  String? status;
+  String? createdAt;
+  String? updatedAt;
 
-    CoinPlan({
-        this.id,
-        this.title,
-        this.image,
-        this.coinsAmount,
-        this.price,
-        this.status,
-        this.createdAt,
-        this.updatedAt,
-    });
+  CoinPlan({
+    this.id,
+    this.title,
+    this.image,
+    this.coinsAmount,
+    this.price,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+  });
 
-    factory CoinPlan.fromJson(Map<String, dynamic> json) => CoinPlan(
+  factory CoinPlan.fromJson(Map<String, dynamic> json) => CoinPlan(
         id: json["id"],
         title: json["title"],
         image: json["image"],
@@ -132,9 +132,9 @@ class CoinPlan {
         status: json["status"],
         createdAt: json["created_at"] == null ? null : json["created_at"],
         updatedAt: json["updated_at"] == null ? null : json["updated_at"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "title": title,
         "image": image,
@@ -143,5 +143,5 @@ class CoinPlan {
         "status": status,
         "created_at": createdAt?.toString(),
         "updated_at": updatedAt?.toString(),
-    };
+      };
 }

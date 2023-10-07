@@ -109,6 +109,8 @@ class GeneralSetting {
   String? iosBannerAdsId;
   String? iosInterstitialUnitId;
   String? iosRewardedUnitId;
+  String? googleLogin;
+  String? mobileLogin;
   dynamic createdAt;
   String? updatedAt;
 
@@ -167,6 +169,8 @@ class GeneralSetting {
     this.iosBannerAdsId,
     this.iosInterstitialUnitId,
     this.iosRewardedUnitId,
+    this.googleLogin,
+    this.mobileLogin,
     this.createdAt,
     this.updatedAt,
   });
@@ -226,6 +230,8 @@ class GeneralSetting {
         iosBannerAdsId: json["ios_banner_ads_id"],
         iosInterstitialUnitId: json["ios_interstitial_unit_id"],
         iosRewardedUnitId: json["ios_rewarded_unit_id"],
+        googleLogin: json["google_login"],
+        mobileLogin: json["mobile_login"],
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
       );
@@ -285,6 +291,8 @@ class GeneralSetting {
         "ios_banner_ads_id": iosBannerAdsId,
         "ios_interstitial_unit_id": iosInterstitialUnitId,
         "ios_rewarded_unit_id": iosRewardedUnitId,
+        "google_login": googleLogin,
+        "mobile_login": mobileLogin,
         "created_at": createdAt,
         "updated_at": updatedAt,
       };

@@ -222,4 +222,13 @@ class ApiClient extends GetxService {
   Future setTheme(bool value) async {
     await sharedPreferences.setBool(SharedPreferenceHelper.themeKey, value);
   }
+
+  String getSocailLoginActiveStats(String type) {
+    if (type == 'phone') {
+      return getGSData().data!.generalSetting!.mobileLogin!;
+    } else if (type == 'google') {
+      return getGSData().data!.generalSetting!.googleLogin!;
+    }
+    return '0';
+  }
 }

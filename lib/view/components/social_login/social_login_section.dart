@@ -6,6 +6,7 @@ import 'package:quiz_lab/core/utils/my_images.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/auth/login_controller.dart';
+import 'package:quiz_lab/environment.dart';
 import 'package:quiz_lab/view/components/social_login/widgets/social_login_button.dart';
 
 import 'package:get/get.dart';
@@ -26,46 +27,52 @@ class SocialLoginSection extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SocialLoginButton(
-                title: MyStrings.google.tr,
-                image: MyImages.google,
-                ontap: () async {
-                  await loginController!.signInWithGoogle();
-                },
-              ),
-              SocialLoginButton(
-                title: MyStrings.phone.tr,
-                image: MyImages.telephone,
-                ontap: () {
-                  Get.toNamed(RouteHelper.mobileLoginScreen);
-                },
-              ),
+              if (Environment.disableGoogle == false && loginController!.loginRepo.apiClient.getSocailLoginActiveStats('google') == '1') ...[
+                SocialLoginButton(
+                  title: MyStrings.google.tr,
+                  image: MyImages.google,
+                  ontap: () async {
+                    await loginController!.signInWithGoogle();
+                  },
+                ),
+              ],
+              if (Environment.disablePhoneAuth == false && loginController!.loginRepo.apiClient.getSocailLoginActiveStats('phone') == '1') ...[
+                SocialLoginButton(
+                  title: MyStrings.phone.tr,
+                  image: MyImages.telephone,
+                  ontap: () {
+                    Get.toNamed(RouteHelper.mobileLoginScreen);
+                  },
+                ),
+              ]
             ],
           ),
         ),
-        const SizedBox(
-          height: Dimensions.space20,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const Expanded(
-                child: Divider(
-              color: MyColor.colorLightGrey,
-            )),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15),
-              child: Text(
-                MyStrings.orsigninwith.tr,
-                style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
+        if (Environment.disableGoogle == false && Environment.disablePhoneAuth == false && loginController!.loginRepo.apiClient.getSocailLoginActiveStats('phone') == '1' && loginController!.loginRepo.apiClient.getSocailLoginActiveStats('google') == '1') ...[
+          const SizedBox(
+            height: Dimensions.space20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Expanded(
+                  child: Divider(
+                color: MyColor.colorLightGrey,
+              )),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15),
+                child: Text(
+                  MyStrings.orsigninwith.tr,
+                  style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
+                ),
               ),
-            ),
-            const Expanded(
-                child: Divider(
-              color: MyColor.colorLightGrey,
-            )),
-          ],
-        ),
+              const Expanded(
+                  child: Divider(
+                color: MyColor.colorLightGrey,
+              )),
+            ],
+          ),
+        ]
       ],
     );
   }
