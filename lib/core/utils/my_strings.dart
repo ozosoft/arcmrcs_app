@@ -2,7 +2,17 @@ class MyStrings {
   final List<String> rules = [rules1, rules2, rules3];
   final List<String> settingsList = [sound, vibration, themes];
 
+  //APPName
   static const String appName = "QuizLAB";
+  //Onboard Text
+  static const String onboardTitle1 = "Test Your Knowladge"; //Title 1
+  static const String onboardDescription1 = "There are hundreds of different categories to choose from"; //Des 1
+  static const String onboardTitle2 = "Win Real Money"; //Title 2
+  static const String onboardDescription2 = "Pick the correct answer at the final question to win the prize money"; //Des 2
+  static const String onboardTitle3 = "Compete With Friends"; //Title 3
+  static const String onboardDescription3 = "Who is the smartest in your group of friends and family"; //Des 3
+  //Onboard End
+
   static const String withdrawInformation = "Withdraw Information";
   static const String withdrawLimit = "Withdraw Limit";
   static const String withdrawConfirm = "Withdraw Confirm";
@@ -437,9 +447,6 @@ class MyStrings {
   static const String rewardNotification = "Rewards Notification";
   static const String joinwithnewroom = "Join with new room";
   static const String eventNotification = "Event Notification";
-  static const String onboardTitle = "Test Your Knowladge";
-  static const String realMoney = "Win Real Money";
-  static const String completeWIthFriends = "Compete With Friends";
   static const String dailyQuiz = "Daily Quiz";
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
@@ -455,10 +462,7 @@ class MyStrings {
   static const String rules2 = "If you lock your phone then exam will complete automatically";
   static const String rules3 = "You cant use browser";
   static const String funvocabulary = "Fun vocabulary";
-  static const String whoIsSmartest = "Who is the smartest in your group of friends and family";
-  static const String pickTheCorrectAnswer = "Pick the correct answer at the final question to win the prize money";
   static const String dontHaveAnaccount = "Don’t have an account?";
-  static const String onboardDescription = "There are hundreds of different categories to choose from";
   static const String transactionType = "Transaction Type";
   static const String minimumReedemAmount = "Minimum Redeemable amount is \$2 (10 coins).";
   static const String payoutTime = "Payout will usd 7 - 10working days.";

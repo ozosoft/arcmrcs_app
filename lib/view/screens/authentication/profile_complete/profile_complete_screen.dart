@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
@@ -57,7 +58,7 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
               child: controller.isLoading
                   ? const CustomLoader()
                   : Container(
-                    padding: const EdgeInsets.all(Dimensions.space20),
+                      padding: const EdgeInsets.all(Dimensions.space20),
                       decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space10)),
                       child: Form(
                         key: formKey,
@@ -65,8 +66,13 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: Dimensions.space15),
-                          
-                            Center(child:Image.asset(MyImages.applogo, height: 50, width: 225,color: MyColor.primaryColor,),),
+                            Center(
+                              child: SvgPicture.asset(
+                                MyImages.appLogoSVG,
+                                height: Dimensions.space60,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                             const SizedBox(height: Dimensions.space30),
                             CustomTextField(
                               animatedLabel: true,
@@ -83,7 +89,6 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                               },
                             ),
                             const SizedBox(height: Dimensions.space25),
-
                             CustomTextField(
                               animatedLabel: true,
                               needOutlineBorder: true,
@@ -99,7 +104,6 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                               },
                             ),
                             const SizedBox(height: Dimensions.space25),
-
                             CustomTextField(
                               animatedLabel: true,
                               needOutlineBorder: true,
@@ -115,7 +119,6 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                               },
                             ),
                             const SizedBox(height: Dimensions.space25),
-
                             CustomTextField(
                               animatedLabel: true,
                               needOutlineBorder: true,
@@ -131,7 +134,6 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                               },
                             ),
                             const SizedBox(height: Dimensions.space25),
-
                             CustomTextField(
                               animatedLabel: true,
                               needOutlineBorder: true,
@@ -147,7 +149,6 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                               },
                             ),
                             const SizedBox(height: Dimensions.space25),
-
                             CustomTextField(
                               animatedLabel: true,
                               needOutlineBorder: true,
@@ -162,7 +163,6 @@ class _ProfileCompleteScreenState extends State<ProfileCompleteScreen> {
                               },
                             ),
                             const SizedBox(height: Dimensions.space35),
-
                             controller.submitLoading
                                 ? const RoundedLoadingBtn()
                                 : RoundedButton(

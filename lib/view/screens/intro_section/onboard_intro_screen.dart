@@ -80,8 +80,8 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
       },
       pages: [
         PageViewModel(
-          title: MyStrings.onboardTitle.tr,
-          body: MyStrings.onboardDescription,
+          title: MyStrings.onboardTitle1.tr,
+          body: MyStrings.onboardDescription1,
           image: SvgPicture.asset(
             MyImages.onboard1SVG,
           ),
@@ -93,9 +93,11 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
           ),
         ),
         PageViewModel(
-          title: MyStrings.realMoney.tr,
-          body: MyStrings.pickTheCorrectAnswer,
-          image: SvgPicture.asset(MyImages.onBoard2SVG),
+          title: MyStrings.onboardTitle2.tr,
+          body: MyStrings.onboardDescription2,
+          image: SvgPicture.asset(
+            MyImages.onboard3SVG,
+          ),
           decoration: PageDecoration(
             titlePadding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space15),
             bodyPadding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space15),
@@ -104,9 +106,11 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
           ),
         ),
         PageViewModel(
-          title: MyStrings.completeWIthFriends.tr,
-          body: MyStrings.whoIsSmartest.tr,
-          image: SvgPicture.asset(MyImages.onBoard3SVG),
+          title: MyStrings.onboardTitle3.tr,
+          body: MyStrings.onboardDescription3.tr,
+          image: SvgPicture.asset(
+            MyImages.onboard3SVG,
+          ),
           decoration: PageDecoration(
             titlePadding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space15),
             bodyPadding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space15),
