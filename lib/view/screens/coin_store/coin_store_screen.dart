@@ -77,7 +77,7 @@ class _CoinStoreScreenState extends State<CoinStoreScreen> {
         builder: (controller) => controller.isLoading == true
             ? const CustomLoader()
             : controller.coinPlanList.isEmpty
-                ? const NoDataWidget()
+                ? SingleChildScrollView(child: const NoDataWidget())
                 : ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),

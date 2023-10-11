@@ -56,10 +56,6 @@ class _ResetPasswordBodySectionState extends State<ResetPasswordBodySection> {
               style: regularDefault.copyWith(fontSize: Dimensions.space20, fontWeight: FontWeight.w500),
             ),
             const SizedBox(height: Dimensions.space8),
-            Text(
-              MyStrings.passwordMustBeDiffrentFromBefore.tr,
-              style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
-            ),
             Form(
               key: formKey,
               child: Column(

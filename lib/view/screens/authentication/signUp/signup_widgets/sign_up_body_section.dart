@@ -125,7 +125,6 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                     labelText: MyStrings.password.tr,
                     onChanged: (value) {
                       debugPrint(value);
-                      //  controller.updateValidationList(value);
                       formKey.currentState!.validate();
                     },
                     isShowSuffixIcon: true,
@@ -151,8 +150,6 @@ class _SignUpBodySectionState extends State<SignUpBodySection> {
                           return null;
                         }
                       }
-
-                      // Password is valid if it passes all checks
                     },
                   ),
                   if (controller.checkPasswordStrength) ...[

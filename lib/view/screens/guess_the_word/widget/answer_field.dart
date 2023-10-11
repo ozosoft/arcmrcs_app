@@ -54,7 +54,7 @@ class _AnswerFieldState extends State<AnswerField> {
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
-                      width: 2,
+                      width: controller.selectedIndex == index ? 2 : .8,
                       color: controller.selectedIndex == index ? MyColor.primaryColor : MyColor.borderColor,
                     ),
                   ),

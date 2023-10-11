@@ -21,7 +21,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    MyUtils.allScreen();
+    MyUtils.splashScreen();
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GeneralSettingRepo(apiClient: Get.find()));
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SplashController>(
-      builder: (conroller) => Scaffold(
+      builder: (controller) => Scaffold(
         backgroundColor: MyColor.primaryColor,
         body: Stack(
           children: [

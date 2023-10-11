@@ -84,7 +84,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             ? TextFormField(
                 maxLines: widget.maxLines,
                 readOnly: widget.readOnly,
-                style: regularMediumLarge.copyWith(color: widget.hastextcolor == true ? MyColor.textColor : MyColor.getTextColor()),
+                style: regularMediumLarge.copyWith(color: widget.hastextcolor == true ? MyColor.colorBlack : MyColor.getTextColor()),
                 //textAlign: TextAlign.left,
                 cursorColor: MyColor.getTextColor(),
                 controller: widget.controller,

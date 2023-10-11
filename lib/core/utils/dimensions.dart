@@ -4,13 +4,13 @@ class Dimensions {
   static const double fontOverSmall     = 7.00;
   static const double fontExtraSmall    = 9.00;
   static const double fontSmall         = 11.00;
-  static const double fontDefault12       = 12.00;
+  static const double fontDefault12     = 12.00;
   static const double fontDefault       = 13.00;
   static const double fontLarge         = 14.00;
   static const double fontMediumLarge   = 16.00;
   static const double fontExtraLarge    = 18.00;
   static const double fontOverLarge     = 21.00;
-  static const double fontOverLarge30     = 30.00;
+  static const double fontOverLarge30   = 30.00;
   static const double defaultButtonH    = 45;
   static const double defaultRadius     = 10;
   static const double cardMargin        = 12;

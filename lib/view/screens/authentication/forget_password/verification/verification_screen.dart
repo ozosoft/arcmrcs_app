@@ -19,8 +19,8 @@ class VerificationScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-             CustomHeadSection(height: Dimensions.space150,iconPosition: Dimensions.space60),
-             VerificationBodySection(),
+              CustomHeadSection(height: Dimensions.space150,iconPosition: Dimensions.space60),
+              VerificationBodySection(),
             ],
           ),
         ),

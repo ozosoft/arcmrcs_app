@@ -63,13 +63,13 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                padding: const EdgeInsets.all(Dimensions.space12),
+                                padding: const EdgeInsets.all(Dimensions.space10),
                                 decoration: BoxDecoration(
                                   border: Border.all(
                                     color: MyColor.borderColor,
                                     width: 1,
                                   ),
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(4),
                                 ),
                                 child: Text('${index + 1}/${controller.guessThewordQuestionList.length}'),
                               ),
@@ -90,7 +90,10 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                                       hasImage: false,
                                       bgColor: MyColor.primaryColor,
                                       hasbgColor: true,
-                                      height: Dimensions.space40,
+                                      borderColor: Colors.transparent,
+                                      height: Dimensions.space40 - 3,
+                                      hPadding: Dimensions.space15,
+                                      vPadding: Dimensions.space10,
                                       hastextColor: true,
                                     )),
                               ]
@@ -103,13 +106,16 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                             controller.guessThewordQuestionList[index].question.toString(),
                             style: mediumExtraLarge.copyWith(fontWeight: FontWeight.w500),
                           ),
+                          const SizedBox(height: Dimensions.space20),
                           // note: use  preloader or something like this
                           controller.guessThewordQuestionList[index].image != null
                               ? Container(
                                   width: double.infinity,
-                                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
+                                  margin: const EdgeInsetsDirectional.only(start: Dimensions.space8, end: Dimensions.space8),
                                   decoration: BoxDecoration(
+                                    color: Colors.transparent,
                                     borderRadius: BorderRadius.circular(16),
+                                    border: Border.all(color: MyColor.borderColor.withOpacity(.2),width: .3)
                                   ),
                                   child: CachedNetworkImage(
                                     imageUrl: '${UrlContainer.questionImagePath}/${controller.guessThewordQuestionList[index].image}',

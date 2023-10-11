@@ -45,9 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     Get.put(QuizContestRepo(apiClient: Get.find()));
 
-    Get.put(QuizContestQuestionsController(
-      quizContestRepo: Get.find(),
-    ));
+    Get.put(QuizContestQuestionsController(quizContestRepo: Get.find()));
 
     DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find(), examZoneRepo: Get.find(), logoutRepo: Get.put(LogoutRepo(apiClient: Get.find()))));
     AdUnitHelper.initializeAdUnits();
@@ -83,36 +81,36 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(Dimensions.space10),
                       child: (controller.loader != false)
-                          ? SizedBox(
-                              height: context.height / 2,
-                              child: const Center(child: CustomLoader()),
-                            )
-                          : controller.generalQuizStatus == '0' && controller.contestStatus == '0' && controller.examStatus == '0' && controller.differentQuizlist.isEmpty
-                              ? const NoDataWidget(
-                                  margin: 10,
-                                  hideButton: true,
-                                )
-                              : Column(
-                                  children: [
-                                    if (controller.generalQuizStatus == '1') ...[
-                                      const TopCategorySection(),
-                                    ],
-                                    // BattleOfTheDaySection(),
-                                    if (controller.contestStatus == '1') ...[
-                                      const QuizContestSection(),
-                                    ],
+                    ? SizedBox(
+                        height: context.height / 2,
+                        child: const Center(child: CustomLoader()),
+                      )
+                    : controller.generalQuizStatus == '0' && controller.contestStatus == '0' && controller.examStatus == '0' && controller.differentQuizlist.isEmpty ?
+                      const NoDataWidget(
+                        margin: 10,
+                        hideButton: true,
+                      ) :
+                      Column(
+                        children: [
+                          if (controller.generalQuizStatus == '1') ...[
+                            const TopCategorySection(),
+                          ],
+                          // BattleOfTheDaySection(),
+                          if (controller.contestStatus == '1') ...[
+                            const QuizContestSection(),
+                          ],
 
-                                    if (controller.examStatus == '1') ...[
-                                      const ExamZoneCategoryScreen(),
-                                    ],
+                          if (controller.examStatus == '1') ...[
+                            const ExamZoneCategoryScreen(),
+                          ],
 
-                                    const PlayDiffrentQuizes(),
+                          const PlayDiffrentQuizes(),
 
-                                    const SizedBox(
-                                      height: Dimensions.space100,
-                                    )
-                                  ],
-                                ),
+                          const SizedBox(
+                            height: Dimensions.space100,
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],

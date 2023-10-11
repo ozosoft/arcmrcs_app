@@ -54,7 +54,7 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                         height: Dimensions.space8,
                       ),
                       Text(
-                        MyStrings.wehaveSentaCode.tr.replaceAll("{email}", controller.email.toString()),
+                        '${MyStrings.wehaveSentaCode.tr} ${controller.email.toString()}',
                         style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
                       ),
                     ],
@@ -81,8 +81,8 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                               shape: PinCodeFieldShape.box,
                               borderWidth: .5,
                               borderRadius: BorderRadius.circular(5),
-                              fieldHeight: 45,
-                              fieldWidth: 45,
+                              fieldHeight: 45 - 7,
+                              fieldWidth: 45 - 7,
                               inactiveColor: MyColor.getTextFieldDisableBorder(),
                               inactiveFillColor: MyColor.colorWhite,
                               activeFillColor: MyColor.getScreenBgColor(),
@@ -154,7 +154,7 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                       Obx(() {
                         final resendCountdown = controller.resendCountdown.value;
 
-                        return resendCountdown > 0 ? Text(MyStrings.emailResendAvilableIn.tr.replaceAll("{time}", resendCountdown.toString())) : const SizedBox.shrink();
+                        return resendCountdown > 0 ? Text('${MyStrings.emailResendAvilableIn} ${resendCountdown.toString()} ${MyStrings.seconds}') : const SizedBox.shrink();
                       }),
                     ],
                   ),

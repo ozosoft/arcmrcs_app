@@ -26,12 +26,13 @@ class CustomTopCategoryCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: Dimensions.space1),
         width: Dimensions.space103,
         decoration: BoxDecoration(
-          color: MyColor.cardBgLighGreyColor,
+          //color: MyColor.cardBgLighGreyColor,
           border: Border.all(color: MyColor.primaryColor.withOpacity(0.05)),
           borderRadius: BorderRadius.circular(Dimensions.space8),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
             // Image.network(image),
             MyImageWidget(
@@ -39,21 +40,19 @@ class CustomTopCategoryCard extends StatelessWidget {
               width: Dimensions.space40,
               height: Dimensions.space40,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: Dimensions.space10, horizontal: Dimensions.space5),
-              child: Text(
-                title.toString(),
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: mediumDefault.copyWith(fontWeight: FontWeight.normal, color: MyColor.primaryTextColor),
-              ),
-            ),
+            SizedBox(height: Dimensions.space10 ),
             Text(
+              title.toString(),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: mediumDefault.copyWith(fontWeight: FontWeight.normal, color: MyColor.primaryTextColor),
+            )
+           /* Text(
               "$questionsQuantaty ${MyStrings.questionse.tr}",
               textAlign: TextAlign.center,
               style: regularDefault.copyWith(color: MyColor.colorlighterGrey, fontSize: Dimensions.space12),
-            )
+            )*/
           ],
         ),
       ),

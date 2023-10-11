@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
@@ -47,28 +48,24 @@ class _GuessResultBodyState extends State<GuessResultBody> {
               ],
             ),
             const SizedBox(
-              height: Dimensions.space40,
+              height: Dimensions.space40 - 20,
             ),
             Stack(
               children: [
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
+                  padding: const EdgeInsetsDirectional.only( start: Dimensions.space8, end: Dimensions.space8),
                   child: controller.appreciation == "[Failed]"
-                      ? SvgPicture.asset(
+                      ?Lottie.asset(MyImages.failedLottie,height: 200,width: 200)
+                      : Lottie.asset(MyImages.successLottie,height: 200,width: 200) /*SvgPicture.asset(
                           MyImages.victory,
                           fit: BoxFit.cover,
-                           colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
-                        )
-                      : SvgPicture.asset(
-                          MyImages.victory,
-                          fit: BoxFit.cover,
-                        ),
+                        ),*/
                 ),
-                SizedBox(
+               /* SizedBox(
                   width: double.infinity,
                   child: CustomSvgPicture(image: MyImages.cup, color: controller.appreciation == "[Failed]" ? Colors.grey.withOpacity(0.3) : Colors.orange.shade400, height: 200),
-                ),
+                ),*/
               ],
             ),
             const SizedBox(

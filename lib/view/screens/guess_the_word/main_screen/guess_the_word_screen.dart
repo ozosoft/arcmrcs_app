@@ -12,6 +12,7 @@ import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/screens/guess_the_word/widget/question_button.dart';
 import 'package:get/get.dart';
+import '../../../../core/utils/util.dart';
 import '../../../components/app-bar/custom_category_appbar.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../widget/answer_field.dart';
@@ -77,8 +78,8 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        LevelCardButton(text: ' ${controller.gessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins.tr}', hasIcon: false, hasImage: false),
-                                        LevelCardButton(text: " ${questionsIndex + 1}/${controller.gessThewordQuesstionList.length}", hasIcon: false, hasImage: false),
+                                        LevelCardButton(bgColor: Colors.transparent,hPadding:Dimensions.space12,vPadding:Dimensions.space10,text: ' ${controller.gessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins.tr}', hasIcon: false, hasImage: false),
+                                        LevelCardButton(bgColor: Colors.transparent,hPadding:Dimensions.space12,vPadding:Dimensions.space10,text: " ${questionsIndex + 1}/${controller.gessThewordQuesstionList.length}", hasIcon: false, hasImage: false),
                                       ],
                                     ),
                                     const SizedBox(height: Dimensions.space20),
@@ -102,26 +103,35 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                     GuessWordKeyBoard(
                                       ans: controller.gessThewordQuesstionList[questionsIndex].options![0].option.toString(),
                                     ),
-                                    const SizedBox(height: Dimensions.space10),
+                                    const SizedBox(height: Dimensions.space15),
                                     Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: MyColor.colorRed.withOpacity(0.5),
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: IconButton(
-                                            onPressed: () {
-                                              controller.removeVAlue();
-                                            },
-                                            icon: const Icon(
+                                        alignment: Alignment.center,
+                                        child:InkWell(
+                                          onTap: (){
+                                            controller.removeVAlue();
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.all(Dimensions.space3),
+                                            height: Dimensions.space40,
+                                            width: Dimensions.space40,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(4),
+                                                boxShadow: MyUtils.getBottomSheetShadow(),
+                                                border: Border.all(
+                                                    color: MyColor.borderColor.withOpacity(.5),
+                                                    width: .5
+                                                ),
+                                                color: MyColor.colorWhite
+                                              // color: Colors.transparent
+                                              //color: MyColor.lightGray,
+                                            ),
+                                            child: const Icon(
                                               Icons.delete_forever_outlined,
-                                              color: MyColor.colorWhite,
-                                            )),
-                                      ),
-                                    ),
+                                              color: MyColor.primaryColor,
+                                            ),
+                                          ),
+                                        )),
                                     const SizedBox(height: Dimensions.space40),
-                                   
                                     const SizedBox(height: Dimensions.space40),
                                   ],
                                 ),

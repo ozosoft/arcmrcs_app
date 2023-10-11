@@ -771,9 +771,9 @@ class BattleRoomController extends GetxController {
     }
   }
 
-  @override
-  void onClose() {
-    _battleRoomStreamSubscription?.cancel();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   _battleRoomStreamSubscription?.cancel();
+  //   super.onClose();
+  // }
 }

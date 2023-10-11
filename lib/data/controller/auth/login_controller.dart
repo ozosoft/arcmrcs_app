@@ -48,7 +48,7 @@ class LoginController extends GetxController {
     Get.toNamed(RouteHelper.forgetpasswordScreen);
   }
 
-  void checkAndGotoNextStep(LoginResponseModel responseModel) async {
+  Future<void> checkAndGotoNextStep(LoginResponseModel responseModel) async {
     bool needEmailVerification = responseModel.data?.user?.ev == "1" ? false : true;
     bool needSmsVerification = responseModel.data?.user?.sv == '1' ? false : true;
 
@@ -67,7 +67,6 @@ class LoginController extends GetxController {
     await loginRepo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.soundKey, true);
     await loginRepo.apiClient.sharedPreferences.setBool(SharedPreferenceHelper.vibrationKey, true);
 
-    // Get.toNamed(RouteHelper.bottomNavBarScreen);
 
     await loginRepo.sendUserToken();
 
@@ -104,7 +103,7 @@ class LoginController extends GetxController {
     if (model.statusCode == 200) {
       LoginResponseModel loginModel = LoginResponseModel.fromJson(jsonDecode(model.responseJson));
       if (loginModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
-        checkAndGotoNextStep(loginModel);
+        await checkAndGotoNextStep(loginModel);
       } else {
         CustomSnackBar.error(errorList: loginModel.message?.error ?? [MyStrings.loginFailedTryAgain.tr]);
       }
@@ -131,7 +130,6 @@ class LoginController extends GetxController {
     update();
   }
 
-  //MOBILE AUTH START HERE
 
   initMobileAuthData() async {
     resetOtpPageData();
@@ -218,9 +216,9 @@ class LoginController extends GetxController {
     update();
   }
 
-  Future<void> verifyPhoneNumber({bool laoder = true}) async {
+  Future<void> verifyPhoneNumber({bool loader = true}) async {
     try {
-      changeOtpSendButtonLoading(laoder);
+      changeOtpSendButtonLoading(loader);
       String phoneNumber = "${MyStrings.plusText.tr}${selectedCountryData.dialCode!.tr}${mobileNumberController.text.tr}";
 
       await firebaseAuth.verifyPhoneNumber(
@@ -282,11 +280,11 @@ class LoginController extends GetxController {
           debugPrint("cancle timmer");
           _resendTimer!.cancel();
         }
-        await verifyPhoneNumber(laoder: false);
+        await verifyPhoneNumber(loader: false);
         isResendingOTP = true;
         _startResendTimer();
       } else {
-        CustomSnackBar.error(errorList: [(MyStrings.tryAfterSec.replaceAll("{sec}", secondLeft.value.toString()).tr)]);
+        CustomSnackBar.error(errorList: ["${MyStrings.tryAfterSec.tr} ${secondLeft.value.toString()} ${MyStrings.seconds.tr}"]);
       }
     } catch (e) {
       CustomSnackBar.error(errorList: [e.toString()]);
@@ -339,6 +337,7 @@ class LoginController extends GetxController {
       await firebaseAuth.signInWithCredential(credential);
 
       await socialLoginUser(email: firebaseUser.value!.email, uid: firebaseUser.value!.uid, provider: 'email');
+      await googleSignIn.signOut();
     } catch (e) {
       // debugPrint(e.toString());
 
@@ -375,15 +374,11 @@ class LoginController extends GetxController {
       if (loginModel.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         remember = true;
         update();
-        checkAndGotoNextStep(loginModel);
+        await checkAndGotoNextStep(loginModel);
       } else {
-        isSocailSubmitLoading = false;
-        update();
         CustomSnackBar.error(errorList: loginModel.message?.error ?? [MyStrings.loginFailedTryAgain.tr]);
       }
     } else {
-      isSocailSubmitLoading = false;
-      update();
       CustomSnackBar.error(errorList: [responseModel.message]);
     }
 

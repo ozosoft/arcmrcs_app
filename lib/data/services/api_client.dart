@@ -223,11 +223,11 @@ class ApiClient extends GetxService {
     await sharedPreferences.setBool(SharedPreferenceHelper.themeKey, value);
   }
 
-  String getSocailLoginActiveStats(String type) {
+  String getSocialLoginActiveStats(String type) {
     if (type == 'phone') {
-      return getGSData().data!.generalSetting!.mobileLogin!;
+      return getGSData().data?.generalSetting?.mobileLogin??'';
     } else if (type == 'google') {
-      return getGSData().data!.generalSetting!.googleLogin!;
+      return getGSData().data?.generalSetting?.googleLogin??'';
     }
     return '0';
   }

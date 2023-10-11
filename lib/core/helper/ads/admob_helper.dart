@@ -19,18 +19,19 @@ class AdmobHelper {
     BannerAd? bAd;
     if (AdUnitHelper.bannerAdUnitId != null) {
       bAd = BannerAd(
-          size: AdSize.banner,
-          adUnitId: AdUnitHelper.bannerAdUnitId!,
-          listener: BannerAdListener(onAdClosed: (Ad ad) {
-            debugPrint("Ad Closed");
-          }, onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            ad.dispose();
-          }, onAdLoaded: (Ad ad) {
-            debugPrint('Ad Loaded');
-          }, onAdOpened: (Ad ad) {
-            debugPrint('Ad opened');
-          }),
-          request: const AdRequest());
+        size: AdSize.banner,
+        adUnitId: AdUnitHelper.bannerAdUnitId!,
+        listener: BannerAdListener(onAdClosed: (Ad ad) {
+          debugPrint("Ad Closed");
+        }, onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          ad.dispose();
+        }, onAdLoaded: (Ad ad) {
+          debugPrint('Ad Loaded');
+        }, onAdOpened: (Ad ad) {
+          debugPrint('Ad opened');
+        }),
+        request: const AdRequest()
+      );
 
       return bAd;
     }
@@ -80,16 +81,16 @@ class AdmobHelper {
     if (Environment.showInterstitialAds == true) {
       if (AdUnitHelper.interstitialAdUnitShow! == '1') {
         InterstitialAd.load(
-            adUnitId: AdUnitHelper.interstitialAdUnitId!,
-            request: const AdRequest(),
-            adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (InterstitialAd ad) {
-              debugPrint('$ad loaded Interstitial.');
-              _interstitialAd = ad;
-              // _interstitialLoadAttempts = 0;
-            }, onAdFailedToLoad: (LoadAdError error) {
-              _interstitialAd = null;
-              debugPrint("from load344");
-            }));
+          adUnitId: AdUnitHelper.interstitialAdUnitId!,
+          request: const AdRequest(),
+          adLoadCallback: InterstitialAdLoadCallback(onAdLoaded: (InterstitialAd ad) {
+            debugPrint('$ad loaded Interstitial.');
+            _interstitialAd = ad;
+            // _interstitialLoadAttempts = 0;
+          }, onAdFailedToLoad: (LoadAdError error) {
+            _interstitialAd = null;
+            debugPrint("from load344");
+          }));
       }
     }
   }
@@ -110,7 +111,6 @@ class AdmobHelper {
 
         if (_interstitialLoadAttempts == Environment.interstitialAdsShowAfter) {
           _interstitialAd?.show();
-
           _interstitialLoadAttempts = 1;
           debugPrint("from load3");
         } else {
@@ -128,87 +128,87 @@ class AdmobHelper {
     if (Environment.showInterstitialAds == true && AdUnitHelper.interstitialAdUnitId! == '1') {
       if (AdUnitHelper.interstitialAdUnitId != null) {
         InterstitialAd.load(
-            adUnitId: AdUnitHelper.interstitialAdUnitId!,
-            request: const AdRequest(),
-            adLoadCallback: InterstitialAdLoadCallback(
-              // Called when an ad is successfully received.
-              onAdLoaded: (ad) {
-                ad.fullScreenContentCallback = FullScreenContentCallback(
-                  // Called when the ad showed the full screen content.
-                  onAdShowedFullScreenContent: (ad) {},
-                  // Called when an impression occurs on the ad.
-                  onAdImpression: (ad) {},
-                  // Called when the ad failed to show full screen content.
-                  onAdFailedToShowFullScreenContent: (ad, err) {
-                    // Dispose the ad here to free resources.
-                    ad.dispose();
-                  },
-                  // Called when the ad dismissed full screen content.
-                  onAdDismissedFullScreenContent: (ad) {
-                    // Dispose the ad here to free resources.
-                    ad.dispose();
-                  },
-                  // Called when a click is recorded for an ad.
-                  onAdClicked: (ad) {},
-                );
+          adUnitId: AdUnitHelper.interstitialAdUnitId!,
+          request: const AdRequest(),
+          adLoadCallback: InterstitialAdLoadCallback(
+            // Called when an ad is successfully received.
+            onAdLoaded: (ad) {
+              ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  // Dispose the ad here to free resources.
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  // Dispose the ad here to free resources.
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {},
+              );
 
-                debugPrint('$ad loaded.');
-                // Keep a reference to the ad so you can show it later.
+              debugPrint('$ad loaded.');
+              // Keep a reference to the ad so you can show it later.
 
-                ad.show();
-                ad.dispose();
-              },
-              // Called when an ad request failed.
-              onAdFailedToLoad: (LoadAdError error) {
-                debugPrint('InterstitialAd failed to load: $error');
-              },
-            ));
+              ad.show();
+              ad.dispose();
+            },
+            // Called when an ad request failed.
+            onAdFailedToLoad: (LoadAdError error) {
+              debugPrint('InterstitialAd failed to load: $error');
+            },
+          ));
       }
     }
   }
 
-  // create and load Reward ads Autromaticaly
+  // create and load Reward ads Automatically
   void loadRewardAdAlways() {
     if (Environment.showRewardlAds == true && AdUnitHelper.rewardedAdUnitShow! == '1') {
       if (AdUnitHelper.rewardedAdUnitId != null) {
         RewardedAd.load(
-            adUnitId: AdUnitHelper.rewardedAdUnitId!,
-            request: const AdRequest(),
-            rewardedAdLoadCallback: RewardedAdLoadCallback(
-              // Called when an ad is successfully received.
-              onAdLoaded: (ad) {
-                ad.fullScreenContentCallback = FullScreenContentCallback(
-                  // Called when the ad showed the full screen content.
-                  onAdShowedFullScreenContent: (ad) {},
-                  // Called when an impression occurs on the ad.
-                  onAdImpression: (ad) {},
-                  // Called when the ad failed to show full screen content.
-                  onAdFailedToShowFullScreenContent: (ad, err) {
-                    // Dispose the ad here to free resources.
-                    ad.dispose();
-                  },
-                  // Called when the ad dismissed full screen content.
-                  onAdDismissedFullScreenContent: (ad) {
-                    // Dispose the ad here to free resources.
-                    ad.dispose();
-                  },
-                  // Called when a click is recorded for an ad.
-                  onAdClicked: (ad) {},
-                );
+          adUnitId: AdUnitHelper.rewardedAdUnitId!,
+          request: const AdRequest(),
+          rewardedAdLoadCallback: RewardedAdLoadCallback(
+            // Called when an ad is successfully received.
+            onAdLoaded: (ad) {
+              ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  // Dispose the ad here to free resources.
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  // Dispose the ad here to free resources.
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {},
+              );
 
-                debugPrint('$ad loaded.');
-                // Keep a reference to the ad so you can show it later.
+              debugPrint('$ad loaded.');
+              // Keep a reference to the ad so you can show it later.
 
-                ad.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
-                  debugPrint("You Get ${rewardItem.amount}");
-                  // Reward the user for watching an ad.
-                });
-              },
-              // Called when an ad request failed.
-              onAdFailedToLoad: (LoadAdError error) {
-                debugPrint('RewardedAd failed to load: $error');
-              },
-            ));
+              ad.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                debugPrint("You Get ${rewardItem.amount}");
+                // Reward the user for watching an ad.
+              });
+            },
+            // Called when an ad request failed.
+            onAdFailedToLoad: (LoadAdError error) {
+              debugPrint('RewardedAd failed to load: $error');
+            },
+          ));
       }
     }
   }

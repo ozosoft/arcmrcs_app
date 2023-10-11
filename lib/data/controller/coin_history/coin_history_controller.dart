@@ -16,12 +16,12 @@ class CoinHistoryController extends GetxController {
 
   List<CoinLog> coinHistoryList = [];
 
-  bool loader = true;
+  bool isLoading = true;
 
   bool isActive = false;
 
-  void getdata() async {
-    loader = true;
+  void getData() async {
+    isLoading = true;
     update();
 
 
@@ -51,11 +51,11 @@ class CoinHistoryController extends GetxController {
 
     debugPrint('---------------------${model.statusCode}');
 
-    loader = false;
+    isLoading = false;
     update();
   }
 
-  changeactivestatus() {
+  changeActiveStatus() {
     isActive = !isActive;
     update();
   }

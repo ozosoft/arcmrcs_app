@@ -46,19 +46,10 @@ class _ForgetPasswordBodySectionState extends State<ForgetPasswordBodySection> {
         ),
         child: Column(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  MyStrings.forgetPassword.tr,
-                  style: regularDefault.copyWith(fontSize: Dimensions.space20, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(height: Dimensions.space8),
-                Text(
-                  MyStrings.enterEmailAndPassword.tr,
-                  style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
-                ),
-              ],
+            Text(
+              MyStrings.enterEmailAndPassword.tr,
+              textAlign: TextAlign.center,
+              style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
             ),
             Form(
               key: formKey,

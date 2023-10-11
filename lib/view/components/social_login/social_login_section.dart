@@ -12,8 +12,8 @@ import 'package:quiz_lab/view/components/social_login/widgets/social_login_butto
 import 'package:get/get.dart';
 
 class SocialLoginSection extends StatelessWidget {
-  final LoginController? loginController;
-  const SocialLoginSection({super.key, this.loginController});
+  final LoginController loginController;
+  const SocialLoginSection({super.key, required this.loginController});
 
   @override
   Widget build(BuildContext context) {
@@ -27,16 +27,16 @@ class SocialLoginSection extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              if (Environment.disableGoogle == false && loginController!.loginRepo.apiClient.getSocailLoginActiveStats('google') == '1') ...[
+              if (Environment.disableGoogle == false && loginController.loginRepo.apiClient.getSocialLoginActiveStats('google') == '1') ...[
                 SocialLoginButton(
                   title: MyStrings.google.tr,
                   image: MyImages.google,
                   ontap: () async {
-                    await loginController!.signInWithGoogle();
+                    await loginController.signInWithGoogle();
                   },
                 ),
               ],
-              if (Environment.disablePhoneAuth == false && loginController!.loginRepo.apiClient.getSocailLoginActiveStats('phone') == '1') ...[
+              if (Environment.disablePhoneAuth == false && loginController.loginRepo.apiClient.getSocialLoginActiveStats('phone') == '1') ...[
                 SocialLoginButton(
                   title: MyStrings.phone.tr,
                   image: MyImages.telephone,
@@ -48,7 +48,7 @@ class SocialLoginSection extends StatelessWidget {
             ],
           ),
         ),
-        if (Environment.disableGoogle == false && Environment.disablePhoneAuth == false && loginController!.loginRepo.apiClient.getSocailLoginActiveStats('phone') == '1' && loginController!.loginRepo.apiClient.getSocailLoginActiveStats('google') == '1') ...[
+        if (Environment.disableGoogle == false && Environment.disablePhoneAuth == false && loginController.loginRepo.apiClient.getSocialLoginActiveStats('phone') == '1' && loginController.loginRepo.apiClient.getSocialLoginActiveStats('google') == '1') ...[
           const SizedBox(
             height: Dimensions.space20,
           ),

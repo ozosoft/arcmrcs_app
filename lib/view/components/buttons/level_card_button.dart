@@ -10,22 +10,24 @@ class LevelCardButton extends StatelessWidget {
   final String? text, image;
   final Color bgColor;
   final Color contentColor;
+  final Color borderColor;
+  final double hPadding,vPadding;
 
-  const LevelCardButton({Key? key, this.text, this.bgColor = MyColor.primaryColor, this.contentColor = MyColor.colorWhite, required this.hasIcon, this.image, this.height, this.width, required this.hasImage, this.lifelineUsed = false, this.hasbgColor = false, this.hastextColor = false}) : super(key: key);
+  const LevelCardButton({Key? key, this.hPadding = Dimensions.space15,this.vPadding = Dimensions.space15, this.borderColor = MyColor.cardBorderColor , this.text, this.bgColor = MyColor.primaryColor, this.contentColor = MyColor.colorWhite, required this.hasIcon, this.image, this.height, this.width, required this.hasImage, this.lifelineUsed = false, this.hasbgColor = false, this.hastextColor = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
-      padding: EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: hasbgColor ? Dimensions.space1 : Dimensions.space15),
+      padding: EdgeInsets.symmetric(horizontal: hPadding, vertical: hasbgColor ? Dimensions.space1 : vPadding),
       decoration: BoxDecoration(
         color: hasbgColor
             ? bgColor
             : lifelineUsed == true
-                ? MyColor.colorLightGrey
-                : MyColor.cardColor,
+                ? MyColor.transparentColor
+                : MyColor.transparentColor,
         borderRadius: BorderRadius.circular(Dimensions.space5),
-        border: Border.all(color: MyColor.cardBorderColor),
+        border: Border.all(color: borderColor),
       ),
       child: Center(
           child: Row(

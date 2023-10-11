@@ -63,7 +63,7 @@ class MyStrings {
   static const String createRoom = "Create Room";
   static const String remark = "Remark";
   static const String any = "Any";
-  static const String signUp = "Sign up";
+  static const String signUp = "Sign Up";
   static const String email = "Email";
   static const String attachment = "Attachment";
   static const String attempted = "Attempted";
@@ -95,7 +95,7 @@ class MyStrings {
   static const String lifeLineAlreadyUsed = "This Life Line Already Used!";
   static const String pleaseEnterValidOtpCode = "Please Enter Valid OTP Code";
   static const String plusText = "+";
-  static const String tryAfterSec = "Try After {sec} Second";
+  static const String tryAfterSec = "Try After";
   static const String firstName = "First Name";
   static const String lastName = "Last Name";
   static const String last = "Last";
@@ -217,8 +217,8 @@ class MyStrings {
   static const String privacyPolicy = "Privacy & Policy";
   static const String forgetPassword = "Forget Password";
   static const String enterVerificationcode = "Enter Verification Code";
-  static const String wehaveSentaCode = "We have sent a code to {email}";
-  static const String emailResendAvilableIn = "Resend available in {time} seconds";
+  static const String wehaveSentaCode = "We have sent a code to";
+  static const String emailResendAvilableIn = "Resend available in";
   static const String doNotHaveAccount = "Don't have an account?";
   static const String enterEmailOrUserName = "Enter username or email";
   static const String policies = "Policies";
@@ -263,7 +263,6 @@ class MyStrings {
   static const String allCategory = "All categories";
   static const String music = "Music";
   static const String scienceAndTech = "Science & Technology";
-  static const String fee50Coins = "Fee 50 Coins";
   static const String feeCoins = "Fee Coins ";
   static const String end = "End ";
   static const String min = "min";
@@ -300,7 +299,6 @@ class MyStrings {
   static const String logout = "Logout";
   static const String hiMariya = "Hi! Mariya Ons";
   static const String hi = "Hi! ";
-  static const String totalCoinFivethousand = "Total Coin 5000";
   static const String total = "Total:";
   static const String letsPlayQuiz = "Let`s Play Quiz";
   static const String bookmarks = "Bookmarks";
@@ -339,7 +337,7 @@ class MyStrings {
   static const String pleaseEnterPhone = "Please enter your phone number to signIn";
   static const String pleaseEnterOTP = "Please enter your OTP to sign in";
   static const String pleaseEnterDetailstoSignUp = "Please enter your details to Create Account.";
-  static const String enterEmailAndPassword = "Enter your email account to reset password";
+  static const String enterEmailAndPassword = "Please enter your email account to reset password";
   static const String verificationSuccess = "Verification Success";
   static const String enterYourUsername = "Enter your username";
   static const String enterYourEmail = "Enter your email";
@@ -364,7 +362,8 @@ class MyStrings {
   static const String otpFieldEmptyMsg = "Otp field can't be empty";
   static const String otpSentToYourMobile = "An OTP has been sent to your mobile number";
   static const String goBackLogMsg = "Sorry something went wrong here, go back and retry after sometimes";
-  static const String secondAgo = "second ago";
+  static const String secondAgo = "seconds ago";
+  static const String seconds = "Seconds";
   static const String minutesAgo = "minutes ago";
   static const String hourAgo = "hour ago";
   static const String daysAgo = "days ago";
@@ -464,8 +463,6 @@ class MyStrings {
   static const String funvocabulary = "Fun vocabulary";
   static const String dontHaveAnaccount = "Don’t have an account?";
   static const String transactionType = "Transaction Type";
-  static const String minimumReedemAmount = "Minimum Redeemable amount is \$2 (10 coins).";
-  static const String payoutTime = "Payout will usd 7 - 10working days.";
   static const String remarkType = "Remark Type";
   static const String dot = "⚈";
   static const String agreePolicyMessage = "You must agree with our privacy & policies";

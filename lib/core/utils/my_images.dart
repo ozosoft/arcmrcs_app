@@ -162,6 +162,9 @@ class MyImages {
   static const String guessTheWordSVG = "assets/images/guessTheWord.svg";
   static const String examzoneSVG = "assets/images/examZone.svg";
 
+  static const String successLottie = "assets/animation/success_lottie.json";
+  static const String failedLottie = "assets/animation/failed.json";
+
   List<String> rightORWrong = [
     MyImages.whiteTikSVG,
     MyImages.wrongAnswerSVG,

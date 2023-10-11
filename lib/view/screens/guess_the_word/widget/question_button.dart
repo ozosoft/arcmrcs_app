@@ -25,6 +25,7 @@ class _GuessWordKeyBoardState extends State<GuessWordKeyBoard> {
           widget.ans.length,
           (index) {
             return InkWell(
+              splashColor: Colors.transparent,
               onTap: () {
                 controller.replace(widget.ans[index].toString());
                 MyUtils.vibrate();
@@ -34,11 +35,15 @@ class _GuessWordKeyBoardState extends State<GuessWordKeyBoard> {
                 height: Dimensions.space40,
                 width: Dimensions.space40,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: MyUtils.getBottomSheetShadow(),
                   border: Border.all(
-                    color: MyColor.borderColor.withOpacity(0.3),
+                    color: MyColor.borderColor.withOpacity(.5),
+                    width: .5
                   ),
-                  color: MyColor.lightGray,
+                 color: MyColor.colorWhite
+                 // color: Colors.transparent
+                  //color: MyColor.lightGray,
                 ),
                 child: Center(
                   child: Text(

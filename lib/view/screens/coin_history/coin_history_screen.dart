@@ -31,7 +31,7 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
+      controller.getData();
     });
   }
 
@@ -42,12 +42,12 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
         appBar: CustomCategoryAppBar(
           title: MyStrings.coinHistory.tr,
         ),
-        body: controller.loader == true
+        body: controller.isLoading == true
             ? const CustomLoader()
             : controller.coinHistoryList.isEmpty
-                ? NoDataWidget(
-                    messages: MyStrings.noCoinHistoryFound.tr,
-                  )
+                ? SingleChildScrollView(child: NoDataWidget(
+          messages: MyStrings.noCoinHistoryFound.tr,
+        ))
                 : ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
