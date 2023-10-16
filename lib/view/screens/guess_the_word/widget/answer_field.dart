@@ -24,15 +24,15 @@ class _AnswerFieldState extends State<AnswerField> {
   @override
   void initState() {
     super.initState();
-    Get.find<GuessThewordController>().tempAns.clear();
+    Get.find<GuessTheWordController>().tempAns.clear();
     for (var i = 0; i < widget.length; i++) {
-      Get.find<GuessThewordController>().tempAns.add('-1');
+      Get.find<GuessTheWordController>().tempAns.add('-1');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GuessThewordController>(builder: (controller) {
+    return GetBuilder<GuessTheWordController>(builder: (controller) {
       return Wrap(
         spacing: 10,
         runSpacing: 10,

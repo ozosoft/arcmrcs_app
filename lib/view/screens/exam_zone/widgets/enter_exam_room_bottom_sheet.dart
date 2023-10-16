@@ -70,10 +70,7 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                             color: MyColor.textColor,
                           )),
                       Padding(
-                        // padding: const EdgeInsetsDirectional.only(right: Dimensions.space10,),
-                        padding: const EdgeInsets.symmetric(
-                          vertical: Dimensions.space10,
-                        ),
+                        padding: const EdgeInsets.symmetric(vertical: Dimensions.space10),
                         child: OTPFieldWidget(
                           onChanged: (value) {
                             controller.enterExamKey = value;
@@ -123,9 +120,9 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                                                     color: Colors.transparent,
                                                     child: Row(
                                                       mainAxisAlignment: MainAxisAlignment.start,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
-                                                        Text('\u2022', style: regularLarge.copyWith(overflow: TextOverflow.visible, color: MyColor.redCancelTextColor, fontSize: 20)),
+                                                        Text('\u2022', textAlign:TextAlign.start,style: regularLarge.copyWith(overflow: TextOverflow.visible, color: MyColor.redCancelTextColor, fontSize: 20)),
                                                         const SizedBox(
                                                           width: Dimensions.space10,
                                                         ),
@@ -232,26 +229,26 @@ class _EnterRoomBottomSheetWidgetState extends State<EnterRoomBottomSheetWidget>
                         ),
                       ),
                       const SizedBox(height: Dimensions.space30),
-                      controller.submitLoading == true
-                          ? const RoundedLoadingBtn()
-                          : RoundedButton(
-                              text: MyStrings.submit.tr,
-                              press: () {
-                                if (controller.enterExamKey == "") {
-                                  CustomSnackBar.error(errorList: [(MyStrings.examKeyMsg.tr)]);
-                                } else {
-                                  if (controller.agreeExamRules == true) {
-                                    if (widget.quizInfo != null) {
-                                      controller.enterExamZone(widget.quizInfo!.id.toString(), controller.enterExamKey);
-                                    }
-                                  } else {
-                                    CustomSnackBar.error(errorList: [(MyStrings.agreeExamRules.tr)]);
-                                  }
+                      controller.submitLoading == true ?
+                      const RoundedLoadingBtn()
+                      : RoundedButton(
+                          text: MyStrings.submit.tr,
+                          press: () {
+                            if (controller.enterExamKey == "") {
+                              CustomSnackBar.error(errorList: [(MyStrings.examKeyMsg.tr)]);
+                            } else {
+                              if (controller.agreeExamRules == true) {
+                                if (widget.quizInfo != null) {
+                                  controller.enterExamZone(widget.quizInfo!.id.toString(), controller.enterExamKey);
                                 }
-                              },
-                              textSize: Dimensions.space20,
-                              cornerRadius: Dimensions.space10,
-                            ),
+                              } else {
+                                CustomSnackBar.error(errorList: [(MyStrings.agreeExamRules.tr)]);
+                              }
+                            }
+                          },
+                          textSize: Dimensions.space20,
+                          cornerRadius: Dimensions.space10,
+                        ),
                       const SizedBox(
                         height: Dimensions.space20,
                       ),

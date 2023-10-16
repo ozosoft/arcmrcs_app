@@ -17,9 +17,9 @@ class LeaderBoardController extends GetxController {
   String rank1PlayerName = "";
   String rank2PlayerName = "";
   String rank3PlayerName = "";
-  String rank1PlayerScore = "";
-  String rank2PlayerScore = "";
-  String rank3PlayerScore = "";
+  String rank1PlayerScore = "00";
+  String rank2PlayerScore = "00";
+  String rank3PlayerScore = "00";
   String rank1PlayerAvatar = "";
   String rank2PlayerAvatar = "";
   String rank3PlayerAvatar = "";
@@ -49,18 +49,18 @@ class LeaderBoardController extends GetxController {
         for (int i = 0; i < leaderBoardlist.length && i < 3; i++) {
           switch (i) {
             case 0:
-              rank1PlayerName = leaderBoardList?[i].fullName ?? leaderBoardList![i].username.toString();
-              rank1PlayerScore = leaderBoardList?[i].score ?? '';
+              rank1PlayerName = leaderBoardList?[i].fullName ?? leaderBoardList?[i].username.toString() ?? '';
+              rank1PlayerScore = leaderBoardList?[i].score ?? '0';
               rank1PlayerAvatar = leaderBoardList?[i].avatar ?? '';
               break;
             case 1:
-              rank2PlayerName = leaderBoardList?[i].fullName ?? leaderBoardList![i].username.toString();
-              rank2PlayerScore = leaderBoardList?[i].score ?? '';
+              rank2PlayerName = leaderBoardList?[i].fullName ?? leaderBoardList?[i].username.toString() ?? '';
+              rank2PlayerScore = leaderBoardList?[i].score ?? '0';
               rank2PlayerAvatar = leaderBoardList?[i].avatar ?? '';
               break;
             case 2:
-              rank3PlayerName = leaderBoardList?[i].fullName ?? leaderBoardList![i].username.toString();
-              rank3PlayerScore = leaderBoardList?[i].score ?? '';
+              rank3PlayerName = leaderBoardList?[i].fullName ?? leaderBoardList?[i].username.toString() ?? '';
+              rank3PlayerScore = leaderBoardList?[i].score ?? '0';
               rank3PlayerAvatar = leaderBoardList?[i].avatar ?? '';
               break;
             default:

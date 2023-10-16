@@ -31,7 +31,7 @@ class _QuizResultScreenState extends State<QuizResultScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColor.primaryColor,
+      backgroundColor: MyColor.getScreenBgColor(),
       appBar: CustomCategoryAppBar(title: MyStrings.quizResult.tr),
       body: Stack(
         children: [

@@ -48,17 +48,17 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              !widget.isEdit
-                  ? const ClipOval(
-                      child: Material(
-                          color: MyColor.transparentColor,
-                          child: CircleImageWidget(
-                            imagePath: MyImages.defaultAvatar,
-                            height: Dimensions.space80,
-                            width: Dimensions.space80,
-                            isAsset: true,
-                          )),
-                    )
+              !widget.isEdit ?
+              const ClipOval(
+                child: Material(
+                  color: MyColor.transparentColor,
+                  child: CircleImageWidget(
+                    imagePath: MyImages.defaultAvatar,
+                    height: Dimensions.space80,
+                    width: Dimensions.space80,
+                    isAsset: true,
+                  )),
+              )
                   : buildImage(),
               widget.isEdit
                   ? Positioned(
@@ -69,15 +69,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             _openGallery(context);
                           },
                           child: BuildCircleWidget(
-                              padding: 3,
+                              padding: 2,
                               color: Colors.white,
                               child: BuildCircleWidget(
-                                  padding: 8,
+                                  padding: 7,
                                   color: MyColor.primaryColor,
                                   child: Icon(
                                     widget.isEdit ? Icons.add_a_photo : Icons.edit,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 15,
                                   )))),
                     )
                   : const SizedBox(),
@@ -96,7 +96,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     } else if (widget.imagePath.contains('http')) {
       image = NetworkImage(widget.imagePath);
     } else {
-      image = const AssetImage(MyImages.profile);
+      image = const AssetImage(MyImages.defaultAvatar);
     }
 
     bool isAsset = widget.imagePath.contains('http') == true ? false : true;
@@ -122,7 +122,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               : CircleImageWidget(
                   press: () {},
                   isAsset: isAsset,
-                  imagePath: isAsset ? MyImages.profile : widget.imagePath,
+                  imagePath: isAsset ? MyImages.defaultAvatar : widget.imagePath,
                   height: Dimensions.space80,
                   width: Dimensions.space80,
                 ),

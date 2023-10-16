@@ -26,10 +26,10 @@ class _GuessWordSubCategoryScreenState extends State<GuessWordSubCategoryScreen>
     super.initState();
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GuessTheWordRepo(apiClient: Get.find()));
-    final controller = Get.put(GuessThewordController(gessTheWordRepo: Get.find()));
+    final controller = Get.put(GuessTheWordController(guessTheWordRepo: Get.find()));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getAllsubcategories(id.toString());
+      controller.getAllSubCategories(id.toString());
     });
   }
 
@@ -39,7 +39,7 @@ class _GuessWordSubCategoryScreenState extends State<GuessWordSubCategoryScreen>
       appBar: CustomCategoryAppBar(
         title: MyStrings.subcategory.tr,
       ),
-      body: GetBuilder<GuessThewordController>(builder: (controller) {
+      body: GetBuilder<GuessTheWordController>(builder: (controller) {
         return controller.isLoading
             ? const CustomLoader()
             : controller.subCategories.isEmpty
@@ -49,7 +49,7 @@ class _GuessWordSubCategoryScreenState extends State<GuessWordSubCategoryScreen>
                 : RefreshIndicator(
                     color: MyColor.primaryColor,
                     onRefresh: () async {
-                      controller.getAllsubcategories(id.toString());
+                      controller.getAllSubCategories(id.toString());
                     },
                     child: ListView.builder(
                       physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),

@@ -4,7 +4,8 @@ class MyImages {
 
   //App Splash Logo White
 
-  static const String splashLogoSVG = "assets/images/logo/splash_logo.svg"; // USE SVG IMAGE
+  static const String splashLogoSVG = "assets/images/logo/splash_logo.svg";
+  static const String warningImage = 'assets/images/warning.png';// USE SVG IMAGE
 
   //Onboard Image
   static const String onboard1SVG = "assets/images/onboard/onboard1.svg"; // USE SVG IMAGE

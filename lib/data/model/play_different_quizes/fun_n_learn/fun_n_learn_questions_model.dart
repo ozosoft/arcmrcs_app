@@ -41,24 +41,28 @@ class FunNLearnQuestionsModel {
 class Data {
   QuizInfo? quizInfo;
   List<Question>? questions;
+  String? answerDuration;
   String? questionImagePath;
 
   Data({
     this.quizInfo,
     this.questions,
     this.questionImagePath,
+    this.answerDuration
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         quizInfo: json["quizInfo"] == null ? null : QuizInfo.fromJson(json["quizInfo"]),
         questions: json["questions"] == null ? [] : List<Question>.from(json["questions"]!.map((x) => Question.fromJson(x))),
         questionImagePath: json["question_image_path"],
+        answerDuration: json['fun_ans_duration'].toString()
       );
 
   Map<String, dynamic> toJson() => {
         "quizInfo": quizInfo?.toJson(),
         "questions": questions == null ? [] : List<dynamic>.from(questions!.map((x) => x.toJson())),
         "question_image_path": questionImagePath,
+        "fun_ans_duration": answerDuration,
       };
 }
 

@@ -13,6 +13,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../core/utils/url_container.dart';
+import '../../../../../../core/utils/util.dart';
 import '../../../../../components/image_widget/my_image_widget.dart';
 
 class ReviewAnswerSection extends StatefulWidget {
@@ -60,8 +61,21 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
+
+                                  Container(
+                                    padding: const EdgeInsets.all(Dimensions.space10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: MyColor.borderColor,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text('${questionsIndex + 1}/${controller.examQuestionsList.length}'),
+                                  ),
+
                                   if (questionsIndex < controller.examQuestionsList.length - 1) // Check if not on the last page
                                     ...[
                                     InkWell(
@@ -79,6 +93,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                           hasImage: false,
                                           bgColor: MyColor.primaryColor,
                                           hasbgColor: true,
+                                          borderColor: Colors.transparent,
                                           height: Dimensions.space40,
                                           hastextColor: true,
                                         )),
@@ -116,15 +131,20 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                                 margin: const EdgeInsets.all(Dimensions.space8),
                                                 padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
                                                 decoration: BoxDecoration(
-                                                    color: reviewItem.selectedOptionId!.isEmpty
-                                                        ? MyColor.lightGray
-                                                        : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
-                                                            ? MyColor.rightAnswerbgColor
-                                                            : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
-                                                                ? MyColor.wrongAnsColor
-                                                                : reviewOptionItem.isAnswer.toString() == "1"
-                                                                    ? MyColor.rightAnswerbgColor
-                                                                    : MyColor.lightGray),
+                                                    borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                                                    border: Border.all(
+                                                        color: MyUtils.getOptionBorderColor(
+                                                            selectedOptionId:reviewItem.selectedOptionId.toString(),
+                                                            isAnswer: reviewOptionItem.isAnswer.toString(),
+                                                            isValidAnswer: reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex),
+                                                            isWrong: reviewItem.selectedOptionId.toString() == reviewItem.id.toString()),
+                                                        width: .8),
+                                                    color:MyUtils.getOptionReviewOptionBGColor(
+                                                        selectedOptionId:reviewItem.selectedOptionId.toString(),
+                                                        isAnswer: reviewOptionItem.isAnswer.toString(),
+                                                        isValidAnswer: reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex),
+                                                        isWrong: reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString()
+                                                    )),
                                                 child: Row(
                                                   children: [
                                                     Expanded(

@@ -35,7 +35,7 @@ class CustomCategoryAppBar extends StatelessWidget implements PreferredSizeWidge
           toolbarHeight: Dimensions.space70,
           elevation: .1,
           shape: const ContinuousRectangleBorder(
-              borderRadius: BorderRadius.vertical(
+            borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(Dimensions.space25),
           )),
           actions: children,

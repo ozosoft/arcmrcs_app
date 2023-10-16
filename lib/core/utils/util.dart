@@ -93,4 +93,86 @@ class MyUtils {
       }
     }
   }
+
+
+  static Color getOptionReviewOptionBGColor({
+    required String selectedOptionId,
+    required String isAnswer,
+    required bool isValidAnswer,
+    required bool isWrong
+  }) {
+
+    print("selected optionId"+selectedOptionId.toString());
+    print("isAnswer"+isAnswer.toString());
+    print("is valid answer"+isValidAnswer.toString());
+    print("is wrong : "+isWrong.toString());
+
+    if (selectedOptionId.isEmpty) {
+      return MyColor.colorWhite;
+    }
+
+    if (isAnswer == '1' && isValidAnswer) {
+      return MyColor.rightAnswerbgColor;
+    }
+
+    if (isWrong) {
+      return MyColor.wrongAnsColor;
+    }
+
+    if(isAnswer == '1'){
+      return MyColor.rightAnswerbgColor;
+    }
+
+    return MyColor.colorWhite;
+  }
+
+  static Color getOptionBorderColor({
+    required String selectedOptionId,
+    required String isAnswer,
+    required bool isValidAnswer,
+    required bool isWrong
+  }) {
+
+    print(selectedOptionId.toString());
+    print(isAnswer.toString());
+    print(isValidAnswer.toString());
+    print(isWrong.toString());
+
+    if (selectedOptionId.isEmpty) {
+      return  MyColor.borderColor.withOpacity(.5);
+    }
+
+    if (isAnswer == '1' && isValidAnswer) {
+      return MyColor.transparentColor;
+    }
+
+    if (isWrong) {
+      return MyColor.transparentColor;
+    }
+
+    return MyColor.borderColor.withOpacity(.5);
+  }
+
+  dynamic getBoxShadow({
+    required String selectedOptionId,
+    required String isAnswer,
+    required bool isValidAnswer,
+    required bool isWrong
+  }) {
+
+    if (selectedOptionId.isEmpty) {
+      return  MyUtils.getCardShadow();
+    }
+
+    if (isValidAnswer) {
+      return null;
+    }
+
+    if (isWrong) {
+      return null;
+    }
+
+    return MyUtils.getCardShadow();
+  }
+
 }

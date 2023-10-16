@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_images.dart';
@@ -40,45 +41,35 @@ class _FunNLearnResultBodySectionState extends State<FunNLearnResultBodySection>
               children: [
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
+                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space10, start: Dimensions.space8, end: Dimensions.space8),
                   child: controller.appreciation == "Failed"
-                      ? SvgPicture.asset(
-                          MyImages.victory,
-                          fit: BoxFit.cover,
-                          colorFilter: const ColorFilter.mode(Colors.grey, BlendMode.srcIn),
-                        )
-                      : SvgPicture.asset(
-                          MyImages.victory,
-                          fit: BoxFit.cover,
-                        ),
-                ),
-                Align(
-                  alignment: Alignment.center,
-                  child: Container(
-                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space100),
-                    child: Column(
-                      children: [
-                        Text(
-                          controller.appreciation,
-                          textAlign: TextAlign.center,
-                          style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
-                        ),
-                        const SizedBox(
-                          height: Dimensions.space10,
-                        ),
-                        Text(
-                          controller.appreciation == "Failed" ? MyStrings.betterLuckNextTime.tr : MyStrings.victory.tr,
-                          textAlign: TextAlign.center,
-                          style: regularOverLarge.copyWith(color: MyColor.colorQuizBodyText),
-                        ),
-                      ],
-                    ),
-                  ),
+                      ?Lottie.asset(MyImages.failedLottie,height: 200,width: 200,repeat: false,reverse: false)
+                      : Lottie.asset(MyImages.successLottie,height: 200,width: 200,repeat: false,reverse: false)
                 ),
               ],
             ),
+            Align(
+              alignment: Alignment.center,
+              child:Column(
+                children: [
+                  Text(
+                    controller.appreciation,
+                    textAlign: TextAlign.center,
+                    style: semiBoldOverLarge.copyWith(fontSize: Dimensions.space30),
+                  ),
+                  const SizedBox(
+                    height: Dimensions.space10,
+                  ),
+                  Text(
+                    controller.appreciation == "Failed" ? MyStrings.betterLuckNextTime.tr : MyStrings.victory.tr,
+                    textAlign: TextAlign.center,
+                    style: regularDefault.copyWith(color: MyColor.colorQuizBodyText,fontSize: Dimensions.fontMediumLarge),
+                  ),
+                ],
+              ),
+            ),
             const SizedBox(
-              height: Dimensions.space12,
+              height: Dimensions.space18,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

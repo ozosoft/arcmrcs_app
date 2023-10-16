@@ -13,15 +13,15 @@ import '../../../components/app-bar/custom_category_appbar.dart';
 import '../../../components/no_data.dart';
 import 'widgets/sub_category_list_card_widget.dart';
 
-class SubCategoriesCardScreen extends StatefulWidget {
+class SubCategoriesScreen extends StatefulWidget {
   final String title;
-  const SubCategoriesCardScreen({super.key, required this.title});
+  const SubCategoriesScreen({super.key, required this.title});
 
   @override
-  State<SubCategoriesCardScreen> createState() => _SubCategoriesCardScreenState();
+  State<SubCategoriesScreen> createState() => _SubCategoriesScreenState();
 }
 
-class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
+class _SubCategoriesScreenState extends State<SubCategoriesScreen> {
   String title = "";
   String subCategoryId = "";
   AdmobHelper admobHelper = AdmobHelper();
@@ -40,9 +40,10 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.getdata(subCategoryId);
     });
+
   }
 
-  bool iscardexpand = false;
+  bool isCardExpand = false;
 
   @override
   Widget build(BuildContext context) {
@@ -51,39 +52,39 @@ class _SubCategoriesCardScreenState extends State<SubCategoriesCardScreen> {
         appBar: CustomCategoryAppBar(
           title: title,
         ),
-        body: controller.loader
-            ? const CustomLoader()
-            : controller.subCategoriesList.isEmpty
-                ? NoDataWidget(
-                    messages: MyStrings.noSubCategoryFound.tr,
-                  )
-                : RefreshIndicator(
-                    color: MyColor.primaryColor,
-                    onRefresh: () async {
-                      controller.getdata(subCategoryId);
-                    },
-                    child: ListView.builder(
-                        physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
-                        itemCount: controller.subCategoriesList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          var categoryItem = controller.subCategoriesList[index];
-                          return SubCategoryListTileCardWidget(
-                            controller: controller,
-                            categoryData: categoryItem,
-                            onTap: () {
-                              admobHelper.showInterstitialAd();
-                              controller.changeExpandIndex(index);
-                            },
-                            title: categoryItem.name.toString(),
-                            image: UrlContainer.subCategoriesImage + categoryItem.image.toString(),
-                            fromViewAll: true,
-                            subCategoryId: subCategoryId,
-                            isExpand: index == controller.expandIndex,
-                            index: index,
-                          );
-                        }),
-                  ),
+        body: controller.loader ?
+        const CustomLoader() :
+        controller.subCategoriesList.isEmpty ?
+        NoDataWidget(
+          messages: MyStrings.noSubCategoryFound.tr,
+        )
+        : RefreshIndicator(
+            color: MyColor.primaryColor,
+            onRefresh: () async {
+              controller.getdata(subCategoryId);
+            },
+            child: ListView.builder(
+              physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+              padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
+              itemCount: controller.subCategoriesList.length,
+              itemBuilder: (BuildContext context, int index) {
+                var categoryItem = controller.subCategoriesList[index];
+                return SubCategoryListTileCardWidget(
+                  controller: controller,
+                  categoryData: categoryItem,
+                  onTap: () {
+                    admobHelper.showInterstitialAd();
+                    controller.changeExpandIndex(index);
+                  },
+                  title: categoryItem.name.toString(),
+                  image: UrlContainer.subCategoriesImage + categoryItem.image.toString(),
+                  fromViewAll: true,
+                  subCategoryId: subCategoryId,
+                  isExpand: index == controller.expandIndex,
+                  index: index,
+                );
+              }),
+          ),
       ),
     );
   }

@@ -25,10 +25,10 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GuessTheWordRepo(apiClient: Get.find()));
-    final controller = Get.put(GuessThewordController(gessTheWordRepo: Get.find()));
+    final controller = Get.put(GuessTheWordController(guessTheWordRepo: Get.find()));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getAllcataroy();
+      controller.getAllCategory();
     });
   }
 
@@ -36,7 +36,7 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomCategoryAppBar(title: MyStrings.allCategory.tr),
-      body: GetBuilder<GuessThewordController>(builder: (controller) {
+      body: GetBuilder<GuessTheWordController>(builder: (controller) {
         return controller.isLoading
             ? const CustomLoader()
             : controller.categoryList.isEmpty
@@ -46,7 +46,7 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
                 : RefreshIndicator(
                     color: MyColor.primaryColor,
                     onRefresh: () async {
-                        controller.getAllcataroy();
+                        controller.getAllCategory();
                     },
                     child: Padding(
                       padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),

@@ -63,8 +63,12 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
   @override
   void dispose() {
     super.dispose();
+    try{
+      _streamDuration.dispose();
+    } catch(e){
+      debugPrint(e.toString());
+    }
 
-    _streamDuration.dispose();
   }
 
   @override
@@ -285,8 +289,7 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                                         );
                                                       }),
                                                   const SizedBox(height: Dimensions.space25),
-                                                  // LifeLinesWidget(questionIndex: questionsIndex),
-                                                  const SizedBox(height: Dimensions.space25),
+                                                  // LifeLinesWidget(questionIndex: questionsIndex)
                                                 ],
                                               ),
                                             ),
@@ -303,7 +306,6 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                       alignment: Alignment.topRight,
                                       child: SlideCountdownSeparated(
                                         streamDuration: _streamDuration,
-                                        // streamDuration: _streamDuration ?? StreamDuration(Duration.zero),
                                         width: 40,
                                         height: 40,
                                         separatorType: SeparatorType.symbol,
@@ -336,120 +338,7 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                       ),
                                     ),
                                   ),
-                                  Positioned(
-                                    bottom: 0,
-                                    left: 0,
-                                    right: 0,
-                                    child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space10),
-                                        child: Row(
-                                          crossAxisAlignment: CrossAxisAlignment.center,
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child: Row(
-                                                crossAxisAlignment: CrossAxisAlignment.center,
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                children: [
-                                                  Padding(
-                                                    padding: const EdgeInsetsDirectional.only(start: Dimensions.space5),
-                                                    child: Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Text(
-                                                          "${controller.selectedAnswerId.length} ${MyStrings.attempted.tr}",
-                                                          style: regularMediumLarge.copyWith(color: MyColor.colorDarkGrey),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: Dimensions.space6,
-                                                        ),
-                                                        Text(
-                                                          "${controller.examQuestionsList.length - controller.selectedAnswerId.length} ${MyStrings.unAttempted.tr}",
-                                                          style: regularMediumLarge.copyWith(color: MyColor.colorDarkGrey),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: RoundedButton(
-                                                  horizontalPadding: Dimensions.space5,
-                                                  text: MyStrings.submit.tr,
-                                                  color: MyColor.primaryColor,
-                                                  press: () {
-                                                    debugPrint("Exam Finished button");
-                                                    _streamDuration.pause();
 
-                                                    CustomAlertDialog(
-                                                        borderRadius: 10,
-                                                        child: Column(
-                                                          children: [
-                                                            const SizedBox(
-                                                              height: 20,
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(Dimensions.space10),
-                                                              child: Column(
-                                                                children: [
-                                                                  Text(
-                                                                    MyStrings.areYouSureYouWantToLeaveExamRoom.tr,
-                                                                    textAlign: TextAlign.center,
-                                                                    style: regularDefault.copyWith(),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                            const SizedBox(
-                                                              height: 20,
-                                                            ),
-                                                            Container(
-                                                              width: double.infinity,
-                                                              height: 1,
-                                                              color: MyColor.textSecondColor.withOpacity(0.3),
-                                                            ),
-                                                            Padding(
-                                                              padding: const EdgeInsets.all(Dimensions.space10),
-                                                              child: Row(
-                                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                                children: [
-                                                                  TextButton(
-                                                                    onPressed: () {
-                                                                      Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                                                                    },
-                                                                    child: Text(
-                                                                      MyStrings.cancel.tr,
-                                                                      style: regularLarge,
-                                                                    ),
-                                                                  ),
-                                                                  TextButton(
-                                                                    style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                                                                    onPressed: () async {
-                                                                      Get.back();
-                                                                      controller.submitAnswer();
-                                                                    },
-                                                                    child: Text(
-                                                                      MyStrings.yes.tr,
-                                                                      style: regularLarge.copyWith(color: MyColor.colorWhite),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        )).customAlertDialog(context);
-                                                  }),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
 
                                   //Load bar
                                   if (controller.submitLoading == true) ...[
@@ -486,6 +375,114 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                            
                           ],
                         ),
+          bottomNavigationBar:  Container(
+            height: 80,
+            padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10, vertical: Dimensions.space5),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(start: Dimensions.space5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "${controller.selectedAnswerId.length} ${MyStrings.attempted.tr}",
+                              style: regularMediumLarge.copyWith(color: MyColor.colorDarkGrey),
+                            ),
+                            const SizedBox(
+                              height: Dimensions.space6,
+                            ),
+                            Text(
+                              "${controller.examQuestionsList.length - controller.selectedAnswerId.length} ${MyStrings.unAttempted.tr}",
+                              style: regularMediumLarge.copyWith(color: MyColor.colorDarkGrey),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: RoundedButton(
+                      horizontalPadding: Dimensions.space5,
+                      text: MyStrings.submit.tr,
+                      color: MyColor.primaryColor,
+                      press: () {
+                        debugPrint("Exam Finished button");
+                        _streamDuration.pause();
+
+                        CustomAlertDialog(
+                            borderRadius: 10,
+                            child: Column(
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(Dimensions.space10),
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        MyStrings.areYouSureYouWantToLeaveExamRoom.tr,
+                                        textAlign: TextAlign.center,
+                                        style: regularDefault.copyWith(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  height: 1,
+                                  color: MyColor.textSecondColor.withOpacity(0.3),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(Dimensions.space10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
+                                        },
+                                        child: Text(
+                                          MyStrings.cancel.tr,
+                                          style: regularLarge,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
+                                        onPressed: () async {
+                                          Get.back();
+                                          controller.submitAnswer();
+                                        },
+                                        child: Text(
+                                          MyStrings.yes.tr,
+                                          style: regularLarge.copyWith(color: MyColor.colorWhite),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            )).customAlertDialog(context);
+                      }),
+                ),
+              ],
+            ),
+          ),
             ));
   }
 }

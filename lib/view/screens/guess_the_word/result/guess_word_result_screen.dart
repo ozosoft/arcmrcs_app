@@ -36,7 +36,7 @@ class _GuessWordResultScreenState extends State<GuessWordResultScreen> {
         body: SingleChildScrollView(
           child: Padding(
             padding: Dimensions.screenPaddingHV,
-            child: GetBuilder<GuessThewordController>(builder: (controller) {
+            child: GetBuilder<GuessTheWordController>(builder: (controller) {
               return controller.isLoading ? const CustomLoader() : const GuessResultBody();
             }),
           ),

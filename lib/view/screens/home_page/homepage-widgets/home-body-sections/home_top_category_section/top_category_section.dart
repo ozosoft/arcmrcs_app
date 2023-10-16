@@ -100,11 +100,37 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                   ] else ...[
                     GetBuilder<SubCategoriesController>(
                       builder: (controllers) {
-                        return GridView.builder(
+                        return 1== 1?
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(),
+                            child: Row(
+                              children: List.generate(
+                                controller.categorylist.length, (index) {
+                                return InkWell(
+                                  onTap: () {
+                                    Get.toNamed(
+                                      RouteHelper.subCategories,
+                                      arguments: [controller.categorylist[index].name.toString(), controller.categorylist[index].id.toString()],
+                                    );
+                                    controllers.changeExpandIndex(index);
+                                  },
+                                  child: CustomTopCategoryCard(
+                                    index: index,
+                                    title: controller.categorylist[index].name ?? '',
+                                    questionsQuantaty: controller.categorylist[index].questionsCount ?? '',
+                                    image: UrlContainer.dashBoardCategoryImage + controller.categorylist[index].image.toString(),
+                                  ),
+                                );
+                              }),
+                            ),
+                          ) :
+
+                          GridView.builder(
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, childAspectRatio: context.width > 600 ? 1 : .7),
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: controller.categorylist.length,
+                          itemCount: controller.categorylist.length - 3,
                           itemBuilder: (BuildContext context, int index) {
                             return InkWell(
                               onTap: () {
@@ -116,8 +142,8 @@ class _TopCategorySectionState extends State<TopCategorySection> {
                               },
                               child: CustomTopCategoryCard(
                                 index: index,
-                                title: controller.categorylist[index].name.toString(),
-                                questionsQuantaty: controller.categorylist[index].questionsCount.toString(),
+                                title: controller.categorylist[index].name ?? '',
+                                questionsQuantaty: controller.categorylist[index].questionsCount ?? '',
                                 image: UrlContainer.dashBoardCategoryImage + controller.categorylist[index].image.toString(),
                               ),
                             );

@@ -28,7 +28,7 @@ class _QuizContestReviewAnswerScreenState extends State<QuizContestReviewAnswerS
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
-                  child: QuizBannerAdsWidget(),
+                 // child: QuizBannerAdsWidget(),
                 ),
               ),
             ),

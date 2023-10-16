@@ -140,7 +140,7 @@ class RouteHelper {
     GetPage(name: resetPassword, page: () => const ResetPasswordScreen()),
     GetPage(name: bottomNavBarScreen, page: () => const BottomNavigationBarScreen()),
 
-    GetPage(name: subCategories, page: () => const SubCategoriesCardScreen(title: "")),
+    GetPage(name: subCategories, page: () => const SubCategoriesScreen(title: "")),
     GetPage(name: allCategories, page: () => const AllCategoriesScreen()),
     GetPage(name: quizQuestionsScreen, page: () => const QuizQuestionsScreen()),
     GetPage(name: quizResultScreen, page: () => const QuizResultScreen()),
@@ -158,7 +158,7 @@ class RouteHelper {
     GetPage(name: coinStroeScreen, page: () => const CoinStoreScreen()),
     GetPage(name: coinHistoryScreen, page: () => const CoinHistoryScreen()),
     GetPage(name: examZoneScreen, page: () => const ExamZoneScreen()),
-    GetPage(name: examZoneCategoryScreen, page: () => const ExamZoneCategoryScreen()),
+    GetPage(name: examZoneCategoryScreen, page: () => const ExamZoneSection()),
     GetPage(name: leaderBoardScreen, page: () => const LeaderBoardScreen()),
 
     // guess the word

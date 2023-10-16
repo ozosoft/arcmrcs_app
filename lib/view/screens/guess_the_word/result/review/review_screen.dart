@@ -7,6 +7,7 @@ import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_review_result.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:get/get.dart';
+import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
 
 import '../../../../../core/utils/url_container.dart';
 import '../../../../components/app-bar/custom_category_appbar.dart';
@@ -57,7 +58,6 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // buttons
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,26 +76,27 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                               if (index < controller.guessThewordQuestionList.length - 1) // Check if not on the last page
                                 ...[
                                 InkWell(
-                                    onTap: () {
-                                      if (controller.reviewPageController.page!.toInt() < controller.guessThewordQuestionList.length) {
-                                        controller.reviewPageController.nextPage(
-                                          duration: const Duration(milliseconds: 500),
-                                          curve: Curves.easeInOut,
-                                        );
-                                      }
-                                    },
-                                    child: LevelCardButton(
-                                      text: MyStrings.next.tr,
-                                      hasIcon: false,
-                                      hasImage: false,
-                                      bgColor: MyColor.primaryColor,
-                                      hasbgColor: true,
-                                      borderColor: Colors.transparent,
-                                      height: Dimensions.space40 - 3,
-                                      hPadding: Dimensions.space15,
-                                      vPadding: Dimensions.space10,
-                                      hastextColor: true,
-                                    )),
+                                  onTap: () {
+                                    if (controller.reviewPageController.page!.toInt() < controller.guessThewordQuestionList.length) {
+                                      controller.reviewPageController.nextPage(
+                                        duration: const Duration(milliseconds: 500),
+                                        curve: Curves.easeInOut,
+                                      );
+                                    }
+                                  },
+                                  child: LevelCardButton(
+                                    text: MyStrings.next.tr,
+                                    hasIcon: false,
+                                    hasImage: false,
+                                    bgColor: MyColor.primaryColor,
+                                    hasbgColor: true,
+                                    borderColor: Colors.transparent,
+                                    height: Dimensions.space40 - 3,
+                                    hPadding: Dimensions.space15,
+                                    vPadding: Dimensions.space10,
+                                    hastextColor: true,
+                                  )
+                                ),
                               ]
                             ],
                           ),
@@ -108,33 +109,22 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                           ),
                           const SizedBox(height: Dimensions.space20),
                           // note: use  preloader or something like this
-                          controller.guessThewordQuestionList[index].image != null
-                              ? Container(
-                                  width: double.infinity,
-                                  margin: const EdgeInsetsDirectional.only(start: Dimensions.space8, end: Dimensions.space8),
-                                  decoration: BoxDecoration(
-                                    color: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(16),
-                                    border: Border.all(color: MyColor.borderColor.withOpacity(.2),width: .3)
-                                  ),
-                                  child: CachedNetworkImage(
-                                    imageUrl: '${UrlContainer.questionImagePath}/${controller.guessThewordQuestionList[index].image}',
-                                    fit: BoxFit.cover,
-                                    height: 220,
-                                    placeholder: (context, url) => const CustomLoader(isPagination: true),
-                                    imageBuilder: (context, imageProvider) {
-                                      return Container(
-                                          decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(14),
-                                        image: DecorationImage(
-                                          image: imageProvider,
-                                          fit: BoxFit.cover,
-                                        ),
-                                      ));
-                                    },
-                                  ),
-                                )
-                              : const SizedBox.shrink(),
+                          controller.guessThewordQuestionList[index].image != null ?
+                          Container(
+                              width: double.infinity,
+                              margin: const EdgeInsetsDirectional.only(start: Dimensions.space8, end: Dimensions.space8),
+                              decoration: BoxDecoration(
+                                color: Colors.transparent,
+                                borderRadius: BorderRadius.circular(16),
+                                border: Border.all(color: MyColor.borderColor.withOpacity(.2),width: .3)
+                              ),
+                              child: MyImageWidget(
+                                imageUrl: '${UrlContainer.questionImagePath}/${controller.guessThewordQuestionList[index].image}',
+                                height: 200,
+                                width: 200,
+                              ),
+                            )
+                          : const SizedBox.shrink(),
                           const SizedBox(height: Dimensions.space20),
                           Row(
                             children: [

@@ -5,11 +5,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/account/profile_controller.dart';
 import 'package:get/get.dart';
-import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
-
-import '../../../../data/controller/auth/logout/logout_controller.dart';
-import '../../../components/buttons/rounded_loading_button.dart';
 
 class ProfileDetailsSection extends StatefulWidget {
   const ProfileDetailsSection({super.key});
@@ -30,15 +26,18 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: Dimensions.space10),
-                  Text(
-                    MyStrings.profileDetails.tr,
-                    style: boldMediumLarge,
-                  ),
-                  const SizedBox(height: Dimensions.space10),
                   Container(
                     decoration: BoxDecoration(color: MyColor.colorWhite, borderRadius: BorderRadius.circular(Dimensions.space10)),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Padding(
+                          padding: const EdgeInsets.all( Dimensions.space16),
+                          child: Text(
+                            MyStrings.profileDetails.tr,
+                            style: boldMediumLarge,
+                          ),
+                        ),
                         ListTile(
                           title: Text(
                             MyStrings.fullname.tr,
@@ -52,7 +51,7 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
                             MyStrings.emailAddress.tr,
                             style: regularDefault.copyWith(color: MyColor.textColor),
                           ),
-                          subtitle: Text(controller.email.tr, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                          subtitle: Text(controller.emailController.text ,style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
                         ),
                         const Divider(height: Dimensions.space3),
                         ListTile(
@@ -76,18 +75,6 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
                   const SizedBox(
                     height: Dimensions.space20,
                   ),
-                  GetBuilder<LogoutController>(
-                    builder: (logoutController) => logoutController.loaderStarted
-                        ? const RoundedLoadingBtn()
-                        : RoundedButton(
-                            text: MyStrings.logout,
-                            press: () {
-                              logoutController.logout();
-                            },
-                          ),
-                  ),
-
-               const   SizedBox(height: Dimensions.space100,)
                 ],
               ),
       ),

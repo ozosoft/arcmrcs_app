@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_images.dart';
@@ -30,7 +31,6 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const CoinStoreScreen(),
-   
     const SettingsScreen(),
     const HomeScreen(),
     const LeaderBoardScreen(),
@@ -41,6 +41,9 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: WillPopWidget(
+        fromBottomNav: selectedIndex == 2? false : true,
+        nextRoute: selectedIndex == 2? "" :
+        RouteHelper.bottomNavBarScreen,
         child: Stack(
           children: [
             Center(

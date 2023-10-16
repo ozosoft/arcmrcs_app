@@ -18,7 +18,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/route/route.dart';
+import '../../../../environment.dart';
 import '../../../components/alert-dialog/custom_alert_dialog.dart';
+import '../../../components/dialog/warning_dialog.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';
 
@@ -65,58 +67,9 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                       )
                     : WillPopScope(
                         onWillPop: () async {
-                          CustomAlertDialog(
-                              borderRadius: 100,
-                              child: Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(Dimensions.space10),
-                                    child: Text(
-                                      MyStrings.areYouSureYouWantToLeaveThisQuiz.tr,
-                                      textAlign: TextAlign.center,
-                                      style: regularLarge.copyWith(color: MyColor.textSecondColor),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Container(
-                                    width: double.infinity,
-                                    height: 1,
-                                    color: MyColor.textSecondColor.withOpacity(0.3),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.all(Dimensions.space10),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                                          },
-                                          child: Text(
-                                            MyStrings.cancel.tr,
-                                            style: regularLarge,
-                                          ),
-                                        ),
-                                        TextButton(
-                                          style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                                          onPressed: () async {
-                                            Get.offAllNamed(RouteHelper.bottomNavBarScreen);
-                                          },
-                                          child: Text(
-                                            MyStrings.yes.tr,
-                                            style: regularLarge.copyWith(color: MyColor.colorWhite),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                ],
-                              )).customAlertDialog(context);
+                          const WarningAlertDialog().warningAlertDialog(context, () {
+                            Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+                          });
                           return false; // Disable back button if `start` is true
                         },
                         child: PageView.builder(
@@ -140,16 +93,20 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                       children: [
                                         Row(
                                           children: [
-                                            LevelCardButton(text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
+                                            LevelCardButton(isQuestionCount:true,text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
                                           ],
                                         ),
                                         const SizedBox(height: Dimensions.space25),
                                         if (controller.examQuestionsList[questionsIndex].image != null) ...[
                                           Container(
                                             width: double.infinity,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(Dimensions.defaultRadius)
+                                            ),
                                             padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
                                             child: MyImageWidget(
                                               boxFit: BoxFit.contain,
+                                              radius: Dimensions.defaultRadius,
                                               height: Get.width / 2,
                                               imageUrl: "${UrlContainer.quizContestQuestionsImage}/${controller.examQuestionsList[questionsIndex].image}",
                                             ),
@@ -215,12 +172,12 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
                                                                             : MyColor.wrongAnsColor
                                                                         : MyColor.transparentColor,
                                                                 borderRadius: BorderRadius.circular(Dimensions.space8),
-                                                                border: Border.all(color: MyColor.colorLightGrey)),
+                                                                border: Border.all(color:  controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty && controller.selectedOptionIndex == optionIndex ? Colors.transparent :  MyColor.colorLightGrey ,width: .8)),
                                                             child: Row(
                                                               children: [
                                                                 Expanded(
                                                                   child: Text(
-                                                                    " ${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()}",
+                                                                    "${Environment.isShowQuestionPrefix? "${MyStrings.questionPrefix[optionIndex]})" : ""} ${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()}",
                                                                     style: regularMediumLarge.copyWith(
                                                                         color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
                                                                             ? MyColor.textColor

@@ -11,6 +11,7 @@ import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
 import 'package:quiz_lab/data/model/quiz_contest/quiz_contest_questions_model.dart';
 import 'package:quiz_lab/data/model/quiz_contest/quiz_result_model.dart';
 import 'package:quiz_lab/data/repo/quiz_contest/quiz_contest_repo.dart';
+import 'package:quiz_lab/environment.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
@@ -165,7 +166,7 @@ class QuizContestQuestionsController extends GetxController {
     flipQuistions ? pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut) : null;
   }
 
-  int timerDuration = 20;
+  int timerDuration = Environment.battleQuizPerQuestionSecond;
   int countDownTimerIndex = -1;
   bool restartTimer = false;
   restartCountDownTimer(int questionIndex) {
@@ -225,13 +226,14 @@ class QuizContestQuestionsController extends GetxController {
     Map<String, dynamic> params = {};
 
     for (int i = 0; i < examQuestionsList.length; i++) {
-      String quizeId = examQuestionsList[i].id.toString();
+      String quizId = examQuestionsList[i].id.toString();
       String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
-      params['question_id[$i]'] = quizeId;
-      debugPrint('quize id: $quizeId');
-      params['option_$quizeId'] = selectedOptionId;
-      debugPrint("option_$quizeId");
+      params['question_id[$i]'] = quizId;
+      debugPrint('quize id: $quizId');
+      params['option_$quizId'] = selectedOptionId;
+      debugPrint("option_$quizId");
     }
+
     debugPrint(params['option_']);
     params['quizInfo_id'] = quizInfoID.toString();
     params['fifty_fifty'] = fifty_fifty;

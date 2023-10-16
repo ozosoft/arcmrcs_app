@@ -63,8 +63,8 @@ class _SubCategoryListTileCardWidgetState extends State<SubCategoryListTileCardW
                       const SizedBox(width: Dimensions.space20),
                       Container(
                         margin: const EdgeInsetsDirectional.only(end: Dimensions.space14, top: Dimensions.space10),
-                        width: Dimensions.space40,
-                        height: Dimensions.space40,
+                        width: Dimensions.space50,
+                        height: Dimensions.space50,
                         child: MyImageWidget(
                           imageUrl: widget.image,
                         ),
@@ -118,7 +118,7 @@ class _SubCategoryListTileCardWidgetState extends State<SubCategoryListTileCardW
                       height: 0.3,
                     ),
                   widget.fromViewAll
-                      ? SubCategoriesExpandedSection(
+                      ? SubCategoriesLabelSection(
                           controller: widget.controller!,
                           categoryindex: widget.index,
                           isExpand: widget.isExpand,

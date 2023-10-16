@@ -62,8 +62,8 @@ class _AllCategoryListTileCardWidgetState extends State<AllCategoryListTileCardW
                       const SizedBox(width: Dimensions.space20),
                       Container(
                         margin: const EdgeInsetsDirectional.only(end: Dimensions.space14, top: Dimensions.space10),
-                        width: Dimensions.space40,
-                        height: Dimensions.space40,
+                        width: Dimensions.space50,
+                        height: Dimensions.space50,
                         child: MyImageWidget(
                           imageUrl: widget.image,
                         ),
@@ -96,11 +96,6 @@ class _AllCategoryListTileCardWidgetState extends State<AllCategoryListTileCardW
                                         child: Center(child: Text("${widget.categoryData.subcategoriesCount} ${MyStrings.subcategory.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                       ),
                                     ],
-                                    CustomChipsWidget(
-                                      padding: Dimensions.space5,
-                                      right: Dimensions.space5,
-                                      child: Center(child: Text("${widget.categoryData.subcategoriesCount! == '0' ? widget.categoryData.quizInfos!.length : widget.categoryData.quizInfos!.where((element) => element.subcategory != null).length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                    ),
                                   ],
                                 ),
                               ),

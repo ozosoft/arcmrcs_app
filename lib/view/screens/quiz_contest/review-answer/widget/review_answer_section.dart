@@ -9,6 +9,7 @@ import 'package:get/get.dart';
 
 import '../../../../../core/utils/my_strings.dart';
 import '../../../../../core/utils/url_container.dart';
+import '../../../../../core/utils/util.dart';
 import '../../../../components/buttons/level_card_button.dart';
 import '../../../../components/custom_loader/custom_loader.dart';
 import '../../../../components/image_widget/my_image_widget.dart';
@@ -45,8 +46,21 @@ class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswer
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
+
+                                  Container(
+                                    padding: const EdgeInsets.all(Dimensions.space10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: MyColor.borderColor,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text('${questionsIndex + 1}/${controller.examQuestionsList.length}'),
+                                  ),
+
                                   if (questionsIndex < controller.examQuestionsList.length - 1) // Check if not on the last page
                                     ...[
                                     InkWell(
@@ -64,7 +78,8 @@ class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswer
                                           hasImage: false,
                                           bgColor: MyColor.primaryColor,
                                           hasbgColor: true,
-                                          height: Dimensions.space40,
+                                          height: Dimensions.space40-3,
+                                          borderColor: Colors.transparent,
                                           hastextColor: true,
                                         )),
                                   ]
@@ -99,15 +114,21 @@ class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswer
                                                 margin: const EdgeInsets.all(Dimensions.space8),
                                                 padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
                                                 decoration: BoxDecoration(
-                                                    color: reviewItem.selectedOptionId!.isEmpty
-                                                        ? MyColor.lightGray
-                                                        : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
-                                                            ? MyColor.rightAnswerbgColor
-                                                            : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
-                                                                ? MyColor.wrongAnsColor
-                                                                : reviewOptionItem.isAnswer.toString() == "1"
-                                                                    ? MyColor.rightAnswerbgColor
-                                                                    : MyColor.lightGray),
+                                                    borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                                                    border: Border.all(
+                                                        color: MyUtils.getOptionBorderColor(
+                                                            selectedOptionId:reviewItem.selectedOptionId.toString(),
+                                                            isAnswer: reviewOptionItem.isAnswer.toString(),
+                                                            isValidAnswer: reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex),
+                                                            isWrong: reviewItem.selectedOptionId.toString() == reviewItem.id.toString()),
+                                                        width: .8),
+                                                    color:MyUtils.getOptionReviewOptionBGColor(
+                                                        selectedOptionId:reviewItem.selectedOptionId.toString(),
+                                                        isAnswer: reviewOptionItem.isAnswer.toString(),
+                                                        isValidAnswer: reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex),
+                                                        isWrong: reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString()
+                                                    )
+                                                ),
                                                 child: Row(
                                                   children: [
                                                     Expanded(
@@ -117,12 +138,10 @@ class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswer
                                                             color: reviewItem.selectedOptionId!.isEmpty
                                                                 ? MyColor.colorBlack
                                                                 : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
-                                                                    ? MyColor.colorWhite
-                                                                    : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
-                                                                        ? MyColor.colorWhite
-                                                                        : reviewOptionItem.isAnswer.toString() == "1"
-                                                                            ? MyColor.colorWhite
-                                                                            : MyColor.colorBlack),
+                                                                ? MyColor.colorWhite
+                                                                : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
+                                                                ? MyColor.colorWhite
+                                                                : MyColor.colorBlack),
                                                       ),
                                                     ),
                                                     SizedBox(

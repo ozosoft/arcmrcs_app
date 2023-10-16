@@ -6,10 +6,13 @@ class Environment {
 
   // LOGIN AND REG PART
   static const int otpResendSecond = 120; //OTP RESEND second
+  static const int defaultQuizTime = 40;
   static const String defaultCountryCode = 'BD'; //Default Country Code
 
   // QUIZ SECTION
   static const int battleQuizPerQuestionSecond = 60; //Change Battle question sec
+
+  static const bool isShowQuestionPrefix = true;
 
   //APP ADS SETTINGS
 

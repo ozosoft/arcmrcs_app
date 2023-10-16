@@ -13,9 +13,12 @@ import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:quiz_lab/view/components/buttons/level_card_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
 import 'package:quiz_lab/view/components/no_data.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+import '../../../../environment.dart';
 
 class DailyQuizQuestionsScreen extends StatefulWidget {
   const DailyQuizQuestionsScreen({super.key});
@@ -32,7 +35,6 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
 
     DailyQuizQuestionsController controller = Get.put(DailyQuizQuestionsController(dailyQuizRepo: Get.find()));
 
-    // debugPrint("++++++++++===============this is id"+quizinfoID.toString());
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -76,7 +78,7 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                                         children: [
                                           Row(
                                             children: [
-                                              LevelCardButton(text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
+                                              LevelCardButton(isQuestionCount: true,text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
                                             ],
                                           ),
                                           const SizedBox(
@@ -84,107 +86,110 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                                           ),
                                           Container(
                                             width: double.infinity,
+                                            decoration:BoxDecoration(
+                                              borderRadius: BorderRadius.circular(Dimensions.defaultRadius)
+                                            ),
                                             padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
-                                            child: controller.examQuestionsList[questionsIndex].image != null
-                                                ? Image.network(
-                                                    UrlContainer.dailyQuizQuestionsImage + controller.examQuestionsList[questionsIndex].image,
-                                                    fit: BoxFit.cover,
-                                                  )
-                                                : const SizedBox(),
+                                            child: controller.examQuestionsList[questionsIndex].image != null ? MyImageWidget(
+                                              boxFit: BoxFit.contain,
+                                              radius: Dimensions.defaultRadius,
+                                              height: Get.width / 2,
+                                              imageUrl:  UrlContainer.dailyQuizQuestionsImage + controller.examQuestionsList[questionsIndex].image,)
+                                              : const SizedBox(),
                                           ),
                                           Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                           const SizedBox(height: Dimensions.space25),
                                           ListView.builder(
-                                              physics: const NeverScrollableScrollPhysics(),
-                                              shrinkWrap: true,
-                                              itemCount: controller.examQuestionsList[questionsIndex].options!.length,
-                                              itemBuilder: (BuildContext context, int optionIndex) {
-                                                return Column(
-                                                  children: [
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              if (controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
-                                                                return;
-                                                              }
+                                            physics: const NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            itemCount: controller.examQuestionsList[questionsIndex].options!.length,
+                                            itemBuilder: (BuildContext context, int optionIndex) {
+                                              return Column(
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Expanded(
+                                                        child: InkWell(
+                                                          onTap: () async {
+                                                            if (controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty) {
+                                                              return;
+                                                            }
 
-                                                              controller.selectAnswer(optionIndex, questionsIndex);
+                                                            controller.selectAnswer(optionIndex, questionsIndex);
 
-                                                              controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                  ? null
-                                                                  : controller.selectedOptionIndex == optionIndex
-                                                                      ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                          ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
-                                                                          : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
-                                                                      : null;
+                                                            controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                ? null
+                                                                : controller.selectedOptionIndex == optionIndex
+                                                                    ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                        ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3'))
+                                                                        : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'))
+                                                                    : null;
 
-                                                              await Future.delayed(const Duration(seconds: 3));
+                                                            await Future.delayed(const Duration(seconds: 3));
 
-                                                              if (controller.pageController.page! < controller.examQuestionsList.length - 1) {
-                                                                controller.pageController.nextPage(
-                                                                  duration: const Duration(milliseconds: 500),
-                                                                  curve: Curves.easeInOut,
-                                                                );
-                                                              }
-                                                              if (controller.selectedOptionIndex.toString() == "0" && controller.selectedOptionIndex.toString() == "1") {
-                                                                controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
-                                                              }
-                                                              controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
+                                                            if (controller.pageController.page! < controller.examQuestionsList.length - 1) {
+                                                              controller.pageController.nextPage(
+                                                                duration: const Duration(milliseconds: 500),
+                                                                curve: Curves.easeInOut,
+                                                              );
+                                                            }
+                                                            if (controller.selectedOptionIndex.toString() == "0" && controller.selectedOptionIndex.toString() == "1") {
+                                                              controller.selectedQuestionsId.add(controller.examQuestionsList[questionsIndex].id);
+                                                            }
+                                                            controller.selectedAnswerId.add(controller.examQuestionsList[questionsIndex].selectedOptionId);
 
-                                                              if (questionsIndex == controller.examQuestionsList.length - 1) {
-                                                                controller.submitAnswer();
-                                                              }
-                                                            },
-                                                            child: Container(
-                                                              margin: const EdgeInsets.all(Dimensions.space8),
-                                                              padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
-                                                              decoration: BoxDecoration(
-                                                                  color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                      ? MyColor.transparentColor
+                                                            if (questionsIndex == controller.examQuestionsList.length - 1) {
+                                                              controller.submitAnswer();
+                                                            }
+                                                          },
+                                                          child: Container(
+                                                            margin: const EdgeInsets.all(Dimensions.space8),
+                                                            padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
+                                                            decoration: BoxDecoration(
+                                                                color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                    ? MyColor.transparentColor
+                                                                    : controller.selectedOptionIndex == optionIndex
+                                                                        ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                            ? MyColor.rightAnswerbgColor
+                                                                            : MyColor.wrongAnsColor
+                                                                        : MyColor.transparentColor,
+                                                                borderRadius: BorderRadius.circular(Dimensions.space8),
+                                                                border: Border.all(color:  controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty && controller.selectedOptionIndex == optionIndex ? Colors.transparent :  MyColor.colorLightGrey ,width: .8)),
+                                                            child: Row(
+                                                              children: [
+                                                                Expanded(
+                                                                  child: Text(
+                                                                    "${Environment.isShowQuestionPrefix? "${MyStrings.questionPrefix[optionIndex]})" : ""} ${controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString()}",
+                                                                    style: regularMediumLarge.copyWith(
+                                                                        color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                            ? MyColor.textColor
+                                                                            : controller.selectedOptionIndex == optionIndex
+                                                                                ? controller.isValidAnswer(questionsIndex, optionIndex)
+                                                                                    ? MyColor.colorWhite
+                                                                                    : MyColor.colorWhite
+                                                                                : MyColor.textColor),
+                                                                  ),
+                                                                ),
+                                                                SizedBox(
+                                                                  height: Dimensions.space10,
+                                                                  child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
+                                                                      ? const SizedBox()
                                                                       : controller.selectedOptionIndex == optionIndex
-                                                                          ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                              ? MyColor.rightAnswerbgColor
-                                                                              : MyColor.wrongAnsColor
-                                                                          : MyColor.transparentColor,
-                                                                  borderRadius: BorderRadius.circular(Dimensions.space8),
-                                                                  border: Border.all(color: MyColor.colorLightGrey)),
-                                                              child: Row(
-                                                                children: [
-                                                                  const SizedBox(width: Dimensions.space8),
-                                                                  Expanded(
-                                                                    child: Text(
-                                                                      controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString(),
-                                                                      style: regularMediumLarge.copyWith(
-                                                                          color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                              ? MyColor.textColor
-                                                                              : controller.selectedOptionIndex == optionIndex
-                                                                                  ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                                      ? MyColor.colorWhite
-                                                                                      : MyColor.colorWhite
-                                                                                  : MyColor.textColor),
-                                                                    ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: Dimensions.space10,
-                                                                    child: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                                        ? const SizedBox()
-                                                                        : controller.selectedOptionIndex == optionIndex
-                                                                            ? SvgPicture.asset(controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG, fit: BoxFit.cover)
-                                                                            : const SizedBox(),
-                                                                  ),
-                                                                ],
-                                                              ),
+                                                                          ? SvgPicture.asset(controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG, fit: BoxFit.cover)
+                                                                          : const SizedBox(),
+                                                                ),
+                                                              ],
                                                             ),
                                                           ),
                                                         ),
-                                                        controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent.tr, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
-                                                      ],
-                                                    ),
-                                                  ],
-                                                );
-                                              }),
+                                                      ),
+                                                      controller.audienceVote == true && controller.audienceVoteIndex == questionsIndex ? Text(MyStrings.fifteenPercent.tr, style: semiBoldExtraLarge.copyWith(color: MyColor.colorQuizBodyAudText)) : const SizedBox()
+                                                    ],
+                                                  ),
+                                                ],
+                                              );
+                                            }
+                                          ),
                                           const SizedBox(height: Dimensions.space25),
                                           // DailyQuizLifeLinesWidget(questionIndex: questionsIndex),
                                           const SizedBox(height: Dimensions.space25),

@@ -37,7 +37,7 @@ class QuizQuestionsController extends GetxController {
 
   int currentQuestionIndex = 0;
 
-  bool loading = true;
+  bool isLoading = true;
 
   int? quizInfoID;
   late int questionsIndex;
@@ -59,8 +59,8 @@ class QuizQuestionsController extends GetxController {
 
   String successmessage = "";
 
-  void getdata(String subcategoryId) async {
-    loading = true;
+  void getData(String subcategoryId) async {
+    isLoading = true;
     audienceVote = false;
     showQuestions = false;
     update();
@@ -92,7 +92,7 @@ class QuizQuestionsController extends GetxController {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    loading = false;
+    isLoading = false;
     update();
   }
 
@@ -167,7 +167,7 @@ class QuizQuestionsController extends GetxController {
     update();
   }
 
-  bool fiftyFifty = false;
+  bool isFiftyFiftyAlreadyUsed = false;
   int fiftyFiftyIndex = -1;
 
   makeFiftyFifty(int index) {
@@ -183,8 +183,8 @@ class QuizQuestionsController extends GetxController {
     update();
 
     fiftyFiftyIndex = fiftyFiftyIndex;
-    fiftyFifty = !fiftyFifty;
-    if (fiftyFifty == true) {
+    isFiftyFiftyAlreadyUsed = !isFiftyFiftyAlreadyUsed;
+    if (isFiftyFiftyAlreadyUsed == true) {
       fifty_fifty = "1";
     }
     update();

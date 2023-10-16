@@ -25,14 +25,12 @@ class LeaderBoardScreen extends StatelessWidget {
               fit: BoxFit.cover, // Make the image cover the full width
             ),
           ),
-
-          /// Background image
           const SingleChildScrollView(
+            padding: EdgeInsets.zero,
             physics: BouncingScrollPhysics(),
             child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: Dimensions.space15,
-                vertical: Dimensions.space50,
+              padding: EdgeInsets.only(
+                top: Dimensions.space35,
               ),
               child: BackGroundWithRankCard(), // Your existing content
             ),

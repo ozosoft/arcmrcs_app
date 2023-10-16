@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
 
                           if (controller.examStatus == '1') ...[
-                            const ExamZoneCategoryScreen(),
+                            const ExamZoneSection(),
                           ],
 
                           const PlayDiffrentQuizes(),

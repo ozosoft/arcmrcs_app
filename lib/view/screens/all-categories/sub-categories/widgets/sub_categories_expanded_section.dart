@@ -12,12 +12,12 @@ import 'package:get/get.dart';
 import '../../../../../core/utils/my_strings.dart';
 import '../../../../../data/controller/sub_categories/sub_categories_controller.dart';
 
-class SubCategoriesExpandedSection extends StatelessWidget {
+class SubCategoriesLabelSection extends StatelessWidget {
   final int categoryindex;
   final bool isExpand;
   final String title;
   final SubCategoriesController? controller;
-  const SubCategoriesExpandedSection({super.key, required this.categoryindex, required this.isExpand, required this.title, this.controller});
+  const SubCategoriesLabelSection({super.key, required this.categoryindex, required this.isExpand, required this.title, this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -37,51 +37,51 @@ class SubCategoriesExpandedSection extends StatelessWidget {
                 itemCount: controller!.subCategoriesList[categoryindex].quizInfos!.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
-                      child: InkWell(
-                        onTap: () {
-                          if (controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.unlock) {
-                            Get.toNamed(RouteHelper.quizQuestionsScreen, arguments: [title, controller!.subCategoriesList[categoryindex].quizInfos![index].id]);
-                          }
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: Dimensions.space8, vertical: Dimensions.space8),
-                          decoration: BoxDecoration(
-                              color: controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
-                                  ? MyColor.lockedLevel
-                                  : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
-                                      ? MyColor.completedlevel
-                                      : MyColor.unlockedLevel,
-                              borderRadius: BorderRadius.circular(Dimensions.space7),
-                              border: Border.all(color: controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
-                                  ? MyImages.lockLevelSVG
-                                  : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
-                                      ? MyImages.levelGreenTikSVG
-                                      : MyImages.unlockSVG),
-                              const SizedBox(width: Dimensions.space5),
-                              Expanded(
-                                child: Text(
-                                  controller!.subCategoriesList[categoryindex].quizInfos![index].level!.title.toString(),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: regularLarge.copyWith(
-                                    color: controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
-                                        ? MyColor.textColor
-                                        : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
-                                            ? MyColor.completedlevelTEXT
-                                            : MyColor.colorBlack,
-                                  ),
+                    padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
+                    child: InkWell(
+                      onTap: () {
+                        if (controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.unlock) {
+                          Get.toNamed(RouteHelper.quizQuestionsScreen, arguments: [title, controller!.subCategoriesList[categoryindex].quizInfos![index].id]);
+                        }
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space8, vertical: Dimensions.space8),
+                        decoration: BoxDecoration(
+                            color: controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
+                                ? MyColor.lockedLevel
+                                : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                    ? MyColor.completedlevel
+                                    : MyColor.unlockedLevel,
+                            borderRadius: BorderRadius.circular(Dimensions.space7),
+                            border: Border.all(color: controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SvgPicture.asset(controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
+                                ? MyImages.lockLevelSVG
+                                : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                    ? MyImages.levelGreenTikSVG
+                                    : MyImages.unlockSVG),
+                            const SizedBox(width: Dimensions.space5),
+                            Expanded(
+                              child: Text(
+                                controller!.subCategoriesList[categoryindex].quizInfos![index].level!.title.toString(),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: regularLarge.copyWith(
+                                  color: controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
+                                      ? MyColor.textColor
+                                      : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                          ? MyColor.completedlevelTEXT
+                                          : MyColor.colorBlack,
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ));
+                      ),
+                    ));
                 }),
           ),
         ],

@@ -15,14 +15,14 @@ import '../../../../../components/bottom-sheet/custom_bottom_sheet_plus.dart';
 import '../../../../../components/chips/custom_chips_widget.dart';
 import '../../../../../components/image_widget/my_image_widget.dart';
 
-class ExamZoneCategoryScreen extends StatefulWidget {
-  const ExamZoneCategoryScreen({super.key});
+class ExamZoneSection extends StatefulWidget {
+  const ExamZoneSection({super.key});
 
   @override
-  State<ExamZoneCategoryScreen> createState() => _ExamZoneCategoryScreenState();
+  State<ExamZoneSection> createState() => _ExamZoneSectionState();
 }
 
-class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
+class _ExamZoneSectionState extends State<ExamZoneSection> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(
@@ -99,7 +99,7 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                     padding: const EdgeInsets.all(Dimensions.space12),
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         //Image
                                         if (item.image.toString() == "null") ...[
@@ -123,78 +123,83 @@ class _ExamZoneCategoryScreenState extends State<ExamZoneCategoryScreen> {
                                         ],
                                         //Contents
                                         Expanded(
-                                          child: Container(
-                                            padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space20),
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text(
-                                                  item.title.toString().tr,
-                                                  style: semiBoldMediumLarge,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                item.title.toString().tr,
+                                                style: semiBoldMediumLarge,
+                                                maxLines: 1,
+                                              ),
+                                              const SizedBox(height: Dimensions.space8),
+                                              Text(
+                                                "${item.description.toString().tr} ",
+                                                maxLines: 3,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: regularDefault.copyWith(color: MyColor.textSecondColor),
+                                              ),
+                                              const SizedBox(height: Dimensions.space10),
+                                              Text(
+                                                "${MyStrings.examStartTime.tr} ${item.examStartTime.toString().tr}",
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: regularDefault.copyWith(
+                                                  fontSize: Dimensions.fontSmall,
+                                                  color: MyColor.colorlighterGrey,
                                                 ),
-                                                const SizedBox(height: Dimensions.space8),
-                                                Text(
-                                                  "${item.description.toString().tr} ",
-                                                  maxLines: 3,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: regularDefault.copyWith(color: MyColor.textSecondColor),
+                                              ),
+                                              const SizedBox(
+                                                height: Dimensions.space3,
+                                              ),
+                                              Text(
+                                                "${MyStrings.total.tr} ${item.examDuration.toString()} ${MyStrings.min.tr} ",
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: regularDefault.copyWith(
+                                                  fontSize: Dimensions.fontSmall,
+                                                  color: MyColor.colorlighterGrey,
                                                 ),
-                                                const SizedBox(height: Dimensions.space10),
-                                                Text(
-                                                  "${MyStrings.examStartTime.tr} ${item.examStartTime.toString().tr}",
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: regularDefault.copyWith(
-                                                    fontSize: Dimensions.fontSmall,
-                                                    color: MyColor.colorlighterGrey,
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                  height: Dimensions.space3,
-                                                ),
-                                                Text(
-                                                  "${MyStrings.total.tr} ${item.examDuration.toString()} ${MyStrings.min.tr} ",
-                                                  maxLines: 2,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  style: regularDefault.copyWith(
-                                                    fontSize: Dimensions.fontSmall,
-                                                    color: MyColor.colorlighterGrey,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
                                     ),
                                   ),
+                                  const SizedBox(
+                                    height: Dimensions.space12,
+                                  ),
                                   Container(
                                     height: 0.1,
                                     color: MyColor.colorlighterGrey,
                                   ),
-                                  SingleChildScrollView(
-                                    physics: const BouncingScrollPhysics(),
-                                    scrollDirection: Axis.horizontal,
-                                    child: Container(
-                                      padding: const EdgeInsets.all(Dimensions.space10),
-                                      child: Row(
-                                        children: [
-                                          CustomChipsWidget(
-                                            right: Dimensions.space7,
-                                            child: Center(
-                                              child: Text(
-                                                "${MyStrings.entryFee.tr} - ${item.point.toString().tr}",
-                                                style: regularDefault.copyWith(color: MyColor.colorGrey),
+                                  const SizedBox(
+                                    height: Dimensions.space12,
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.all(Dimensions.space10),
+                                    child: Flexible(child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      padding: EdgeInsets.zero,
+                                      physics: const BouncingScrollPhysics(),
+                                        child: Row(
+                                          children: [
+                                            CustomChipsWidget(
+                                              right: Dimensions.space7,
+                                              child: Center(
+                                                child: Text(
+                                                  "${MyStrings.entryFee.tr} - ${item.point.toString().tr}",
+                                                  style: regularSmall.copyWith(color: MyColor.colorGrey),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                          CustomChipsWidget(
-                                            right: Dimensions.space7,
-                                            child: Center(child: Text(MyStrings.youNeedtoScoreSort.replaceAll("{point}", item.point.toString()).tr, style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                          ),
-                                         
-                                        ],
+                                            CustomChipsWidget(
+                                              right: Dimensions.space7,
+                                              child: Center(child: Text(MyStrings.youNeedtoScoreSort.replaceAll("{point}", item.point.toString()).tr, style: regularSmall.copyWith(color: MyColor.colorGrey))),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),

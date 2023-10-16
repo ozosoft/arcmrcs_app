@@ -26,7 +26,7 @@ class GuessResultBody extends StatefulWidget {
 class _GuessResultBodyState extends State<GuessResultBody> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GuessThewordController>(builder: (controller) {
+    return GetBuilder<GuessTheWordController>(builder: (controller) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space30),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space20), color: MyColor.colorWhite),
@@ -56,23 +56,15 @@ class _GuessResultBodyState extends State<GuessResultBody> {
                   width: double.infinity,
                   padding: const EdgeInsetsDirectional.only( start: Dimensions.space8, end: Dimensions.space8),
                   child: controller.appreciation == "[Failed]"
-                      ?Lottie.asset(MyImages.failedLottie,height: 200,width: 200)
-                      : Lottie.asset(MyImages.successLottie,height: 200,width: 200) /*SvgPicture.asset(
-                          MyImages.victory,
-                          fit: BoxFit.cover,
-                        ),*/
+                      ?Lottie.asset(MyImages.failedLottie,height: 200,width: 200,repeat: false,reverse: false)
+                      : Lottie.asset(MyImages.successLottie,height: 200,width: 200)
                 ),
-               /* SizedBox(
-                  width: double.infinity,
-                  child: CustomSvgPicture(image: MyImages.cup, color: controller.appreciation == "[Failed]" ? Colors.grey.withOpacity(0.3) : Colors.orange.shade400, height: 200),
-                ),*/
               ],
             ),
             const SizedBox(
               height: Dimensions.space10,
             ),
             Text("${controller.appreciation.replaceAll("[", "").replaceAll("]", "")} ", style: semiBoldExtraLarge.copyWith(fontSize: Dimensions.fontExtraLarge)),
-
             const SizedBox(
               height: Dimensions.space20,
             ),
@@ -170,7 +162,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
             RoundedButton(
               text: MyStrings.reviewAnswer.tr,
               press: () {
-                Get.offAndToNamed(RouteHelper.gessThewordResultReview, arguments: [controller.gessThewordQuesstionList.isNotEmpty ? controller.gessThewordQuesstionList : <GuessQuestion>[]]);
+                Get.offAndToNamed(RouteHelper.gessThewordResultReview, arguments: [controller.guessTheWordQuestionList.isNotEmpty ? controller.guessTheWordQuestionList : <GuessQuestion>[]]);
               },
               color: MyColor.greenSuccessColor,
               textSize: Dimensions.space21,

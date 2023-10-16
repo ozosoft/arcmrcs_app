@@ -57,7 +57,7 @@ class Data {
         totalQuestion: json["totalQuestion"],
         correctAnswer: json["correctAnswer"],
         wrongAnswer: json["wrongAnswer"],
-        winingCoin: json["winingCoin"],
+        winingCoin: json["winingCoin"].toString(),
         user: json["user"] == null ? null : User.fromJson(json["user"]),
     );
 
@@ -92,8 +92,8 @@ class User {
     String? tv;
     dynamic tsc;
     dynamic banReason;
-    int? coins;
-    int? score;
+    String? coins;
+    String? score;
     dynamic loginBy;
     DateTime? createdAt;
     DateTime? updatedAt;
@@ -134,24 +134,24 @@ class User {
         username: json["username"],
         avatar: json["avatar"],
         email: json["email"],
-        countryCode: json["country_code"],
-        mobile: json["mobile"],
-        refBy: json["ref_by"],
+        countryCode: json["country_code"].toString(),
+        mobile: json["mobile"].toString(),
+        refBy: json["ref_by"].toString(),
         referralCode: json["referral_code"],
         address: json["address"] == null ? null : Address.fromJson(json["address"]),
         status: json["status"],
-        kv: json["kv"],
-        ev: json["ev"],
-        sv: json["sv"],
+        kv: json["kv"].toString(),
+        ev: json["ev"].toString(),
+        sv: json["sv"].toString(),
         profileComplete: json["profile_complete"],
         verCodeSendAt: json["ver_code_send_at"] == null ? null : DateTime.parse(json["ver_code_send_at"]),
-        ts: json["ts"],
-        tv: json["tv"],
-        tsc: json["tsc"],
-        banReason: json["ban_reason"],
-        coins: json["coins"],
-        score: json["score"],
-        loginBy: json["login_by"],
+        ts: json["ts"].toString(),
+        tv: json["tv"].toString(),
+        tsc: json["tsc"].toString(),
+        banReason: json["ban_reason"].toString(),
+        coins: json["coins"].toString(),
+        score: json["score"].toString(),
+        loginBy: json["login_by"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     );

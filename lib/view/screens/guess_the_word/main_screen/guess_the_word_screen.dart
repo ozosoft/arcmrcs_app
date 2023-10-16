@@ -34,7 +34,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
     id = Get.arguments as int;
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GuessTheWordRepo(apiClient: Get.find()));
-    final controller = Get.put(GuessThewordController(gessTheWordRepo: Get.find()));
+    final controller = Get.put(GuessTheWordController(guessTheWordRepo: Get.find()));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.clearAllData();
@@ -45,7 +45,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GuessThewordController>(builder: (controller) {
+    return GetBuilder<GuessTheWordController>(builder: (controller) {
       return Scaffold(
           appBar: CustomCategoryAppBar(
             title: MyStrings.guessTheWord.tr,
@@ -56,7 +56,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                   children: [
                     PageView.builder(
                       controller: controller.pageController,
-                      itemCount: controller.gessThewordQuesstionList.length,
+                      itemCount: controller.guessTheWordQuestionList.length,
                       physics: const NeverScrollableScrollPhysics(),
                       onPageChanged: (index) {
                         setState(() {
@@ -78,37 +78,37 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        LevelCardButton(bgColor: Colors.transparent,hPadding:Dimensions.space12,vPadding:Dimensions.space10,text: ' ${controller.gessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins.tr}', hasIcon: false, hasImage: false),
-                                        LevelCardButton(bgColor: Colors.transparent,hPadding:Dimensions.space12,vPadding:Dimensions.space10,text: " ${questionsIndex + 1}/${controller.gessThewordQuesstionList.length}", hasIcon: false, hasImage: false),
+                                        LevelCardButton(isQuestionCount: true,bgColor: Colors.transparent,hPadding:Dimensions.space12,vPadding:Dimensions.space10,text: ' ${controller.guessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins.tr}', hasIcon: false, hasImage: false),
+                                        LevelCardButton(isQuestionCount: true,bgColor: Colors.transparent,hPadding:Dimensions.space12,vPadding:Dimensions.space10,text: " ${questionsIndex + 1}/${controller.guessTheWordQuestionList.length}", hasIcon: false, hasImage: false),
                                       ],
                                     ),
                                     const SizedBox(height: Dimensions.space20),
                                     // note: use  preloader or something like this
-                                    controller.gessThewordQuesstionList[questionsIndex].image != null
+                                    controller.guessTheWordQuestionList[questionsIndex].image != null
                                         ? Container(
                                             margin: const EdgeInsetsDirectional.only(top: Dimensions.space20, bottom: Dimensions.space20),
                                             width: double.infinity,
                                             height: context.width / 2.5,
                                             child: MyImageWidget(
                                               boxFit: BoxFit.contain,
-                                              imageUrl: "${controller.questionImgPath}/${controller.gessThewordQuesstionList[questionsIndex].image}",
+                                              imageUrl: "${controller.questionImgPath}/${controller.guessTheWordQuestionList[questionsIndex].image}",
                                             ),
                                           )
                                         : const SizedBox(height: Dimensions.space20),
-                                    Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.gessThewordQuesstionList[questionsIndex].question.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                                    Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.guessTheWordQuestionList[questionsIndex].question.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                     const SizedBox(height: Dimensions.space40),
-                                    AnswerField(length: controller.gessThewordQuesstionList[questionsIndex].options![0].option!.length),
+                                    AnswerField(length: controller.guessTheWordQuestionList[questionsIndex].options![0].option!.length),
 
                                     const SizedBox(height: Dimensions.space30),
                                     GuessWordKeyBoard(
-                                      ans: controller.gessThewordQuesstionList[questionsIndex].options![0].option.toString(),
+                                      ans: controller.guessTheWordQuestionList[questionsIndex].options![0].option.toString(),
                                     ),
                                     const SizedBox(height: Dimensions.space15),
                                     Align(
                                         alignment: Alignment.center,
                                         child:InkWell(
                                           onTap: (){
-                                            controller.removeVAlue();
+                                            controller.removeValue();
                                           },
                                           child: Container(
                                             padding: const EdgeInsets.all(Dimensions.space3),
@@ -158,7 +158,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                   autoStart: true,
                                   onComplete: () {
                                     controller.addAns(questionsIndex, controller.tempAns.join().toLowerCase().toString());
-                                    questionsIndex == controller.gessThewordQuesstionList.length - 1 ? controller.submitGuessTheWordAnswers() : controller.nextPage();
+                                    questionsIndex == controller.guessTheWordQuestionList.length - 1 ? controller.submitGuessTheWordAnswers() : controller.nextPage();
                                   },
                                 ),
                               ),
@@ -178,7 +178,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                             text: MyStrings.submit.tr,
                             press: () {
                               controller.addAns(currentQuestionIndex, controller.tempAns.join().toLowerCase().toString());
-                              if (currentQuestionIndex == controller.gessThewordQuesstionList.length - 1) {
+                              if (currentQuestionIndex == controller.guessTheWordQuestionList.length - 1) {
                                 controller.submitGuessTheWordAnswers();
                               } else {
                                 controller.nextPage();

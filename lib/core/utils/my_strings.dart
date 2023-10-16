@@ -6,6 +6,7 @@ class MyStrings {
   static const String appName = "QuizLAB";
   //Onboard Text
   static const String onboardTitle1 = "Test Your Knowladge"; //Title 1
+  static const String quizLeaveWarningTitle = "Are you sure you want to leave this quiz?"; //Title 1
   static const String onboardDescription1 = "There are hundreds of different categories to choose from"; //Des 1
   static const String onboardTitle2 = "Win Real Money"; //Title 2
   static const String onboardDescription2 = "Pick the correct answer at the final question to win the prize money"; //Des 2
@@ -260,10 +261,10 @@ class MyStrings {
   static const String quizQuestions2 = "The Great Wall is a world-famous ?";
   static const String percent = "%";
   static const String level = "Level";
-  static const String allCategory = "All categories";
+  static const String allCategory = "All Categories";
   static const String music = "Music";
-  static const String scienceAndTech = "Science & Technology";
   static const String feeCoins = "Fee Coins ";
+  static const String fee = "Fee";
   static const String end = "End ";
   static const String min = "min";
   static const String healthAndQuiz = "Health Quiz Contest";
@@ -457,7 +458,7 @@ class MyStrings {
   static const String subcategory2 = "Sub Category";
   static const String dailynewquiz = "Daily new quiz";
   static const String gamequizwithfun = "Game quiz with fun";
-  static const String rules1 = "I Will not copy and give this exam with honesty";
+  static const String rules1 = "I will not copy and give this exam with honesty";
   static const String rules2 = "If you lock your phone then exam will complete automatically";
   static const String rules3 = "You cant use browser";
   static const String funvocabulary = "Fun vocabulary";
@@ -469,4 +470,6 @@ class MyStrings {
   static const String agreeExamRules = "You must agree with Exam rules";
   static const String unlock = "unlock";
   static const String lock = "lock";
+
+  static const List<String> questionPrefix = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"];
 }

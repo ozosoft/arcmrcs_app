@@ -93,42 +93,40 @@ class _RankingTabBarState extends State<RankingTabBar> {
               ),
               child: FittedBox(
                 fit: BoxFit.cover,
-                child: playerAvatar.isNotEmpty
-                    ? Container(
-                        margin: EdgeInsets.all(
-                          orientation != Orientation.portrait ? Dimensions.space10 : Dimensions.space8,
-                        ),
-                        decoration: const BoxDecoration(
-                          color: MyColor.leaderBoardTabBar,
-                          shape: BoxShape.circle,
-                        ),
-                        height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
-                        width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
-                        child: MyImageWidget(radius: Dimensions.space100, imageUrl: UrlContainer.leaderboardProfileImage + playerAvatar),
-                      )
-                    : Container(
-                        margin: EdgeInsets.all(
-                          orientation != Orientation.portrait ? Dimensions.space10 : Dimensions.space8,
-                        ),
-                        decoration: const BoxDecoration(
-                          color: MyColor.leaderBoardTabBar,
-                          shape: BoxShape.circle,
-                        ),
-                        height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
-                        width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
-                        child: Image.asset(MyImages.defaultAvatar),
-                      ),
+                child: playerAvatar.isNotEmpty ?
+                Container(
+                  margin: EdgeInsets.all(
+                    orientation != Orientation.portrait ? Dimensions.space10 : Dimensions.space8,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: MyColor.leaderBoardTabBar,
+                    shape: BoxShape.circle,
+                  ),
+                  height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                  width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                  child: MyImageWidget(radius: Dimensions.space100, imageUrl: UrlContainer.leaderboardProfileImage + playerAvatar),
+                ) :
+                Container(
+                  margin: EdgeInsets.all(
+                    orientation != Orientation.portrait ? Dimensions.space10 : Dimensions.space8,
+                  ),
+                  decoration: const BoxDecoration(
+                    color: MyColor.leaderBoardTabBar,
+                    shape: BoxShape.circle,
+                  ),
+                  height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                  width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
+                  child: Image.asset(MyImages.defaultAvatar),
+                ),
               ),
             ),
             const SizedBox(
               height: Dimensions.space10,
             ),
-            FittedBox(
-              child: Text(
-                playerName.tr,
-                style: regularMediumLarge.copyWith(
-                  color: MyColor.colorWhite,
-                ),
+            Text(
+              playerName.tr ?? '',
+              style: regularMediumLarge.copyWith(
+                color: MyColor.colorWhite,
               ),
             ),
             const SizedBox(

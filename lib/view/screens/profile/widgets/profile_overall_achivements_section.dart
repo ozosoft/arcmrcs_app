@@ -24,19 +24,7 @@ class ProfileTopSection extends StatefulWidget {
 }
 
 class _ProfileTopSectionState extends State<ProfileTopSection> {
-  @override
-  void initState() {
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(ProfileRepo(apiClient: Get.find()));
-    Get.put(LogoutController(logoutRepo: Get.find()));
-    ProfileController controller = Get.put(ProfileController(profileRepo: Get.find()));
 
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.loadProfileInfo();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -115,9 +103,9 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                            child: Container(
+                          child: Container(
                           decoration: BoxDecoration(
-                            color: MyColor.cardBgLighGreyColor,
+                            color: MyColor.transparentColor,
                             border: Border.all(color: MyColor.primaryColor.withOpacity(0.05)),
                             borderRadius: BorderRadius.circular(Dimensions.space8),
                           ),
@@ -148,9 +136,9 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
                           width: Dimensions.space10,
                         ),
                         Expanded(
-                            child: Container(
+                          child: Container(
                           decoration: BoxDecoration(
-                            color: MyColor.cardBgLighGreyColor,
+                            color: MyColor.transparentColor,
                             border: Border.all(color: MyColor.primaryColor.withOpacity(0.05)),
                             borderRadius: BorderRadius.circular(Dimensions.space8),
                           ),
@@ -181,9 +169,9 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
                           width: Dimensions.space10,
                         ),
                         Expanded(
-                            child: Container(
+                          child: Container(
                           decoration: BoxDecoration(
-                            color: MyColor.cardBgLighGreyColor,
+                            color: MyColor.transparentColor,
                             border: Border.all(color: MyColor.primaryColor.withOpacity(0.05)),
                             borderRadius: BorderRadius.circular(Dimensions.space8),
                           ),

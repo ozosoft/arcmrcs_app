@@ -17,7 +17,7 @@ class GuessWordKeyBoard extends StatefulWidget {
 class _GuessWordKeyBoardState extends State<GuessWordKeyBoard> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GuessThewordController>(builder: (controller) {
+    return GetBuilder<GuessTheWordController>(builder: (controller) {
       return Wrap(
         spacing: 10,
         runSpacing: 10,

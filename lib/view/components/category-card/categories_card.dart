@@ -80,8 +80,8 @@ class _CategoriesCardState extends State<CategoriesCard> {
                       else
                         Container(
                           margin: const EdgeInsetsDirectional.only(end: Dimensions.space14, top: Dimensions.space10),
-                          width: Dimensions.space40,
-                          height: Dimensions.space40,
+                          width: Dimensions.space50,
+                          height: Dimensions.space50,
                           child: MyImageWidget(
                             imageUrl: widget.image,
                           ),

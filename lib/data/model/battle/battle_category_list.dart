@@ -48,7 +48,7 @@ class Data {
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
-        categories: List<BattleCategory>.from(json["categories"].map((x) => BattleCategory.fromJson(x))),
+        categories: json["categories"] != null? List<BattleCategory>.from(json["categories"].map((x) => BattleCategory.fromJson(x))) : [],
         entryCoin: json["entryCoin"],
     );
 

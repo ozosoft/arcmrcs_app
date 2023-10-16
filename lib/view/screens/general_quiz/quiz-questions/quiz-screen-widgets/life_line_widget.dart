@@ -22,19 +22,16 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
         children: [
           InkWell(
             onTap: () {
-              if (controller.fiftyFifty == true) {
-                // CustomSnackBar.error(errorList: [MyStrings.lifeLineAlreadyUsed.tr]);
-              } else {
+              if (controller.isFiftyFiftyAlreadyUsed != true) {
                 controller.makeFiftyFifty(widget.questionIndex);
               }
             },
             child: LevelCardButton(
-              // lifelineUsed: controller.showQuestions,
               hasIcon: false,
-              height: Dimensions.space75,
-              width: Dimensions.space78,
+              height: Dimensions.space75 - 10,
+              width: Dimensions.space75 - 5,
               hasImage: true,
-              lifelineUsed: controller.fiftyFifty,
+              lifelineUsed: controller.isFiftyFiftyAlreadyUsed,
               image: MyImages.fiftyFiftySVG,
             ),
           ),
@@ -46,7 +43,14 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
                 controller.audienceVotes(widget.questionIndex);
               }
             },
-            child: LevelCardButton(lifelineUsed: controller.audienceVote, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.groupSVG),
+            child: LevelCardButton(
+              lifelineUsed: controller.audienceVote,
+              hasIcon: false,
+              height: Dimensions.space75 - 10,
+              width: Dimensions.space75 - 5,
+              hasImage: true,
+              image: MyImages.groupSVG
+            ),
           ),
           InkWell(
             onTap: () {
@@ -57,7 +61,14 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
                 controller.restartCountDownTimer(widget.questionIndex);
               }
             },
-            child: LevelCardButton(lifelineUsed: controller.restartTimer, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.timeSVG),
+            child: LevelCardButton(
+              lifelineUsed: controller.restartTimer,
+              hasIcon: false,
+                height: Dimensions.space75 - 10,
+                width: Dimensions.space75 - 5,
+              hasImage: true,
+              image: MyImages.timeSVG
+            ),
           ),
           if ((controller.currentPage + 1) == controller.questionsList.length) ...[
             InkWell(
@@ -70,7 +81,14 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
                   controller.flipQuistion = "1";
                 }
               },
-              child: const LevelCardButton(lifelineUsed: true, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.nextSVG),
+              child: const LevelCardButton(
+                lifelineUsed: true,
+                hasIcon: false,
+                  height: Dimensions.space75 - 10,
+                  width: Dimensions.space75 - 5,
+                hasImage: true,
+                image: MyImages.nextSVG
+              ),
             ),
           ] else ...[
             InkWell(
@@ -83,7 +101,14 @@ class _LifeLinesWidgetState extends State<LifeLinesWidget> {
                   controller.flipQuistion = "1";
                 }
               },
-              child: LevelCardButton(lifelineUsed: controller.flipQuistions, hasIcon: false, height: Dimensions.space75, width: Dimensions.space78, hasImage: true, image: MyImages.nextSVG),
+              child: LevelCardButton(
+                lifelineUsed: controller.flipQuistions,
+                hasIcon: false,
+                  height: Dimensions.space75 - 10,
+                  width: Dimensions.space75 - 5,
+                hasImage: true,
+                image: MyImages.nextSVG
+              ),
             ),
           ]
         ],

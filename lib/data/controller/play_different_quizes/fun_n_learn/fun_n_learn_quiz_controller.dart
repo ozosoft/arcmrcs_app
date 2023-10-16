@@ -9,6 +9,7 @@ import 'package:quiz_lab/data/repo/play_different_quizes/fun_n_learn/fun_n_learn
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/environment.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 import '../../../../core/route/route.dart';
@@ -40,7 +41,7 @@ class FunNlearnQuizController extends GetxController {
   String? quizInfoID;
   String? title;
   late int questionsIndex;
-  List<Question> examQuestionsList = [];
+  List<Question> questionList = [];
   List<Option> optionsList = [];
 
   List selectedQuestionsId = [];
@@ -71,15 +72,16 @@ class FunNlearnQuizController extends GetxController {
     ResponseModel getQuestionsModel = await funNLearnRepo.getFunNlearnQuestions(quizInfoId);
 
     if (getQuestionsModel.statusCode == 200) {
-      examQuestionsList.clear();
+      questionList.clear();
       FunNLearnQuestionsModel model = FunNLearnQuestionsModel.fromJson(jsonDecode(getQuestionsModel.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
         debugPrint("get answer done");
         // debugPrint(model.data);
         List<Question>? examQuestion = model.data!.questions!;
+        timerDuration = int.tryParse(model.data?.answerDuration??'${Environment.defaultQuizTime}')?? Environment.defaultQuizTime;
 
         if (examQuestion.isNotEmpty) {
-          examQuestionsList.addAll(examQuestion);
+          questionList.addAll(examQuestion);
         }
 
     
@@ -120,7 +122,7 @@ class FunNlearnQuizController extends GetxController {
     String optionId = optionsList[optionIndex].id.toString();
 
     debugPrint('not work here');
-    examQuestionsList[questionIndex].setSelectedOptionId(optionId);
+    questionList[questionIndex].setSelectedOptionId(optionId);
 
     debugPrint('done');
 
@@ -135,7 +137,7 @@ class FunNlearnQuizController extends GetxController {
   String questionId = "";
   String thisQuestionId = "";
   isValidAnswer(int index, int optionIndex) {
-    questionId = examQuestionsList[index].selectedOptionId.toString();
+    questionId = questionList[index].selectedOptionId.toString();
     thisQuestionId = optionsList[optionIndex].id.toString();
 
     if (thisQuestionId == questionId && optionsList[optionIndex].isAnswer == '1') {
@@ -163,15 +165,15 @@ class FunNlearnQuizController extends GetxController {
   bool fiftyFifty = false;
   int fiftyFiftyIndex = -1;
   makeFiftyFifty(int index) {
-    List<Option> allOptions = examQuestionsList[index].options!;
+    List<Option> allOptions = questionList[index].options!;
     var random = Random();
     Option correctAnswers = allOptions.firstWhere((element) => element.isAnswer == '1');
     allOptions.remove(correctAnswers);
     Option incorrectAnswer = allOptions[random.nextInt(allOptions.length)];
     List<Option> optionsToDisplay = [correctAnswers, incorrectAnswer]..shuffle(random);
 
-    examQuestionsList[index].options!.clear();
-    examQuestionsList[index].options!.addAll(optionsToDisplay);
+    questionList[index].options!.clear();
+    questionList[index].options!.addAll(optionsToDisplay);
     update();
 
     debugPrint("object is here");
@@ -183,8 +185,8 @@ class FunNlearnQuizController extends GetxController {
   void setCurrentOption(int questionsIndex) {
     // optionsList.clear();
 
-    if (examQuestionsList[questionsIndex].options != null) {
-      optionsList = examQuestionsList[questionsIndex].options!;
+    if (questionList[questionsIndex].options != null) {
+      optionsList = questionList[questionsIndex].options!;
     }
   }
 
@@ -203,9 +205,9 @@ class FunNlearnQuizController extends GetxController {
 
     Map<String, dynamic> params = {};
 
-    for (int i = 0; i < examQuestionsList.length; i++) {
-      String quizeId = examQuestionsList[i].id.toString();
-      String selectedOptionId = examQuestionsList[i].selectedOptionId.toString();
+    for (int i = 0; i < questionList.length; i++) {
+      String quizeId = questionList[i].id.toString();
+      String selectedOptionId = questionList[i].selectedOptionId.toString();
       params['question_id[$i]'] = quizeId;
       // debugPrint('quize id: ${quizeId}');
       params['option_$quizeId'] = selectedOptionId;
@@ -231,7 +233,7 @@ class FunNlearnQuizController extends GetxController {
         winningCoin = model.data!.winingScore.toString();
 
         countDownController.pause();
-        Get.toNamed(RouteHelper.funNlearnResultScreen, arguments: [examQuestionsList, optionsList])!.whenComplete(() {
+        Get.toNamed(RouteHelper.funNlearnResultScreen, arguments: [questionList, optionsList])!.whenComplete(() {
           Get.back();
         });
       } else {

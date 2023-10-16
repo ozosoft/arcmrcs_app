@@ -67,12 +67,12 @@ class ProfileController extends GetxController {
         //save User Data
         profileRepo.apiClient.setUserData(model.data!.user!.toJson());
         loadData(model);
-        username = model.data!.user!.username!;
-        rank = model.data!.rank!.userRank!;
-        coins = model.data!.user!.coins!;
-        score = model.data!.user!.score!;
-        avatar = model.data!.user!.avatar!;
-        email = model.data!.user!.email!;
+        username = model.data?.user?.username ?? '';
+        rank = model.data?.rank?.userRank ?? '';
+        coins = model.data?.user?.coins ?? '';
+        score = model.data?.user?.score ?? '';
+        avatar = model.data?.user?.avatar ?? '';
+        email = model.data?.user?.email ?? '';
 
         //save User Data
         profileRepo.apiClient.setUserData(model.data!.user!.toJson());
