@@ -85,8 +85,8 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                       const SizedBox(width: Dimensions.space20),
                       Container(
                         margin: const EdgeInsetsDirectional.only(top: Dimensions.space20, bottom: Dimensions.space20),
-                        width: Dimensions.space40,
-                        height: Dimensions.space40,
+                        width: Dimensions.space50,
+                        height: Dimensions.space50,
                         child: MyImageWidget(
                           imageUrl: widget.image,
                         ),
@@ -118,11 +118,6 @@ class _GuessCategoryCardState extends State<GuessCategoryCard> {
                                         right: Dimensions.space10,
                                         child: Center(child: Text("${widget.categories.questionsCount} ${MyStrings.questionse.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
                                       ),
-                                    CustomChipsWidget(
-                                      padding: Dimensions.space5,
-                                      right: Dimensions.space5,
-                                      child: Center(child: Text("${widget.categories.subcategoriesCount! == '0' ? widget.categories.quizInfos!.length : widget.categories.quizInfos!.where((element) => element.subcategory != null).length} ${MyStrings.level.tr}", style: regularDefault.copyWith(color: MyColor.colorGrey))),
-                                    ),
                                   ],
                                 ),
                               ),

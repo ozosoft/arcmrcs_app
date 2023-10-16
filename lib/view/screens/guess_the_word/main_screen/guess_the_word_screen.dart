@@ -88,9 +88,11 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                         ? Container(
                                             margin: const EdgeInsetsDirectional.only(top: Dimensions.space20, bottom: Dimensions.space20),
                                             width: double.infinity,
+                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
                                             height: context.width / 2.5,
                                             child: MyImageWidget(
                                               boxFit: BoxFit.contain,
+                                              radius: Dimensions.defaultRadius,
                                               imageUrl: "${controller.questionImgPath}/${controller.guessTheWordQuestionList[questionsIndex].image}",
                                             ),
                                           )

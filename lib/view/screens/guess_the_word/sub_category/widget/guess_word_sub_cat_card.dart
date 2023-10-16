@@ -81,8 +81,8 @@ class _GuessWordSubCategoryCardState extends State<GuessWordSubCategoryCard> {
                       const SizedBox(width: Dimensions.space20),
                       Container(
                         margin: const EdgeInsetsDirectional.only(top: Dimensions.space20, bottom: Dimensions.space20),
-                        width: Dimensions.space40,
-                        height: Dimensions.space40,
+                        width: Dimensions.space50,
+                        height: Dimensions.space50,
                         child: MyImageWidget(
                           imageUrl: widget.image,
                         ),

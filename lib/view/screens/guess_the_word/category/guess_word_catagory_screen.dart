@@ -52,7 +52,7 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
                       padding: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                       child: ListView.builder(
                         physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
-                        itemCount: 1,
+                        itemCount: controller.categoryList.length,
                         itemBuilder: (context, i) {
                           return GuessCategoryCard(
                             categories: controller.categoryList[i],
