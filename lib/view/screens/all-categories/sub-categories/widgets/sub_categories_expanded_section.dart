@@ -49,18 +49,18 @@ class SubCategoriesLabelSection extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
                                 ? MyColor.lockedLevel
-                                : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null && controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo?.isWin =='1'
                                     ? MyColor.completedlevel
                                     : MyColor.unlockedLevel,
                             borderRadius: BorderRadius.circular(Dimensions.space7),
-                            border: Border.all(color: controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null ? MyColor.completedlevel : MyColor.lockedLevel)),
+                            border: Border.all(color: controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null && controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo?.isWin =='1'? MyColor.completedlevel : MyColor.lockedLevel)),
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SvgPicture.asset(controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
                                 ? MyImages.lockLevelSVG
-                                : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null && controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo?.isWin =='1'
                                     ? MyImages.levelGreenTikSVG
                                     : MyImages.unlockSVG),
                             const SizedBox(width: Dimensions.space5),
@@ -72,7 +72,7 @@ class SubCategoriesLabelSection extends StatelessWidget {
                                 style: regularLarge.copyWith(
                                   color: controller!.subCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
                                       ? MyColor.textColor
-                                      : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                      : controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo != null && controller!.subCategoriesList[categoryindex].quizInfos![index].playInfo?.isWin =='1'
                                           ? MyColor.completedlevelTEXT
                                           : MyColor.colorBlack,
                                 ),

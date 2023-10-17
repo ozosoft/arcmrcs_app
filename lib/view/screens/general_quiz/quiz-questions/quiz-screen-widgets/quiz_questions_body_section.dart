@@ -61,6 +61,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                 itemBuilder: (context, questionsIndex) {
                   controller.setCurrentOption(questionsIndex);
                   return SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
                     padding: const EdgeInsets.all(Dimensions.space20),
                     child: Stack(
                       children: [
@@ -187,7 +188,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                 }),
                               const SizedBox(height: Dimensions.space25),
                               LifeLinesWidget(questionIndex: questionsIndex),
-                              const SizedBox(height: Dimensions.space25),
+                              const SizedBox(height: Dimensions.space60),
                             ],
                           ),
                         ),

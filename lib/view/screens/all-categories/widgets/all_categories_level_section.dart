@@ -33,7 +33,7 @@ class AllCategoriesExpandedSection extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: context.width > 600 ? 3 : 2.3, crossAxisCount: 3),
-                itemCount: controller!.allCategoriesList[categoryindex].quizInfos!.length,
+                itemCount: controller!.allCategoriesList[categoryindex].quizInfos?.length ?? 0,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                       padding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space5),
@@ -57,7 +57,7 @@ class AllCategoriesExpandedSection extends StatelessWidget {
                             children: [
                               SvgPicture.asset(controller!.allCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
                                   ? MyImages.lockLevelSVG
-                                  : controller!.allCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                  : controller!.allCategoriesList[categoryindex].quizInfos![index].playInfo != null && controller!.allCategoriesList[categoryindex].quizInfos![index].playInfo?.isWin == '1'
                                       ? MyImages.levelGreenTikSVG
                                       : MyImages.unlockSVG),
                               const SizedBox(width: Dimensions.space8),
@@ -69,7 +69,7 @@ class AllCategoriesExpandedSection extends StatelessWidget {
                                   style: regularLarge.copyWith(
                                     color: controller!.allCategoriesList[categoryindex].quizInfos![index].levelStatus == MyStrings.lock
                                         ? MyColor.textColor
-                                        : controller!.allCategoriesList[categoryindex].quizInfos![index].playInfo != null
+                                        : controller!.allCategoriesList[categoryindex].quizInfos![index].playInfo != null && controller!.allCategoriesList[categoryindex].quizInfos![index].playInfo?.isWin == '1'
                                             ? MyColor.completedlevelTEXT
                                             : MyColor.colorBlack,
                                   ),
