@@ -8,7 +8,8 @@ import '../../../../core/utils/my_images.dart';
 import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/style.dart';
 import '../../../../core/utils/url_container.dart';
-import '../../../../data/model/dashboard/dashboard_model.dart';
+import '../../../../data/model/dashboard/exam.dart';
+import '../../../../data/model/exam_zone/exam_zone_question_list_model.dart';
 import '../../../components/chips/custom_chips_widget.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 

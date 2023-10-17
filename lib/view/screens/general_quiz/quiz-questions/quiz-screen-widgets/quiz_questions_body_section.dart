@@ -163,7 +163,8 @@ class _QuizBodySectionState extends State<QuizBodySection> {
                                                                     ? controller.isValidAnswer(questionsIndex, optionIndex)
                                                                         ? MyColor.colorWhite
                                                                         : MyColor.colorWhite
-                                                                    : MyColor.textColor),
+                                                                    : MyColor.textColor
+                                                        ),
                                                       ),
                                                     ),
                                                     SizedBox(height: Dimensions.space10, child: controller.questionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox.shrink() : SvgPicture.asset(controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG, fit: BoxFit.cover))

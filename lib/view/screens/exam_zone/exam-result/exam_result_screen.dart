@@ -30,7 +30,7 @@ class _ExamResultScreenState extends State<ExamResultScreen> {
   Widget build(BuildContext context) {
     return RepaintBoundary(
       child: Scaffold(
-          backgroundColor: MyColor.primaryColor,
+          backgroundColor: MyColor.screenBgColor,
           appBar: CustomCategoryAppBar(title: MyStrings.examResult.tr),
           body: const SingleChildScrollView(
             child: Padding(

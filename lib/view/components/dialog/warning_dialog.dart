@@ -11,7 +11,7 @@ import '../buttons/rounded_button.dart';
 class WarningAlertDialog {
   const WarningAlertDialog();
 
-  void warningAlertDialog(BuildContext context, VoidCallback press) {
+  void warningAlertDialog(BuildContext context, VoidCallback press,{String title = MyStrings.quizLeaveWarningTitle}) {
     showDialog(
         context: context,
         builder: (context) => Dialog(
@@ -32,7 +32,7 @@ class WarningAlertDialog {
                     children: [
                       const SizedBox(height: Dimensions.space7),
                       Text(
-                        MyStrings.quizLeaveWarningTitle.tr,
+                        title.tr,
                         style: regularSmall.copyWith(color: MyColor.getTextColor(),fontSize: Dimensions.fontDefault),
                         textAlign: TextAlign.center,
                         overflow: TextOverflow.ellipsis,

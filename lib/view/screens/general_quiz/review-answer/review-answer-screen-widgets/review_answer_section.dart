@@ -119,7 +119,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                           ListView.builder(
                               physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
-                              itemCount: controller.questionsList[questionsIndex].options!.length,
+                              itemCount: controller.questionsList[questionsIndex].options?.length??0,
                               itemBuilder: (BuildContext context, int optionIndex) {
                                 var reviewOptionItem = controller.optionsList[optionIndex];
                                 return Column(
@@ -153,13 +153,15 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                                   child: Text(
                                                     controller.questionsList[questionsIndex].options![optionIndex].option.toString(),
                                                     style: regularMediumLarge.copyWith(
-                                                        color: reviewItem.selectedOptionId!.isEmpty
+                                                        color:  reviewItem.selectedOptionId!.isEmpty
                                                             ? MyColor.colorBlack
                                                             : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
-                                                                ? MyColor.colorWhite
-                                                                : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
-                                                                    ? MyColor.colorWhite
-                                                                        : MyColor.colorBlack),
+                                                            ? MyColor.colorWhite
+                                                            : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
+                                                            ? MyColor.colorWhite
+                                                            : reviewOptionItem.isAnswer.toString() == "1"
+                                                            ? MyColor.colorWhite
+                                                            : MyColor.colorBlack),
                                                   ),
                                                 ),
                                                 SizedBox(

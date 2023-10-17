@@ -10,6 +10,7 @@ import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 import '../../../core/route/route.dart';
+import '../../model/dashboard/exam.dart';
 import '../../model/exam_zone/completed_exam_zone_model.dart';
 import '../../model/exam_zone/exam_zone_question_list_model.dart';
 

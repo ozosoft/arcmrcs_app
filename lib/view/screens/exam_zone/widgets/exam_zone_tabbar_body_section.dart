@@ -10,7 +10,8 @@ import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/no_data.dart';
 import 'package:get/get.dart';
 
-import '../../../../data/model/dashboard/dashboard_model.dart';
+import '../../../../data/model/dashboard/exam.dart';
+import '../../../../data/model/exam_zone/exam_zone_question_list_model.dart';
 import '../../../components/bottom-sheet/custom_bottom_sheet_plus.dart';
 import 'completed_exam_list_card_widget.dart';
 import 'enter_exam_room_bottom_sheet.dart';
@@ -106,7 +107,7 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                                 physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                                 itemCount: controller.examcategoryList!.length,
                                 itemBuilder: (BuildContext context, int index) {
-                                  Exams item = controller.examcategoryList![index].createdAt as Exams;
+                                  Exams item = controller.examcategoryList![index];
                                   return ExamListTileCard(
                                     exam: item,
                                     index: index,

@@ -102,7 +102,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                       GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .84, crossAxisCount: 4),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .79, crossAxisCount: 4),
                         itemCount: coinValues.length, // Use coinValues.length
                         itemBuilder: (BuildContext context, index) {
                           return GestureDetector(

@@ -10,13 +10,11 @@ class OneVsMutiController extends GetxController {
   OneVsMutiController(this.battleRepo);
 
   // Variables
-
   final isLoadingQuestions = false.obs;
-
   final categoryList = <BattleCategory>[].obs;
 
   final isLoadingCategory = false.obs;
-  final slectedCategoryID = 0.obs;
+  final selectedCategoryID = 0.obs;
   final entryFeeRandomGame = "0".obs;
 
   @override
@@ -57,8 +55,8 @@ class OneVsMutiController extends GetxController {
   }
 
   //Select A Category
-  slectACategory(int value) {
-    slectedCategoryID.value = value;
+  selectACategory(int value) {
+    selectedCategoryID.value = value;
     update();
   }
 }
