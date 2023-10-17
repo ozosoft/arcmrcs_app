@@ -5,7 +5,6 @@ class MyImages {
   //App Splash Logo White
 
   static const String splashLogoSVG = "assets/images/logo/splash_logo.svg";
-  static const String warningImage = 'assets/images/warning.png';// USE SVG IMAGE
 
   //Onboard Image
   static const String onboard1SVG = "assets/images/onboard/onboard1.svg"; // USE SVG IMAGE
@@ -14,6 +13,8 @@ class MyImages {
 
   //Others
 
+  static const String warningImage = 'assets/images/warning.png'; // USE SVG IMAGE
+  static const String crossImage = 'assets/images/cross.png'; // USE PNG
   static const String defaultAvatar = "assets/images/default-avatar.png";
   static const String deadImage = "assets/images/dead.png";
   static const String noContentFound = "assets/images/no-content.png";
@@ -99,6 +100,10 @@ class MyImages {
   static const String mariaOns = "assets/images/mariaOnsSVG.svg";
   static const String profileDrawer = "assets/images/drawer_profile_svg.svg";
   static const String coinStoreDrawer = "assets/images/coinStoreSVG.svg";
+  static const String dailyQuizDrawer = "assets/images/dailyQuiz.svg";
+  static const String singleBattleDrawer = "assets/images/singleBattle.svg";
+  static const String dangerDrawer = "assets/images/danger.svg";
+  static const String accountDelete = "assets/images/account_delete.svg";
   static const String badgeDrawer = "assets/images/badge_SVG.svg";
   static const String languageDrawer = "assets/images/languageSVG.svg";
   static const String logOutDrawer = "assets/images/logOutSVG.svg";

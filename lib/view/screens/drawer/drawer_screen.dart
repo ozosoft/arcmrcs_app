@@ -18,7 +18,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/util.dart';
+import '../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../components/bottom-sheet/custom_bottom_sheet.dart';
+import '../../components/dialog/warning_dialog.dart';
 import '../../components/image_widget/my_image_widget.dart';
 
 class DrawerScreen extends StatefulWidget {
@@ -115,9 +117,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     Get.toNamed(RouteHelper.coinStroeScreen);
                   },
                 ),
-                const Divider(
-                  endIndent: Dimensions.space70,
-                ),
                 ListTile(
                   leading: SvgPicture.asset(MyImages.coinStoreDrawer),
                   title: Text(
@@ -129,6 +128,40 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   },
                   minLeadingWidth: Dimensions.space1,
                 ),
+                if (Get.find<DashBoardController>().dailyQuizStatus == '1' || Get.find<DashBoardController>().singleBattleStatus == '1')
+                  const Divider(
+                    endIndent: Dimensions.space70,
+                  ),
+                if (Get.find<DashBoardController>().dailyQuizStatus == '1')
+                  ListTile(
+                    leading: SvgPicture.asset(
+                      MyImages.dailyQuizDrawer,
+                      width: 25,
+                    ),
+                    title: Text(
+                      MyStrings.dailyQuiz.tr,
+                      style: regularMediumLarge,
+                    ),
+                    onTap: () {
+                      Get.toNamed(RouteHelper.dailyQuizQuestionsScreen);
+                    },
+                    minLeadingWidth: Dimensions.space1,
+                  ),
+                if (Get.find<DashBoardController>().singleBattleStatus == '1')
+                  ListTile(
+                    leading: SvgPicture.asset(
+                      MyImages.singleBattleDrawer,
+                      width: 25,
+                    ),
+                    title: Text(
+                      MyStrings.singleBattle.tr,
+                      style: regularMediumLarge,
+                    ),
+                    onTap: () {
+                      Get.toNamed(RouteHelper.oneVSoneBattleScreen);
+                    },
+                    minLeadingWidth: Dimensions.space1,
+                  ),
                 const Divider(
                   endIndent: Dimensions.space70,
                 ),
@@ -142,10 +175,28 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     onTap: () {
                       CustomBottomSheet(child: const LanguageBottomSheetScreen()).customBottomSheet(context);
                     }),
+                ListTile(
+                  leading: SvgPicture.asset(
+                    MyImages.accountDelete,
+                    colorFilter: const ColorFilter.mode(MyColor.wrongAnsColor, BlendMode.srcIn),
+                    width: 25,
+                  ),
+                  title: Text(
+                    MyStrings.deleteAccount.tr,
+                    style: regularMediumLarge.copyWith(color: MyColor.wrongAnsColor),
+                  ),
+                  onTap: () {
+                    const WarningAlertDialog().deleteAccountAlertDialog(context, () {});
+                  },
+                  minLeadingWidth: Dimensions.space1,
+                ),
                 GetBuilder<LogoutController>(
                   builder: (logoutController) => ListTile(
                     onTap: () {
-                      logoutController.logout();
+                      const WarningAlertDialog().warningAlertDialog(context, () {
+                        Get.back();
+                        logoutController.logout();
+                      }, title: MyStrings.logoutSureWarningMSg);
                     },
                     leading: logoutController.loaderStarted
                         ? const SizedBox(

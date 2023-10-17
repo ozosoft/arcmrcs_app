@@ -19,6 +19,7 @@ import '../../../../data/services/api_client.dart';
 import '../../../../environment.dart';
 import '../../../components/alert-dialog/custom_alert_dialog.dart';
 
+import '../../../components/dialog/warning_dialog.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import 'battle_quiz_option_button.dart';
 import 'battle_quiz_user_info_card.dart';
@@ -60,69 +61,22 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
       if (quizController.meLeftTheGame.value == true) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           if (quizController.battleRoomController.getOpponentUserDetailsOrMy(quizController.battleRepo.apiClient.getUserID(), isMyData: true).status == false) {
-            CustomAlertDialog(
-                    willPop: false,
-                    borderRadius: 10,
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(Dimensions.space10),
-                          child: Column(
-                            children: [
-                              Text(
-                                MyStrings.youLeftTheGame.tr,
-                                style: regularLarge.copyWith(color: MyColor.textSecondColor),
-                              ),
-                              const SizedBox(
-                                height: Dimensions.space15,
-                              ),
-                              Text(
-                                MyStrings.lose.tr,
-                                style: boldLarge.copyWith(color: MyColor.textSecondColor, fontSize: Dimensions.fontMediumLarge),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 1,
-                          color: MyColor.textSecondColor.withOpacity(0.3),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(Dimensions.space10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextButton(
-                                style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                                onPressed: () async {
-                                  // if (quizController.opponentLeftTheGame.isTrue) {
-                                  //   // left User
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              if (quizController.showLeftPopupValue.isFalse) {
+                quizController.countDownController.pause();
+                debugPrint("Show PopUp");
 
-                                  //   await quizController.finishBattleAndSubmitAnswer().then((value) {
-                                  //     debugPrint("Collected");
-                                  //   });
-                                  // }
-                                  Get.offAllNamed(RouteHelper.bottomNavBarScreen);
-                                },
-                                child: Text(
-                                  MyStrings.ok.tr,
-                                  style: regularLarge.copyWith(color: MyColor.colorWhite),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    barrierDismissible: false)
-                .customAlertDialog(context);
+                const WarningAlertDialog().warningAlertDialog(
+                  context,
+                  () async {
+                    Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+                  },
+                  title: MyStrings.youLeftTheGame,
+                  subTitle: MyStrings.lose,
+                );
+              }
+              quizController.showLeftPopupUpdate(true);
+            });
           }
         });
       }
@@ -132,68 +86,21 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
           if (quizController.showLeftPopupValue.isFalse) {
             quizController.countDownController.pause();
             debugPrint("Show PopUp");
-            CustomAlertDialog(
-                    willPop: false,
-                    borderRadius: 10,
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(Dimensions.space10),
-                          child: Column(
-                            children: [
-                              Text(
-                                MyStrings.oponentLeftTheGame.tr,
-                                style: regularLarge.copyWith(color: MyColor.textSecondColor),
-                              ),
-                              const SizedBox(
-                                height: Dimensions.space15,
-                              ),
-                              Text(
-                                MyStrings.youWon.tr,
-                                style: boldLarge.copyWith(color: MyColor.textSecondColor, fontSize: Dimensions.fontMediumLarge),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 1,
-                          color: MyColor.textSecondColor.withOpacity(0.3),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(Dimensions.space10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              TextButton(
-                                style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                                onPressed: () async {
-                                  if (quizController.opponentLeftTheGame.isTrue) {
-                                    // left User
 
-                                    await quizController.finishBattleAndSubmitAnswer(fromYouWon: true).then((value) {
-                                      debugPrint("Collected");
-                                    });
-                                  }
-                                },
-                                child: Text(
-                                  MyStrings.collectCoins.tr,
-                                  style: regularLarge.copyWith(color: MyColor.colorWhite),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                    barrierDismissible: false)
-                .customAlertDialog(context);
+            const WarningAlertDialog().warningAlertDialog(
+              context,
+              () async {
+                if (quizController.opponentLeftTheGame.isTrue) {
+                  // left User
+
+                  await quizController.finishBattleAndSubmitAnswer(fromYouWon: true).then((value) {
+                    debugPrint("Collected");
+                  });
+                }
+              },
+              title: MyStrings.oponentLeftTheGame,
+              subTitle: MyStrings.youWon,
+            );
           }
           quizController.showLeftPopupUpdate(true);
         });
@@ -213,75 +120,31 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
 
               return WillPopScope(
                 onWillPop: () async {
-                  CustomAlertDialog(
-                      borderRadius: 100,
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(Dimensions.space10),
-                            child: Text(
-                              MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
-                              textAlign: TextAlign.center,
-                              style: regularLarge.copyWith(color: MyColor.textSecondColor),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            width: double.infinity,
-                            height: 1,
-                            color: MyColor.textSecondColor.withOpacity(0.3),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(Dimensions.space10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                                  },
-                                  child: Text(
-                                    MyStrings.cancel.tr,
-                                    style: regularLarge,
-                                  ),
-                                ),
-                                TextButton(
-                                  style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                                  onPressed: () async {
-                                    if (quizController.opponentLeftTheGame.isTrue) {
-                                      // left User
-                                      await quizController.battleRoomController
-                                          .deleteBattleRoom(
-                                        quizController.battleRoomController.battleRoomData.value!.roomId,
-                                        false,
-                                      )
-                                          .whenComplete(() {
-                                        Navigator.of(context).pop(true); // Return true when "Yes" is pressed
-                                        Get.back();
-                                      });
-                                    } else {
-                                      // left User
-                                      await quizController.battleRoomController.leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false, currentUserId: quizController.battleRepo.apiClient.getUserID()).whenComplete(() {
-                                        Navigator.of(context).pop(true); // Return true when "Yes" is pressed
-                                        Get.back();
-                                      });
-                                    }
-                                  },
-                                  child: Text(
-                                    MyStrings.yes.tr,
-                                    style: regularLarge.copyWith(color: MyColor.colorWhite),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
-                      )).customAlertDialog(context);
+                  const WarningAlertDialog().warningAlertDialog(
+                    context,
+                    () async {
+                      if (quizController.opponentLeftTheGame.isTrue) {
+                        // left User
+                        await quizController.battleRoomController
+                            .deleteBattleRoom(
+                          quizController.battleRoomController.battleRoomData.value!.roomId,
+                          false,
+                        )
+                            .whenComplete(() {
+                          Navigator.of(context).pop(true); // Return true when "Yes" is pressed
+                          Get.back();
+                        });
+                      } else {
+                        // left User
+                        await quizController.battleRoomController.leftBattleRoomFirebase(quizController.battleRoomController.battleRoomData.value!.roomId, false, currentUserId: quizController.battleRepo.apiClient.getUserID()).whenComplete(() {
+                          Navigator.of(context).pop(true); // Return true when "Yes" is pressed
+                          Get.back();
+                        });
+                      }
+                    },
+                    title: MyStrings.areYouSureYouWantToLeaveThisRoom,
+                  );
+
                   return false; // Disable back button if `start` is true
                 },
 

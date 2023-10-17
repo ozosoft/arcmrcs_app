@@ -15,6 +15,7 @@ import 'package:get/get.dart';
 
 import '../../../../../../../core/route/route.dart';
 import '../../../../../../../core/utils/url_container.dart';
+import '../../../../../../components/dialog/warning_dialog.dart';
 
 class LobbyBottomSheet extends StatefulWidget {
   const LobbyBottomSheet({super.key});
@@ -31,61 +32,16 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
     return GetBuilder<BattleRoomController>(builder: (controller) {
       return WillPopScope(
         onWillPop: () async {
-          CustomAlertDialog(
-              barrierDismissible: false,
-              willPop: true,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(Dimensions.space10),
-                    child: Text(
-                      MyStrings.areYouSureYouWantToLeaveThisRoom.tr,
-                      textAlign: TextAlign.center,
-                      style: regularLarge.copyWith(color: MyColor.textSecondColor),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 1,
-                    color: MyColor.textSecondColor.withOpacity(0.3),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(Dimensions.space10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                          },
-                          child: Text(
-                            MyStrings.cancel.tr,
-                            style: regularLarge,
-                          ),
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                          onPressed: () async {
-                            await controller.deleteBattleRoom(controller.battleRoomData.value!.roomId, false).whenComplete(() {
-                              Get.offAllNamed(RouteHelper.bottomNavBarScreen);
-                            });
-                          },
-                          child: Text(
-                            MyStrings.yes.tr,
-                            style: regularLarge.copyWith(color: MyColor.colorWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )).customAlertDialog(context);
+          const WarningAlertDialog().warningAlertDialog(
+            context,
+            () async {
+              await controller.deleteBattleRoom(controller.battleRoomData.value!.roomId, false).whenComplete(() {
+                Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+              });
+            },
+            title: MyStrings.areYouSureYouWantToLeaveThisRoom,
+          );
+
           return false; // Disable back button if `start` is true
         },
         child: Padding(
@@ -289,9 +245,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                         });
                         debugPrint("go");
 
-                        controller.startBattleQuiz(controller.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
-                      
-                        });
+                        controller.startBattleQuiz(controller.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {});
                       },
                       cornerRadius: Dimensions.space10,
                       textSize: Dimensions.space20,

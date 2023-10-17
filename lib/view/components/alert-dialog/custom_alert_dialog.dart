@@ -20,7 +20,6 @@ class CustomAlertDialog {
   void customAlertDialog(BuildContext context) {
     showDialog(
         barrierDismissible: barrierDismissible,
-    
         context: context,
         builder: (BuildContext context) => WillPopScope(
               onWillPop: () async {

@@ -2,11 +2,11 @@ class MyStrings {
   final List<String> rules = [rules1, rules2, rules3];
   final List<String> settingsList = [sound, vibration, themes];
 
-  //APPName
+  //APP Name
   static const String appName = "QuizLAB";
+
   //Onboard Text
   static const String onboardTitle1 = "Test Your Knowladge"; //Title 1
-  static const String quizLeaveWarningTitle = "Are you sure you want to leave this quiz?"; //Title 1
   static const String onboardDescription1 = "There are hundreds of different categories to choose from"; //Des 1
   static const String onboardTitle2 = "Win Real Money"; //Title 2
   static const String onboardDescription2 = "Pick the correct answer at the final question to win the prize money"; //Des 2
@@ -14,6 +14,7 @@ class MyStrings {
   static const String onboardDescription3 = "Who is the smartest in your group of friends and family"; //Des 3
   //Onboard End
 
+  static const String quizLeaveWarningTitle = "Are you sure you want to leave this quiz?";
   static const String withdrawInformation = "Withdraw Information";
   static const String withdrawLimit = "Withdraw Limit";
   static const String withdrawConfirm = "Withdraw Confirm";
@@ -299,6 +300,9 @@ class MyStrings {
   static const String coinHistory = "Coin History";
   static const String history = "History";
   static const String logout = "Logout";
+  static const String logoutTitle = "Log out";
+  static const String logoutMSg = "Log out of this app by clicking the Log Out button.";
+  static const String logoutSureWarningMSg = "Are you sure you want to log out from your account?";
   static const String hiMariya = "Hi! Mariya Ons";
   static const String hi = "Hi! ";
   static const String total = "Total:";
@@ -309,6 +313,7 @@ class MyStrings {
   static const String accountNumber = "Account Number";
   static const String routingNumber = "Routing Number";
   static const String profileDetails = "Profile Details";
+  static const String accountControl = "Account control";
   static const String playDiffrentQuizs = "Play Different Quizs";
   static const String payNow = "PAY NOW";
   static const String noDepositFound = "No Deposit Found";
@@ -425,6 +430,7 @@ class MyStrings {
   static const String approved = "Approved";
   static const String supper = "Supper";
   static const String supperbattleMan = "Supper Battle Man";
+  static const String singleBattle = "Single Battle";
   static const String silver = "Silver";
   static const String quizerMaster = "Quizer Master";
   static const String master = "Quizer Master";
@@ -449,6 +455,9 @@ class MyStrings {
   static const String joinwithnewroom = "Join with new room";
   static const String eventNotification = "Event Notification";
   static const String dailyQuiz = "Daily Quiz";
+  static const String deleteAccount = "Delete Account";
+  static const String deleteAccountMSG = "Permanently Delete your data from our app.";
+  static const String accountDeleteSureWaring = "Are you sure you want to delete Your Account?";
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
   static const String sorryNoCategory = "Sorry No Category Found";
@@ -472,5 +481,5 @@ class MyStrings {
   static const String unlock = "unlock";
   static const String lock = "lock";
 
-  static const List<String> questionPrefix = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P"];
+  static const List<String> questionPrefix = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"];
 }

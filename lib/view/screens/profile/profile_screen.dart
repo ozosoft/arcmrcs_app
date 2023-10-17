@@ -6,6 +6,7 @@ import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
 
+import '../../../data/controller/auth/logout/logout_controller.dart';
 import 'widgets/profile_details_section.dart';
 import 'widgets/profile_overall_achivements_section.dart';
 
@@ -23,6 +24,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ProfileRepo(apiClient: Get.find()));
+    Get.put(LogoutController(logoutRepo: Get.find()));
     ProfileController controller = Get.put(ProfileController(profileRepo: Get.find()));
 
     super.initState();

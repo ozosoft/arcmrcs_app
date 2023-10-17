@@ -13,6 +13,7 @@ import '../../../../../core/utils/url_container.dart';
 import '../../../../../data/controller/battle/battle_room_controller.dart';
 import '../../../../../data/services/api_client.dart';
 import '../../../../components/alert-dialog/custom_alert_dialog.dart';
+import '../../../../components/dialog/warning_dialog.dart';
 import '../../../../components/text/default_text.dart';
 import '../../../../../data/controller/battle/find_opponents_controller.dart';
 
@@ -38,68 +39,24 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
     return GetBuilder<FindOpponentsController>(builder: (controller) {
       return WillPopScope(
         onWillPop: () async {
-          CustomAlertDialog(
-              borderRadius: 10,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(Dimensions.space10),
-                    child: Column(
-                      children: [
-                        Text(MyStrings.areYouSureYouWantToCloseSearching.tr, textAlign: TextAlign.center, style: regularDefault.copyWith()),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 1,
-                    color: MyColor.textSecondColor.withOpacity(0.3),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(Dimensions.space10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                          },
-                          child: Text(
-                            MyStrings.cancel.tr,
-                            style: regularLarge,
-                          ),
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                          onPressed: () async {
-                            if (controller.battleRoomController.battleRoomData.value != null) {
-                              await controller.battleRoomController.deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false).whenComplete(() {
-                                Navigator.of(context).pop(true);
-                                // Return true when "Yes" is pressed
-                                Get.back();
-                              });
-                            } else {
-                              Navigator.of(context).pop(true);
-                              // Return true when "Yes" is pressed
-                              Get.back();
-                            }
-                          },
-                          child: Text(
-                            MyStrings.yes.tr,
-                            style: regularLarge.copyWith(color: MyColor.colorWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )).customAlertDialog(context);
+          const WarningAlertDialog().warningAlertDialog(
+            context,
+            () async {
+              if (controller.battleRoomController.battleRoomData.value != null) {
+                await controller.battleRoomController.deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false).whenComplete(() {
+                  Navigator.of(context).pop(true);
+                  // Return true when "Yes" is pressed
+                  Get.back();
+                });
+              } else {
+                Navigator.of(context).pop(true);
+                // Return true when "Yes" is pressed
+                Get.back();
+              }
+            },
+            title: MyStrings.areYouSureYouWantToCloseSearching,
+          );
+
           return false; // Disable back button if `start` is true
         },
         child: Column(

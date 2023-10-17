@@ -52,8 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
     admobHelper.createInterstitialAd();
 
     controller.getHomePageData();
-    print("Ads Show code1 ${AdUnitHelper.bannerAdUnitShow}");
-    print("Ads Show code2 ${AdUnitHelper.bannerAdUnitId}");
   }
 
   @override
