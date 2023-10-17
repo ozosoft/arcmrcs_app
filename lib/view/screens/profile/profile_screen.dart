@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/controller/account/profile_controller.dart';
-import 'package:quiz_lab/data/controller/auth/logout/logout_controller.dart';
 import 'package:quiz_lab/data/repo/account/profile_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
-import 'package:quiz_lab/view/components/will_pop_widget.dart';
 
 import 'widgets/profile_details_section.dart';
 import 'widgets/profile_overall_achivements_section.dart';

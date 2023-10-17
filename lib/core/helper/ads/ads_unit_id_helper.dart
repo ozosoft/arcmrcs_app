@@ -22,6 +22,7 @@ class AdUnitHelper {
       rewardedAdUnitShow = apiClient.getGSData().data?.generalSetting?.rewardedUnitStatus;
       if (Platform.isAndroid) {
         bannerAdUnitId = apiClient.getGSData().data?.generalSetting?.bannerAdsId;
+        
         nativeBannerAdUnitId = 'ca-app-pub-3940256099942544/2247696110';
         interstitialAdUnitId = apiClient.getGSData().data?.generalSetting?.interstitialUnitId;
         rewardedAdUnitId = apiClient.getGSData().data?.generalSetting?.rewardedUnitId;

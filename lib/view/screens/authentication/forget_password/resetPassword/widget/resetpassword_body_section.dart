@@ -10,7 +10,6 @@ import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
 import 'package:quiz_lab/view/components/text-form-field/custom_text_field.dart';
 import 'package:get/get.dart';
-import '../../../../../../core/utils/my_color.dart';
 
 class ResetPasswordBodySection extends StatefulWidget {
   const ResetPasswordBodySection({super.key});

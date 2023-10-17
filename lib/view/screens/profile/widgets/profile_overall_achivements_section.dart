@@ -7,13 +7,10 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/controller/account/profile_controller.dart';
-import 'package:quiz_lab/data/repo/account/profile_repo.dart';
-import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/util.dart';
-import '../../../../data/controller/auth/logout/logout_controller.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 
 class ProfileTopSection extends StatefulWidget {

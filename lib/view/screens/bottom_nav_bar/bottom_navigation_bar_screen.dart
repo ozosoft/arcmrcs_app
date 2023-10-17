@@ -41,9 +41,8 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: WillPopWidget(
-        fromBottomNav: selectedIndex == 2? false : true,
-        nextRoute: selectedIndex == 2? "" :
-        RouteHelper.bottomNavBarScreen,
+        fromBottomNav: selectedIndex == 2 ? false : true,
+        nextRoute: selectedIndex == 2 ? "" : RouteHelper.bottomNavBarScreen,
         child: Stack(
           children: [
             Center(
