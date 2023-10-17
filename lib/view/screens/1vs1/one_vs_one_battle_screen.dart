@@ -71,7 +71,7 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                                   onChanged: (value) {
                                     var valueData = value as BattleCategory;
 
-                                    controller.slectACategory(valueData.id);
+                                    controller.selectACategory(valueData.id);
                                   },
                                   items: controller.categoryList.map<DropdownMenuItem<BattleCategory>>((BattleCategory value) {
                                     return DropdownMenuItem<BattleCategory>(
@@ -93,12 +93,12 @@ class _OneVSOneBattleScreenState extends State<OneVSOneBattleScreen> {
                                 RoundedButton(
                                     text: widget.isGroupBattle ? MyStrings.groupBattle.tr : MyStrings.letsPlay.tr,
                                     press: () async {
-                                      if (controller.slectedCategoryID.value == 0) {
+                                      if (controller.selectedCategoryID.value == 0) {
                                         CustomSnackBar.error(errorList: [MyStrings.selectACategoryMsg.tr]);
                                       } else if (int.parse(controller.battleRepo.apiClient.getUserCurrentCoin()) < int.parse(controller.entryFeeRandomGame.value)) {
                                         CustomSnackBar.error(errorList: [MyStrings.youHaveNoCoins.tr]);
                                       } else {
-                                        Get.toNamed(RouteHelper.findOpponentScreen, arguments: [controller.slectedCategoryID.value, controller.entryFeeRandomGame.value, <BattleCategory>[]]); //Send Question List and ID to next page
+                                        Get.toNamed(RouteHelper.findOpponentScreen, arguments: [controller.selectedCategoryID.value, controller.entryFeeRandomGame.value, <BattleCategory>[]]); //Send Question List and ID to next page
                                       }
                                     },
                                     textSize: Dimensions.space20,

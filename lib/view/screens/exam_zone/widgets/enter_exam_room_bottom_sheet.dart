@@ -14,6 +14,8 @@ import 'package:quiz_lab/view/components/text/default_text.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/model/dashboard/dashboard_model.dart';
+import '../../../../data/model/dashboard/exam.dart';
+import '../../../../data/model/exam_zone/exam_zone_question_list_model.dart';
 import '../../../components/buttons/rounded_loading_button.dart';
 
 class EnterRoomBottomSheetWidget extends StatefulWidget {

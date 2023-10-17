@@ -154,7 +154,7 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
                                                                       : MyColor.wrongAnsColor
                                                                   : MyColor.transparentColor,
                                                           borderRadius: BorderRadius.circular(Dimensions.space8),
-                                                          border: Border.all(color:  controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty && controller.selectedOptionIndex == optionIndex ? Colors.transparent :  MyColor.colorLightGrey ,width: .8)),
+                                                           border: Border.all(color:  controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty && controller.selectedOptionIndex == optionIndex ? Colors.transparent :  MyColor.colorLightGrey ,width: .8)),
                                                       child: Row(
                                                         children: [
                                                           Expanded(

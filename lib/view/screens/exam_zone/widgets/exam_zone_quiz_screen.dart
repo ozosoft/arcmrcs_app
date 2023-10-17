@@ -21,6 +21,7 @@ import 'package:slide_countdown/slide_countdown.dart';
 import '../../../../core/utils/url_container.dart';
 import '../../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../../components/buttons/rounded_button.dart';
+import '../../../components/dialog/warning_dialog.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../../../components/no_data.dart';
 
@@ -75,7 +76,43 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<ExamZoneQuizController>(
         builder: (controller) => Scaffold(
-              appBar: CustomCategoryAppBar(title: MyStrings.examZone.tr),
+              appBar: CustomCategoryAppBar(title: MyStrings.exam.tr,children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 3),
+                  child: !controller.loading && controller.examQuestionsList.isNotEmpty?  SlideCountdownSeparated(
+                    streamDuration: _streamDuration,
+                    width: 38,
+                    height: 38,
+                    separatorType: SeparatorType.symbol,
+                    slideDirection: SlideDirection.down,
+                    separatorStyle: const TextStyle(color: MyColor.primaryColor, fontSize: 20),
+                    textStyle: const TextStyle(backgroundColor: Colors.transparent, color: MyColor.primaryColor, fontSize: 23, fontWeight: FontWeight.bold),
+                    decoration: const BoxDecoration(
+                      color: MyColor.timerbgColor,
+                      borderRadius: BorderRadius.all(Radius.circular(Dimensions.space5)),
+                    ),
+                    padding: const EdgeInsets.all(5),
+                    separatorPadding: const EdgeInsets.all(5),
+                    onChanged: (v) {
+                      // debugPrint(v);
+                      // debugPrint(v);
+                      if (v.toString() == "0:00:01.000000") {
+                        debugPrint("Exam Finished onchange");
+
+                        controller.submitAnswer();
+                        _streamDuration.pause();
+                      }
+                    },
+                    onDone: () {
+                      debugPrint("Exam Finished ccc");
+
+                      controller.submitAnswer();
+                      _streamDuration.pause();
+                    },
+                    showZeroValue: false,
+                  ): const SizedBox.shrink(),
+                )
+              ]),
               body: controller.loading == true
                   ? const CustomLoader()
                   : controller.examQuestionsList.isEmpty
@@ -96,58 +133,9 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                 if (controller.examAlreadyGiven == false && controller.examFinished == false && controller.examNotStartYet == false && controller.examStarted == false) {
                                   return true;
                                 }
-                                CustomAlertDialog(
-                                    borderRadius: 100,
-                                    child: Column(
-                                      children: [
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(Dimensions.space10),
-                                          child: Text(
-                                            MyStrings.areYouSureYouWantToLeaveExamRoom.tr,
-                                            textAlign: TextAlign.center,
-                                            style: regularLarge.copyWith(color: MyColor.textSecondColor),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 20,
-                                        ),
-                                        Container(
-                                          width: double.infinity,
-                                          height: 1,
-                                          color: MyColor.textSecondColor.withOpacity(0.3),
-                                        ),
-                                        Padding(
-                                          padding: const EdgeInsets.all(Dimensions.space10),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                                                },
-                                                child: Text(
-                                                  MyStrings.cancel.tr,
-                                                  style: regularLarge,
-                                                ),
-                                              ),
-                                              TextButton(
-                                                style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                                                onPressed: () async {
-                                                  Get.offAllNamed(RouteHelper.bottomNavBarScreen);
-                                                },
-                                                child: Text(
-                                                  MyStrings.yes.tr,
-                                                  style: regularLarge.copyWith(color: MyColor.colorWhite),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    )).customAlertDialog(context);
+                                const WarningAlertDialog().warningAlertDialog(context, () {
+                                  Get.offAndToNamed(RouteHelper.bottomNavBarScreen);
+                                });
                                 return false; // Disable back button if `start` is true
                               },
                               child: Stack(
@@ -176,7 +164,7 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                                 children: [
                                                   Row(
                                                     children: [
-                                                      LevelCardButton(text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
+                                                      LevelCardButton(isQuestionCount: true,text: "${controller.currentPage + 1} / ${controller.examQuestionsList.length.toString()}", hasIcon: false, hasImage: false),
                                                     ],
                                                   ),
                                                   const SizedBox(
@@ -254,7 +242,7 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                                                                       : MyColor.wrongAnsColor
                                                                                   : MyColor.transparentColor,
                                                                           borderRadius: BorderRadius.circular(Dimensions.space8),
-                                                                          border: Border.all(color: MyColor.colorLightGrey)),
+                                                                          border: Border.all( color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isNotEmpty && controller.selectedOptionIndex == optionIndex ? Colors.transparent :  MyColor.colorLightGrey ,width: .8)),
                                                                       child: Row(
                                                                         children: [
                                                                           Expanded(
@@ -298,47 +286,6 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                                       );
                                     },
                                   ),
-                                  Positioned(
-                                    top: Dimensions.space40,
-                                    left: 0,
-                                    right: Dimensions.space40,
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: SlideCountdownSeparated(
-                                        streamDuration: _streamDuration,
-                                        width: 40,
-                                        height: 40,
-                                        separatorType: SeparatorType.symbol,
-                                        slideDirection: SlideDirection.down,
-                                        separatorStyle: const TextStyle(color: MyColor.primaryColor, fontSize: 20),
-                                        textStyle: const TextStyle(backgroundColor: Colors.transparent, color: MyColor.primaryColor, fontSize: 25, fontWeight: FontWeight.bold),
-                                        decoration: const BoxDecoration(
-                                          color: MyColor.timerbgColor,
-                                          borderRadius: BorderRadius.all(Radius.circular(Dimensions.space5)),
-                                        ),
-                                        padding: const EdgeInsets.all(0),
-                                        separatorPadding: const EdgeInsets.all(5),
-                                        onChanged: (v) {
-                                          // debugPrint(v);
-                                          // debugPrint(v);
-                                          if (v.toString() == "0:00:01.000000") {
-                                            debugPrint("Exam Finished onchange");
-
-                                            controller.submitAnswer();
-                                            _streamDuration.pause();
-                                          }
-                                        },
-                                        onDone: () {
-                                          debugPrint("Exam Finished ccc");
-
-                                          controller.submitAnswer();
-                                          _streamDuration.pause();
-                                        },
-                                        showZeroValue: false,
-                                      ),
-                                    ),
-                                  ),
-
 
                                   //Load bar
                                   if (controller.submitLoading == true) ...[
@@ -421,63 +368,13 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
                         debugPrint("Exam Finished button");
                         _streamDuration.pause();
 
-                        CustomAlertDialog(
-                            borderRadius: 10,
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(Dimensions.space10),
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        MyStrings.areYouSureYouWantToLeaveExamRoom.tr,
-                                        textAlign: TextAlign.center,
-                                        style: regularDefault.copyWith(),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Container(
-                                  width: double.infinity,
-                                  height: 1,
-                                  color: MyColor.textSecondColor.withOpacity(0.3),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(Dimensions.space10),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                                        },
-                                        child: Text(
-                                          MyStrings.cancel.tr,
-                                          style: regularLarge,
-                                        ),
-                                      ),
-                                      TextButton(
-                                        style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                                        onPressed: () async {
-                                          Get.back();
-                                          controller.submitAnswer();
-                                        },
-                                        child: Text(
-                                          MyStrings.yes.tr,
-                                          style: regularLarge.copyWith(color: MyColor.colorWhite),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )).customAlertDialog(context);
+                        const WarningAlertDialog().warningAlertDialog(context,
+                          title: MyStrings.areYouSureYouWantToSubmitExamAnswer,
+                          () {
+                          Get.back();
+                          controller.submitAnswer();
+                        });
+
                       }),
                 ),
               ],

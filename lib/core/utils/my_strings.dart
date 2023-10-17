@@ -32,6 +32,7 @@ class MyStrings {
   static const String areYouSureYouWantToLeaveThisRoom = "Are You sure You Want to leave this room!";
   static const String areYouSureYouWantToLeaveThisQuiz = "Are You sure You Want to leave this Quiz!";
   static const String areYouSureYouWantToLeaveExamRoom = "Are You sure You Want to leave Exam room!";
+  static const String areYouSureYouWantToSubmitExamAnswer = "Are you sure you want to submit the exam answer?";
   static const String questionNotFoundMsg = "Questions not found! Please try again after a few minutes.";
   static const String noQuestionFoundMsg = "Sorry! No Questions!";
   static const String oponentLeftTheGame = "Oponent Left The game!";
