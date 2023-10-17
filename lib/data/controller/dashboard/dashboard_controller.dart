@@ -40,7 +40,7 @@ class DashBoardController extends GetxController {
   String? dailyQuizStatus = '0';
   String? singleBattleStatus = '0';
 
-  bool loader = false;
+  bool loader = true;
 
   bool isActive = false;
 

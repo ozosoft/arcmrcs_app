@@ -180,7 +180,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                                               : reviewOptionItem.isAnswer.toString() == "1"
                                                                   ? SvgPicture.asset(MyImages.whiteTikSVG)
                                                                   : const SizedBox(),
-                                                )
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -190,6 +190,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                   ],
                                 );
                               }),
+                          const SizedBox(height: Dimensions.addSpace),
                         ],
                       ),
                     ),

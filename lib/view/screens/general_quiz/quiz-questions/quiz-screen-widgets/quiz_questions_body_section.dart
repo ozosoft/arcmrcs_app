@@ -43,7 +43,7 @@ class _QuizBodySectionState extends State<QuizBodySection> {
       return controller.isLoading
       ? const CustomLoader()
       : controller.questionsList.isEmpty
-          ? const NoDataWidget()
+          ? const SingleChildScrollView(child: NoDataWidget())
           : WillPopScope(
               onWillPop: () async {
                 const WarningAlertDialog().warningAlertDialog(context, () {

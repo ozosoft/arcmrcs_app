@@ -35,7 +35,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.all(Dimensions.space10),
+        margin: const EdgeInsets.only(left:Dimensions.space10,right:Dimensions.space10,bottom:Dimensions.space10),
         decoration: BoxDecoration(
           color: MyColor.colorWhite,
           borderRadius: BorderRadius.circular(5.0),
@@ -60,7 +60,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const SizedBox(width: Dimensions.space10),
@@ -87,7 +87,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                       ],
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.only(top: Dimensions.space10, bottom: Dimensions.space10, end: Dimensions.space10),
+                          padding: const EdgeInsetsDirectional.only( bottom: Dimensions.space10, end: Dimensions.space10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [

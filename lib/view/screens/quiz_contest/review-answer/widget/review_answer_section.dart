@@ -170,6 +170,7 @@ class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswer
                                       ],
                                     );
                                   }),
+                              const SizedBox(height: Dimensions.addSpace),
                             ],
                           ),
                         ),

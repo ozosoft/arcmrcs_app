@@ -90,7 +90,7 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
                       height: Dimensions.space15,
                     ),
                     Text(
-                      controller.apiClient.getUserFullName(),
+                      controller.apiClient.getCurrencyOrUsername(isCurrency: false),
                       style: semiBoldExtraLarge.copyWith(fontSize: Dimensions.fontOverLarge),
                     ),
                     const SizedBox(

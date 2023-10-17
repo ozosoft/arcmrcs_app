@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:quiz_lab/core/utils/method.dart';
@@ -11,6 +12,8 @@ import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
 import 'package:quiz_lab/data/model/user_post_model/user_post_model.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
+
+import '../../../core/helper/shared_preference_helper.dart';
 
 class ProfileRepo {
   ApiClient apiClient;
@@ -89,4 +92,45 @@ class ProfileRepo {
       return false;
     }
   }
+
+  Future<bool> sendUserToken() async {
+    String deviceToken;
+    if (apiClient.sharedPreferences.containsKey(SharedPreferenceHelper.fcmDeviceKey)) {
+      deviceToken = apiClient.sharedPreferences.getString(SharedPreferenceHelper.fcmDeviceKey) ?? '';
+    } else {
+      deviceToken = '';
+    }
+
+    FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+    bool success = false;
+    if (deviceToken.isEmpty) {
+      firebaseMessaging.getToken().then((fcmDeviceToken) async {
+        success = await sendUpdatedToken(fcmDeviceToken ?? '');
+      });
+    } else {
+      firebaseMessaging.onTokenRefresh.listen((fcmDeviceToken) async {
+        if (deviceToken == fcmDeviceToken) {
+          success = true;
+        } else {
+          apiClient.sharedPreferences.setString(SharedPreferenceHelper.fcmDeviceKey, fcmDeviceToken);
+          success = await sendUpdatedToken(fcmDeviceToken);
+        }
+      });
+    }
+    return success;
+  }
+
+  Future<bool> sendUpdatedToken(String deviceToken) async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.deviceTokenEndPoint}';
+    Map<String, String> map = deviceTokenMap(deviceToken);
+
+    await apiClient.request(url, Method.postMethod, map, passHeader: true);
+    return true;
+  }
+
+  Map<String, String> deviceTokenMap(String deviceToken) {
+    Map<String, String> map = {'token': deviceToken.toString()};
+    return map;
+  }
+
 }

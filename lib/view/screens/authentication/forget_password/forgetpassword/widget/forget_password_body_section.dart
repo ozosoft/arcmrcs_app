@@ -81,7 +81,6 @@ class _ForgetPasswordBodySectionState extends State<ForgetPasswordBodySection> {
                       : RoundedButton(
                           text: MyStrings.continues.tr,
                           press: () {
-                            // Get.toNamed(RouteHelper.verificationScreen);
                             if (formKey.currentState!.validate()) {
                               auth.submitForgetPassCode();
                             }

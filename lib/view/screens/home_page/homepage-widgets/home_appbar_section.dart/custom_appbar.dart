@@ -74,7 +74,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${MyStrings.hi.tr} ${controller.dashRepo.apiClient.getUserFullName().tr}",
+                        "${MyStrings.hi.tr} ${controller.dashRepo.apiClient.getCurrencyOrUsername(isCurrency: false)}",
                         style: semiBoldLarge.copyWith(fontSize: Dimensions.fontMediumLarge, color: MyColor.colorWhite),
                       ),
                       const SizedBox(height: Dimensions.space5),

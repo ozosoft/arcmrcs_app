@@ -100,9 +100,12 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                           controller.examZoneListData(fromLoad: true);
                         },
                         child: controller.examcategoryList!.isEmpty
-                            ? NoDataWidget(
-                                messages: MyStrings.noExamFound.tr,
-                              )
+                            ? SingleChildScrollView(
+                              child: NoDataWidget(
+                                margin: 8,
+                                  messages: MyStrings.noExamFound.tr,
+                                ),
+                            )
                             : ListView.builder(
                                 physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                                 itemCount: controller.examcategoryList!.length,
@@ -134,7 +137,12 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                         onRefresh: () async {
                           controller.completedExamList(fromLoad: true);
                         },
-                        child: ListView.builder(
+                        child: controller.completedExamDataList!.isEmpty ? SingleChildScrollView(
+                          child: NoDataWidget(
+                            margin: 8,
+                            messages: MyStrings.noExamFound.tr,
+                          ),
+                        ) : ListView.builder(
                             physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
                             itemCount: controller.completedExamDataList.length,
                             itemBuilder: (BuildContext context, int index) {

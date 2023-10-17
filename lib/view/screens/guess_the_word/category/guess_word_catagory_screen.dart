@@ -40,9 +40,11 @@ class _GestheWordCategoryScreenState extends State<GestheWordCategoryScreen> {
         return controller.isLoading
             ? const CustomLoader()
             : controller.categoryList.isEmpty
-                ? NoDataWidget(
-                    messages: MyStrings.noCategoryFound.tr,
-                  )
+                ? SingleChildScrollView(
+                  child: NoDataWidget(
+                      messages: MyStrings.noCategoryFound.tr,
+                    ),
+                )
                 : RefreshIndicator(
                     color: MyColor.primaryColor,
                     onRefresh: () async {

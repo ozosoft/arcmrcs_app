@@ -82,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: const EdgeInsets.all(Dimensions.space10),
-                      child: (controller.loader != false)
+                      child: controller.loader
                           ? SizedBox(
                               height: context.height / 2,
                               child: const Center(child: CustomLoader()),
@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     const PlayDiffrentQuizes(),
 
                                     const SizedBox(
-                                      height: Dimensions.space100,
+                                      height: Dimensions.space70,
                                     )
                                   ],
                                 ),

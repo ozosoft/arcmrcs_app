@@ -88,6 +88,7 @@ class Dimensions {
 
   static const double screenPaddingH = 15;
   static const double screenPaddingV = 15;
+  static const double addSpace = 45;
 
   static const EdgeInsets screenPaddingHV  = EdgeInsets.symmetric(horizontal: space15, vertical: space20);
   static const EdgeInsets defaultPaddingHV = EdgeInsets.symmetric(vertical: space20, horizontal: space15);

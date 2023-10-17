@@ -177,6 +177,7 @@ class _ExamReviewAnswerSectionState extends State<ExamReviewAnswerSection> {
                                       ],
                                     );
                                   }),
+                              const SizedBox(height: Dimensions.addSpace),
                             ],
                           ),
                         ),

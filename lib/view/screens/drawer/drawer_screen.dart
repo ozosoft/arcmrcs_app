@@ -76,7 +76,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            controller.dashRepo.apiClient.getUserFullName().tr,
+                            controller.dashRepo.apiClient.getCurrencyOrUsername(isCurrency: false),
                             style: semiBoldMediumLarge,
                           ),
                           const SizedBox(height: Dimensions.space7),

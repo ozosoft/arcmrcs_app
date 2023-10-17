@@ -5,6 +5,7 @@ import 'package:quiz_lab/view/screens/quiz_contest/review-answer/widget/review_a
 import 'package:get/get.dart';
 
 import '../../../../core/utils/dimensions.dart';
+import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';
 
 class QuizContestReviewAnswerScreen extends StatefulWidget {
   const QuizContestReviewAnswerScreen({super.key});
@@ -27,7 +28,7 @@ class _QuizContestReviewAnswerScreenState extends State<QuizContestReviewAnswerS
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
-                 // child: QuizBannerAdsWidget(),
+                  child: QuizBannerAdsWidget(),
                 ),
               ),
             ),

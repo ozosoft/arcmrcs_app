@@ -116,15 +116,17 @@ class _ExamZoneQuizScreenState extends State<ExamZoneQuizScreen> {
               body: controller.loading == true
                   ? const CustomLoader()
                   : controller.examQuestionsList.isEmpty
-                      ? NoDataWidget(
-                          messages: controller.examNotStartYet
-                              ? MyStrings.examNotStartYet.tr
-                              : controller.examAlreadyGiven
-                                  ? MyStrings.examAlreadyGiven.tr
-                                  : controller.examFinished
-                                      ? MyStrings.examFinished.tr
-                                      : MyStrings.noDataToShow.tr,
-                        )
+                      ? SingleChildScrollView(
+                        child: NoDataWidget(
+                            messages: controller.examNotStartYet
+                                ? MyStrings.examNotStartYet.tr
+                                : controller.examAlreadyGiven
+                                    ? MyStrings.examAlreadyGiven.tr
+                                    : controller.examFinished
+                                        ? MyStrings.examFinished.tr
+                                        : MyStrings.noDataToShow.tr,
+                          ),
+                      )
                       : Stack(
                           fit: StackFit.expand,
                           children: [

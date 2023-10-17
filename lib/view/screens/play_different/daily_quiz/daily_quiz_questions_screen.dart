@@ -50,10 +50,12 @@ class _DailyQuizQuestionsScreenState extends State<DailyQuizQuestionsScreen> {
         body: controller.loading
             ? const CustomLoader()
             : controller.examQuestionsList.isEmpty
-                ? NoDataWidget(
-                    showBack: true,
-                    messages: "${controller.alreadyPlayed == true ? MyStrings.sorryAlreadyPlayedQuiz.tr : MyStrings.sorryNoQuizFound.tr} ",
-                  )
+                ? SingleChildScrollView(
+                  child: NoDataWidget(
+                      showBack: true,
+                      messages: "${controller.alreadyPlayed == true ? MyStrings.sorryAlreadyPlayedQuiz.tr : MyStrings.sorryNoQuizFound.tr} ",
+                    ),
+                )
                 : PageView(onPageChanged: (value) {}, children: [
                     PageView.builder(
                       physics: const NeverScrollableScrollPhysics(),

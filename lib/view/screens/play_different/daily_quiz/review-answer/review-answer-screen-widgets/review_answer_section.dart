@@ -188,6 +188,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                       ],
                                     );
                                   }),
+                              const SizedBox(height: Dimensions.addSpace),
                             ],
                           ),
                         ),

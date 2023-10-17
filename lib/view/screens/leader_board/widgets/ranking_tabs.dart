@@ -124,7 +124,9 @@ class _RankingTabBarState extends State<RankingTabBar> {
               height: Dimensions.space10,
             ),
             Text(
-              playerName.tr ?? '',
+              playerName,
+              maxLines: 2,
+              textAlign: TextAlign.center,
               style: regularMediumLarge.copyWith(
                 color: MyColor.colorWhite,
               ),
