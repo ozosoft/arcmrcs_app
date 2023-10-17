@@ -3,7 +3,6 @@ import 'package:lottie/lottie.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_images.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../../core/utils/my_color.dart';
 import '../../../../../core/utils/my_strings.dart';

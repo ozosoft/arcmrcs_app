@@ -13,28 +13,13 @@ class QuizBannerAdsWidget extends StatefulWidget {
 
 class _QuizBannerAdsWidgetState extends State<QuizBannerAdsWidget> {
   BannerAd? _bannerAd;
-
+  bool isAdLoaded = true;
   @override
   void initState() {
     super.initState();
     if (AdUnitHelper.bannerAdUnitId != null) {
-      _bannerAd = BannerAd(
-        adUnitId: AdUnitHelper.bannerAdUnitId!,
-        request: const AdRequest(),
-        size: AdSize.banner,
-        listener: BannerAdListener(
-          onAdLoaded: (Ad ad) {
-            debugPrint('$BannerAd loaded.');
-          },
-          onAdFailedToLoad: (Ad ad, LoadAdError error) {
-            debugPrint('$BannerAd failedToLoad: $error');
-          },
-          onAdOpened: (Ad ad) => debugPrint('$BannerAd onAdOpened.'),
-          onAdClosed: (Ad ad) => debugPrint('$BannerAd onAdClosed.'),
-          onAdWillDismissScreen: (Ad ad) => debugPrint('$BannerAd onAdWillDismissScreen.'),
-        ),
-      );
       if (Environment.showBannerAds && AdUnitHelper.bannerAdUnitShow! == '1') {
+        loadAds();
         _bannerAd!.load();
       } else {
         _bannerAd!.dispose();
@@ -42,10 +27,41 @@ class _QuizBannerAdsWidgetState extends State<QuizBannerAdsWidget> {
     }
   }
 
+  loadAds() {
+    try {
+      _bannerAd = BannerAd(
+        adUnitId: AdUnitHelper.bannerAdUnitId!,
+        request: const AdRequest(),
+        size: AdSize.banner,
+        listener: BannerAdListener(
+          onAdLoaded: (Ad ad) {
+            setState(() {
+              isAdLoaded = true;
+            });
+            debugPrint('$BannerAd loaded.');
+          },
+          onAdFailedToLoad: (Ad ad, LoadAdError error) {
+            debugPrint('$BannerAd failedToLoad: $error');
+
+            print('BannerAd failedToLoad: $error');
+            _bannerAd?.dispose();
+            _bannerAd = null;
+            loadAds();
+          },
+          onAdOpened: (Ad ad) => debugPrint('$BannerAd onAdOpened.'),
+          onAdClosed: (Ad ad) => debugPrint('$BannerAd onAdClosed.'),
+          onAdWillDismissScreen: (Ad ad) => debugPrint('$BannerAd onAdWillDismissScreen.'),
+        ),
+      );
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final AdWidget adWidget = AdWidget(ad: _bannerAd!);
-    return Environment.showBannerAds
+    return Environment.showBannerAds && AdUnitHelper.bannerAdUnitShow! == '1' && isAdLoaded
         ? Container(
             alignment: Alignment.center,
             width: _bannerAd!.size.width.toDouble(),

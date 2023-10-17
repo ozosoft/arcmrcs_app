@@ -52,6 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
     admobHelper.createInterstitialAd();
 
     controller.getHomePageData();
+    print("Ads Show code1 ${AdUnitHelper.bannerAdUnitShow}");
+    print("Ads Show code2 ${AdUnitHelper.bannerAdUnitId}");
   }
 
   @override
@@ -81,36 +83,36 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Padding(
                       padding: const EdgeInsets.all(Dimensions.space10),
                       child: (controller.loader != false)
-                    ? SizedBox(
-                        height: context.height / 2,
-                        child: const Center(child: CustomLoader()),
-                      )
-                    : controller.generalQuizStatus == '0' && controller.contestStatus == '0' && controller.examStatus == '0' && controller.differentQuizlist.isEmpty ?
-                      const NoDataWidget(
-                        margin: 10,
-                        hideButton: true,
-                      ) :
-                      Column(
-                        children: [
-                          if (controller.generalQuizStatus == '1') ...[
-                            const TopCategorySection(),
-                          ],
-                          // BattleOfTheDaySection(),
-                          if (controller.contestStatus == '1') ...[
-                            const QuizContestSection(),
-                          ],
+                          ? SizedBox(
+                              height: context.height / 2,
+                              child: const Center(child: CustomLoader()),
+                            )
+                          : controller.generalQuizStatus == '0' && controller.contestStatus == '0' && controller.examStatus == '0' && controller.differentQuizlist.isEmpty
+                              ? const NoDataWidget(
+                                  margin: 10,
+                                  hideButton: true,
+                                )
+                              : Column(
+                                  children: [
+                                    if (controller.generalQuizStatus == '1') ...[
+                                      const TopCategorySection(),
+                                    ],
+                                    // BattleOfTheDaySection(),
+                                    if (controller.contestStatus == '1') ...[
+                                      const QuizContestSection(),
+                                    ],
 
-                          if (controller.examStatus == '1') ...[
-                            const ExamZoneSection(),
-                          ],
+                                    if (controller.examStatus == '1') ...[
+                                      const ExamZoneSection(),
+                                    ],
 
-                          const PlayDiffrentQuizes(),
+                                    const PlayDiffrentQuizes(),
 
-                          const SizedBox(
-                            height: Dimensions.space100,
-                          )
-                        ],
-                      ),
+                                    const SizedBox(
+                                      height: Dimensions.space100,
+                                    )
+                                  ],
+                                ),
                     ),
                   ),
                 ],

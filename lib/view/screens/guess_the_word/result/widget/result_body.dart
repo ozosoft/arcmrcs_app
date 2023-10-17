@@ -10,8 +10,6 @@ import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_Controller.da
 import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:quiz_lab/view/components/divider/custom_horizontal_divider.dart';
 import 'package:quiz_lab/view/components/divider/custom_vertical_divider.dart';
-import 'package:quiz_lab/view/components/image/custom_svg_picture.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../data/model/guess_the_word/guess_question_model.dart';

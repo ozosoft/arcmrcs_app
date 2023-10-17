@@ -9,7 +9,6 @@ import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_quiz_controller.dart';
 import 'package:quiz_lab/data/repo/play_different_quizes/fun_n_learn/fun_n_learn_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
-import 'package:quiz_lab/environment.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:quiz_lab/view/components/buttons/level_card_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
@@ -19,7 +18,6 @@ import 'package:get/get.dart';
 
 import '../../../../core/route/route.dart';
 import '../../../../core/utils/url_container.dart';
-import '../../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../../components/dialog/warning_dialog.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';

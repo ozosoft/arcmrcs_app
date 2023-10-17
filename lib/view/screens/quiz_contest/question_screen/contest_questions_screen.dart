@@ -19,7 +19,6 @@ import 'package:get/get.dart';
 
 import '../../../../core/route/route.dart';
 import '../../../../environment.dart';
-import '../../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../../components/dialog/warning_dialog.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';
