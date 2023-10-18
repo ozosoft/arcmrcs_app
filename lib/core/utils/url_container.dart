@@ -87,6 +87,7 @@ class UrlContainer {
   static const String privacyPolicyEndPoint = 'privacy-policy';
 
   static const String getProfileEndPoint = 'user-info';
+  static const String deleteAccountEndPoint = 'account/delete';
   static const String updateProfileEndPoint = 'profile-setting';
   static const String updateProfileAvatarEndPoint = 'profile-avatar-update';
   static const String profileCompleteEndPoint = 'user-data-submit';

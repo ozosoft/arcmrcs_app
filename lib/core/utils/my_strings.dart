@@ -30,9 +30,9 @@ class MyStrings {
   static const String selectPaymentMethod = "Select PaymentMethod";
   static const String areYouSureYouWantToCloseSearching = "Are You sure You Want Close Searching!";
   static const String searching = "Searching";
-  static const String areYouSureYouWantToLeaveThisRoom = "Are You sure You Want to leave this room!";
-  static const String areYouSureYouWantToLeaveThisQuiz = "Are You sure You Want to leave this Quiz!";
-  static const String areYouSureYouWantToLeaveExamRoom = "Are You sure You Want to leave Exam room!";
+  static const String areYouSureYouWantToLeaveThisRoom = "Are you sure? you want to leave this room!";
+  static const String areYouSureYouWantToLeaveThisQuiz = "Are you sure? You want to leave this Quiz!";
+  static const String areYouSureYouWantToLeaveExamRoom = "Are you sure? You want to leave Exam room!";
   static const String areYouSureYouWantToSubmitExamAnswer = "Are you sure you want to submit the exam answer?";
   static const String questionNotFoundMsg = "Questions not found! Please try again after a few minutes.";
   static const String noQuestionFoundMsg = "Sorry! No Questions!";
@@ -456,8 +456,10 @@ class MyStrings {
   static const String eventNotification = "Event Notification";
   static const String dailyQuiz = "Daily Quiz";
   static const String deleteAccount = "Delete Account";
+  static const String delete = "Delete";
+  static const String deleteUndoneMSG = "This cannot be undone!";
   static const String deleteAccountMSG = "Permanently Delete your data from our app.";
-  static const String accountDeleteSureWaring = "Are you sure you want to delete Your Account?";
+  static const String accountDeleteSureWaring = "Are you sure you want to delete your account? This action cannot be undone!";
   static const String funAndLearn = "Fun & Learn";
   static const String guessTheWord = "Guess The Word";
   static const String sorryNoCategory = "Sorry No Category Found";

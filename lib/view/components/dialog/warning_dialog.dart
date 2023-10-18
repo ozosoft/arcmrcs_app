@@ -110,6 +110,14 @@ class WarningAlertDialog {
                   children: [
                     const SizedBox(height: Dimensions.space10),
                     Text(
+                      "${MyStrings.deleteAccount.tr}?",
+                      style: semiBoldLarge.copyWith(color: MyColor.getTextColor(), fontSize: Dimensions.fontDefault + 5),
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 4,
+                    ),
+                    const SizedBox(height: Dimensions.space15),
+                    Text(
                       title.tr,
                       style: regularSmall.copyWith(color: MyColor.getTextColor(), fontSize: Dimensions.fontDefault),
                       textAlign: TextAlign.center,
@@ -122,7 +130,7 @@ class WarningAlertDialog {
                       children: [
                         Expanded(
                           child: RoundedButton(
-                            text: MyStrings.no.tr,
+                            text: MyStrings.cancel.tr,
                             press: () {
                               Navigator.pop(context);
                             },
@@ -134,10 +142,12 @@ class WarningAlertDialog {
                         ),
                         const SizedBox(width: Dimensions.space10),
                         Expanded(
-                          child: RoundedButton(text: MyStrings.yes.tr, press: press, horizontalPadding: 3, verticalPadding: 3, color: MyColor.getPrimaryColor(), textColor: MyColor.colorWhite),
+                          child: RoundedButton(text: MyStrings.delete.tr, press: press, horizontalPadding: 3, verticalPadding: 3, color: MyColor.getPrimaryColor(), textColor: MyColor.colorWhite),
                         )
                       ],
-                    )
+                    ),
+                
+                    
                   ],
                 ),
               ),

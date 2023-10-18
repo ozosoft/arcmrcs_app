@@ -93,25 +93,41 @@ class _ProfileDetailsSectionState extends State<ProfileDetailsSection> {
                             style: boldMediumLarge,
                           ),
                         ),
-                        ListTile(
-                          onTap: () {
-                            const WarningAlertDialog().deleteAccountAlertDialog(context, () {
-                              print("Delete");
-                            });
+                        GetBuilder<LogoutController>(
+                          builder: (logoutController) {
+                            return ListTile(
+                              onTap: () {
+                                const WarningAlertDialog().deleteAccountAlertDialog(context, () {
+                                  print("Delete Button Clicked!");
+                                  Get.back();
+                                  logoutController.deleteMyAccount();
+                                });
+                              },
+                              title: Padding(
+                                padding: const EdgeInsets.only(bottom: 5),
+                                child: Text(
+                                  MyStrings.deleteAccount.tr,
+                                  style: regularDefault.copyWith(color: MyColor.colorRed, fontSize: Dimensions.fontExtraLarge),
+                                ),
+                              ),
+                              subtitle: Text(MyStrings.deleteAccountMSG.tr, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
+                              trailing: logoutController.accountDeleteStarted
+                                  ? const SizedBox(
+                                      width: Dimensions.space25,
+                                      height: Dimensions.space25,
+                                      child: SpinKitPouringHourGlass(
+                                        strokeWidth: 0.2,
+                                        color: MyColor.primaryColor,
+                                        size: Dimensions.space40,
+                                      ),
+                                    )
+                                  : SvgPicture.asset(
+                                      MyImages.accountDelete,
+                                      colorFilter: const ColorFilter.mode(MyColor.wrongAnsColor, BlendMode.srcIn),
+                                      width: Dimensions.space35,
+                                    ),
+                            );
                           },
-                          title: Padding(
-                            padding: const EdgeInsets.only(bottom: 5),
-                            child: Text(
-                              MyStrings.deleteAccount.tr,
-                              style: regularDefault.copyWith(color: MyColor.colorRed, fontSize: Dimensions.fontExtraLarge),
-                            ),
-                          ),
-                          subtitle: Text(MyStrings.deleteAccountMSG.tr, style: semiBoldLarge.copyWith(color: MyColor.colorBlack, fontWeight: FontWeight.w500)),
-                          trailing: SvgPicture.asset(
-                            MyImages.accountDelete,
-                            colorFilter: const ColorFilter.mode(MyColor.wrongAnsColor, BlendMode.srcIn),
-                            width: Dimensions.space35,
-                          ),
                         ),
                         const Divider(height: Dimensions.space10),
                         GetBuilder<LogoutController>(

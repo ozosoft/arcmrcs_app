@@ -17,7 +17,6 @@ import '../../../../core/utils/url_container.dart';
 import '../../../../data/model/battle/battle_question_list.dart';
 import '../../../../data/services/api_client.dart';
 import '../../../../environment.dart';
-import '../../../components/alert-dialog/custom_alert_dialog.dart';
 
 import '../../../components/dialog/warning_dialog.dart';
 import '../../../components/image_widget/my_image_widget.dart';
@@ -176,7 +175,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                 ],
                               ),
                               const SizedBox(
-                                height: 10,
+                                height: Dimensions.space30,
                               ),
                               Center(
                                 child: AnimationLimiter(
@@ -210,7 +209,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                                 style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500),
                                                 textAlign: TextAlign.center,
                                               )),
-                                          const SizedBox(height: 20),
+                                          const SizedBox(height: Dimensions.space25),
                                           Column(
                                             children: currentQuestion.options.asMap().entries.map<Widget>((entry) {
                                               int index = entry.key;

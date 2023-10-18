@@ -18,7 +18,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/util.dart';
-import '../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../components/bottom-sheet/custom_bottom_sheet.dart';
 import '../../components/dialog/warning_dialog.dart';
 import '../../components/image_widget/my_image_widget.dart';
@@ -166,29 +165,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   endIndent: Dimensions.space70,
                 ),
                 ListTile(
-                    leading: SvgPicture.asset(MyImages.languageDrawer),
-                    title: Text(
-                      MyStrings.language.tr,
-                      style: regularMediumLarge,
-                    ),
-                    minLeadingWidth: Dimensions.space1,
-                    onTap: () {
-                      CustomBottomSheet(child: const LanguageBottomSheetScreen()).customBottomSheet(context);
-                    }),
-                ListTile(
-                  leading: SvgPicture.asset(
-                    MyImages.accountDelete,
-                    colorFilter: const ColorFilter.mode(MyColor.wrongAnsColor, BlendMode.srcIn),
-                    width: 25,
-                  ),
+                  leading: SvgPicture.asset(MyImages.languageDrawer),
                   title: Text(
-                    MyStrings.deleteAccount.tr,
-                    style: regularMediumLarge.copyWith(color: MyColor.wrongAnsColor),
+                    MyStrings.language.tr,
+                    style: regularMediumLarge,
                   ),
-                  onTap: () {
-                    const WarningAlertDialog().deleteAccountAlertDialog(context, () {});
-                  },
                   minLeadingWidth: Dimensions.space1,
+                  onTap: () {
+                    CustomBottomSheet(child: const LanguageBottomSheetScreen()).customBottomSheet(context);
+                  },
                 ),
                 GetBuilder<LogoutController>(
                   builder: (logoutController) => ListTile(
@@ -219,6 +204,37 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     minLeadingWidth: Dimensions.space1,
                   ),
                 ),
+                GetBuilder<LogoutController>(builder: (logoutController) {
+                  return ListTile(
+                    leading: logoutController.accountDeleteStarted
+                        ? const SizedBox(
+                            width: Dimensions.space25,
+                            height: Dimensions.space25,
+                            child: SpinKitPouringHourGlass(
+                              strokeWidth: 0.2,
+                              color: MyColor.primaryColor,
+                              size: Dimensions.space40,
+                            ),
+                          )
+                        : SvgPicture.asset(
+                            MyImages.accountDelete,
+                            colorFilter: const ColorFilter.mode(MyColor.wrongAnsColor, BlendMode.srcIn),
+                            width: 25,
+                          ),
+                    title: Text(
+                      MyStrings.deleteAccount.tr,
+                      style: regularMediumLarge.copyWith(color: MyColor.wrongAnsColor),
+                    ),
+                    onTap: () {
+                      const WarningAlertDialog().deleteAccountAlertDialog(context, () {
+                        print("Delete Button Clicked!");
+                        Get.back();
+                        logoutController.deleteMyAccount();
+                      });
+                    },
+                    minLeadingWidth: Dimensions.space1,
+                  );
+                }),
               ],
             ),
           ),

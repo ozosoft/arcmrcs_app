@@ -12,23 +12,25 @@ class LogoutRepo {
   Future<ResponseModel> logout() async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.logoutUrl}';
 
-    ResponseModel responseModel =
-        await apiClient.request(url, Method.getMethod, null, passHeader: true);
+    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
     await clearSharedPrefData();
     return responseModel;
   }
 
   Future<void> clearSharedPrefData() async {
-    await apiClient.sharedPreferences
-        .setString(SharedPreferenceHelper.userNameKey, '');
-    await apiClient.sharedPreferences
-        .setString(SharedPreferenceHelper.userEmailKey, '');
-    await apiClient.sharedPreferences
-        .setString(SharedPreferenceHelper.accessTokenType, '');
-    await apiClient.sharedPreferences
-        .setString(SharedPreferenceHelper.accessTokenKey, '');
-    await apiClient.sharedPreferences
-        .setBool(SharedPreferenceHelper.rememberMeKey, false);
+    await apiClient.sharedPreferences.setString(SharedPreferenceHelper.userNameKey, '');
+    await apiClient.sharedPreferences.setString(SharedPreferenceHelper.userEmailKey, '');
+    await apiClient.sharedPreferences.setString(SharedPreferenceHelper.accessTokenType, '');
+    await apiClient.sharedPreferences.setString(SharedPreferenceHelper.accessTokenKey, '');
+    await apiClient.sharedPreferences.setBool(SharedPreferenceHelper.rememberMeKey, false);
     return Future.value();
+  }
+
+  Future<ResponseModel> deleteMyAccount() async {
+    String url = '${UrlContainer.baseUrl}${UrlContainer.deleteAccountEndPoint}';
+
+    ResponseModel responseModel = await apiClient.request(url, Method.getMethod, null, passHeader: true);
+    await clearSharedPrefData();
+    return responseModel;
   }
 }

@@ -15,6 +15,7 @@ class LogoutController extends GetxController {
 
   LogoutController({required this.logoutRepo});
 
+  // Logout PART
   bool loaderStarted = false;
 
   void logout() async {
@@ -39,6 +40,35 @@ class LogoutController extends GetxController {
     }
 
     loaderStarted = false;
+    update();
+  }
+
+// Account Delete Part
+  bool accountDeleteStarted = false;
+
+  void deleteMyAccount() async {
+    accountDeleteStarted = true;
+    update();
+
+    // getsavedData();
+
+    ResponseModel logout = await logoutRepo.deleteMyAccount();
+
+    if (logout.statusCode == 200) {
+      LogoutModel delete = LogoutModel.fromJson(jsonDecode(logout.responseJson));
+      if (delete.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+        Get.offAllNamed(RouteHelper.loginScreen);
+        CustomSnackBar.success(successList: [...delete.message!.success!]);
+        debugPrint("Delete Account OUT!");
+        update();
+      } else {
+        CustomSnackBar.error(errorList: [...delete.message!.error!]);
+      }
+    } else {
+      CustomSnackBar.error(errorList: [logout.message]);
+    }
+
+    accountDeleteStarted = false;
     update();
   }
 }
