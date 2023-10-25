@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final appLanguageResponseModel = appLanguageResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -23,7 +20,7 @@ class AppLanguageResponseModel {
 
     factory AppLanguageResponseModel.fromJson(Map<String, dynamic> json) => AppLanguageResponseModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: Message.fromJson(json["message"]),
         data: Data.fromJson(json["data"]),
     );
@@ -77,7 +74,7 @@ class Language {
         id: json["id"],
         name: json["name"],
         code: json["code"],
-        isDefault: json["is_default"],
+        isDefault: json["is_default"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );

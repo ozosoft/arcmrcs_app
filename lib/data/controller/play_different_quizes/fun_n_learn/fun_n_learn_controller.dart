@@ -28,7 +28,7 @@ class FunNLearnCategoriesController extends GetxController {
     if (model.statusCode == 200) {
       allCategoriesList.clear();
 
-      FunNLearncategoryModel allcategories = FunNLearncategoryModel.fromJson(jsonDecode(model.responseJson));
+      FunNLearnCategoryModel allcategories = FunNLearnCategoryModel.fromJson(jsonDecode(model.responseJson));
 
       if (allcategories.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<Category>? categories = allcategories.data?.categories;

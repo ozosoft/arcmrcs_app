@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
+import '../../../core/utils/my_images.dart';
 
 class MyImageWidget extends StatelessWidget {
   final String imageUrl;
@@ -11,12 +12,14 @@ class MyImageWidget extends StatelessWidget {
   final double width;
   final double radius;
   final BoxFit boxFit;
+  final bool fromProfile;
   const MyImageWidget({
     super.key,
     required this.imageUrl,
     this.height = 80,
     this.width = 100,
     this.radius = 5,
+    this.fromProfile = false,
     this.boxFit = BoxFit.cover,
   });
 
@@ -50,7 +53,12 @@ class MyImageWidget extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(Dimensions.defaultRadius * 5),
           child: Center(
-            child: Icon(
+            child: fromProfile?
+            Image.asset(
+              MyImages.defaultAvatar,
+              fit: BoxFit.cover,
+            ) :
+            Icon(
               Icons.image,
               color: MyColor.colorGrey.withOpacity(0.5),
             ),

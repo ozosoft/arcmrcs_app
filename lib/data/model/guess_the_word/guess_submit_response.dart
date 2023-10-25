@@ -1,25 +1,22 @@
-// To parse this JSON data, do
-//
-//     final gesswordQuestionSubmitResponse = gesswordQuestionSubmitResponseFromJson(jsonString);
 
 import 'package:quiz_lab/data/model/global/meassage.dart';
 
-class GuesswordQuestionSubmitResponse {
+class GuessWordQuestionSubmitResponse {
   String? remark;
   String? status;
   Message? message;
   Data? data;
 
-  GuesswordQuestionSubmitResponse({
+  GuessWordQuestionSubmitResponse({
     this.remark,
     this.status,
     this.message,
     this.data,
   });
 
-  factory GuesswordQuestionSubmitResponse.fromJson(Map<String, dynamic> json) => GuesswordQuestionSubmitResponse(
+  factory GuessWordQuestionSubmitResponse.fromJson(Map<String, dynamic> json) => GuessWordQuestionSubmitResponse(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );

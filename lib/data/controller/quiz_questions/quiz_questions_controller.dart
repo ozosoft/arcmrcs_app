@@ -72,7 +72,7 @@ class QuizQuestionsController extends GetxController {
     if (model.statusCode == 200) {
       questionsList.clear();
 
-      QuizquestionsModel quizquestions = QuizquestionsModel.fromJson(jsonDecode(model.responseJson));
+      QuizQuestionsModel quizquestions = QuizQuestionsModel.fromJson(jsonDecode(model.responseJson));
 
       if (quizquestions.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<Question>? subcategorylist = quizquestions.data?.questions;

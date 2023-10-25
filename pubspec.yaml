@@ -7,6 +7,8 @@ environment:
   sdk: ">=3.0.5 <4.0.0"
 
 dependencies:
+  flutter:
+    sdk: flutter
   animated_bottom_navigation_bar: ^0.3.2
   animated_floating_buttons: ^0.0.2
   audioplayers: ^5.1.0
@@ -31,8 +33,6 @@ dependencies:
   firebase_core: ^2.15.1
   firebase_core_platform_interface: ^4.8.0
   firebase_messaging: ^14.6.8
-  flutter:
-    sdk: flutter
   flutter_inappwebview: ^5.7.2+3
   flutter_local_notifications: ^15.1.1
   flutter_spinkit: ^5.1.0

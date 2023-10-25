@@ -26,7 +26,7 @@ class ExamZoneQuestionsModel {
 
   factory ExamZoneQuestionsModel.fromJson(Map<String, dynamic> json) => ExamZoneQuestionsModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -100,15 +100,15 @@ class PlayInfo {
 
   factory PlayInfo.fromJson(Map<String, dynamic> json) => PlayInfo(
         id: json["id"],
-        userId: json["user_id"],
-        quizInfoId: json["quiz_info_id"],
-        roomId: json["room_id"],
-        singleBattleId: json["single_battle_id"],
-        isWin: json["is_win"],
-        fiftyFifty: json["fifty_fifty"],
-        audiencePoll: json["audience_poll"],
-        timeReset: json["time_reset"],
-        flipQuestion: json["flip_question"],
+        userId: json["user_id"].toString(),
+        quizInfoId: json["quiz_info_id"].toString(),
+        roomId: json["room_id"].toString(),
+        singleBattleId: json["single_battle_id"].toString(),
+        isWin: json["is_win"].toString(),
+        fiftyFifty: json["fifty_fifty"].toString(),
+        audiencePoll: json["audience_poll"].toString(),
+        timeReset: json["time_reset"].toString(),
+        flipQuestion: json["flip_question"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
@@ -158,8 +158,8 @@ class Question {
         id: json["id"],
         question: json["question"],
         image: json["image"],
-        code: json["code"],
-        status: json["status"],
+        code: json["code"].toString(),
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         selectedOptionId: '',
@@ -205,10 +205,10 @@ class Option {
 
   factory Option.fromJson(Map<String, dynamic> json) => Option(
         id: json["id"],
-        questionId: json["question_id"],
+        questionId: json["question_id"].toString(),
         option: json["option"],
-        isAnswer: json["is_answer"],
-        audience: json["audience"],
+        isAnswer: json["is_answer"].toString(),
+        audience: json["audience"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
@@ -234,8 +234,8 @@ class Pivot {
   });
 
   factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
-        quizInfoId: json["quiz_info_id"],
-        questionId: json["question_id"],
+        quizInfoId: json["quiz_info_id"].toString(),
+        questionId: json["question_id"].toString(),
       );
 
   Map<String, dynamic> toJson() => {

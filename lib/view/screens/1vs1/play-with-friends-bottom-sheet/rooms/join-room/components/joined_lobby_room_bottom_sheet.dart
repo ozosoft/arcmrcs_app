@@ -13,6 +13,7 @@ import '../../../../../../../core/route/route.dart';
 import '../../../../../../../core/utils/url_container.dart';
 import '../../../../../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../../../../../components/dialog/warning_dialog.dart';
+import '../../../../../../components/image_widget/my_image_widget.dart';
 
 class JoinedLobbyBottomSheet extends StatefulWidget {
   const JoinedLobbyBottomSheet({super.key});
@@ -126,9 +127,9 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )
-                                        : Image.network(
-                                            "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user1!.profileUrl}",
-                                            fit: BoxFit.cover,
+                                        : MyImageWidget(
+                                            fromProfile: true,
+                                            imageUrl:"${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user1!.profileUrl}",
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )),
@@ -189,9 +190,9 @@ class _JoinedLobbyBottomSheetState extends State<JoinedLobbyBottomSheet> {
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )
-                                        : Image.network(
-                                            "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user2!.profileUrl}",
-                                            fit: BoxFit.cover,
+                                        :  MyImageWidget(
+                                            fromProfile: true,
+                                            imageUrl:"${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user2!.profileUrl}",
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )),

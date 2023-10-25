@@ -25,7 +25,7 @@ class FunNLearnResultModel {
 
     factory FunNLearnResultModel.fromJson(Map<String, dynamic> json) => FunNLearnResultModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
@@ -39,11 +39,11 @@ class FunNLearnResultModel {
 }
 
 class Data {
-    int? totalQuestion;
-    int? correctAnswer;
-    int? wrongAnswer;
-    int? winingScore;
-    int? totalScore;
+    String? totalQuestion;
+    String? correctAnswer;
+    String? wrongAnswer;
+    String? winingScore;
+    String? totalScore;
 
     Data({
         this.totalQuestion,
@@ -54,11 +54,11 @@ class Data {
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
-        totalQuestion: json["totalQuestion"],
-        correctAnswer: json["correctAnswer"],
-        wrongAnswer: json["wrongAnswer"],
-        winingScore: json["winingScore"],
-        totalScore: json["totalScore"],
+        totalQuestion: json["totalQuestion"] != null ?json["totalQuestion"].toString() : '',
+        correctAnswer: json["correctAnswer"] != null ?json["correctAnswer"].toString() : '',
+        wrongAnswer: json["wrongAnswer"]!= null ?json["wrongAnswer"].toString() : '',
+        winingScore: json["winingScore"]!= null ?json["winingScore"].toString() : '',
+        totalScore: json["totalScore"]!= null ?json["totalScore"].toString() : '',
     );
 
     Map<String, dynamic> toJson() => {

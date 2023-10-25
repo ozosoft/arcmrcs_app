@@ -25,7 +25,7 @@ class FunNLearnQuestionsModel {
 
   factory FunNLearnQuestionsModel.fromJson(Map<String, dynamic> json) => FunNLearnQuestionsModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -95,8 +95,8 @@ class Question {
         id: json["id"],
         question: json["question"],
         image: json["image"],
-        code: json["code"],
-        status: json["status"],
+        code: json["code"] .toString(),
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         pivot: json["pivot"] == null ? null : Pivot.fromJson(json["pivot"]),
@@ -140,10 +140,10 @@ class Option {
 
   factory Option.fromJson(Map<String, dynamic> json) => Option(
         id: json["id"],
-        questionId: json["question_id"],
+        questionId: json["question_id"].toString(),
         option: json["option"],
-        isAnswer: json["is_answer"],
-        audience: json["audience"],
+        isAnswer: json["is_answer"].toString(),
+        audience: json["audience"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
@@ -169,8 +169,8 @@ class Pivot {
   });
 
   factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
-        quizInfoId: json["quiz_info_id"],
-        questionId: json["question_id"],
+        quizInfoId: json["quiz_info_id"].toString(),
+        questionId: json["question_id"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -228,23 +228,23 @@ class QuizInfo {
 
   factory QuizInfo.fromJson(Map<String, dynamic> json) => QuizInfo(
         id: json["id"],
-        typeId: json["type_id"],
-        categoryId: json["category_id"],
-        subCategoryId: json["sub_category_id"],
+        typeId: json["type_id"].toString(),
+        categoryId: json["category_id"].toString(),
+        subCategoryId: json["sub_category_id"].toString(),
         title: json["title"],
         image: json["image"],
         startDate: json["start_date"],
         endDate: json["end_date"],
-        prize: json["prize"],
-        point: json["point"],
+        prize: json["prize"].toString(),
+        point: json["point"].toString(),
         description: json["description"],
-        levelId: json["level_id"],
+        levelId: json["level_id"].toString(),
         examStartTime: json["exam_start_time"],
         examEndTime: json["exam_end_time"],
-        examDuration: json["exam_duration"],
+        examDuration: json["exam_duration"].toString(),
         examKey: json["exam_key"],
         winningMark: double.parse(json["winning_mark"].toString()),
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         playInfo: json["play_info"] == null ? null : PlayInfo.fromJson(json["play_info"]),
@@ -306,15 +306,15 @@ class PlayInfo {
 
   factory PlayInfo.fromJson(Map<String, dynamic> json) => PlayInfo(
         id: json["id"],
-        userId: json["user_id"],
-        quizInfoId: json["quiz_info_id"],
-        roomId: json["room_id"],
-        singleBattleId: json["single_battle_id"],
-        isWin: json["is_win"],
-        fiftyFifty: json["fifty_fifty"],
-        audiencePoll: json["audience_poll"],
-        timeReset: json["time_reset"],
-        flipQuestion: json["flip_question"],
+        userId: json["user_id"].toString(),
+        quizInfoId: json["quiz_info_id"].toString(),
+        roomId: json["room_id"].toString(),
+        singleBattleId: json["single_battle_id"].toString(),
+        isWin: json["is_win"].toString(),
+        fiftyFifty: json["fifty_fifty"].toString(),
+        audiencePoll: json["audience_poll"].toString(),
+        timeReset: json["time_reset"].toString(),
+        flipQuestion: json["flip_question"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );

@@ -1,5 +1,6 @@
 class UrlContainer {
-  static const String domainUrl = 'https://url8.viserlab.com/quizlab';
+  static const String domainUrl = 'https://script.viserlab.com/quizlab';
+  //static const String domainUrl = 'https://url8.viserlab.com/quizlab';
   static const String baseUrl = '$domainUrl/api/';
 
   static const String dashBoardEndPoint = 'dashboard';

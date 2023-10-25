@@ -25,7 +25,7 @@ class DailyQuizQuestionsModel {
 
   factory DailyQuizQuestionsModel.fromJson(Map<String, dynamic> json) => DailyQuizQuestionsModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -54,7 +54,7 @@ class Data {
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         dailyQuiz: json["dailyQuiz"] == null ? null : DailyQuiz.fromJson(json["dailyQuiz"]),
         questions: json["questions"] == null ? [] : List<Question>.from(json["questions"]!.map((x) => Question.fromJson(x))),
-        dailyQuizAnsDuration: json["daily_quiz_ans_duration"],
+        dailyQuizAnsDuration: json["flip_question"].toString(),
         questionImagePath: json["question_image_path"],
       );
 
@@ -115,23 +115,23 @@ class DailyQuiz {
 
   factory DailyQuiz.fromJson(Map<String, dynamic> json) => DailyQuiz(
         id: json["id"],
-        typeId: json["type_id"],
-        categoryId: json["category_id"],
-        subCategoryId: json["sub_category_id"],
+        typeId: json["type_id"].toString(),
+        categoryId: json["category_id"].toString(),
+        subCategoryId: json["sub_category_id"].toString(),
         title: json["title"] == null ? null : DateTime.parse(json["title"]),
         image: json["image"],
         startDate: json["start_date"],
         endDate: json["end_date"],
-        prize: json["prize"],
-        point: json["point"],
+        prize: json["prize"].toString(),
+        point: json["point"].toString(),
         description: json["description"],
-        levelId: json["level_id"],
+        levelId: json["level_id"].toString(),
         examStartTime: json["exam_start_time"],
         examEndTime: json["exam_end_time"],
-        examDuration: json["exam_duration"],
+        examDuration: json["exam_duration"].toString(),
         examKey: json["exam_key"],
         winningMark: json["winning_mark"].toString(),
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         playInfo: json["play_info"],
@@ -192,7 +192,7 @@ class Question {
         question: json["question"],
         image: json["image"],
         code: json["code"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         pivot: json["pivot"] == null ? null : Pivot.fromJson(json["pivot"]),
@@ -236,10 +236,10 @@ class Option {
 
   factory Option.fromJson(Map<String, dynamic> json) => Option(
         id: json["id"],
-        questionId: json["question_id"],
+        questionId: json["question_id"].toString(),
         option: json["option"],
-        isAnswer: json["is_answer"],
-        audience: json["audience"],
+        isAnswer: json["is_answer"].toString(),
+        audience: json["audience"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
@@ -265,8 +265,8 @@ class Pivot {
   });
 
   factory Pivot.fromJson(Map<String, dynamic> json) => Pivot(
-        quizInfoId: json["quiz_info_id"],
-        questionId: json["question_id"],
+        quizInfoId: json["quiz_info_id"].toString(),
+        questionId: json["question_id"].toString(),
       );
 
   Map<String, dynamic> toJson() => {

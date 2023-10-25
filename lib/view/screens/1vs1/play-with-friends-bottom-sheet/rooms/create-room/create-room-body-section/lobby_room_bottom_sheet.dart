@@ -16,6 +16,7 @@ import 'package:get/get.dart';
 import '../../../../../../../core/route/route.dart';
 import '../../../../../../../core/utils/url_container.dart';
 import '../../../../../../components/dialog/warning_dialog.dart';
+import '../../../../../../components/image_widget/my_image_widget.dart';
 
 class LobbyBottomSheet extends StatefulWidget {
   const LobbyBottomSheet({super.key});
@@ -139,9 +140,9 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )
-                                        : Image.network(
-                                            "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user1!.profileUrl}",
-                                            fit: BoxFit.cover,
+                                        : MyImageWidget(
+                                            fromProfile: true,
+                                            imageUrl: "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user1!.profileUrl}",
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )),
@@ -202,9 +203,9 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )
-                                        : Image.network(
-                                            "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user2!.profileUrl}",
-                                            fit: BoxFit.cover,
+                                        : MyImageWidget(
+                                            fromProfile: true,
+                                            imageUrl: "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user2!.profileUrl}",
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )),

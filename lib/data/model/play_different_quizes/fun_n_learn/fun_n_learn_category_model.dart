@@ -6,26 +6,26 @@ import 'dart:convert';
 
 import '../../model/message_model/message_model.dart';
 
-FunNLearncategoryModel funNLearncategoryModelFromJson(String str) => FunNLearncategoryModel.fromJson(json.decode(str));
+FunNLearnCategoryModel funNLearnCategoryModelFromJson(String str) => FunNLearnCategoryModel.fromJson(json.decode(str));
 
-String funNLearncategoryModelToJson(FunNLearncategoryModel data) => json.encode(data.toJson());
+String funNLearnCategoryModelToJson(FunNLearnCategoryModel data) => json.encode(data.toJson());
 
-class FunNLearncategoryModel {
+class FunNLearnCategoryModel {
     String? remark;
     String? status;
     Message? message;
     Data? data;
 
-    FunNLearncategoryModel({
+    FunNLearnCategoryModel({
         this.remark,
         this.status,
         this.message,
         this.data,
     });
 
-    factory FunNLearncategoryModel.fromJson(Map<String, dynamic> json) => FunNLearncategoryModel(
+    factory FunNLearnCategoryModel.fromJson(Map<String, dynamic> json) => FunNLearnCategoryModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
@@ -83,7 +83,7 @@ class Category {
         id: json["id"],
         name: json["name"],
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
         subcategoriesCount: json["subcategories_count"].toString(),

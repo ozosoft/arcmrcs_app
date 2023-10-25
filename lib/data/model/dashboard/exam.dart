@@ -17,7 +17,7 @@ class Exams {
   String? examKey;
   List<String>? examRule;
   String? status;
-  String? winningmark;
+  String? winningMark;
   DateTime? createdAt;
   DateTime? updatedAt;
 
@@ -40,31 +40,31 @@ class Exams {
     this.examKey,
     this.examRule,
     this.status,
-    this.winningmark,
+    this.winningMark,
     this.createdAt,
     this.updatedAt,
   });
 
   factory Exams.fromJson(Map<String, dynamic> json) => Exams(
     id: json["id"],
-    typeId: json["type_id"],
-    categoryId: json["category_id"],
-    subCategoryId: json["sub_category_id"],
+    typeId: json["type_id"].toString(),
+    categoryId: json["category_id"].toString(),
+    subCategoryId: json["sub_category_id"].toString(),
     title: json["title"],
     image: json["image"],
     startDate: json["start_date"] == null ? null : DateTime.parse(json["start_date"]),
     endDate: json["end_date"] == null ? null : DateTime.parse(json["end_date"]),
-    prize: json["prize"],
-    point: json["point"],
+    prize: json["prize"].toString(),
+    point: json["point"].toString(),
     description: json["description"] ?? "",
-    levelId: json["level_id"],
-    examStartTime: json["exam_start_time"],
+    levelId: json["level_id"].toString(),
+    examStartTime: json["exam_start_time"].toString(),
     examEndTime: json["exam_end_time"],
     examDuration: json["exam_duration"],
     examKey: json["exam_key"],
     examRule: json["exam_rule"] == null || json["exam_rule"].toString() == '0' ? [] : List<String>.from(json["exam_rule"]!.map((x) => x)),
-    status: json["status"],
-    winningmark: json["winning_mark"].toString(),
+    status: json["status"].toString(),
+    winningMark: json["winning_mark"].toString(),
     createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
   );
@@ -88,7 +88,7 @@ class Exams {
     "exam_key": examKey,
     "exam_rule": examRule,
     "status": status,
-    "winning_mark": winningmark,
+    "winning_mark": winningMark,
     "created_at": createdAt?.toIso8601String(),
     "updated_at": updatedAt?.toIso8601String(),
   };

@@ -25,7 +25,7 @@ class FunSubCategoryListModel {
 
   factory FunSubCategoryListModel.fromJson(Map<String, dynamic> json) => FunSubCategoryListModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -78,12 +78,12 @@ class Subcategory {
   factory Subcategory.fromJson(Map<String, dynamic> json) => Subcategory(
         id: json["id"],
         name: json["name"],
-        categoryId: json["category_id"],
+        categoryId: json["category_id"].toString(),
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        quizInfosCount: json["quiz_infos_count"],
+        quizInfosCount: json["quiz_infos_count"].toString(),
       );
 
   Map<String, dynamic> toJson() => {

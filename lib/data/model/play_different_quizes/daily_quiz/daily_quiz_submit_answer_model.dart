@@ -25,7 +25,7 @@ class DailyQuizSubmitAnswerModel {
 
     factory DailyQuizSubmitAnswerModel.fromJson(Map<String, dynamic> json) => DailyQuizSubmitAnswerModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
@@ -39,9 +39,9 @@ class DailyQuizSubmitAnswerModel {
 }
 
 class Data {
-    int? totalQuestion;
-    int? correctAnswer;
-    int? wrongAnswer;
+    String? totalQuestion;
+    String? correctAnswer;
+    String? wrongAnswer;
     String? winingCoin;
     User? user;
 
@@ -54,9 +54,9 @@ class Data {
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
-        totalQuestion: json["totalQuestion"],
-        correctAnswer: json["correctAnswer"],
-        wrongAnswer: json["wrongAnswer"],
+        totalQuestion: json["totalQuestion"] != null? json["totalQuestion"].toString() : '',
+        correctAnswer: json["correctAnswer"] != null? json["correctAnswer"].toString() : '',
+        wrongAnswer: json["wrongAnswer"] != null? json["wrongAnswer"].toString() : '',
         winingCoin: json["winingCoin"].toString(),
         user: json["user"] == null ? null : User.fromJson(json["user"]),
     );
@@ -137,13 +137,13 @@ class User {
         countryCode: json["country_code"].toString(),
         mobile: json["mobile"].toString(),
         refBy: json["ref_by"].toString(),
-        referralCode: json["referral_code"],
+        referralCode: json["referral_code"].toString(),
         address: json["address"] == null ? null : Address.fromJson(json["address"]),
-        status: json["status"],
+        status: json["status"].toString(),
         kv: json["kv"].toString(),
         ev: json["ev"].toString(),
         sv: json["sv"].toString(),
-        profileComplete: json["profile_complete"],
+        profileComplete: json["profile_complete"].toString(),
         verCodeSendAt: json["ver_code_send_at"] == null ? null : DateTime.parse(json["ver_code_send_at"]),
         ts: json["ts"].toString(),
         tv: json["tv"].toString(),

@@ -34,8 +34,8 @@ class Message {
       by: json['by'] ?? "",
       isTextMessage: json['isTextMessage'] ?? false,
       message: json['message'] ?? "",
-      messageId: documentSnapshot.id,
-      roomId: json['roomId'] ?? "",
+      messageId: documentSnapshot.id.toString(),
+      roomId: json['roomId'].toString(),
       timestamp: json['timestamp'] ?? Timestamp.now(),
     );
   }

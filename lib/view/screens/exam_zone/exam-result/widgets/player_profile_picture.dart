@@ -4,6 +4,7 @@ import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_images.dart';
 
 import '../../../../../core/utils/url_container.dart';
+import '../../../../components/image_widget/my_image_widget.dart';
 
 class PlayerProfilePicture extends StatelessWidget {
   final String imagePath;
@@ -27,9 +28,9 @@ class PlayerProfilePicture extends StatelessWidget {
                     height: MediaQuery.of(context).size.width / 5,
                     width: MediaQuery.of(context).size.width / 5,
                   )
-                : Image.network(
-                    "${UrlContainer.userImagePath}/$imagePath",
-                    fit: BoxFit.cover,
+                : MyImageWidget(
+                    fromProfile: true,
+                    imageUrl: "${UrlContainer.userImagePath}/$imagePath",
                     height: MediaQuery.of(context).size.width / 5,
                     width: MediaQuery.of(context).size.width / 5,
                   )),

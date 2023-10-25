@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_images.dart';
 import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
 
 import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/url_container.dart';
@@ -30,12 +31,8 @@ class PlayerProfileDetails extends StatelessWidget {
                         height: Dimensions.space50,
                         width: Dimensions.space50,
                       )
-                    : Image.network(
-                        "${UrlContainer.userImagePath}/${userData["avatar"]}",
-                        fit: BoxFit.cover,
-                        height: Dimensions.space50,
-                        width: Dimensions.space50,
-                      )),
+                    : MyImageWidget(fromProfile:true,imageUrl: "${UrlContainer.userImagePath}/${userData["avatar"]}",)
+                ),
           ),
         ),
         const SizedBox(

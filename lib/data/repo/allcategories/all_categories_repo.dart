@@ -10,9 +10,7 @@ class AllCategoriesRepo {
 
   Future<ResponseModel> getData() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.allcategoriesUrl}";
-    debugPrint('all categories=====>: $url');
-    ResponseModel model =
-        await apiClient.request(url, Method.getMethod, null, passHeader: true);
+    ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
   }

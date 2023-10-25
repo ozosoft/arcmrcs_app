@@ -10,9 +10,7 @@ class CoinHistoryRepo {
 
   Future<ResponseModel> coinHistoryData() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.coinHistory}";
-    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
-
     return model;
   }
 

@@ -25,7 +25,7 @@ class BattleQuestionList {
 
     factory BattleQuestionList.fromJson(Map<String, dynamic> json) => BattleQuestionList(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: Message.fromJson(json["message"]),
         data: Data.fromJson(json["data"]),
     );
@@ -83,8 +83,8 @@ class BattleQuestion {
         id: json["id"],
         question: json["question"],
         image: json["image"],
-        code: json["code"],
-        status: json["status"],
+        code: json["code"].toString(),
+        status: json["status"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         options: List<BattleQuestionOption>.from(json["options"].map((x) => BattleQuestionOption.fromJson(x))),
@@ -123,10 +123,10 @@ class BattleQuestionOption {
 
     factory BattleQuestionOption.fromJson(Map<String, dynamic> json) => BattleQuestionOption(
         id: json["id"],
-        questionId: json["question_id"],
+        questionId: json["question_id"].toString(),
         option: json["option"],
-        isAnswer: json["is_answer"],
-        audience: json["audience"],
+        isAnswer: json["is_answer"].toString(),
+        audience: json["audience"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );

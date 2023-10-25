@@ -117,9 +117,6 @@ class User {
 
   User.fromJson(dynamic json) {
     _id = json['id'];
-    _packageId = json['package_id'];
-    _validity = json['validity'];
-    _telegramUsername = json['telegram_username'];
     _firstname = json['firstname'];
     _lastname = json['lastname'];
     _username = json['username'];
@@ -239,7 +236,7 @@ class Address {
   Address.fromJson(dynamic json) {
     _address = json['address'];
     _state = json['state'];
-    _zip = json['zip'];
+    _zip = json['zip'].toString();
     _country = json['country'];
     _city = json['city'];
   }
@@ -275,7 +272,7 @@ class Message {
 
   Message.fromJson(dynamic json) {
     _success = json['success'] != null ? [json['success'].toString()] : null;
-    _error = json['error'] != null ? json['error'].cast<String>() : [];
+    _error = json['error'] != null ? [json['error'].toString()]: [];
   }
 
   List<String>? _success;

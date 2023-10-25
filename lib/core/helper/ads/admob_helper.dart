@@ -1,6 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
 import '../../../environment.dart';
 import 'ads_unit_id_helper.dart';
 import 'good_interstitial.dart';
@@ -92,8 +92,10 @@ class AdmobHelper {
 
   void showGoodInterstitialAds() {
     _counter++;
-    if (_counter % 5 == 0) {
-      print("Good InterstialAds Show now  $_counter");
+    if (_counter % Environment.interstitialAdsShowAfter == 0) {
+      if (kDebugMode) {
+        print("Good InterstialAds Show now  $_counter");
+      }
       goodInterstitialAd.show(reloadAfterShow: true);
     }
     print("Good InterstialAds Show count $_counter");
@@ -106,48 +108,48 @@ class AdmobHelper {
     }
   }
 
-  // create and load Reward ads Automatically
   void loadRewardAdAlways() {
     if (Environment.showRewardlAds == true && AdUnitHelper.rewardedAdUnitShow == '1') {
       if (AdUnitHelper.rewardedAdUnitId != null) {
         RewardedAd.load(
-            adUnitId: AdUnitHelper.rewardedAdUnitId!,
-            request: const AdRequest(),
-            rewardedAdLoadCallback: RewardedAdLoadCallback(
-              // Called when an ad is successfully received.
-              onAdLoaded: (ad) {
-                ad.fullScreenContentCallback = FullScreenContentCallback(
-                  // Called when the ad showed the full screen content.
-                  onAdShowedFullScreenContent: (ad) {},
-                  // Called when an impression occurs on the ad.
-                  onAdImpression: (ad) {},
-                  // Called when the ad failed to show full screen content.
-                  onAdFailedToShowFullScreenContent: (ad, err) {
-                    // Dispose the ad here to free resources.
-                    ad.dispose();
-                  },
-                  // Called when the ad dismissed full screen content.
-                  onAdDismissedFullScreenContent: (ad) {
-                    // Dispose the ad here to free resources.
-                    ad.dispose();
-                  },
-                  // Called when a click is recorded for an ad.
-                  onAdClicked: (ad) {},
-                );
+          adUnitId: AdUnitHelper.rewardedAdUnitId!,
+          request: const AdRequest(),
+          rewardedAdLoadCallback: RewardedAdLoadCallback(
+            // Called when an ad is successfully received.
+            onAdLoaded: (ad) {
+              ad.fullScreenContentCallback = FullScreenContentCallback(
+                // Called when the ad showed the full screen content.
+                onAdShowedFullScreenContent: (ad) {},
+                // Called when an impression occurs on the ad.
+                onAdImpression: (ad) {},
+                // Called when the ad failed to show full screen content.
+                onAdFailedToShowFullScreenContent: (ad, err) {
+                  // Dispose the ad here to free resources.
+                  ad.dispose();
+                },
+                // Called when the ad dismissed full screen content.
+                onAdDismissedFullScreenContent: (ad) {
+                  // Dispose the ad here to free resources.
+                  ad.dispose();
+                },
+                // Called when a click is recorded for an ad.
+                onAdClicked: (ad) {},
+              );
 
-                debugPrint('$ad loaded.');
-                // Keep a reference to the ad so you can show it later.
+              debugPrint('$ad loaded.');
+              // Keep a reference to the ad so you can show it later.
 
-                ad.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
-                  debugPrint("You Get ${rewardItem.amount}");
-                  // Reward the user for watching an ad.
-                });
-              },
-              // Called when an ad request failed.
-              onAdFailedToLoad: (LoadAdError error) {
-                debugPrint('RewardedAd failed to load: $error');
-              },
-            ));
+              ad.show(onUserEarnedReward: (AdWithoutView ad, RewardItem rewardItem) {
+                debugPrint("You Get ${rewardItem.amount}");
+                // Reward the user for watching an ad.
+              });
+            },
+            // Called when an ad request failed.
+            onAdFailedToLoad: (LoadAdError error) {
+              debugPrint('RewardedAd failed to load: $error');
+            },
+          )
+        );
       }
     }
   }

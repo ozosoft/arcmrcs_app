@@ -78,24 +78,24 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                               if (questionsIndex < controller.questionsList.length - 1) // Check if not on the last page
                                 ...[
                                 InkWell(
-                                    onTap: () {
-                                      if (controller.reviewController.page!.toInt() < controller.questionsList.length) {
-                                        controller.reviewController.nextPage(
-                                          duration: const Duration(milliseconds: 500),
-                                          curve: Curves.easeInOut,
-                                        );
-                                      }
-                                    },
-                                    child: LevelCardButton(
-                                      text: MyStrings.next.tr,
-                                      hasIcon: false,
-                                      hasImage: false,
-                                      bgColor: MyColor.primaryColor,
-                                      borderColor: Colors.transparent,
-                                      hasbgColor: true,
-                                      height: Dimensions.space40 -3,
-                                      hastextColor: true,
-                                    )),
+                                  onTap: () {
+                                    if (controller.reviewController.page!.toInt() < controller.questionsList.length) {
+                                      controller.reviewController.nextPage(
+                                        duration: const Duration(milliseconds: 500),
+                                        curve: Curves.easeInOut,
+                                      );
+                                    }
+                                  },
+                                  child: LevelCardButton(
+                                    text: MyStrings.next.tr,
+                                    hasIcon: false,
+                                    hasImage: false,
+                                    bgColor: MyColor.primaryColor,
+                                    borderColor: Colors.transparent,
+                                    hasbgColor: true,
+                                    height: Dimensions.space40 -3,
+                                    hastextColor: true,
+                                  )),
                               ]
                             ],
                           ),
@@ -117,10 +117,10 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                           Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.questionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                           const SizedBox(height: Dimensions.space25),
                           ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: controller.questionsList[questionsIndex].options?.length??0,
-                              itemBuilder: (BuildContext context, int optionIndex) {
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: controller.questionsList[questionsIndex].options?.length??0,
+                            itemBuilder: (BuildContext context, int optionIndex) {
                                 var reviewOptionItem = controller.optionsList[optionIndex];
                                 return Column(
                                   children: [
@@ -153,33 +153,33 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                                   child: Text(
                                                     controller.questionsList[questionsIndex].options![optionIndex].option.toString(),
                                                     style: regularMediumLarge.copyWith(
-                                                        color:  reviewItem.selectedOptionId!.isEmpty
-                                                            ? MyColor.colorBlack
-                                                            : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
-                                                            ? MyColor.colorWhite
-                                                            : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
-                                                            ? MyColor.colorWhite
-                                                            : reviewOptionItem.isAnswer.toString() == "1"
-                                                            ? MyColor.colorWhite
-                                                            : MyColor.colorBlack),
+                                                      color:  reviewItem.selectedOptionId!.isEmpty
+                                                        ? MyColor.colorBlack
+                                                        : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
+                                                        ? MyColor.colorWhite
+                                                        : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
+                                                        ? MyColor.colorWhite
+                                                        : reviewOptionItem.isAnswer.toString() == "1"
+                                                        ? MyColor.colorWhite
+                                                        : MyColor.colorBlack),
                                                   ),
                                                 ),
                                                 SizedBox(
                                                   height: Dimensions.space10,
-                                                  child: reviewItem.selectedOptionId!.isEmpty
-                                                      ? reviewOptionItem.isAnswer == '1'
-                                                          ? SvgPicture.asset(
-                                                              MyImages.whiteTikSVG,
-                                                              colorFilter: const ColorFilter.mode(MyColor.rightAnswerbgColor, BlendMode.srcIn),
-                                                            )
-                                                          : const SizedBox()
-                                                      : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
-                                                          ? SvgPicture.asset(MyImages.whiteTikSVG)
-                                                          : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
-                                                              ? SvgPicture.asset(MyImages.wrongAnswerSVG)
-                                                              : reviewOptionItem.isAnswer.toString() == "1"
-                                                                  ? SvgPicture.asset(MyImages.whiteTikSVG)
-                                                                  : const SizedBox(),
+                                                  child: reviewItem.selectedOptionId!.isEmpty ?
+                                                  reviewOptionItem.isAnswer == '1'
+                                                        ? SvgPicture.asset(
+                                                            MyImages.whiteTikSVG,
+                                                            colorFilter: const ColorFilter.mode(MyColor.rightAnswerbgColor, BlendMode.srcIn),
+                                                          )
+                                                        : const SizedBox()
+                                                    : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
+                                                        ? SvgPicture.asset(MyImages.whiteTikSVG)
+                                                        : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
+                                                            ? SvgPicture.asset(MyImages.wrongAnswerSVG)
+                                                            : reviewOptionItem.isAnswer.toString() == "1"
+                                                                ? SvgPicture.asset(MyImages.whiteTikSVG)
+                                                                : const SizedBox(),
                                                 ),
                                               ],
                                             ),
@@ -189,7 +189,8 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                                     ),
                                   ],
                                 );
-                              }),
+                              }
+                          ),
                           const SizedBox(height: Dimensions.addSpace),
                         ],
                       ),
@@ -198,6 +199,7 @@ class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
                 ),
               );
             },
-          ));
+          )
+    );
   }
 }

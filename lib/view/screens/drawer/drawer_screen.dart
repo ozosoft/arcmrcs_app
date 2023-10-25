@@ -184,19 +184,19 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       }, title: MyStrings.logoutSureWarningMSg);
                     },
                     leading: logoutController.loaderStarted
-                        ? const SizedBox(
-                            width: Dimensions.space25,
-                            height: Dimensions.space25,
-                            child: SpinKitPouringHourGlass(
-                              strokeWidth: 0.2,
-                              color: MyColor.primaryColor,
-                              size: Dimensions.space40,
-                            ),
-                          )
-                        : SvgPicture.asset(
-                            MyImages.logOutDrawer,
-                            width: Dimensions.space20,
+                      ? const SizedBox(
+                          width: Dimensions.space25,
+                          height: Dimensions.space25,
+                          child: SpinKitPouringHourGlass(
+                            strokeWidth: 0.2,
+                            color: MyColor.primaryColor,
+                            size: Dimensions.space40,
                           ),
+                        )
+                      : SvgPicture.asset(
+                          MyImages.logOutDrawer,
+                          width: Dimensions.space20,
+                        ),
                     title: Text(
                       MyStrings.logout.tr,
                       style: regularMediumLarge,
@@ -227,7 +227,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     ),
                     onTap: () {
                       const WarningAlertDialog().deleteAccountAlertDialog(context, () {
-                        print("Delete Button Clicked!");
                         Get.back();
                         logoutController.deleteMyAccount();
                       });

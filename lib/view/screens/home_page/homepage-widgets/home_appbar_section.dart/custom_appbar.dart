@@ -39,7 +39,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
             flexibleSpace: Container(
               width: double.infinity,
               decoration: const BoxDecoration(
-                image: DecorationImage(image: AssetImage(MyImages.appBarBGimage), fit: BoxFit.fitWidth),
+                image: DecorationImage(image: AssetImage(MyImages.appBarBGImage), fit: BoxFit.fitWidth),
               ),
             ),
             backgroundColor: MyColor.primaryColor,
@@ -56,6 +56,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                       child: Padding(
                         padding: const EdgeInsets.all(Dimensions.space5),
                         child: MyImageWidget(
+                          fromProfile: true,
                           radius: Dimensions.space100,
                           imageUrl: UrlContainer.dashboardUserProfileImage + controller.userImage.toString(),
                         ),

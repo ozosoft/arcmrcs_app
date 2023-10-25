@@ -10,7 +10,7 @@ class BattleRoomDataModel {
   final UserBattleRoomDetailsModel? user2;
   final UserBattleRoomDetailsModel? user3;
   final UserBattleRoomDetailsModel? user4;
-  final int? entryFee;
+  final String? entryFee;
   final String? roomCode;
   final bool? readyToPlay;
   final String? questionsList;
@@ -21,10 +21,10 @@ class BattleRoomDataModel {
     final data = documentSnapshot.data() as Map<String, dynamic>;
     return BattleRoomDataModel(
         roomId: documentSnapshot.id,
-        categoryId: data['categoryId'] ?? "",
+        categoryId: data['categoryId'] == null ? "" : data['categoryId'].toString() ,
         createdBy: data['createdBy'],
         readyToPlay: data['readyToPlay'] ?? false,
-        entryFee: data['entryFee'] ?? 0,
+        entryFee: data['entryFee'] != null ?  data['entryFee'].toString() : "0",
         roomCode: data['roomCode'] ?? "",
         user1: UserBattleRoomDetailsModel.fromJson(Map.from(data['user1'])),
         user2: UserBattleRoomDetailsModel.fromJson(Map.from(data['user2'])),

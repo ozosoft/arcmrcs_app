@@ -97,7 +97,6 @@ class LoginRepo {
 
     return responseModel;
 
-    //final response = await http.post(url, body: map, headers: {"Accept": "application/json",});
   }
 
   Future<bool> sendUserToken() async {
@@ -133,7 +132,6 @@ class LoginRepo {
     Map<String, String> map = deviceTokenMap(deviceToken);
     var data = await apiClient.request(url, Method.postMethod, map, passHeader: true);
 
-    debugPrint("FCCM KEY ${data.responseJson}");
     return true;
   }
 
@@ -142,7 +140,6 @@ class LoginRepo {
     return map;
   }
 
-  //MOBILE AUTH
 
   //GET Countrry data
 

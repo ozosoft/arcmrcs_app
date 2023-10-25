@@ -39,7 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return  WillPopScope(
       onWillPop: () {
-        return Future.value(false);
+        return Future.value(true);
       },
       child: Scaffold(
         appBar: CustomCategoryAppBar(

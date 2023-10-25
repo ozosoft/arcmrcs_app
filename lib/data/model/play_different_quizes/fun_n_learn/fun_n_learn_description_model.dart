@@ -25,7 +25,7 @@ class FunNLearnDescriptionModel {
 
   factory FunNLearnDescriptionModel.fromJson(Map<String, dynamic> json) => FunNLearnDescriptionModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -103,26 +103,26 @@ class FunList {
 
   factory FunList.fromJson(Map<String, dynamic> json) => FunList(
         id: json["id"],
-        typeId: json["type_id"],
-        categoryId: json["category_id"],
-        subCategoryId: json["sub_category_id"],
+        typeId: json["type_id"].toString(),
+        categoryId: json["category_id"].toString(),
+        subCategoryId: json["sub_category_id"].toString(),
         title: json["title"],
         image: json["image"],
         startDate: json["start_date"],
         endDate: json["end_date"],
-        prize: json["prize"],
-        point: json["point"],
+        prize: json["prize"].toString(),
+        point: json["point"].toString(),
         description: json["description"],
-        levelId: json["level_id"],
+        levelId: json["level_id"].toString(),
         examStartTime: json["exam_start_time"],
         examEndTime: json["exam_end_time"],
-        examDuration: json["exam_duration"],
+        examDuration: json["exam_duration"].toString(),
         examKey: json["exam_key"],
         winningMark: double.parse(json["winning_mark"].toString()),
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-        questionsCount: json["questions_count"],
+        questionsCount: json["questions_count"].toString(),
       );
 
   Map<String, dynamic> toJson() => {

@@ -8,26 +8,26 @@ import 'dart:convert';
 
 import 'package:quiz_lab/data/model/global/meassage.dart';
 
-GuesswordCategorysResponse gesswordCategorysResponseFromJson(String str) => GuesswordCategorysResponse.fromJson(json.decode(str));
+GuessWordCategoryResponse guessWordCategoryResponseFromJson(String str) => GuessWordCategoryResponse.fromJson(json.decode(str));
 
-String gesswordCategorysResponseToJson(GuesswordCategorysResponse data) => json.encode(data.toJson());
+String guessWordCategoryResponseToJson(GuessWordCategoryResponse data) => json.encode(data.toJson());
 
-class GuesswordCategorysResponse {
+class GuessWordCategoryResponse {
   String? remark;
   String? status;
   Message? message;
   Data? data;
 
-  GuesswordCategorysResponse({
+  GuessWordCategoryResponse({
     this.remark,
     this.status,
     this.message,
     this.data,
   });
 
-  factory GuesswordCategorysResponse.fromJson(Map<String, dynamic> json) => GuesswordCategorysResponse(
+  factory GuessWordCategoryResponse.fromJson(Map<String, dynamic> json) => GuessWordCategoryResponse(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -87,11 +87,11 @@ class GuessCategories {
         id: json["id"],
         name: json["name"],
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : json["created_at"].toString(),
         updatedAt: json["updated_at"] == null ? null : json["updated_at"].toString(),
-        subcategoriesCount: json["subcategories_count"],
-        questionsCount: json["questions_count"],
+        subcategoriesCount: json["subcategories_count"].toString(),
+        questionsCount: json["questions_count"].toString(),
         quizInfos: json["quiz_infos"] == null ? [] : List<QuizInfo>.from(json["quiz_infos"]!.map((x) => QuizInfo.fromJson(x))),
       );
 
@@ -237,7 +237,7 @@ class Level {
         id: json["id"],
         title: json["title"],
         level: json["level"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : json["created_at"].toString(),
         updatedAt: json["updated_at"] == null ? null : json["updated_at"].toString(),
       );
@@ -283,15 +283,15 @@ class PlayInfo {
 
   factory PlayInfo.fromJson(Map<String, dynamic> json) => PlayInfo(
         id: json["id"],
-        userId: json["user_id"],
-        quizInfoId: json["quiz_info_id"],
-        roomId: json["room_id"],
-        singleBattleId: json["single_battle_id"],
-        isWin: json["is_win"],
-        fiftyFifty: json["fifty_fifty"],
-        audiencePoll: json["audience_poll"],
-        timeReset: json["time_reset"],
-        flipQuestion: json["flip_question"],
+        userId: json["user_id"].toString(),
+        quizInfoId: json["quiz_info_id"].toString(),
+        roomId: json["room_id"].toString(),
+        singleBattleId: json["single_battle_id"].toString(),
+        isWin:json["is_win"].toString(),
+        fiftyFifty: json["fifty_fifty"].toString(),
+        audiencePoll:json["audience_poll"].toString(),
+        timeReset: json["time_reset"].toString(),
+        flipQuestion: json["flip_question"].toString(),
         createdAt: json["created_at"] == null ? null : json["created_at"].toString(),
         updatedAt: json["updated_at"] == null ? null : json["updated_at"].toString(),
       );
@@ -334,9 +334,9 @@ class Subcategory {
   factory Subcategory.fromJson(Map<String, dynamic> json) => Subcategory(
         id: json["id"],
         name: json["name"],
-        categoryId: json["category_id"],
+        categoryId: json["category_id"].toString(),
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
       );

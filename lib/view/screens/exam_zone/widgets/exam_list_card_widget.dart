@@ -64,7 +64,7 @@ class _ExamListTileCardState extends State<ExamListTileCard> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const SizedBox(width: Dimensions.space10),
@@ -90,74 +90,71 @@ class _ExamListTileCardState extends State<ExamListTileCard> {
                         ),
                       ],
                       Expanded(
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.only(top: Dimensions.space10, bottom: Dimensions.space10, end: Dimensions.space10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //Title here
-                              Text(widget.exam.title!.tr, style: semiBoldMediumLarge),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            //Title here
+                            Text(widget.exam.title!.tr, style: semiBoldMediumLarge),
 
-                              const SizedBox(height: Dimensions.space15),
-                              //Title here
-                              Text("${MyStrings.youNeedtoScoreLong.replaceAll("{point}", widget.exam.winningmark.toString()).tr} ", style: regularSmall),
+                            const SizedBox(height: Dimensions.space15),
+                            //Title here
+                            Text("${MyStrings.youNeedtoScoreLong.replaceAll("{point}", widget.exam.winningMark.toString()).tr} ", style: regularSmall),
 
-                              const SizedBox(height: Dimensions.space15),
-                              // //Title here
-                              //Title here
-                              Text("${MyStrings.entryFee.tr} - ${widget.exam.point.toString().tr} ${int.parse(widget.exam.point.toString()) > 1 ? MyStrings.coins.tr : MyStrings.coin.tr}", style: regularSmall),
+                            const SizedBox(height: Dimensions.space15),
+                            // //Title here
+                            //Title here
+                            Text("${MyStrings.entryFee.tr} - ${widget.exam.point.toString().tr} ${int.parse(widget.exam.point.toString()) > 1 ? MyStrings.coins.tr : MyStrings.coin.tr}", style: regularSmall),
 
-                              const SizedBox(height: Dimensions.space15),
-                              //Chips Here
+                            const SizedBox(height: Dimensions.space15),
+                            //Chips Here
 
-                              SingleChildScrollView(
-                                physics: const BouncingScrollPhysics(),
-                                scrollDirection: Axis.horizontal,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      // mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        CustomChipsWidget(
-                                          right: Dimensions.space10,
-                                          padding: Dimensions.space5,
-                                          child: Center(
-                                            child: Text(
-                                              widget.marks,
-                                              style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                            ),
+                            SingleChildScrollView(
+                              physics: const BouncingScrollPhysics(),
+                              scrollDirection: Axis.horizontal,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    // mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      CustomChipsWidget(
+                                        right: Dimensions.space10,
+                                        padding: Dimensions.space5,
+                                        child: Center(
+                                          child: Text(
+                                            widget.marks,
+                                            style: regularDefault.copyWith(color: MyColor.colorGrey),
                                           ),
                                         ),
-                                        CustomChipsWidget(
-                                          // top: Dimensions.space10,
-                                          right: Dimensions.space10,
-                                          padding: Dimensions.space5,
-                                          child: Center(
-                                            child: Text(
-                                              widget.date,
-                                              style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                            ),
+                                      ),
+                                      CustomChipsWidget(
+                                        // top: Dimensions.space10,
+                                        right: Dimensions.space10,
+                                        padding: Dimensions.space5,
+                                        child: Center(
+                                          child: Text(
+                                            widget.date,
+                                            style: regularDefault.copyWith(color: MyColor.colorGrey),
                                           ),
                                         ),
-                                        CustomChipsWidget(
-                                          right: Dimensions.space10,
-                                          padding: Dimensions.space5,
-                                          child: Center(
-                                            child: Text(
-                                              widget.minute,
-                                              style: regularDefault.copyWith(color: MyColor.colorGrey),
-                                            ),
+                                      ),
+                                      CustomChipsWidget(
+                                        right: Dimensions.space10,
+                                        padding: Dimensions.space5,
+                                        child: Center(
+                                          child: Text(
+                                            widget.minute,
+                                            style: regularDefault.copyWith(color: MyColor.colorGrey),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    
-                                  ],
-                                ),
+                                      ),
+                                    ],
+                                  ),
+
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

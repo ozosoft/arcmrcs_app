@@ -10,7 +10,6 @@ class BattleRepo {
 
   Future<ResponseModel> getCategoryListData() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.battleCategoryLIst}";
-    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
@@ -18,18 +17,13 @@ class BattleRepo {
 
   Future<ResponseModel> getBatttleQuestion(int id, int user1ID, int user2ID) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.battleQuestionList}/${user1ID.toString()}/${user2ID.toString()}/${id.toString()}";
-    debugPrint('come here: $url');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
-
     return model;
   }
 
   Future<ResponseModel> finishBattleAndSubmitAnswer(Map<String, dynamic> map) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.battleAnswerSubmit}';
-    debugPrint(url);
-
     ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
-
     return model;
   }
 }

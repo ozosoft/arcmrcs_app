@@ -75,7 +75,7 @@ class GuessTheWordController extends GetxController {
 
     ResponseModel response = await guessTheWordRepo.submitAnswar(params);
     if (response.statusCode == 200) {
-      GuesswordQuestionSubmitResponse model = GuesswordQuestionSubmitResponse.fromJson(jsonDecode(response.responseJson));
+      GuessWordQuestionSubmitResponse model = GuessWordQuestionSubmitResponse.fromJson(jsonDecode(response.responseJson));
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         debugPrint(model.message!.success!.first);
         appreciation = model.message!.success!.first;
@@ -144,7 +144,7 @@ class GuessTheWordController extends GetxController {
     ResponseModel response = await guessTheWordRepo.getwordcategoryList();
 
     if (response.statusCode == 200) {
-      GuesswordCategorysResponse model = GuesswordCategorysResponse.fromJson(jsonDecode(response.responseJson));
+      GuessWordCategoryResponse model = GuessWordCategoryResponse.fromJson(jsonDecode(response.responseJson));
 
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<GuessCategories>? tempcategorylist = model.data?.categories;
@@ -169,7 +169,7 @@ class GuessTheWordController extends GetxController {
     ResponseModel response = await guessTheWordRepo.getwordSubCatagroiList(id);
 
     if (response.statusCode == 200) {
-      GuesswordSubCategoryResponse model = GuesswordSubCategoryResponse.fromJson(jsonDecode(response.responseJson));
+      GuessWordSubCategoryResponse model = GuessWordSubCategoryResponse.fromJson(jsonDecode(response.responseJson));
 
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<GuessSubCategory>? tempList = model.data?.subcategories;
@@ -195,7 +195,7 @@ class GuessTheWordController extends GetxController {
     ResponseModel response = await guessTheWordRepo.getwordQuestionList(id);
 
     if (response.statusCode == 200) {
-      GuesswordQuestionResponse model = GuesswordQuestionResponse.fromJson(jsonDecode(response.responseJson));
+      GuessWordQuestionResponse model = GuessWordQuestionResponse.fromJson(jsonDecode(response.responseJson));
 
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<GuessQuestion>? templist = model.data?.questions;

@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final coinStoreModel = coinStoreModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -25,7 +22,7 @@ class CoinStoreModel {
 
     factory CoinStoreModel.fromJson(Map<String, dynamic> json) => CoinStoreModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
@@ -79,9 +76,9 @@ class CoinPlan {
         id: json["id"],
         title: json["title"],
         image: json["image"],
-        coinsAmount: json["coins_amount"],
-        price: json["price"],
-        status: json["status"],
+        coinsAmount: json["coins_amount"].toString(),
+        price: json["price"].toString(),
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     );

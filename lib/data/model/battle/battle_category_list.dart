@@ -25,7 +25,7 @@ class BattleCategoryList {
 
     factory BattleCategoryList.fromJson(Map<String, dynamic> json) => BattleCategoryList(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: Message.fromJson(json["message"]),
         data: Data.fromJson(json["data"]),
     );
@@ -49,7 +49,7 @@ class Data {
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
         categories: json["categories"] != null? List<BattleCategory>.from(json["categories"].map((x) => BattleCategory.fromJson(x))) : [],
-        entryCoin: json["entryCoin"],
+        entryCoin: json["entryCoin"].toString(),
     );
 
     Map<String, dynamic> toJson() => {
@@ -79,7 +79,7 @@ class BattleCategory {
         id: json["id"],
         name: json["name"],
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );

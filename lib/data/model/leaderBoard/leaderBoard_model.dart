@@ -6,6 +6,8 @@
 
 import 'dart:convert';
 
+import 'package:get/get.dart';
+
 import '../model/message_model/message_model.dart';
 
 LeaderBoardModel leaderBoardModelFromJson(String str) => LeaderBoardModel.fromJson(json.decode(str));
@@ -27,7 +29,7 @@ class LeaderBoardModel {
 
   factory LeaderBoardModel.fromJson(Map<String, dynamic> json) => LeaderBoardModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -81,9 +83,9 @@ class User {
         username: json["username"],
         firstname: json["firstname"],
         lastname: json["lastname"],
-        score: json["score"],
+        score: json["score"] != null? json["score"].toString() : '00',
         avatar: json["avatar"],
-        userRank: json["user_rank"],
+        userRank: json["user_rank"] != null? json["user_rank"].toString() : "",
       );
 
   Map<String, dynamic> toJson() => {

@@ -11,14 +11,10 @@ class Environment {
 
   // QUIZ SECTION
   static const int battleQuizPerQuestionSecond = 60; //Change Battle question sec
-
   static const bool isShowQuestionPrefix = true;
 
   //APP ADS SETTINGS
-
   static const bool showBannerAds = true; // show Banner Ads
-
-  static const bool hideAfterShowBannerAds = true; //false => Disabling ads below a certain minimum will not work
   static const int hideHomeBannerAdsAfteraMiniutes = 2; // Hide Home Banner Ads After 2 Min
 
   static const bool showInterstitialAds = true; // show interstitial Ads

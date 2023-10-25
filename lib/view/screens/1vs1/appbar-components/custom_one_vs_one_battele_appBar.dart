@@ -21,7 +21,7 @@ class CustomOneVSOneAppBar extends StatelessWidget {
         flexibleSpace: Container(
           width: double.infinity,
           decoration: const BoxDecoration(
-            image: DecorationImage(image: AssetImage(MyImages.appBarBGimage), fit: BoxFit.fitWidth),
+            image: DecorationImage(image: AssetImage(MyImages.appBarBGImage), fit: BoxFit.fitWidth),
           ),
         ),
         backgroundColor: MyColor.primaryColor,

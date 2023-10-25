@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final dashBoardModel = dashBoardModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -26,7 +23,7 @@ class DashBoardModel {
 
   factory DashBoardModel.fromJson(Map<String, dynamic> json) => DashBoardModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -92,13 +89,13 @@ class Data {
       quizImagePath: json["quiz_image_path"],
       examImagePath: json["exam_image_path"],
       userImagePath: json["user_image_path"],
-      generalQuizStatus: json["general_quiz_status"],
-      contestStatus: json["contest_status"],
-      funNLearnStatus: json["fun_n_learn_status"],
-      guessTheWordStatus: json["guess_the_word_status"],
-      examStatus: json["exam_status"],
-      dailyQuizStatus: json["daily_quiz_status"],
-      singleBattleStatus: json["single_battle_status"],
+      generalQuizStatus: json["general_quiz_status"].toString(),
+      contestStatus: json["contest_status"].toString(),
+      funNLearnStatus: json["fun_n_learn_status"].toString(),
+      guessTheWordStatus: json["guess_the_word_status"].toString(),
+      examStatus: json["exam_status"].toString(),
+      dailyQuizStatus: json["daily_quiz_status"].toString(),
+      singleBattleStatus: json["single_battle_status"].toString(),
     );
   }
 
@@ -147,10 +144,10 @@ class Category {
         id: json["id"],
         name: json["name"],
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-        questionsCount: json["questions_count"],
+        questionsCount: json["questions_count"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -211,23 +208,23 @@ class Contest {
 
   factory Contest.fromJson(Map<String, dynamic> json) => Contest(
         id: json["id"],
-        typeId: json["type_id"],
-        categoryId: json["category_id"],
-        subCategoryId: json["sub_category_id"],
+        typeId: json["type_id"].toString(),
+        categoryId: json["category_id"].toString(),
+        subCategoryId: json["sub_category_id"].toString(),
         title: json["title"],
         image: json["image"],
         startDate: json["start_date"] == null ? null : DateTime.parse(json["start_date"]),
-        endDate: json["end_date"] == null ? null : json["end_date"].toString(),
-        prize: json["prize"],
-        point: json["point"],
+        endDate: json["end_date"],
+        prize: json["prize"].toString(),
+        point: json["point"].toString(),
         description: json["description"] ?? "",
-        levelId: json["level_id"],
+        levelId: json["level_id"].toString(),
         examStartTime: json["exam_start_time"],
         examEndTime: json["exam_end_time"],
-        examDuration: json["exam_duration"],
-        examKey: json["exam_key"],
+        examDuration: json["exam_duration"].toString(),
+        examKey: json["exam_key"].toString(),
         enrolledPlayer: json["enrolled_player"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
@@ -286,8 +283,8 @@ class QuizType {
         name: json["name"],
         act: json["act"],
         image: json["image"] ?? "",
-        isCategorise: json["is_categorise"],
-        status: json["status"],
+        isCategorise: json["is_categorise"].toString(),
+        status: json["status"].toString(),
         shortDescription: json["short_description"] ?? "",
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
@@ -314,7 +311,7 @@ class Rank {
   });
 
   factory Rank.fromJson(Map<String, dynamic> json) => Rank(
-        userRank: json["user_rank"],
+        userRank: json["user_rank"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -384,23 +381,23 @@ class User {
         username: json["username"],
         avatar: json["avatar"],
         email: json["email"],
-        countryCode: json["country_code"],
+        countryCode: json["country_code"].toString(),
         mobile: json["mobile"],
-        refBy: json["ref_by"],
-        referralCode: json["referral_code"],
+        refBy: json["ref_by"].toString(),
+        referralCode: json["referral_code"].toString(),
         address: json["address"] == null ? null : Address.fromJson(json["address"]),
-        status: json["status"],
-        kv: json["kv"],
-        ev: json["ev"],
-        sv: json["sv"],
-        profileComplete: json["profile_complete"],
+        status: json["status"].toString(),
+        kv: json["kv"].toString(),
+        ev: json["ev"].toString(),
+        sv: json["sv"].toString(),
+        profileComplete: json["profile_complete"].toString(),
         verCodeSendAt: json["ver_code_send_at"] == null ? null : DateTime.parse(json["ver_code_send_at"]),
-        ts: json["ts"],
-        tv: json["tv"],
-        tsc: json["tsc"],
-        banReason: json["ban_reason"],
-        coins: json["coins"],
-        score: json["score"],
+        ts: json["ts"].toString(),
+        tv: json["tv"].toString(),
+        tsc: json["tsc"].toString(),
+        banReason: json["ban_reason"].toString(),
+        coins: json["coins"].toString(),
+        score: json["score"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
@@ -453,7 +450,7 @@ class Address {
         address: json["address"],
         city: json["city"],
         state: json["state"],
-        zip: json["zip"],
+        zip: json["zip"] ,
         country: json["country"],
       );
 

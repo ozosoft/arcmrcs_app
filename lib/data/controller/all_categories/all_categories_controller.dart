@@ -28,7 +28,7 @@ class AllCategoriesController extends GetxController {
     if (model.statusCode == 200) {
       allCategoriesList.clear();
 
-      AllcategoriesModel allcategories = AllcategoriesModel.fromJson(jsonDecode(model.responseJson));
+      AllCategoriesModel allcategories = AllCategoriesModel.fromJson(jsonDecode(model.responseJson));
 
       if (allcategories.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<Category>? categories = allcategories.data?.categories;

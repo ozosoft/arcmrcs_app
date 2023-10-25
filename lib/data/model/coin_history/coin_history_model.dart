@@ -1,6 +1,3 @@
-// To parse this JSON data, do
-//
-//     final coinHistoryModel = coinHistoryModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -25,7 +22,7 @@ class CoinHistoryModel {
 
   factory CoinHistoryModel.fromJson(Map<String, dynamic> json) => CoinHistoryModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -79,11 +76,11 @@ class CoinLog {
 
   factory CoinLog.fromJson(Map<String, dynamic> json) => CoinLog(
         id: json["id"],
-        userId: json["user_id"],
-        quizInfoId: json["quiz_info_id"],
-        coinPlanId: json["coin_plan_id"],
-        coins: json["coins"],
-        status: json["status"],
+        userId: json["user_id"].toString(),
+        quizInfoId: json["quiz_info_id"].toString(),
+        coinPlanId: json["coin_plan_id"].toString(),
+        coins: json["coins"].toString(),
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"],
         coinPlan: json["coin_plan"] == null ? null : CoinPlan.fromJson(json["coin_plan"]),
@@ -127,11 +124,11 @@ class CoinPlan {
         id: json["id"],
         title: json["title"],
         image: json["image"],
-        coinsAmount: json["coins_amount"],
-        price: json["price"],
-        status: json["status"],
-        createdAt: json["created_at"] == null ? null : json["created_at"],
-        updatedAt: json["updated_at"] == null ? null : json["updated_at"],
+        coinsAmount: json["coins_amount"].toString(),
+        price: json["price"].toString(),
+        status: json["status"].toString(),
+        createdAt: json["created_at"],
+        updatedAt: json["updated_at"],
       );
 
   Map<String, dynamic> toJson() => {

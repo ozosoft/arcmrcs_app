@@ -14,6 +14,7 @@ import '../../../../../data/controller/battle/battle_room_controller.dart';
 import '../../../../../data/services/api_client.dart';
 import '../../../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../../../components/dialog/warning_dialog.dart';
+import '../../../../components/image_widget/my_image_widget.dart';
 import '../../../../components/text/default_text.dart';
 import '../../../../../data/controller/battle/find_opponents_controller.dart';
 
@@ -83,9 +84,9 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                                     height: Dimensions.space50,
                                     width: Dimensions.space50,
                                   )
-                                : Image.network(
-                                    "${UrlContainer.userImagePath}/${controller.battleRepo.apiClient.getUserImagePath()}",
-                                    fit: BoxFit.cover,
+                                : MyImageWidget(
+                                    fromProfile: true,
+                                    imageUrl:"${UrlContainer.userImagePath}/${controller.battleRepo.apiClient.getUserImagePath()}",
                                     height: Dimensions.space50,
                                     width: Dimensions.space50,
                                   )),
@@ -132,9 +133,9 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                                             height: Dimensions.space50,
                                             width: Dimensions.space50,
                                           )
-                                        : Image.network(
-                                            "${UrlContainer.userImagePath}/${opUserData.profileUrl}",
-                                            fit: BoxFit.cover,
+                                        : MyImageWidget(
+                                            fromProfile: true,
+                                            imageUrl:"${UrlContainer.userImagePath}/${opUserData.profileUrl}",
                                             height: Dimensions.space50,
                                             width: Dimensions.space50,
                                           )),

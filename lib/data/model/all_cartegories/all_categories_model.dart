@@ -6,26 +6,26 @@ import 'dart:convert';
 
 import '../model/message_model/message_model.dart';
 
-AllcategoriesModel allcategoriesModelFromJson(String str) => AllcategoriesModel.fromJson(json.decode(str));
+AllCategoriesModel allCategoriesModelFromJson(String str) => AllCategoriesModel.fromJson(json.decode(str));
 
-String allcategoriesModelToJson(AllcategoriesModel data) => json.encode(data.toJson());
+String allCategoriesModelToJson(AllCategoriesModel data) => json.encode(data.toJson());
 
-class AllcategoriesModel {
+class AllCategoriesModel {
   String? remark;
   String? status;
   Message? message;
   Data? data;
 
-  AllcategoriesModel({
+  AllCategoriesModel({
     this.remark,
     this.status,
     this.message,
     this.data,
   });
 
-  factory AllcategoriesModel.fromJson(Map<String, dynamic> json) => AllcategoriesModel(
+  factory AllCategoriesModel.fromJson(Map<String, dynamic> json) => AllCategoriesModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -85,11 +85,11 @@ class Category {
         id: json["id"],
         name: json["name"],
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-        questionsCount: json["questions_count"],
-        subcategoriesCount: json["subcategories_count"],
+        questionsCount: json["questions_count"].toString(),
+        subcategoriesCount: json["subcategories_count"].toString(),
         quizInfos: json["quiz_infos"] == null ? [] : List<QuizInfo>.from(json["quiz_infos"]!.map((x) => QuizInfo.fromJson(x))),
       );
 
@@ -162,26 +162,26 @@ class QuizInfo {
   factory QuizInfo.fromJson(Map<String, dynamic> json) {
     return QuizInfo(
       id: json["id"],
-      typeId: json["type_id"],
-      categoryId: json["category_id"],
-      subCategoryId: json["sub_category_id"] ?? "",
+      typeId: json["type_id"].toString(),
+      categoryId: json["category_id"].toString(),
+      subCategoryId: json["sub_category_id"].toString(),
       title: json["title"],
       image: json["image"],
       startDate: json["start_date"],
       endDate: json["end_date"],
-      prize: json["prize"],
-      point: json["point"],
+      prize: json["prize"].toString(),
+      point: json["point"].toString(),
       description: json["description"],
-      levelId: json["level_id"],
+      levelId: json["level_id"].toString(),
       examStartTime: json["exam_start_time"],
       examEndTime: json["exam_end_time"],
-      examDuration: json["exam_duration"],
-      examKey: json["exam_key"],
+      examDuration: json["exam_duration"].toString(),
+      examKey: json["exam_key"].toString(),
       winningMark: double.parse(json["winning_mark"].toString()),
-      status: json["status"],
+      status: json["status"].toString(),
       createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
       updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-      levelStatus: json["level_status"],
+      levelStatus: json["level_status"].toString(),
       subcategory: json["subcategory"] == null ? null : Subcategory.fromJson(json["subcategory"]),
       playInfo: json["play_info"] == null ? null : PlayInfo.fromJson(json["play_info"]),
       level: json["level"] == null ? null : Level.fromJson(json["level"]),
@@ -236,8 +236,8 @@ class Level {
   factory Level.fromJson(Map<String, dynamic> json) => Level(
         id: json["id"],
         title: json["title"],
-        level: json["level"],
-        status: json["status"],
+        level: json["level"].toString(),
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
@@ -283,15 +283,15 @@ class PlayInfo {
 
   factory PlayInfo.fromJson(Map<String, dynamic> json) => PlayInfo(
         id: json["id"],
-        userId: json["user_id"],
-        quizInfoId: json["quiz_info_id"],
-        roomId: json["room_id"],
-        singleBattleId: json["single_battle_id"],
-        isWin: json["is_win"],
-        fiftyFifty: json["fifty_fifty"],
-        audiencePoll: json["audience_poll"],
-        timeReset: json["time_reset"],
-        flipQuestion: json["flip_question"],
+        userId: json["user_id"].toString(),
+        quizInfoId: json["quiz_info_id"].toString(),
+        roomId: json["room_id"].toString(),
+        singleBattleId: json["single_battle_id"].toString(),
+        isWin: json["is_win"].toString(),
+        fiftyFifty: json["fifty_fifty"].toString(),
+        audiencePoll: json["audience_poll"].toString(),
+        timeReset: json["time_reset"].toString(),
+        flipQuestion: json["flip_question"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
       );
@@ -334,9 +334,9 @@ class Subcategory {
   factory Subcategory.fromJson(Map<String, dynamic> json) => Subcategory(
         id: json["id"],
         name: json["name"],
-        categoryId: json["category_id"],
+        categoryId: json["category_id"].toString(),
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: json["created_at"],
         updatedAt: json["updated_at"],
       );

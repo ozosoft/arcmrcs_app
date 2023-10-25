@@ -50,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Positioned.fill(
               child: SvgPicture.asset(
-                MyImages.splashBGimage,
+                MyImages.splashBGImage,
                 fit: BoxFit.cover, // Make the image cover the full width
               ),
             ),

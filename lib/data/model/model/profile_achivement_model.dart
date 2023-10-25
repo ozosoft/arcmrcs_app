@@ -1,8 +1,8 @@
-class AchivementModel {
+class AchievementModel {
   String title;
   String points;
 
-  AchivementModel(
+  AchievementModel(
       {required this. title,
       required this.points});
 }

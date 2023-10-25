@@ -23,7 +23,7 @@ class LogoutModel {
 
     factory LogoutModel.fromJson(Map<String, dynamic> json) => LogoutModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
     );
 

@@ -3,7 +3,7 @@
 //     final submitAnswerModel = submitAnswerModelFromJson(jsonString);
 
 import 'dart:convert';
-
+import '../quiz_questions_model/level_model.dart';
 import '../model/message_model/message_model.dart';
 
 SubmitAnswerModel submitAnswerModelFromJson(String str) => SubmitAnswerModel.fromJson(json.decode(str));
@@ -25,7 +25,7 @@ class SubmitAnswerModel {
 
   factory SubmitAnswerModel.fromJson(Map<String, dynamic> json) => SubmitAnswerModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: Message.fromJson(json["message"]),
         data: Data.fromJson(json["data"]),
       );
@@ -39,11 +39,11 @@ class SubmitAnswerModel {
 }
 
 class Data {
-  int totalQuestion;
-  int correctAnswer;
-  int wrongAnswer;
-  int winingScore;
-  int totalScore;
+  String totalQuestion;
+  String correctAnswer;
+  String wrongAnswer;
+  String winingScore;
+  String totalScore;
   NextLevelQuizInfo? nextLevelQuizInfo;
 
   Data({
@@ -56,11 +56,11 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        totalQuestion: json["totalQuestion"],
-        correctAnswer: json["correctAnswer"],
-        wrongAnswer: json["wrongAnswer"],
-        winingScore: json["winingScore"],
-        totalScore: json["totalScore"],
+        totalQuestion: json["totalQuestion"].toString(),
+        correctAnswer: json["correctAnswer"].toString(),
+        wrongAnswer: json["wrongAnswer"].toString(),
+        winingScore: json["winingScore"].toString(),
+        totalScore: json["totalScore"].toString(),
         nextLevelQuizInfo: json["nextLevelQuizInfo"] == null ? null : NextLevelQuizInfo.fromJson(json["nextLevelQuizInfo"]),
       );
 
@@ -127,23 +127,23 @@ class NextLevelQuizInfo {
 
   factory NextLevelQuizInfo.fromJson(Map<String, dynamic> json) => NextLevelQuizInfo(
         id: json["id"],
-        typeId: json["type_id"],
-        categoryId: json["category_id"],
-        subCategoryId: json["sub_category_id"],
+        typeId: json["type_id"].toString(),
+        categoryId: json["category_id"].toString(),
+        subCategoryId: json["sub_category_id"].toString(),
         title: json["title"],
         image: json["image"],
         startDate: json["start_date"],
         endDate: json["end_date"],
-        prize: json["prize"],
-        point: json["point"],
+        prize: json["prize"].toString(),
+        point: json["point"].toString(),
         description: json["description"],
-        levelId: json["level_id"],
+        levelId: json["level_id"].toString(),
         examStartTime: json["exam_start_time"],
         examEndTime: json["exam_end_time"],
-        examDuration: json["exam_duration"],
+        examDuration: json["exam_duration"].toString(),
         examKey: json["exam_key"],
         winningMark: double.parse(json["winning_mark"].toString()),
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         category: json["category"] == null ? null : Category.fromJson(json["category"]),
@@ -201,10 +201,10 @@ class Category {
         id: json["id"],
         name: json["name"],
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        categoryId: json["category_id"],
+        categoryId: json["category_id"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -218,38 +218,4 @@ class Category {
       };
 }
 
-class Level {
-  int? id;
-  String? title;
-  String? level;
-  String? status;
-  DateTime? createdAt;
-  DateTime? updatedAt;
 
-  Level({
-    required this.id,
-    required this.title,
-    required this.level,
-    required this.status,
-    required this.createdAt,
-    required this.updatedAt,
-  });
-
-  factory Level.fromJson(Map<String, dynamic> json) => Level(
-        id: json["id"],
-        title: json["title"],
-        level: json["level"],
-        status: json["status"],
-        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
-        updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "title": title,
-        "level": level,
-        "status": status,
-        "created_at": createdAt!.toIso8601String(),
-        "updated_at": updatedAt!.toIso8601String(),
-      };
-}

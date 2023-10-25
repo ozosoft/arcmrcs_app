@@ -25,7 +25,7 @@ class QuizResultResponseModel {
 
     factory QuizResultResponseModel.fromJson(Map<String, dynamic> json) => QuizResultResponseModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
