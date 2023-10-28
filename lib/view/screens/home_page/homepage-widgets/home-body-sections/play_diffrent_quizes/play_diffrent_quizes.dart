@@ -1,4 +1,4 @@
-    import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
@@ -8,17 +8,16 @@ import 'package:quiz_lab/core/utils/url_container.dart';
 import 'package:quiz_lab/data/controller/dashboard/dashboard_controller.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
-
 import '../../../../../components/image_widget/my_image_widget.dart';
 
-class PlayDiffrentQuizes extends StatefulWidget {
-  const PlayDiffrentQuizes({super.key});
+class PlayDifferentQuizes extends StatefulWidget {
+  const PlayDifferentQuizes({super.key});
 
   @override
-  State<PlayDiffrentQuizes> createState() => _PlayDiffrentQuizesState();
+  State<PlayDifferentQuizes> createState() => _PlayDifferentQuizesState();
 }
 
-class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
+class _PlayDifferentQuizesState extends State<PlayDifferentQuizes> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(

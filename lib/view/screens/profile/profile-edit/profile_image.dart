@@ -56,6 +56,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                     imagePath: MyImages.defaultAvatar,
                     height: Dimensions.space80,
                     width: Dimensions.space80,
+                    isProfile: true,
                     isAsset: true,
                   )),
               )
@@ -121,6 +122,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                 )
               : CircleImageWidget(
                   press: () {},
+                  isProfile: true,
                   isAsset: isAsset,
                   imagePath: isAsset ? MyImages.defaultAvatar : widget.imagePath,
                   height: Dimensions.space80,

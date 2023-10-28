@@ -24,7 +24,7 @@ class InfoWidget extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-                border: Border.all(color: MyColor.borderColor)),
+                border: Border.all(color: MyColor.borderColor,width: .5)),
             child: Column(
               children: [
                 const SizedBox(

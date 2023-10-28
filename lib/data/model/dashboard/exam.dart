@@ -60,7 +60,7 @@ class Exams {
     levelId: json["level_id"].toString(),
     examStartTime: json["exam_start_time"].toString(),
     examEndTime: json["exam_end_time"],
-    examDuration: json["exam_duration"],
+    examDuration: json["exam_duration"].toString(),
     examKey: json["exam_key"],
     examRule: json["exam_rule"] == null || json["exam_rule"].toString() == '0' ? [] : List<String>.from(json["exam_rule"]!.map((x) => x)),
     status: json["status"].toString(),

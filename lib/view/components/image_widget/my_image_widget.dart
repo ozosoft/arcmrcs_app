@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
@@ -13,6 +14,7 @@ class MyImageWidget extends StatelessWidget {
   final double radius;
   final BoxFit boxFit;
   final bool fromProfile;
+  final bool fromCoin;
   const MyImageWidget({
     super.key,
     required this.imageUrl,
@@ -20,6 +22,7 @@ class MyImageWidget extends StatelessWidget {
     this.width = 100,
     this.radius = 5,
     this.fromProfile = false,
+    this.fromCoin = false,
     this.boxFit = BoxFit.cover,
   });
 
@@ -50,10 +53,18 @@ class MyImageWidget extends StatelessWidget {
       errorWidget: (context, url, error) => SizedBox(
         height: height,
         width: width,
-        child: ClipRRect(
+        child:  fromCoin?
+        SvgPicture.asset(
+          MyImages.coin,
+          fit: BoxFit.cover,
+          height: height,
+          width: width,
+        ) :ClipRRect(
           borderRadius: BorderRadius.circular(Dimensions.defaultRadius * 5),
           child: Center(
-            child: fromProfile?
+            child:
+
+            fromProfile?
             Image.asset(
               MyImages.defaultAvatar,
               fit: BoxFit.cover,

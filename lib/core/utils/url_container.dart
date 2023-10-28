@@ -1,6 +1,5 @@
 class UrlContainer {
   static const String domainUrl = 'https://script.viserlab.com/quizlab';
-  //static const String domainUrl = 'https://url8.viserlab.com/quizlab';
   static const String baseUrl = '$domainUrl/api/';
 
   static const String dashBoardEndPoint = 'dashboard';
@@ -43,6 +42,7 @@ class UrlContainer {
   static const String allCategoriesImage = '$domainUrl/assets/admin/images/category/';
   static const String subCategoriesImage = '$domainUrl/assets/admin/images/subcategory/';
   static const String questionImagePath = '$domainUrl/assets/admin/images/question';
+  static const String coinImages = '$domainUrl/assets/admin/images/plan/';
 
   static const String userImagePath = '$domainUrl/assets/images/user/profile';
   static const String examZoneImage = '$domainUrl/assets/admin/images/exam/';

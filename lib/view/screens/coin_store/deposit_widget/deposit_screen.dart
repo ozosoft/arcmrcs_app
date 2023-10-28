@@ -74,8 +74,10 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomDropDownTextField(
+                          borderWidth: .5,
+                            radius: Dimensions.defaultRadius,
                             labelText: MyStrings.paymentMethod.tr,
-                            selectedValue: controller.paymentMethod,
+                             selectedValue: controller.paymentMethod,
                             onChanged: (newValue) {
                               controller.setPaymentMethod(newValue);
                             },

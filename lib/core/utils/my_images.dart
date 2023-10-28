@@ -20,7 +20,6 @@ class MyImages {
 
   static const String placeHolderImage = "assets/images/place_holder.png";
 
-  static const String profile = "assets/images/profile.png";
   static const String mailSVG = "assets/images/email_SVG.svg";
   static const String home = "assets/images/home.png";
   static const String email = "assets/images/email.png";
@@ -43,6 +42,7 @@ class MyImages {
   static const String reward = "assets/images/rewords.svg";
   static const String avatar1 = "assets/images/avatar1.svg";
   static const String rank = "assets/images/rank.svg";
+  static const String coin1 = "assets/images/coin1.svg";
   static const String coin = "assets/images/Coin.svg";
   static const String score = "assets/images/score.svg";
   static const String reviewBgImage = "assets/images/app_red_bg.svg";
@@ -98,7 +98,7 @@ class MyImages {
   List<String> achivementsType = [
     rank,
     coin,
-    score,
+    score
   ];
 
 }

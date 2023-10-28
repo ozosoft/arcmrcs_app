@@ -44,6 +44,7 @@ class _ProfileTopSectionState extends State<ProfileTopSection> {
                             margin: const EdgeInsetsDirectional.only(top: Dimensions.space20),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(Dimensions.space40),
+                              border: Border.all(color: MyColor.borderColor.withOpacity(.2),width: .5)
                             ),
                             height: Dimensions.space80,
                             width: Dimensions.space80,

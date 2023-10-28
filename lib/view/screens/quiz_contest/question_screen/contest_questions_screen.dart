@@ -262,12 +262,15 @@ class _QuizContestQuestionsState extends State<QuizContestQuestions> {
           ),
         ),
         //Ads Code
-        const Positioned.fill(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Padding(
-              padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
-              child: QuizBannerAdsWidget(),
+        const Visibility(
+          visible: Environment.isShowAdsOnQuizScreen,
+          child:  Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
+                child: QuizBannerAdsWidget(),
+              ),
             ),
           ),
         ),

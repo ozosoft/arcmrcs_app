@@ -13,6 +13,9 @@ class Environment {
   static const int battleQuizPerQuestionSecond = 60; //Change Battle question sec
   static const bool isShowQuestionPrefix = true;
 
+  static const bool isShowAdsOnQuizScreen = false;
+  static const bool isShowAdsOnReviewAnswerScreen = false;
+
   //APP ADS SETTINGS
   static const bool showBannerAds = true; // show Banner Ads
   static const int hideHomeBannerAdsAfteraMiniutes = 2; // Hide Home Banner Ads After 2 Min

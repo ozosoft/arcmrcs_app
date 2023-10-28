@@ -65,7 +65,7 @@ class QuizInfo {
     levelId: json["level_id"].toString(),
     examStartTime: json["exam_start_time"],
     examEndTime: json["exam_end_time"],
-    examDuration: json["exam_duration"],
+    examDuration: json["exam_duration"].toString(),
     examKey: json["exam_key"],
     winningMark: double.parse(json["winning_mark"].toString()),
     status: json["status"].toString(),

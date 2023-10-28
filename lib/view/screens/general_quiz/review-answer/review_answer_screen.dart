@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_lab/environment.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:get/get.dart';
 
@@ -23,12 +24,15 @@ class _ReviewAnswerScreenState extends State<ReviewAnswerScreen> {
         fit: StackFit.expand,
         children: [
           ReviewAnswerSection(),
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
-                child: QuizBannerAdsWidget(),
+          Visibility(
+            visible: Environment.isShowAdsOnReviewAnswerScreen,
+            child: Positioned.fill(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
+                  child: QuizBannerAdsWidget(),
+                ),
               ),
             ),
           ),

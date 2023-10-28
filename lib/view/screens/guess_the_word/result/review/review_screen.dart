@@ -5,6 +5,7 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_review_result.dart';
 import 'package:get/get.dart';
+import 'package:quiz_lab/environment.dart';
 import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
 
 import '../../../../../core/utils/url_container.dart';
@@ -145,12 +146,15 @@ class _GuessWordReviewResultState extends State<GuessWordReviewResult> {
                   },
                 ),
               ),
-              const Positioned.fill(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
-                    child: QuizBannerAdsWidget(),
+              const Visibility(
+                visible: Environment.isShowAdsOnReviewAnswerScreen,
+                child: Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
+                      child: QuizBannerAdsWidget(),
+                    ),
                   ),
                 ),
               ),

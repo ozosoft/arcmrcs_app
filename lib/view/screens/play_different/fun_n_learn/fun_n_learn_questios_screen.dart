@@ -18,6 +18,7 @@ import 'package:get/get.dart';
 
 import '../../../../core/route/route.dart';
 import '../../../../core/utils/url_container.dart';
+import '../../../../environment.dart';
 import '../../../components/dialog/warning_dialog.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';
@@ -252,12 +253,15 @@ class _FunNlearnQuizScreenState extends State<FunNlearnQuizScreen> {
                 ]),
 
                 //Ads Code
-                const Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
-                     // child: QuizBannerAdsWidget(),
+                const Visibility(
+                  visible: Environment.isShowAdsOnQuizScreen,
+                  child:  Positioned.fill(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.only(bottom: Dimensions.space10),
+                        child: QuizBannerAdsWidget(),
+                      ),
                     ),
                   ),
                 ),

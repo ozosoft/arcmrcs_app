@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:get/get.dart';
-
 import '../../components/app-bar/custom_category_appbar.dart';
 import 'widgets/exam_zone_tabbar_body_section.dart';
 
@@ -15,4 +14,5 @@ class ExamZoneScreen extends StatelessWidget {
       body: const ExamZoneTabBarBodySection(),
     );
   }
+
 }

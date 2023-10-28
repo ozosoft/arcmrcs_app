@@ -4,6 +4,7 @@ import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/util.dart';
 import 'package:quiz_lab/data/controller/coin_history/coin_history_controller.dart';
 import 'package:quiz_lab/data/repo/coin_history/coin_history_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
@@ -50,67 +51,67 @@ class _CoinHistoryScreenState extends State<CoinHistoryScreen> {
         ))
                 : ListView.builder(
                     physics: const BouncingScrollPhysics(),
-                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space25),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space25,start: Dimensions.space15,end: Dimensions.space15),
                     // shrinkWrap: true,
                     itemCount: controller.coinHistoryList.length,
                     itemBuilder: (BuildContext context, int index) {
                       final coinHistoryItem = controller.coinHistoryList[index];
 
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space5),
-                        child: Card(
-                          elevation: 0.2,
-                          child: Padding(
-                            padding: const EdgeInsets.all(Dimensions.space6),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.all(
-                                    Dimensions.space10,
-                                  ),
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const SizedBox(
-                                        width: Dimensions.space10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(coinHistoryItem.coinPlan!.title.toString().tr, style: semiBoldMediumLarge),
-                                          const SizedBox(
-                                            height: Dimensions.space8,
-                                          ),
-                                          Text(
-                                            DateConverter.isoStringToLocalFormattedDateAndTimeOnly(controller.coinHistoryList[index].createdAt!.toIso8601String()).tr,
-                                            style: regularLarge.copyWith(color: MyColor.textColor),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: Dimensions.space10,
-                                ),
-                                const Spacer(),
-                                SizedBox(
-                                    child: Text("${controller.coinHistoryRepo.apiClient.getCurrencyOrUsername(isCurrency: true,isSymbol: true)}${controller.coinHistoryList[index].coinPlan!.price} ${controller.coinHistoryRepo.apiClient.getCurrencyOrUsername(isCurrency: true,isSymbol: false)}",
-                                        style: semiBoldLarge.copyWith(
-                                            color: coinHistoryItem.status == "+"
-                                                ? MyColor.colorGreen
-                                                : coinHistoryItem.status == "-"
-                                                    ? MyColor.colorRed
-                                                    : Colors.black))),
-                                const SizedBox(
-                                  width: Dimensions.space10,
-                                ),
-                              ],
-                            ),
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: Dimensions.space12),
+                          decoration: BoxDecoration(
+                              color: MyColor.colorWhite,
+                              borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                              boxShadow: MyUtils.getCardShadow()
                           ),
-                        ),
+                          padding: const EdgeInsets.all(Dimensions.space6),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(
+                                  Dimensions.space7,
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const SizedBox(
+                                      width: Dimensions.space10,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(coinHistoryItem.coinPlan!.title.toString().tr, style: semiBoldMediumLarge),
+                                        const SizedBox(
+                                          height: Dimensions.space8,
+                                        ),
+                                        Text(
+                                          DateConverter.isoStringToLocalFormattedDateAndTimeOnly(controller.coinHistoryList[index].createdAt!.toIso8601String()).tr,
+                                          style: regularLarge.copyWith(color: MyColor.textColor),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(
+                                width: Dimensions.space10,
+                              ),
+                              const Spacer(),
+                              SizedBox(
+                                  child: Text("${controller.coinHistoryRepo.apiClient.getCurrencyOrUsername(isCurrency: true,isSymbol: true)}${controller.coinHistoryList[index].coinPlan!.price} ${controller.coinHistoryRepo.apiClient.getCurrencyOrUsername(isCurrency: true,isSymbol: false)}",
+                                      style: semiBoldLarge.copyWith(
+                                          color: coinHistoryItem.status == "+"
+                                              ? MyColor.colorGreen
+                                              : coinHistoryItem.status == "-"
+                                              ? MyColor.colorRed
+                                              : Colors.black))),
+                              const SizedBox(
+                                width: Dimensions.space10,
+                              ),
+                            ],
+                          )
                       );
                     }),
       ),

@@ -104,7 +104,7 @@ class _RankingTabBarState extends State<RankingTabBar> {
                   ),
                   height: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
                   width: orientation != Orientation.portrait ? Dimensions.space60 : Dimensions.space60,
-                  child: MyImageWidget(radius: Dimensions.space100, imageUrl: UrlContainer.leaderboardProfileImage + playerAvatar),
+                  child: MyImageWidget(radius: Dimensions.space100, imageUrl: UrlContainer.leaderboardProfileImage + playerAvatar,fromProfile: true,),
                 ) :
                 Container(
                   margin: EdgeInsets.all(
@@ -139,9 +139,11 @@ class _RankingTabBarState extends State<RankingTabBar> {
                 color: MyColor.leaderBoardContainer,
                 borderRadius: BorderRadius.all(Radius.circular(Dimensions.space30)),
               ),
+              alignment: Alignment.center,
               padding: const EdgeInsets.all(Dimensions.space7),
               child: Text(
                 "$playerScore ${MyStrings.qP.tr}",
+                textAlign: TextAlign.center,
                 style: semiBoldDefault.copyWith(
                   color: MyColor.colorWhite,
                 ),
