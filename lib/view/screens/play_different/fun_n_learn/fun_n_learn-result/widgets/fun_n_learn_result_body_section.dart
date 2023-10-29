@@ -7,7 +7,6 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/play_different_quizes/fun_n_learn/fun_n_learn_quiz_controller.dart';
 import 'package:quiz_lab/view/components/divider/custom_dashed_divider.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'bottom_section_buttons.dart';
 import 'player_profile_picture.dart';

@@ -12,7 +12,6 @@ import '../../../../../core/utils/style.dart';
 import '../../../../../core/utils/url_container.dart';
 import '../../../../../data/controller/battle/battle_room_controller.dart';
 import '../../../../../data/services/api_client.dart';
-import '../../../../components/alert-dialog/custom_alert_dialog.dart';
 import '../../../../components/dialog/warning_dialog.dart';
 import '../../../../components/image_widget/my_image_widget.dart';
 import '../../../../components/text/default_text.dart';

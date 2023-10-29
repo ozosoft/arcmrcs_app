@@ -9,7 +9,6 @@ import 'package:quiz_lab/data/controller/exam_zone/exam_zone_quiz_controller.dar
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/divider/custom_dashed_divider.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'bottom_section_buttons.dart';
 import 'player_profile_picture.dart';
