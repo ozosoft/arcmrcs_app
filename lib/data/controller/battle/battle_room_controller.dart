@@ -172,6 +172,7 @@ class BattleRoomController extends GetxController {
           }
         } else {
           battleRoomData.value = battleRoom;
+
           debugPrint("User Found ${joinRoomState.value}");
 
           // if user found then get question list from api
@@ -186,6 +187,7 @@ class BattleRoomController extends GetxController {
               var ownData = getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID(), isMyData: true); // Current User Data
               var opUserData = getOpponentUserDetailsOrMy(battleRepo.apiClient.getUserID()); // Opponent Data
 
+              debugPrint("User 2  Name : ${opUserData.name}");
               //Get random question from api and update to firebase adn use it for 2 user
 
               if (ownData.uid == battleRoom.user1!.uid) {
@@ -555,7 +557,7 @@ class BattleRoomController extends GetxController {
         DocumentSnapshot documentSnapshot = await documentReference.get();
         Map documentSnapshotDetails = Map.from(documentSnapshot.data() as Map<String, dynamic>);
         Map user2Details = Map.from(documentSnapshotDetails)['user2'];
-        debugPrint("User 2 : $user2Details");
+
         if (user2Details['uid'].toString().isEmpty && Map.from(documentSnapshotDetails)["categoryId"] == categoryId) {
           //debugPrint("Join user");
           //join as user2

@@ -1,17 +1,17 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
+import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import 'firebase_options.dart';
 
 class PushNotificationService {
   Future<void> setupInteractedMessage() async {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     FirebaseMessaging messaging = FirebaseMessaging.instance;
     await _requestPermissions();
 
@@ -28,10 +28,7 @@ class PushNotificationService {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {});
 
     FirebaseMessaging.onMessage.listen((RemoteMessage event) {});
-    messaging.getToken().then((value) {
-      String? token = value;
-      debugPrint("FCM ---${token!}");
-    });
+
     await enableIOSNotifications();
     await registerNotificationListeners();
   }
@@ -60,21 +57,49 @@ class PushNotificationService {
         }
       } catch (e) {
         if (kDebugMode) {
-          debugPrint(e.toString());
+          print(e.toString());
         }
       }
     });
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage? message) async {
       RemoteNotification? notification = message!.notification;
       AndroidNotification? android = message.notification?.android;
+
       if (notification != null && android != null) {
+        log(notification.title.toString());
+        log(notification.body.toString());
+        log(android.imageUrl.toString());
+        // Download the image and save it locally
+        late BigPictureStyleInformation bigPictureStyle;
+        if (android.imageUrl != null) {
+          final http.Response response = await http.get(Uri.parse(android.imageUrl!));
+          final String localImagePath = await _saveImageLocally(response.bodyBytes);
+          bigPictureStyle = BigPictureStyleInformation(
+            FilePathAndroidBitmap(localImagePath),
+            contentTitle: notification.title,
+            summaryText: notification.body,
+          );
+        }
+        //
         flutterLocalNotificationsPlugin.show(
             notification.hashCode,
             notification.title,
             notification.body,
             NotificationDetails(
-              android: AndroidNotificationDetails(channel.id, channel.name, channelDescription: channel.description, icon: '@mipmap/ic_launcher', playSound: true, enableVibration: true, enableLights: true, fullScreenIntent: true, priority: Priority.high, styleInformation: const BigTextStyleInformation(''), importance: Importance.high),
+              android: AndroidNotificationDetails(
+                channel.id,
+                channel.name,
+                channelDescription: channel.description,
+                icon: '@mipmap/ic_launcher',
+                playSound: true,
+                enableVibration: true,
+                enableLights: true,
+                fullScreenIntent: true,
+                priority: Priority.high,
+                styleInformation: android.imageUrl != null ? bigPictureStyle : const BigTextStyleInformation(''),
+                importance: Importance.high,
+              ),
             ),
             payload: jsonEncode(message.data));
       }
@@ -118,5 +143,14 @@ class PushNotificationService {
 
       await androidImplementation?.requestPermission();
     }
+  }
+
+  // Function to save the image locally
+  Future<String> _saveImageLocally(Uint8List bytes) async {
+    final directory = await getTemporaryDirectory();
+    final imagePath = '${directory.path}/notification_image.png';
+    final file = File(imagePath);
+    await file.writeAsBytes(bytes);
+    return imagePath;
   }
 }

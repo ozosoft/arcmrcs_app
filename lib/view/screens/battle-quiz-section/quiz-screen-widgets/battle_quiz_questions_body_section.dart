@@ -235,6 +235,7 @@ class _BattleQuizQuestionsBodySectionState extends State<BattleQuizQuestionsBody
                                                     quizController.selectOptionForQuestion(currentQuestion.id, option);
 
                                                     if (quizController.battleRepo.apiClient.getSoundStatus()) {
+                                                      debugPrint(quizController.isOptionSelectedForQuestion(currentQuestion.id, option).toString());
                                                       quizController.isOptionSelectedForQuestion(currentQuestion.id, option) ? AudioPlayer().play(AssetSource('audios/correct_ans.mp3')) : AudioPlayer().play(AssetSource('audios/wrong_ans.mp3'));
                                                     }
                                                   }
