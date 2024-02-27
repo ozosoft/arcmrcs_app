@@ -11,7 +11,6 @@ import 'package:quiz_lab/view/components/no_data.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/model/dashboard/exam.dart';
-import '../../../../data/model/exam_zone/exam_zone_question_list_model.dart';
 import '../../../components/bottom-sheet/custom_bottom_sheet_plus.dart';
 import 'completed_exam_list_card_widget.dart';
 import 'enter_exam_room_bottom_sheet.dart';
@@ -137,7 +136,7 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
                         onRefresh: () async {
                           controller.completedExamList(fromLoad: true);
                         },
-                        child: controller.completedExamDataList!.isEmpty ? SingleChildScrollView(
+                        child: controller.completedExamDataList.isEmpty ? SingleChildScrollView(
                           child: NoDataWidget(
                             margin: 8,
                             messages: MyStrings.noExamFound.tr,

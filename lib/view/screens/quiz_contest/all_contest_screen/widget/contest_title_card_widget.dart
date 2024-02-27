@@ -35,7 +35,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: const EdgeInsets.only(left:Dimensions.space10,right:Dimensions.space10,bottom:Dimensions.space10),
+        margin: const EdgeInsets.only(left: Dimensions.space10, right: Dimensions.space10, bottom: Dimensions.space10),
         decoration: BoxDecoration(
           color: MyColor.colorWhite,
           borderRadius: BorderRadius.circular(5.0),
@@ -87,7 +87,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
                       ],
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.only( bottom: Dimensions.space10, end: Dimensions.space10),
+                          padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space10, end: Dimensions.space10),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -96,7 +96,7 @@ class _ContestListTileCardState extends State<ContestListTileCard> {
 
                               const SizedBox(height: Dimensions.space15),
                               //Title here
-                              Text("${MyStrings.youNeedtoScoreLong.replaceAll("{point}", widget.contest.winningMark.toString()).tr} ", style: regularSmall),
+                              Text(MyStrings.youNeedtoScoreLong.tr.replaceAll("{point}", widget.contest.winningMark.toString()), style: regularSmall),
 
                               const SizedBox(height: Dimensions.space15),
                               // //Title here

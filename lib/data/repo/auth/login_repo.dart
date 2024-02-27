@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
 import 'package:quiz_lab/core/utils/method.dart';

@@ -9,7 +9,6 @@ import '../../../../core/utils/my_strings.dart';
 import '../../../../core/utils/style.dart';
 import '../../../../core/utils/url_container.dart';
 import '../../../../data/model/dashboard/exam.dart';
-import '../../../../data/model/exam_zone/exam_zone_question_list_model.dart';
 import '../../../components/chips/custom_chips_widget.dart';
 import '../../../components/image_widget/my_image_widget.dart';
 
@@ -98,7 +97,7 @@ class _ExamListTileCardState extends State<ExamListTileCard> {
 
                             const SizedBox(height: Dimensions.space15),
                             //Title here
-                            Text("${MyStrings.youNeedtoScoreLong.replaceAll("{point}", widget.exam.winningMark.toString()).tr} ", style: regularSmall),
+                            Text(MyStrings.youNeedtoScoreLong.tr.replaceAll("{point}", widget.exam.winningMark.toString()), style: regularSmall),
 
                             const SizedBox(height: Dimensions.space15),
                             // //Title here
@@ -150,7 +149,6 @@ class _ExamListTileCardState extends State<ExamListTileCard> {
                                       ),
                                     ],
                                   ),
-
                                 ],
                               ),
                             ),
