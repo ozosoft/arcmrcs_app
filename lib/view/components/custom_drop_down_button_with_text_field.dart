@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
 import 'package:get/get.dart';
 
 class CustomDropDownWithTextField extends StatefulWidget {
@@ -38,7 +38,7 @@ class _CustomDropDownWithTextFieldState
               border: Border.all(color: MyColor.textFieldDisableBorderColor)),
           child: Padding(
             padding:
-                const EdgeInsets.only(left: 10, right: 5, top: 5, bottom: 5),
+                const EdgeInsetsDirectional.only(start: 10, end: 5, top: 5, bottom: 5),
             child: DropdownButton(
               isExpanded: true,
               underline: Container(),

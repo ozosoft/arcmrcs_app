@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/helper/string_format_helper.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
+import 'package:quiz_lab/core/helper/string_format_helper.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
 
 class CustomSnackBar {
   static error({required List<String> errorList, int duration = 5}) {
@@ -20,13 +20,11 @@ class CustomSnackBar {
     message = Converter.removeQuotationAndSpecialCharacterFromString(message);
     Get.rawSnackbar(
       progressIndicatorBackgroundColor: MyColor.transparentColor,
-      progressIndicatorValueColor:
-          const AlwaysStoppedAnimation<Color>(Colors.transparent),
-      messageText: Text(message,
-          style: regularLarge.copyWith(color: MyColor.colorWhite)),
+      progressIndicatorValueColor: const AlwaysStoppedAnimation<Color>(Colors.transparent),
+      messageText: Text(message, style: regularLarge.copyWith(color: MyColor.colorWhite)),
       dismissDirection: DismissDirection.horizontal,
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: MyColor.colorRed,
+      backgroundColor: MyColor.colorRed.withOpacity(0.8),
       borderRadius: 4,
       margin: const EdgeInsets.all(Dimensions.space8),
       padding: const EdgeInsets.all(Dimensions.space8),
@@ -54,14 +52,12 @@ class CustomSnackBar {
     }
     message = Converter.removeQuotationAndSpecialCharacterFromString(message);
     Get.rawSnackbar(
-      progressIndicatorBackgroundColor: MyColor.colorGreen,
-      progressIndicatorValueColor:
-          const AlwaysStoppedAnimation<Color>(MyColor.transparentColor),
-      messageText: Text(message,
-          style: regularLarge.copyWith(color: MyColor.colorWhite)),
+         progressIndicatorBackgroundColor: MyColor.transparentColor,
+      progressIndicatorValueColor: const AlwaysStoppedAnimation<Color>(MyColor.transparentColor),
+      messageText: Text(message, style: regularLarge.copyWith(color: MyColor.colorWhite)),
       dismissDirection: DismissDirection.horizontal,
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: MyColor.colorGreen,
+      backgroundColor: MyColor.colorGreen.withOpacity(0.8),
       borderRadius: 4,
       margin: const EdgeInsets.all(Dimensions.space8),
       padding: const EdgeInsets.all(Dimensions.space8),

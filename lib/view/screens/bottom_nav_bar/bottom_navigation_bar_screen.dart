@@ -1,44 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/view/screens/coin_store/coin_store_screen.dart';
-import 'package:flutter_prime/view/screens/home_page/home_screen.dart';
-import 'package:flutter_prime/view/screens/leader_board/leader_board_screen.dart';
-import 'package:flutter_prime/view/screens/profile/profile_screen.dart';
-import 'package:flutter_prime/view/screens/settings/settings_screen.dart';
-import 'package:flutter_prime/view/screens/wallet/wallet_screen.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/view/components/will_pop_widget.dart';
+import 'package:quiz_lab/view/screens/home_page/home_screen.dart';
+import 'package:quiz_lab/view/screens/leader_board/leader_board_screen.dart';
+import 'package:quiz_lab/view/screens/profile/profile_screen.dart';
+import 'package:quiz_lab/view/screens/settings/settings_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
+import '../../../core/helper/ads/ads_unit_id_helper.dart';
+import '../../../environment.dart';
+import '../../components/mobile_ads/banner_ads_widget.dart';
+import '../coin_store/coin_store_screen.dart';
 
 class BottomNavigationBarScreen extends StatefulWidget {
   const BottomNavigationBarScreen({super.key});
 
   @override
-  _BottomNavigationBarScreenState createState() =>
-      _BottomNavigationBarScreenState();
+  State<BottomNavigationBarScreen> createState() => _BottomNavigationBarScreenState();
 }
 
 class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
+  int selectedIndex = 2;
 
   int _page = 2;
-  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    CoinStoreScreen(),
-    SettingsScreen(),
-    HomeScreen(),
-    LeaderBoardScreen(),
-    ProfileScreen()
+  static final List<Widget> _widgetOptions = <Widget>[
+    const CoinStoreScreen(),
+    const SettingsScreen(),
+    const HomeScreen(),
+    const LeaderBoardScreen(),
+    const ProfileScreen(),
   ];
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: _widgetOptions.elementAt(_page),
+      body: WillPopWidget(
+        fromBottomNav: selectedIndex == 2 ? false : true,
+        nextRoute: selectedIndex == 2 ? "" : RouteHelper.bottomNavBarScreen,
+        child: Stack(
+          children: [
+            Center(
+              child: _widgetOptions.elementAt(_page),
+            ),
+            if (Environment.showBannerAds && AdUnitHelper.bannerAdUnitShow == '1') ...[
+              const Positioned.fill(
+                bottom: 0,
+                child: Align(alignment: Alignment.bottomCenter, child: BannerAdsWidget()),
+              )
+            ]
+          ],
+        ),
       ),
       bottomNavigationBar: CurvedNavigationBar(
         key: _bottomNavigationKey,
@@ -46,13 +63,12 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         height: Dimensions.space60,
         items: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(Dimensions.space8),
+            padding: const EdgeInsets.all(Dimensions.space2),
             child: SvgPicture.asset(
               MyImages.coinStoreDrawer,
               height: Dimensions.space35,
               width: Dimensions.space50,
-               color: _page == 0 ?MyColor.colorWhite
-                  : MyColor.bottomNavBarIconInActiveColor
+              colorFilter: _page == 0 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
             ),
           ),
           Padding(
@@ -61,8 +77,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
               MyImages.settingsFilledSVG,
               height: Dimensions.space25,
               width: Dimensions.space50,
-               color: _page == 1 ?MyColor.colorWhite
-                  : MyColor.bottomNavBarIconInActiveColor
+              colorFilter: _page == 1 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
             ),
           ),
           Padding(
@@ -71,9 +86,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
               MyImages.homeFilledSVG,
               height: Dimensions.space25,
               width: Dimensions.space50,
-              color: _page == 2 ?null
-                  : MyColor.bottomNavBarIconInActiveColor
-                  ,
+              colorFilter: _page == 2 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
             ),
           ),
           Padding(
@@ -82,8 +95,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
               MyImages.prizeFilledSVG,
               height: Dimensions.space25,
               width: Dimensions.space50,
-               color: _page == 3 ?MyColor.colorWhite
-                  : MyColor.bottomNavBarIconInActiveColor
+              colorFilter: _page == 3 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
             ),
           ),
           Padding(
@@ -92,8 +104,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
               MyImages.profileFilledSVG,
               height: Dimensions.space25,
               width: Dimensions.space40,
-               color: _page == 4 ?MyColor.colorWhite
-                  : MyColor.bottomNavBarIconInActiveColor
+              colorFilter: _page == 4 ? const ColorFilter.mode(MyColor.colorWhite, BlendMode.srcIn) : const ColorFilter.mode(MyColor.bottomNavBarIconInActiveColor, BlendMode.srcIn),
             ),
           ),
         ],
@@ -104,6 +115,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
         animationDuration: const Duration(milliseconds: 400),
         onTap: (index) {
           setState(() {
+            selectedIndex = index;
             _page = index;
           });
         },

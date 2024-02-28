@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../model/message_model/message_model.dart';
+
 ProfileResponseModel profileResponseModelFromJson(String str) => ProfileResponseModel.fromJson(json.decode(str));
 
 String profileResponseModelToJson(ProfileResponseModel data) => json.encode(data.toJson());
@@ -23,7 +25,7 @@ class ProfileResponseModel {
 
     factory ProfileResponseModel.fromJson(Map<String, dynamic> json) => ProfileResponseModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
@@ -64,7 +66,7 @@ class Rank {
     });
 
     factory Rank.fromJson(Map<String, dynamic> json) => Rank(
-        userRank: json["user_rank"],
+        userRank: json["user_rank"].toString(),
     );
 
     Map<String, dynamic> toJson() => {
@@ -136,24 +138,24 @@ class User {
         username: json["username"],
         avatar: json["avatar"],
         email: json["email"],
-        countryCode: json["country_code"],
-        mobile: json["mobile"],
-        refBy: json["ref_by"],
-        referralCode: json["referral_code"],
+        countryCode: json["country_code"].toString(),
+        mobile: json["mobile"].toString(),
+        refBy: json["ref_by"].toString(),
+        referralCode: json["referral_code"].toString(),
         address: json["address"] == null ? null : Address.fromJson(json["address"]),
-        status: json["status"],
-        kv: json["kv"],
-        ev: json["ev"],
-        sv: json["sv"],
-        profileComplete: json["profile_complete"],
+        status: json["status"].toString(),
+        kv: json["kv"].toString(),
+        ev: json["ev"].toString(),
+        sv: json["sv"].toString(),
+        profileComplete: json["profile_complete"].toString(),
         verCodeSendAt: json["ver_code_send_at"] == null ? null : DateTime.parse(json["ver_code_send_at"]),
-        ts: json["ts"],
-        tv: json["tv"],
-        tsc: json["tsc"],
-        banReason: json["ban_reason"],
-        coins: json["coins"],
-        score: json["score"],
-        loginBy: json["login_by"],
+        ts: json["ts"].toString(),
+        tv: json["tv"].toString(),
+        tsc: json["tsc"].toString(),
+        banReason: json["ban_reason"].toString(),
+        coins: json["coins"].toString(),
+        score: json["score"].toString(),
+        loginBy: json["login_by"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     );
@@ -220,18 +222,4 @@ class Address {
     };
 }
 
-class Message {
-    List<String>? success;
 
-    Message({
-        this.success,
-    });
-
-    factory Message.fromJson(Map<String, dynamic> json) => Message(
-        success: json["success"] == null ? [] : List<String>.from(json["success"]!.map((x) => x)),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "success": success == null ? [] : List<dynamic>.from(success!.map((x) => x)),
-    };
-}

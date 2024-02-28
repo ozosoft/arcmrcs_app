@@ -1,10 +1,10 @@
 import 'dart:convert';
-import 'package:flutter_prime/data/model/coin_store/coin_store_model.dart';
-import 'package:flutter_prime/data/repo/coin_store/coin_store_repo.dart';
+import 'package:quiz_lab/data/model/coin_store/coin_store_model.dart';
+import 'package:quiz_lab/data/repo/coin_store/coin_store_repo.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class CoinStoreController extends GetxController {
   CoinStoreRepo coinStoreRepo;
@@ -41,7 +41,7 @@ class CoinStoreController extends GetxController {
         }
 
       } else {
-        CustomSnackBar.error(errorList: [coinPlanModel.status ?? ""]);
+        CustomSnackBar.error(errorList: [...coinPlanModel.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);

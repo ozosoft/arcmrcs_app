@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/repo/auth/login_repo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/repo/auth/login_repo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class ForgetPasswordController extends GetxController {
   LoginRepo loginRepo;
@@ -16,7 +16,7 @@ class ForgetPasswordController extends GetxController {
     String input = emailOrUsernameController.text;
 
     if (input.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.enterYourEmail]);
+      CustomSnackBar.error(errorList: [MyStrings.enterYourEmail.tr]);
       return;
     }
 
@@ -31,7 +31,7 @@ class ForgetPasswordController extends GetxController {
       Get.toNamed(RouteHelper.verificationScreen, arguments: responseEmail);
       
     }
-    print("this is email from forget password"+responseEmail);
+    debugPrint("this is email from forget password $responseEmail");
     submitLoading = false;
     update();
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/view/components/text/label_text.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/view/components/text/label_text.dart';
 
 class CustomDropDownTextField extends StatefulWidget {
   final dynamic selectedValue;
@@ -16,6 +16,7 @@ class CustomDropDownTextField extends StatefulWidget {
   final Color? iconColor;
   final double radius;
   final bool needLabel;
+  final double borderWidth;
 
   const CustomDropDownTextField(
       {Key? key,
@@ -25,10 +26,11 @@ class CustomDropDownTextField extends StatefulWidget {
       required this.onChanged,
       required this.items,
       this.fillColor = MyColor.transparentColor,
-      this.focusColor = MyColor.colorWhite,
+      this.focusColor = MyColor.borderColor,
       this.dropDownColor = MyColor.colorWhite,
       this.iconColor = MyColor.colorGrey,
       this.radius = 3,
+      this.borderWidth = 1,
       this.needLabel = true})
       : super(key: key);
 
@@ -66,8 +68,8 @@ class _CustomDropDownTextFieldState extends State<CustomDropDownTextField> {
                   const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.radius),
-                borderSide: const BorderSide(
-                    color: MyColor.textFieldDisableBorderColor, width: 1),
+                borderSide:  BorderSide(
+                    color: MyColor.textFieldDisableBorderColor, width: widget.borderWidth),
               ),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.radius),
@@ -76,17 +78,16 @@ class _CustomDropDownTextFieldState extends State<CustomDropDownTextField> {
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.radius),
-                borderSide:
-                    const BorderSide(color: MyColor.primaryColor, width: 1),
+                borderSide: BorderSide(color: widget.focusColor??MyColor.primaryColor, width: widget.borderWidth),
               ),
               errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.radius),
-                borderSide: const BorderSide(color: MyColor.colorRed, width: 1),
+                borderSide:  BorderSide(color: MyColor.colorRed, width: widget.borderWidth),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(widget.radius),
-                borderSide: const BorderSide(
-                    color: MyColor.textFieldDisableBorderColor, width: 1),
+                borderSide:  BorderSide(
+                    color: MyColor.textFieldDisableBorderColor, width:widget.borderWidth),
               ),
             ),
             isExpanded: false,

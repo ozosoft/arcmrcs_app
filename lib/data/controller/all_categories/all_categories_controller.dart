@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'package:flutter_prime/data/model/all_cartegories/all_categories_model.dart';
-import 'package:flutter_prime/data/repo/allcategories/all_categories_repo.dart';
+import 'package:flutter/widgets.dart';
+import 'package:quiz_lab/data/model/all_cartegories/all_categories_model.dart';
+import 'package:quiz_lab/data/repo/allcategories/all_categories_repo.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class AllCategoriesController extends GetxController {
   AllCategoriesRepo allCategoriesRepo;
@@ -25,42 +26,35 @@ class AllCategoriesController extends GetxController {
     ResponseModel model = await allCategoriesRepo.getData();
 
     if (model.statusCode == 200) {
-
       allCategoriesList.clear();
 
-      AllcategoriesModel allcategories =
-          AllcategoriesModel.fromJson(jsonDecode(model.responseJson));
+      AllCategoriesModel allcategories = AllCategoriesModel.fromJson(jsonDecode(model.responseJson));
 
-      if (allcategories.status.toString().toLowerCase() ==
-          MyStrings.success.toLowerCase()) {
+      if (allcategories.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<Category>? categories = allcategories.data?.categories;
 
         if (categories != null && categories.isNotEmpty) {
           allCategoriesList.addAll(categories);
         }
       } else {
-        CustomSnackBar.error(errorList: [allcategories.status ?? ""]);
+        CustomSnackBar.error(errorList: [...allcategories.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     loader = false;
     update();
-   
- 
   }
-
-
-  
 
   changeactivestatus() {
     isActive = !isActive;
     update();
   }
- int expandIndex = -1;
+
+  int expandIndex = -1;
   void changeExpandIndex(int index) {
     if (expandIndex == index) {
       expandIndex = -1;

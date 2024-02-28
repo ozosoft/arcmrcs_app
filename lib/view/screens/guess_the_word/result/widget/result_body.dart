@@ -1,18 +1,15 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/divider/custom_horizontal_divider.dart';
-import 'package:flutter_prime/view/components/divider/custom_vertical_divider.dart';
-import 'package:flutter_prime/view/components/image/custom_svg_picture.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_Controller.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/divider/custom_horizontal_divider.dart';
+import 'package:quiz_lab/view/components/divider/custom_vertical_divider.dart';
 import 'package:get/get.dart';
 
 import '../../../../../data/model/guess_the_word/guess_question_model.dart';
@@ -27,7 +24,7 @@ class GuessResultBody extends StatefulWidget {
 class _GuessResultBodyState extends State<GuessResultBody> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GuessThewordController>(builder: (controller) {
+    return GetBuilder<GuessTheWordController>(builder: (controller) {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space30),
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.space20), color: MyColor.colorWhite),
@@ -42,36 +39,30 @@ class _GuessResultBodyState extends State<GuessResultBody> {
                 const SizedBox(
                   height: Dimensions.space2,
                 ),
-                const Text(
-                  'Total Score',
+                Text(
+                  MyStrings.totalScore.tr,
                   style: lightDefault,
                 ),
               ],
             ),
             const SizedBox(
-              height: Dimensions.space40,
+              height: Dimensions.space40 - 20,
             ),
             Stack(
               children: [
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                  child: SvgPicture.asset(
-                    MyImages.victory,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: CustomSvgPicture(image: MyImages.cup, color: Colors.orange.shade400, height: 200),
+                  padding: const EdgeInsetsDirectional.only( start: Dimensions.space8, end: Dimensions.space8),
+                  child: controller.appreciation == "[Failed]"
+                      ?Lottie.asset(MyImages.failedLottie,height: 200,width: 200,repeat: false,reverse: false)
+                      : Lottie.asset(MyImages.successLottie,height: 200,width: 200)
                 ),
               ],
             ),
             const SizedBox(
               height: Dimensions.space10,
             ),
-            Text("Victory!", style: semiBoldExtraLarge.copyWith(fontSize: Dimensions.fontExtraLarge)),
-
+            Text("${controller.appreciation.replaceAll("[", "").replaceAll("]", "")} ", style: semiBoldExtraLarge.copyWith(fontSize: Dimensions.fontExtraLarge)),
             const SizedBox(
               height: Dimensions.space20,
             ),
@@ -83,56 +74,74 @@ class _GuessResultBodyState extends State<GuessResultBody> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  children: [
-                    Text(
-                      controller.totalQuestion,
-                      style: mediumLarge,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimensions.space5),
+                    child: Column(
+                      children: [
+                        Text(
+                          controller.totalQuestion,
+                          style: mediumLarge,
+                        ),
+                        const SizedBox(
+                          height: Dimensions.space5,
+                        ),
+                        Text(
+                          MyStrings.totalQuestion.tr,
+                          textAlign: TextAlign.center,
+                          style: lightDefault,
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: Dimensions.space5,
-                    ),
-                    const Text(
-                      'Total Question',
-                      style: lightDefault,
-                    ),
-                  ],
+                  ),
                 ),
                 const CustomVerticalDivider(
                   height: Dimensions.space20,
                 ),
-                Column(
-                  children: [
-                    Text(
-                      controller.correctAnswer,
-                      style: mediumLarge,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimensions.space5),
+                    child: Column(
+                      children: [
+                        Text(
+                          controller.correctAnswer,
+                          style: mediumLarge,
+                        ),
+                        const SizedBox(
+                          height: Dimensions.space5,
+                        ),
+                        Text(
+                          MyStrings.correctAnswer.tr,
+                          textAlign: TextAlign.center,
+                          style: lightDefault.copyWith(color: MyColor.greenSuccessColor),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: Dimensions.space5,
-                    ),
-                    Text(
-                      'Correct Answer',
-                      style: lightDefault.copyWith(color: MyColor.greenSuccessColor),
-                    ),
-                  ],
+                  ),
                 ),
                 const CustomVerticalDivider(
                   height: Dimensions.space20,
                 ),
-                Column(
-                  children: [
-                    Text(
-                      controller.wrongAnswer.toString(),
-                      style: mediumLarge,
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(Dimensions.space5),
+                    child: Column(
+                      children: [
+                        Text(
+                          controller.wrongAnswer.toString(),
+                          style: mediumLarge,
+                        ),
+                        const SizedBox(
+                          height: Dimensions.space5,
+                        ),
+                        Text(
+                          MyStrings.wrongAnswer.tr,
+                          textAlign: TextAlign.center,
+                          style: lightDefault.copyWith(color: MyColor.redCancelTextColor),
+                        ),
+                      ],
                     ),
-                    const SizedBox(
-                      height: Dimensions.space5,
-                    ),
-                    Text(
-                      'Wrong Answer',
-                      style: lightDefault.copyWith(color: MyColor.redCancelTextColor),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),
@@ -140,7 +149,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
               height: Dimensions.space40,
             ),
             RoundedButton(
-                text: MyStrings.playAgain,
+                text: MyStrings.playAgain.tr,
                 press: () {
                   Get.offAndToNamed(RouteHelper.guessTheword, arguments: int.parse(controller.quizInfoId.toString()));
                 },
@@ -149,10 +158,9 @@ class _GuessResultBodyState extends State<GuessResultBody> {
               height: Dimensions.space20,
             ),
             RoundedButton(
-              text: MyStrings.reviewAnswer,
+              text: MyStrings.reviewAnswer.tr,
               press: () {
-                Get.offAndToNamed(RouteHelper.gessThewordResultReview,
-                    arguments: [controller.gessThewordQuesstionList.isNotEmpty ? controller.gessThewordQuesstionList : <GuessQuestion>[]]);
+                Get.offAndToNamed(RouteHelper.gessThewordResultReview, arguments: [controller.guessTheWordQuestionList.isNotEmpty ? controller.guessTheWordQuestionList : <GuessQuestion>[]]);
               },
               color: MyColor.greenSuccessColor,
               textSize: Dimensions.space21,
@@ -161,7 +169,7 @@ class _GuessResultBodyState extends State<GuessResultBody> {
               height: Dimensions.space20,
             ),
             RoundedButton(
-              text: MyStrings.home,
+              text: MyStrings.home.tr,
               press: () {
                 Get.offAllNamed(RouteHelper.bottomNavBarScreen);
               },

@@ -1,5 +1,5 @@
 class UrlContainer {
-  static const String domainUrl = 'https://url8.viserlab.com/quizlab';
+  static const String domainUrl = 'https://script.viserlab.com/quizlab';
   static const String baseUrl = '$domainUrl/api/';
 
   static const String dashBoardEndPoint = 'dashboard';
@@ -21,6 +21,7 @@ class UrlContainer {
 
   static const String registrationEndPoint = 'register';
   static const String loginEndPoint = 'login';
+  static const String socialLogin = 'social-login';
   static const String logoutUrl = 'logout';
   static const String submitAnswerUrl = 'general-quiz/answer-submit';
 
@@ -37,10 +38,11 @@ class UrlContainer {
   static const String verify2FAUrl = 'verify-g2fa';
   static const String dashBoardCategoryImage = '$domainUrl/assets/admin/images/category/';
   static const String quizContestImage = '$domainUrl/assets/admin/images/contest/';
-  static const String playdiffrentImage = '$domainUrl/assets/admin/images/quiz/';
+  static const String playdifferentImage = '$domainUrl/assets/admin/images/quiz/';
   static const String allCategoriesImage = '$domainUrl/assets/admin/images/category/';
   static const String subCategoriesImage = '$domainUrl/assets/admin/images/subcategory/';
   static const String questionImagePath = '$domainUrl/assets/admin/images/question';
+  static const String coinImages = '$domainUrl/assets/admin/images/plan/';
 
   static const String userImagePath = '$domainUrl/assets/images/user/profile';
   static const String examZoneImage = '$domainUrl/assets/admin/images/exam/';
@@ -61,6 +63,9 @@ class UrlContainer {
   static const String dashBoardUrl = 'dashboard';
   static const String leaderBoardUrl = 'leader-board';
   static const String examZone = 'exam/exam-list';
+  static const String examDetails = 'exam/exam-details';
+  static const String examCode = 'exam/exam-code';
+  static const String examCompletedList = 'exam/completed-exam';
   static const String coinStore = 'coin-store';
   static const String coinHistory = 'coin-history';
   static const String quizList = 'exam/quizList-list';
@@ -80,15 +85,17 @@ class UrlContainer {
   static const String generalSettingEndPoint = 'general-setting';
   //static const String moduleSettingEndPoint        = 'module-setting';
 
-  static const String privacyPolicyEndPoint = 'policy-pages';
+  static const String privacyPolicyEndPoint = 'privacy-policy';
 
   static const String getProfileEndPoint = 'user-info';
+  static const String deleteAccountEndPoint = 'account/delete';
   static const String updateProfileEndPoint = 'profile-setting';
   static const String updateProfileAvatarEndPoint = 'profile-avatar-update';
   static const String profileCompleteEndPoint = 'user-data-submit';
 
   static const String changePasswordEndPoint = 'change-password';
   static const String countryEndPoint = 'get-countries';
+  static const String countryFlagImageLink = 'https://flagpedia.net/data/flags/h24/{countryCode}.webp';
 
   static const String deviceTokenEndPoint = 'get/device/token';
   static const String languageUrl = 'language/';
@@ -107,5 +114,4 @@ class UrlContainer {
   static const String battleCategoryLIst = 'single-battle';
   static const String battleQuestionList = 'single-battle/question-list';
   static const String battleAnswerSubmit = 'single-battle/answer-submit';
-  static const String battleQuestionImagePath = '$domainUrl/assets/admin/images/question';
 }

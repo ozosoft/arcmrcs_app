@@ -6,28 +6,28 @@
 
 import 'dart:convert';
 
-import 'package:flutter_prime/data/model/global/meassage.dart';
+import 'package:quiz_lab/data/model/global/meassage.dart';
 
-GuesswordSubCategoryResponse gesswordSubCategoryResponseFromJson(String str) => GuesswordSubCategoryResponse.fromJson(json.decode(str));
+GuessWordSubCategoryResponse gesswordSubCategoryResponseFromJson(String str) => GuessWordSubCategoryResponse.fromJson(json.decode(str));
 
-String gesswordSubCategoryResponseToJson(GuesswordSubCategoryResponse data) => json.encode(data.toJson());
+String guessWordSubCategoryResponseToJson(GuessWordSubCategoryResponse data) => json.encode(data.toJson());
 
-class GuesswordSubCategoryResponse {
+class GuessWordSubCategoryResponse {
   String? remark;
   String? status;
   Message? message;
   Data? data;
 
-  GuesswordSubCategoryResponse({
+  GuessWordSubCategoryResponse({
     this.remark,
     this.status,
     this.message,
     this.data,
   });
 
-  factory GuesswordSubCategoryResponse.fromJson(Map<String, dynamic> json) => GuesswordSubCategoryResponse(
+  factory GuessWordSubCategoryResponse.fromJson(Map<String, dynamic> json) => GuessWordSubCategoryResponse(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
       );
@@ -128,6 +128,7 @@ class QuizInfo {
   String? status;
   String? createdAt;
   String? updatedAt;
+  String? levelStatus;
   PlayInfo? playInfo;
   Level? level;
 
@@ -152,34 +153,36 @@ class QuizInfo {
     this.status,
     this.createdAt,
     this.updatedAt,
+    this.levelStatus,
     this.playInfo,
     this.level,
   });
 
   factory QuizInfo.fromJson(Map<String, dynamic> json) => QuizInfo(
-        id: json["id"],
-        typeId: json["type_id"] == null ? '' : json["type_id"].toString(),
-        categoryId: json["category_id"] == null ? null : json["category_id"].toString(),
-        subCategoryId: json["sub_category_id"] == null ? null : json["sub_category_id"].toString(),
-        title: json["title"] == null ? '' : json["title"].toString(),
-        image: json["image"] == null ? '' : json["image"].toString(),
-        startDate: json["start_date"] == null ? '' : json["start_date"].toString(),
-        endDate: json["end_date"] == null ? '' : json["end_date"].toString(),
-        prize: json["prize"] == null ? '' : json["end_date"].toString(),
-        point: json["point"] == null ? '' : json["end_date"].toString(),
-        description: json["description"] == null ? '' : json["description"].toString(),
-        levelId: json["level_id"] == null ? '' : json["level_id"].toString(),
-        examStartTime: json["exam_start_time"] == null ? '' : json["exam_start_time"].toString(),
-        examEndTime: json["exam_end_time"] == null ? '' : json["exam_end_time"].toString(),
-        examDuration: json["exam_duration"] == null ? '' : json["exam_duration"].toString(),
-        examKey: json["exam_key"] == null ? '' : json["exam_key"].toString(),
-        winningMark: json["winning_mark"] == null ? '' : json["winning_mark"].toString(),
-        status: json["status"] == null ? '' : json["status"].toString(),
-        createdAt: json["created_at"] == null ? null : json["created_at"].toString(),
-        updatedAt: json["updated_at"] == null ? null : json["updated_at"].toString(),
-        playInfo: json["play_info"] == null ? null : PlayInfo.fromJson(json["play_info"]),
-        level: json["level"] == null ? null : Level.fromJson(json["level"]),
-      );
+      id: json["id"],
+      typeId: json["type_id"] == null ? '' : json["type_id"].toString(),
+      categoryId: json["category_id"] == null ? null : json["category_id"].toString(),
+      subCategoryId: json["sub_category_id"] == null ? null : json["sub_category_id"].toString(),
+      title: json["title"] == null ? '' : json["title"].toString(),
+      image: json["image"] == null ? '' : json["image"].toString(),
+      startDate: json["start_date"] == null ? '' : json["start_date"].toString(),
+      endDate: json["end_date"] == null ? '' : json["end_date"].toString(),
+      prize: json["prize"] == null ? '' : json["end_date"].toString(),
+      point: json["point"] == null ? '' : json["end_date"].toString(),
+      description: json["description"] == null ? '' : json["description"].toString(),
+      levelId: json["level_id"] == null ? '' : json["level_id"].toString(),
+      examStartTime: json["exam_start_time"] == null ? '' : json["exam_start_time"].toString(),
+      examEndTime: json["exam_end_time"] == null ? '' : json["exam_end_time"].toString(),
+      examDuration: json["exam_duration"] == null ? '' : json["exam_duration"].toString(),
+      examKey: json["exam_key"] == null ? '' : json["exam_key"].toString(),
+      winningMark: json["winning_mark"] == null ? '' : json["winning_mark"].toString(),
+      status: json["status"] == null ? '' : json["status"].toString(),
+      createdAt: json["created_at"] == null ? null : json["created_at"].toString(),
+      levelStatus: json["level_status"],
+      updatedAt: json["updated_at"] == null ? null : json["updated_at"].toString(),
+      playInfo: json["play_info"] == null ? null : PlayInfo.fromJson(json["play_info"]),
+      level: json["level"] == null ? null : Level.fromJson(json["level"]),
+    );
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -202,6 +205,7 @@ class QuizInfo {
         "status": status,
         "created_at": createdAt?.toString(),
         "updated_at": updatedAt?.toString(),
+        "level_status": levelStatus,
         "play_info": playInfo?.toJson(),
         "level": level?.toJson(),
       };
@@ -227,8 +231,8 @@ class Level {
   factory Level.fromJson(Map<String, dynamic> json) => Level(
         id: json["id"],
         title: json["title"],
-        level: json["level"],
-        status: json["status"],
+        level: json["level"].toString(),
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : json["created_at"].toString(),
         updatedAt: json["updated_at"] == null ? null : json["updated_at"].toString(),
       );
@@ -274,15 +278,15 @@ class PlayInfo {
 
   factory PlayInfo.fromJson(Map<String, dynamic> json) => PlayInfo(
         id: json["id"],
-        userId: json["user_id"],
-        quizInfoId: json["quiz_info_id"],
-        roomId: json["room_id"],
-        singleBattleId: json["single_battle_id"],
-        isWin: json["is_win"],
-        fiftyFifty: json["fifty_fifty"],
-        audiencePoll: json["audience_poll"],
-        timeReset: json["time_reset"],
-        flipQuestion: json["flip_question"],
+        userId: json["user_id"].toString(),
+        quizInfoId: json["quiz_info_id"].toString(),
+        roomId: json["room_id"].toString(),
+        singleBattleId: json["single_battle_id"].toString(),
+        isWin: json["is_win"].toString(),
+        fiftyFifty: json["fifty_fifty"].toString(),
+        audiencePoll: json["audience_poll"].toString(),
+        timeReset: json["time_reset"].toString(),
+        flipQuestion: json["flip_question"].toString(),
         createdAt: json["created_at"] == null ? null : json["created_at"].toString(),
         updatedAt: json["updated_at"] == null ? null : json["updated_at"].toString(),
       );

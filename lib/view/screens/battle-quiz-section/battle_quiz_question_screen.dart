@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/view/screens/battle-quiz-section/quiz-screen-widgets/battle_quiz_questions_body_section.dart';
+import 'package:quiz_lab/view/screens/battle-quiz-section/quiz-screen-widgets/battle_quiz_questions_body_section.dart';
 import 'package:get/get.dart';
 
-import '../../../core/utils/dimensions.dart';
 import '../../../data/model/battle/battle_question_list.dart';
-import '../../components/app-bar/custom_category_appBar.dart';
+import '../../components/app-bar/custom_category_appbar.dart';
 
 class BattleQuizQuestionsScreen extends StatefulWidget {
   const BattleQuizQuestionsScreen({super.key});
@@ -19,7 +18,7 @@ class _BattleQuizQuestionsScreenState extends State<BattleQuizQuestionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomCategoryAppBar(title: title.toString()),
+        appBar: CustomCategoryAppBar(title: title.toString().tr),
         body: BattleQuizQuestionsBodySection(
           qustionsList: qustionsList,
         ));

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
 
 class CustomBottomSheet {
   final Widget child;
@@ -24,7 +24,7 @@ class CustomBottomSheet {
                 duration: const Duration(milliseconds: 50),
                 curve: Curves.decelerate,
                 child: Container(
-                  margin: isNeedMargin ? const EdgeInsets.only(left: 15, right: 15, bottom: 15) : EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+                  margin: isNeedMargin ? const EdgeInsetsDirectional.only(start: 15, end: 15, bottom: 15) : EdgeInsetsDirectional.only(top: MediaQuery.of(context).size.height * 0.2),
                   padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space12),
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(color: bgColor, borderRadius: isNeedMargin ? BorderRadius.circular(15) : const BorderRadius.vertical(top: Radius.circular(15))),

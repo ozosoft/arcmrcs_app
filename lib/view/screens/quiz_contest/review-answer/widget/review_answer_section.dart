@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/quiz_contest/quiz_contest_questions_controller.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/quiz_contest/quiz_contest_questions_controller.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/utils/my_strings.dart';
+import '../../../../../core/utils/url_container.dart';
+import '../../../../../core/utils/util.dart';
 import '../../../../components/buttons/level_card_button.dart';
 import '../../../../components/custom_loader/custom_loader.dart';
+import '../../../../components/image_widget/my_image_widget.dart';
 
 class QuizContestReviewAnswerSection extends StatefulWidget {
   const QuizContestReviewAnswerSection({super.key});
@@ -19,22 +22,18 @@ class QuizContestReviewAnswerSection extends StatefulWidget {
 }
 
 class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswerSection> {
-
-
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<QuizContestQuestionsController>(
         builder: (controller) => controller.examQuestionsList.isEmpty
             ? const CustomLoader()
             : PageView.builder(
-                // physics: NeverScrollableScrollPhysics(),
-                controller: controller.pageController,
+                physics: const BouncingScrollPhysics(),
+                controller: controller.reviewPageController,
                 itemCount: controller.examQuestionsList.length,
                 itemBuilder: (context, questionsIndex) {
+                  var reviewItem = controller.examQuestionsList[questionsIndex];
                   controller.setCurrentOption(questionsIndex);
-
-                  print('current question index: ${questionsIndex}');
 
                   return SingleChildScrollView(
                     padding: const EdgeInsets.all(Dimensions.space20),
@@ -47,94 +46,133 @@ class _QuizContestReviewAnswerSectionState extends State<QuizContestReviewAnswer
                           child: Column(
                             children: [
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  InkWell(
-                                      onTap: () {
-                                        if (controller.pageController.page! < 1) {
-                                          controller.pageController.nextPage(
-                                            duration: const Duration(milliseconds: 500),
-                                            curve: Curves.easeInOut,
-                                          );
-                                        }
-                                      },
-                                      child: const LevelCardButton(
-                                        text: MyStrings.next,
-                                        hasIcon: false,
-                                        hasImage: false,
-                                        bgColor: MyColor.primaryColor,
-                                        hasbgColor: true,
-                                        height: Dimensions.space40,
-                                        hastextColor: true,
-                                      )),
+
+                                  Container(
+                                    padding: const EdgeInsets.all(Dimensions.space10),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: MyColor.borderColor,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Text('${questionsIndex + 1}/${controller.examQuestionsList.length}'),
+                                  ),
+
+                                  if (questionsIndex < controller.examQuestionsList.length - 1) // Check if not on the last page
+                                    ...[
+                                    InkWell(
+                                        onTap: () {
+                                          if (controller.reviewPageController.page!.toInt() < controller.examQuestionsList.length) {
+                                            controller.reviewPageController.nextPage(
+                                              duration: const Duration(milliseconds: 500),
+                                              curve: Curves.easeInOut,
+                                            );
+                                          }
+                                        },
+                                        child: LevelCardButton(
+                                          text: MyStrings.next.tr,
+                                          hasIcon: false,
+                                          hasImage: false,
+                                          bgColor: MyColor.primaryColor,
+                                          hasbgColor: true,
+                                          height: Dimensions.space40-3,
+                                          borderColor: Colors.transparent,
+                                          hastextColor: true,
+                                        )),
+                                  ]
                                 ],
                               ),
-                              Container(
-                                width: double.infinity,
-                                padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                                child: Image.asset(
-                                  MyImages.greatWallPNG,
-                                  fit: BoxFit.cover,
+                              const SizedBox(height: Dimensions.space25),
+                              if (controller.examQuestionsList[questionsIndex].image != null) ...[
+                                Container(
+                                  width: double.infinity,
+                                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space8, end: Dimensions.space8),
+                                  child: MyImageWidget(
+                                    boxFit: BoxFit.contain,
+                                    height: Get.width / 2,
+                                    imageUrl: "${UrlContainer.quizContestQuestionsImage}/${controller.examQuestionsList[questionsIndex].image}",
+                                  ),
                                 ),
-                              ),
-                              Container(padding: const EdgeInsets.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                              ],
+                              Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.examQuestionsList[questionsIndex].question!, style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                               const SizedBox(height: Dimensions.space25),
                               ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: controller.examQuestionsList[questionsIndex].options!.length,
-                                  itemBuilder: (BuildContext context, int optionIndex) {
-                                    print("this is option id from review answer page" + controller.examQuestionsList[questionsIndex].selectedOptionId.toString());
-                                    return Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Container(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: controller.examQuestionsList[questionsIndex].options!.length,
+                                itemBuilder: (BuildContext context, int optionIndex) {
+                                  var reviewOptionItem = controller.optionsList[optionIndex];
+                                  return Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
                                               margin: const EdgeInsets.all(Dimensions.space8),
                                               padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
-                                              height: Dimensions.space55,
-                                              width: MediaQuery.of(context).size.width * .75,
                                               decoration: BoxDecoration(
-                                                  color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                      ? MyColor.colorWhite
-                                                      : controller.selectedOptionIndex == optionIndex
-                                                          ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                              ? MyColor.rightAnswerbgColor
-                                                              : MyColor.wrongAnsColor
-                                                          : controller.optionsList[optionIndex].isAnswer == '1'
-                                                              ? MyColor.rightAnswerbgColor
-                                                              : MyColor.colorWhite),
+                                                  borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
+                                                  border: Border.all(
+                                                      color: MyUtils.getOptionBorderColor(
+                                                          selectedOptionId:reviewItem.selectedOptionId.toString(),
+                                                          isAnswer: reviewOptionItem.isAnswer.toString(),
+                                                          isValidAnswer: reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex),
+                                                          isWrong: reviewItem.selectedOptionId.toString() == reviewItem.id.toString()),
+                                                      width: .8),
+                                                  color:MyUtils.getOptionReviewOptionBGColor(
+                                                      selectedOptionId:reviewItem.selectedOptionId.toString(),
+                                                      isAnswer: reviewOptionItem.isAnswer.toString(),
+                                                      isValidAnswer: reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex),
+                                                      isWrong: reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString()
+                                                  )
+                                              ),
                                               child: Row(
                                                 children: [
-                                                  const SizedBox(width: Dimensions.space8),
-                                                  Text(
-                                                    controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString(),
-                                                    style: regularMediumLarge.copyWith(
-                                                        color: controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty
-                                                            ? MyColor.textColor
-                                                            : controller.selectedOptionIndex == optionIndex
-                                                                ? controller.isValidAnswer(questionsIndex, optionIndex)
-                                                                    ? MyColor.colorWhite
-                                                                    : MyColor.colorWhite
-                                                                : controller.optionsList[optionIndex].isAnswer == '1'
-                                                                    ? MyColor.colorWhite
-                                                                    : MyColor.textColor),
+                                                  Expanded(
+                                                    child: Text(
+                                                      controller.examQuestionsList[questionsIndex].options![optionIndex].option.toString(),
+                                                      style: regularMediumLarge.copyWith(
+                                                        color: reviewItem.selectedOptionId!.isEmpty
+                                                          ? MyColor.colorBlack
+                                                          : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
+                                                          ? MyColor.colorWhite
+                                                          : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
+                                                          ? MyColor.colorWhite
+                                                          : reviewOptionItem.isAnswer.toString() == "1"
+                                                          ? MyColor.colorWhite
+                                                          : MyColor.colorBlack),
+                                                    ),
                                                   ),
-                                                  const Spacer(),
                                                   SizedBox(
-                                                      height: Dimensions.space10,
-                                                      child: SvgPicture.asset(
-                                                          "${controller.examQuestionsList[questionsIndex].selectedOptionId!.isEmpty ? const SizedBox() : controller.selectedOptionIndex == optionIndex ? controller.isValidAnswer(questionsIndex, optionIndex) ? MyImages.whiteTikSVG : MyImages.wrongAnswerSVG : controller.optionsList[optionIndex].isAnswer == '1' ? MyImages.whiteTikSVG : const SizedBox()}",
-                                                          fit: BoxFit.cover))
+                                                    height: Dimensions.space10,
+                                                    child: reviewItem.selectedOptionId!.isEmpty
+                                                        ? reviewOptionItem.isAnswer == '1'
+                                                            ? SvgPicture.asset(
+                                                                MyImages.whiteTikSVG,
+                                                                colorFilter: const ColorFilter.mode(MyColor.rightAnswerbgColor, BlendMode.srcIn),
+                                                              )
+                                                            : const SizedBox()
+                                                        : (reviewOptionItem.isAnswer == '1' && controller.isValidAnswer(questionsIndex, optionIndex) == true)
+                                                            ? SvgPicture.asset(MyImages.whiteTikSVG)
+                                                            : (reviewItem.selectedOptionId.toString() == reviewOptionItem.id.toString())
+                                                                ? SvgPicture.asset(MyImages.wrongAnswerSVG)
+                                                                : reviewOptionItem.isAnswer.toString() == "1"
+                                                                    ? SvgPicture.asset(MyImages.whiteTikSVG)
+                                                                    : const SizedBox(),
+                                                  )
                                                 ],
                                               ),
                                             ),
-                                            const Spacer(),
-                                          ],
-                                        ),
-                                      ],
-                                    );
-                                  }),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                }),
+                              const SizedBox(height: Dimensions.addSpace),
                             ],
                           ),
                         ),

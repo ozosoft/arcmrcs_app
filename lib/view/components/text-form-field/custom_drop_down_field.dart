@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/style.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
-import '../text/label_text.dart';
 
 class CustomDropDownTextField3 extends StatefulWidget {
   final dynamic selectedValue;
@@ -36,6 +35,7 @@ class CustomDropDownTextField3 extends StatefulWidget {
     this.isUnderLined = false,
   }) : super(key: key);
 
+
   @override
   State<CustomDropDownTextField3> createState() => _CustomDropDownTextField3State();
 }
@@ -49,7 +49,7 @@ class _CustomDropDownTextField3State extends State<CustomDropDownTextField3> {
         widget.needLabel ? const SizedBox(height: Dimensions.textToTextSpace) : const SizedBox(),
         widget.isUnderLined
             ? SizedBox(
-                height: 50,
+                   height: 55,
                 child: DropdownButtonFormField(
                   value: widget.selectedValue,
                   dropdownColor: widget.dropDownColor,
@@ -107,7 +107,7 @@ class _CustomDropDownTextField3State extends State<CustomDropDownTextField3> {
                       borderSide: const BorderSide(color: MyColor.borderColor, width: 1),
                     ),
                   ),
-                  isExpanded: false,
+                  isExpanded: true,
                   onChanged: widget.onChanged,
                   items: widget.items,
                   icon: Icon(

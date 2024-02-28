@@ -1,21 +1,20 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
-import 'package:flutter_prime/data/repo/gess_the_word/gessThewordRepo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/buttons/level_card_button.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
-import 'package:flutter_prime/view/screens/guess_the_word/widget/question_button.dart';
-
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_Controller.dart';
+import 'package:quiz_lab/data/repo/guess_the_word/guess_the_word_repo.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
+import 'package:quiz_lab/view/components/buttons/level_card_button.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/screens/guess_the_word/widget/question_button.dart';
 import 'package:get/get.dart';
-
-import '../../../components/app-bar/custom_category_appBar.dart';
+import '../../../../core/utils/util.dart';
+import '../../../components/app-bar/custom_category_appbar.dart';
+import '../../../components/image_widget/my_image_widget.dart';
 import '../widget/answer_field.dart';
 
 class GuessThewordScreen extends StatefulWidget {
@@ -26,6 +25,7 @@ class GuessThewordScreen extends StatefulWidget {
 }
 
 class _GuessThewordScreenState extends State<GuessThewordScreen> {
+
   int id = 0;
   int currentQuestionIndex = 0;
 
@@ -34,7 +34,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
     id = Get.arguments as int;
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(GuessTheWordRepo(apiClient: Get.find()));
-    final controller = Get.put(GuessThewordController(gessTheWordRepo: Get.find()));
+    final controller = Get.put(GuessTheWordController(guessTheWordRepo: Get.find()));
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       controller.clearAllData();
@@ -45,11 +45,10 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GuessThewordController>(builder: (controller) {
+    return GetBuilder<GuessTheWordController>(builder: (controller) {
       return Scaffold(
-          backgroundColor: MyColor.scaffoldBackgroundColor,
-          appBar: const CustomCategoryAppBar(
-            title: MyStrings.guessTheWord,
+          appBar: CustomCategoryAppBar(
+            title: MyStrings.guessTheWord.tr,
           ),
           body: controller.isLoading
               ? const CustomLoader()
@@ -57,7 +56,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                   children: [
                     PageView.builder(
                       controller: controller.pageController,
-                      itemCount: controller.gessThewordQuesstionList.length,
+                      itemCount: controller.guessTheWordQuestionList.length,
                       physics: const NeverScrollableScrollPhysics(),
                       onPageChanged: (index) {
                         setState(() {
@@ -65,7 +64,8 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                         });
                       },
                       itemBuilder: (context, questionsIndex) {
-                        return SingleChildScrollView(   physics: const BouncingScrollPhysics(),
+                        return SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
                           padding: const EdgeInsets.all(Dimensions.space20),
                           child: Stack(
                             children: [
@@ -78,89 +78,68 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                       children: [
-                                        LevelCardButton(
-                                            text: ' ${controller.gessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins}',
-                                            hasIcon: false,
-                                            hasImage: false),
-                                        LevelCardButton(
-                                            text: " ${questionsIndex + 1}/${controller.gessThewordQuesstionList.length}",
-                                            hasIcon: false,
-                                            hasImage: false),
+                                        LevelCardButton(isQuestionCount: true,bgColor: Colors.transparent,hPadding:Dimensions.space12,vPadding:Dimensions.space10,text: ' ${controller.guessTheWordRepo.apiClient.getUserCurrentCoin()} ${MyStrings.coins.tr}', hasIcon: false, hasImage: false),
+                                        LevelCardButton(isQuestionCount: true,bgColor: Colors.transparent,hPadding:Dimensions.space12,vPadding:Dimensions.space10,text: " ${questionsIndex + 1}/${controller.guessTheWordQuestionList.length}", hasIcon: false, hasImage: false),
                                       ],
                                     ),
                                     const SizedBox(height: Dimensions.space20),
                                     // note: use  preloader or something like this
-                                    controller.gessThewordQuesstionList[questionsIndex].image != null
+                                    controller.guessTheWordQuestionList[questionsIndex].image != null
                                         ? Container(
+                                            margin: const EdgeInsetsDirectional.only(top: Dimensions.space20, bottom: Dimensions.space20),
                                             width: double.infinity,
-                                            padding:
-                                                const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space8, right: Dimensions.space8),
-                                            decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.circular(16),
-                                            ),
-                                            child: CachedNetworkImage(
-                                              imageUrl: '${controller.questionImgPath}/${controller.gessThewordQuesstionList[questionsIndex].image}',
-                                              fit: BoxFit.cover,
-                                              height: 220,
-                                              placeholder: (context, url) => const CustomLoader(isPagination: true),
-                                              imageBuilder: (context, imageProvider) {
-                                                return Container(
-                                                    decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(14),
-                                                  image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ));
-                                              },
+                                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(Dimensions.defaultRadius)),
+                                            height: context.width / 2.5,
+                                            child: MyImageWidget(
+                                              boxFit: BoxFit.contain,
+                                              radius: Dimensions.defaultRadius,
+                                              imageUrl: "${controller.questionImgPath}/${controller.guessTheWordQuestionList[questionsIndex].image}",
                                             ),
                                           )
                                         : const SizedBox(height: Dimensions.space20),
-                                    Container(
-                                        padding: const EdgeInsets.only(top: Dimensions.space20),
-                                        child: Text(controller.gessThewordQuesstionList[questionsIndex].question.toString(),
-                                            style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
+                                    Container(padding: const EdgeInsetsDirectional.only(top: Dimensions.space20), child: Text(controller.guessTheWordQuestionList[questionsIndex].question.toString(), style: semiBoldExtraLarge.copyWith(fontWeight: FontWeight.w500), textAlign: TextAlign.center)),
                                     const SizedBox(height: Dimensions.space40),
-                                    AnswerField(length: controller.gessThewordQuesstionList[questionsIndex].options![0].option!.length),
+                                    AnswerField(length: controller.guessTheWordQuestionList[questionsIndex].options![0].option!.length),
 
                                     const SizedBox(height: Dimensions.space30),
                                     GuessWordKeyBoard(
-                                      ans: controller.gessThewordQuesstionList[questionsIndex].options![0].option.toString(),
+                                      ans: controller.guessTheWordQuestionList[questionsIndex].options![0].option.toString(),
                                     ),
-                                    const SizedBox(height: Dimensions.space10),
+                                    const SizedBox(height: Dimensions.space15),
                                     Align(
-                                      alignment: Alignment.centerRight,
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          color: MyColor.primaryColor,
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: IconButton(
-                                            onPressed: () {
-                                              controller.removeVAlue();
-                                            },
-                                            icon: const Icon(
+                                        alignment: Alignment.center,
+                                        child:InkWell(
+                                          onTap: (){
+                                            controller.removeValue();
+                                          },
+                                          child: Container(
+                                            padding: const EdgeInsets.all(Dimensions.space3),
+                                            height: Dimensions.space40,
+                                            width: Dimensions.space40,
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(4),
+                                                boxShadow: MyUtils.getBottomSheetShadow(),
+                                                border: Border.all(
+                                                    color: MyColor.borderColor.withOpacity(.5),
+                                                    width: .5
+                                                ),
+                                                color: MyColor.colorWhite
+                                              // color: Colors.transparent
+                                              //color: MyColor.lightGray,
+                                            ),
+                                            child: const Icon(
                                               Icons.delete_forever_outlined,
-                                              color: MyColor.colorWhite,
-                                            )),
-                                      ),
-                                    ),
+                                              color: MyColor.primaryColor,
+                                            ),
+                                          ),
+                                        )),
                                     const SizedBox(height: Dimensions.space40),
-                                    // RoundedButton(
-                                    //   text: MyStrings.submit,
-                                    //   press: () {
-                                    //     controller.addAns(questionsIndex, controller.tempAns.join().toLowerCase().toString());
-                                    //     questionsIndex == controller.gessThewordQuesstionList.length - 1
-                                    //         ? controller.submitGuessTheWordAnswers()
-                                    //         : controller.nextPage();
-                                    //   },
-                                    // ),
                                     const SizedBox(height: Dimensions.space40),
                                   ],
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * .4),
+                                padding: EdgeInsetsDirectional.only(start: MediaQuery.of(context).size.width * .4),
                                 child: CircularCountDownTimer(
                                   initialDuration: 0,
                                   duration: controller.ansDuration,
@@ -181,9 +160,7 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                                   autoStart: true,
                                   onComplete: () {
                                     controller.addAns(questionsIndex, controller.tempAns.join().toLowerCase().toString());
-                                    questionsIndex == controller.gessThewordQuesstionList.length - 1
-                                        ? controller.submitGuessTheWordAnswers()
-                                        : controller.nextPage();
+                                    questionsIndex == controller.guessTheWordQuestionList.length - 1 ? controller.submitGuessTheWordAnswers() : controller.nextPage();
                                   },
                                 ),
                               ),
@@ -200,10 +177,10 @@ class _GuessThewordScreenState extends State<GuessThewordScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20),
                         child: Center(
                           child: RoundedButton(
-                            text: MyStrings.submit,
+                            text: MyStrings.submit.tr,
                             press: () {
                               controller.addAns(currentQuestionIndex, controller.tempAns.join().toLowerCase().toString());
-                              if (currentQuestionIndex == controller.gessThewordQuesstionList.length - 1) {
+                              if (currentQuestionIndex == controller.guessTheWordQuestionList.length - 1) {
                                 controller.submitGuessTheWordAnswers();
                               } else {
                                 controller.nextPage();

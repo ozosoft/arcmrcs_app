@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/view/components/text/small_text.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/view/components/text/small_text.dart';
 
 class CustomTextFieldForPhone extends StatefulWidget {
   final String hintText, labelText;
@@ -125,7 +125,7 @@ class _CustomTextFieldForPhoneState extends State<CustomTextFieldForPhone> {
             filled: true,
             prefixIcon: widget.isShowPrefixIcon
                 ? Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 5),
+                    padding: const EdgeInsetsDirectional.only(end: 20, start: 5),
                     // child: Image.asset(widget.prefixIconUrl),
                     child: Image.asset(""),
                   )

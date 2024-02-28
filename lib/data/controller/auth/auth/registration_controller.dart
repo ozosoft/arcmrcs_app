@@ -1,19 +1,18 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
-import 'package:flutter_prime/core/route/route.dart';
+import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/core/route/route.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/auth/sign_up_model/registration_response_model.dart';
-import 'package:flutter_prime/data/model/auth/sign_up_model/sign_up_model.dart';
-import 'package:flutter_prime/data/model/country_model/country_model.dart';
-import 'package:flutter_prime/data/model/general_setting/general_setting_response_model.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/model/model/error_model.dart';
-import 'package:flutter_prime/data/repo/auth/general_setting_repo.dart';
-import 'package:flutter_prime/data/repo/auth/signup_repo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/auth/sign_up_model/registration_response_model.dart';
+import 'package:quiz_lab/data/model/auth/sign_up_model/sign_up_model.dart';
+import 'package:quiz_lab/data/model/general_setting/general_setting_response_model.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/model/model/error_model.dart';
+import 'package:quiz_lab/data/repo/auth/general_setting_repo.dart';
+import 'package:quiz_lab/data/repo/auth/signup_repo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class RegistrationController extends GetxController {
   RegistrationRepo registrationRepo;
@@ -66,14 +65,14 @@ class RegistrationController extends GetxController {
 
   signUpUser() async {
     if (emailController.text.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.enterYourEmail]);
+      CustomSnackBar.error(errorList: [MyStrings.enterYourEmail.tr]);
       return;
     }
 
-    // if(needAgree && !agreeTC) {
-    //   CustomSnackBar.error(errorList: [MyStrings.agreePolicyMessage],);
-    //   return;
-    // }
+    if(needAgree && !agreeTC) {
+      CustomSnackBar.error(errorList: [MyStrings.agreePolicyMessage],);
+      return;
+    }
 
     submitLoading = true;
     update();
@@ -112,7 +111,6 @@ class RegistrationController extends GetxController {
   SignUpModel getUserData() {
     SignUpModel model = SignUpModel(
 
-        // agree: agreeTC ? true : false,
         username: userNameController.text.toString(),
         email: emailController.text.toString(),
         password: passwordController.text.toString(),
@@ -137,16 +135,23 @@ class RegistrationController extends GetxController {
     await registrationRepo.sendUserToken();
 
     bool isProfileCompleteEnable = true;
-  
 
     if (needEmailVerification == false && needSmsVerification == false) {
       Get.offAndToNamed(RouteHelper.profileCompleteScreen);
     } else if (needEmailVerification == true && needSmsVerification == true) {
-      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [true, isProfileCompleteEnable,]);
+      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [
+        true,
+        isProfileCompleteEnable,
+      ]);
     } else if (needEmailVerification) {
-      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [false, isProfileCompleteEnable, ]);
+      Get.offAndToNamed(RouteHelper.emailVerificationScreen, arguments: [
+        false,
+        isProfileCompleteEnable,
+      ]);
     } else if (needSmsVerification) {
-      Get.offAndToNamed(RouteHelper.smsVerificationScreen, arguments: [isProfileCompleteEnable,]);
+      Get.offAndToNamed(RouteHelper.smsVerificationScreen, arguments: [
+        isProfileCompleteEnable,
+      ]);
     }
   }
 
@@ -183,7 +188,7 @@ class RegistrationController extends GetxController {
 
     ResponseModel response = await generalSettingRepo.getGeneralSetting();
     if (response.statusCode == 200) {
-      print("I am from reg cont");
+      debugPrint("I am from reg cont");
       GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(jsonDecode(response.responseJson));
       if (model.status?.toLowerCase() == 'success') {
         generalSettingMainModel = model;
@@ -202,35 +207,12 @@ class RegistrationController extends GetxController {
       return;
     }
 
-    // needAgree = generalSettingMainModel.data?.generalSetting?.agree.toString() == '0' ? false : true;
-    // checkPasswordStrength = generalSettingMainModel.data?.generalSetting?.securePassword.toString() == '0' ? false : true;
+    needAgree = generalSettingMainModel.data?.generalSetting?.agree.toString() == '0' ? false : true;
+    checkPasswordStrength = generalSettingMainModel.data?.generalSetting?.securePassword.toString() == '0' ? false : true;
 
     isLoading = false;
     update();
   }
-
-  bool countryLoading = true;
-  List<Countries> countryList = [];
-
-  // Future<dynamic> getCountryData() async {
-
-  //   ResponseModel mainResponse = await registrationRepo.getCountryList();
-
-  //   if (mainResponse.statusCode == 200) {
-  //     CountryModel model = CountryModel.fromJson(jsonDecode(mainResponse.responseJson));
-  //     List<Countries>? tempList = model.data?.countries;
-
-  //     if (tempList != null && tempList.isNotEmpty) {
-  //       countryList.addAll(tempList);
-  //     }
-  //   } else {
-  //     CustomSnackBar.error(errorList: [mainResponse.message]);
-  //   }
-
-  //   countryLoading = false;
-  //   update();
-
-  // }
 
   String? validatePassword(String value) {
     if (value.isEmpty) {

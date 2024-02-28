@@ -1,14 +1,15 @@
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/style.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../core/utils/dimensions.dart';
 import '../../../../core/utils/url_container.dart';
 import '../../../../data/controller/battle/battle_room_quiz_controller.dart';
 import '../../../../data/model/battle/user_battle_room_details_model.dart';
+import '../../../components/image_widget/my_image_widget.dart';
 
 class BattlePlayerProfileDetails extends StatelessWidget {
   final BattleRoomQuizController quizController;
@@ -51,7 +52,7 @@ class BattlePlayerProfileDetails extends StatelessWidget {
                   // Callback function when countdown completes
                 },
                 onChange: (v) {
-                  // print("${userData.name} - $v");
+                
                   if (userData.answers.any((answer) => answer["qid"] == quizController.getCurrentQuestion().id.toString()) == true) {
                     countDownController.pause();
                   } else {
@@ -74,9 +75,9 @@ class BattlePlayerProfileDetails extends StatelessWidget {
                               height: Dimensions.space50,
                               width: Dimensions.space50,
                             )
-                          : Image.network(
-                              "${UrlContainer.userImagePath}/${userData.profileUrl}",
-                              fit: BoxFit.cover,
+                          : MyImageWidget(
+                              fromProfile: true,
+                              imageUrl:"${UrlContainer.userImagePath}/${userData.profileUrl}",
                               height: Dimensions.space50,
                               width: Dimensions.space50,
                             ),

@@ -1,7 +1,7 @@
 
-
 import 'dart:convert';
-import '../auth/sign_up_model/registration_response_model.dart';
+
+import '../model/message_model/message_model.dart';
 
 CoinStoreModel coinStoreModelFromJson(String str) => CoinStoreModel.fromJson(json.decode(str));
 
@@ -22,7 +22,7 @@ class CoinStoreModel {
 
     factory CoinStoreModel.fromJson(Map<String, dynamic> json) => CoinStoreModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
@@ -76,9 +76,9 @@ class CoinPlan {
         id: json["id"],
         title: json["title"],
         image: json["image"],
-        coinsAmount: json["coins_amount"] != null ? json["coins_amount"].toString() : '',
-        price: json["price"] != null ? json["price"].toString() : '',
-        status: json["status"],
+        coinsAmount: json["coins_amount"].toString(),
+        price: json["price"].toString(),
+        status: json["status"].toString(),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
         updatedAt: json["updated_at"] == null ? null : DateTime.parse(json["updated_at"]),
     );

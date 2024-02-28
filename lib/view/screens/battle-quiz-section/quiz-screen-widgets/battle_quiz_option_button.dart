@@ -7,7 +7,6 @@ import '../../../../core/utils/my_images.dart';
 import '../../../../core/utils/style.dart';
 import '../../../../data/model/battle/battle_question_list.dart';
 
-
 class OptionButton extends StatelessWidget {
   final BattleQuestionOption option;
   final VoidCallback onTap;
@@ -15,6 +14,7 @@ class OptionButton extends StatelessWidget {
   final String letter;
 
   const OptionButton({
+    super.key,
     required this.option,
     required this.onTap,
     required this.isSelected,
@@ -27,8 +27,7 @@ class OptionButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.all(Dimensions.space8),
-        padding: const EdgeInsets.symmetric(
-            vertical: Dimensions.space15, horizontal: Dimensions.space15),
+        padding: const EdgeInsets.symmetric(vertical: Dimensions.space15, horizontal: Dimensions.space15),
         decoration: BoxDecoration(
           color: isSelected && option.isAnswer == "1"
               ? MyColor.rightAnswerbgColor
@@ -54,7 +53,7 @@ class OptionButton extends StatelessWidget {
             const SizedBox(width: Dimensions.space8),
             Expanded(
               child: Text(
-                "${option.option} - ${option.isAnswer}",
+                "${option.option} ",
                 style: regularMediumLarge.copyWith(
                   overflow: TextOverflow.visible,
                   color: isSelected ? MyColor.colorWhite : MyColor.textColor,
@@ -64,9 +63,7 @@ class OptionButton extends StatelessWidget {
             SizedBox(
               height: Dimensions.space10,
               child: SvgPicture.asset(
-                isSelected && option.isAnswer == "1"
-                    ? MyImages().rightORWrong[0]
-                    : MyImages().rightORWrong[1],
+                isSelected && option.isAnswer == "1" ? MyImages().rightORWrong[0] : MyImages().rightORWrong[1],
                 fit: BoxFit.cover,
               ),
             ),

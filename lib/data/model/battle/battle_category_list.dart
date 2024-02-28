@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../model/message_model/message_model.dart';
+
 BattleCategoryList battleCategoryListFromJson(String str) => BattleCategoryList.fromJson(json.decode(str));
 
 String battleCategoryListToJson(BattleCategoryList data) => json.encode(data.toJson());
@@ -23,7 +25,7 @@ class BattleCategoryList {
 
     factory BattleCategoryList.fromJson(Map<String, dynamic> json) => BattleCategoryList(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: Message.fromJson(json["message"]),
         data: Data.fromJson(json["data"]),
     );
@@ -46,8 +48,8 @@ class Data {
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
-        categories: List<BattleCategory>.from(json["categories"].map((x) => BattleCategory.fromJson(x))),
-        entryCoin: json["entryCoin"],
+        categories: json["categories"] != null? List<BattleCategory>.from(json["categories"].map((x) => BattleCategory.fromJson(x))) : [],
+        entryCoin: json["entryCoin"].toString(),
     );
 
     Map<String, dynamic> toJson() => {
@@ -77,7 +79,7 @@ class BattleCategory {
         id: json["id"],
         name: json["name"],
         image: json["image"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
     );
@@ -92,18 +94,4 @@ class BattleCategory {
     };
 }
 
-class Message {
-    List<String> success;
 
-    Message({
-        required this.success,
-    });
-
-    factory Message.fromJson(Map<String, dynamic> json) => Message(
-        success: List<String>.from(json["success"].map((x) => x)),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "success": List<dynamic>.from(success.map((x) => x)),
-    };
-}

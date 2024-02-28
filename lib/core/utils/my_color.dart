@@ -11,11 +11,12 @@ class MyColor {
   static const Color lightprimaryColor = Color(0x92FF7357);
   static const Color secondaryColor = Color(0xffF6F7FE);
   static const Color screenBgColor = Color(0xFFF9F9F9);
-  static const Color primaryTextColor = Color(0xff262626);
+  static const Color primaryTextColor = Color(0xff160603);
   static const Color contentTextColor = Color(0xff777777);
   static const Color lineColor = Color(0xffECECEC);
   static const Color borderColor = Color(0xffD9D9D9);
   static const Color bodyTextColor = Color(0xFF747475);
+  static const Color lightGreyTextColor = Color(0xffABA8B0);
   static const Color textColor = Color(0xFF8A8281);
   static const Color notActivatedFadeColor = Color(0x5AFFFFFF);
   static const Color lightGray = Color(0xFFFAFAFA);
@@ -23,6 +24,7 @@ class MyColor {
   static const Color titleColor = Color(0xff373e4a);
   static const Color labelTextColor = Color(0xff444444);
   static const Color smallTextColor1 = Color(0xff555555);
+  static const Color colorYellow = Color(0xFFFFFF26);
   static const Color leaderBoardTabBar = Color(0xffE75E43);
   static const Color leaderBoardContainer = Color(0xffB7351B);
   static const Color pendingBorderColor = Color(0xffFF9F43);
@@ -63,6 +65,10 @@ class MyColor {
   static const Color colorLightGrey = Color(0xFFCECECE);
   static const Color colorDarkGrey = Color(0xFFA0A0A0);
   static const Color textSecondColor = Color(0xFF8A8281);
+
+  static const Color cardBgLighGreyColor = Color(0xffFBFBFB);
+  static const Color cardShaddowColor = Color(0xE5432226);
+  static const Color cardShaddowColor2 = Color(0x00000026);
   static const Color transparentColor = Colors.transparent;
 
   static const Color greenSuccessColor = greenP;
@@ -81,12 +87,13 @@ class MyColor {
   static const Color lobbycontColor = Color(0xFFFCECE8);
   static const Color lobbycontBorderColor = Color(0xFFE54322);
   static const Color cardBorderColors = Color(0xFFE9E9E9);
-  static const Color categoryCardBodyColor =  Color(0xFFE5F8E5);
-  static const Color categoryCardBodyWrongColor =  Color(0xFFFFD2DA);
-  static const Color prifileBG =  Color(0xDFFF795E);
-  static const Color unlockedLevel =  Color(0xFFF8F8F8);
-  static const Color lockedLevel =  Color(0xFFDFDFDF);
-  static const Color completedlevel =  Color(0xFFE5F8E5);
+  static const Color categoryCardBodyColor = Color(0xFFE5F8E5);
+  static const Color categoryCardBodyWrongColor = Color(0xFFFFD2DA);
+  static const Color prifileBG = Color(0xDFFF795E);
+  static const Color unlockedLevel = Color(0xFFF8F8F8);
+  static const Color lockedLevel = Color(0xFFEAE7E7);
+  static const Color completedlevel = Color(0xFFE5F8E5);
+  static const Color completedlevelTEXT = Color(0xFF00BA00);
 
   static Color getPrimaryColor() {
     return primaryColor;
@@ -168,7 +175,7 @@ class MyColor {
     return MyColor.colorGrey;
   }
 
-   static Color getAuthTextColor() {
+  static Color getAuthTextColor() {
     return colorlighterGrey;
   }
 
@@ -197,30 +204,17 @@ class MyColor {
     MyColor.colorWhite,
     MyColor.colorWhite,
   ];
-  static List<Color> quizquestionsTextColor = [
-    MyColor.colorWhite,
-    MyColor.colorWhite,
-    MyColor.colorQuizBodyText,
-    MyColor.colorQuizBodyText
-  ];
+  static List<Color> quizquestionsTextColor = [MyColor.colorWhite, MyColor.colorWhite, MyColor.colorQuizBodyText, MyColor.colorQuizBodyText];
 
-      final List<Color> containerBorderColors = [
-    Color(0xFFCCF1CC),
-    Color(0xFFEEEEEE),
-    Color(0xFFF8F8F8),
-    MyColor.appBarColor
-    ];
+  final List<Color> containerBorderColors = [const Color(0xFFCCF1CC), const Color(0xFFEEEEEE), const Color(0xFFF8F8F8), MyColor.appBarColor];
 
-      final List<Color> containerBodyColors = [
+  final List<Color> containerBodyColors = [
     MyColor.categoryCardBodyColor,
     MyColor.cardColor,
-    Color(0xFFDFDFDF),
-    ];
-  
-      final List<Color> containertextColors = [
-      Color(0xFF00BA00),
-      MyColor.colorBlack,
-      Color(0xFF8A8281)];
+    const Color(0xFFDFDFDF),
+  ];
+
+  final List<Color> containertextColors = [const Color(0xFF00BA00), MyColor.colorBlack, const Color(0xFF8A8281)];
 
   static getSymbolColor(int index) {
     int colorIndex = index > 10 ? index % 10 : index;

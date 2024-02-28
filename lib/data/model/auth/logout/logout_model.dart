@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../../model/message_model/message_model.dart';
+
 LogoutModel logoutModelFromJson(String str) => LogoutModel.fromJson(json.decode(str));
 
 String logoutModelToJson(LogoutModel data) => json.encode(data.toJson());
@@ -21,7 +23,7 @@ class LogoutModel {
 
     factory LogoutModel.fromJson(Map<String, dynamic> json) => LogoutModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
     );
 
@@ -29,21 +31,5 @@ class LogoutModel {
         "remark": remark,
         "status": status,
         "message": message?.toJson(),
-    };
-}
-
-class Message {
-    List<String>? success;
-
-    Message({
-        this.success,
-    });
-
-    factory Message.fromJson(Map<String, dynamic> json) => Message(
-        success: json["success"] == null ? [] : List<String>.from(json["success"]!.map((x) => x)),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "success": success == null ? [] : List<dynamic>.from(success!.map((x) => x)),
     };
 }

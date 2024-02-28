@@ -1,10 +1,10 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
-import 'package:flutter_prime/core/utils/method.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/model/auth/sign_up_model/sign_up_model.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/core/utils/method.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/model/auth/sign_up_model/sign_up_model.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 
 class RegistrationRepo {
   ApiClient apiClient;
@@ -21,24 +21,14 @@ class RegistrationRepo {
 
   Map<String, dynamic> modelToMap(SignUpModel model) {
     Map<String, dynamic> bodyFields = {
-      
-       'username': model.username.toString(),
-      
+      'username': model.username.toString(),
       'password': model.password.toString(),
       'password_confirmation': model.password.toString(),
-     'email': model.email.toString(),
+      'email': model.email.toString(),
     };
-
-    print("++++++++++++++++++hey========================="+model.email);
 
     return bodyFields;
   }
-
-  // Future<dynamic> getCountryList() async {
-  //   String url = '${UrlContainer.baseUrl}${UrlContainer.countryEndPoint}';
-  //   ResponseModel model = await apiClient.request(url, Method.getMethod, null);
-  //   return model;
-  // }
 
   Future<bool> sendUserToken() async {
     String deviceToken;

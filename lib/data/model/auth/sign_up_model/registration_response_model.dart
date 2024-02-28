@@ -104,7 +104,6 @@ class User {
     _username = json['username'];
     _countryCode = json['country_code'].toString();
     _mobile = json['mobile'].toString();
-   
     _status = json['status'].toString();
     _ev = json['ev'].toString();
     _sv = json['sv'].toString();

@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import '../model/message_model/message_model.dart';
+
 ExamResultModel examResultModelFromJson(String str) => ExamResultModel.fromJson(json.decode(str));
 
 String examResultModelToJson(ExamResultModel data) => json.encode(data.toJson());
@@ -23,7 +25,7 @@ class ExamResultModel {
 
     factory ExamResultModel.fromJson(Map<String, dynamic> json) => ExamResultModel(
         remark: json["remark"],
-        status: json["status"],
+        status: json["status"].toString(),
         message: json["message"] == null ? null : Message.fromJson(json["message"]),
         data: json["data"] == null ? null : Data.fromJson(json["data"]),
     );
@@ -68,18 +70,4 @@ class Data {
     };
 }
 
-class Message {
-    List<String>? success;
 
-    Message({
-        this.success,
-    });
-
-    factory Message.fromJson(Map<String, dynamic> json) => Message(
-        success: json["success"] == null ? [] : List<String>.from(json["success"]!.map((x) => x)),
-    );
-
-    Map<String, dynamic> toJson() => {
-        "success": success == null ? [] : List<dynamic>.from(success!.map((x) => x)),
-    };
-}

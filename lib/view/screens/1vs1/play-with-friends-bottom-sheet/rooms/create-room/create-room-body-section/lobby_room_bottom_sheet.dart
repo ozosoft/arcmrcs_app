@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/battle/battle_room_controller.dart';
-import 'package:flutter_prime/view/components/alert-dialog/custom_alert_dialog.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_bar.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/bottom_sheet_header_row.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/battle/battle_room_controller.dart';
+import 'package:quiz_lab/view/components/bottom-sheet/bottom_sheet_bar.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../core/route/route.dart';
 import '../../../../../../../core/utils/url_container.dart';
+import '../../../../../../components/dialog/warning_dialog.dart';
+import '../../../../../../components/image_widget/my_image_widget.dart';
 
 class LobbyBottomSheet extends StatefulWidget {
   const LobbyBottomSheet({super.key});
@@ -32,60 +32,16 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
     return GetBuilder<BattleRoomController>(builder: (controller) {
       return WillPopScope(
         onWillPop: () async {
-          CustomAlertDialog(
-              barrierDismissible: false,
-              willPop: true,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(Dimensions.space10),
-                    child: Text(
-                      MyStrings.areYouSureYouWantToLeaveThisRoom,
-                      style: regularLarge.copyWith(color: MyColor.textSecondColor),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 1,
-                    color: MyColor.textSecondColor.withOpacity(0.3),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(Dimensions.space10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                          },
-                          child: const Text(
-                            MyStrings.cancel,
-                            style: regularLarge,
-                          ),
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                          onPressed: () async {
-                            await controller.deleteBattleRoom(controller.battleRoomData.value!.roomId, false).whenComplete(() {
-                              Get.offAllNamed(RouteHelper.bottomNavBarScreen);
-                            });
-                          },
-                          child: Text(
-                            MyStrings.yes,
-                            style: regularLarge.copyWith(color: MyColor.colorWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )).customAlertDialog(context);
+          const WarningAlertDialog().warningAlertDialog(
+            context,
+            () async {
+              await controller.deleteBattleRoom(controller.battleRoomData.value!.roomId, false).whenComplete(() {
+                Get.offAllNamed(RouteHelper.bottomNavBarScreen);
+              });
+            },
+            title: MyStrings.areYouSureYouWantToLeaveThisRoom,
+          );
+
           return false; // Disable back button if `start` is true
         },
         child: Padding(
@@ -93,7 +49,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
           child: Column(
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: Dimensions.space8, bottom: Dimensions.space30),
+                padding: EdgeInsetsDirectional.only(top: Dimensions.space8, bottom: Dimensions.space30),
                 child: BottomSheetBar(),
               ),
               Container(
@@ -105,8 +61,8 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                     GestureDetector(
                       onTap: () {
                         Clipboard.setData(ClipboardData(text: controller.battleRoomData.value!.roomCode!)).then((value) {
-                          print("copied");
-                          CustomSnackBar.success(successList: [(MyStrings.copied)]);
+                          debugPrint("copied");
+                          CustomSnackBar.success(successList: [(MyStrings.copied.tr)]);
                         });
                       },
                       child: Container(
@@ -139,7 +95,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                       width: Dimensions.space260,
                       child: Center(
                         child: Text(
-                          MyStrings.sharecodeText,
+                          MyStrings.sharecodeText.tr,
                           textAlign: TextAlign.center,
                           style: regularLarge.copyWith(color: MyColor.textColor),
                         ),
@@ -183,9 +139,9 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )
-                                        : Image.network(
-                                            "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user1!.profileUrl}",
-                                            fit: BoxFit.cover,
+                                        : MyImageWidget(
+                                            fromProfile: true,
+                                            imageUrl: "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user1!.profileUrl}",
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )),
@@ -206,7 +162,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                             ),
                           ),
                           Text(
-                            MyStrings.creator,
+                            MyStrings.creator.tr,
                             textAlign: TextAlign.center,
                             style: regularLarge.copyWith(color: MyColor.textColor),
                           ),
@@ -246,9 +202,9 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )
-                                        : Image.network(
-                                            "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user2!.profileUrl}",
-                                            fit: BoxFit.cover,
+                                        : MyImageWidget(
+                                            fromProfile: true,
+                                            imageUrl: "${UrlContainer.userImagePath}/${controller.battleRoomData.value!.user2!.profileUrl}",
                                             height: Dimensions.space70,
                                             width: Dimensions.space70,
                                           )),
@@ -269,7 +225,7 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
                             ),
                           ),
                           Text(
-                            MyStrings.player,
+                            MyStrings.player.tr,
                             textAlign: TextAlign.center,
                             style: regularLarge.copyWith(color: MyColor.textColor),
                           ),
@@ -282,29 +238,20 @@ class _LobbyBottomSheetState extends State<LobbyBottomSheet> {
               const SizedBox(height: Dimensions.space100),
               controller.userFoundState.value == UserFoundState.found
                   ? RoundedButton(
-                      text: MyStrings.start,
+                      text: MyStrings.start.tr,
                       press: () {
                         setState(() {
                           start = true;
                         });
-                        print("go");
+                        debugPrint("go");
 
-                        controller.startBattleQuiz(controller.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
-                          // Get.back();
-                          // Get.toNamed(
-                          //   RouteHelper.battleQuizQuestionsScreen,
-                          //   arguments: [
-                          //     "Quiz DEmo",
-                          //     controller.questionsData.data.questions
-                          //   ],
-                          // );
-                        });
+                        controller.startBattleQuiz(controller.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {});
                       },
                       cornerRadius: Dimensions.space10,
                       textSize: Dimensions.space20,
                     )
                   : RoundedButton(
-                      text: MyStrings.start,
+                      text: MyStrings.start.tr,
                       press: () {
                         setState(() {
                           start = true;

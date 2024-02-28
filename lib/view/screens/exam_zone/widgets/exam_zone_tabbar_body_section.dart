@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/exam_zone/exam_zone_controller.dart';
-import 'package:flutter_prime/data/repo/exam_zone/exam_zone_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
-import 'package:flutter_prime/view/components/category-card/categories_card.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/exam_zone/exam_zone_controller.dart';
+import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/components/no_data.dart';
 import 'package:get/get.dart';
 
+import '../../../../data/model/dashboard/exam.dart';
+import '../../../components/bottom-sheet/custom_bottom_sheet_plus.dart';
+import 'completed_exam_list_card_widget.dart';
 import 'enter_exam_room_bottom_sheet.dart';
+import 'exam_list_card_widget.dart';
 
 class ExamZoneTabBarBodySection extends StatefulWidget {
   const ExamZoneTabBarBodySection({super.key});
@@ -19,28 +23,18 @@ class ExamZoneTabBarBodySection extends StatefulWidget {
   State<ExamZoneTabBarBodySection> createState() => _ExamZoneTabBarBodySectionState();
 }
 
-class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> with SingleTickerProviderStateMixin {
+class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> {
   @override
   void initState() {
+    super.initState();
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ExamZoneRepo(apiClient: Get.find()));
-
-    ExamZoneController controller = Get.put(ExamZoneController(
-      examZoneRepo: Get.find(),
-    ));
-
-    
-
-    
-    super.initState();
+    ExamZoneController controller = Get.put(ExamZoneController(examZoneRepo: Get.find()));
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.examZonegetdata();
+      controller.examZoneListData(fromLoad: true);
+      controller.completedExamList(fromLoad: true);
     });
-
-    controller.tabController = TabController(vsync: this, length: 2);
-
-    controller.selectedIndex = controller.tabController.index;
   }
 
   @override
@@ -56,79 +50,114 @@ class _ExamZoneTabBarBodySectionState extends State<ExamZoneTabBarBodySection> w
               appBar: PreferredSize(
                 preferredSize: Size.fromHeight(size.height * .4),
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space30),
+                  margin: const EdgeInsets.symmetric(horizontal: Dimensions.space20, vertical: Dimensions.space10),
+                  height: Dimensions.space45,
+                  decoration: BoxDecoration(
+                    color: MyColor.greyTextColor.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(Dimensions.space50),
+                  ),
                   child: TabBar(
+                      splashFactory: NoSplash.splashFactory,
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>((Set<MaterialState> states) {
+                        // Use the default focused overlay color
+                        return states.contains(MaterialState.focused) ? null : Colors.transparent;
+                      }),
                       controller: controller.tabController,
                       unselectedLabelColor: MyColor.textColor,
-                      labelStyle: regularMediumLarge,
+                      labelColor: MyColor.colorWhite,
+                      labelStyle: regularMediumLarge.copyWith(),
                       indicatorPadding: EdgeInsets.zero,
-                      indicator: const ShapeDecoration(color: MyColor.primaryColor, shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(Dimensions.space25)))),
+                      indicator: BoxDecoration(
+                        borderRadius: BorderRadius.circular(Dimensions.space25), // Make it rounded
+                        color: MyColor.primaryColor, // Change the color to green
+                      ),
                       onTap: (value) {
-                        controller.selectTab();
+                        // controller.selectTab();
                       },
-                      tabs: const [
+                      tabs: [
                         Tab(
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text(MyStrings.today),
+                            child: Text(MyStrings.today.tr),
                           ),
                         ),
                         Tab(
                           child: Align(
                             alignment: Alignment.center,
-                            child: Text(MyStrings.completed),
+                            child: Text(MyStrings.completed.tr),
                           ),
                         ),
                       ]),
                 ),
               ),
-              body: TabBarView(controller:controller. tabController, children: [
-                ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: controller.examcategoryList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return InkWell(
-                        onTap: () {
-
-                            CustomBottomSheet(child: EnterRoomBottomSheetWidget(quizInfo_id:controller.examcategoryList[index].id.toString())).customBottomSheet(context);
-
+              body: controller.loading == true || controller.loadingForCompletedList == true
+                  ? const CustomLoader()
+                  : TabBarView(physics: const BouncingScrollPhysics(), controller: controller.tabController, children: [
+                      RefreshIndicator(
+                        color: MyColor.primaryColor,
+                        onRefresh: () async {
+                          controller.examZoneListData(fromLoad: true);
                         },
-                        child: CategoriesCard(
-                          index: index,
-                          marks: MyStrings.marks,
-                          date: MyStrings.dates,
-                          minute: MyStrings.minutes,
-                          fromExam: true,
-                          title: controller.examcategoryList[index].title.toString(),
-                          // questions: MyStrings().allCategoryies[index]["questions"].toString(),
-                          // image: UrlContainer.examZoneImage+  controller.examcategoryList[index].image.toString(),
-                          expansionVisible: false,
-                          fromViewAll: false,
-                          // levels: MyStrings().allCategoryies[index]["level"].toString(),
-                        ),
-                      );
-                    }),
-                ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: 3,
-                    itemBuilder: (BuildContext context, int index) {
-                      return CategoriesCard(
-                        index: index,
-                        marks: MyStrings.marks,
-                        date: MyStrings.dates,
-                        minute: MyStrings.minutes,
-                        fromExam: true,
-                        title: MyStrings.completed,
-                        // questions: MyStrings().allCategoryies[index]["questions"].toString(),
-                        // image: UrlContainer.examZoneImage+  controller.examcategoryList[index].image.toString(),
-                        expansionVisible: false,
-                        fromViewAll: false,
-                        // levels: MyStrings().allCategoryies[index]["level"].toString(),
-                      );
-                    }),
-              ]),
+                        child: controller.examcategoryList!.isEmpty
+                            ? SingleChildScrollView(
+                              child: NoDataWidget(
+                                margin: 8,
+                                  messages: MyStrings.noExamFound.tr,
+                                ),
+                            )
+                            : ListView.builder(
+                                physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                                itemCount: controller.examcategoryList!.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  Exams item = controller.examcategoryList![index];
+                                  return ExamListTileCard(
+                                    exam: item,
+                                    index: index,
+                                    marks: "${item.prize.toString()} ${MyStrings.points.tr}",
+                                    date: "${item.examStartTime.toString()} ",
+                                    minute: "${item.examDuration.toString()} ${MyStrings.min.tr}",
+                                    image: item.image.toString(),
+                                    title: item.title.toString(),
+                                    onTap: () async {
+                                      // controller.enterExamKey = item.examKey!;
+                                      CustomBottomSheetPlus(
+                                        enableDrag: true,
+                                        child: EnterRoomBottomSheetWidget(
+                                          quizInfo: item,
+                                        ),
+                                      ).customBottomSheet(context);
+                                      await controller.examZoneRepo.getExamCode(item.id.toString());
+                                    },
+                                  );
+                                }),
+                      ),
+                      RefreshIndicator(
+                        color: MyColor.primaryColor,
+                        onRefresh: () async {
+                          controller.completedExamList(fromLoad: true);
+                        },
+                        child: controller.completedExamDataList.isEmpty ? SingleChildScrollView(
+                          child: NoDataWidget(
+                            margin: 8,
+                            messages: MyStrings.noExamFound.tr,
+                          ),
+                        ) : ListView.builder(
+                            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+                            itemCount: controller.completedExamDataList.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              var item = controller.completedExamDataList[index];
+                              return CompletedExamListTileCard(
+                                exam: item,
+                                index: index,
+                                image: item.image.toString(),
+                                title: item.title.toString(),
+                                onTap: () {
+                                  return;
+                                },
+                              );
+                            }),
+                      ),
+                    ]),
             )),
       ),
     );

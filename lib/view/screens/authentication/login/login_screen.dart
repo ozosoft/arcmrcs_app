@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/view/components/custom-head-section-for-auth/auth_heading.dart';
-import 'package:flutter_prime/view/screens/authentication/login/widgets/login_body_section_screen.dart';
+import 'package:quiz_lab/view/components/custom-head-section-for-auth/auth_heading.dart';
+import 'package:quiz_lab/view/screens/authentication/login/widgets/login_body_section_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -19,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
               CustomHeadSection(

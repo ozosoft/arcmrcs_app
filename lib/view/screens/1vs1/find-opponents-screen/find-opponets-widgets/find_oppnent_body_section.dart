@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/repo/battle/battle_repo.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/repo/battle/battle_repo.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
@@ -11,8 +11,9 @@ import '../../../../../core/utils/my_images.dart';
 import '../../../../../core/utils/style.dart';
 import '../../../../../core/utils/url_container.dart';
 import '../../../../../data/controller/battle/battle_room_controller.dart';
-import '../../../../../data/services/api_service.dart';
-import '../../../../components/alert-dialog/custom_alert_dialog.dart';
+import '../../../../../data/services/api_client.dart';
+import '../../../../components/dialog/warning_dialog.dart';
+import '../../../../components/image_widget/my_image_widget.dart';
 import '../../../../components/text/default_text.dart';
 import '../../../../../data/controller/battle/find_opponents_controller.dart';
 
@@ -38,68 +39,24 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
     return GetBuilder<FindOpponentsController>(builder: (controller) {
       return WillPopScope(
         onWillPop: () async {
-          CustomAlertDialog(
-              borderRadius: 10,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.all(Dimensions.space10),
-                    child: Column(
-                      children: [
-                        Text(MyStrings.areYouSureYouWantToCloseSearching),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 1,
-                    color: MyColor.textSecondColor.withOpacity(0.3),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(Dimensions.space10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(false); // Return false when "Cancel" is pressed
-                          },
-                          child: const Text(
-                            MyStrings.cancel,
-                            style: regularLarge,
-                          ),
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(backgroundColor: MyColor.primaryColor, foregroundColor: MyColor.colorWhite),
-                          onPressed: () async {
-                            if (controller.battleRoomController.battleRoomData.value != null) {
-                              await controller.battleRoomController.deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false).whenComplete(() {
-                                Navigator.of(context).pop(true);
-                                // Return true when "Yes" is pressed
-                                Get.back();
-                              });
-                            } else {
-                              Navigator.of(context).pop(true);
-                              // Return true when "Yes" is pressed
-                              Get.back();
-                            }
-                          },
-                          child: Text(
-                            MyStrings.yes,
-                            style: regularLarge.copyWith(color: MyColor.colorWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              )).customAlertDialog(context);
+          const WarningAlertDialog().warningAlertDialog(
+            context,
+            () async {
+              if (controller.battleRoomController.battleRoomData.value != null) {
+                await controller.battleRoomController.deleteBattleRoom(controller.battleRoomController.battleRoomData.value!.roomId, false).whenComplete(() {
+                  Navigator.of(context).pop(true);
+                  // Return true when "Yes" is pressed
+                  Get.back();
+                });
+              } else {
+                Navigator.of(context).pop(true);
+                // Return true when "Yes" is pressed
+                Get.back();
+              }
+            },
+            title: MyStrings.areYouSureYouWantToCloseSearching,
+          );
+
           return false; // Disable back button if `start` is true
         },
         child: Column(
@@ -126,9 +83,9 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                                     height: Dimensions.space50,
                                     width: Dimensions.space50,
                                   )
-                                : Image.network(
-                                    "${UrlContainer.userImagePath}/${controller.battleRepo.apiClient.getUserImagePath()}",
-                                    fit: BoxFit.cover,
+                                : MyImageWidget(
+                                    fromProfile: true,
+                                    imageUrl:"${UrlContainer.userImagePath}/${controller.battleRepo.apiClient.getUserImagePath()}",
                                     height: Dimensions.space50,
                                     width: Dimensions.space50,
                                   )),
@@ -146,7 +103,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                 Padding(
                   padding: const EdgeInsets.all(Dimensions.space20),
                   child: Text(
-                    MyStrings.vs,
+                    MyStrings.vs.tr,
                     style: semiBoldOverLarge.copyWith(color: MyColor.colorBlack),
                   ),
                 ),
@@ -175,9 +132,9 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                                             height: Dimensions.space50,
                                             width: Dimensions.space50,
                                           )
-                                        : Image.network(
-                                            "${UrlContainer.userImagePath}/${opUserData.profileUrl}",
-                                            fit: BoxFit.cover,
+                                        : MyImageWidget(
+                                            fromProfile: true,
+                                            imageUrl:"${UrlContainer.userImagePath}/${opUserData.profileUrl}",
                                             height: Dimensions.space50,
                                             width: Dimensions.space50,
                                           )),
@@ -215,8 +172,8 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               const SizedBox(
                                 height: Dimensions.space10,
                               ),
-                              const Text(
-                                "${MyStrings.searching}...",
+                              Text(
+                                "${MyStrings.searching.tr}...",
                                 style: semiBoldLarge,
                               )
                             ],
@@ -231,7 +188,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
             Stack(
               children: [
                 Container(
-                  padding: const EdgeInsets.only(top: Dimensions.space40, left: Dimensions.space15, right: Dimensions.space15, bottom: Dimensions.space20),
+                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40, start: Dimensions.space15, end: Dimensions.space15, bottom: Dimensions.space20),
                   width: double.infinity,
                   child: Lottie.asset(
                     MyImages.userSearchLottie,
@@ -261,7 +218,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               Container(
                                 margin: const EdgeInsets.all(Dimensions.space14),
                                 child: DefaultText(
-                                  text: MyStrings.yourGameWillStartSoon,
+                                  text: MyStrings.yourGameWillStartSoon.tr,
                                   fontSize: Dimensions.fontExtraLarge,
                                   textStyle: boldLarge.copyWith(fontStyle: FontStyle.italic),
                                 ),
@@ -269,7 +226,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                               Container(
                                 margin: const EdgeInsets.all(Dimensions.space14),
                                 child: DefaultText(
-                                  text: "${controller.countdownSeconds == 0 ? MyStrings.started : controller.countdownSeconds}",
+                                  text: "${controller.countdownSeconds < 1 ? MyStrings.started.tr : controller.countdownSeconds}",
                                   fontSize: Dimensions.fontExtraLarge * 3,
                                   textStyle: boldLarge.copyWith(color: MyColor.primaryColor, fontStyle: FontStyle.italic),
                                 ),
@@ -288,20 +245,11 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             RoundedButton(
-                              text: MyStrings.start,
+                              text: MyStrings.start.tr,
                               press: () {
-                                print("go");
+                                debugPrint("go");
 
-                                controller.battleRoomController.startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {
-                                  // Get.back();
-                                  // Get.toNamed(
-                                  //   RouteHelper.battleQuizQuestionsScreen,
-                                  //   arguments: [
-                                  //     "Quiz DEmo",
-                                  //     controller.questionsData.data.questions
-                                  //   ],
-                                  // );
-                                });
+                                controller.battleRoomController.startBattleQuiz(controller.battleRoomController.battleRoomData.value!.roomId, "battle", readyToPlay: true).whenComplete(() {});
                               },
                               cornerRadius: Dimensions.space10,
                               textSize: Dimensions.space20,
@@ -309,7 +257,7 @@ class _FindOpponentsBodySectionState extends State<FindOpponentsBodySection> {
                           ],
                         )
                       : RoundedButton(
-                          text: MyStrings.start,
+                          text: MyStrings.start.tr,
                           press: () {},
                           color: MyColor.colorWhite,
                           textColor: MyColor.textColor,

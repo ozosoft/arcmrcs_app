@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/controller/dashboard/dashboard_controller.dart';
+import 'package:quiz_lab/view/components/bottom-sheet/custom_bottom_sheet.dart';
+import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../../../../../core/utils/my_color.dart';
@@ -23,85 +23,93 @@ class CustomHomeAppBar extends StatefulWidget {
 }
 
 class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
-
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: widget.appbarSize < kToolbarHeight ? kToolbarHeight : widget.appbarSize,
       child: GetBuilder<DashBoardController>(
-        builder: (controller) => AppBar(
-          systemOverlayStyle: const SystemUiOverlayStyle(statusBarColor: MyColor.primaryColor),
-          leadingWidth: Dimensions.space30,
-          leading: IconButton(
-              onPressed: () {
-                widget.scaffoldKey.currentState!.openDrawer();
-              },
-              icon: const Icon(Icons.menu)),
-          flexibleSpace: Container(
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              image: DecorationImage(image: AssetImage(MyImages.appBarBGimage), fit: BoxFit.fitWidth),
+        builder: (controller) {
+          return AppBar(
+            leadingWidth: Dimensions.space30,
+            leading: IconButton(
+                onPressed: () {
+                  widget.scaffoldKey.currentState!.openDrawer();
+                },
+                icon: const Icon(Icons.menu)),
+            flexibleSpace: Container(
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(image: AssetImage(MyImages.appBarBGImage), fit: BoxFit.fitWidth),
+              ),
             ),
-          ),
-          backgroundColor: MyColor.primaryColor,
-          automaticallyImplyLeading: false,
-          elevation: 0.0,
-          title: FittedBox(
-            fit: BoxFit.cover,
-            child: Row(
+            backgroundColor: MyColor.primaryColor,
+            automaticallyImplyLeading: false,
+            elevation: 0.0,
+            title: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                if (controller.userImage.toString() != "null")
-                  CircleAvatar(
-                    radius: Dimensions.space22,
-                    backgroundImage: NetworkImage(UrlContainer.dashboardUserProfileImage + controller.userImage.toString()),
-                    backgroundColor: MyColor.lightprimaryColor,
+                if (controller.userImage.toString() != "null" && controller.userImage.toString() != "")
+                  SizedBox(
+                    child: CircleAvatar(
+                      backgroundColor: MyColor.colorWhite.withOpacity(0.2),
+                      child: Padding(
+                        padding: const EdgeInsets.all(Dimensions.space5),
+                        child: MyImageWidget(
+                          fromProfile: true,
+                          radius: Dimensions.space100,
+                          imageUrl: UrlContainer.dashboardUserProfileImage + controller.userImage.toString(),
+                        ),
+                      ),
+                    ),
                   )
                 else
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: Dimensions.space22,
-                    backgroundImage: AssetImage(MyImages.defaultAvatar),
-                    backgroundColor: MyColor.lightprimaryColor,
+                    backgroundColor: MyColor.colorWhite.withOpacity(0.2),
+                    child: Padding(padding: const EdgeInsets.all(Dimensions.space5), child: Image.asset(MyImages.defaultAvatar)),
                   ),
                 const SizedBox(width: Dimensions.space10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      controller.dashRepo.apiClient.getUserFullName(),
-                      style: semiBoldLarge.copyWith(fontSize: Dimensions.space17, color: MyColor.colorWhite),
-                    ),
-                    const SizedBox(height: Dimensions.space5),
-                    Text(
-                      MyStrings.letsPlayQuiz,
-                      style: regularDefault.copyWith(color: MyColor.colorWhite),
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${MyStrings.hi.tr} ${controller.dashRepo.apiClient.getCurrencyOrUsername(isCurrency: false)}",
+                        style: semiBoldLarge.copyWith(fontSize: Dimensions.fontMediumLarge, color: MyColor.colorWhite),
+                      ),
+                      const SizedBox(height: Dimensions.space5),
+                      Text(
+                        MyStrings.letsPlayQuiz.tr,
+                        style: regularDefault.copyWith(color: MyColor.colorWhite),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
-          actions: [
-            InkWell(
-              onTap: () {
-                Get.toNamed(RouteHelper.leaderBoardScreen);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(Dimensions.space8),
-                child: SvgPicture.asset(MyImages.reward),
+            actions: [
+              InkWell(
+                onTap: () {
+                  Get.toNamed(RouteHelper.leaderBoardScreen);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimensions.space8),
+                  child: SvgPicture.asset(MyImages.reward),
+                ),
               ),
-            ),
-            InkWell(
-              onTap: () {
-                CustomBottomSheet(child: const LanguageBottomSheetScreen()).customBottomSheet(context);
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(Dimensions.space8),
-                child: SvgPicture.asset(MyImages.languagesSVG),
+              InkWell(
+                onTap: () {
+                  CustomBottomSheet(child: const LanguageBottomSheetScreen()).customBottomSheet(context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(Dimensions.space8),
+                  child: SvgPicture.asset(MyImages.languagesSVG),
+                ),
               ),
-            ),
-          ],
-        ),
+            ],
+          );
+        },
       ),
     );
   }

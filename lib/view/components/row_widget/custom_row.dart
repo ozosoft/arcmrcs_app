@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/style.dart';
 import 'package:get/get.dart';
 
 import '../../../core/utils/my_color.dart';
@@ -89,7 +89,7 @@ class CustomRow extends StatelessWidget {
                           child: Text(
                         firstText.tr,
                         style: regularDefault.copyWith(
-                            color: MyColor.primaryColor),
+                            color: MyColor.colorBlack),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                       )),
@@ -100,14 +100,14 @@ class CustomRow extends StatelessWidget {
                               style: regularDefault.copyWith(
                                   color: isStatus
                                       ? MyColor.greenSuccessColor
-                                      : MyColor.primaryColor),
+                                      : MyColor.colorBlack),
                               overflow: TextOverflow.ellipsis,
                               textAlign: TextAlign.end,
                             ))
                     ],
                   ),
                   const SizedBox(height: 5),
-                  showDivider ? const CustomDivider() : const SizedBox(),
+                  showDivider ? const CustomDivider(color: MyColor.colorGrey,hascolor: true) : const SizedBox(),
                   showDivider
                       ? const SizedBox(
                           height: 5,

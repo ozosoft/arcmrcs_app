@@ -91,7 +91,7 @@ class Withdrawals {
         });
       } catch (e) {
         if (kDebugMode) {
-          print(e.toString());
+          debugPrint(e.toString());
         }
       }
     }
@@ -184,7 +184,7 @@ class WithdrawListModel {
             (element) => element.value == null || element.name == null);
       } catch (e) {
         if (kDebugMode) {
-          print(e.toString());
+          debugPrint(e.toString());
         }
       }
     }

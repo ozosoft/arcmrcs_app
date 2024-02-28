@@ -1,255 +1,107 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
-import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/controller/dashboard/dashboard_controller.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
+import '../../../../../components/image_widget/my_image_widget.dart';
 
-class PlayDiffrentQuizes extends StatefulWidget {
-  const PlayDiffrentQuizes({super.key});
+class PlayDifferentQuizes extends StatefulWidget {
+  const PlayDifferentQuizes({super.key});
 
   @override
-  State<PlayDiffrentQuizes> createState() => _PlayDiffrentQuizesState();
+  State<PlayDifferentQuizes> createState() => _PlayDifferentQuizesState();
 }
 
-class _PlayDiffrentQuizesState extends State<PlayDiffrentQuizes> {
-  @override
-  void initState() {
-    Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(DashBoardRepo(apiClient: Get.find()));
-    Get.put(DashBoardController(dashRepo: Get.find()));
-    DashBoardController controller = Get.put(DashBoardController(dashRepo: Get.find()));
-
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      controller.getdata();
-    });
-  }
-
+class _PlayDifferentQuizesState extends State<PlayDifferentQuizes> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(
-      builder: (controller) =>controller.loader ==true? const CustomLoader(): Padding(
-        padding: const EdgeInsets.all(Dimensions.space10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: Dimensions.space10),
-            const Text(
-              MyStrings.playDiffrentQuizs,
-              style: boldMediumLarge,
+      builder: (controller) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: Dimensions.space10,
+          ),
+          if (controller.differentQuizlist.isNotEmpty)
+            Padding(
+              padding: const EdgeInsetsDirectional.only(bottom: Dimensions.space10, start: Dimensions.space5, end: Dimensions.space5, top: Dimensions.space20),
+              child: Text(
+                MyStrings.playDiffrentQuizs.tr,
+                style: boldMediumLarge,
+              ),
             ),
-            const SizedBox(height: Dimensions.space10),
-            // GridView.builder(
-
-            //       gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-            //         crossAxisCount: 2,
-            //         childAspectRatio: 1.2
-            //       ),
-            //       itemCount: controller.quizlist.length,
-            //       itemBuilder: (context, index) {
-            //         return    Container(
-            //           padding:const EdgeInsets.symmetric(horizontal: Dimensions.space10),
-            //        decoration: BoxDecoration(
-            //                   color: MyColor.colorWhite,
-            //                   borderRadius:
-            //                       BorderRadius.circular(Dimensions.defaultRadius),
-            //                   boxShadow: const [
-            //                     BoxShadow(
-            //                       color: Color.fromARGB(61, 158, 158, 158),
-            //                       blurRadius: 7,
-            //                       spreadRadius: .5,
-            //                       offset: Offset(
-            //                         .4,
-            //                         .4,
-            //                       ),
-            //                     )
-            //                   ],
-            //                 ),
-            //         margin:const EdgeInsets.all(Dimensions.space5),
-            //         child: Column(
-            //           mainAxisAlignment: MainAxisAlignment.center,
-            //           children: [
-            //           // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
-            //           Image.network(UrlContainer.playdiffrentImage+controller.quizlist[index].image.toString()),
-            //           const SizedBox(height: Dimensions.space10,),
-            //            Text(controller.quizlist[index].name.toString(),style: semiBoldExtraLarge,),
-            //             const SizedBox(height: Dimensions.space3),
-            //            Text(controller.quizlist[index].shortDescription.toString(),style: regularDefault.copyWith(color: MyColor.textColor,),textAlign: TextAlign.center),
-            //         ],),
-            //       );
-
-            //       },
-            //       shrinkWrap: true,
-            //       physics: NeverScrollableScrollPhysics(),
-            //     ),
-
-            Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed(RouteHelper.funNlearnScreenScreen);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
-                      decoration: BoxDecoration(
-                        color: MyColor.colorWhite,
-                        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(61, 158, 158, 158),
-                            blurRadius: 7,
-                            spreadRadius: .5,
-                            offset: Offset(
-                              .4,
-                              .4,
-                            ),
-                          )
-                        ],
+          const SizedBox(height: Dimensions.space10),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(parent: BouncingScrollPhysics()),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, childAspectRatio: context.width > 600 ? 1 : 0.9),
+            itemCount: controller.differentQuizlist.length,
+            itemBuilder: (context, index) {
+              var item = controller.differentQuizlist[index];
+              return GestureDetector(
+                onTap: () {
+                  if (item.act == "fun") {
+                    Get.toNamed(RouteHelper.funNlearnScreenScreen);
+                  } else if (item.act == "guess_word") {
+                    Get.toNamed(RouteHelper.guessTheWordCategory);
+                  } else if (item.act == "daily_quiz") {
+                    Get.toNamed(RouteHelper.dailyQuizQuestionsScreen);
+                  } else if (item.act == "single_battle") {
+                    Get.toNamed(RouteHelper.oneVSoneBattleScreen);
+                  } else {
+                    CustomSnackBar.error(errorList: [(MyStrings.serverError.tr)]);
+                  }
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: Dimensions.space10),
+                  decoration: BoxDecoration(
+                    color: MyColor.colorWhite,
+                    borderRadius: BorderRadius.circular(Dimensions.space10),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: MyColor.cardShaddowColor2,
+                        offset: Offset(0, 8),
+                        blurRadius: 60,
+                        spreadRadius: 0,
                       ),
-                      margin: const EdgeInsets.all(Dimensions.space5),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
-
-                          Image.network(UrlContainer.playdiffrentImage + controller.quizlist[0].image.toString()),
-
-                          const SizedBox(
-                            height: Dimensions.space10,
-                          ),
-
-                          Text(
-                            controller.quizlist[0].name.toString(),
-                            style: semiBoldExtraLarge,
-                          ),
-
-                          const SizedBox(height: Dimensions.space3),
-
-                          Text(controller.quizlist[0].shortDescription.toString(),
-                              style: regularDefault.copyWith(
-                                color: MyColor.textColor,
-                              ),
-                              textAlign: TextAlign.center),
-                        ],
+                    ],
+                  ),
+                  margin: const EdgeInsets.all(Dimensions.space5),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: const EdgeInsetsDirectional.only(end: Dimensions.space10),
+                        child: MyImageWidget(
+                          height: context.width * 0.14,
+                          width: context.width * 0.14,
+                          imageUrl: UrlContainer.playdifferentImage + controller.differentQuizlist[index].image.toString(),
+                        ),
                       ),
-                    ),
+                      const SizedBox(
+                        height: Dimensions.space10,
+                      ),
+                      Text(
+                        controller.differentQuizlist[index].name.toString().tr,
+                        textAlign: TextAlign.center,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: semiBoldMediumLarge,
+                      ),
+                      const SizedBox(height: Dimensions.space10),
+                      Text("${controller.differentQuizlist[index].shortDescription.toString().tr} ", maxLines: 3, overflow: TextOverflow.ellipsis, style: regularDefault.copyWith(color: MyColor.textColor, fontSize: Dimensions.fontDefault12), textAlign: TextAlign.center),
+                    ],
                   ),
                 ),
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      Get.toNamed(RouteHelper.guessTheWordCategory);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
-                      decoration: BoxDecoration(
-                        color: MyColor.colorWhite,
-                        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(61, 158, 158, 158),
-                            blurRadius: 7,
-                            spreadRadius: .5,
-                            offset: Offset(
-                              .4,
-                              .4,
-                            ),
-                          )
-                        ],
-                      ),
-                      margin: const EdgeInsets.all(Dimensions.space5),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
-                          Image.network(UrlContainer.playdiffrentImage + controller.quizlist[1].image.toString()),
-                          const SizedBox(
-                            height: Dimensions.space10,
-                          ),
-                          Text(
-                            controller.quizlist[1].name.toString(),
-                            style: semiBoldExtraLarge,
-                          ),
-                          const SizedBox(height: Dimensions.space3),
-                          Text(controller.quizlist[1].shortDescription.toString(),
-                              style: regularDefault.copyWith(
-                                color: MyColor.textColor,
-                              ),
-                              textAlign: TextAlign.center),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-
-            Row(
-              children: [
-                Expanded(
-                  child: InkWell(
-                    onTap: () {
-                       Get.toNamed(RouteHelper.dailyQuizQuestionsScreen, arguments: [controller.quizlist[2].id.toString()]);
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15, vertical: Dimensions.space30),
-                      decoration: BoxDecoration(
-                        color: MyColor.colorWhite,
-                        borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(61, 158, 158, 158),
-                            blurRadius: 7,
-                            spreadRadius: .5,
-                            offset: Offset(
-                              .4,
-                              .4,
-                            ),
-                          )
-                        ],
-                      ),
-                      margin: const EdgeInsets.all(Dimensions.space5),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // SvgPicture.asset(MyImages().playDiffrentGamesImages[index]),
-
-                          Image.network(UrlContainer.playdiffrentImage + controller.quizlist[2].image.toString()),
-
-                          const SizedBox(
-                            height: Dimensions.space10,
-                          ),
-
-                          Text(
-                            controller.quizlist[2].name.toString(),
-                            style: semiBoldExtraLarge,
-                          ),
-
-                          const SizedBox(height: Dimensions.space3),
-
-                          Text(controller.quizlist[2].shortDescription.toString(),
-                              style: regularDefault.copyWith(
-                                color: MyColor.textColor,
-                              ),
-                              textAlign: TextAlign.center),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+              );
+            },
+          ),
+        ],
       ),
     );
   }

@@ -3,15 +3,16 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/helper/shared_preference_helper.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/model/profile/profile_response_model.dart';
-import 'package:flutter_prime/data/model/user_post_model/user_post_model.dart';
-import 'package:flutter_prime/data/repo/account/profile_repo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/model/profile/profile_response_model.dart';
+import 'package:quiz_lab/data/model/user_post_model/user_post_model.dart';
+import 'package:quiz_lab/data/repo/account/profile_repo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class ProfileController extends GetxController {
   ProfileRepo profileRepo;
@@ -51,32 +52,91 @@ class ProfileController extends GetxController {
   String avatar = "";
   String email = "";
 
+  ApiClient get apiClient => profileRepo.apiClient;
+
   loadProfileInfo() async {
-    isLoading = true;
-    update();
+    if (username == '') {
+      isLoading = true;
+      update();
+    }
 
     ResponseModel responseModel = await profileRepo.loadProfileInfo();
     if (responseModel.statusCode == 200) {
       model = ProfileResponseModel.fromJson(jsonDecode(responseModel.responseJson));
       if (model.data != null && model.status?.toLowerCase() == MyStrings.success.toLowerCase()) {
-
+        //save User Data
+        profileRepo.apiClient.setUserData(model.data!.user!.toJson());
         loadData(model);
         username = model.data?.user?.username ?? '';
-        rank = model.data?.rank?.userRank ?? '--';
-        coins = model.data?.user?.coins ?? '00';
-        score = model.data?.user?.score ?? '00';
+        rank = model.data?.rank?.userRank ?? '';
+        coins = model.data?.user?.coins ?? '';
+        score = model.data?.user?.score ?? '';
         avatar = model.data?.user?.avatar ?? '';
         email = model.data?.user?.email ?? '';
 
+        //save User Data
+        profileRepo.apiClient.setUserData(model.data!.user!.toJson());
       } else {
         isLoading = false;
         update();
       }
     } else {
+      isLoading = false;
+      update();
       CustomSnackBar.error(errorList: [responseModel.message]);
     }
   }
 
+  bool isSubmitLoading = false;
+  updateProfile() async {
+    isSubmitLoading = true;
+    update();
+
+    String firstName = firstNameController.text;
+    String lastName = lastNameController.text.toString();
+    String address = addressController.text.toString();
+    String city = cityController.text.toString();
+    String zip = zipCodeController.text.toString();
+    String state = stateController.text.toString();
+    User? user = model.data?.user;
+
+    if (firstName.isNotEmpty && lastName.isNotEmpty) {
+      isLoading = true;
+      update();
+
+      UserPostModel model = UserPostModel(
+        firstname: firstName,
+        lastName: lastName,
+        mobile: user?.mobile ?? '',
+        email: user?.email ?? '',
+        username: user?.username ?? '',
+        countryCode: user?.countryCode ?? '',
+        country: user?.address?.country ?? '',
+        mobileCode: '880',
+        avatar: imageFile,
+        address: address,
+        state: state,
+        zip: zip,
+        city: city,
+      );
+
+      bool b = await profileRepo.updateProfile(model, true);
+
+      if (b) {
+        await loadProfileInfo();
+      }
+    } else {
+      if (firstName.isEmpty) {
+        CustomSnackBar.error(errorList: [MyStrings.kFirstNameNullError.tr]);
+      }
+      if (lastName.isEmpty) {
+        CustomSnackBar.error(errorList: [MyStrings.kLastNameNullError.tr]);
+      }
+    }
+
+    isSubmitLoading = false;
+    update();
+  }
 
   void loadData(ProfileResponseModel? model) {
     profileRepo.apiClient.sharedPreferences.setString(SharedPreferenceHelper.userNameKey, '${model?.data?.user?.username}');

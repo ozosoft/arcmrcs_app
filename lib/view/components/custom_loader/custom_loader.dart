@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/view/components/indicator/indicator.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/view/components/indicator/indicator.dart';
 
 class CustomLoader extends StatelessWidget {
   final bool isFullScreen;

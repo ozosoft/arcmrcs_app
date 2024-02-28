@@ -2,11 +2,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/view/components/buttons/custom_round_border_shape.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/view/components/buttons/custom_round_border_shape.dart';
 import '../../core/utils/dimensions.dart';
 import 'image/custom_svg_picture.dart';
 
@@ -76,7 +76,7 @@ class _NoDataOrInternetScreenState extends State<NoDataOrInternetScreen> {
                 ),
                 Center(
                     child: Padding(
-                  padding: const EdgeInsets.only(top: 6, left: 30, right: 30),
+                  padding: const EdgeInsetsDirectional.only(top: 6, start: 30, end: 30),
                   child: Column(
                     children: [
                       Text(

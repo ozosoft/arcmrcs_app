@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-import '../../components/app-bar/custom_category_appBar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:get/get.dart';
+import '../../components/app-bar/custom_category_appbar.dart';
 import 'widgets/exam_zone_tabbar_body_section.dart';
 
 class ExamZoneScreen extends StatelessWidget {
@@ -8,9 +9,10 @@ class ExamZoneScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: CustomCategoryAppBar(title: "Exam"),
-      body: ExamZoneTabBarBodySection(),
+    return Scaffold(
+      appBar: CustomCategoryAppBar(title: MyStrings.exam.tr),
+      body: const ExamZoneTabBarBodySection(),
     );
   }
+
 }

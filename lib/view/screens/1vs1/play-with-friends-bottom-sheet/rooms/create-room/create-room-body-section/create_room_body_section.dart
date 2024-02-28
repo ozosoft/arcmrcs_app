@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/view/components/bottom-sheet/custom_bottom_sheet.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/view/components/bottom-sheet/custom_bottom_sheet.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
@@ -13,7 +13,7 @@ import '../../../../../../../core/utils/style.dart';
 import '../../../../../../../data/controller/battle/battle_room_controller.dart';
 import '../../../../../../../data/model/battle/battle_category_list.dart';
 import '../../../../../../../data/repo/battle/battle_repo.dart';
-import '../../../../../../../data/services/api_service.dart';
+import '../../../../../../../data/services/api_client.dart';
 import '../../../../../../components/buttons/rounded_loading_button.dart';
 import '../../../../../../components/category-card/custom_room_card.dart';
 import '../../../../../../components/text-form-field/custom_drop_down_field.dart';
@@ -52,8 +52,8 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                MyStrings.selectCategory,
+               Text(
+                MyStrings.selectCategory.tr,
                 style: semiBoldMediumLarge,
               ),
               const SizedBox(height: Dimensions.space15),
@@ -79,7 +79,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                     ),
                   );
                 }).toList(),
-                hintText: MyStrings.selectACategoryText,
+                hintText: MyStrings.selectACategoryText.tr,
               ),
               const SizedBox(height: Dimensions.space25),
               Container(
@@ -92,17 +92,17 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.only(top: Dimensions.space15, left: Dimensions.space15),
+                       Padding(
+                        padding: const EdgeInsetsDirectional.only(top: Dimensions.space15, start: Dimensions.space15),
                         child: Text(
-                          MyStrings.entryCoinsForBattele,
-                          style: semiBoldMediumLarge,
+                          MyStrings.entryCoinsForBattele.tr,
+                          style: semiBoldMediumLarge, 
                         ),
-                      ),
+                      ),  const SizedBox(height: Dimensions.space25),
                       GridView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .84, crossAxisCount: 4),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: .79, crossAxisCount: 4),
                         itemCount: coinValues.length, // Use coinValues.length
                         itemBuilder: (BuildContext context, index) {
                           return GestureDetector(
@@ -124,7 +124,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                           controller: _textEditingController,
                           keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            labelText: MyStrings.enterCoins,
+                            labelText: MyStrings.enterCoins.tr,
                             filled: true,
                             fillColor: MyColor.cardColor,
                             labelStyle: regularExtraLarge.copyWith(color: MyColor.textColor),
@@ -143,7 +143,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                     ],
                   )),
               Container(
-                padding: const EdgeInsets.only(top: Dimensions.space30, left: Dimensions.space15),
+                padding: const EdgeInsetsDirectional.only(top: Dimensions.space30, start: Dimensions.space15),
                 child: Row(
                   children: [
                     SvgPicture.asset(
@@ -158,7 +158,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          MyStrings.yourCoins,
+                          MyStrings.yourCoins.tr,
                           style: regularMediumLarge.copyWith(color: MyColor.textColor),
                         ),
                         const SizedBox(
@@ -171,16 +171,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                       ],
                     ),
                     const Spacer(),
-                    // Container(
-                    //   height: Dimensions.space43,
-                    //   width: Dimensions.space110,
-                    //   decoration: BoxDecoration(color: MyColor.createRoomButtonBGcolor, borderRadius: BorderRadius.circular(Dimensions.space10)),
-                    //   child: Center(
-                    //       child: Text(
-                    //     MyStrings.buyCoins,
-                    //     style: semiBoldMediumLarge.copyWith(color: MyColor.textColor),
-                    //   )),
-                    // )
+                  
                   ],
                 ),
               ),
@@ -200,19 +191,17 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                 }
 
                 return Padding(
-                  padding: const EdgeInsets.only(top: Dimensions.space40),
+                  padding: const EdgeInsetsDirectional.only(top: Dimensions.space40),
                   child: battleRoomController.roomCreateState.value == RoomCreateState.creatingRoom
                       ? const RoundedLoadingBtn()
                       : RoundedButton(
                           text: MyStrings.createRoom,
                           press: () {
-                            print(battleRoomController.slectedCategoryID.value);
-                            print(battleRoomController.entryFeeCustomRoom.value);
-
+                          
                             if (battleRoomController.slectedCategoryID.value == 0) {
-                              CustomSnackBar.error(errorList: [MyStrings.selectACategoryText]);
+                              CustomSnackBar.error(errorList: [MyStrings.selectACategoryText.tr]);
                             } else if (battleRoomController.entryFeeCustomRoom.value == "0") {
-                              CustomSnackBar.error(errorList: [MyStrings.selectEntryCoinText]);
+                              CustomSnackBar.error(errorList: [MyStrings.selectEntryCoinText.tr]);
                             } else {
                               battleRoomController.createNewRoom(
                                   categoryId: "${battleRoomController.slectedCategoryID.value}",
@@ -224,7 +213,7 @@ class _CreateRoomBodySectionState extends State<CreateRoomBodySection> {
                                   questionList: []);
                             }
 
-                            // print("${battleRoomController.roomCreateState.value}");
+                            // debugPrint("${battleRoomController.roomCreateState.value}");
                           },
                           textSize: Dimensions.space20),
                 );

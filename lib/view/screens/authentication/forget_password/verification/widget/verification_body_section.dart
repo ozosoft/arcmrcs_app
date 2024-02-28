@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/auth/forget_password/verify_password_controller.dart';
-import 'package:flutter_prime/data/repo/auth/login_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
-import 'package:flutter_prime/view/components/otp_field_widget/otp_field_widget.dart';
-import 'package:flutter_prime/view/components/text/custom_underline_text.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/auth/forget_password/verify_password_controller.dart';
+import 'package:quiz_lab/data/repo/auth/login_repo.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
+import 'package:quiz_lab/view/components/text/custom_underline_text.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import '../../../../../../core/utils/dimensions.dart';
@@ -56,7 +54,7 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                         height: Dimensions.space8,
                       ),
                       Text(
-                        MyStrings.wehaveSentaCode.tr,
+                        '${MyStrings.wehaveSentaCode.tr} ${controller.email.toString()}',
                         style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
                       ),
                     ],
@@ -83,8 +81,8 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                               shape: PinCodeFieldShape.box,
                               borderWidth: .5,
                               borderRadius: BorderRadius.circular(5),
-                              fieldHeight: 45,
-                              fieldWidth: 45,
+                              fieldHeight: 45 - 7,
+                              fieldWidth: 45 - 7,
                               inactiveColor: MyColor.getTextFieldDisableBorder(),
                               inactiveFillColor: MyColor.colorWhite,
                               activeFillColor: MyColor.getScreenBgColor(),
@@ -124,25 +122,40 @@ class _VerificationBodySectionState extends State<VerificationBodySection> {
                               ),
                       ),
                       const SizedBox(height: Dimensions.space10),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(MyStrings.didNotReceiveCode.tr, style: regularLarge.copyWith(color: MyColor.getAuthTextColor(), fontWeight: FontWeight.w500)),
-                          controller.isResendLoading
-                              ? const SizedBox(
-                                  height: 17,
-                                  width: 17,
-                                  child: CircularProgressIndicator(
-                                    color: MyColor.primaryColor,
-                                  ),
-                                )
-                              : TextButton(
-                                  onPressed: () {
-                                    controller.resendForgetPassCode();
-                                  },
-                                  child: CustomUndelineText(text: MyStrings.resendCode.tr))
-                        ],
-                      ),
+                      Obx(() => Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(Dimensions.space10),
+                                child: Text(MyStrings.didNotReceiveCode.tr, style: regularLarge.copyWith(color: MyColor.getAuthTextColor(), fontWeight: FontWeight.w500)),
+                              ),
+                              controller.isResendButtonLoading.value == true
+                                  ? const Padding(
+                                      padding: EdgeInsets.all(20.0),
+                                      child: SizedBox(
+                                        height: 17,
+                                        width: 17,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          color: MyColor.primaryColor,
+                                        ),
+                                      ),
+                                    )
+                                  : controller.isResendLoading.value
+                                      ? const SizedBox.shrink()
+                                      : TextButton(
+                                          onPressed: () {
+                                            controller.resendForgetPassCode();
+                                          },
+                                          child: CustomUndelineText(text: MyStrings.resendCode.tr)),
+                            ],
+                          )),
+                      const SizedBox(height: Dimensions.space10),
+                      Obx(() {
+                        final resendCountdown = controller.resendCountdown.value;
+
+                        return resendCountdown > 0 ? Text('${MyStrings.emailResendAvilableIn} ${resendCountdown.toString()} ${MyStrings.seconds}') : const SizedBox.shrink();
+                      }),
                     ],
                   ),
                 )

@@ -1,7 +1,7 @@
-import 'package:flutter_prime/core/utils/method.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:quiz_lab/core/utils/method.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 
 class BattleRepo {
   ApiClient apiClient;
@@ -9,7 +9,6 @@ class BattleRepo {
 
   Future<ResponseModel> getCategoryListData() async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.battleCategoryLIst}";
-    print('come here: ${url}');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
@@ -17,18 +16,13 @@ class BattleRepo {
 
   Future<ResponseModel> getBatttleQuestion(int id, int user1ID, int user2ID) async {
     String url = "${UrlContainer.baseUrl}${UrlContainer.battleQuestionList}/${user1ID.toString()}/${user2ID.toString()}/${id.toString()}";
-    print('come here: ${url}');
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
-
     return model;
   }
 
   Future<ResponseModel> finishBattleAndSubmitAnswer(Map<String, dynamic> map) async {
     String url = '${UrlContainer.baseUrl}${UrlContainer.battleAnswerSubmit}';
-    print(url);
-    print(map);
     ResponseModel model = await apiClient.request(url, Method.postMethod, map, passHeader: true);
-
     return model;
   }
 }

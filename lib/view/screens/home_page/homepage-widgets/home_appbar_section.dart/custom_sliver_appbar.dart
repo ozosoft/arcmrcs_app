@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/view/screens/home_page/homepage-widgets/home_appbar_section.dart/custom_appbar.dart';
-import 'package:flutter_prime/view/screens/home_page/homepage-widgets/home_appbar_section.dart/custom_card.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home_appbar_section.dart/custom_appbar.dart';
+import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home_appbar_section.dart/custom_card.dart';
 
 class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
@@ -23,6 +23,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
     final cardTopPosition = expandedHeight / 2 - shrinkOffset;
     final proportion = 2 - (expandedHeight / appBarSize);
     final percent = proportion < 0 || proportion > 1 ? 0.0 : proportion;
+    // debugPrint(percent);
     return SizedBox(
       height: expandedHeight + expandedHeight / 3,
       child: Stack(
@@ -40,9 +41,7 @@ class CustomSliverDelegate extends SliverPersistentHeaderDelegate {
               child: Opacity(
                 opacity: percent,
                 child: Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: Dimensions.space12 * percent,
-                      vertical: Dimensions.space8 * percent),
+                  padding: EdgeInsets.symmetric(horizontal: Dimensions.space12 * percent, vertical: Dimensions.space8 * percent),
                   child: const CustomCardWidget(),
                 ),
               ),

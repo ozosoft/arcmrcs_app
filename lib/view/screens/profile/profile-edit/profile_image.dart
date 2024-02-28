@@ -1,15 +1,15 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/controller/account/profile_update_controller.dart';
-import 'package:flutter_prime/data/repo/account/profile_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:quiz_lab/data/controller/account/profile_update_controller.dart';
+import 'package:quiz_lab/data/repo/account/profile_repo.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:flutter_prime/view/components/circle_image_button.dart';
+import 'package:quiz_lab/view/components/circle_image_button.dart';
 import '../../../../../../../../core/utils/my_color.dart';
 import '../../../../../../../core/utils/my_images.dart';
-import '../../../../../data/controller/account/profile_controller.dart';
+import '../../../../core/utils/dimensions.dart';
 import 'widgets/build_circle_widget.dart';
 
 class ProfileWidget extends StatefulWidget {
@@ -29,10 +29,7 @@ class ProfileWidget extends StatefulWidget {
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
-
-
-
-   @override
+  @override
   void initState() {
 
      print('image : ${widget.imagePath}');
@@ -43,10 +40,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     Get.put(ProfileUpdateController(profileRepo: Get.find()));
 
     super.initState();
-  
-  } 
+  }
 
-  
   XFile? imageFile;
   @override
   Widget build(BuildContext context) {
@@ -56,17 +51,18 @@ class _ProfileWidgetState extends State<ProfileWidget> {
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              !widget.isEdit
-                  ? const ClipOval(
-                      child: Material(
-                          color: MyColor.transparentColor,
-                          child: CircleImageWidget(
-                            imagePath: MyImages.profile,
-                            width: 90,
-                            height: 90,
-                            isAsset: true,
-                          )),
-                    )
+              !widget.isEdit ?
+              const ClipOval(
+                child: Material(
+                  color: MyColor.transparentColor,
+                  child: CircleImageWidget(
+                    imagePath: MyImages.defaultAvatar,
+                    height: Dimensions.space80,
+                    width: Dimensions.space80,
+                    isProfile: true,
+                    isAsset: true,
+                  )),
+              )
                   : buildImage(),
               widget.isEdit
                   ? Positioned(
@@ -77,17 +73,15 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             _openGallery(context);
                           },
                           child: BuildCircleWidget(
-                              padding: 3,
+                              padding: 2,
                               color: Colors.white,
                               child: BuildCircleWidget(
-                                  padding: 8,
+                                  padding: 7,
                                   color: MyColor.primaryColor,
                                   child: Icon(
-                                    widget.isEdit
-                                        ? Icons.add_a_photo
-                                        : Icons.edit,
+                                    widget.isEdit ? Icons.add_a_photo : Icons.edit,
                                     color: Colors.white,
-                                    size: 20,
+                                    size: 15,
                                   )))),
                     )
                   : const SizedBox(),
@@ -96,7 +90,6 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         ),
       ),
     );
-    
   }
 
   Widget buildImage() {
@@ -107,7 +100,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     } else if (widget.imagePath.contains('http')) {
       image = NetworkImage(widget.imagePath);
     } else {
-      image = const AssetImage(MyImages.profile);
+      image = const AssetImage(MyImages.defaultAvatar);
     }
 
     bool isAsset = widget.imagePath.contains('http') == true ? false : true;
@@ -124,18 +117,19 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               ? Ink.image(
                   image: image as ImageProvider,
                   fit: BoxFit.cover,
-                  width: 90,
-                  height: 90,
+                  height: Dimensions.space80,
+                  width: Dimensions.space80,
                   child: InkWell(
                     onTap: widget.onClicked,
                   ),
                 )
               : CircleImageWidget(
                   press: () {},
+                  isProfile: true,
                   isAsset: isAsset,
-                  imagePath: isAsset ? MyImages.profile : widget.imagePath,
-                  height: 100,
-                  width: 100,
+                  imagePath: isAsset ? MyImages.defaultAvatar : widget.imagePath,
+                  height: Dimensions.space80,
+                  width: Dimensions.space80,
                 ),
         ),
       ),
@@ -143,15 +137,10 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   }
 
   void _openGallery(BuildContext context) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        allowMultiple: false,
-        type: FileType.custom,
-        allowedExtensions: ['png', 'jpg', 'jpeg']);
+    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: false, type: FileType.custom, allowedExtensions: ['png', 'jpg', 'jpeg']);
     setState(() {
-      if(result !=null && result.files.single.path != null){
-        Get.find<ProfileUpdateController>().imageFile = File(result.files.single.path!);
-        imageFile = XFile(result.files.single.path!);
-      }
+      Get.find<ProfileUpdateController>().imageFile = File(result!.files.single.path!);
+      imageFile = XFile(result.files.single.path!);
     });
   }
 }

@@ -1,9 +1,12 @@
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/auth/verification/email_verification_model.dart';
-import 'package:flutter_prime/data/repo/auth/login_repo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/auth/verification/email_verification_model.dart';
+import 'package:quiz_lab/data/repo/auth/login_repo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class VerifyPasswordController extends GetxController {
   LoginRepo loginRepo;
@@ -18,17 +21,42 @@ class VerifyPasswordController extends GetxController {
   List<String> errors = [];
   String currentText = "";
   String confirmPassword = '';
+  DateTime? lastResendTime;
+  Timer? resendTimer;
 
-  bool isResendLoading = false;
+  RxBool isResendLoading = false.obs;
+  RxBool isResendButtonLoading = false.obs;
+
+  int resendDelaySeconds = 30; // Set the resend delay time in seconds
+  RxInt resendCountdown = 0.obs; // Countdown timer in seconds
+
+  void startResendCountdown() {
+    isResendLoading.value = true;
+    resendCountdown.value = resendDelaySeconds;
+    update();
+
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (resendCountdown.value > 0) {
+        resendCountdown.value--;
+      } else {
+        isResendLoading.value = false;
+        timer.cancel();
+      }
+      update();
+    });
+  }
 
   void resendForgetPassCode() async {
-    isResendLoading = true;
-    update();
-    String value = email;
-    String type = 'email';
-    await loginRepo.forgetPassword(type, value);
-    isResendLoading = false;
-    update();
+    if (!isResendLoading.value) {
+      isResendButtonLoading.value = true;
+      // Trigger the resend code function
+      String value = email;
+      String type = 'email';
+      await loginRepo.forgetPassword(type, value);
+  isResendButtonLoading.value = false;
+      // Start the resend countdown
+      startResendCountdown();
+    }
   }
 
   bool verifyLoading = false;
@@ -38,17 +66,16 @@ class VerifyPasswordController extends GetxController {
       verifyLoading = true;
       update();
 
-      EmailVerificationModel model =
-          await loginRepo.verifyForgetPassCode(value);
+      EmailVerificationModel model = await loginRepo.verifyForgetPassCode(value);
 
       if (model.code == 200) {
         verifyLoading = false;
         Get.offAndToNamed(RouteHelper.resetPassword, arguments: [email, value]);
-        print("this is email"+email);
+        debugPrint("this is email $email");
       } else {
         verifyLoading = false;
         update();
-        List<String> errorList = [MyStrings.verificationFailed];
+        List<String> errorList = [MyStrings.verificationFailed.tr];
         CustomSnackBar.error(errorList: model.message?.error ?? errorList);
       }
     }

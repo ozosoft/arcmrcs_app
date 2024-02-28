@@ -1,51 +1,26 @@
 {
   "project_info": {
-    "project_number": "756507339207",
-    "project_id": "quiz-lab-f9e22",
-    "storage_bucket": "quiz-lab-f9e22.appspot.com"
+    "project_number": "81136556539",
+    "project_id": "quiz-lab-viserlab",
+    "storage_bucket": "quiz-lab-viserlab.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:756507339207:android:f7fe66f16e7c8c6c23d1e2",
+        "mobilesdk_app_id": "1:81136556539:android:29cb90d1ddc627d269535e",
         "android_client_info": {
-          "package_name": "dev.vlab.quiz"
+          "package_name": "dev.vlab.quizlab"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "756507339207-al6uohh0khqteh1c1jlj4c12fem0voc7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "dev.vlab.flutter_prime",
-            "certificate_hash": "b136159e2d15ade4750b074c4cf45ea6f715b188"
-          }
-        },
-        {
-          "client_id": "756507339207-o9alus1s6aeeqh51ql45guemdctluiog.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAkkzPYATMfiWIKyRVfn3EqLDXdZ85Q0Sg"
+          "current_key": "AIzaSyDmb1gdhQUToeWpP4lv__XptEpI5HFEZlU"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "756507339207-o9alus1s6aeeqh51ql45guemdctluiog.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "756507339207-fqqhbp7aeadm2hckh6l40ca3bm5ogmhi.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.flutterPrime"
-              }
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
 
 import '../../../../../core/utils/my_color.dart';
 import '../../../../components/custom-head-section-for-auth/auth_heading.dart';
@@ -19,8 +19,8 @@ class VerificationScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-             CustomHeadSection(height: Dimensions.space150,iconPosition: Dimensions.space60),
-             VerificationBodySection(),
+              CustomHeadSection(height: Dimensions.space150,iconPosition: Dimensions.space60),
+              VerificationBodySection(),
             ],
           ),
         ),

@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/authorization/authorization_response_model.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/repo/auth/sms_email_verification_repo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/authorization/authorization_response_model.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/repo/auth/sms_email_verification_repo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class SmsVerificationController extends GetxController {
 
@@ -52,7 +52,7 @@ class SmsVerificationController extends GetxController {
         // Get.offAndToNamed(isProfileCompleteEnable? RouteHelper.profileCompleteScreen:RouteHelper.bottomNavBar);
 
       } else {
-        CustomSnackBar.error(errorList: model.message?.error??['${MyStrings.sms.tr} ${MyStrings.verificationFailed}']);
+        CustomSnackBar.error(errorList: model.message?.error??['${MyStrings.sms.tr} ${MyStrings.verificationFailed.tr}']);
       }
     } else {
       CustomSnackBar.error(errorList: [responseModel.message]);

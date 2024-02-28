@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
 import 'package:get/get.dart';
-
 
 class BottomSectionButtons extends StatelessWidget {
   const BottomSectionButtons({super.key});
@@ -14,13 +13,27 @@ class BottomSectionButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-       
+        
         Padding(
           padding: const EdgeInsets.all(Dimensions.space15),
           child: RoundedButton(
-            text: MyStrings.reviewAnswer,
+            text: MyStrings.reviewAnswer.tr,
             press: () {
-            Get.toNamed(RouteHelper.quizContestreviewScreen);
+              Get.toNamed(RouteHelper.quizContestreviewScreen);
+            },
+            color: MyColor.primaryColor,
+            textSize: Dimensions.space21,
+          ),
+        ),
+        const SizedBox(
+          height: Dimensions.space5,
+        ),
+        Padding(
+          padding: const EdgeInsets.all(Dimensions.space15),
+          child: RoundedButton(
+            text: MyStrings.home.tr,
+            press: () {
+              Get.offAllNamed(RouteHelper.bottomNavBarScreen);
             },
             color: MyColor.colorBlack,
             textSize: Dimensions.space21,

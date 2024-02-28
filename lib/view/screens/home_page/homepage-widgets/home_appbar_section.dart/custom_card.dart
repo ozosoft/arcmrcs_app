@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/dashboard/dashboard_controller.dart';
-import 'package:flutter_prime/data/repo/dashboard/dashboard_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/divider/custom_divider.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/dashboard/dashboard_controller.dart';
+import 'package:quiz_lab/view/components/divider/custom_divider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import '../../../../../core/utils/util.dart';
 import '../../../../components/divider/custom_vertical_divider.dart';
 
 class CustomCardWidget extends StatefulWidget {
@@ -20,42 +19,28 @@ class CustomCardWidget extends StatefulWidget {
 }
 
 class _CustomCardWidgetState extends State<CustomCardWidget> {
-
-  
-   @override
-  void initState() {
-
-    // Get.put(ApiClient(sharedPreferences: Get.find()));
-    // Get.put(DashBoardRepo(apiClient: Get.find()));
-    // Get.put(DashBoardController(dashRepo: Get.find()));
-    // Get.put(DashBoardController(dashRepo: Get.find()));
-
-    // super.initState();
-
-    
-
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashBoardController>(
-       builder: (controller) => Card(
+      builder: (controller) => Card(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Dimensions.space10)),
-        elevation: .5,
+          borderRadius: BorderRadius.circular(Dimensions.space8), // Adjust the radius as needed
+        ),
+
+        shadowColor: MyColor.cardShaddowColor, // Shadow color
+        elevation: 0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             SizedBox(
-              height: Dimensions.space50,
+              height: Dimensions.space55,
               width: Dimensions.space100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: Dimensions.space3),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space3),
                     child: SvgPicture.asset(MyImages.rank),
                   ),
                   const SizedBox(width: Dimensions.space8),
@@ -64,12 +49,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        MyStrings.rank,
-                        style: regularMediumLarge.copyWith(
-                            color: MyColor.primaryColor),
+                        MyStrings.rank.tr,
+                        style: regularMediumLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w500),
                       ),
-                      const CustomDivider(space: Dimensions.space3),
-                       Text(controller.rank)
+                      const CustomDivider(space: Dimensions.space5),
+                      Text(
+                        MyUtils().formatNumberWithLeadingZero(controller.rank).tr,
+                        style: regularMediumLarge.copyWith(color: MyColor.lightGreyTextColor, fontWeight: FontWeight.w400),
+                      ),
                     ],
                   )
                 ],
@@ -77,15 +64,15 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
             ),
             const CustomVerticalDivider(height: Dimensions.space25),
             SizedBox(
-              height: Dimensions.space50,
+              height: Dimensions.space55,
               width: Dimensions.space100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: Dimensions.space3),
-                    child: SvgPicture.asset( MyImages.coin),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space3),
+                    child: SvgPicture.asset(MyImages.coin),
                   ),
                   const SizedBox(width: Dimensions.space8),
                   Column(
@@ -93,11 +80,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        MyStrings.coins,
-                        style: regularMediumLarge.copyWith(color: MyColor.primaryColor),
+                        MyStrings.coins.tr,
+                        style: regularMediumLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w500),
                       ),
-                      const CustomDivider( space: Dimensions.space3),
-                      Text(controller.coins)
+                      const CustomDivider(space: Dimensions.space5),
+                      Text(
+                        MyUtils().formatNumberWithLeadingZero(controller.coins).tr,
+                        style: regularMediumLarge.copyWith(color: MyColor.lightGreyTextColor, fontWeight: FontWeight.w400),
+                      )
                     ],
                   )
                 ],
@@ -105,14 +95,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
             ),
             const CustomVerticalDivider(height: Dimensions.space25),
             SizedBox(
-              height: Dimensions.space50,
+              height: Dimensions.space55,
               width: Dimensions.space100,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: Dimensions.space3),
+                    padding: const EdgeInsetsDirectional.only(top: Dimensions.space3),
                     child: SvgPicture.asset(MyImages.score),
                   ),
                   const SizedBox(width: Dimensions.space8),
@@ -121,10 +111,14 @@ class _CustomCardWidgetState extends State<CustomCardWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        MyStrings.score,
-                        style: regularMediumLarge.copyWith(color: MyColor.primaryColor)),
-                      const CustomDivider( space: Dimensions.space3),
-                      Text(controller.score)
+                        MyStrings.score.tr,
+                        style: regularMediumLarge.copyWith(color: MyColor.primaryColor, fontWeight: FontWeight.w500),
+                      ),
+                      const CustomDivider(space: Dimensions.space5),
+                      Text(
+                        MyUtils().formatNumberWithLeadingZero(controller.score).tr,
+                        style: regularMediumLarge.copyWith(color: MyColor.lightGreyTextColor, fontWeight: FontWeight.w400),
+                      )
                     ],
                   )
                 ],

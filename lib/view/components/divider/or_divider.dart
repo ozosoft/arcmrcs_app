@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:get/get.dart';
 
 import '../../../core/utils/dimensions.dart';
 
@@ -21,7 +22,7 @@ class OrDivider extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: Dimensions.space15),
           child: Text(
-            MyStrings.or,
+            MyStrings.or.tr,
             style: regularDefault.copyWith(color: MyColor.colorlighterGrey),
           ),
         ),

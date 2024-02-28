@@ -1,11 +1,9 @@
-import 'dart:developer';
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/core/utils/util.dart';
-import 'package:flutter_prime/data/controller/gesstheword/gess_the_word_Controller.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/util.dart';
+import 'package:quiz_lab/data/controller/gesstheword/gess_the_word_Controller.dart';
 import 'package:get/get.dart';
 
 class GuessWordKeyBoard extends StatefulWidget {
@@ -19,7 +17,7 @@ class GuessWordKeyBoard extends StatefulWidget {
 class _GuessWordKeyBoardState extends State<GuessWordKeyBoard> {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<GuessThewordController>(builder: (controller) {
+    return GetBuilder<GuessTheWordController>(builder: (controller) {
       return Wrap(
         spacing: 10,
         runSpacing: 10,
@@ -27,6 +25,7 @@ class _GuessWordKeyBoardState extends State<GuessWordKeyBoard> {
           widget.ans.length,
           (index) {
             return InkWell(
+              splashColor: Colors.transparent,
               onTap: () {
                 controller.replace(widget.ans[index].toString());
                 MyUtils.vibrate();
@@ -36,11 +35,15 @@ class _GuessWordKeyBoardState extends State<GuessWordKeyBoard> {
                 height: Dimensions.space40,
                 width: Dimensions.space40,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(2),
+                  borderRadius: BorderRadius.circular(4),
+                  boxShadow: MyUtils.getBottomSheetShadow(),
                   border: Border.all(
-                    color: MyColor.borderColor.withOpacity(0.3),
+                    color: MyColor.borderColor.withOpacity(.5),
+                    width: .5
                   ),
-                  color: MyColor.lightGray,
+                 color: MyColor.colorWhite
+                 // color: Colors.transparent
+                  //color: MyColor.lightGray,
                 ),
                 child: Center(
                   child: Text(

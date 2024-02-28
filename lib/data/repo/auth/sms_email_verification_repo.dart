@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'package:flutter_prime/core/utils/method.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/model/authorization/authorization_response_model.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/method.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/model/authorization/authorization_response_model.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:get/get.dart';
 
 class SmsEmailVerificationRepo {
   ApiClient apiClient;
@@ -40,10 +41,10 @@ class SmsEmailVerificationRepo {
       AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(response.responseJson));
 
       if (model.status == 'error') {
-        CustomSnackBar.error(errorList: model.message?.error ??[ MyStrings.resendCodeFail]);
+        CustomSnackBar.error(errorList: model.message?.error ??[ MyStrings.resendCodeFail.tr]);
         return false;
       } else {
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.successfullyCodeResend]);
+        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.successfullyCodeResend.tr]);
         return true;
       }
 

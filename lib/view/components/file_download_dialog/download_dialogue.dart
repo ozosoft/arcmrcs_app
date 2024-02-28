@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import '../../../core/utils/my_strings.dart';
 
 class DownloadingDialog extends StatefulWidget {
@@ -34,7 +34,6 @@ class DownloadingDialog extends StatefulWidget {
 class DownloadingDialogState extends State<DownloadingDialog> {
   int _total = 0, _received = 0;
   late http.StreamedResponse _response;
-  File? _image;
   final List<int> _bytes = [];
 
   Future<void> _downloadFile() async {
@@ -53,10 +52,9 @@ class DownloadingDialogState extends State<DownloadingDialog> {
       File savedFile = await file.writeAsBytes(_bytes);
       Get.back();
       CustomSnackBar.success(successList: [
-        '${MyStrings.fileDownloadedSuccess}: ${savedFile.path.toString()}'
+        '${MyStrings.fileDownloadedSuccess.tr}: ${savedFile.path.toString()}'
       ]);
       setState(() {
-        _image = file;
       });
     });
   }
@@ -74,7 +72,7 @@ class DownloadingDialogState extends State<DownloadingDialog> {
       if (value.toString() == 'true') {
         Get.back();
         CustomSnackBar.success(
-            successList: [(MyStrings.fileDownloadedSuccess)]);
+            successList: [(MyStrings.fileDownloadedSuccess.tr)]);
       } else {
         Get.back();
         dynamic errorMessage = result['errorMessage'];
@@ -82,10 +80,10 @@ class DownloadingDialogState extends State<DownloadingDialog> {
       }
     } catch (e) {
       if (kDebugMode) {
-        print(e.toString());
+        debugPrint(e.toString());
       }
       Get.back();
-      CustomSnackBar.error(errorList: [MyStrings.requestFail]);
+      CustomSnackBar.error(errorList: [MyStrings.requestFail.tr]);
     }
   }
 

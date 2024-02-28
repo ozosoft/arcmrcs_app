@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
 
 class CustomAlertDialog {
   bool isHorizontalPadding;
@@ -20,7 +20,6 @@ class CustomAlertDialog {
   void customAlertDialog(BuildContext context) {
     showDialog(
         barrierDismissible: barrierDismissible,
-    
         context: context,
         builder: (BuildContext context) => WillPopScope(
               onWillPop: () async {

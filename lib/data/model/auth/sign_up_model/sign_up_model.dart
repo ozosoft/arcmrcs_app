@@ -4,10 +4,6 @@ class SignUpModel {
   final String username;
   final String password;
   final String confirmPassword;
-  
-  
-
-  
 
   SignUpModel( {
     required this.email,

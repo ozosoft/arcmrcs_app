@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/coin_store/deposit/add_new_deposit_controller.dart';
-import 'package:flutter_prime/data/repo/coin_store/deposit/deposit_repo.dart';
-import 'package:flutter_prime/view/components/app-bar/custom_category_appBar.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
-import 'package:flutter_prime/view/components/custom_loader/custom_loader.dart';
-import 'package:flutter_prime/view/components/text-form-field/custom_amount_text_field.dart';
-import 'package:flutter_prime/view/components/text-form-field/custom_drop_down_text_field.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/coin_store/deposit/add_new_deposit_controller.dart';
+import 'package:quiz_lab/data/repo/coin_store/deposit/deposit_repo.dart';
+import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
+import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/components/text-form-field/custom_amount_text_field.dart';
+import 'package:quiz_lab/view/components/text-form-field/custom_drop_down_text_field.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/utils/dimensions.dart';
@@ -15,7 +15,7 @@ import '../../../../../core/utils/my_color.dart';
 import '../../../../../core/utils/my_strings.dart';
 import '../../../../../data/model/deposit/deposit_method_response_model.dart';
 
-import '../../../../../data/services/api_service.dart';
+import '../../../../data/services/api_client.dart';
 
 import 'info_widget.dart';
 
@@ -51,29 +51,33 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("this is coin id from deposit screen" + widget.id);
+
     return GetBuilder<AddNewDepositController>(
       builder: (controller) => SafeArea(
           child: Scaffold(
         backgroundColor: MyColor.getScreenBgColor(),
-        appBar: const CustomCategoryAppBar(title: MyStrings.deposit),
+        appBar:  CustomCategoryAppBar(title: MyStrings.payment.tr),
         body: controller.isLoading
             ? const CustomLoader()
             : SingleChildScrollView(
                 padding: Dimensions.screenPaddingHV,
                 child: Container(
-                  width: MediaQuery.of(context).size.width,
+ 
                   decoration: BoxDecoration(
-                    color: MyColor.getScreenBgColor(),
+                    color: MyColor.colorWhite,
                     borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
                   ),
+                  padding: const EdgeInsets.all(Dimensions.space20),
+
                   child: Form(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         CustomDropDownTextField(
+                          borderWidth: .5,
+                            radius: Dimensions.defaultRadius,
                             labelText: MyStrings.paymentMethod.tr,
-                            selectedValue: controller.paymentMethod,
+                             selectedValue: controller.paymentMethod,
                             onChanged: (newValue) {
                               controller.setPaymentMethod(newValue);
                             },
@@ -106,7 +110,7 @@ class _NewDepositScreenState extends State<NewDepositScreen> {
                         controller.submitLoading
                             ? const RoundedLoadingBtn()
                             : RoundedButton(
-                                text: MyStrings.submit,
+                                text: MyStrings.submit.tr,
                                 textColor: MyColor.colorWhite,
                                 textSize: Dimensions.space17,
                                 width: double.infinity,

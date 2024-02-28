@@ -11,8 +11,7 @@ class DateConverter {
     return outputFormat;
   }
 
-  static String isoToLocalDateAndTime(String dateTime,
-      {String errorResult = '--'}) {
+  static String isoToLocalDateAndTime(String dateTime, {String errorResult = '--'}) {
     String date = '';
     if (dateTime.isEmpty || dateTime == 'null') {
       date = '';
@@ -27,8 +26,7 @@ class DateConverter {
   }
 
   static String formatDepositTimeWithAmFormat(String dateString) {
-    var newStr =
-        '${dateString.substring(0, 10)} ${dateString.substring(11, 23)}';
+    var newStr = '${dateString.substring(0, 10)} ${dateString.substring(11, 23)}';
     DateTime dt = DateTime.parse(newStr);
 
     String formatedDate = DateFormat("yyyy-MM-dd").format(dt);
@@ -54,9 +52,7 @@ class DateConverter {
   }
 
   static DateTime isoStringToLocalDate(String dateTime) {
-    return DateFormat('yyyy-MM-ddTHH:mm:ss.SSS')
-        .parse(dateTime, true)
-        .toLocal();
+    return DateFormat('yyyy-MM-ddTHH:mm:ss.SSS').parse(dateTime, true).toLocal();
   }
 
   static String isoToLocalTimeSubtract(String dateTime) {
@@ -90,6 +86,14 @@ class DateConverter {
     }
   }
 
+  static String isoStringToLocalFormattedDateAndTimeOnly(String dateTime) {
+    try {
+      return DateFormat('d MMM, yyyy h:mm a').format(isoStringToLocalDate(dateTime));
+    } catch (v) {
+      return "--";
+    }
+  }
+
   static String localDateTime(DateTime dateTime) {
     return DateFormat('dd-MM-yyyy').format(dateTime.toUtc());
   }
@@ -103,13 +107,11 @@ class DateConverter {
   }
 
   static String nextReturnTime(String dateTime) {
-    final date =
-        DateFormat("dd MMM, yyyy hh:mm a").format(DateTime.parse(dateTime));
+    final date = DateFormat("dd MMM, yyyy hh:mm a").format(DateTime.parse(dateTime));
     return date;
   }
 
-  static String getFormatedSubtractTime(String time,
-      {bool numericDates = false}) {
+  static String getFormatedSubtractTime(String time, {bool numericDates = false}) {
     final date1 = DateTime.now();
     final isoDate = isoStringToLocalDate(time);
     final difference = date1.difference(isoDate);
@@ -133,6 +135,56 @@ class DateConverter {
       return '${difference.inSeconds} seconds ago';
     } else {
       return 'Just now';
+    }
+  }
+
+  static String stringDateToDate(String inputDate) {
+    DateTime date = DateTime.parse(inputDate);
+    final DateFormat outputFormat = DateFormat('d MMM yyyy');
+    return outputFormat.format(date);
+  }
+
+  int calculateDurationToEndTime(String endTime) {
+    // Get the current time
+    DateTime currentTime = DateTime.now();
+
+    // Split the endTime string into hours and minutes
+    List<String> timeComponents = endTime.split(':');
+    int endHour = int.parse(timeComponents[0]);
+    int endMinute = int.parse(timeComponents[1].split(' ')[0]);
+    String amPm = timeComponents[1].split(' ')[1].toLowerCase();
+
+    if (amPm == 'pm' && endHour != 12) {
+      endHour += 12;
+    } else if (amPm == 'am' && endHour == 12) {
+      endHour = 0;
+    }
+
+    // Create a DateTime object for the specified end time
+    DateTime parsedEndTime = DateTime(currentTime.year, currentTime.month, currentTime.day, endHour, endMinute);
+
+    // Calculate the time difference
+    Duration difference = parsedEndTime.difference(currentTime);
+
+    // Convert the time difference to minutes
+    int durationInMinutes = difference.inMinutes;
+
+    return durationInMinutes;
+  }
+
+  static String formatDateTime(String inputString, String format) {
+    try {
+      // Parse the input date and time string
+      final inputDateTime = DateTime.parse(inputString);
+
+      // Create a date and time format
+      final formatter = DateFormat(format);
+
+      // Format the date and time and return the formatted string
+      return formatter.format(inputDateTime);
+    } catch (e) {
+      // Handle any parsing errors here
+      return "Invalid Date/Time";
     }
   }
 }

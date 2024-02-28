@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
 
+import '../../../../../core/utils/url_container.dart';
 
 class PlayerProfilePicture extends StatelessWidget {
-  const PlayerProfilePicture({super.key});
+  final String imagePath;
+  const PlayerProfilePicture({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(Dimensions.space6),
-      height: Dimensions.space110,
-      width: Dimensions.space110,
-      decoration: BoxDecoration(
-        color: MyColor.prifileBG,
-        borderRadius: BorderRadius.circular(Dimensions.space90),
-      ),
+      padding: const EdgeInsets.all(Dimensions.space2),
+      height: MediaQuery.of(context).size.width / 5,
+      width: MediaQuery.of(context).size.width / 5,
+      decoration: BoxDecoration(color: MyColor.colorLightGrey, borderRadius: BorderRadius.circular(Dimensions.space100)),
       child: FittedBox(
         fit: BoxFit.cover,
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(Dimensions.space40),
-              image: const DecorationImage(
-                  image: AssetImage(MyImages.profileimageWomenPng),
-                  fit: BoxFit.cover)),
-          height: Dimensions.space70,
-          width: Dimensions.space70,
-        ),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(Dimensions.space100),
+            child: imagePath.toString() == "null"
+                ? Image.asset(
+                    MyImages.defaultAvatar,
+                    fit: BoxFit.cover,
+                    height: MediaQuery.of(context).size.width / 5,
+                    width: MediaQuery.of(context).size.width / 5,
+                  )
+                : MyImageWidget(
+                    fromProfile: true,
+                    imageUrl: "${UrlContainer.userImagePath}/$imagePath",
+                    height: MediaQuery.of(context).size.width / 5,
+                    width: MediaQuery.of(context).size.width / 5,
+                  )),
       ),
     );
   }

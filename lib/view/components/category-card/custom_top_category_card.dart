@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/util.dart';
+import 'package:quiz_lab/view/components/image_widget/my_image_widget.dart';
 
 class CustomTopCategoryCard extends StatelessWidget {
   final String title, questionsQuantaty, image;
@@ -12,7 +13,8 @@ class CustomTopCategoryCard extends StatelessWidget {
     super.key,
     required this.title,
     required this.questionsQuantaty,
-    required this.image, this.index,
+    required this.image,
+    this.index,
   });
 
   @override
@@ -20,30 +22,29 @@ class CustomTopCategoryCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(Dimensions.space5),
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: Dimensions.space1),
-        width: Dimensions.space103,
+        padding: const EdgeInsets.all(Dimensions.space7),
         decoration: BoxDecoration(
-            color: MyColor.cardColor,
-            border: Border.all(color: MyColor.cardBorderColor),
-            borderRadius: BorderRadius.circular(Dimensions.space8)),
+          borderRadius: BorderRadius.circular(Dimensions.space8),
+          boxShadow: MyUtils.getCardShadow(),
+          border: Border.all(color: MyColor.borderColor.withOpacity(.3),width: .5)
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Image.network(image),
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                  vertical: Dimensions.space10, horizontal: Dimensions.space5),
-              child: Text(
-                title.toString(),
-                textAlign: TextAlign.center,
-                style: semiBoldDefault,
-              ),
+            MyImageWidget(
+              imageUrl: image,
+              width: Dimensions.space50,
+              height: Dimensions.space50,
             ),
-            Text(questionsQuantaty + MyStrings.questionse,
-                textAlign: TextAlign.center,
-                style: regularDefault.copyWith(
-                    color: MyColor.colorlighterGrey,
-                    fontSize: Dimensions.space12))
+            const SizedBox(height: Dimensions.space10 ),
+            Text(
+              title.toString(),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: mediumDefault.copyWith(fontWeight: FontWeight.normal, color: MyColor.primaryTextColor),
+            )
           ],
         ),
       ),

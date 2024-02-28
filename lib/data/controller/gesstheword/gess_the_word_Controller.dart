@@ -1,24 +1,24 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: file_names
+
 import 'dart:convert';
-import 'dart:developer' as dev;
 
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/guess_the_word/guess_question_model.dart';
-import 'package:flutter_prime/data/model/guess_the_word/guess_subcategory_model.dart';
-import 'package:flutter_prime/data/model/guess_the_word/guess_submit_response.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/repo/gess_the_word/gessThewordRepo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/guess_the_word/guess_question_model.dart';
+import 'package:quiz_lab/data/model/guess_the_word/guess_subcategory_model.dart';
+import 'package:quiz_lab/data/model/guess_the_word/guess_submit_response.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/repo/guess_the_word/guess_the_word_repo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
 import '../../model/guess_the_word/guess_category_model.dart';
 
-class GuessThewordController extends GetxController {
-  GuessTheWordRepo gessTheWordRepo;
-  GuessThewordController({required this.gessTheWordRepo});
+class GuessTheWordController extends GetxController {
+  GuessTheWordRepo guessTheWordRepo;
+  GuessTheWordController({required this.guessTheWordRepo});
 
   PageController pageController = PageController(initialPage: 0);
   CountDownController countDownController = CountDownController();
@@ -31,20 +31,21 @@ class GuessThewordController extends GetxController {
   int ansDuration = 30;
   String? quizInfoId;
   // result
+  String appreciation = "";
   String totalQuestion = '';
   String correctAnswer = '';
   String wrongAnswer = '';
   String totalScore = '';
 
-  void initiaValue() async {
+  void initialValue() async {
     imgPath = "";
     currentPage = 0;
-    await getAllcataroy();
+    await getAllCategory();
   }
 
   // page controlling
   void nextPage() {
-    if (pageController.initialPage < gessThewordQuesstionList.length) {
+    if (pageController.initialPage < guessTheWordQuestionList.length) {
       clearAllData();
       pageController.nextPage(duration: const Duration(milliseconds: 400), curve: Curves.easeIn);
     } else {}
@@ -55,7 +56,7 @@ class GuessThewordController extends GetxController {
 
   void addAns(int questionIndex, String answer) {
     String modifiedString = answer.replaceAll('-1', '');
-    gessThewordQuesstionList[questionIndex].setSelectedAnswer(modifiedString);
+    guessTheWordQuestionList[questionIndex].setSelectedAnswer(modifiedString);
   }
 
 //final submit Answers
@@ -65,20 +66,19 @@ class GuessThewordController extends GetxController {
 
     Map<String, dynamic> params = {};
     params['quizInfo_id'] = quizInfoId;
-    for (int i = 0; i < gessThewordQuesstionList.length; i++) {
-      dev.log(gessThewordQuesstionList[i].id.toString(), name: "submit");
-
-      String questionId = gessThewordQuesstionList[i].id.toString();
-      // String optionId = gessThewordQuesstionList[i].options![0].id.toString();
-      String selectedOptionId = gessThewordQuesstionList[i].selectedAnswer.toString();
+    for (int i = 0; i < guessTheWordQuestionList.length; i++) {
+      String questionId = guessTheWordQuestionList[i].id.toString();
+      String selectedOptionId = guessTheWordQuestionList[i].selectedAnswer.toString();
       params['question_id[]$questionId'] = questionId;
       params['option_$questionId'] = selectedOptionId.toString();
     }
-    //
-    ResponseModel response = await gessTheWordRepo.submitAnswar(params);
+
+    ResponseModel response = await guessTheWordRepo.submitAnswar(params);
     if (response.statusCode == 200) {
-      GuesswordQuestionSubmitResponse model = GuesswordQuestionSubmitResponse.fromJson(jsonDecode(response.responseJson));
+      GuessWordQuestionSubmitResponse model = GuessWordQuestionSubmitResponse.fromJson(jsonDecode(response.responseJson));
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
+        debugPrint(model.message!.success!.first);
+        appreciation = model.message!.success!.first;
         totalQuestion = model.data?.totalQuestion.toString() ?? '';
         correctAnswer = model.data?.correctAnswer.toString() ?? '';
         wrongAnswer = model.data?.wrongAnswer.toString() ?? '';
@@ -86,9 +86,9 @@ class GuessThewordController extends GetxController {
         Get.offAndToNamed(
           RouteHelper.gessThewordResult,
         );
-        CustomSnackBar.success(successList: model.message?.success ?? [MyStrings.success]);
+
       } else {
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
         Get.offAndToNamed(RouteHelper.guessTheWordCategory);
       }
     } else {
@@ -114,7 +114,7 @@ class GuessThewordController extends GetxController {
     }
   }
 
-  void removeVAlue() {
+  void removeValue() {
     if (selectedIndex != tempAns.length) {
       tempAns.removeAt(selectedIndex);
       tempAns.insert(selectedIndex, "-1");
@@ -134,17 +134,17 @@ class GuessThewordController extends GetxController {
   }
 
 //
-  List<GuessQuestion> gessThewordQuesstionList = [];
+  List<GuessQuestion> guessTheWordQuestionList = [];
   List<GuessCategories> categoryList = [];
   List<GuessSubCategory> subCategories = [];
 
-  Future<void> getAllcataroy() async {
+  Future<void> getAllCategory() async {
     isLoading = true;
     update();
-    ResponseModel response = await gessTheWordRepo.getwordcategoryList();
+    ResponseModel response = await guessTheWordRepo.getwordcategoryList();
 
     if (response.statusCode == 200) {
-      GuesswordCategorysResponse model = GuesswordCategorysResponse.fromJson(jsonDecode(response.responseJson));
+      GuessWordCategoryResponse model = GuessWordCategoryResponse.fromJson(jsonDecode(response.responseJson));
 
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<GuessCategories>? tempcategorylist = model.data?.categories;
@@ -154,7 +154,7 @@ class GuessThewordController extends GetxController {
           categoryList.addAll(tempcategorylist);
         }
       } else {
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
       }
     } else {
       CustomSnackBar.error(errorList: [response.message]);
@@ -163,13 +163,13 @@ class GuessThewordController extends GetxController {
     update();
   }
 
-  Future<void> getAllsubcategories(String id) async {
+  Future<void> getAllSubCategories(String id) async {
     isLoading = true;
     update();
-    ResponseModel response = await gessTheWordRepo.getwordSubCatagroiList(id);
+    ResponseModel response = await guessTheWordRepo.getwordSubCatagroiList(id);
 
     if (response.statusCode == 200) {
-      GuesswordSubCategoryResponse model = GuesswordSubCategoryResponse.fromJson(jsonDecode(response.responseJson));
+      GuessWordSubCategoryResponse model = GuessWordSubCategoryResponse.fromJson(jsonDecode(response.responseJson));
 
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<GuessSubCategory>? tempList = model.data?.subcategories;
@@ -179,7 +179,7 @@ class GuessThewordController extends GetxController {
           subImgPath = model.data?.imgPath;
         }
       } else {
-        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong.tr]);
       }
     } else {
       CustomSnackBar.error(errorList: [response.message]);
@@ -192,26 +192,31 @@ class GuessThewordController extends GetxController {
     quizInfoId = '';
     isLoading = true;
     update();
-    ResponseModel response = await gessTheWordRepo.getwordQuestionList(id);
+    ResponseModel response = await guessTheWordRepo.getwordQuestionList(id);
 
     if (response.statusCode == 200) {
-      GuesswordQuestionResponse model = GuesswordQuestionResponse.fromJson(jsonDecode(response.responseJson));
+      GuessWordQuestionResponse model = GuessWordQuestionResponse.fromJson(jsonDecode(response.responseJson));
 
       if (model.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         List<GuessQuestion>? templist = model.data?.questions;
         if (templist != null) {
-          gessThewordQuesstionList.clear();
+          guessTheWordQuestionList.clear();
           questionImgPath = model.data?.questionImagePath;
           ansDuration = int.parse(model.data?.perQuestionAnswerDuration.toString() ?? "30");
           quizInfoId = id;
-          gessThewordQuesstionList.addAll(templist);
-          dev.log(gessThewordQuesstionList.length.toString());
+          guessTheWordQuestionList.addAll(templist);
+        }
+        if (model.data!.questions!.isEmpty) {
+          Get.back();
+          CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.sorryNoQuizFound]);
         }
       } else {
-        // CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
+        Get.back();
+        CustomSnackBar.error(errorList: model.message?.error ?? [MyStrings.somethingWentWrong]);
       }
     } else {
-      // CustomSnackBar.error(errorList: [response.message]);
+      Get.back();
+      CustomSnackBar.error(errorList: [response.message]);
     }
     isLoading = false;
     update();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/view/screens/authentication/forget_password/resetPassword/widget/resetpassword_body_section.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/view/screens/authentication/forget_password/resetPassword/widget/resetpassword_body_section.dart';
 
 import '../../../../components/custom-head-section-for-auth/auth_heading.dart';
 

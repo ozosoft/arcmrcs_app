@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:flutter_prime/core/utils/style.dart';
+import 'package:quiz_lab/core/utils/style.dart';
 import '../../../core/utils/dimensions.dart';
 import '../../../core/utils/my_color.dart';
 
@@ -33,20 +33,21 @@ class OTPFieldWidget extends StatelessWidget {
         length: length,
         textStyle: regularExtraLarge.copyWith(color: MyColor.textColor),
         obscureText: false,
+        autovalidateMode: AutovalidateMode.always,
         controller: tController,
         obscuringCharacter: '*',
         blinkWhenObscuring: false,
         animationType: AnimationType.fade,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         pinTheme: PinTheme(
-            fieldOuterPadding: const EdgeInsets.all(Dimensions.space4),
+            fieldOuterPadding: const EdgeInsets.all(Dimensions.space1),
             shape: PinCodeFieldShape.box,
             borderWidth: Dimensions.space1,
             borderRadius: BorderRadius.circular(Dimensions.space8),
-            fieldHeight: Dimensions.space45,
-            fieldWidth: Dimensions.space45,
+            fieldHeight: Dimensions.space45 - 8,
+            fieldWidth: Dimensions.space45 -8,
             inactiveColor: MyColor.cardBorderColors,
-            inactiveFillColor: inActiveColor,
+            inactiveFillColor: MyColor.colorWhite,
             activeFillColor: activeColor,
             activeColor: MyColor.getPrimaryColor(),
             selectedFillColor: MyColor.getScreenBgColor(),

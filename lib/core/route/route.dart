@@ -1,46 +1,42 @@
-import 'package:flutter_prime/view/screens/authentication/email_verification_page/email_verification_screen.dart';
-import 'package:flutter_prime/view/screens/authentication/forget_password/resetPassword/reset_Password_Screen.dart';
-import 'package:flutter_prime/view/screens/authentication/forget_password/verification/verification_screen.dart';
-import 'package:flutter_prime/view/screens/authentication/login/login_screen.dart';
-import 'package:flutter_prime/view/screens/authentication/profile_complete/profile_complete_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/email_verification_page/email_verification_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/forget_password/resetPassword/reset_password_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/forget_password/verification/verification_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/login/login_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/login/mobile_login_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/profile_complete/profile_complete_screen.dart';
 
-import 'package:flutter_prime/view/screens/authentication/signUp/signUp_screen.dart';
-import 'package:flutter_prime/view/screens/authentication/sms_verification_page/sms_verification_screen.dart';
-import 'package:flutter_prime/view/screens/authentication/two_factor_screen/two_factor_verification_screen.dart';
-import 'package:flutter_prime/view/screens/badges/badges_screen.dart';
-import 'package:flutter_prime/view/screens/bookmark/bookmark_screen.dart';
-import 'package:flutter_prime/view/screens/coin_history/coin_history_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/signUp/signup_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/sms_verification_page/sms_verification_screen.dart';
+import 'package:quiz_lab/view/screens/authentication/two_factor_screen/two_factor_verification_screen.dart';
+import 'package:quiz_lab/view/screens/coin_history/coin_history_screen.dart';
 
-import 'package:flutter_prime/view/screens/guess_the_word/category/guess_word_catagory_screen.dart';
-import 'package:flutter_prime/view/screens/guess_the_word/main_screen/guess_the_word_screen.dart';
-import 'package:flutter_prime/view/screens/guess_the_word/result/review/review_screen.dart';
-import 'package:flutter_prime/view/screens/guess_the_word/subCategory/guess_word_sub_categories_screen.dart';
+import 'package:quiz_lab/view/screens/guess_the_word/category/guess_word_catagory_screen.dart';
+import 'package:quiz_lab/view/screens/guess_the_word/main_screen/guess_the_word_screen.dart';
+import 'package:quiz_lab/view/screens/guess_the_word/result/review/review_screen.dart';
+import 'package:quiz_lab/view/screens/guess_the_word/sub_category/guess_word_sub_categories_screen.dart';
 
-import 'package:flutter_prime/view/screens/coin_store/coin_store_webview/coin_store_webview_screen.dart';
-import 'package:flutter_prime/view/screens/coin_store/deposit_widget/deposit_screen.dart';
-import 'package:flutter_prime/view/screens/exam_zone/review-answer/review_answer-screen.dart';
-import 'package:flutter_prime/view/screens/quiz_contest/all_contest_screen/all_contest_screen.dart';
-import 'package:flutter_prime/view/screens/exam_zone/exam-result/exam_result_screen.dart';
-import 'package:flutter_prime/view/screens/exam_zone/widgets/exam_zone_quiz_screen.dart';
+import 'package:quiz_lab/view/screens/coin_store/coin_store_webview/coin_store_webview_screen.dart';
+import 'package:quiz_lab/view/screens/coin_store/deposit_widget/deposit_screen.dart';
+import 'package:quiz_lab/view/screens/exam_zone/review-answer/review_answer-screen.dart';
+import 'package:quiz_lab/view/screens/quiz_contest/all_contest_screen/all_contest_screen.dart';
+import 'package:quiz_lab/view/screens/exam_zone/exam-result/exam_result_screen.dart';
+import 'package:quiz_lab/view/screens/exam_zone/widgets/exam_zone_quiz_screen.dart';
 
-import 'package:flutter_prime/view/screens/notification/notification_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/daily_quiz/daily_quiz_questions_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/daily_quiz/daily_quiz_result/daily_quiz_result_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/daily_quiz/review-answer/review_answer-screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn-result/fun_N_learn_result_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_description_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_list_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_questios_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_screen.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/fun_n_learn_sub_categories.dart';
-import 'package:flutter_prime/view/screens/play_diffrent/fun_n_learn/review-answer/review_answer-screen.dart';
-import 'package:flutter_prime/view/screens/profile/profile-edit/Profile_edit_screen.dart';
-import 'package:flutter_prime/view/screens/profile/profile_screen.dart';
-import 'package:flutter_prime/view/screens/general_quiz/quiz-questions/quiz_question_screen.dart';
-import 'package:flutter_prime/view/screens/quiz_contest/review-answer/review_answer-screen.dart';
-import 'package:flutter_prime/view/screens/splash/splash_screen.dart';
-import 'package:flutter_prime/view/screens/wallet/wallet_screen.dart';
-import 'package:flutter_prime/view/screens/coin_store/coin_store_screen.dart';
+import 'package:quiz_lab/view/screens/play_different/daily_quiz/daily_quiz_questions_screen.dart';
+import 'package:quiz_lab/view/screens/play_different/daily_quiz/daily_quiz_result/daily_quiz_result_screen.dart';
+import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn-result/fun_n_learn_result_screen.dart';
+import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_description_screen.dart';
+import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_list_screen.dart';
+import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_questios_screen.dart';
+import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_screen.dart';
+import 'package:quiz_lab/view/screens/play_different/fun_n_learn/fun_n_learn_sub_categories.dart';
+import 'package:quiz_lab/view/screens/play_different/fun_n_learn/review-answer/review_answer_screen.dart';
+import 'package:quiz_lab/view/screens/profile/profile-edit/profile_edit_screen.dart';
+import 'package:quiz_lab/view/screens/profile/profile_screen.dart';
+import 'package:quiz_lab/view/screens/general_quiz/quiz-questions/quiz_question_screen.dart';
+import 'package:quiz_lab/view/screens/quiz_contest/review-answer/review_answer_screen.dart';
+import 'package:quiz_lab/view/screens/splash/splash_screen.dart';
+import 'package:quiz_lab/view/screens/coin_store/coin_store_screen.dart';
 
 import 'package:get/get.dart';
 
@@ -56,30 +52,33 @@ import '../../view/screens/bottom_nav_bar/bottom_navigation_bar_screen.dart';
 import '../../view/screens/exam_zone/exam_zone_screen.dart';
 import '../../view/screens/home_page/homepage-widgets/home-body-sections/exam_zone_section/exam_zone_homepage_category_screen.dart';
 import '../../view/screens/guess_the_word/result/guess_word_result_screen.dart';
-import '../../view/screens/home_page/homepage-widgets/home-body-sections/home_top_category_section/sub-categories/sub_categories_card_screen.dart';
+import '../../view/screens/all-categories/sub-categories/sub_categories_screen.dart';
 import '../../view/screens/intro_section/onboard_intro_screen.dart';
 import '../../view/screens/leader_board/leader_board_screen.dart';
 import '../../view/screens/general_quiz/quiz-result/quiz_result_screen.dart';
-import '../../view/screens/general_quiz/review-answer/review_answer-screen.dart';
+import '../../view/screens/general_quiz/review-answer/review_answer_screen.dart';
+import '../../view/screens/play_different/daily_quiz/review-answer/review_answer_screen.dart';
+import '../../view/screens/privacy_policy/privacy_policy_screen.dart';
 import '../../view/screens/quiz_contest/contest_result_screen/contest_result_screen.dart';
 import '../../view/screens/quiz_contest/question_screen/contest_questions_screen.dart';
 
-class RouteHelper { 
-
+class RouteHelper {
   static const String splashScreen = "/splash_screen";
   static const String onboardScreen = '/onboard_screen';
   static const String loginScreen = '/login_screen';
+  static const String mobileLoginScreen = '/mobile_login_screen';
   static const String signupScreen = '/signUp_screen';
   static const String forgetpasswordScreen = '/forget_password_screen';
   static const String verificationScreen = '/verification_screen';
   static const String resetPassword = '/reset_password_screen';
   static const String bottomNavBarScreen = '/bottom_navigation_screen';
   static const String allCategories = '/all_categories_screen';
-  static const String subCategories = '/top_categories_screen';
+  static const String subCategories = '/sub_categories_screen';
   static const String quizQuestionsScreen = '/quiz_questions_screen';
   static const String quizResultScreen = '/quiz_result_screen';
-  static const String profileCompleteScreen       = "/profile_complete_screen";
-   //battle
+  static const String profileCompleteScreen = "/profile_complete_screen";
+  static const String privacyScreen = "/privacy-screen";
+  //battle
   static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
   static const String battleQuizResultScreen = '/battle_quiz_result_screen';
   static const String reviewAnswerScreen = '/review_answer_screen';
@@ -92,8 +91,6 @@ class RouteHelper {
   static const String coinStroeScreen = '/coin_store_screen';
   static const String badgesScreen = '/badges_screen';
   static const String coinHistoryScreen = '/coin_history_screen';
-  static const String walletScreen = '/wallet_screen';
-  static const String bookmarkScreen = '/bookmark_screen';
   static const String notificationScreen = '/notification_screen';
   static const String examZoneScreen = '/exam_zone_screen';
   static const String examZoneCategoryScreen = '/exam_zone_category_screen';
@@ -105,11 +102,10 @@ class RouteHelper {
   static const String gessThewordResult = "/gess_the_word_result";
   static const String gessThewordResultReview = "/gess_the_word_result_review";
 
-
   static const String examZoneQuestionScreen = '/exam_zone_questions_screen';
   static const String examZoneResultScreen = '/exam_zone_result_screen';
   static const String examZoneReviewAnswerScreen = '/exam_zone_review_answer_screen';
-  
+
   static const String funNlearnScreenScreen = '/fun_n_learn_screen';
   static const String funNlearnSubCategoryScreenScreen = '/fun_n_learn_sub_category_screen';
   static const String funNlearnListScreen = '/fun_n_learn_list_screen';
@@ -122,38 +118,35 @@ class RouteHelper {
   static const String dailyQuizresultReviewScreen = '/daily_quiz_result_review_screen';
   static const String quizContestListscreen = '/quiz_contest_List_screen';
   static const String quizContestQuestionscreen = '/quiz_contest_List_questions_screen';
-  static const String emailVerificationScreen     = "/verify_email_screen" ;
-  static const String smsVerificationScreen       = "/verify_sms_screen";
-  static const String twoFactorScreen             = "/two-factor-screen";
-  static const String quizContestresultScreen             = "/quiz-contest-screen";
-  static const String dailyquizContestresultScreen             = "/_daily_quiz-contest-screen";
-  static const String quizContestreviewScreen             = "/quiz_contest_review_screen";
-  static const String depositsScreen              = "/deposits";
-static const String depositsDetailsScreen       = "/deposits_details";
-static const String newDepositScreenScreen      = "/deposits_money";
-static const String depositWebViewScreen        = '/deposit_webView';
-
+  static const String emailVerificationScreen = "/verify_email_screen";
+  static const String smsVerificationScreen = "/verify_sms_screen";
+  static const String twoFactorScreen = "/two-factor-screen";
+  static const String quizContestresultScreen = "/quiz-contest-screen";
+  static const String dailyquizContestresultScreen = "/_daily_quiz-contest-screen";
+  static const String quizContestreviewScreen = "/quiz_contest_review_screen";
+  static const String depositsScreen = "/deposits";
+  static const String depositsDetailsScreen = "/deposits_details";
+  static const String newDepositScreenScreen = "/deposits_money";
+  static const String depositWebViewScreen = '/deposit_webView';
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
     GetPage(name: onboardScreen, page: () => const OnBoardIntroScreen()),
     GetPage(name: loginScreen, page: () => const LoginScreen()),
+    GetPage(name: mobileLoginScreen, page: () => const MobileLoginScreen()),
     GetPage(name: signupScreen, page: () => const SignupScreen()),
     GetPage(name: forgetpasswordScreen, page: () => const ForgetPasswordScreen()),
     GetPage(name: verificationScreen, page: () => const VerificationScreen()),
     GetPage(name: resetPassword, page: () => const ResetPasswordScreen()),
     GetPage(name: bottomNavBarScreen, page: () => const BottomNavigationBarScreen()),
 
-
-
-    GetPage(name: subCategories, page: () => const SubCategoriesCardScreen(title: "")),
+    GetPage(name: subCategories, page: () => const SubCategoriesScreen(title: "")),
     GetPage(name: allCategories, page: () => const AllCategoriesScreen()),
     GetPage(name: quizQuestionsScreen, page: () => const QuizQuestionsScreen()),
     GetPage(name: quizResultScreen, page: () => const QuizResultScreen()),
     //battle
     GetPage(name: battleQuizQuestionsScreen, page: () => const BattleQuizQuestionsScreen()),
     GetPage(name: battleQuizResultScreen, page: () => const BattleQuizResultScreen()),
-
 
     GetPage(name: reviewAnswerScreen, page: () => const ReviewAnswerScreen()),
     GetPage(name: oneVSoneBattleScreen, page: () => const OneVSOneBattleScreen()),
@@ -163,13 +156,9 @@ static const String depositWebViewScreen        = '/deposit_webView';
     GetPage(name: profileScreen, page: () => const ProfileScreen()),
     GetPage(name: profileEditScreen, page: () => const ProfileEditScreen()),
     GetPage(name: coinStroeScreen, page: () => const CoinStoreScreen()),
-    GetPage(name: badgesScreen, page: () => const BadgesScreen()),
     GetPage(name: coinHistoryScreen, page: () => const CoinHistoryScreen()),
-    GetPage(name: walletScreen, page: () => const WalletScreen()),
-    GetPage(name: bookmarkScreen, page: () => const BookmarkScreen()),
-    GetPage(name: notificationScreen, page: () => const NotificationScreen()),
     GetPage(name: examZoneScreen, page: () => const ExamZoneScreen()),
-    GetPage(name: examZoneCategoryScreen, page: () => const ExamZoneCategoryScreen()),
+    GetPage(name: examZoneCategoryScreen, page: () => const ExamZoneSection()),
     GetPage(name: leaderBoardScreen, page: () => const LeaderBoardScreen()),
 
     // guess the word
@@ -179,18 +168,14 @@ static const String depositWebViewScreen        = '/deposit_webView';
     GetPage(name: gessThewordResult, page: () => const GuessWordResultScreen()),
     GetPage(name: gessThewordResultReview, page: () => const GuessWordReviewResult()),
 
-    GetPage(name: examZoneQuestionScreen, page: () => const Exam_zone_quiz_screen()),
+    GetPage(name: examZoneQuestionScreen, page: () => const ExamZoneQuizScreen()),
     GetPage(name: funNlearnQuizScreen, page: () => const FunNlearnQuizScreen()),
     GetPage(name: examZoneResultScreen, page: () => const ExamResultScreen()),
     GetPage(name: examZoneReviewAnswerScreen, page: () => const ExamReviewAnswerScreen()),
 
     GetPage(name: funNlearnScreenScreen, page: () => const FunNLearnScreen()),
     GetPage(name: funNlearnSubCategoryScreenScreen, page: () => const FunNLearnSubCategoriesCardScreen(title: '')),
-    GetPage(
-        name: funNlearnListScreen,
-        page: () => const FunNlearnListScreen(
-              title: "",
-            )),
+    GetPage(name: funNlearnListScreen, page: () => const FunNlearnListScreen(title: "")),
     GetPage(name: funNlearnDescriptionScreen, page: () => const FunNLearnDescription()),
     GetPage(name: funNlearnResultScreen, page: () => const FunNlearnResultScreen()),
     GetPage(name: funNlearnResultReviewScreen, page: () => const FunNPlayReviewAnswerScreen()),
@@ -206,10 +191,13 @@ static const String depositWebViewScreen        = '/deposit_webView';
     GetPage(name: quizContestresultScreen, page: () => const QuizContestResultScreen()),
     GetPage(name: dailyquizContestresultScreen, page: () => const DailyQuizResultScreen()),
     GetPage(name: quizContestreviewScreen, page: () => const QuizContestReviewAnswerScreen()),
-     GetPage(name: depositsScreen,               page: () => const NewDepositScreen(price: '', id: '',)),
-     
-    
-    GetPage(name: depositWebViewScreen,         page: () => CoinStroreWebViewScreen(redirectUrl: Get.arguments)),
-
+    GetPage(
+        name: depositsScreen,
+        page: () => const NewDepositScreen(
+              price: '',
+              id: '',
+            )),
+    GetPage(name: privacyScreen, page: () => const PrivacyPolicyScreen()),
+    GetPage(name: depositWebViewScreen, page: () => CoinStroreWebViewScreen(redirectUrl: Get.arguments)),
   ];
 }

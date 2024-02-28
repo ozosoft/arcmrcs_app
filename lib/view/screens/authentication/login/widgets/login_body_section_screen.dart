@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/auth/login_controller.dart';
-import 'package:flutter_prime/data/repo/auth/login_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
-import 'package:flutter_prime/view/components/divider/custom_divider.dart';
-import 'package:flutter_prime/view/components/social_login/social_login_section.dart';
-import 'package:flutter_prime/view/components/text/custom_underline_text.dart';
-import 'package:flutter_prime/view/components/text/default_text.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/auth/login_controller.dart';
+import 'package:quiz_lab/data/repo/auth/login_repo.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
+import 'package:quiz_lab/view/components/divider/custom_divider.dart';
+import 'package:quiz_lab/view/components/social_login/social_login_section.dart';
+import 'package:quiz_lab/view/components/text/custom_underline_text.dart';
+import 'package:quiz_lab/view/components/text/default_text.dart';
 import 'package:get/get.dart';
 import '../../../../components/text-form-field/custom_text_field.dart';
 
@@ -43,11 +43,10 @@ class _LoginBodySectionState extends State<LoginBodySection> {
   Widget build(BuildContext context) {
     return GetBuilder<LoginController>(
       builder: (controller) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space35, vertical: Dimensions.space7),
+        padding: const EdgeInsets.symmetric(horizontal: Dimensions.space25, vertical: Dimensions.space7),
         child: Column(
           children: [
             SizedBox(
-              height: Dimensions.space70,
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -69,7 +68,12 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                 ],
               ),
             ),
-            const SocialLoginSection(),
+            const SizedBox(
+              height: Dimensions.space10,
+            ),
+            SocialLoginSection(
+              loginController: controller,
+            ),
             const CustomDivider(space: Dimensions.space10),
             Form(
               key: formKey,
@@ -127,18 +131,16 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                             width: Dimensions.space25,
                             height: Dimensions.space25,
                             child: Checkbox(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.space5)),
-                                activeColor: MyColor.primaryColor,
-                                checkColor: MyColor.colorWhite,
-                                value: controller.remember,
-                                side: MaterialStateBorderSide.resolveWith(
-                                  (states) => BorderSide(width: Dimensions.space1, color: controller.remember ? MyColor.getTextFieldEnableBorder() : MyColor.getTextFieldDisableBorder()),
-                                ),
-                                onChanged: (value) {
-                                  setState(() {
-                                    controller.remember = !controller.remember;
-                                  });
-                                }),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(Dimensions.space5)),
+                              activeColor: MyColor.primaryColor,
+                              checkColor: MyColor.colorWhite,
+                              value: controller.remember,
+                              side: MaterialStateBorderSide.resolveWith(
+                                (states) => BorderSide(width: Dimensions.space1, color: controller.remember ? MyColor.getTextFieldEnableBorder() : MyColor.getTextFieldDisableBorder()),
+                              ),
+                              onChanged: (value) {
+                                controller.changeRememberMe();
+                              }),
                           ),
                           const SizedBox(width: Dimensions.space8),
                           DefaultText(
@@ -159,32 +161,33 @@ class _LoginBodySectionState extends State<LoginBodySection> {
                     ],
                   ),
                   const SizedBox(height: Dimensions.space25),
-                  controller.isSubmitLoading
-                      ? const RoundedLoadingBtn()
-                      : RoundedButton(
-                          text: MyStrings.signIn.tr,
-                          press: () {
-                            // Get.toNamed(RouteHelper.bottomNavBarScreen);
+                  controller.isSubmitLoading ?
+                  const RoundedLoadingBtn() :
+                  RoundedButton(
+                    text: MyStrings.signIn.tr,
+                    press: () {
 
-                            if (formKey.currentState!.validate()) {
-                              controller.loginUser();
-                            }
-                          }),
+                      if (formKey.currentState!.validate()) {
+                        controller.loginUser();
+                      }
+                    }),
                   const SizedBox(height: Dimensions.space10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(MyStrings.doNotHaveAccount,
-                          overflow: TextOverflow.ellipsis,
-                          style: mediumOverSmall.copyWith(
-                            fontSize: Dimensions.space14,
-                            color: MyColor.getAuthTextColor(),
-                          )),
+                      Text(
+                        MyStrings.doNotHaveAccount.tr,
+                        overflow: TextOverflow.ellipsis,
+                        style: mediumOverSmall.copyWith(
+                          fontSize: Dimensions.space14,
+                          color: MyColor.getAuthTextColor(),
+                        )
+                      ),
                       TextButton(
                         onPressed: () {
                           Get.toNamed(RouteHelper.signupScreen);
                         },
-                        child: const CustomUndelineText(text: MyStrings.signUp),
+                        child: CustomUndelineText(text: MyStrings.signUp.tr),
                       )
                     ],
                   ),

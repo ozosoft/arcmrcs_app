@@ -1,13 +1,13 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/helper/string_format_helper.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/deposit/deposit_insert_response_model.dart';
-import 'package:flutter_prime/data/model/deposit/deposit_method_response_model.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/repo/coin_store/deposit/deposit_repo.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/helper/string_format_helper.dart';
+import 'package:quiz_lab/core/route/route.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/deposit/deposit_insert_response_model.dart';
+import 'package:quiz_lab/data/model/deposit/deposit_method_response_model.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/repo/coin_store/deposit/deposit_repo.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:get/get.dart';
 
 class AddNewDepositController extends GetxController {
@@ -74,13 +74,13 @@ class AddNewDepositController extends GetxController {
   bool submitLoading = false;
   Future<void> submitDeposit(String coinId) async {
     if (paymentMethod?.id.toString() == '-1') {
-      CustomSnackBar.error(errorList: [MyStrings.selectPaymentMethod]);
+      CustomSnackBar.error(errorList: [MyStrings.selectPaymentMethod.tr]);
       return;
     }
 
     String amount = amountController.text.toString();
     if (amount.isEmpty) {
-      CustomSnackBar.error(errorList: [MyStrings.enterAmount]);
+      CustomSnackBar.error(errorList: [MyStrings.enterAmount.tr]);
       return;
     }
 
@@ -89,14 +89,14 @@ class AddNewDepositController extends GetxController {
 
     ResponseModel responseModel = await depositRepo.insertDeposit(amount: amount, methodCode: paymentMethod?.methodCode ?? "", currency: paymentMethod?.currency ?? "", coinID: coinId);
 
-    print("this is cpon id from deposit" + coinId.toString());
+    debugPrint("this is cpon id from deposit $coinId");
     if (responseModel.statusCode == 200) {
       DepositInsertResponseModel insertResponseModel = DepositInsertResponseModel.fromJson(jsonDecode(responseModel.responseJson));
 
       if (insertResponseModel.status.toString().toLowerCase() == "success") {
         showWebView(insertResponseModel.data?.redirectUrl ?? "");
       } else {
-        CustomSnackBar.error(errorList: insertResponseModel.message?.error ?? [MyStrings.somethingWentWrong]);
+        CustomSnackBar.error(errorList: insertResponseModel.message?.error ?? [MyStrings.somethingWentWrong.tr]);
       }
     } else {
       CustomSnackBar.error(

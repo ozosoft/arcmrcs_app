@@ -1,10 +1,11 @@
 import 'dart:convert';
-import 'package:flutter_prime/data/model/sub_categories/sub_categories_model.dart';
-import 'package:flutter_prime/data/repo/sub_categories/sub_categories_repo.dart';
+import 'package:flutter/widgets.dart';
+import 'package:quiz_lab/data/model/sub_categories/sub_categories_model.dart';
+import 'package:quiz_lab/data/repo/sub_categories/sub_categories_repo.dart';
 import 'package:get/get.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/view/components/snack_bar/show_custom_snackbar.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class SubCategoriesController extends GetxController {
   SubCategoriesRepo subCategoriesRepo;
@@ -20,7 +21,7 @@ class SubCategoriesController extends GetxController {
   bool loader = true;
 
   bool isActive = false;
-  bool viewMore  = false;
+  bool viewMore = false;
 
   void getdata(String subcategoryId) async {
     loader = true;
@@ -31,11 +32,9 @@ class SubCategoriesController extends GetxController {
     if (model.statusCode == 200) {
       subCategoriesList.clear();
 
-      SubcategoriesModel subcategories =
-          SubcategoriesModel.fromJson(jsonDecode(model.responseJson));
+      SubcategoriesModel subcategories = SubcategoriesModel.fromJson(jsonDecode(model.responseJson));
 
-      if (subcategories.status.toString().toLowerCase() ==
-          MyStrings.success.toLowerCase()) {
+      if (subcategories.status.toString().toLowerCase() == MyStrings.success.toLowerCase()) {
         // id =subcategories.data.subcategories.
 
         List<Subcategory>? subcategorylist = subcategories.data?.subcategories;
@@ -46,13 +45,13 @@ class SubCategoriesController extends GetxController {
 
         itemCount = subcategorylist?.length ?? 0;
       } else {
-        CustomSnackBar.error(errorList: [subcategories.status ?? ""]);
+        CustomSnackBar.error(errorList: [...subcategories.message!.error!]);
       }
     } else {
       CustomSnackBar.error(errorList: [model.message]);
     }
 
-    print('---------------------${model.statusCode}');
+    debugPrint('---------------------${model.statusCode}');
 
     loader = false;
     update();

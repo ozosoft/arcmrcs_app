@@ -1,9 +1,9 @@
 
-import 'package:flutter_prime/core/utils/method.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/url_container.dart';
-import 'package:flutter_prime/data/model/global/response_model/response_model.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
+import 'package:quiz_lab/core/utils/method.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/url_container.dart';
+import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 
 class GeneralSettingRepo {
   ApiClient apiClient;
@@ -19,10 +19,18 @@ class GeneralSettingRepo {
 
   Future<dynamic> getLanguage(String languageCode) async {
     try {
-      String url =
-          '${UrlContainer.baseUrl}${UrlContainer.languageUrl}$languageCode';
-      ResponseModel response = await apiClient
-          .request(url, Method.getMethod, null, passHeader: false);
+      String url = '${UrlContainer.baseUrl}${UrlContainer.changeLanguageUrl}$languageCode';
+      ResponseModel response = await apiClient.request(url, Method.getMethod, null, passHeader: false);
+
+      return response;
+    } catch (e) {
+      return ResponseModel(false, MyStrings.somethingWentWrong, 300, '');
+    }
+  }
+  Future<dynamic> changeLanguage(String languageCode) async {
+    try {
+      String url = '${UrlContainer.baseUrl}${UrlContainer.changeLanguageUrl}$languageCode';
+      ResponseModel response = await apiClient.request(url, Method.getMethod, null, passHeader: false);
 
       return response;
     } catch (e) {

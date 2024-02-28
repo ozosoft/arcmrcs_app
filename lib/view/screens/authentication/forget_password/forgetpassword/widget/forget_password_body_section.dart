@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/core/route/route.dart';
-import 'package:flutter_prime/core/utils/dimensions.dart';
-import 'package:flutter_prime/core/utils/my_color.dart';
-import 'package:flutter_prime/core/utils/my_images.dart';
-import 'package:flutter_prime/core/utils/my_strings.dart';
-import 'package:flutter_prime/core/utils/style.dart';
-import 'package:flutter_prime/data/controller/auth/forget_password/forget_password_controller.dart';
-import 'package:flutter_prime/data/repo/auth/login_repo.dart';
-import 'package:flutter_prime/data/services/api_service.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_button.dart';
-import 'package:flutter_prime/view/components/buttons/rounded_loading_button.dart';
-import 'package:flutter_prime/view/components/text-form-field/custom_text_field.dart';
+import 'package:quiz_lab/core/utils/dimensions.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/auth/forget_password/forget_password_controller.dart';
+import 'package:quiz_lab/data/repo/auth/login_repo.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_button.dart';
+import 'package:quiz_lab/view/components/buttons/rounded_loading_button.dart';
+import 'package:quiz_lab/view/components/text-form-field/custom_text_field.dart';
 import 'package:get/get.dart';
 
 class ForgetPasswordBodySection extends StatefulWidget {
@@ -47,19 +46,10 @@ class _ForgetPasswordBodySectionState extends State<ForgetPasswordBodySection> {
         ),
         child: Column(
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  MyStrings.forgetPassword.tr,
-                  style: regularDefault.copyWith(fontSize: Dimensions.space20, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(height: Dimensions.space8),
-                Text(
-                  MyStrings.enterEmailAndPassword.tr,
-                  style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
-                ),
-              ],
+            Text(
+              MyStrings.enterEmailAndPassword.tr,
+              textAlign: TextAlign.center,
+              style: regularLarge.copyWith(color: MyColor.authScreenTextColor),
             ),
             Form(
               key: formKey,
@@ -91,7 +81,6 @@ class _ForgetPasswordBodySectionState extends State<ForgetPasswordBodySection> {
                       : RoundedButton(
                           text: MyStrings.continues.tr,
                           press: () {
-                            // Get.toNamed(RouteHelper.verificationScreen);
                             if (formKey.currentState!.validate()) {
                               auth.submitForgetPassCode();
                             }

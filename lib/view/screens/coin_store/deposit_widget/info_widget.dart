@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prime/data/controller/coin_store/deposit/add_new_deposit_controller.dart';
+import 'package:quiz_lab/data/controller/coin_store/deposit/add_new_deposit_controller.dart';
 import 'package:get/get.dart';
 
 import '../../../../core/utils/dimensions.dart';
@@ -24,7 +24,7 @@ class InfoWidget extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(Dimensions.defaultRadius),
-                border: Border.all(color: MyColor.borderColor)),
+                border: Border.all(color: MyColor.borderColor,width: .5)),
             child: Column(
               children: [
                 const SizedBox(

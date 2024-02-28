@@ -1,0 +1,17 @@
+{
+    "name": "thesoftking/quiz-app",
+    "autoload": {
+        "psr-4": {
+            "Thesoftking\\QuizApp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "NM Kawcher",
+            "email": "46804139+nmkawcher@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "symfony/process": "^6.3"
+    }
+}
