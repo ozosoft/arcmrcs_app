@@ -8,7 +8,9 @@ import 'package:quiz_lab/view/screens/authentication/profile_complete/profile_co
 import 'package:quiz_lab/view/screens/authentication/signUp/signup_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/sms_verification_page/sms_verification_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/two_factor_screen/two_factor_verification_screen.dart';
+import 'package:quiz_lab/view/screens/buy_credits/buy_credits_screen.dart';
 import 'package:quiz_lab/view/screens/coin_history/coin_history_screen.dart';
+import 'package:quiz_lab/view/screens/earn_reward/earn_reward_screen.dart';
 
 import 'package:quiz_lab/view/screens/guess_the_word/category/guess_word_catagory_screen.dart';
 import 'package:quiz_lab/view/screens/guess_the_word/main_screen/guess_the_word_screen.dart';
@@ -35,10 +37,14 @@ import 'package:quiz_lab/view/screens/profile/profile-edit/profile_edit_screen.d
 import 'package:quiz_lab/view/screens/profile/profile_screen.dart';
 import 'package:quiz_lab/view/screens/general_quiz/quiz-questions/quiz_question_screen.dart';
 import 'package:quiz_lab/view/screens/quiz_contest/review-answer/review_answer_screen.dart';
+import 'package:quiz_lab/view/screens/reffer-a-friend/reffer_a_friend_screen.dart';
 import 'package:quiz_lab/view/screens/splash/splash_screen.dart';
 import 'package:quiz_lab/view/screens/coin_store/coin_store_screen.dart';
 
 import 'package:get/get.dart';
+import 'package:quiz_lab/view/screens/withdraw/add_withdraw_screen/add_withdraw_method_screen.dart';
+import 'package:quiz_lab/view/screens/withdraw/confirm_withdraw_screen/withdraw_confirm_screen.dart';
+import 'package:quiz_lab/view/screens/withdraw/withdraw_history/withdraw_screen.dart';
 
 import '../../view/screens/1vs1/find-opponents-screen/find_opponent_screen.dart';
 import '../../view/screens/1vs1/one_vs_one_battle_screen.dart';
@@ -128,6 +134,12 @@ class RouteHelper {
   static const String depositsDetailsScreen = "/deposits_details";
   static const String newDepositScreenScreen = "/deposits_money";
   static const String depositWebViewScreen = '/deposit_webView';
+  static const String buyCreditsScreen = '/buy_credits_screen';
+   static const String refferAFriendScreen = '/reffer_a_friend_screen';
+   static const String earnRewardScreen = '/earn_reward_screen';
+   static const String withdrawConfirmScreenScreen = '/withdraw_confirm_screen';
+   static const String withdrawScreen = '/withdraw_screen';
+ static const String addWithdrawMethodScreen     = "/withdraw-method";
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -191,6 +203,12 @@ class RouteHelper {
     GetPage(name: quizContestresultScreen, page: () => const QuizContestResultScreen()),
     GetPage(name: dailyquizContestresultScreen, page: () => const DailyQuizResultScreen()),
     GetPage(name: quizContestreviewScreen, page: () => const QuizContestReviewAnswerScreen()),
+    GetPage(name: buyCreditsScreen, page: () => const BuyCreditsScreen()),
+    GetPage(name: refferAFriendScreen, page: () => const RefferAFriendScreen()),
+    GetPage(name: earnRewardScreen, page: () => const EarnRewardScreen()),
+    GetPage(name: withdrawConfirmScreenScreen, page: () => const WithdrawConfirmScreen()),
+    GetPage(name: withdrawScreen, page: () => const WithdrawScreen()),
+    GetPage(name: addWithdrawMethodScreen,      page: () => const AddWithdrawMethod()),
     GetPage(
         name: depositsScreen,
         page: () => const NewDepositScreen(

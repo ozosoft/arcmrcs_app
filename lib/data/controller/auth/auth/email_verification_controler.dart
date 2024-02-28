@@ -9,7 +9,6 @@ import 'package:quiz_lab/data/repo/auth/sms_email_verification_repo.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 import '../../../../core/route/route.dart';
-
 class EmailVerificationController extends GetxController {
   SmsEmailVerificationRepo repo;
   EmailVerificationController({required this.repo});

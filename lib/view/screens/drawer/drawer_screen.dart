@@ -113,7 +113,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   ),
                   minLeadingWidth: Dimensions.space1,
                   onTap: () {
-                    Get.toNamed(RouteHelper.coinStroeScreen);
+                    Get.toNamed(RouteHelper.buyCreditsScreen);
                   },
                 ),
                 ListTile(
@@ -126,6 +126,17 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     Get.toNamed(RouteHelper.coinHistoryScreen);
                   },
                   minLeadingWidth: Dimensions.space1,
+                ),
+                ListTile(
+                  leading: SvgPicture.asset(MyImages.withdraw,height: 20,),
+                  title: const Text(
+                    MyStrings.withdraw,
+                    style: regularMediumLarge,
+                  ),
+                  minLeadingWidth: Dimensions.space1,
+                  onTap: () {
+                    Get.toNamed(RouteHelper.withdrawScreen);
+                  },
                 ),
                 if (Get.find<DashBoardController>().dailyQuizStatus == '1' || Get.find<DashBoardController>().singleBattleStatus == '1')
                   const Divider(
@@ -161,6 +172,29 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     },
                     minLeadingWidth: Dimensions.space1,
                   ),
+                
+                 ListTile(
+                  leading: SvgPicture.asset(MyImages.referAfriend,height: 20,),
+                  title: const Text(
+                    MyStrings.refferAFriend,
+                    style: regularMediumLarge,
+                  ),
+                  minLeadingWidth: Dimensions.space1,
+                  onTap: () {
+                    Get.toNamed(RouteHelper.refferAFriendScreen);
+                  },
+                ),
+                 ListTile(
+                  leading: SvgPicture.asset(MyImages.earnReward,height: 20,),
+                  title: const Text(
+                    MyStrings.earnReward,
+                    style: regularMediumLarge,
+                  ),
+                  minLeadingWidth: Dimensions.space1,
+                  onTap: () {
+                    Get.toNamed(RouteHelper.earnRewardScreen);
+                  },
+                ),
                 const Divider(
                   endIndent: Dimensions.space70,
                 ),

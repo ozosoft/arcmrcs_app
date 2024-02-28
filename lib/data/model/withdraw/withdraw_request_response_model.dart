@@ -3,8 +3,12 @@ import 'package:flutter/foundation.dart';
 import '../auth/sign_up_model/registration_response_model.dart';
 
 class WithdrawRequestResponseModel {
-  WithdrawRequestResponseModel(
-      {String? remark, String? status, Message? message, Data? data}) {
+  WithdrawRequestResponseModel({
+    String? remark,
+    String? status,
+    Message? message,
+    Data? data
+  }) {
     _remark = remark;
     _status = status;
     _message = message;
@@ -14,8 +18,7 @@ class WithdrawRequestResponseModel {
   WithdrawRequestResponseModel.fromJson(dynamic json) {
     _remark = json['remark'];
     _status = json['status'];
-    _message =
-        json['message'] != null ? Message.fromJson(json['message']) : null;
+    _message = json['message'] != null ? Message.fromJson(json['message']) : null;
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
@@ -44,18 +47,20 @@ class WithdrawRequestResponseModel {
 }
 
 class Data {
-  Data({String? trx, WithdrawData? withdrawData, Form? form}) {
+  Data({
+    String? trx,
+    WithdrawData? withdrawData,
+    Form? form
+  }) {
     _trx = trx;
     _withdrawData = withdrawData;
     _form = form;
   }
 
   Data.fromJson(dynamic json) {
-    _trx = json['trx'];
+    _trx  = json['trx'];
     _form = json['form'] != null ? Form.fromJson(json['form']) : null;
-    _withdrawData = json['withdraw_data'] != null
-        ? WithdrawData.fromJson(json['withdraw_data'])
-        : null;
+    _withdrawData = json['withdraw_data'] != null ? WithdrawData.fromJson(json['withdraw_data']) : null;
   }
 
   String? _trx;
@@ -81,38 +86,38 @@ class Form {
     _list = list;
   }
 
-  List<FormModel>? _list = [];
+  List<FormModel>? _list=[];
 
   List<FormModel>? get list => _list;
 
   Form.fromJson(dynamic json) {
     var map = Map.from(json).map((k, v) => MapEntry<String, dynamic>(k, v));
 
-    try {
+    try{
       List<FormModel>? list = map.entries
-          .map(
-            (e) => FormModel(
-                e.value['name'],
-                e.value['label'],
-                e.value['is_required'],
-                e.value['extensions'],
-                (e.value['options'] as List).map((e) => e as String).toList(),
-                e.value['type'],
-                ''),
-          )
-          .toList();
+          .map((e) => FormModel(
+          e.value['name'],
+          e.value['label'],
+          e.value['is_required'],
+          e.value['extensions'],
+          (e.value['options'] as List).map((e) => e as String).toList(),
+          e.value['type'],
+        ''
+      ),).toList();
       if (list.isNotEmpty) {
         list.removeWhere((element) => element.toString().isEmpty);
         _list?.addAll(list);
       }
       _list;
-    } catch (e) {
+    }catch(e){
       if (kDebugMode) {
-        debugPrint(e.toString());
+        print(e.toString());
       }
     }
   }
+
 }
+
 
 class FormModel {
   String? name;
@@ -123,12 +128,13 @@ class FormModel {
   String? type;
   dynamic selectedValue;
   File? file;
-  List<String>? cbSelected;
+  List<String>?cbSelected;
 
   FormModel(this.name, this.label, this.isRequired, this.extensions,
-      this.options, this.type, this.selectedValue,
-      {this.cbSelected, this.file});
+      this.options, this.type,this.selectedValue,{this.cbSelected,this.file});
+
 }
+
 
 class WithdrawData {
   WithdrawData({
@@ -145,35 +151,33 @@ class WithdrawData {
     String? createdAt,
     int? id,
   }) {
-    _methodId = methodId;
-    _userId = userId;
-    _amount = amount;
-    _currency = currency;
-    _rate = rate;
-    _charge = charge;
-    _finalAmount = finalAmount;
-    _afterCharge = afterCharge;
-    _trx = trx;
-    _updatedAt = updatedAt;
-    _createdAt = createdAt;
-    _id = id;
+    _methodId     = methodId;
+    _userId       = userId;
+    _amount       = amount;
+    _currency     = currency;
+    _rate         = rate;
+    _charge       = charge;
+    _finalAmount  = finalAmount;
+    _afterCharge  = afterCharge;
+    _trx          = trx;
+    _updatedAt    = updatedAt;
+    _createdAt    = createdAt;
+    _id           = id;
   }
 
   WithdrawData.fromJson(dynamic json) {
-    _methodId = json['method_id'].toString();
-    _userId = json['user_id'].toString();
-    _amount = json['amount'] != null ? json['amount'].toString() : '0';
-    _currency = json['currency'].toString();
-    _rate = json['rate'] != null ? json['rate'].toString() : '1';
-    _charge = json['charge'] != null ? json['charge'].toString() : '0';
-    _finalAmount =
-        json['final_amount'] != null ? json['final_amount'].toString() : '';
-    _afterCharge =
-        json['after_charge'] != null ? json['after_charge'].toString() : '';
-    _trx = json['trx'].toString();
-    _updatedAt = json['updated_at'];
-    _createdAt = json['created_at'];
-    _id = json['id'];
+    _methodId      = json['method_id'].toString();
+    _userId        = json['user_id'].toString();
+    _amount        = json['amount'] !=null? json['amount'].toString():'0';
+    _currency      = json['currency'].toString();
+    _rate          = json['rate']!=null?json['rate'].toString():'1';
+    _charge        = json['charge'] !=null? json['charge'].toString():'0';
+    _finalAmount   = json['final_amount']!=null?json['final_amount'].toString():'';
+    _afterCharge   = json['after_charge'] !=null? json['after_charge'].toString():'';
+    _trx           = json['trx'].toString();
+    _updatedAt     = json['updated_at'];
+    _createdAt     = json['created_at'];
+    _id            = json['id'];
   }
 
   String? _methodId;
@@ -219,3 +223,4 @@ class WithdrawData {
     return map;
   }
 }
+

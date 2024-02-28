@@ -6,8 +6,7 @@ class WithdrawHistoryResponseModel {
     String? remark,
     String? status,
     Message? message,
-    MainData? data,
-  }) {
+    MainData? data,}){
     _remark = remark;
     _status = status;
     _message = message;
@@ -15,11 +14,10 @@ class WithdrawHistoryResponseModel {
   }
 
   WithdrawHistoryResponseModel.fromJson(dynamic json) {
-    _remark = json['remark'];
-    _status = json['status'];
-    _message =
-        json['message'] != null ? Message.fromJson(json['message']) : null;
-    _data = json['data'] != null ? MainData.fromJson(json['data']) : null;
+    _remark  = json['remark'];
+    _status  = json['status'];
+    _message = json['message'] != null ? Message.fromJson(json['message']) : null;
+    _data    = json['data'] != null ? MainData.fromJson(json['data']) : null;
   }
 
   String? _remark;
@@ -44,19 +42,17 @@ class WithdrawHistoryResponseModel {
     }
     return map;
   }
+
 }
 
 class MainData {
   MainData({
-    Withdrawals? withdrawals,
-  }) {
+    Withdrawals? withdrawals,}){
     _withdrawals = withdrawals;
   }
 
   MainData.fromJson(dynamic json) {
-    _withdrawals = json['withdrawals'] != null
-        ? Withdrawals.fromJson(json['withdrawals'])
-        : null;
+    _withdrawals = json['withdrawals'] != null ? Withdrawals.fromJson(json['withdrawals']) : null;
     _path = json['path'];
   }
   Withdrawals? _withdrawals;
@@ -72,11 +68,15 @@ class MainData {
     }
     return map;
   }
+
 }
 
 class Withdrawals {
-  Withdrawals(
-      {List<WithdrawListModel>? data, dynamic nextPageUrl, String? path}) {
+  Withdrawals({
+    List<WithdrawListModel>? data,
+    dynamic nextPageUrl,
+    String? path
+  }){
     _data = data;
     _nextPageUrl = nextPageUrl;
     _path = path;
@@ -85,13 +85,13 @@ class Withdrawals {
   Withdrawals.fromJson(dynamic json) {
     if (json['data'] != null) {
       _data = [];
-      try {
+      try{
         json['data'].forEach((v) {
           _data?.add(WithdrawListModel.fromJson(v));
         });
-      } catch (e) {
+      }catch(e){
         if (kDebugMode) {
-          debugPrint(e.toString());
+          print(e.toString());
         }
       }
     }
@@ -116,25 +116,28 @@ class Withdrawals {
     map['path'] = _path;
     return map;
   }
+
 }
 
+
 class WithdrawListModel {
-  WithdrawListModel(
-      {int? id,
-      String? methodId,
-      String? userId,
-      String? amount,
-      String? currency,
-      String? rate,
-      String? charge,
-      String? trx,
-      String? finalAmount,
-      String? afterCharge,
-      String? status,
-      dynamic adminFeedback,
-      String? createdAt,
-      String? updatedAt,
-      Method? method}) {
+  WithdrawListModel({
+    int? id,
+    String? methodId,
+    String? userId,
+    String? amount,
+    String? currency,
+    String? rate,
+    String? charge,
+    String? trx,
+    String? finalAmount,
+    String? afterCharge,
+    String? status,
+    dynamic adminFeedback,
+    String? createdAt,
+    String? updatedAt,
+    Method? method}){
+
     _id = id;
     _amount = amount;
     _currency = currency;
@@ -147,6 +150,7 @@ class WithdrawListModel {
     _createdAt = createdAt;
     _updatedAt = updatedAt;
     _method = method;
+
   }
 
   WithdrawListModel.fromJson(dynamic json) {
@@ -160,33 +164,32 @@ class WithdrawListModel {
     _afterCharge = json['after_charge'].toString();
     if (json['withdraw_information'] != null) {
       _details = [];
-      try {
-        if (json['withdraw_information'] is List<dynamic>) {
+      try{
+        if(json['withdraw_information'] is List<dynamic>){
           json['withdraw_information'].forEach((v) {
             _details?.add(Details.fromJson(v));
           });
-        } else {
-          var map = Map.from(json['withdraw_information'])
-              .map((key, value) => MapEntry(key, value));
-          List<Details>? list = map.entries
-              .map((e) => Details(
+        } else{
+          var map=Map.from(json['withdraw_information']).map((key, value) => MapEntry(key, value));
+          List<Details>?list=map.entries.map((e) =>
+              Details(
                   name: e.value['name'],
                   type: e.value['type'],
-                  value: e.value['value']))
-              .toList();
-          if (list.isNotEmpty) {
+                  value: e.value['value']
+              )).toList();
+          if(list.isNotEmpty){
             list.removeWhere((element) => element.toString().isEmpty);
             _details?.addAll(list);
           }
           _details;
         }
-        _details?.removeWhere(
-            (element) => element.value == null || element.name == null);
-      } catch (e) {
-        if (kDebugMode) {
-          debugPrint(e.toString());
+        _details?.removeWhere((element) => element.value==null || element.name==null);
+      }catch(e){
+        if(kDebugMode){
+          print(e.toString());
         }
       }
+
     }
     _status = json['status'].toString();
     _adminFeedback = json['admin_feedback'].toString();
@@ -250,22 +253,24 @@ class WithdrawListModel {
     }
     return map;
   }
+
 }
 
 class Method {
-  Method(
-      {int? id,
-      String? name,
-      String? minLimit,
-      String? maxLimit,
-      String? fixedCharge,
-      String? rate,
-      String? percentCharge,
-      String? currency,
-      String? description,
-      String? status,
-      String? createdAt,
-      String? updatedAt}) {
+  Method({
+    int? id,
+    String? name,
+    String? minLimit,
+    String? maxLimit,
+    String? fixedCharge,
+    String? rate,
+    String? percentCharge,
+    String? currency,
+    String? description,
+    String? status,
+    String? createdAt,
+    String? updatedAt}){
+
     _id = id;
     _name = name;
     _minLimit = minLimit;
@@ -278,6 +283,7 @@ class Method {
     _status = status;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
+
   }
 
   Method.fromJson(dynamic json) {
@@ -337,23 +343,23 @@ class Method {
     map['updated_at'] = _updatedAt;
     return map;
   }
+
 }
 
 class Details {
   Details({
     String? name,
     String? type,
-    String? value,
-  }) {
+    String? value,}){
     _name = name;
     _type = type;
     _value = value;
   }
 
   Details.fromJson(dynamic json) {
-    _name = json['name'] ?? '';
-    _type = json['type'] ?? '';
-    _value = json['value'] != null ? json['value'].toString() : '';
+    _name = json['name']??'';
+    _type = json['type']??'';
+    _value = json['value']!=null?json['value'].toString():'';
   }
 
   String? _name;
@@ -371,4 +377,5 @@ class Details {
     map['value'] = _value;
     return map;
   }
+
 }

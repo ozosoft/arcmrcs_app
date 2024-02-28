@@ -22,6 +22,10 @@ static const String dollarSign = "\$ ";
     static const String tapToShare = "Tap to share";
   static const String refferalCode = "Refferal Code";
 
+   static const String refferAFriend = 'Reffer a Friend';
+   static const String earnReward = 'Earn reward';
+   static const String myReffers = 'My Reffers';
+
   static const String quizLeaveWarningTitle = "Are you sure you want to leave this quiz?";
   static const String withdrawInformation = "Withdraw Information";
   static const String withdrawLimit = "Withdraw Limit";
@@ -139,7 +143,8 @@ static const String dollarSign = "\$ ";
   static const String kycAlreadyVerifiedMsg = "You are already verified";
   static const String verify = "Verify";
   static const String verifyNow = "Verify Now";
-  static const String withdraw = "Withdrawals";
+  static const String withdraw = "Withdraw";
+  static const String withdrawals = "Withdrawals";
   static const String seeAll = "See All";
   static const String goHome = "Go Home";
   static const String home = "Home";

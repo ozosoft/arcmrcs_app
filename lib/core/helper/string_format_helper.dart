@@ -15,8 +15,9 @@ class Converter {
       return value;
     }
   }
+  
 
-  static String formatNumber(String value, {int precision = 2}) {
+ static String formatNumber(String value, {int precision = 2}) {
     try {
       double number = double.parse(value);
       String b = number.toStringAsFixed(precision);
@@ -25,6 +26,7 @@ class Converter {
       return value;
     }
   }
+
 
   static String removeQuotationAndSpecialCharacterFromString(String value) {
     try {

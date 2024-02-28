@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
 import 'package:quiz_lab/view/components/no_data.dart';
@@ -67,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: SafeArea(
               child: CustomScrollView(
+                
                 physics: const BouncingScrollPhysics(),
                 slivers: <Widget>[
                   SliverPersistentHeader(
@@ -91,6 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   hideButton: true,
                                 )
                               : Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     if (controller.generalQuizStatus == '1') ...[
                                       const TopCategorySection(),
@@ -104,7 +107,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const ExamZoneSection(),
                                     ],
 
+
+                                 
+
                                     const PlayDifferentQuizes(),
+                                       
+                                      
+
+                                     
+
+
 
                                     const SizedBox(
                                       height: Dimensions.space70,

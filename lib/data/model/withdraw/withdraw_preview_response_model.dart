@@ -3,19 +3,21 @@ import 'package:flutter/foundation.dart';
 import '../auth/sign_up_model/registration_response_model.dart';
 
 class WithdrawConfirmResponseModel {
-  WithdrawConfirmResponseModel(
-      {String? remark, String? status, Message? message, Data? data}) {
+  WithdrawConfirmResponseModel({
+      String? remark, 
+      String? status, 
+      Message? message, 
+      Data? data}){
     _remark = remark;
     _status = status;
     _message = message;
     _data = data;
-  }
+}
 
   WithdrawConfirmResponseModel.fromJson(dynamic json) {
     _remark = json['remark'];
     _status = json['status'];
-    _message =
-        json['message'] != null ? Message.fromJson(json['message']) : null;
+    _message = json['message'] != null ? Message.fromJson(json['message']) : null;
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
   String? _remark;
@@ -40,17 +42,19 @@ class WithdrawConfirmResponseModel {
     }
     return map;
   }
+
 }
 
 class Data {
-  Data({Withdraw? withdraw, Form? form}) {
+  Data({
+      Withdraw? withdraw, 
+      Form? form}){
     _withdraw = withdraw;
     _form = form;
   }
 
   Data.fromJson(dynamic json) {
-    _withdraw =
-        json['withdraw'] != null ? Withdraw.fromJson(json['withdraw']) : null;
+    _withdraw = json['withdraw'] != null ? Withdraw.fromJson(json['withdraw']) : null;
     _form = json['form'] != null ? Form.fromJson(json['form']) : null;
   }
 
@@ -70,28 +74,27 @@ class Data {
     }
     return map;
   }
+
 }
 
 class Form {
   Form({
-    int? id,
-    String? act,
-    FormData? formData,
-    String? createdAt,
-    String? updatedAt,
-  }) {
+      int? id, 
+      String? act, 
+      FormData? formData, 
+      String? createdAt, 
+      String? updatedAt,}){
     _id = id;
     _act = act;
     _formData = formData;
     _createdAt = createdAt;
     _updatedAt = updatedAt;
-  }
+}
 
   Form.fromJson(dynamic json) {
     _id = json['id'];
     _act = json['act'];
-    _formData =
-        json['form_data'] != null ? FormData.fromJson(json['form_data']) : null;
+    _formData = json['form_data'] != null ? FormData.fromJson(json['form_data']) : null;
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
   }
@@ -116,6 +119,7 @@ class Form {
     map['updated_at'] = _updatedAt;
     return map;
   }
+
 }
 
 class FormData {
@@ -123,14 +127,14 @@ class FormData {
     _list = list;
   }
 
-  List<FormModel>? _list = [];
+  List<FormModel>? _list=[];
 
   List<FormModel>? get list => _list;
 
   FormData.fromJson(dynamic json) {
-    try {
+    try{
       _list = [];
-      if (json is List<dynamic>) {
+      if(json is List<dynamic>){
         for (var e in json) {
           _list?.add(FormModel(
               e.value['name'],
@@ -139,36 +143,36 @@ class FormData {
               e.value['extensions'],
               (e.value['options'] as List).map((e) => e as String).toList(),
               e.value['type'],
-              ''));
+              ''
+          ));
         }
         _list;
-      } else {
+      } else{
         var map = Map.from(json).map((k, v) => MapEntry<String, dynamic>(k, v));
         List<FormModel>? list = map.entries
-            .map(
-              (e) => FormModel(
-                  e.value['name'],
-                  e.value['label'],
-                  e.value['is_required'],
-                  e.value['extensions'],
-                  (e.value['options'] as List).map((e) => e as String).toList(),
-                  e.value['type'],
-                  ''),
-            )
-            .toList();
+            .map((e) => FormModel(
+            e.value['name'],
+            e.value['label'],
+            e.value['is_required'],
+            e.value['extensions'],
+            (e.value['options'] as List).map((e) => e as String).toList(),
+            e.value['type'],
+            ''
+        ),).toList();
         if (list.isNotEmpty) {
           list.removeWhere((element) => element.toString().isEmpty);
           _list?.addAll(list);
         }
         _list;
       }
-    } catch (e) {
+    }catch(e){
       if (kDebugMode) {
-        debugPrint(e.toString());
+        print(e.toString());
       }
     }
   }
 }
+
 
 class FormModel {
   String? name;
@@ -179,34 +183,35 @@ class FormModel {
   String? type;
   dynamic selectedValue;
   File? file;
-  List<String>? cbSelected;
+  List<String>?cbSelected;
 
   FormModel(this.name, this.label, this.isRequired, this.extensions,
-      this.options, this.type, this.selectedValue,
-      {this.cbSelected, this.file});
+      this.options, this.type,this.selectedValue,{this.cbSelected,this.file});
+
 }
 
 class Withdraw {
-  Withdraw(
-      {int? id,
-      String? methodId,
-      String? userId,
-      String? amount,
-      String? currency,
-      String? rate,
-      String? charge,
-      String? trx,
-      String? finalAmount,
-      String? afterCharge,
-      dynamic withdrawInformation,
-      String? status,
-      dynamic adminFeedback,
-      String? branchId,
-      String? branchStaffId,
-      String? createdAt,
-      String? updatedAt,
-      Method? method,
-      User? user}) {
+  Withdraw({
+      int? id, 
+      String? methodId, 
+      String? userId, 
+      String? amount, 
+      String? currency, 
+      String? rate, 
+      String? charge, 
+      String? trx, 
+      String? finalAmount, 
+      String? afterCharge, 
+      dynamic withdrawInformation, 
+      String? status, 
+      dynamic adminFeedback, 
+      String? branchId, 
+      String? branchStaffId, 
+      String? createdAt, 
+      String? updatedAt, 
+      Method? method, 
+      User? user}){
+
     _id = id;
     _methodId = methodId;
     _userId = userId;
@@ -226,21 +231,19 @@ class Withdraw {
     _updatedAt = updatedAt;
     _method = method;
     _user = user;
-  }
+}
 
   Withdraw.fromJson(dynamic json) {
     _id = json['id'];
     _methodId = json['method_id'].toString();
     _userId = json['user_id'].toString();
-    _amount = json['amount'] != null ? json['amount'].toString() : '';
-    _currency = json['currency'] != null ? json['currency'].toString() : '';
-    _rate = json['rate'] != null ? json['rate'].toString() : '';
-    _charge = json['charge'] != null ? json['charge'].toString() : '';
-    _trx = json['trx'] != null ? json['trx'].toString() : '';
-    _finalAmount =
-        json['final_amount'] != null ? json['final_amount'].toString() : '';
-    _afterCharge =
-        json['after_charge'] != null ? json['after_charge'].toString() : '';
+    _amount = json['amount']!=null?json['amount'].toString():'';
+    _currency = json['currency']!=null?json['currency'].toString():'';
+    _rate = json['rate']!=null?json['rate'].toString():'';
+    _charge = json['charge']!=null?json['charge'].toString():'';
+    _trx = json['trx']!=null?json['trx'].toString():'';
+    _finalAmount = json['final_amount']!=null?json['final_amount'].toString():'';
+    _afterCharge = json['after_charge']!=null?json['after_charge'].toString():'';
     _withdrawInformation = json['withdraw_information'].toString();
     _status = json['status'].toString();
     _adminFeedback = json['admin_feedback'].toString();
@@ -319,33 +322,34 @@ class Withdraw {
     }
     return map;
   }
+
 }
 
 class User {
-  User(
-      {int? id,
-      String? firstname,
-      String? lastname,
-      String? username,
-      String? email,
-      String? countryCode,
-      String? mobile,
-      String? balance,
-      String? image,
-      Address? address,
-      String? status,
-      String? kv,
-      String? ev,
-      String? sv,
-      String? profileComplete,
-      String? verCodeSendAt,
-      String? ts,
-      String? tv,
-      String? tsc,
-      String? sessionData,
-      String? banReason,
-      String? createdAt,
-      String? updatedAt}) {
+  User({
+    int? id,
+    String? firstname,
+    String? lastname,
+    String? username,
+    String? email,
+    String? countryCode,
+    String? mobile,
+    String? balance,
+    String? image,
+    Address? address,
+    String? status,
+    String? kv,
+    String? ev,
+    String? sv,
+    String? profileComplete,
+    String? verCodeSendAt,
+    String? ts,
+    String? tv,
+    String? tsc,
+    String? sessionData,
+    String? banReason,
+    String? createdAt,
+    String? updatedAt}){
     _id = id;
     _firstname = firstname;
     _lastname = lastname;
@@ -383,8 +387,7 @@ class User {
     _refBy = json['ref_by'].toString();
     _balance = json['balance'].toString();
     _image = json['image'];
-    _address =
-        json['address'] != null ? Address.fromJson(json['address']) : null;
+    _address = json['address'] != null ? Address.fromJson(json['address']) : null;
     _status = json['status'].toString();
     _kv = json['kv'].toString();
     _ev = json['ev'].toString();
@@ -480,15 +483,16 @@ class User {
     map['updated_at'] = _updatedAt;
     return map;
   }
+
 }
 
 class Address {
-  Address(
-      {String? address,
-      String? city,
-      String? state,
-      String? zip,
-      String? country}) {
+  Address({
+    String? address,
+    String? city,
+    String? state,
+    String? zip,
+    String? country}){
     _address = address;
     _city = city;
     _state = state;
@@ -524,24 +528,25 @@ class Address {
     map['country'] = _country;
     return map;
   }
+
 }
 
 class Method {
-  Method(
-      {int? id,
-      String? formId,
-      String? name,
-      String? minLimit,
-      String? maxLimit,
-      String? fixedCharge,
-      String? rate,
-      String? percentCharge,
-      String? currency,
-      String? description,
-      String? status,
-      String? createdAt,
-      String? updatedAt,
-      Form? form}) {
+  Method({
+      int? id, 
+      String? formId, 
+      String? name, 
+      String? minLimit, 
+      String? maxLimit, 
+      String? fixedCharge, 
+      String? rate, 
+      String? percentCharge, 
+      String? currency, 
+      String? description, 
+      String? status, 
+      String? createdAt, 
+      String? updatedAt, 
+      Form? form}){
     _id = id;
     _formId = formId;
     _name = name;
@@ -556,22 +561,20 @@ class Method {
     _createdAt = createdAt;
     _updatedAt = updatedAt;
     _form = form;
-  }
+}
 
   Method.fromJson(dynamic json) {
     _id = json['id'];
     _formId = json['form_id'].toString();
-    _name = json['name'] != null ? json['name'].toString() : '';
-    _minLimit = json['min_limit'] != null ? json['max_limit'].toString() : '';
-    _maxLimit = json['max_limit'] != null ? json['max_limit'].toString() : '';
-    _fixedCharge =
-        json['fixed_charge'] != null ? json['fixed_charge'].toString() : '';
-    _rate = json['rate'] != null ? json['rate'].toString() : '';
-    _percentCharge =
-        json['percent_charge'] != null ? json['percent_charge'].toString() : '';
-    _currency = json['currency'] != null ? json['currency'].toString() : '';
+    _name = json['name']!=null?json['name'].toString():'';
+    _minLimit = json['min_limit']!=null?json['max_limit'].toString():'';
+    _maxLimit = json['max_limit']!=null?json['max_limit'].toString():'';
+    _fixedCharge = json['fixed_charge']!=null?json['fixed_charge'].toString():'';
+    _rate = json['rate']!=null?json['rate'].toString():'';
+    _percentCharge = json['percent_charge']!=null?json['percent_charge'].toString():'';
+    _currency = json['currency']!=null?json['currency'].toString():'';
     _description = json['description'].toString();
-    _status = json['status'] != null ? json['status'].toString() : '';
+    _status = json['status']!=null?json['status'].toString():'';
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
     _form = json['form'] != null ? Form.fromJson(json['form']) : null;
@@ -626,4 +629,5 @@ class Method {
     }
     return map;
   }
+
 }

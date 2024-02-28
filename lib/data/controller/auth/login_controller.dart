@@ -14,7 +14,6 @@ import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 import '../../model/country_model/country_model.dart';
-
 class LoginController extends GetxController {
   LoginRepo loginRepo;
   LoginController({required this.loginRepo});

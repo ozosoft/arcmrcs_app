@@ -20,8 +20,9 @@ class MyImages {
 
   static const String coinsImage  = "assets/images/star.png";
    static const String arrowDown = "assets/images/arrow-down.svg";
+   static const String earnReward = "assets/images/earnReward.svg";
    static const String person = "assets/images/person.png";
-
+static const String referAfriend = "assets/images/refer-arrow.svg";
      static const String reffer = "assets/images/refer.png";
   static const String done = "assets/images/done.png";
   static const String coinEarned = "assets/images/coin_earned.png";
@@ -54,6 +55,7 @@ class MyImages {
   static const String coin1 = "assets/images/coin1.svg";
   static const String coin = "assets/images/Coin.svg";
   static const String score = "assets/images/score.svg";
+  static const String withdraw = "assets/images/withdraw.svg";
   static const String reviewBgImage = "assets/images/app_red_bg.svg";
   static const String greenTikSvg = "assets/images/green_tik_svg.svg";
   static const String wrongSvg = "assets/images/wrongFilled.svg";

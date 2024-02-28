@@ -1,8 +1,11 @@
 import '../auth/sign_up_model/registration_response_model.dart';
 
 class WithdrawMethodResponseModel {
-  WithdrawMethodResponseModel(
-      {String? remark, String? status, Message? message, Data? data}) {
+  WithdrawMethodResponseModel({
+    String? remark,
+    String? status,
+    Message? message,
+    Data? data}){
     _remark = remark;
     _status = status;
     _message = message;
@@ -12,8 +15,7 @@ class WithdrawMethodResponseModel {
   WithdrawMethodResponseModel.fromJson(dynamic json) {
     _remark = json['remark'];
     _status = json['status'];
-    _message =
-        json['message'] != null ? Message.fromJson(json['message']) : null;
+    _message = json['message'] != null ? Message.fromJson(json['message']) : null;
     _data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
@@ -39,10 +41,12 @@ class WithdrawMethodResponseModel {
     }
     return map;
   }
+
 }
 
 class Data {
-  Data({List<WithdrawMethod>? withdrawMethod}) {
+  Data({
+    List<WithdrawMethod>? withdrawMethod}){
     _withdrawMethod = withdrawMethod;
   }
 
@@ -65,24 +69,25 @@ class Data {
     }
     return map;
   }
+
 }
 
 class WithdrawMethod {
-  WithdrawMethod(
-      {int? id,
-      String? name,
-      String? image,
-      String? minLimit,
-      String? maxLimit,
-      String? delay,
-      String? fixedCharge,
-      String? rate,
-      String? percentCharge,
-      String? currency,
-      String? description,
-      String? status,
-      String? createdAt,
-      String? updatedAt}) {
+  WithdrawMethod({
+    int? id,
+    String? name,
+    String? image,
+    String? minLimit,
+    String? maxLimit,
+    String? delay,
+    String? fixedCharge,
+    String? rate,
+    String? percentCharge,
+    String? currency,
+    String? description,
+    String? status,
+    String? createdAt,
+    String? updatedAt}){
     _id = id;
     _name = name;
     _image = image;
@@ -166,4 +171,5 @@ class WithdrawMethod {
     map['updated_at'] = _updatedAt;
     return map;
   }
+
 }

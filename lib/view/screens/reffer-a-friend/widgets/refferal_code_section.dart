@@ -1,9 +1,11 @@
 import 'package:dotted_border/dotted_border.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
+import 'package:share_plus/share_plus.dart';
 
 class RefferalCodeSection extends StatefulWidget {
   const RefferalCodeSection({super.key});
@@ -41,9 +43,14 @@ class _RefferalCodeSectionState extends State<RefferalCodeSection> {
                     "EKREF3123",
                     style: semiBoldExtraLarge,
                   ),
-                  Text(
-                    MyStrings.tapToShare,
-                    style: semiBoldDefault.copyWith(color: MyColor.greyTextColor),
+                  InkWell(
+                    onTap: () {
+                      Share.share('#EKREF3123');
+                    },
+                    child: Text(
+                      MyStrings.tapToShare,
+                      style: semiBoldDefault.copyWith(color: MyColor.greyTextColor),
+                    ),
                   )
                 ]),
               ),
@@ -52,7 +59,7 @@ class _RefferalCodeSectionState extends State<RefferalCodeSection> {
               height: Dimensions.space40,
             ),
             const Text(
-              MyStrings.referByFriends,
+              MyStrings.myReffers,
               style: regularMediumLarge,
             ),
           ]),

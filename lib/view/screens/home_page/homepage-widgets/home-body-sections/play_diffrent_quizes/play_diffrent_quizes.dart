@@ -43,6 +43,8 @@ class _PlayDifferentQuizesState extends State<PlayDifferentQuizes> {
             itemCount: controller.differentQuizlist.length,
             itemBuilder: (context, index) {
               var item = controller.differentQuizlist[index];
+              print("this is play diffrent section items var $item");
+              print("this is play diffrent section items  ${controller.differentQuizlist}");
               return GestureDetector(
                 onTap: () {
                   if (item.act == "fun") {
