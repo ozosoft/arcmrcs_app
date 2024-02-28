@@ -18,6 +18,15 @@ class MyImages {
   static const String noContentFound = "assets/images/no-content.png";
   static const String battleKnife = "assets/images/battle_knife.png";
 
+  static const String coinsImage  = "assets/images/star.png";
+   static const String arrowDown = "assets/images/arrow-down.svg";
+   static const String person = "assets/images/person.png";
+
+     static const String reffer = "assets/images/refer.png";
+  static const String done = "assets/images/done.png";
+  static const String coinEarned = "assets/images/coin_earned.png";
+  static const String arrowNext = "assets/images/next.png";
+
   static const String placeHolderImage = "assets/images/place_holder.png";
 
   static const String mailSVG = "assets/images/email_SVG.svg";

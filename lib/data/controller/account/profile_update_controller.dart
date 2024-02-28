@@ -79,12 +79,6 @@ class ProfileUpdateController extends GetxController {
 
   bool isSubmitLoading = false;
   updateProfilePic() async {
-
-    if(imageFile == null){
-      CustomSnackBar.error(errorList: [MyStrings.selectAnImage]);
-      return;
-    }
-
     isSubmitLoading = true;
     update();
 

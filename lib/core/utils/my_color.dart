@@ -11,6 +11,9 @@ class MyColor {
   static const Color lightprimaryColor = Color(0x92FF7357);
   static const Color secondaryColor = Color(0xffF6F7FE);
   static const Color screenBgColor = Color(0xFFF9F9F9);
+   static const Color buyCoinButtonColor             = Color(0xff1CBC9C);
+    static const Color colorLightWhite                  = Color(0xFFE2E2E2);
+ 
   static const Color primaryTextColor = Color(0xff160603);
   static const Color contentTextColor = Color(0xff777777);
   static const Color lineColor = Color(0xffECECEC);

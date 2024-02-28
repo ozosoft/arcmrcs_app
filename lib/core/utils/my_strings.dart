@@ -13,6 +13,14 @@ class MyStrings {
   static const String onboardTitle3 = "Compete With Friends"; //Title 3
   static const String onboardDescription3 = "Who is the smartest in your group of friends and family"; //Des 3
   //Onboard End
+static const String dollarSign = "\$ ";
+ static const String usd = " USD";
+
+  static const String noPackAvailableRightNow = "No Pack Available Right Now";
+  static const String referByFriends = "Reffered by Friends";
+   static const String chooseAnOption = "Choose an option";
+    static const String tapToShare = "Tap to share";
+  static const String refferalCode = "Refferal Code";
 
   static const String quizLeaveWarningTitle = "Are you sure you want to leave this quiz?";
   static const String withdrawInformation = "Withdraw Information";
@@ -68,7 +76,6 @@ class MyStrings {
   static const String any = "Any";
   static const String signUp = "Sign Up";
   static const String email = "Email";
-  static const String emailAddress = "Email Address";
   static const String attachment = "Attachment";
   static const String attempted = "Attempted";
   static const String unAttempted = "Un Attempted";
@@ -483,6 +490,16 @@ class MyStrings {
   static const String agreeExamRules = "You must agree with Exam rules";
   static const String unlock = "unlock";
   static const String lock = "lock";
+
+   static const String buyCredits = 'Buy Credits';
+  static const String youWillGet = "You and your friend will get ";
+  static const String refferalAmount = "1 Refferal = 100 Coins";
+
+
+    static const String packPurchasedSuccessfully = "Pack Purchased Successfully";
+  static const String purchaseWasCanceled = "Pack Purchased was Canceled";
+  static const String purchaseIsPending = "Pack Purchase is Pending";
+  static const String failedToPurchasedPack = "Pack Purchased Failed";
 
   static const List<String> questionPrefix = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"];
 }

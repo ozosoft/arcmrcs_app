@@ -25,8 +25,8 @@ class ProfileController extends GetxController {
   bool isLoading = false;
   TextEditingController firstNameController = TextEditingController();
   TextEditingController lastNameController = TextEditingController();
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  late TextEditingController userNameController = TextEditingController(text: username.toString());
+  late TextEditingController emailController = TextEditingController(text: email.toString());
   TextEditingController mobileNoController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController stateController = TextEditingController();

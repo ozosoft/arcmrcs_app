@@ -24,7 +24,6 @@ class BackGroundWithRankCard extends StatefulWidget {
 class _BackGroundWithRankCardState extends State<BackGroundWithRankCard> with SingleTickerProviderStateMixin {
   @override
   void initState() {
-
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(LeaderBoardRepo(apiClient: Get.find()));
     LeaderBoardController controller = Get.put(LeaderBoardController(leaderBoardRepo: Get.find()));

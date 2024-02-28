@@ -3,18 +3,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:quiz_lab/firebase_options.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:quiz_lab/core/helper/shared_preference_helper.dart';
+import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/messages.dart';
-import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/controller/localization/localization_controller.dart';
-import 'package:quiz_lab/firebase_options.dart';
 import 'package:quiz_lab/push_notification_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'core/di_service/di_services.dart' as di_service;
-import 'core/route/route.dart';
 import 'core/utils/util.dart';
 
 Future<void> _messageHandler(RemoteMessage message) async {

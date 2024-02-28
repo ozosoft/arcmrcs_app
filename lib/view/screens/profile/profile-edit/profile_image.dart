@@ -31,9 +31,6 @@ class ProfileWidget extends StatefulWidget {
 class _ProfileWidgetState extends State<ProfileWidget> {
   @override
   void initState() {
-
-     print('image : ${widget.imagePath}');
-
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(ProfileRepo(apiClient: Get.find()));
 

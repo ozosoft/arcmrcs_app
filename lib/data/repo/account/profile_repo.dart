@@ -77,6 +77,7 @@ class ProfileRepo {
       request.files.add(http.MultipartFile('avatar', profilePic.readAsBytes().asStream(), profilePic.lengthSync(), filename: profilePic.path.split('/').last));
     
       http.StreamedResponse response = await request.send();
+
       String jsonResponse = await response.stream.bytesToString();
       AuthorizationResponseModel model = AuthorizationResponseModel.fromJson(jsonDecode(jsonResponse));
 
@@ -88,7 +89,6 @@ class ProfileRepo {
         return false;
       }
     } catch (e) {
-      print('error: ${e.toString()}');
       return false;
     }
   }
