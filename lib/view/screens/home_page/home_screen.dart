@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_lab/core/helper/unity-ads/unity_ads_helper.dart';
+import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
+import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
@@ -9,6 +12,7 @@ import 'package:quiz_lab/view/screens/drawer/drawer_screen.dart';
 import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home-body-sections/exam_zone_section/exam_zone_homepage_category_screen.dart';
 import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home-body-sections/home_top_category_section/top_category_section.dart';
 import 'package:get/get.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../../../core/helper/ads/admob_helper.dart';
 import '../../../core/helper/ads/ads_unit_id_helper.dart';
 import '../../../data/controller/dashboard/dashboard_controller.dart';
@@ -52,6 +56,11 @@ class _HomeScreenState extends State<HomeScreen> {
     AdUnitHelper.initializeAdUnits();
     admobHelper.createInterstitialAd();
 
+      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+      await AdManager.loadUnityIntAd();
+      await AdManager.loadUnityRewardedAd();
+    });
+
     controller.getHomePageData();
   }
 
@@ -68,7 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
             },
             child: SafeArea(
               child: CustomScrollView(
-                
                 physics: const BouncingScrollPhysics(),
                 slivers: <Widget>[
                   SliverPersistentHeader(
@@ -93,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   hideButton: true,
                                 )
                               : Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     if (controller.generalQuizStatus == '1') ...[
                                       const TopCategorySection(),
@@ -107,16 +115,54 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const ExamZoneSection(),
                                     ],
 
+        //                             Column(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   children: [
+        //     ElevatedButton(
+        //       onPressed: () async {
+        //         await AdManager.showIntAd();
+        //       },
+        //       child: const Text("Int Ad"),
+        //     ),
+        //     ElevatedButton(
+        //       onPressed: () async {
+        //         await AdManager.showRewardedAd();
+        //       },
+        //       child: const Text("Rewarded Ad"),
+        //     ),
+        //   ],
+        // ),
 
-                                 
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            Get.toNamed(RouteHelper.trueFalseQuestionsScreen, arguments: [MyStrings.trueFalse]);
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(color: MyColor.colorWhite),
+                                            padding: EdgeInsets.all(10),
+                                            child: Center(child: Text(MyStrings.trueFalse)),
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        InkWell(
+                                          onTap: () {
+                                            Get.toNamed(RouteHelper.audioQuestionCategoryScreen, arguments: [MyStrings.audioQuestions]);
+                                          },
+                                          child: Container(
+                                            decoration: BoxDecoration(color: MyColor.colorWhite),
+                                            padding: EdgeInsets.all(10),
+                                            child: Center(child: Text(MyStrings.audioQuestions)),
+                                          ),
+                                        )
+                                      ],
+                                    ),
 
                                     const PlayDifferentQuizes(),
-                                       
-                                      
-
-                                     
-
-
 
                                     const SizedBox(
                                       height: Dimensions.space70,

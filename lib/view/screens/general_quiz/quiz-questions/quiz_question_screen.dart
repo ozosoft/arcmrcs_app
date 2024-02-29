@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/environment.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
-import 'package:quiz_lab/view/screens/general_quiz/quiz-questions/quiz-screen-widgets/quiz_questions_body_section.dart';
+import 'package:quiz_lab/view/screens/general_quiz/quiz-questions/quiz-questions-screen-widgets/quiz_questions_body_section.dart';
 import 'package:get/get.dart';
 
 import '../../../../data/controller/quiz_questions/quiz_questions_controller.dart';
@@ -20,7 +20,6 @@ class QuizQuestionsScreen extends StatefulWidget {
 class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
   var title = '';
 
-
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
@@ -28,6 +27,7 @@ class _QuizQuestionsScreenState extends State<QuizQuestionsScreen> {
 
     QuizQuestionsController controller = Get.put(QuizQuestionsController(quizquestionsRepo: Get.find()));
     controller.quizInfoID = Get.arguments[1];
+    print("this is quiz id${controller.quizInfoID}");
 
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

@@ -1,3 +1,6 @@
+import 'package:quiz_lab/view/screens/audio-questions/all-categories/all_audio_categories_screen.dart';
+import 'package:quiz_lab/view/screens/audio-questions/all-categories/sub-categories/audio_questions_sub_categories_screen.dart';
+import 'package:quiz_lab/view/screens/audio-questions/audio_questions/audio_questions_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/email_verification_page/email_verification_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/forget_password/resetPassword/reset_password_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/forget_password/verification/verification_screen.dart';
@@ -42,6 +45,8 @@ import 'package:quiz_lab/view/screens/splash/splash_screen.dart';
 import 'package:quiz_lab/view/screens/coin_store/coin_store_screen.dart';
 
 import 'package:get/get.dart';
+import 'package:quiz_lab/view/screens/true-false-questions/quiz-result/true_false_quiz_result_screen.dart';
+import 'package:quiz_lab/view/screens/true-false-questions/true_false_questions/true_false_questions_screen.dart';
 import 'package:quiz_lab/view/screens/withdraw/add_withdraw_screen/add_withdraw_method_screen.dart';
 import 'package:quiz_lab/view/screens/withdraw/confirm_withdraw_screen/withdraw_confirm_screen.dart';
 import 'package:quiz_lab/view/screens/withdraw/withdraw_history/withdraw_screen.dart';
@@ -84,6 +89,7 @@ class RouteHelper {
   static const String quizResultScreen = '/quiz_result_screen';
   static const String profileCompleteScreen = "/profile_complete_screen";
   static const String privacyScreen = "/privacy-screen";
+  static const String audioQuestionScreen = "/audio_questions_screen";
   //battle
   static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
   static const String battleQuizResultScreen = '/battle_quiz_result_screen';
@@ -140,6 +146,10 @@ class RouteHelper {
    static const String withdrawConfirmScreenScreen = '/withdraw_confirm_screen';
    static const String withdrawScreen = '/withdraw_screen';
  static const String addWithdrawMethodScreen     = "/withdraw-method";
+ static const String trueFalseQuestionsScreen     = "/true_false_questions_screen";
+ static const String trueFalseQuestionsResultScreen     = "/true_false_questions_result_screen";
+ static const String audioQuestionSubCategoryScreen     = "/audio_questions_subCategory_screen";
+ static const String audioQuestionCategoryScreen     = "/audio_questions_category_screen";
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -209,8 +219,12 @@ class RouteHelper {
     GetPage(name: withdrawConfirmScreenScreen, page: () => const WithdrawConfirmScreen()),
     GetPage(name: withdrawScreen, page: () => const WithdrawScreen()),
     GetPage(name: addWithdrawMethodScreen,      page: () => const AddWithdrawMethod()),
-    GetPage(
-        name: depositsScreen,
+    GetPage(name: trueFalseQuestionsScreen,      page: () => const TrueFalseQuestionsScreen()),
+    GetPage(name: audioQuestionScreen,      page: () => const AudioQuestionsScreen()),
+    GetPage(name: audioQuestionCategoryScreen,      page: () => const AllAudioCategoriesScreen()),
+    GetPage(name: trueFalseQuestionsResultScreen,      page: () => const TrueFalseQuizResultScreen()),
+    GetPage(name: audioQuestionSubCategoryScreen,      page: () => const AudioQuestionsSubCategoriesScreen(title: '',)),
+    GetPage(  name: depositsScreen,
         page: () => const NewDepositScreen(
               price: '',
               id: '',

@@ -59,8 +59,10 @@ dependencies:
   share_plus: ^4.0.6
   shared_preferences: ^2.0.13
   shimmer: ^2.0.0
+  sign_in_with_apple: ^5.0.0
   simple_animations: ^4.2.0
   slide_countdown: ^0.6.0
+  unity_ads_plugin: ^0.3.11
   url_launcher: ^6.0.20
   vibration: any
   wakelock: ^0.6.2

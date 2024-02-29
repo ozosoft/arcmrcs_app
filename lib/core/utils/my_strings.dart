@@ -25,6 +25,8 @@ static const String dollarSign = "\$ ";
    static const String refferAFriend = 'Reffer a Friend';
    static const String earnReward = 'Earn reward';
    static const String myReffers = 'My Reffers';
+   static const String trueFalse = 'True/False';
+   static const String audioQuestions = 'Audio Questions';
 
   static const String quizLeaveWarningTitle = "Are you sure you want to leave this quiz?";
   static const String withdrawInformation = "Withdraw Information";

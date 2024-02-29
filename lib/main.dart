@@ -14,6 +14,7 @@ import 'package:quiz_lab/core/utils/messages.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/controller/localization/localization_controller.dart';
 import 'package:quiz_lab/push_notification_service.dart';
+import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 import 'core/di_service/di_services.dart' as di_service;
 import 'core/utils/util.dart';
 
@@ -29,6 +30,17 @@ Future<void> _messageHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+
+  await UnityAds.init(
+    gameId: '5564960',
+    onComplete: () => print('Initialization Complete'),
+    onFailed: (error, message) =>
+        print('Initialization Failed: $error $message'),
+  );
+
+
+
   Map<String, Map<String, String>> languages = await di_service.init();
 
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
