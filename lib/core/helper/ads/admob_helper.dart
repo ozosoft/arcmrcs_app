@@ -90,7 +90,7 @@ class AdmobHelper {
     }
   }
 
-  void showGoodInterstitialAds() {
+   showGoodInterstitialAds() {
     _counter++;
     if (_counter % Environment.interstitialAdsShowAfter == 0) {
       if (kDebugMode) {

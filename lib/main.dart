@@ -30,17 +30,6 @@ Future<void> _messageHandler(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-
-  await UnityAds.init(
-    gameId: '5564960',
-    onComplete: () => print('Initialization Complete'),
-    onFailed: (error, message) =>
-        print('Initialization Failed: $error $message'),
-  );
-
-
-
   Map<String, Map<String, String>> languages = await di_service.init();
 
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
@@ -49,6 +38,14 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
 
   MyUtils.allScreen();
+
+ await UnityAds.init(
+    gameId: '5564960',
+    onComplete: () => print('Initialization Complete'),
+    onFailed: (error, message) =>
+        print('Initialization Failed: $error $message'),
+  );
+
 
   runApp(MyApp(languages: languages));
 }

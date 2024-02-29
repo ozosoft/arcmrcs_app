@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_lab/core/helper/choose_ads/choose_ads_to_show.dart';
 import 'package:quiz_lab/core/helper/unity-ads/unity_ads_helper.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
@@ -56,7 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
     AdUnitHelper.initializeAdUnits();
     admobHelper.createInterstitialAd();
 
-      WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await AdManager.loadUnityIntAd();
       await AdManager.loadUnityRewardedAd();
     });
@@ -115,23 +116,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                       const ExamZoneSection(),
                                     ],
 
-        //                             Column(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: [
-        //     ElevatedButton(
-        //       onPressed: () async {
-        //         await AdManager.showIntAd();
-        //       },
-        //       child: const Text("Int Ad"),
-        //     ),
-        //     ElevatedButton(
-        //       onPressed: () async {
-        //         await AdManager.showRewardedAd();
-        //       },
-        //       child: const Text("Rewarded Ad"),
-        //     ),
-        //   ],
-        // ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () async {
+                                            ChooseAds.showInterstileAds(false);
+                                          },
+                                          child: const Text("Int Ad"),
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () async {
+                                            await AdManager.showRewardedAd();
+                                          },
+                                          child: const Text("Rewarded Ad"),
+                                        ),
+                                      ],
+                                    ),
 
                                     SizedBox(
                                       height: 20,

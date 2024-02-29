@@ -32,11 +32,12 @@ class SplashController extends GetxController {
   bool noInternet = false;
   void getGSData(bool isRemember, bool isOnBoard) async {
     ResponseModel response = await repo.getGeneralSetting();
-
+   
     if (response.statusCode == 200) {
       GeneralSettingResponseModel model = GeneralSettingResponseModel.fromJson(jsonDecode(response.responseJson));
       if (model.status?.toLowerCase() == MyStrings.success) {
         repo.apiClient.storeGeneralSetting(model);
+         print("this is general settings responses ${model.data}");
       } else {
         List<String> message = [MyStrings.somethingWentWrong.tr];
         CustomSnackBar.error(errorList: model.message?.error ?? message);
