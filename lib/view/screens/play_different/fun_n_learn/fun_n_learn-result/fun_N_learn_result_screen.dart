@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_lab/core/helper/unity-ads/unity_ads_helper.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appbar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -23,7 +25,9 @@ class _FunNlearnResultScreenState extends State<FunNlearnResultScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // AdmobHelper().loadInterstitialAdAlways();
-      AdmobHelper().loadRewardAdAlways();
+         AdManager.loadUnityRewardedAd();
+
+      Get.find<ApiClient>().isAdmobAddEnable() ? AdmobHelper().loadRewardAdAlways() : AdManager.showRewardedAd();
     });
   }
 

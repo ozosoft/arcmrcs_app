@@ -9,6 +9,7 @@ import 'package:quiz_lab/core/helper/string_format_helper.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/data/model/quiz_questions_model/quiz_questions_model.dart';
 import 'package:quiz_lab/data/model/submit_answer/submit_answer_model.dart';
+import 'package:quiz_lab/data/repo/all_audio_questions/all_audio_questions_repo.dart';
 import 'package:quiz_lab/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
@@ -16,9 +17,9 @@ import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class AudioQuestionsController extends GetxController {
-  QuizquestionsRepo quizquestionsRepo;
+  AllAudioQuizquestionsRepo allAudioQuizquestionsRepo;
 
-  AudioQuestionsController({required this.quizquestionsRepo});
+  AudioQuestionsController({required this.allAudioQuizquestionsRepo});
 
   bool showQuestions = false;
   bool audienceVote = false;
@@ -27,9 +28,7 @@ class AudioQuestionsController extends GetxController {
   bool flipQuistions = false;
   bool restartTimer = false;
 
-
-
-    final player = AudioPlayer();
+  final player = AudioPlayer();
   bool isPlaying = false;
   Duration duration = Duration.zero;
   Duration position = Duration.zero;
@@ -38,6 +37,7 @@ class AudioQuestionsController extends GetxController {
   String fifty_fifty = "0";
   String audiencevotes = "0";
   String reset_timer = "0";
+  String audioSource = "";
 
   int rightAnswerIndex = 0;
   int selectedAnswerIndex = -1;
@@ -50,15 +50,28 @@ class AudioQuestionsController extends GetxController {
   int? quizInfoID;
   late int questionsIndex;
   List<Question> questionsList = [];
+  List<Map> audioList = [];
   List<Option> optionsList = [];
 
   List selectedQuestionsId = [];
   List selectedAnswerId = [];
 
+  String audioURL = "";
+
   CountDownController countDownController = CountDownController();
   PageController pageController = PageController();
   PageController reviewController = PageController();
   int currentPage = 0;
+  void playAudio(String source) {
+    player.play(AssetSource(source));
+
+    audioList = [
+      {"audio": "audios/testAudio.wav"},
+      {"audio": "audios/correct_ans.mp3"},
+      {"audio": "audios/wrong_ans.mp3"},
+    ];
+    update();
+  }
 
   changePage(int page) {
     currentPage = page;
@@ -72,8 +85,9 @@ class AudioQuestionsController extends GetxController {
     audienceVote = false;
     showQuestions = false;
     update();
+    print("this is quizquestion id$quizInfoID");
 
-    ResponseModel model = await quizquestionsRepo.getData(quizInfoID!);
+    ResponseModel model = await allAudioQuizquestionsRepo.getData(quizInfoID!);
 
     debugPrint("object$quizInfoID");
 
@@ -87,6 +101,8 @@ class AudioQuestionsController extends GetxController {
 
         if (subcategorylist != null && subcategorylist.isNotEmpty) {
           questionsList.addAll(subcategorylist);
+
+          print("this is question list===================................>>>>> ${questionsList[0].question}");
         }
 
         timerDuration = int.parse(quizquestions.data!.perQuestionAnswerDuration.toString());
@@ -104,26 +120,23 @@ class AudioQuestionsController extends GetxController {
     update();
   }
 
-
-audiosection (){
+  audiosection() {
     player.onPlayerStateChanged.listen((state) {
-    
-        isPlaying = state == PlayerState.playing;
+      isPlaying = state == PlayerState.playing;
       update();
     });
 
     player.onDurationChanged.listen((newDuration) {
-     
-        duration = newDuration;
-            update();
+      duration = newDuration;
+      update();
     });
 
     player.onPositionChanged.listen((newPosition) {
-      
-        position = newPosition;
-           update();
+      position = newPosition;
+      update();
     });
-}
+  }
+
   showQuestion() {
     showQuestions = !showQuestions;
   }
@@ -258,7 +271,9 @@ audiosection (){
     params['time_reset'] = reset_timer;
     params['flip_question'] = flipQuistion;
 
-    ResponseModel submitModel = await quizquestionsRepo.submitAnswer(params);
+    ResponseModel submitModel = await allAudioQuizquestionsRepo.submitAnswer(params);
+
+    print("this is params><><><><><><><><>$params");
 
     if (submitModel.statusCode == 200) {
       SubmitAnswerModel model = SubmitAnswerModel.fromJson(jsonDecode(submitModel.responseJson));
@@ -280,7 +295,7 @@ audiosection (){
           }
         }
         countDownController.pause();
-        Get.toNamed(RouteHelper.quizResultScreen)!.whenComplete(() {
+        Get.toNamed(RouteHelper.audioQuestionResultScreen)!.whenComplete(() {
           Get.back();
         });
 

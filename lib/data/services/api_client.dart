@@ -225,10 +225,15 @@ class ApiClient extends GetxService {
 
   String getSocialLoginActiveStats(String type) {
     if (type == 'phone') {
-      return getGSData().data?.generalSetting?.mobileLogin??'';
+      return getGSData().data?.generalSetting?.mobileLogin ?? '';
     } else if (type == 'google') {
-      return getGSData().data?.generalSetting?.googleLogin??'';
+      return getGSData().data?.generalSetting?.googleLogin ?? '';
     }
     return '0';
+  }
+
+  bool isAdmobAddEnable() {
+    bool isAdmobEnable = true; /*getGSData().data?.generalSetting?.iosBannerAdsId=='1'; */
+    return isAdmobEnable;
   }
 }

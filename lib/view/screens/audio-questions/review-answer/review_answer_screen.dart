@@ -8,14 +8,14 @@ import '../../../../core/utils/my_strings.dart';
 import '../../../components/mobile_ads/quiz_banner_ads_widget.dart';
 import 'review-answer-screen-widgets/review_answer_section.dart';
 
-class ReviewAnswerScreen extends StatefulWidget {
-  const ReviewAnswerScreen({super.key});
+class AudioReviewAnswerScreen extends StatefulWidget {
+  const AudioReviewAnswerScreen({super.key});
 
   @override
-  State<ReviewAnswerScreen> createState() => _ReviewAnswerScreenState();
+  State<AudioReviewAnswerScreen> createState() => _AudioReviewAnswerScreenState();
 }
 
-class _ReviewAnswerScreenState extends State<ReviewAnswerScreen> {
+class _AudioReviewAnswerScreenState extends State<AudioReviewAnswerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,7 @@ class _ReviewAnswerScreenState extends State<ReviewAnswerScreen> {
       body: const Stack(
         fit: StackFit.expand,
         children: [
-          ReviewAnswerSection(),
+          AudioReviewAnswerSection(),
           Visibility(
             visible: Environment.isShowAdsOnReviewAnswerScreen,
             child: Positioned.fill(

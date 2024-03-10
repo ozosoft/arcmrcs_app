@@ -55,7 +55,14 @@ class _PlayDifferentQuizesState extends State<PlayDifferentQuizes> {
                     Get.toNamed(RouteHelper.dailyQuizQuestionsScreen);
                   } else if (item.act == "single_battle") {
                     Get.toNamed(RouteHelper.oneVSoneBattleScreen);
-                  } else {
+                  }
+                  else if (item.act == "audio") {
+                    Get.toNamed(RouteHelper.audioQuestionCategoryScreen);
+                  } 
+                  else if (item.act == "true_false") {
+                    Get.toNamed(RouteHelper.trueFalseCategoryScreen);
+                  } 
+                   else {
                     CustomSnackBar.error(errorList: [(MyStrings.serverError.tr)]);
                   }
                 },

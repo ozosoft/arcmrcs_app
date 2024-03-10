@@ -8,12 +8,14 @@ import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/repo/exam_zone/exam_zone_repo.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
+import 'package:quiz_lab/view/components/mobile_ads/banner_ads_widget.dart';
 import 'package:quiz_lab/view/components/no_data.dart';
 import 'package:quiz_lab/view/screens/drawer/drawer_screen.dart';
 import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home-body-sections/exam_zone_section/exam_zone_homepage_category_screen.dart';
 import 'package:quiz_lab/view/screens/home_page/homepage-widgets/home-body-sections/home_top_category_section/top_category_section.dart';
 import 'package:get/get.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 import '../../../core/helper/ads/admob_helper.dart';
 import '../../../core/helper/ads/ads_unit_id_helper.dart';
 import '../../../data/controller/dashboard/dashboard_controller.dart';
@@ -60,6 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await AdManager.loadUnityIntAd();
       await AdManager.loadUnityRewardedAd();
+      await AdManager.loadUnityBannerAd();
     });
 
     controller.getHomePageData();
@@ -115,53 +118,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                     if (controller.examStatus == '1') ...[
                                       const ExamZoneSection(),
                                     ],
+                                 
+                                    // Column(
+                                    //   mainAxisAlignment: MainAxisAlignment.center,
+                                    //   children: [
+                                    //     ElevatedButton(
+                                    //       onPressed: () async {
+                                    //         ChooseAds.showInterstileAds(true);
+                                    //       },
+                                    //       child: const Text("Int Ad"),
+                                    //     ),
+                                    //     ElevatedButton(
+                                    //       onPressed: () async {
+                                    //          ChooseAds.showRewardedAds(true);
 
-                                    Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        ElevatedButton(
-                                          onPressed: () async {
-                                            ChooseAds.showInterstileAds(false);
-                                          },
-                                          child: const Text("Int Ad"),
-                                        ),
-                                        ElevatedButton(
-                                          onPressed: () async {
-                                            await AdManager.showRewardedAd();
-                                          },
-                                          child: const Text("Rewarded Ad"),
-                                        ),
-                                      ],
-                                    ),
+                                    //       },
+                                    //       child: const Text("Rewarded Ad"),
+                                    //     ),
+                                    //   ],
+                                    // ),
 
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Row(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            Get.toNamed(RouteHelper.trueFalseQuestionsScreen, arguments: [MyStrings.trueFalse]);
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(color: MyColor.colorWhite),
-                                            padding: EdgeInsets.all(10),
-                                            child: Center(child: Text(MyStrings.trueFalse)),
-                                          ),
-                                        ),
-                                        const Spacer(),
-                                        InkWell(
-                                          onTap: () {
-                                            Get.toNamed(RouteHelper.audioQuestionCategoryScreen, arguments: [MyStrings.audioQuestions]);
-                                          },
-                                          child: Container(
-                                            decoration: BoxDecoration(color: MyColor.colorWhite),
-                                            padding: EdgeInsets.all(10),
-                                            child: Center(child: Text(MyStrings.audioQuestions)),
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                    // SizedBox(
+                                    //   height: 20,
+                                    // ),
+                                   
 
                                     const PlayDifferentQuizes(),
 

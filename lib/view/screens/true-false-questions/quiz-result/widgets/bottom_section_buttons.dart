@@ -34,7 +34,7 @@ class BottomSectionButtons extends StatelessWidget {
             child: RoundedButton(
               text: MyStrings.reviewAnswer.tr,
               press: () {
-                Get.toNamed(RouteHelper.reviewAnswerScreen);
+                Get.toNamed(RouteHelper.trueFalseReviewAnswerScreen);
               },
               color: MyColor.colorBlack,
               textSize: Dimensions.space21,

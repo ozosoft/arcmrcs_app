@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/data/controller/audio-questions/audio_questions_controller.dart';
-import 'package:quiz_lab/data/controller/true-false-quiz/true_false_quiz_controller.dart';
+import 'package:quiz_lab/data/repo/all_audio_questions/all_audio_questions_repo.dart';
 import 'package:quiz_lab/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/environment.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
 import 'package:quiz_lab/view/components/mobile_ads/quiz_banner_ads_widget.dart';
-import 'package:quiz_lab/view/screens/audio-questions/audio_questions/audi-questions-screen-widgets/audio_questions_body_section.dart';
-import 'package:quiz_lab/view/screens/true-false-questions/true_false_questions/quiz-questions-screen-widgets/quiz_questions_body_section.dart';
+import 'package:quiz_lab/view/screens/audio-questions/audio_questions/audio-questions-screen-widgets/audio_questions_body_section.dart';
 
 class AudioQuestionsScreen extends StatefulWidget {
   const AudioQuestionsScreen({super.key});
@@ -23,10 +22,10 @@ class _AudioQuestionsScreenState extends State<AudioQuestionsScreen> {
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(QuizquestionsRepo(apiClient: Get.find()));
+    Get.put(AllAudioQuizquestionsRepo(apiClient: Get.find()));
 
-    AudioQuestionsController controller = Get.put(AudioQuestionsController(quizquestionsRepo: Get.find()));
-    controller.quizInfoID = 1;
+    AudioQuestionsController controller = Get.put(AudioQuestionsController(allAudioQuizquestionsRepo: Get.find()));
+    controller.quizInfoID = Get.arguments[1];
 
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

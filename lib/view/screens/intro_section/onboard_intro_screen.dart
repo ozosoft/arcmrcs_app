@@ -33,6 +33,9 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("this is onboard image 1>>>>>>>>>>>>>${MyImages.onboard1SVG}");
+    print("this is onboard image 2>>>>>>>>>>>>>${MyImages.onboard3SVG}");
+    print("this is onboard image 3>>>>>>>>>>>>>${MyImages.onboard3SVG}");
     return IntroductionScreen(
       bodyPadding: const EdgeInsets.only(top: Dimensions.space200),
       key: introKey,
@@ -84,6 +87,8 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
           body: MyStrings.onboardDescription1,
           image: SvgPicture.asset(
             MyImages.onboard1SVG,
+            height: 50,
+            width: 50,
           ),
           decoration: PageDecoration(
             titleTextStyle: semiBoldMediumLarge.copyWith(fontSize: Dimensions.space20),
@@ -97,6 +102,8 @@ class _OnBoardIntroScreenState extends State<OnBoardIntroScreen> {
           body: MyStrings.onboardDescription2,
           image: SvgPicture.asset(
             MyImages.onboard3SVG,
+            height: 50,
+            width: 50,
           ),
           decoration: PageDecoration(
             titlePadding: const EdgeInsets.symmetric(vertical: Dimensions.space5, horizontal: Dimensions.space15),

@@ -11,6 +11,7 @@ import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class CoinHistoryController extends GetxController {
   CoinHistoryRepo coinHistoryRepo;
+  bool isFilterOn = false;
 
   CoinHistoryController({required this.coinHistoryRepo});
 
@@ -62,20 +63,20 @@ class CoinHistoryController extends GetxController {
 
   filterdList() {
     if (selectedFilteredValue == "+") {
-      coinHistoryList = coinHistoryList.where((item) => item.status == "+").toList();
-      Get.back();
-      update();
-      print("this is plus filter $coinHistoryList");
+      coinHistoryList = originalCoinHistoryList.where((item) => item.status == "+").toList();
     } else if (selectedFilteredValue == "-") {
-      coinHistoryList = coinHistoryList.where((item) => item.status == "-").toList();
-      Get.back();
-      update();
-      print("this is minus filter $coinHistoryList");
+      coinHistoryList = originalCoinHistoryList.where((item) => item.status == "-").toList();
     } else {
       coinHistoryList = List.from(originalCoinHistoryList);
-      Get.back();
-      update();
     }
+    update();
+   
+  
+  }
+
+  changeShowFilterVisibility(){
+     isFilterOn =!isFilterOn;
+             update();
   }
 
   changeactivestatus() {

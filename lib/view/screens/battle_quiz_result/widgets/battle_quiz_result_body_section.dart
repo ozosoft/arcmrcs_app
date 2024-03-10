@@ -2,6 +2,8 @@ import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:quiz_lab/core/helper/ads/admob_helper.dart';
+import 'package:quiz_lab/core/helper/unity-ads/unity_ads_helper.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_images.dart';
 import 'package:quiz_lab/data/controller/battle/battle_result_controller.dart';
@@ -30,6 +32,9 @@ class _BattleQuizResultBodySectionState extends State<BattleQuizResultBodySectio
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(BattleRepo(apiClient: Get.find()));
     Get.put(BattleResultController(Get.find()));
+     AdManager.loadUnityRewardedAd();
+
+      Get.find<ApiClient>().isAdmobAddEnable() ? AdmobHelper().loadRewardAdAlways() : AdManager.showRewardedAd();
   }
 
   @override

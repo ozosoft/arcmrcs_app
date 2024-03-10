@@ -35,7 +35,7 @@ class _CustomHomeAppBarState extends State<CustomHomeAppBar> {
                 onPressed: () {
                   widget.scaffoldKey.currentState!.openDrawer();
                 },
-                icon: const Icon(Icons.menu)),
+                icon: const Icon(Icons.menu,color: MyColor.colorWhite,)),
             flexibleSpace: Container(
               width: double.infinity,
               decoration: const BoxDecoration(

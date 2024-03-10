@@ -75,7 +75,7 @@ class CoinLog {
   });
 
   factory CoinLog.fromJson(Map<String, dynamic> json) => CoinLog(
-        id: json["id"],
+        id: json["id"]??0,
         userId: json["user_id"].toString(),
         quizInfoId: json["quiz_info_id"].toString(),
         coinPlanId: json["coin_plan_id"].toString(),

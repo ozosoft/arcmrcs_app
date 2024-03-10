@@ -4,7 +4,9 @@ import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_images.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
+import 'package:quiz_lab/data/controller/audio-questions/audio_questions_controller.dart';
 import 'package:quiz_lab/data/controller/quiz_questions/quiz_questions_controller.dart';
+import 'package:quiz_lab/data/repo/all_audio_questions/all_audio_questions_repo.dart';
 import 'package:quiz_lab/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/buttons/level_card_button.dart';
@@ -17,28 +19,28 @@ import '../../../../../core/utils/url_container.dart';
 import '../../../../../core/utils/util.dart';
 import '../../../../components/image_widget/my_image_widget.dart';
 
-class ReviewAnswerSection extends StatefulWidget {
-  const ReviewAnswerSection({super.key});
+class AudioReviewAnswerSection extends StatefulWidget {
+  const AudioReviewAnswerSection({super.key});
 
   @override
-  State<ReviewAnswerSection> createState() => _ReviewAnswerSectionState();
+  State<AudioReviewAnswerSection> createState() => _AudioReviewAnswerSectionState();
 }
 
-class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
+class _AudioReviewAnswerSectionState extends State<AudioReviewAnswerSection> {
 
   @override
   void initState() {
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(QuizquestionsRepo(apiClient: Get.find()));
-    Get.put(QuizQuestionsController(quizquestionsRepo: Get.find()));
+    Get.put(AllAudioQuizquestionsRepo(apiClient: Get.find()));
+    Get.put(AudioQuestionsController(allAudioQuizquestionsRepo: Get.find()));
     super.initState();
 
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<QuizQuestionsController>(
+    return GetBuilder<AudioQuestionsController>(
       builder: (controller) => controller.isLoading
         ? const CustomLoader()
         : controller.questionsList.isEmpty

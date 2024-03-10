@@ -7,6 +7,7 @@ class MyImages {
 
   //Onboard Image
   static const String onboard1SVG = "assets/images/onboard/onboard1.svg"; // USE SVG IMAGE
+  static const String onboard2SVG = "assets/images/onboard/onboard2.svg"; // USE SVG IMAGE
   static const String onboard3SVG = "assets/images/onboard/onboard3.svg"; // USE SVG IMAGE
 
   //Others
@@ -20,6 +21,8 @@ class MyImages {
 
   static const String coinsImage  = "assets/images/star.png";
    static const String arrowDown = "assets/images/arrow-down.svg";
+   static const String filter = "assets/images/filter.svg";
+   static const String cross = "assets/images/cross-circle.svg";
    static const String earnReward = "assets/images/earnReward.svg";
    static const String person = "assets/images/person.png";
 static const String referAfriend = "assets/images/refer-arrow.svg";

@@ -13,12 +13,13 @@ import 'package:quiz_lab/data/repo/quiz_questions_repo/quiz_questions_repo.dart'
 import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/data/model/global/response_model/response_model.dart';
+import 'package:quiz_lab/data/repo/true-false-questions/true_false_question_repo.dart';
 import 'package:quiz_lab/view/components/snack_bar/show_custom_snackbar.dart';
 
 class TrueFalseQuestionsController extends GetxController {
-  QuizquestionsRepo quizquestionsRepo;
+  TrueFalseQuestionsRepo trueFalseQuestionsRepo;
 
-  TrueFalseQuestionsController({required this.quizquestionsRepo});
+  TrueFalseQuestionsController({required this.trueFalseQuestionsRepo});
 
   bool showQuestions = false;
   bool audienceVote = false;
@@ -73,7 +74,7 @@ class TrueFalseQuestionsController extends GetxController {
     showQuestions = false;
     update();
 
-    ResponseModel model = await quizquestionsRepo.getData(quizInfoID!);
+    ResponseModel model = await trueFalseQuestionsRepo.getData(quizInfoID!);
 
     debugPrint("object$quizInfoID");
 
@@ -238,7 +239,7 @@ class TrueFalseQuestionsController extends GetxController {
     params['time_reset'] = reset_timer;
     params['flip_question'] = flipQuistion;
 
-    ResponseModel submitModel = await quizquestionsRepo.submitAnswer(params);
+    ResponseModel submitModel = await trueFalseQuestionsRepo.submitAnswer(params);
 
     if (submitModel.statusCode == 200) {
       SubmitAnswerModel model = SubmitAnswerModel.fromJson(jsonDecode(submitModel.responseJson));

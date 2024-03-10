@@ -70,6 +70,7 @@ class Data {
 class Question {
   int? id;
   String? question;
+  String? audioFile;
   dynamic image;
   String? code;
   String? playedAudience;
@@ -80,12 +81,13 @@ class Question {
   String? selectedOptionId;
   List<Option>? options;
 
-  Question({this.id, this.question, this.image, this.code, this.playedAudience, this.status, this.createdAt, this.updatedAt, this.pivot, this.options, this.selectedOptionId = ''});
+  Question({this.id, this.question, this.image,this.audioFile, this.code, this.playedAudience, this.status, this.createdAt, this.updatedAt, this.pivot, this.options, this.selectedOptionId = ''});
 
   factory Question.fromJson(Map<String, dynamic> json) => Question(
         id: json["id"],
         question: json["question"],
         image: json["image"],
+         audioFile: json["audio_file"],
         code: json["code"],
         playedAudience: json["played_audience"].toString(),
         status: json["status"].toString(),
@@ -100,6 +102,7 @@ class Question {
         "id": id,
         "question": question,
         "image": image,
+        "audio_file": audioFile,
         "code": code,
         "played_audience": playedAudience,
         "status": status,

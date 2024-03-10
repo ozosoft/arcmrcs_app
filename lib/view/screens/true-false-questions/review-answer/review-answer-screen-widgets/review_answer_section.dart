@@ -5,7 +5,9 @@ import 'package:quiz_lab/core/utils/my_images.dart';
 import 'package:quiz_lab/core/utils/my_strings.dart';
 import 'package:quiz_lab/core/utils/style.dart';
 import 'package:quiz_lab/data/controller/quiz_questions/quiz_questions_controller.dart';
+import 'package:quiz_lab/data/controller/true-false-quiz/true_false_quiz_controller.dart';
 import 'package:quiz_lab/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
+import 'package:quiz_lab/data/repo/true-false-questions/true_false_question_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/buttons/level_card_button.dart';
 import 'package:quiz_lab/view/components/custom_loader/custom_loader.dart';
@@ -17,28 +19,28 @@ import '../../../../../core/utils/url_container.dart';
 import '../../../../../core/utils/util.dart';
 import '../../../../components/image_widget/my_image_widget.dart';
 
-class ReviewAnswerSection extends StatefulWidget {
-  const ReviewAnswerSection({super.key});
+class TrueFalseReviewAnswerSection extends StatefulWidget {
+  const TrueFalseReviewAnswerSection({super.key});
 
   @override
-  State<ReviewAnswerSection> createState() => _ReviewAnswerSectionState();
+  State<TrueFalseReviewAnswerSection> createState() => _TrueFalseReviewAnswerSectionState();
 }
 
-class _ReviewAnswerSectionState extends State<ReviewAnswerSection> {
+class _TrueFalseReviewAnswerSectionState extends State<TrueFalseReviewAnswerSection> {
 
   @override
   void initState() {
 
     Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(QuizquestionsRepo(apiClient: Get.find()));
-    Get.put(QuizQuestionsController(quizquestionsRepo: Get.find()));
+    Get.put(TrueFalseQuestionsRepo(apiClient: Get.find()));
+    Get.put(TrueFalseQuestionsController(trueFalseQuestionsRepo: Get.find()));
     super.initState();
 
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<QuizQuestionsController>(
+    return GetBuilder<TrueFalseQuestionsController>(
       builder: (controller) => controller.isLoading
         ? const CustomLoader()
         : controller.questionsList.isEmpty

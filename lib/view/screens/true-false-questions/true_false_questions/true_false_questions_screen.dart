@@ -3,12 +3,13 @@ import 'package:get/get.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/data/controller/true-false-quiz/true_false_quiz_controller.dart';
 import 'package:quiz_lab/data/repo/quiz_questions_repo/quiz_questions_repo.dart';
+import 'package:quiz_lab/data/repo/true-false-questions/true_false_question_repo.dart';
 import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/environment.dart';
 import 'package:quiz_lab/view/components/app-bar/custom_category_appBar.dart';
 import 'package:quiz_lab/view/components/mobile_ads/quiz_banner_ads_widget.dart';
 import 'package:quiz_lab/view/screens/general_quiz/quiz-questions/quiz-questions-screen-widgets/quiz_questions_body_section.dart';
-import 'package:quiz_lab/view/screens/true-false-questions/true_false_questions/quiz-questions-screen-widgets/quiz_questions_body_section.dart';
+import 'package:quiz_lab/view/screens/true-false-questions/true_false_questions/true_false_quiz-questions-screen-widgets/true_false_quiz_questions_body_section.dart';
 
 class TrueFalseQuestionsScreen extends StatefulWidget {
   const TrueFalseQuestionsScreen({super.key});
@@ -22,10 +23,10 @@ class _TrueFalseQuestionsScreenState extends State<TrueFalseQuestionsScreen> {
   @override
   void initState() {
     Get.put(ApiClient(sharedPreferences: Get.find()));
-    Get.put(QuizquestionsRepo(apiClient: Get.find()));
+    Get.put(TrueFalseQuestionsRepo(apiClient: Get.find()));
 
-    TrueFalseQuestionsController controller = Get.put(TrueFalseQuestionsController(quizquestionsRepo: Get.find()));
-   controller.quizInfoID = 1;
+    TrueFalseQuestionsController controller = Get.put(TrueFalseQuestionsController(trueFalseQuestionsRepo: Get.find()));
+   controller.quizInfoID = Get.arguments[1];
 
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {

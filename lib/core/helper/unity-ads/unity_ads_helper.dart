@@ -24,7 +24,15 @@ class AdManager {
         });
   }
 
-  static Future<void> loadUnityRewardedAd() async {
+  static Future<void> loadUnityBannerAd() async {
+    await UnityAds.load(
+      placementId: 'Banner_Android',
+      onComplete: (placementId) => print('Load Complete $placementId'),
+      onFailed: (placementId, error, message) =>
+          print('Load Failed $placementId: $error $message'),
+    );
+  }
+    static Future<void> loadUnityRewardedAd() async {
     await UnityAds.load(
       placementId: 'Rewarded_Android',
       onComplete: (placementId) => print('Load Complete $placementId'),
@@ -32,6 +40,7 @@ class AdManager {
           print('Load Failed $placementId: $error $message'),
     );
   }
+
 
   static Future<void> showRewardedAd() async {
     UnityAds.showVideoAd(
@@ -45,5 +54,6 @@ class AdManager {
         onFailed: (placementId, error, message) async {
           await loadUnityRewardedAd();
         });
+        
   }
 }

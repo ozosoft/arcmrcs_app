@@ -30,7 +30,7 @@ class _TruefalseQuizResultBodySectionState extends State<TruefalseQuizResultBody
     Get.put(ApiClient(sharedPreferences: Get.find()));
     Get.put(QuizquestionsRepo(apiClient: Get.find()));
 
-    Get.put(TrueFalseQuestionsController(quizquestionsRepo: Get.find()));
+    Get.put(TrueFalseQuestionsController(trueFalseQuestionsRepo: Get.find()));
     super.initState();
   }
 
@@ -94,7 +94,7 @@ class _TruefalseQuizResultBodySectionState extends State<TruefalseQuizResultBody
                   Container(
                     margin: const EdgeInsets.all(Dimensions.space10),
                     child: PlayerProfilePicture(
-                      imagePath: controller.quizquestionsRepo.apiClient.getUserImagePath(),
+                      imagePath: controller.trueFalseQuestionsRepo.apiClient.getUserImagePath(),
                     ),
                   ),
                   Expanded(

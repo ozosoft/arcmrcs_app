@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quiz_lab/core/route/route.dart';
 import 'package:quiz_lab/core/utils/dimensions.dart';
 import 'package:quiz_lab/core/utils/my_color.dart';
 import 'package:quiz_lab/core/utils/my_images.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
 import 'package:quiz_lab/view/components/will_pop_widget.dart';
+import 'package:quiz_lab/view/screens/buy_credits/buy_credits_screen.dart';
 import 'package:quiz_lab/view/screens/home_page/home_screen.dart';
 import 'package:quiz_lab/view/screens/leader_board/leader_board_screen.dart';
 import 'package:quiz_lab/view/screens/profile/profile_screen.dart';
@@ -30,7 +33,7 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
   final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
   static final List<Widget> _widgetOptions = <Widget>[
-    const CoinStoreScreen(),
+    const BuyCreditsScreen(),
     const SettingsScreen(),
     const HomeScreen(),
     const LeaderBoardScreen(),
@@ -48,7 +51,16 @@ class _BottomNavigationBarScreenState extends State<BottomNavigationBarScreen> {
             Center(
               child: _widgetOptions.elementAt(_page),
             ),
-            if (Environment.showBannerAds && AdUnitHelper.bannerAdUnitShow == '1') ...[
+            const Positioned.fill(
+                bottom: 0,
+                child: Align(alignment: Alignment.bottomCenter, child: BannerAdsWidget()),
+              ),
+            if (Environment.showBannerAds && Get.find<ApiClient>().isAdmobAddEnable()) ...[
+              const Positioned.fill(
+                bottom: 0,
+                child: Align(alignment: Alignment.bottomCenter, child: BannerAdsWidget()),
+              )
+            ] else...[
               const Positioned.fill(
                 bottom: 0,
                 child: Align(alignment: Alignment.bottomCenter, child: BannerAdsWidget()),

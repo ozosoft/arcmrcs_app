@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:quiz_lab/core/helper/ads/ads_unit_id_helper.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:quiz_lab/data/services/api_client.dart';
+import 'package:unity_ads_plugin/unity_ads_plugin.dart';
 // Import the async package for using timers
 
 import '../../../core/helper/ads/good_banner.dart';
@@ -14,7 +17,8 @@ class BannerAdsWidget extends StatefulWidget {
 }
 
 class _BannerAdsWidgetState extends State<BannerAdsWidget> {
-  bool isAdLoaded = true; // Track whether to show or hide banner ads
+  bool isAdLoaded = true;
+  bool hasUnityBannerAds = true;
 
   @override
   void initState() {
@@ -25,12 +29,23 @@ class _BannerAdsWidgetState extends State<BannerAdsWidget> {
   Widget build(BuildContext context) {
     return Environment.showBannerAds
         ? IntrinsicHeight(
-            child: GoodBanner(
-              adUnitId: AdUnitHelper.bannerAdUnitId!,
-              adRequest: const AdRequest(),
-              interval: Environment.hideHomeBannerAdsAfteraMiniutes * 60 * 1000, // min to milisec
-              adSize: AdSize.banner,
-            ),
+            child: Get.find<ApiClient>().isAdmobAddEnable()
+                ? GoodBanner(
+                    adUnitId: AdUnitHelper.bannerAdUnitId!,
+                    adRequest: const AdRequest(),
+                    interval: Environment.hideHomeBannerAdsAfteraMiniutes * 60 * 1000, // min to milisec
+                    adSize: AdSize.banner,
+                  )
+                : hasUnityBannerAds? UnityBannerAd(
+                    placementId: 'Banner_Android',
+                    onLoad: (placementId) => print('Banner loaded: $placementId'),
+                    onClick: (placementId) => print('Banner clicked: $placementId'),
+                    onShown: (placementId) => print('Banner shown: $placementId'),
+                    onFailed: (placementId, error, message) {
+                      print('Banner Ad $placementId failed: $error $message');
+                      hasUnityBannerAds = false;
+                      print(hasUnityBannerAds);
+                    }):const SizedBox(),
           )
         : const SizedBox.shrink();
   }

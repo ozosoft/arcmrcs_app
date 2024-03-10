@@ -1,5 +1,5 @@
 class UrlContainer {
-  static const String domainUrl = 'https://script.viserlab.com/quizlab';
+  static const String domainUrl = 'https://url8.viserlab.com/quizlab';
   static const String baseUrl = '$domainUrl/api/';
 
   static const String dashBoardEndPoint = 'dashboard';
@@ -7,14 +7,20 @@ class UrlContainer {
   static const String depositMethodUrl = 'deposit/methods';
   static const String depositInsertUrl = 'deposit/insert';
   static const String allcategoriesUrl = 'general-quiz/category/';
+  static const String audiocategoriesUrl = 'audio/category-list';
+  static const String trueFalseCategoriesUrl = 'true-false/category-list';
 
   static const String funNLearnallCategoryUrl = 'fun/category-list';
 
   static const String funNLearnsubCategoryUrl = 'fun/subcategory-list/';
   static const String funNLearnDescriptionUrl = 'fun/fun-list/';
   static const String subcategoriesUrl = 'general-quiz/subcategory/';
+  static const String audioSubcategoriesUrl = 'audio/subcategory-list/';
+  static const String trueFaleSubcategoriesUrl = 'true-false/subcategory-list/';
   static const String funNLearnsubcategoriesUrl = 'general-quiz/subcategory/';
   static const String quizQuestionsUrl = 'general-quiz/level/question/';
+  static const String trueFalseQuizQuestionsUrl = 'true-false/question-list/';
+  static const String audioQuizQuestionsUrl = 'audio/question-list/';
   static const String funNlearnQuestionsUrl = 'fun/question-list/';
   static const String dailyQuizQuestionsUrl = 'daily-quiz';
   static const String dailyQuizSubmitAnswerUrl = 'daily-quiz/answer-submit';
@@ -24,6 +30,8 @@ class UrlContainer {
   static const String socialLogin = 'social-login';
   static const String logoutUrl = 'logout';
   static const String submitAnswerUrl = 'general-quiz/answer-submit';
+  static const String trueFalseSubmitAnswerUrl = 'true-false/answer-submit';
+  static const String submitAudioAnswerUrl = 'audio/answer-submit';
 
   static const String examsubmitAnswerUrl = 'exam/answer-submit';
   static const String quizContestsubmitAnswerUrl = 'contest/answer-submit';

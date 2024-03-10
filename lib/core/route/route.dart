@@ -1,6 +1,8 @@
-import 'package:quiz_lab/view/screens/audio-questions/all-categories/all_audio_categories_screen.dart';
-import 'package:quiz_lab/view/screens/audio-questions/all-categories/sub-categories/audio_questions_sub_categories_screen.dart';
+import 'package:quiz_lab/view/screens/audio-questions/all-audio-categories/all_audio_categories_screen.dart';
+import 'package:quiz_lab/view/screens/audio-questions/all-audio-categories/audio-sub-categories/audio_sub_categories_screen.dart';
+import 'package:quiz_lab/view/screens/audio-questions/audio-question-result/audio_quiz_result_screen.dart';
 import 'package:quiz_lab/view/screens/audio-questions/audio_questions/audio_questions_screen.dart';
+import 'package:quiz_lab/view/screens/audio-questions/review-answer/review_answer_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/email_verification_page/email_verification_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/forget_password/resetPassword/reset_password_screen.dart';
 import 'package:quiz_lab/view/screens/authentication/forget_password/verification/verification_screen.dart';
@@ -45,8 +47,11 @@ import 'package:quiz_lab/view/screens/splash/splash_screen.dart';
 import 'package:quiz_lab/view/screens/coin_store/coin_store_screen.dart';
 
 import 'package:get/get.dart';
+import 'package:quiz_lab/view/screens/true-false-questions/all-true-false-categories/true_false_categories_screen.dart';
 import 'package:quiz_lab/view/screens/true-false-questions/quiz-result/true_false_quiz_result_screen.dart';
+import 'package:quiz_lab/view/screens/true-false-questions/review-answer/true_fasle_review_answer_screen.dart';
 import 'package:quiz_lab/view/screens/true-false-questions/true_false_questions/true_false_questions_screen.dart';
+import 'package:quiz_lab/view/screens/true-false-subcategory/audio-sub-categories/true_false_sub_categories_screen.dart';
 import 'package:quiz_lab/view/screens/withdraw/add_withdraw_screen/add_withdraw_method_screen.dart';
 import 'package:quiz_lab/view/screens/withdraw/confirm_withdraw_screen/withdraw_confirm_screen.dart';
 import 'package:quiz_lab/view/screens/withdraw/withdraw_history/withdraw_screen.dart';
@@ -94,6 +99,7 @@ class RouteHelper {
   static const String battleQuizQuestionsScreen = '/battleq_uiz_questions_screen';
   static const String battleQuizResultScreen = '/battle_quiz_result_screen';
   static const String reviewAnswerScreen = '/review_answer_screen';
+  static const String audioReviewAnswerScreen = '/audio_review_answer_screen';
   static const String oneVSoneBattleScreen = '/battle_screen';
   static const String findOpponentScreen = '/find_opponent_screen';
   static const String createRoomScreen = '/create_room_screen';
@@ -150,6 +156,10 @@ class RouteHelper {
  static const String trueFalseQuestionsResultScreen     = "/true_false_questions_result_screen";
  static const String audioQuestionSubCategoryScreen     = "/audio_questions_subCategory_screen";
  static const String audioQuestionCategoryScreen     = "/audio_questions_category_screen";
+ static const String audioQuestionResultScreen     = "/audio_questions_result_screen";
+ static const String trueFalseCategoryScreen     = "/true_false_category_screen";
+ static const String trueFalseQuestionsSubcategories     = "/true_false_questions_subcategory_screen";
+ static const String trueFalseReviewAnswerScreen     = "/true_false_review_answer_screen";
 
   List<GetPage> routes = [
     GetPage(name: splashScreen, page: () => const SplashScreen()),
@@ -223,6 +233,11 @@ class RouteHelper {
     GetPage(name: audioQuestionScreen,      page: () => const AudioQuestionsScreen()),
     GetPage(name: audioQuestionCategoryScreen,      page: () => const AllAudioCategoriesScreen()),
     GetPage(name: trueFalseQuestionsResultScreen,      page: () => const TrueFalseQuizResultScreen()),
+    GetPage(name: audioQuestionResultScreen,      page: () => const AudioQuizResultScreen()),
+    GetPage(name: trueFalseCategoryScreen,      page: () => const TrueFalseCategoryScreen()),
+    GetPage(name: trueFalseReviewAnswerScreen,      page: () => const TrueFalseReviewAnswerScreen()),
+    GetPage(name: audioReviewAnswerScreen,      page: () => const AudioReviewAnswerScreen()),
+    GetPage(name: trueFalseQuestionsSubcategories,      page: () => const TrueFalseQuestionsSubCategoriesScreen(title: '',)),
     GetPage(name: audioQuestionSubCategoryScreen,      page: () => const AudioQuestionsSubCategoriesScreen(title: '',)),
     GetPage(  name: depositsScreen,
         page: () => const NewDepositScreen(

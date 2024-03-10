@@ -9,7 +9,7 @@ class AllCategoriesRepo {
   AllCategoriesRepo({required this.apiClient});
 
   Future<ResponseModel> getData() async {
-    String url = "${UrlContainer.baseUrl}${UrlContainer.allcategoriesUrl}";
+    String url = "${UrlContainer.baseUrl}${UrlContainer.audiocategoriesUrl}";
     ResponseModel model = await apiClient.request(url, Method.getMethod, null, passHeader: true);
 
     return model;
